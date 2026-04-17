@@ -78,7 +78,10 @@ void main (void) {
       setupUniforms(controller, drawingContext) {
           const programManager = this.programManager;
 
-          programManager.setUniform('split', [controller.splitX, (drawingContext.height - controller.splitY)]);
+          var splitX = controller.centerX;
+          var splitY = drawingContext.height - controller.centerY;
+
+          programManager.setUniform('split', [splitX, splitY]);
           programManager.setUniform('angle', controller.rotation);
           programManager.setUniform('texSize', [drawingContext.width, drawingContext.height]);
 

@@ -62,8 +62,10 @@ void main (void) {
       setupUniforms(controller, drawingContext) {
           const programManager = this.programManager;
 
+          var centerX = controller.centerX;
+          var centerY = drawingContext.height - controller.centerY;
           programManager.setUniform('config', [controller.fishEyeMode, controller.radius, controller.intensity]);
-          programManager.setUniform('center', [controller.centerX, drawingContext.height - controller.centerY]);
+          programManager.setUniform('center', [centerX, centerY]);
           programManager.setUniform('texSize', [drawingContext.width, drawingContext.height]);
       }
   }

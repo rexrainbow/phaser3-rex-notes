@@ -94,7 +94,6 @@ class Demo extends Phaser.Scene {
                     var maskGameObject = scene.add.circle(listPanel.x, listPanel.y, 0, 0x330000).setVisible(false);
 
                     var maskObject = listPanel
-                        .enableLayer()   // Put children on layer
                         .enableFilters()
                         .filters.external.addMask(maskGameObject)
 

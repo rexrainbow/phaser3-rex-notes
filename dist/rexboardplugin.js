@@ -13330,6 +13330,24 @@
 
             return this;
         }
+
+        enableFilters() {
+            if (this.filterCamera || !this.scene.renderer.gl) {
+                return this;
+            }
+
+            this.enableLayerRenderer();
+
+            /*
+            Layer renderer requires filtersFocusContext=true 
+            to avoid object-bounds clipping when using any filter.
+            */
+            this.setFiltersFocusContext(true);
+
+            super.enableFilters();
+
+            return this;
+        }
     }
 
     const Components = Phaser.GameObjects.Components;

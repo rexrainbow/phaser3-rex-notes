@@ -118,7 +118,6 @@ var CreateMenu = function (scene, x, y, items, onClick) {
 
             var maskGameObject = scene.add.circle(menu.x, menu.y, 0, 0x330000).setVisible(false);
             var maskObject = menu
-                .enableLayer()   // Put children on layer
                 .enableFilters()
                 .filters.external.addMask(maskGameObject)
 

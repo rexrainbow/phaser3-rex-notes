@@ -32,7 +32,6 @@ class Demo extends Phaser.Scene {
                 }, this)
                 .on('pointerover', function () {
                     card.glowController = card
-                        .getLayer()
                         .enableFilters()
                         .filters.internal.addGlow(0xff0000, 8, 0)
                         .setPaddingOverride(null)

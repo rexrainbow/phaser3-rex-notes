@@ -45,7 +45,6 @@ var CreateCard = function (scene, orientation) {
             ease: 'Cubic'
         }
     })
-        .enableLayer()
         .enableFilters()
         .setInteractive()
         // .setFace(0)
