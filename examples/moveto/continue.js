@@ -23,10 +23,16 @@ class Demo extends Phaser.Scene {
             return points;
         };
 
+        var round0 = 0, round1 = 0, round2=0;
+        var txt = this.add.text(0,0, '');
+        var OnRoundUpdate = function() {
+            txt.text = `${round0} , ${round1} , ${round2}`
+        }
+        OnRoundUpdate();
+
         // Chain segment by 'complete' event
         var points0 = hexPoints(250, 150, 120);
         var dot0 = this.add.circle(points0[0].x, points0[0].y, 16, 0xffffff);
-        var txt0 = this.add.text(150, 50, '0');
         dot0.moveTo = this.plugins.get('rexMoveTo').add(dot0, {
             speed: 350
         });
@@ -37,7 +43,8 @@ class Demo extends Phaser.Scene {
             dot0.moveTo.moveTo(next0.x, next0.y);
 
             if (index0 === 0) {
-                txt0.text = (parseInt(txt0.text) + 1).toString();
+                round0 += 1;
+                OnRoundUpdate();
             }
         });
         dot0.moveTo.moveTo(points0[index0].x, points0[index0].y);
@@ -45,7 +52,6 @@ class Demo extends Phaser.Scene {
         // Queue segments by moveTo method        
         var points1 = hexPoints(550, 150, 120);
         var dot1 = this.add.circle(points1[0].x, points1[0].y, 16, 0xffcc00);
-        var txt1 = this.add.text(450, 50, '0');
         dot1.moveTo = this.plugins.get('rexMoveTo').add(dot1, {
             speed: 350,
             appendMode: true
@@ -58,14 +64,14 @@ class Demo extends Phaser.Scene {
         };
         dot1.moveTo.on('complete', function () {
             queueDot1();
-            txt1.text = (parseInt(txt1.text) + 1).toString();
+            round1 += 1;
+            OnRoundUpdate();
         });
         queueDot1();
 
         // Chain segment by 'complete' event, continue in same tick
         var points2 = hexPoints(550, 400, 120);
         var dot2 = this.add.circle(points2[0].x, points2[0].y, 16, 0x00ccff);
-        var txt2 = this.add.text(450, 300, '0');
         dot2.moveTo = this.plugins.get('rexMoveTo').add(dot2, {
             speed: 350,
             continueAfterComplete: true
@@ -77,7 +83,8 @@ class Demo extends Phaser.Scene {
             dot2.moveTo.moveTo(next2.x, next2.y);
 
             if (index2 === 0) {
-                txt2.text = (parseInt(txt2.text) + 1).toString();
+                round2 +=1;
+                OnRoundUpdate();
             }
         });
         dot2.moveTo.moveTo(points2[index2].x, points2[index2].y);

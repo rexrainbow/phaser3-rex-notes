@@ -88,31 +88,36 @@ export default {
                 }
 
                 remainingDistanceBudget = 0;
-                break;
+                return this;
             }
 
-            // Reach target and still have remaining distance budget
-            gameObject.setPosition(targetX, targetY);
+            // (remainingDistanceBudget >= distanceToTarget) : Reach target and still have remaining distance budget
+            else {
+                gameObject.setPosition(targetX, targetY);
 
-            if (this.rotateToTarget) {
-                gameObject.rotation = AngleBetween(currentX, currentY, targetX, targetY);
+                if (this.rotateToTarget) {
+                    gameObject.rotation = AngleBetween(currentX, currentY, targetX, targetY);
+                }
+
+                remainingDistanceBudget -= distanceToTarget;
+
+                // Continue to next target if any, otherwise complete
+                if (this.targets.length > 0) {
+                    var nextTargetAfterReach = this.targets.shift();
+                    this.targetX = nextTargetAfterReach.x;
+                    this.targetY = nextTargetAfterReach.y;
+                    console.log('next target')
+                    continue;
+                }
+
+                this.complete();
+                if (this.shouldContinueAfterComplete()) {
+                    console.log('continue')
+                    continue;
+                }
+                return this;
             }
 
-            remainingDistanceBudget -= distanceToTarget;
-
-            // Continue to next target if any, otherwise complete
-            if (this.targets.length > 0) {
-                var nextTargetAfterReach = this.targets.shift();
-                this.targetX = nextTargetAfterReach.x;
-                this.targetY = nextTargetAfterReach.y;
-                continue;
-            }
-
-            this.complete();
-            if (this.shouldContinueAfterComplete()) {
-                continue;
-            }
-            return this;
         }
 
         return this;
