@@ -64,11 +64,11 @@ class RenderScene extends Phaser.Scene {
     }
 
     create() {
-        var rt = this.make.renderTexture({ x: 0, y: 0, width: 800, height: 600 }, false)
-        rt.saveTexture('game')
+        var gameScene = this.scene.get('Game');
+        var gameTexture = this.textures.addDynamicTexture('game', 800, 600);
         this.events.on('postupdate', function () {
-            rt.clear().draw(this.scene.get('Game').children, 0, 0).render();
-        }, this);
+            gameTexture.clear().draw(gameScene.children, 0, 0).render();
+        });
 
         var image = this.add.rexPerspectiveImage(400, 300, 'game', undefined, { hideCCW: false });
         image.angleX = 45;

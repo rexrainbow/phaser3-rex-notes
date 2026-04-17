@@ -57,7 +57,7 @@ class RenderScene extends Phaser.Scene {
         }, false)
         rt.saveTexture('game')
         this.events.on('postupdate', function () {
-            rt.clear().draw(this.scene.get('Game').children, 0, 0);
+            rt.clear().draw(this.scene.get('Game').children, 0, 0).render();
         }, this);
 
         var images = this.plugins.get('rexGridCutImage').gridCut(rt, 4, 4);
