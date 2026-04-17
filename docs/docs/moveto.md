@@ -76,13 +76,15 @@ Move game object towards target position with a steady speed.
 var moveTo = scene.plugins.get('rexMoveTo').add(gameObject, {
     // speed: 400,
     // rotateToTarget: false,
-    // appendMode: false
+    // appendMode: false,
+    // continueAfterComplete: false
 });
 ```
 
 - `speed` : Moving speed, pixels in second.
-- `rotateToTarget` : Set true to change angle towards path.
-- `appendMode` : Set true to queue new targets when already moving, for smoother motion.
+- `rotateToTarget` : Set `true` to change angle towards path.
+- `appendMode` : Set `true` to queue new targets when already moving, for smoother motion.
+- `continueAfterComplete` : Set `true` to continue moving in the same tick when calling `moveTo()` in the `complete` event callback.
 
 ### Start moving
 
@@ -189,6 +191,17 @@ moveTo.setRotateToTarget(rotateToTarget);
     moveTo.on('complete', function(gameObject, moveTo){});
     // moveTo.once('complete', function(gameObject, moveTo){});
     ```
+    - Set `continueAfterComplete` to `true` to consume the remaining movement distance 
+      in the same tick when calling `moveTo()` in this callback.
+        ```javascript
+        // var moveTo = scene.plugins.get('rexMoveTo').add(gameObject, {
+        //     continueAfterComplete: true
+        // });
+
+        moveTo.on('complete', function(gameObject, moveTo) {
+            moveTo.moveTo(nextX, nextY);
+        });
+        ```
 
 ### Status
 

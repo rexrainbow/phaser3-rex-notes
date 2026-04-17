@@ -61,6 +61,26 @@ class Demo extends Phaser.Scene {
             txt1.text = (parseInt(txt1.text) + 1).toString();
         });
         queueDot1();
+
+        // Chain segment by 'complete' event, continue in same tick
+        var points2 = hexPoints(400, 455, 90);
+        var dot2 = this.add.circle(points2[0].x, points2[0].y, 16, 0x00ccff);
+        var txt2 = this.add.text(380, 540, '0');
+        dot2.moveTo = this.plugins.get('rexMoveTo').add(dot2, {
+            speed: 300,
+            continueAfterComplete: true
+        });
+        var index2 = 1;
+        dot2.moveTo.on('complete', function () {
+            index2 = (index2 + 1) % points2.length;
+            var next2 = points2[index2];
+            dot2.moveTo.moveTo(next2.x, next2.y);
+
+            if (index2 === 0) {
+                txt2.text = (parseInt(txt2.text) + 1).toString();
+            }
+        });
+        dot2.moveTo.moveTo(points2[index2].x, points2[index2].y);
     }
 
     update() { }

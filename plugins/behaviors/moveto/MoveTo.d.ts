@@ -15,11 +15,16 @@ declare namespace MoveTo {
         /**
          * Rotate the game object to face its movement direction.
          */
-        rotateToTarget?: boolean
+        rotateToTarget?: boolean,
         /**
          * Queue new targets when already moving.
          */
-        appendMode?: boolean
+        appendMode?: boolean,
+        /**
+         * Continue moving in the same tick when moveTo() is called in the
+         * complete event callback.
+         */
+        continueAfterComplete?: boolean
     }
 
     namespace Events {
@@ -80,6 +85,12 @@ declare class MoveTo extends TickTask {
      * Clear queued targets.
      */
     clearTargets(): this;
+
+    /**
+     * Whether to continue moving in the same tick when moveTo() is called in
+     * the complete event callback.
+     */
+    continueAfterComplete: boolean;
 
     /**
      * Move toward a target position.
