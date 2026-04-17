@@ -1,5 +1,4 @@
 import phaser from '../../../phaser/src/phaser.js';
-import { mask } from '../../../phaser/src/gameobjects/components/Mask';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -20,11 +19,13 @@ class Demo extends Phaser.Scene {
         var layer = this.add.layer();
         layer.add([bg, obj0, obj1]);
 
-        var maskSource = this.add.image(400, 300, 'dot').setDisplaySize(400, 200).setVisible(false);
-        var mask = maskSource.createBitmapMask();
-        layer.setMask(mask);
-        
-        this.time.delayedCall(1000, function(){
+        var maskGameObject = this.add.image(400, 300, 'dot').setDisplaySize(400, 200).setVisible(false);
+
+        layer
+            .enableFilters()
+            .filters.external.addMask(maskGameObject);
+
+        this.time.delayedCall(1000, function () {
             // obj1.setFillStyle(0xffffff, 0.1);
             obj1.alpha = 0.1
         });
