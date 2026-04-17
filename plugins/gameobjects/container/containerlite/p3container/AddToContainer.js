@@ -21,11 +21,6 @@ var AddToContainer = function (p3Container, config) {
 
     var gameObjects = GetValidChildren(this, includeParent);
 
-    // This containerLite parent should be considered.
-    if (includeParent && (gameObjects.indexOf(this) === -1)) {
-        gameObjects.push(this);
-    }
-
     SortGameObjectsByDepth(gameObjects);
 
     p3Container.add(gameObjects);
