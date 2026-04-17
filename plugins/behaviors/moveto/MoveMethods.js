@@ -106,13 +106,11 @@ export default {
                     var nextTargetAfterReach = this.targets.shift();
                     this.targetX = nextTargetAfterReach.x;
                     this.targetY = nextTargetAfterReach.y;
-                    console.log('next target')
                     continue;
                 }
 
                 this.complete();
                 if (this.shouldContinueAfterComplete()) {
-                    console.log('continue')
                     continue;
                 }
                 return this;
