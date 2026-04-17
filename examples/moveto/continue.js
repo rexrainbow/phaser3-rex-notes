@@ -24,11 +24,11 @@ class Demo extends Phaser.Scene {
         };
 
         // Chain segment by 'complete' event
-        var points0 = hexPoints(250, 300, 120);
+        var points0 = hexPoints(250, 150, 120);
         var dot0 = this.add.circle(points0[0].x, points0[0].y, 16, 0xffffff);
-        var txt0 = this.add.text(100, 100, '0');
+        var txt0 = this.add.text(150, 50, '0');
         dot0.moveTo = this.plugins.get('rexMoveTo').add(dot0, {
-            speed: 300
+            speed: 350
         });
         var index0 = 1;
         dot0.moveTo.on('complete', function () {
@@ -43,11 +43,11 @@ class Demo extends Phaser.Scene {
         dot0.moveTo.moveTo(points0[index0].x, points0[index0].y);
 
         // Queue segments by moveTo method        
-        var points1 = hexPoints(550, 300, 120);
+        var points1 = hexPoints(550, 150, 120);
         var dot1 = this.add.circle(points1[0].x, points1[0].y, 16, 0xffcc00);
-        var txt1 = this.add.text(500, 100, '0');
+        var txt1 = this.add.text(450, 50, '0');
         dot1.moveTo = this.plugins.get('rexMoveTo').add(dot1, {
-            speed: 300,
+            speed: 350,
             appendMode: true
         });
         var queueDot1 = function () {
@@ -63,11 +63,11 @@ class Demo extends Phaser.Scene {
         queueDot1();
 
         // Chain segment by 'complete' event, continue in same tick
-        var points2 = hexPoints(400, 455, 90);
+        var points2 = hexPoints(550, 400, 120);
         var dot2 = this.add.circle(points2[0].x, points2[0].y, 16, 0x00ccff);
-        var txt2 = this.add.text(380, 540, '0');
+        var txt2 = this.add.text(450, 300, '0');
         dot2.moveTo = this.plugins.get('rexMoveTo').add(dot2, {
-            speed: 300,
+            speed: 350,
             continueAfterComplete: true
         });
         var index2 = 1;
@@ -81,6 +81,14 @@ class Demo extends Phaser.Scene {
             }
         });
         dot2.moveTo.moveTo(points2[index2].x, points2[index2].y);
+
+
+        this.add.graphics()
+            .lineStyle(3, 0x00ff00)
+            .strokePoints(points0, true, true)
+            .strokePoints(points1, true, true)
+            .strokePoints(points2, true, true)
+
     }
 
     update() { }
