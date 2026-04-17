@@ -1,6 +1,8 @@
 import phaser from '../../../phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
+const ApplyFilter = true;
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -43,6 +45,8 @@ var CreateCard = function (scene, orientation) {
             ease: 'Cubic'
         }
     })
+        .enableLayer()
+        .enableFilters()
         .setInteractive()
         // .setFace(0)
         .on('pointerdown', function (pointer, localX, localY) {
@@ -54,22 +58,20 @@ var CreateCard = function (scene, orientation) {
             // this.flip.flip();
         })
         .on('pointerover', function () {
-            // Add grayscale effect
-            var layer = this.getLayer();
-            var controller = layer
-                .enableFilters()
-                .filters.internal.addColorMatrix();
-            controller.colorMatrix.grayscale();
-            layer.setData('effect', controller);
+            // Add filter
+            if (ApplyFilter && !this.filterController) {
+                this.filterController = this
+                    .filters.external.addGlow(0xff0000, 4, 0)
+            }
         })
         .on('pointerout', function () {
-            // Remove grayscale effect
-            var layer = this.getLayer();
-            var controller = layer.getData('effect');
-            if (!controller) {
-                return;
+            // Remove filter
+            if (ApplyFilter && this.filterController) {
+                this
+                    .filters.external
+                    .remove(this.filterController, true)
+                this.filterController = null;
             }
-            layer.filters.internal.remove(controller);
         })
 }
 
