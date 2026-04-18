@@ -69,6 +69,24 @@ class Image extends Mesh {
                 sharedVertexMode: true
             });
 
+        this.syncRotation();
+
+        return this;
+    }
+
+    setSizeToFrame(frame) {
+        super.setSizeToFrame(frame);
+
+        if (this._rotationX !== undefined) {
+            this.syncRotation();
+        }
+
+        return this;
+    }
+
+    syncRotation() {
+        Rotate(this, this._rotationX, this._rotationY, this._rotationZ);
+
         return this;
     }
 
@@ -82,7 +100,7 @@ class Image extends Mesh {
         }
 
         this._rotationX = value;
-        Rotate(this, this._rotationX, this._rotationY, this._rotationZ);
+        this.syncRotation();
     }
 
     get angleX() {
@@ -103,7 +121,7 @@ class Image extends Mesh {
         }
 
         this._rotationY = value;
-        Rotate(this, this._rotationX, this._rotationY, this._rotationZ);
+        this.syncRotation();
     }
 
     get angleY() {
@@ -124,7 +142,7 @@ class Image extends Mesh {
         }
 
         this._rotationZ = value;
-        Rotate(this, this._rotationX, this._rotationY, this._rotationZ);
+        this.syncRotation();
     }
 
     get angleZ() {

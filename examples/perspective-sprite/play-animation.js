@@ -20,14 +20,16 @@ class Demo extends Phaser.Scene {
             repeat: -1
         });
 
-        var sprite0 = this.add.sprite(200, 300, 'knight')
+        var sprite0 = this.add.sprite(200, 300, 'knight').setScale(2)
 
-        var sprite = this.add.rexPerspectiveImage(400, 300, 'knight', null, { hideCCW: false })
+        var sprite = this.add.rexPerspectiveImage(400, 300, 'knight', null, { hideCCW: false }).setScale(2)
 
-        this.input.once('pointerdown', function () {
-            sprite0.play('idle');
-            sprite.play('idle');
-        })
+        this.add.text(0, 400, 'Play animation')
+            .setInteractive()
+            .on('pointerdown', function () {
+                sprite0.play('idle');
+                sprite.play('idle');
+            })
 
         this.input.on('pointermove', function (pointer) {
 
