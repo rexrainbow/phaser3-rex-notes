@@ -27626,7 +27626,6 @@ void main (void) {
         var fitHeight = GetValue$x(config, 'fitHeight', false);
 
         textObject._minWidth = minWidth;
-        textObject._minHeight = minHeight;
 
         if (!fitHeight) {
             // Set font size to fit width only
@@ -27635,6 +27634,8 @@ void main (void) {
                     textObject.setFixedSize(0, 0);
                 }
                 FontSizeFit(textObject, width, undefined);
+
+                textObject.minHeight = Math.max(minHeight, textObject.height);
                 return textObject;
             };
             textObject.resize = function (width, height) {
@@ -27656,10 +27657,12 @@ void main (void) {
                 }
 
                 textObject.setFontSize(1);
+                textObject.minHeight = Math.max(minHeight, textObject.height);
                 return textObject;
             };
             textObject.resize = function (width, height) {
                 FontSizeFit(textObject, width, height);
+                textObject.minHeight = Math.max(minHeight, textObject.height);
                 return textObject;
             };
         }
