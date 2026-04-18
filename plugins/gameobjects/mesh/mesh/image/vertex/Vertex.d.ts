@@ -55,7 +55,7 @@ declare class Vertex {
     // setFrameUV(frameU0: number, frameV0: number, frameU1: number, frameV1: number): this;
     // frameU: number;
     // frameV: number;
-    // setFrameSize(frameWidth: number, frameHeight: number): this;
+    // setFrameSize(frameWidth: number, frameHeight: number, frameX?: number, frameY?: number): this;
     // frameX: number;
     // frameY: number;
 

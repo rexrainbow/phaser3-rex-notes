@@ -168,9 +168,12 @@ class Vertex {
         return this;
     }
 
-    setFrameSize(frameWidth, frameHeight) {
-        this.frameX = this.u * frameWidth;
-        this.frameY = this.v * frameHeight;
+    setFrameSize(frameWidth, frameHeight, frameX, frameY) {
+        if (frameX === undefined) { frameX = 0; }
+        if (frameY === undefined) { frameY = 0; }
+
+        this.frameX = frameX + (this.u * frameWidth);
+        this.frameY = frameY + (this.v * frameHeight);
         return this;
     }
 

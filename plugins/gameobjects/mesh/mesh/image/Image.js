@@ -75,16 +75,20 @@ class Image extends Base {
         var frameV1 = (value) ? value.v1 : 0;
         var frameWidth = (value) ? value.cutWidth : 0;
         var frameHeight = (value) ? value.cutHeight : 0;
+        var frameX = (value) ? value.x : 0;
+        var frameY = (value) ? value.y : 0;
 
-        var isSizeChanged = (this._frameWidthSave !== frameWidth) || (this._frameHeightSave !== frameHeight);
+        var isSizeChanged = (this._frameWidthSave !== frameWidth) || (this._frameHeightSave !== frameHeight) || (this._frameXSave !== frameX) || (this._frameYSave !== frameY);
         this._frameWidthSave = frameWidth;
         this._frameHeightSave = frameHeight;
+        this._frameXSave = frameX;
+        this._frameYSave = frameY;
 
         for (var i = 0, cnt = faces.length; i < cnt; i++) {
             var face = faces[i];
             face.setFrameUV(frameU0, frameV0, frameU1, frameV1);
             if (isSizeChanged) {
-                face.setFrameSize(frameWidth, frameHeight)
+                face.setFrameSize(frameWidth, frameHeight, frameX, frameY)
             }
         }
     }

@@ -163,11 +163,15 @@ declare class Face {
      *
      * @param frameWidth - Frame width.
      * @param frameHeight - Frame height.
+     * @param frameX - Frame x offset.
+     * @param frameY - Frame y offset.
      * @returns This face instance.
      */
     setFrameSize(
         frameWidth: number,
-        frameHeight: number
+        frameHeight: number,
+        frameX?: number,
+        frameY?: number
     ): this;
 
     /**

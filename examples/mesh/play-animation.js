@@ -26,12 +26,20 @@ class Demo extends Phaser.Scene {
             .addGridFaces(1, 1)
             .play('idle')
 
-        this.debugGraphics = this.add.graphics();
-        gameObject.setDebug(this.debugGraphics);
-
+        // Face test
         var face = gameObject.faces[0];
         face.localOffsetX -= 200 / gameObject.scaleX;
         face.angle = -90;
+
+        // Filter test
+        gameObject.enableFilters()
+            .filters.internal.addColorMatrix()
+            .colorMatrix.grayscale()
+
+
+        this.debugGraphics = this.add.graphics();
+        gameObject.setDebug(this.debugGraphics);
+
     }
 
     update() {

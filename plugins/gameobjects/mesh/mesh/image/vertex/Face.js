@@ -164,10 +164,10 @@ class Face {
         return this;
     }
 
-    setFrameSize(frameWidth, frameHeight) {
+    setFrameSize(frameWidth, frameHeight, frameX, frameY) {
         // Set local position of vertices by frameXY and dxy
         for (var i = 0, cnt = this.vertices.length; i < cnt; i++) {
-            this.vertices[i].setFrameSize(frameWidth, frameHeight)
+            this.vertices[i].setFrameSize(frameWidth, frameHeight, frameX, frameY)
         }
 
         // Apply face offset, and rotation to vertices

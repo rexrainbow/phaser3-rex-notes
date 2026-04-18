@@ -37,7 +37,7 @@ export default {
 
         var frame = this.frame;
         face
-            .setFrameSize(frame.cutWidth, frame.cutHeight)
+            .setFrameSize(frame.cutWidth, frame.cutHeight, frame.x, frame.y)
             .setFrameUV(frame.u0, frame.v0, frame.u1, frame.v1)
             .resetVerticesPosition();
 

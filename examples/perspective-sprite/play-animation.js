@@ -21,18 +21,13 @@ class Demo extends Phaser.Scene {
         });
 
         var sprite0 = this.add.sprite(200, 300, 'knight')
-        
-        var plane = this.add.plane(300, 300, 'knight')
 
-        var sprite = this.add.rexPerspectiveSprite(400, 300, 'knight', null, { hideCCW: false })
+        var sprite = this.add.rexPerspectiveImage(400, 300, 'knight', null, { hideCCW: false })
 
         this.input.once('pointerdown', function () {
             sprite0.play('idle');
             sprite.play('idle');
-            plane.play('idle');
         })
-
-        var image = this.add.rexPerspectiveImage(500, 300, 'knight', null, { hideCCW: false })
 
         this.input.on('pointermove', function (pointer) {
 
@@ -41,12 +36,10 @@ class Demo extends Phaser.Scene {
             }
 
             sprite.rotationY += pointer.velocity.x * (1 / 800);
-            image.rotationY += pointer.velocity.x * (1 / 800);
         });
 
         this.debug = this.add.graphics();
         sprite.setDebug(this.debug);
-        image.setDebug(this.debug);
 
     }
 
