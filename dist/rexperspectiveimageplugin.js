@@ -302,9 +302,12 @@
             return this;
         }
 
-        setFrameSize(frameWidth, frameHeight) {
-            this.frameX = this.u * frameWidth;
-            this.frameY = this.v * frameHeight;
+        setFrameSize(frameWidth, frameHeight, frameX, frameY) {
+            if (frameX === undefined) { frameX = 0; }
+            if (frameY === undefined) { frameY = 0; }
+
+            this.frameX = frameX + (this.u * frameWidth);
+            this.frameY = frameY + (this.v * frameHeight);
             return this;
         }
 
@@ -586,10 +589,10 @@
             return this;
         }
 
-        setFrameSize(frameWidth, frameHeight) {
+        setFrameSize(frameWidth, frameHeight, frameX, frameY) {
             // Set local position of vertices by frameXY and dxy
             for (var i = 0, cnt = this.vertices.length; i < cnt; i++) {
-                this.vertices[i].setFrameSize(frameWidth, frameHeight);
+                this.vertices[i].setFrameSize(frameWidth, frameHeight, frameX, frameY);
             }
 
             // Apply face offset, and rotation to vertices
@@ -820,7 +823,7 @@
 
             var frame = this.frame;
             face
-                .setFrameSize(frame.cutWidth, frame.cutHeight)
+                .setFrameSize(frame.cutWidth, frame.cutHeight, frame.x, frame.y)
                 .setFrameUV(frame.u0, frame.v0, frame.u1, frame.v1)
                 .resetVerticesPosition();
 
@@ -1512,16 +1515,20 @@
             var frameV1 = (value) ? value.v1 : 0;
             var frameWidth = (value) ? value.cutWidth : 0;
             var frameHeight = (value) ? value.cutHeight : 0;
+            var frameX = (value) ? value.x : 0;
+            var frameY = (value) ? value.y : 0;
 
-            var isSizeChanged = (this._frameWidthSave !== frameWidth) || (this._frameHeightSave !== frameHeight);
+            var isSizeChanged = (this._frameWidthSave !== frameWidth) || (this._frameHeightSave !== frameHeight) || (this._frameXSave !== frameX) || (this._frameYSave !== frameY);
             this._frameWidthSave = frameWidth;
             this._frameHeightSave = frameHeight;
+            this._frameXSave = frameX;
+            this._frameYSave = frameY;
 
             for (var i = 0, cnt = faces.length; i < cnt; i++) {
                 var face = faces[i];
                 face.setFrameUV(frameU0, frameV0, frameU1, frameV1);
                 if (isSizeChanged) {
-                    face.setFrameSize(frameWidth, frameHeight);
+                    face.setFrameSize(frameWidth, frameHeight, frameX, frameY);
                 }
             }
         }
@@ -1712,13 +1719,6 @@
     var RotateXYZ = function (gameObject, rotationX, rotationY, rotationZ, centerX, centerY) {
         var vertices = gameObject.vertices;
 
-        if ((rotationX === 0) && (rotationY === 0) && (rotationZ === 0)) {
-            for (var i = 0, cnt = vertices.length; i < cnt; i++) {
-                vertices[i].resetPosition();
-            }
-            return;
-        }
-
         if (centerX === undefined) {
             centerX = gameObject.width / 2;
         }
@@ -1726,54 +1726,73 @@
             centerY = gameObject.height / 2;
         }
 
-        var vertex, x, y, z, xTemp, yTemp, zTemp;
-        var cosX = Math.cos(rotationX),
-            sinX = Math.sin(rotationX);
-        var cosY = Math.cos(rotationY),
-            sinY = Math.sin(rotationY);
-        var cosZ = Math.cos(rotationZ),
-            sinZ = Math.sin(rotationZ);
-        var perspective = gameObject.scene.scale.gameSize.width,
-            scale;
-        var xyz;
-        for (var i = 0, cnt = vertices.length; i < cnt; i++) {
-            vertex = vertices[i];
-            x = vertex.frameX - centerX;
-            y = vertex.frameY - centerY;
-            z = 0;
+        if ((rotationX === 0) && (rotationY === 0) && (rotationZ === 0)) {
+            var vertex, xyz;
+            for (var i = 0, cnt = vertices.length; i < cnt; i++) {
+                vertex = vertices[i];
+                vertex.resetPosition();
 
-            // Rotate around x-axis
-            yTemp = y * cosX - z * sinX;
-            zTemp = y * sinX + z * cosX;
-            y = yTemp;
-            z = zTemp;
+                if (!vertex.hasOwnProperty('xyz')) {
+                    vertex.xyz = [0, 0, 0];
+                }
 
-            // Rotate around y-axis
-            xTemp = x * cosY + z * sinY;
-            zTemp = -x * sinY + z * cosY;
-            x = xTemp;
-            z = zTemp;
-
-            // Rotate around z-axis
-            xTemp = x * cosZ - y * sinZ;
-            yTemp = x * sinZ + y * cosZ;
-            x = xTemp;
-            y = yTemp;
-
-            // Project from 3d to 2d
-            scale = perspective / (perspective - z);
-            vertex.localX = x * scale + centerX;
-            vertex.localY = y * scale + centerY;
-
-            // Store [x,y,z]
-            if (!vertex.hasOwnProperty('xyz')) {
-                vertex.xyz = [0, 0, 0];
+                xyz = vertex.xyz;
+                xyz[0] = vertex.frameX - centerX;
+                xyz[1] = vertex.frameY - centerY;
+                xyz[2] = 0;
             }
-            xyz = vertex.xyz;
-            xyz[0] = x;
-            xyz[1] = y;
-            xyz[2] = z;
+
+        } else {
+            var vertex, x, y, z, xTemp, yTemp, zTemp;
+            var cosX = Math.cos(rotationX),
+                sinX = Math.sin(rotationX);
+            var cosY = Math.cos(rotationY),
+                sinY = Math.sin(rotationY);
+            var cosZ = Math.cos(rotationZ),
+                sinZ = Math.sin(rotationZ);
+            var perspective = gameObject.scene.scale.gameSize.width,
+                scale;
+            var xyz;
+            for (var i = 0, cnt = vertices.length; i < cnt; i++) {
+                vertex = vertices[i];
+                x = vertex.frameX - centerX;
+                y = vertex.frameY - centerY;
+                z = 0;
+
+                // Rotate around x-axis
+                yTemp = y * cosX - z * sinX;
+                zTemp = y * sinX + z * cosX;
+                y = yTemp;
+                z = zTemp;
+
+                // Rotate around y-axis
+                xTemp = x * cosY + z * sinY;
+                zTemp = -x * sinY + z * cosY;
+                x = xTemp;
+                z = zTemp;
+
+                // Rotate around z-axis
+                xTemp = x * cosZ - y * sinZ;
+                yTemp = x * sinZ + y * cosZ;
+                x = xTemp;
+                y = yTemp;
+
+                // Project from 3d to 2d
+                scale = perspective / (perspective - z);
+                vertex.localX = x * scale + centerX;
+                vertex.localY = y * scale + centerY;
+
+                // Store [x,y,z]
+                if (!vertex.hasOwnProperty('xyz')) {
+                    vertex.xyz = [0, 0, 0];
+                }
+                xyz = vertex.xyz;
+                xyz[0] = x;
+                xyz[1] = y;
+                xyz[2] = z;
+            }
         }
+
     };
 
     var IsBackFace = function (face) {
@@ -1859,6 +1878,24 @@
                     sharedVertexMode: true
                 });
 
+            this.syncRotation();
+
+            return this;
+        }
+
+        setSizeToFrame(frame) {
+            super.setSizeToFrame(frame);
+
+            if (this._rotationX !== undefined) {
+                this.syncRotation();
+            }
+
+            return this;
+        }
+
+        syncRotation() {
+            Rotate(this, this._rotationX, this._rotationY, this._rotationZ);
+
             return this;
         }
 
@@ -1872,7 +1909,7 @@
             }
 
             this._rotationX = value;
-            Rotate(this, this._rotationX, this._rotationY, this._rotationZ);
+            this.syncRotation();
         }
 
         get angleX() {
@@ -1893,7 +1930,7 @@
             }
 
             this._rotationY = value;
-            Rotate(this, this._rotationX, this._rotationY, this._rotationZ);
+            this.syncRotation();
         }
 
         get angleY() {
@@ -1914,7 +1951,7 @@
             }
 
             this._rotationZ = value;
-            Rotate(this, this._rotationX, this._rotationY, this._rotationZ);
+            this.syncRotation();
         }
 
         get angleZ() {

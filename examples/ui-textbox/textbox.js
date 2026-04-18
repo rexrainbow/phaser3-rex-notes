@@ -1,5 +1,6 @@
 import phaser from '../../../phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
+import TransitionImagePackPlugin from '../../templates/transitionimagepack/transitionimagepack-plugin.js';
 
 const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
@@ -66,7 +67,7 @@ var createTextBox = function (scene, x, y, config) {
 
         background: scene.rexUI.add.roundRectangle({ radius: 20, color: COLOR_MAIN, strokeColor: COLOR_LIGHT, strokeWidth: 2 }),
 
-        icon: scene.rexUI.add.transitionImagePack({
+        icon: scene.add.rexTransitionImagePack({
             width: 40, height: 40,
             key: 'portraits', frame: 'A-smile'
         }),
@@ -174,6 +175,11 @@ var config = {
     },
     scene: Demo,
     plugins: {
+        global: [{
+            key: 'rexTransitionImagePack',
+            plugin: TransitionImagePackPlugin,
+            start: true
+        }],
         scene: [{
             key: 'rexUI',
             plugin: UIPlugin,

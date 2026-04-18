@@ -302,9 +302,12 @@
             return this;
         }
 
-        setFrameSize(frameWidth, frameHeight) {
-            this.frameX = this.u * frameWidth;
-            this.frameY = this.v * frameHeight;
+        setFrameSize(frameWidth, frameHeight, frameX, frameY) {
+            if (frameX === undefined) { frameX = 0; }
+            if (frameY === undefined) { frameY = 0; }
+
+            this.frameX = frameX + (this.u * frameWidth);
+            this.frameY = frameY + (this.v * frameHeight);
             return this;
         }
 
@@ -586,10 +589,10 @@
             return this;
         }
 
-        setFrameSize(frameWidth, frameHeight) {
+        setFrameSize(frameWidth, frameHeight, frameX, frameY) {
             // Set local position of vertices by frameXY and dxy
             for (var i = 0, cnt = this.vertices.length; i < cnt; i++) {
-                this.vertices[i].setFrameSize(frameWidth, frameHeight);
+                this.vertices[i].setFrameSize(frameWidth, frameHeight, frameX, frameY);
             }
 
             // Apply face offset, and rotation to vertices
@@ -820,7 +823,7 @@
 
             var frame = this.frame;
             face
-                .setFrameSize(frame.cutWidth, frame.cutHeight)
+                .setFrameSize(frame.cutWidth, frame.cutHeight, frame.x, frame.y)
                 .setFrameUV(frame.u0, frame.v0, frame.u1, frame.v1)
                 .resetVerticesPosition();
 
@@ -1512,16 +1515,20 @@
             var frameV1 = (value) ? value.v1 : 0;
             var frameWidth = (value) ? value.cutWidth : 0;
             var frameHeight = (value) ? value.cutHeight : 0;
+            var frameX = (value) ? value.x : 0;
+            var frameY = (value) ? value.y : 0;
 
-            var isSizeChanged = (this._frameWidthSave !== frameWidth) || (this._frameHeightSave !== frameHeight);
+            var isSizeChanged = (this._frameWidthSave !== frameWidth) || (this._frameHeightSave !== frameHeight) || (this._frameXSave !== frameX) || (this._frameYSave !== frameY);
             this._frameWidthSave = frameWidth;
             this._frameHeightSave = frameHeight;
+            this._frameXSave = frameX;
+            this._frameYSave = frameY;
 
             for (var i = 0, cnt = faces.length; i < cnt; i++) {
                 var face = faces[i];
                 face.setFrameUV(frameU0, frameV0, frameU1, frameV1);
                 if (isSizeChanged) {
-                    face.setFrameSize(frameWidth, frameHeight);
+                    face.setFrameSize(frameWidth, frameHeight, frameX, frameY);
                 }
             }
         }
