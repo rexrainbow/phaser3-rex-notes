@@ -105,7 +105,6 @@ class Demo extends Phaser.Scene {
             },
             items: CreateItems(3)
         })
-            .setDraggable('header')  // Draggable-header
             .layout()
 
         //.drawBounds(this.add.graphics(), 0xff0000);

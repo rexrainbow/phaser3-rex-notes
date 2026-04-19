@@ -17,7 +17,7 @@ class CrtController extends Phaser.Filters.Controller {
 
     resetFromJSON(o) {
         this.setWarp(GetValue(o, 'warpX', 0.75), GetValue(o, 'warpY', 0.75));
-        this.setScanStrength(GetValue(o, 'scanLineStrength', 0.2));
+        this.setScanLineStrength(GetValue(o, 'scanLineStrength', 0.2));
         this.setScanLineWidth(GetValue(o, 'scanLineWidth', 1024));
         return this;
     }
