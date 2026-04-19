@@ -11,6 +11,8 @@ var content = `
 <b><color=yellow>H</color></b>ello\\n
 <u=red>Phaser</u>\\n
 World
+
+[wait=text.a.typing]
 `
 
 class Demo extends Phaser.Scene {
@@ -30,7 +32,10 @@ class Demo extends Phaser.Scene {
                 createGameObject: CreateTextBox
             }
         })
-            .play(content)
+            .playPromise(content)
+            .then(function () {
+                console.log('Complete')
+            })
     }
 
     update() { }
@@ -46,7 +51,7 @@ var CreateTextBox = function (scene) {
 
         // delimiters of tagPlayer is `[]`, 
         // change delimiters of bbcodetext to '<>'
-        delimiters: '<>'  
+        delimiters: '<>'
     });
 }
 

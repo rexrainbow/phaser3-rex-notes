@@ -1,6 +1,7 @@
 import phaser from '../../../phaser/src/phaser.js';
 import MarkedEventSheetsPlugin from '../../plugins/markedeventsheets-plugin.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
+import TransitionImagePackPlugin from '../../templates/transitionimagepack/transitionimagepack-plugin.js';
 
 class Demo extends Phaser.Scene {
 
@@ -78,7 +79,7 @@ var CreateCommandExecutor = function (scene) {
                 if (name && expression) {
                     config.frame = `${name}-${expression}`;
                 }
-                return scene.rexUI.add.transitionImagePack(config)
+                return scene.add.rexTransitionImagePack(config)
                     .setOrigin(0.5, 1)
             },
             fade: 0,  // No fade-in when creating/destroying gameobject
@@ -161,7 +162,7 @@ var CreateCommandExecutor = function (scene) {
         .addGameObjectManager({
             name: 'BG',
             createGameObject(scene, config) {
-                return scene.rexUI.add.transitionImagePack(config);
+                return scene.add.rexTransitionImagePack(config);
             },
             fade: 0,  // No fade-in when creating/destroying gameobject
             viewportCoordinate: true,
@@ -460,11 +461,18 @@ var config = {
     },
     scene: Demo,
     plugins: {
-        global: [{
-            key: 'rexMarkedEventSheets',
-            plugin: MarkedEventSheetsPlugin,
-            start: true
-        }],
+        global: [
+            {
+                key: 'rexMarkedEventSheets',
+                plugin: MarkedEventSheetsPlugin,
+                start: true
+            },
+            {
+                key: 'rexTransitionImagePack',
+                plugin: TransitionImagePackPlugin,
+                start: true
+            }
+        ],
         scene: [{
             key: 'rexUI',
             plugin: UIPlugin,

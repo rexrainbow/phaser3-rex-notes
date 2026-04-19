@@ -26,6 +26,7 @@ class Demo extends Phaser.Scene {
             .fill(0x888888)
             .draw(numberText, 150, 200)
             .draw(mushroom, 75, 100)
+            .render()
 
         this.input
             .on('pointerdown', function (pointer) {
@@ -36,22 +37,16 @@ class Demo extends Phaser.Scene {
                 image.shatter(pointer.x, pointer.y);
             })
             .on('pointerup', function () {
-                image.startUpdate();
                 image.task = this.tweens.add({
                     targets: image.faces,
                     alpha: 0,
                     angle: function () { return -90 + Math.random() * 180; },
-                    y: '-=0.5',
+                    localOffsetY: '+=300',
                     ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
                     duration: 1000,
                     delay: this.tweens.stagger(20),
                     repeat: 0,            // -1: infinity
                     yoyo: false,
-                    onComplete: function () {
-                        image
-                            .stopUpdate()
-                            .resetImage()
-                    }
                 });
             }, this)
     }

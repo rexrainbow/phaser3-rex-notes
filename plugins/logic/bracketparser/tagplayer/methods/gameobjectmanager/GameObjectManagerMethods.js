@@ -24,18 +24,19 @@ export default {
 
         var defaultLayer = config.defaultLayer;
         var createGameObject = config.createGameObject;
-        var layerManager = this.layerManager;
+        var self = this;
         config.createGameObject = function (scene, ...args) {
             var gameObject = createGameObject.call(this, scene, ...args);
             // this: config.createGameObjectScope
 
-            if (defaultLayer && layerManager) {
-                layerManager.addToLayer(defaultLayer, gameObject);
+            if (defaultLayer && self.layerManager) {
+                self.layerManager.addToLayer(defaultLayer, gameObject);
             }
 
             return gameObject;
         }
 
+        // Base method from Managers
         AddGameObjectManager.call(this, config, GameObjectManagerClass);
 
         // Register parse callbacks

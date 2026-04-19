@@ -16,9 +16,9 @@ class TagPlayer extends Extend(EventEmitter) {
 
         this.scene = scene;
 
-        this.initManagers(scene, config);
-
         this.parser = new Parser(this, GetValue(config, 'parser', undefined));
+
+        this.initManagers(scene, config);
 
         var spriteManagerConfig = GetValue(config, 'sprites');
         if ((spriteManagerConfig !== false) && (spriteManagerConfig !== null)) {
