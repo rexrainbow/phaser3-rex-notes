@@ -11,6 +11,7 @@ import GetAllMatch from '../match/GetAllMatch.js';
 import DumpSymbols from './DumpSymbols.js';
 import MaskMethods from './MaskMethods.js';
 import ActivateAreaMethods from './ActivateAreaMethods.js';
+import GetBoardBounds from './GetBoardBounds.js';
 
 var Methods = {
     clear: Clear,
@@ -23,6 +24,7 @@ var Methods = {
     preTest: PreTest,
     getAllMatch: GetAllMatch,
     dumpSymbols: DumpSymbols,
+    getBoardBounds: GetBoardBounds,
 }
 
 Object.assign(

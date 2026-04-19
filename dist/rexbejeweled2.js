@@ -1910,7 +1910,6 @@
     };
 
     const GetValue$5 = Phaser.Utils.Objects.GetValue;
-    const SetStruct$1 = Phaser.Structs.Set;
 
     let State$1 = class State extends BaseState {
         constructor(bejeweled, config) {
@@ -1986,17 +1985,17 @@
                     pieces = [];
                     break;
                 case 1:
-                    pieces = matchedLines[0].entries;
+                    pieces = Array.from(matchedLines[0]);
                     break;
                 default:
                     // Put all chess to a set
-                    var newSet = new SetStruct$1();
+                    var newSet = new Set();
                     for (var i = 0; i < matchedLinesCount; i++) {
-                        matchedLines[i].entries.forEach(function (value) {
-                            newSet.set(value);
+                        matchedLines[i].forEach(function (value) {
+                            newSet.add(value);
                         });
                     }
-                    pieces = newSet.entries;
+                    pieces = Array.from(newSet);
                     break;
             }
 
@@ -3120,7 +3119,6 @@
         y: 0
     };
 
-    const SetStruct = Phaser.Structs.Set;
     var GetAllMatch = function () {
         RefreshSymbolCache.call(this); // only refresh symbol cache once
         // Get match5, match4, match3
@@ -3128,7 +3126,7 @@
         var matchLines = [];
         for (var n = 5; n >= 3; n--) {
             GetMatchN.call(this, n, function (result, board) {
-                var newSet = new SetStruct(board.tileXYArrayToChessArray(result.tileXY, self.chessTileZ));
+                var newSet = new Set(board.tileXYArrayToChessArray(result.tileXY, self.chessTileZ));
                 for (var i = 0, cnt = matchLines.length; i < cnt; i++) {
                     if (SubSetTest(matchLines[i], newSet)) {
                         return; // not a new set
@@ -3142,9 +3140,8 @@
 
     var SubSetTest = function (setA, setB) {
         // Return true if setB is a subset of setA
-        var itemsA = setA.entries;
-        for (var i = 0, cnt = itemsA.length; i < cnt; i++) {
-            if (!setB.contains(itemsA[i])) {
+        for (var item of setA) {
+            if (!setB.has(item)) {
                 return false;
             }
         }
@@ -3401,24 +3398,17 @@
         resetBoardMask() {
             // Create Graphics game object, mask object
             if (!this.activateAreaMaskGameObject) {
-                this.activateAreaMaskGameObject = this.scene.add.graphics().setVisible(true);
                 this.enableBoardLayer();
+                this.activateAreaMaskGameObject = this.scene.add.graphics().setVisible(false);
                 SetMask(this.layer, this.activateAreaMaskGameObject, undefined, 'world');
             }
 
             // Draw Graphics game object, a rectangle of activate area
-            var board = this.board;
-            var grid = board.grid;
-
-            var worldTL = board.tileXYToWorldXY(0, board.height / 2);
-            var x = worldTL.x - (grid.width / 2);
-            var y = worldTL.y - (grid.height / 2);
-            var width = this.activateBoardWidth * grid.width;
-            var height = this.activateBoardHeight * grid.height;
             this.activateAreaMaskGameObject
                 .clear()
                 .fillStyle(0xffffff)
-                .fillRect(x, y, width, height);
+                .fillRectShape(this.getBoardBounds());
+
 
             return this;
         },
@@ -3428,17 +3418,39 @@
     var ActivateAreaMethods = {
         setActivateBoardWidth(width) {
             this.setBoardWidth(width + 2);
+            // Padding each 1 column at left and right side
             return this;
         },
 
         setActivateBoardHeight(height) {
             this.setBoardHeight(height + 2);
+            // Padding 1 row at left and right side
             return this;
         },
 
         isAtActivateArea(tileX, tileY) {
-            return (tileX >= 1) && (tileX <= this.board.width - 2) && (tileY >= 1) && (tileY <= this.board.height - 2);
+            return (tileX >= 1) && (tileX <= this.board.width - 2) &&
+                (tileY >= 1) && (tileY <= this.board.height - 2);
         }
+    };
+
+    var Rectangle = Phaser.Geom.Rectangle;
+    var GetBoardBounds = function (out) {
+        if (out === undefined) {
+            out = new Rectangle();
+        }
+
+        var board = this.board;
+        var grid = board.grid;
+
+        var worldTL = board.tileXYToWorldXY(1, 1);
+        var x = worldTL.x - (grid.width / 2);
+        var y = worldTL.y - (grid.height / 2);
+        var width = this.activateBoardWidth * grid.width;
+        var height = this.activateBoardHeight * grid.height;
+        out.setTo(x, y, width, height);
+
+        return out;
     };
 
     var Methods = {
@@ -3452,6 +3464,7 @@
         preTest: PreTest,
         getAllMatch: GetAllMatch,
         dumpSymbols: DumpSymbols,
+        getBoardBounds: GetBoardBounds,
     };
 
     Object.assign(

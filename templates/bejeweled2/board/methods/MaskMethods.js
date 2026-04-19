@@ -18,24 +18,17 @@ export default {
     resetBoardMask() {
         // Create Graphics game object, mask object
         if (!this.activateAreaMaskGameObject) {
-            this.activateAreaMaskGameObject = this.scene.add.graphics().setVisible(true);
             this.enableBoardLayer();
+            this.activateAreaMaskGameObject = this.scene.add.graphics().setVisible(false);
             SetMask(this.layer, this.activateAreaMaskGameObject, undefined, 'world');
         }
 
         // Draw Graphics game object, a rectangle of activate area
-        var board = this.board;
-        var grid = board.grid;
-
-        var worldTL = board.tileXYToWorldXY(0, board.height / 2);
-        var x = worldTL.x - (grid.width / 2);
-        var y = worldTL.y - (grid.height / 2);
-        var width = this.activateBoardWidth * grid.width;
-        var height = this.activateBoardHeight * grid.height;
         this.activateAreaMaskGameObject
             .clear()
             .fillStyle(0xffffff)
-            .fillRect(x, y, width, height);
+            .fillRectShape(this.getBoardBounds());
+
 
         return this;
     },

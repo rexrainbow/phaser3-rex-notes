@@ -27,8 +27,8 @@ class Demo extends Phaser.Scene {
 
         var bejeweled = new Bejeweled(this, {
             board: {
-                x: 10,
-                y: 10,
+                x: 200,
+                y: 100,
                 cellSize: 40,
                 width: 10,
                 height: 10
@@ -63,7 +63,7 @@ class Demo extends Phaser.Scene {
                 var symbol = chess.getData('symbol');
                 var tileXY = bejeweled.chessToTileXY(chess);
 
-                var chessSet = new Phaser.Structs.Set();
+                var chessSet = new Set();
                 var chessArray = [];
                 switch (symbol) {
                     case 6:
@@ -76,9 +76,9 @@ class Demo extends Phaser.Scene {
                 }
 
                 chessArray.forEach(function (chess) {
-                    chessSet.set(chess);
+                    chessSet.add(chess);
                 })
-                bejeweled.setEliminatingChess(chessSet.entries);
+                bejeweled.setEliminatingChess(Array.from(chessSet));
 
             },
 
