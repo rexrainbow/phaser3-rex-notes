@@ -12,6 +12,7 @@ var OnParseTypingTextTag = function (tagPlayer, parser, config) {
                 gameObjectManager.setTypingSpeed(name, speed);
             }
             gameObjectManager.typing(name, content);
+            // see \plugins\utils\text\textmanager\TextBob.js
         });
     });
 }
