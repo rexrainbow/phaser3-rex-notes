@@ -25631,9 +25631,9 @@ void main (void) {
             super(scene, x, y, fixedWidth, fixedHeight, config);
             this.type = 'rexTextPlayer';
 
-            this.initManagers(scene, config);
-
             this.parser = new Parser(this, GetValue$3F(config, 'parser', undefined));
+
+            this.initManagers(scene, config);
 
             this.typeWriter = new TypeWriter(this, GetValue$3F(config, 'typing', undefined));
 
