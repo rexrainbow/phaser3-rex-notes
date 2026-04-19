@@ -53,11 +53,12 @@ class Demo extends Phaser.Scene {
         this.add.text(0, 580, 'scale')
             .setInteractive()
             .once('pointerdown', function () {
+                // Reset t after scale/layout
+                var t = scrollablePanel.t;
                 scrollablePanel
                     .setScale(0.5)
-                    .layout();
-
-                console.log(scrollablePanel.t)
+                    .layout()
+                    .setT(t);
             })
 
     }

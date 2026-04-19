@@ -31,7 +31,9 @@ var AddGlowProperties = function (gameObject) {
                 }
             } else {
                 if (!gameObject._glow) {
-                    gameObject._glow = filterList.addGlow(glowColor, glowOuterStrength, glowInnerStrength);
+                    gameObject._glow = filterList
+                        .addGlow(glowColor, glowOuterStrength, glowInnerStrength)
+                        .setPaddingOverride(null);
                 }
 
                 gameObject._glow.color = glowColor;

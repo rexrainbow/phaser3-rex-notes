@@ -35,7 +35,9 @@ var AddShadowProperties = function (gameObject) {
                 }
             } else {
                 if (!gameObject._shadow) {
-                    gameObject._shadow = filterList.addShadow(shadowX, shadowY, shadowDecay, shadowPower, shadowColor, shadowSamples, shadowIntensity);
+                    gameObject._shadow = filterList
+                        .addShadow(shadowX, shadowY, shadowDecay, shadowPower, shadowColor, shadowSamples, shadowIntensity)
+                        .setPaddingOverride(null);
                 }
 
                 gameObject._shadow.color = shadowColor;

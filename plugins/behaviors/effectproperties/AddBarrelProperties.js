@@ -29,7 +29,9 @@ var AddBarrelProperties = function (gameObject) {
                 }
             } else {
                 if (!gameObject._barrelEffect) {
-                    gameObject._barrelEffect = filterList.addBarrel();
+                    gameObject._barrelEffect = filterList
+                        .addBarrel()
+                        .setPaddingOverride(null);
                 }
                 gameObject._barrelEffect.amount = barrel;
             }

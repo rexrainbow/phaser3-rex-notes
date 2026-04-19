@@ -9058,7 +9058,9 @@
                     }
                 } else {
                     if (!gameObject._barrelEffect) {
-                        gameObject._barrelEffect = filterList.addBarrel();
+                        gameObject._barrelEffect = filterList
+                            .addBarrel()
+                            .setPaddingOverride(null);
                     }
                     gameObject._barrelEffect.amount = barrel;
                 }
@@ -10358,7 +10360,9 @@ void main (void) {
                     }
                 } else {
                     if (!gameObject._glow) {
-                        gameObject._glow = filterList.addGlow(glowColor, glowOuterStrength, glowInnerStrength);
+                        gameObject._glow = filterList
+                            .addGlow(glowColor, glowOuterStrength, glowInnerStrength)
+                            .setPaddingOverride(null);
                     }
 
                     gameObject._glow.color = glowColor;
@@ -11299,7 +11303,9 @@ void main (void) {
                     }
                 } else {
                     if (!gameObject._shadow) {
-                        gameObject._shadow = filterList.addShadow(shadowX, shadowY, shadowDecay, shadowPower, shadowColor, shadowSamples, shadowIntensity);
+                        gameObject._shadow = filterList
+                            .addShadow(shadowX, shadowY, shadowDecay, shadowPower, shadowColor, shadowSamples, shadowIntensity)
+                            .setPaddingOverride(null);
                     }
 
                     gameObject._shadow.color = shadowColor;
