@@ -56,6 +56,8 @@ class Demo extends Phaser.Scene {
                 scrollablePanel
                     .setScale(0.5)
                     .layout();
+
+                console.log(scrollablePanel.t)
             })
 
     }

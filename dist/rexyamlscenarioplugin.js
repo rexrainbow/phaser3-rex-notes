@@ -55844,7 +55844,7 @@ void main (void) {
 	        background: background,
 	        space: style.space,
 
-	        alignTitle: style.root.alignTitle
+	        alignTitle: tweaker.root.alignTitle
 	    });
 	    scene.add.existing(columns);
 
@@ -56590,7 +56590,7 @@ void main (void) {
 	        minRightPanelWidth: GetValue$1J(config, 'minRightPanelWidth', 0),
 	        space: style.space,
 
-	        alignTitle: style.root.alignTitle
+	        alignTitle: tweaker.root.alignTitle
 	    });
 	    scene.add.existing(splitPanels);
 

@@ -52,7 +52,7 @@ var CreateSplitPanels = function (tweaker, config, style) {
         minRightPanelWidth: GetValue(config, 'minRightPanelWidth', 0),
         space: style.space,
 
-        alignTitle: style.root.alignTitle
+        alignTitle: tweaker.root.alignTitle
     });
     scene.add.existing(splitPanels);
 

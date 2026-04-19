@@ -7,12 +7,12 @@ export default {
         return this;
     },
 
-    addFilters(filters) {
-        if (!this.filters) {
-            this.filters = {};
+    addFilters(fileTypeFilters) {
+        if (!this.fileTypeFilters) {
+            this.fileTypeFilters = {};
         }
-        for (var name in filters) {
-            this.filters[name] = filters[name];
+        for (var name in fileTypeFilters) {
+            this.fileTypeFilters[name] = fileTypeFilters[name];
         }
         return this;
     },

@@ -48607,12 +48607,12 @@ void main (void) {
             return this;
         },
 
-        addFilters(filters) {
-            if (!this.filters) {
-                this.filters = {};
+        addFilters(fileTypeFilters) {
+            if (!this.fileTypeFilters) {
+                this.fileTypeFilters = {};
             }
-            for (var name in filters) {
-                this.filters[name] = filters[name];
+            for (var name in fileTypeFilters) {
+                this.fileTypeFilters[name] = fileTypeFilters[name];
             }
             return this;
         },
@@ -48684,9 +48684,9 @@ void main (void) {
                 .on('drop', function (gameObject, e) {
                     this._files = e.dataTransfer.files;
                     var files = this._files;
-                    if (files && this.filters) {
-                        for (var filterType in this.filters) {
-                            var filterCallback = this.filters[filterType];
+                    if (files && this.fileTypeFilters) {
+                        for (var filterType in this.fileTypeFilters) {
+                            var filterCallback = this.fileTypeFilters[filterType];
 
                             var filteredFiles = [];
                             for (var i = 0, cnt = files.length; i < cnt; i++) {
@@ -78250,7 +78250,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             background: background,
             space: style.space,
 
-            alignTitle: style.root.alignTitle
+            alignTitle: tweaker.root.alignTitle
         });
         scene.add.existing(columns);
 
@@ -78434,7 +78434,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             minRightPanelWidth: GetValue$N(config, 'minRightPanelWidth', 0),
             space: style.space,
 
-            alignTitle: style.root.alignTitle
+            alignTitle: tweaker.root.alignTitle
         });
         scene.add.existing(splitPanels);
 

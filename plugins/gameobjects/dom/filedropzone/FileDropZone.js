@@ -49,9 +49,9 @@ class FileDropZone extends DOMElement {
             .on('drop', function (gameObject, e) {
                 this._files = e.dataTransfer.files;
                 var files = this._files;
-                if (files && this.filters) {
-                    for (var filterType in this.filters) {
-                        var filterCallback = this.filters[filterType];
+                if (files && this.fileTypeFilters) {
+                    for (var filterType in this.fileTypeFilters) {
+                        var filterCallback = this.fileTypeFilters[filterType];
 
                         var filteredFiles = [];
                         for (var i = 0, cnt = files.length; i < cnt; i++) {

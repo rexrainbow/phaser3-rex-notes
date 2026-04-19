@@ -170,12 +170,12 @@
             return this;
         },
 
-        addFilters(filters) {
-            if (!this.filters) {
-                this.filters = {};
+        addFilters(fileTypeFilters) {
+            if (!this.fileTypeFilters) {
+                this.fileTypeFilters = {};
             }
-            for (var name in filters) {
-                this.filters[name] = filters[name];
+            for (var name in fileTypeFilters) {
+                this.fileTypeFilters[name] = fileTypeFilters[name];
             }
             return this;
         },
@@ -265,9 +265,9 @@
                 .on('drop', function (gameObject, e) {
                     this._files = e.dataTransfer.files;
                     var files = this._files;
-                    if (files && this.filters) {
-                        for (var filterType in this.filters) {
-                            var filterCallback = this.filters[filterType];
+                    if (files && this.fileTypeFilters) {
+                        for (var filterType in this.fileTypeFilters) {
+                            var filterCallback = this.fileTypeFilters[filterType];
 
                             var filteredFiles = [];
                             for (var i = 0, cnt = files.length; i < cnt; i++) {

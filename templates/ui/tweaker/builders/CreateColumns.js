@@ -47,7 +47,7 @@ var CreateColumns = function (tweaker, config, style) {
         background: background,
         space: style.space,
 
-        alignTitle: style.root.alignTitle
+        alignTitle: tweaker.root.alignTitle
     });
     scene.add.existing(columns);
 

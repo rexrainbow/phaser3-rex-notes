@@ -1,5 +1,6 @@
 import phaser from '../../../phaser/src/phaser.js';
 import CanvasFrameManagerPlugin from '../../plugins/canvasframemanager-plugin.js';
+import FrameManagerPlugin from '../../plugins/framemanager-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -13,7 +14,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         var useDynamicTexture = true;
-        var frameManagerPool = this.plugins.get('rexCanvasFrameManager').addPool(this,
+        var frameManagerPool = this.plugins.get('rexFrameManagerPlugin').addPool(this,
             {
                 key: 'test',
                 width: 128, height: 128,
@@ -75,8 +76,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexCanvasFrameManager',
-            plugin: CanvasFrameManagerPlugin,
+            key: 'rexFrameManagerPlugin',
+            plugin: FrameManagerPlugin,
             start: true
         }]
     }
