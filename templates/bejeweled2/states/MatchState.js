@@ -5,7 +5,6 @@ import MovingAllPieces from '../actions/Move.js';
 import IsPromise from '../../../plugins/utils/object/IsPromise.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-const SetStruct = Phaser.Structs.Set;
 
 class State extends BaseState {
     constructor(bejeweled, config) {
@@ -81,17 +80,17 @@ class State extends BaseState {
                 pieces = [];
                 break;
             case 1:
-                pieces = matchedLines[0].entries;
+                pieces = Array.from(matchedLines[0]);
                 break;
             default:
                 // Put all chess to a set
-                var newSet = new SetStruct();
+                var newSet = new Set();
                 for (var i = 0; i < matchedLinesCount; i++) {
-                    matchedLines[i].entries.forEach(function (value) {
-                        newSet.set(value);
+                    matchedLines[i].forEach(function (value) {
+                        newSet.add(value);
                     });
                 }
-                pieces = newSet.entries;
+                pieces = Array.from(newSet);
                 break;
         }
 
