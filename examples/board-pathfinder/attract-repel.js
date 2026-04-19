@@ -148,8 +148,8 @@ class ChessA extends RexPlugins.Board.Shape {
         this.setDepth(1);
 
         this.board = board;
-        this.attractors = new Phaser.Structs.Set();
-        this.repelors = new Phaser.Structs.Set();
+        this.attractors = new Set();
+        this.repelors = new Set();
         this.factor = 1;
 
         // add behaviors
@@ -176,28 +176,26 @@ class ChessA extends RexPlugins.Board.Shape {
     }
 
     addAttractor(chess) {
-        this.attractors.set(chess);
+        this.attractors.add(chess);
         return this;
     }
 
     addRepelor(chess) {
-        this.repelors.set(chess);
+        this.repelors.add(chess);
         return this;
     }
 
     // Cost function of pathFinder
     getCost(curTile, preTile, pathFinder) {
         var board = this.board,
-            repelors = this.repelors.entries,
-            attractors = this.attractors.entries,
             factor = this.factor;
 
         var cost = 1;
-        for (var i = 0, cnt = repelors.length; i < cnt; i++) {
-            cost += factor / board.getDistance(curTile, repelors[i]);
+        for (const repelor of this.repelors) {
+            cost += factor / board.getDistance(curTile, repelor);
         }
-        for (var i = 0, cnt = attractors.length; i < cnt; i++) {
-            cost -= factor / board.getDistance(curTile, attractors[i]);
+        for (const attractor of this.attractors) {
+            cost -= factor / board.getDistance(curTile, attractor);
         }
 
         console.log(`(${curTile.x},${curTile.y}):${cost}`)

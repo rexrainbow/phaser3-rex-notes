@@ -67,7 +67,7 @@ var CustomMaskIn = function (transitionImage, key, frame) {
         duration: 3000, ease: 'Linear', dir: 'in',
 
         onStart: function (parent, currentImage, nextImage, t) {
-            parent.setNextImageMaskEnable(true);
+            parent.setNextImageMaskEnable(true, true);
             parent.maskGameObject.setValue(1-t);
         },
         onProgress: function (parent, currentImage, nextImage, t) {
