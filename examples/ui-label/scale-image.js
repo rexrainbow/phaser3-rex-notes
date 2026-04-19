@@ -37,12 +37,22 @@ class Demo extends Phaser.Scene {
             .layout()
             .setPosition(200, 300)
 
+        var icon = label.getElement('icon');
+        var action = label.getElement('action');
         this.input.once('pointerup', function () {
+            console.log('before layout')
+            console.log(`icon: ${icon.displayWidth}, ${icon.displayHeight}`)
+            console.log(`action: ${action.displayWidth}, ${action.displayHeight}`)
+
             label.getElement('icon').setDisplaySize(36, 36);
             label.layout().setPosition(400, 300);
 
             //label.resetChildScaleState(label.getElement('icon').setDisplaySize(36, 36))
             //label.setPosition(400, 300).layout()
+
+            console.log('after layout')
+            console.log(`icon: ${icon.displayWidth}, ${icon.displayHeight}`)
+            console.log(`action: ${action.displayWidth}, ${action.displayHeight}`)
         })
     }
 

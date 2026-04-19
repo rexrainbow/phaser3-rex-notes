@@ -1,5 +1,11 @@
 import GetViewport from '../system/GetViewport.js';
 
+var GetRenderTextureSize = function (value) {
+    value = Math.floor(value);
+
+    return (value % 2 === 0) ? value : value + 1;
+}
+
 var FitToViewport = function (renderTexture, camera) {
     if (camera === undefined) {
         camera = renderTexture.scene.cameras.main;
@@ -10,11 +16,11 @@ var FitToViewport = function (renderTexture, camera) {
     var viewport = GetViewport(renderTexture.scene, camera);
     var x = viewport.x,
         y = viewport.y,
-        w = viewport.width,
-        h = viewport.height;
+        w = GetRenderTextureSize(viewport.width),
+        h = GetRenderTextureSize(viewport.height);
 
-    if ((w !== renderTexture.width) || (h !== renderTexture.height)) {
-        renderTexture.setSize(w, h);
+    if ((w !== renderTexture.texture.width) || (h !== renderTexture.texture.height)) {
+        renderTexture.resize(w, h);
     } else {
         renderTexture.clear();
     }

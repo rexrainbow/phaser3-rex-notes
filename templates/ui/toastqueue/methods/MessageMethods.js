@@ -1,8 +1,7 @@
-import ClickMethods from '../../basesizer/ClickMethods.js'
+import { OnClick } from '../../basesizer/ClickMethods.js';
 import DelayCallMethods from '../../basesizer/DelayCallMethods.js';
 import EaseMoveMethods from '../../basesizer/EaseMoveMethods.js';
 
-const OnClick = ClickMethods.onClick;
 const DelayCall = DelayCallMethods.delayCall;
 const MoveTo = EaseMoveMethods.moveTo;
 
@@ -11,9 +10,12 @@ var CreateChild = function (parent, callback, message) {
 
     // Destroy this child when
     // Click
-    OnClick.call(child, function () {
-        parent.removeMessage(child);
-    });
+    OnClick(
+        child,
+        function () {
+            parent.removeMessage(child);
+        }
+    );
 
     // Timeout 
     if (parent.displayTime) {

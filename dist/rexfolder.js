@@ -9712,24 +9712,29 @@
         pointerup: 1,
     };
 
+    var GetClickController = function (gameObject, config) {
+        if (gameObject._click === undefined) {
+            gameObject._click = new Button(gameObject, config);
+        }
+
+        return gameObject._click;
+    };
+
+    var OnClick = function (gameObject, callback, scope, config) {
+        GetClickController(gameObject, config)
+            .on('click', callback, scope);
+    };
+
     var ClickMethods = {
         getClickController(gameObject, config) {
             if (!gameObject) {
                 gameObject = this;
             }
 
-            if (gameObject._click === undefined) {
-                gameObject._click = new Button(gameObject, config);
-            }
-
-            return gameObject._click;
+            return GetClickController(gameObject, config);
         },
 
         onClick(gameObject, callback, scope, config) {
-            if (!gameObject) {
-                return this;
-            }
-
             if (typeof (gameObject) === 'function') {
                 config = scope;
                 scope = callback;
@@ -9737,8 +9742,7 @@
                 gameObject = this;
             }
 
-            this.getClickController(gameObject, config)
-                .on('click', callback, scope);
+            OnClick(gameObject, callback, scope, config);
 
             return this;
         },
@@ -10057,24 +10061,29 @@
         pointerup: 1,
     };
 
+    var GetClickOutsideController = function (gameObject, config) {
+        if (gameObject._clickOutside === undefined) {
+            gameObject._clickOutside = new ClickOutside(gameObject, config);
+        }
+
+        return gameObject._clickOutside;
+    };
+
+    var OnClickOutside = function (gameObject, callback, scope, config) {
+        GetClickOutsideController(gameObject, config)
+            .on('clickoutside', callback, scope);
+    };
+
     var ClickOutsideMethods = {
         getClickOutsideController(gameObject, config) {
             if (!gameObject) {
                 gameObject = this;
             }
 
-            if (gameObject._clickOutside === undefined) {
-                gameObject._clickOutside = new ClickOutside(gameObject, config);
-            }
-
-            return gameObject._clickOutside;
+            return GetClickOutsideController(gameObject, config)
         },
 
         onClickOutside(gameObject, callback, scope, config) {
-            if (!gameObject) {
-                return this;
-            }
-
             if (typeof (gameObject) === 'function') {
                 config = scope;
                 scope = callback;
@@ -10082,8 +10091,7 @@
                 gameObject = this;
             }
 
-            this.getClickOutsideController(gameObject, config)
-                .on('clickoutside', callback, scope);
+            OnClickOutside(gameObject, callback, scope, config);
 
             return this;
         },
@@ -13824,7 +13832,7 @@
                 toggleByTarget = title;
             }
             if (toggleByTarget) {
-                ClickMethods.onClick.call(
+                OnClick(
                     toggleByTarget,
                     function () {
                         this.toggle();

@@ -1,7 +1,6 @@
 import phaser from '../../../phaser/src/phaser.js';
 import BoardPlugin from '../../plugins/board-plugin.js';
 import FitToViewport from '../../plugins/utils/rendertexture/FitToViewport.js';
-import GetViewport from '../../plugins/utils/system/GetViewport.js';
 
 const COLOR_MAIN = 0x03a9f4;
 const COLOR_LIGHT = 0x67daff;
@@ -145,7 +144,7 @@ class Board extends RexPlugins.Board.Board {
 
         // Paste Graphics to RenderTexture        
         FitToViewport(this.gridsTexture)
-            .draw(this.gridsGraphics);
+            .draw(this.gridsGraphics).render();
         this.gridsGraphics.clear();
 
         return this;
@@ -164,7 +163,7 @@ class Board extends RexPlugins.Board.Board {
 
         // Paste Graphics to RenderTexture
         FitToViewport(this.pathTexture)
-            .draw(this.pathGraphics);
+            .draw(this.pathGraphics).render();
         this.pathGraphics.clear();
 
         return this;

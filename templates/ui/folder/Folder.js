@@ -1,7 +1,7 @@
 import Sizer from '../sizer/Sizer';
 import ChildTransition from './methods/ChildTransition.js';
 import ExpandMethods from './methods/ExpandMethods.js';
-import ClickMethods from '../basesizer/ClickMethods';
+import { OnClick } from '../basesizer/ClickMethods.js';
 import ConfigurationMethods from './methods/ConfigurationMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -60,7 +60,7 @@ class Folder extends Sizer {
             toggleByTarget = title;
         }
         if (toggleByTarget) {
-            ClickMethods.onClick.call(
+            OnClick(
                 toggleByTarget,
                 function () {
                     this.toggle();
