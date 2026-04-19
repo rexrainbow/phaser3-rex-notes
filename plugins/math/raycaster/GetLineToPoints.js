@@ -50,7 +50,7 @@ var GetLineToPoints = function (line, points, out) {
 };
 
 var globResult = {};
-var startPoint = new Phaser.Geom.Point();
+var startPoint = new Phaser.Math.Vector2();
 var segment = new Phaser.Geom.Line();
 var tempIntersect = new Phaser.Math.Vector3();
 
