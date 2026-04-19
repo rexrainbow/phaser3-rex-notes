@@ -11,6 +11,7 @@ Built-in filters.
 - [Combine Color Matrix](#combine-color-matrix) : Combine channels from base and transfer textures with color matrix control.
 - [Displacement](#displacement) : Use a displacement texture, such as a noise texture, to drastically (or subtly!) alter the appearance of a Game Object.
 - [Glow](#glow) : Add a smooth inner or outer glow, with custom distance, strength and color.
+- [Gradient Map](#gradient-map) : Recolor an image by mapping its progress value through a color ramp.
 - [Image Light](#image-light) : Image-based lighting from panorama environment maps and normal maps.
 - [Key](#key) : Remove or isolate a target color with threshold and feather controls.
 - [NormalTools](#normaltools) : Rotate and reshape normal maps, or output normal-facing ratio masks.
@@ -83,7 +84,8 @@ All Game Objects and camera support filters. These are effects applied after the
     ```javascript
     var controller = gameObject
         .enableFilters()
-        .filters.internal.addBarrel(amount);
+        .filters.internal.addBarrel(amount)
+        .setPaddingOverride(null)
     ```
     - `amount` : The amount of distortion applied to the barrel effect.
         - `1` : No distortion
@@ -520,6 +522,99 @@ A simple rule of thumb:
     controller.outerStrength = outerStrength;
     controller.innerStrength = innerStrength;
     controller.knockout = knockout;
+    ```
+
+### Gradient Map
+
+Color conversion can collide: 
+different input colors can produce the same progress value, 
+then map to the same output color on the ramp.
+
+Use this effect for brightness remapping, grayscale recoloring, duotone looks, heatmap-style recoloring, 
+or palette-like remapping when the source image already fits a one-dimensional value scale.
+
+
+- Add filter controller to game object
+    ```javascript
+    var controller = gameObject
+        .enableFilters()
+        .filters.internal.addGradientMap(config);
+    ```
+- Add filter controller to camera
+    ```javascript
+    var controller = camera
+        .filters.internal.addGradientMap(config);
+    ```
+    - `config.ramp` : The color ramp used to map progress to output color.
+        - `undefined` : Use a simple black-to-white ramp.
+        - A band config object, or an array of band config objects.
+            ```javascript
+            {
+                colorStart: 0x000000,
+                colorEnd:
+                size:
+                start: 0, middle: 0.5, end: 1,
+                interpolation: 0,
+            }
+            ```                
+            ```javascript
+            [
+                {
+                    colorStart: ,
+                    colorEnd: ,
+                    colorSpace: ,
+                    size:
+                },
+                {
+                    colorStart: ,
+                    colorEnd: ,
+                    colorSpace: ,
+                    size:
+                },
+                // ...
+            ]
+            ```
+            - `colorStart`, `colorEnd` : Start and end color of the band, can be a number, hex string, `[r, g, b]` / `[r, g, b, a]`, or a `Phaser.Display.Color` instance.                
+            - `start`, `end` : Normalized range of this band in the ramp, usually `0` to `1`.
+            - `size` : Alternative to `end`, meaning `end = start + size`.
+            - `middle` : Midpoint bias of interpolation. Default value is `0.5`.
+            - `interpolation` : Interpolation style.
+                - `0` : LINEAR - a straight blend.
+                - `1` : CURVED - color changes quickly at start and end, flattening in the middle. Good for convex surfaces.
+                - `2` : SINUSOIDAL - color changes quickly in the middle, flattening at start and end. Good for smooth transitions.
+                - `3` : CURVE_START - color changes quickly at the start, flattening at the end.
+                - `4` : CURVE_END - color changes quickly at the end, flattening at the start.
+            - `colorSpace` : `colorStart` and `colorEnd` blending space.
+                - `0` : RGBA - channels are blended directly. This can be inaccurate.
+                - `1` : HSVA_NEAREST - colors are blended in HSVA space, better preserving saturation and lightness. The hue is blended with the shortest angle, e.g. red and blue blend via purple, not green.
+                - `2` : HSVA_PLUS - as HSVA_NEAREST, but hue angle always increases.
+                - `3` : HSVA_MINUS - as HSVA_NEAREST, but hue angle always decreases.
+    - `config.dither` : Use Interleaved Gradient Noise to reduce ramp banding. Default value is `false`.
+    - `config.color` : Values added to ramp progress after `colorFactor`. Default value is `[0, 0, 0, 0]`.
+    - `config.colorFactor` : Weights used to convert the input sample into ramp progress. Default value is `[0.3, 0.6, 0.1, 0]`.
+    - `config.unpremultiply` : Unpremultiply the input before computing progress. Default value is `true`.
+    - `config.alpha` : Blend amount of the mapped result over the original image. Default value is `1`.
+- Disable filter controller
+    ```javascript
+    controller.setActive(false);
+    // controller.active = false;
+    ```
+- Remove filter controller
+    ```javascript
+    gameObject.filters.internal.remove(controller);
+    ```
+    ```javascript
+    camera.filters.internal.remove(controller);
+    ```
+    - Also destroy this controller.
+- Properties
+    ```javascript
+    controller.ramp = ramp;
+    controller.dither = dither;
+    controller.color = [r, g, b, a];
+    controller.colorFactor = [r, g, b, a];
+    controller.unpremultiply = unpremultiply;
+    controller.alpha = alpha;
     ```
 
 ### Image Light
