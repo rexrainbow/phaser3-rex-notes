@@ -14,7 +14,7 @@ class Demo extends Phaser.Scene {
     create() {
         var image = this.add.image(400, 300, 'classroom');
 
-        var noise = new Noise(this, {}, 400, 300, 800, 600);
+        var noise = new Noise(this, 400, 300, 800, 600);
 
         var maskObject = image
             .enableFilters()
@@ -38,12 +38,10 @@ class Demo extends Phaser.Scene {
 const MinNoisePower = 0.01;
 const MaxNoisePower = 100;
 class Noise extends Phaser.GameObjects.Noise {
-    constructor(scene, config, x, y, width, height) {
-        if (config === undefined) {
-            config = {};
-        }
-        config.noiseColorStart = new Phaser.Display.Color(0, 0, 0, 0);
-
+    constructor(scene, x, y, width, height) {
+        var config = {
+            noiseColorStart: new Phaser.Display.Color(0, 0, 0, 0)
+        };
         super(scene, config, x, y, width, height);
     }
     get noisePowerT() {
