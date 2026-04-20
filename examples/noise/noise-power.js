@@ -14,7 +14,7 @@ class Demo extends Phaser.Scene {
     create() {
         var image = this.add.image(400, 300, 'classroom');
 
-        var noise = CreateNoise(this, 400, 300, 800, 600).setVisible(false);
+        var noise = new Noise(this, {}, 400, 300, 800, 600);
 
         var maskObject = image
             .enableFilters()
@@ -35,29 +35,28 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var CreateNoise = function (scene, x, y, width, height) {
-    var noise = scene.add.noise({
-        noiseColorStart: new Phaser.Display.Color(0, 0, 0, 0),
+const MinNoisePower = 0.01;
+const MaxNoisePower = 100;
+class Noise extends Phaser.GameObjects.Noise {
+    constructor(scene, config, x, y, width, height) {
+        if (config === undefined) {
+            config = {};
+        }
+        config.noiseColorStart = new Phaser.Display.Color(0, 0, 0, 0);
 
-    }, x, y, width, height);
-    noise.minNoisePower = 0.01;
-    noise.maxNoisePower = 100;
-    Object.defineProperty(noise, 'noisePowerT', {
-        get() {
-            return this._t;
-        },
-        set(value) {
-            this._t = value;
-            this.noisePower = Math.exp(
-                Math.log(this.maxNoisePower) * (1 - value) +
-                Math.log(this.minNoisePower) * value
-            );
-        },
-        enumerable: true,
-        configurable: true
-    });
+        super(scene, config, x, y, width, height);
+    }
+    get noisePowerT() {
+        return this._t;
+    }
 
-    return noise;
+    set noisePowerT(value) {
+        this._t = value;
+        this.noisePower = Math.exp(
+            Math.log(MaxNoisePower) * (1 - value) +
+            Math.log(MinNoisePower) * value
+        );
+    }
 }
 
 var config = {
