@@ -16,14 +16,18 @@ class Demo extends Phaser.Scene {
 
         var noise = CreateNoise(this, 400, 300, 800, 600).setVisible(false);
 
-        image
+        var maskObject = image
             .enableFilters()
             .filters.external.addMask(noise)
 
         this.tweens.add({
             targets: noise,
             noisePowerT: { from: 0, to: 1 },
-            duration: 2000
+            duration: 2000,
+
+            onComplete() {
+                image.filters.external.remove(maskObject);
+            }
         });
 
     }
@@ -32,7 +36,10 @@ class Demo extends Phaser.Scene {
 }
 
 var CreateNoise = function (scene, x, y, width, height) {
-    var noise = scene.add.noise(undefined, x, y, width, height);
+    var noise = scene.add.noise({
+        noiseColorStart: new Phaser.Display.Color(0, 0, 0, 0),
+
+    }, x, y, width, height);
     noise.minNoisePower = 0.01;
     noise.maxNoisePower = 100;
     Object.defineProperty(noise, 'noisePowerT', {
