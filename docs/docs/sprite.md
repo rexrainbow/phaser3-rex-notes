@@ -3,6 +3,7 @@
 Display of both static and animated images, built-in game object of phaser.
 
 - Author: Phaser Team
+- Game object
 
 ## Usage
 

@@ -3,6 +3,7 @@
 A quad with its own shader, built-in game object of phaser.
 
 - Author: Phaser Team
+- Game object
 
 !!! warning "WebGL only"
     Only work in WebGL render mode.
@@ -241,6 +242,10 @@ See [game object](gameobject.md)
 ### Create mask
 
 See [mask](mask.md)
+
+### Shader effects
+
+Support [internal and external filters](shader-builtin.md)
 
 ### BaseShader
 
