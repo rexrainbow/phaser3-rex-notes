@@ -118,10 +118,6 @@ See [game object](gameobject.md)
 
 ### Create mask
 
-```javascript
-var mask = triangle.createGeometryMask();
-```
-
 See [mask](mask.md)
 
 ### Shader effects

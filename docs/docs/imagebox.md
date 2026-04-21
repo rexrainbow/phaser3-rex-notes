@@ -209,4 +209,4 @@ See [mask](mask.md)
 
 ### Shader effects
 
-Internal image game object (`image.image`) support [internal and external filters](shader-builtin.md)
+Support [internal and external filters](shader-builtin.md)

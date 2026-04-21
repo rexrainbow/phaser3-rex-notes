@@ -362,10 +362,6 @@ See [game object](gameobject.md)
 
 ### Create mask
 
-```javascript
-var mask = quad.createGeometryMask();
-```
-
 See [mask](mask.md)
 
 ### Shader effects

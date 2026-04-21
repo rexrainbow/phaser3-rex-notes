@@ -243,10 +243,6 @@ See [game object](gameobject.md)
 
 ### Create mask
 
-```javascript
-var mask = graphics.createGeometryMask();
-```
-
 See [mask](mask.md)
 
 ### Shader effects

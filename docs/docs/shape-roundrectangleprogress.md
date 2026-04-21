@@ -435,10 +435,6 @@ See [game object](gameobject.md)
 
 ### Create mask
 
-```javascript
-var mask = roundRectangleProgress.createGeometryMask();
-```
-
 See [mask](mask.md)
 
 ### Shader effects

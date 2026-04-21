@@ -19,19 +19,28 @@ Built-in filters.
 - [Parallel](#parallel) : Blend result of 2 filter lists.
 - [Pixelate](#pixelate) : Blends colors in each block for a soft, mosaic look. Great for smooth transitions or gentle censorship.
 - [Shadow](#shadow) : Add a drop shadow behind a Game Object, with custom depth and color.
+- [Threshold](#threshold) : Converts channel values to hard or soft threshold output, with per-channel edge and invert controls.
+- [Vignette](#vignette) : Darken or color the edges of the view to draw attention toward a focal point.
+- [Wipe/Reveal](#wipereveal) : Directionally hide or reveal the input, optionally using another texture for transitions.
 
 All Game Objects and camera support filters. These are effects applied after the Game Object has been rendered.
 
 
-- Author: Phaser Team
-- Filters shader effects
+Composite filters
+
+- [Bloom](groupactions.md#add-bloom-effect)
+- [Shine](groupactions.md#add-shine-effect)
+
 
 !!! warning "WebGL only"
     Only work in WebGL render mode.
 
 !!! note
-    Abandoned effects : Bloom, Circle, Gradient, Shine, Vignette, Wipe, Reveal. 
+    Abandoned effects : Circle, Gradient.
     Use [p3-fx](shader-p3fx.md) to reintroduce unsupported features.
+
+- Author: Phaser Team
+- Filters shader effects
 
 ## Live demos
 
@@ -39,7 +48,7 @@ All Game Objects and camera support filters. These are effects applied after the
 
 ## Usage
 
-#### Steps
+### Steps
 
 - Game object
     1. Enable `filters`
@@ -310,6 +319,21 @@ All Game Objects and camera support filters. These are effects applied after the
     var controller = camera
         .filters.internal.addColorMatrix();
     ```
+- Use color matrix effect
+    ```javascript
+    controller.colorMatrix.brightness(value);
+    ```
+    ```javascript
+    controller.colorMatrix.saturate(value);
+    controller.colorMatrix.desaturate();
+    ```
+    ```javascript
+    controller.colorMatrix.contrast(value);
+    ```
+    ```javascript
+    controller.colorMatrix.grayscale(value);
+    ```
+    And more... see [color matrix](#color-matrix)
 - Disable filter controller
     ```javascript
     controller.setActive(false);
@@ -995,6 +1019,217 @@ Blend results of 2 filter lists
     controller.blurY = blurY;
     controller.strength = strength;
     ```
+
+### Threshold
+
+- Add filter controller to game object
+    ```javascript
+    var controller = gameObject
+        .enableFilters()
+        .filters.internal.addThreshold(edge1, edge2, invert);
+    ```
+    - `edge1` : The first edge of the threshold.
+        - A number : Sets RGBA channels to the same value. Default value is `0.5`.
+        - An array `[r, g, b, a]` : Sets each channel separately, each component's range is `0` to `1`.
+    - `edge2` : The second edge of the threshold.
+        - A number : Sets RGBA channels to the same value. Default value is `0.5`.
+        - An array `[r, g, b, a]` : Sets each channel separately, each component's range is `0` to `1`.
+        - `undefined` : Use `edge1`.
+    - `invert` : Whether each channel is inverted.
+        - A boolean : Sets RGBA channels to the same value. Default value is `false`.
+        - An array `[r, g, b, a]` : Sets each channel separately.
+- Add filter controller to camera
+    ```javascript
+    var controller = camera
+        .filters.internal.addThreshold(edge1, edge2, invert);
+    ```
+- Set edges
+    ```javascript
+    controller.setEdge(edge1, edge2);
+    ```
+    - If `edge2` is not provided, it will be set to `edge1`.
+    - If any channel in `edge1` is greater than the same channel in `edge2`, these values are swapped.
+- Set invert
+    ```javascript
+    controller.setInvert(invert);
+    ```
+- Disable filter controller
+    ```javascript
+    controller.setActive(false);
+    // controller.active = false;
+    ```
+- Remove filter controller
+    ```javascript
+    gameObject.filters.internal.remove(controller);
+    ```
+    ```javascript
+    camera.filters.internal.remove(controller);
+    ```
+    - Also destroy this controller.
+- Properties
+    ```javascript
+    controller.edge1 = edge1;
+    controller.edge2 = edge2;
+    controller.invert = invert;
+    ```
+    - `edge1`, `edge2` : Threshold edge arrays `[r, g, b, a]`, each component's range is `0` to `1`.
+        - If the two edges are the same, the threshold has no interpolation and outputs either `0` or `1`.
+        - Values between two different edges are linearly interpolated.
+    - `invert` : Invert state array `[r, g, b, a]`.
+
+### Vignette
+
+- Add filter controller to game object
+    ```javascript
+    var controller = gameObject
+        .enableFilters()
+        .filters.internal.addVignette(x, y, radius, strength, color, blendMode);
+    ```
+    - `x`, `y` : The horizontal/vertical offset of the vignette center. Range is `0` to `1`. Default value is `0.5`.
+    - `radius` : The radius of the vignette effect. Range is `0` to `1`. Default value is `0.5`.
+    - `strength` : The strength of the vignette effect. Default value is `0.5`.
+    - `color` : The color of the vignette effect. Default value is `0x000000`.
+        - A number : Hex color, for example `0x000000`.
+        - A string : Hex string, for example `'#000000'`.
+        - A color object : `Phaser.Display.Color`, or `{r, g, b, a}`.
+    - `blendMode` : The blend mode to use with the vignette. Default value is `Phaser.BlendModes.NORMAL`.
+        - `Phaser.BlendModes.NORMAL`, or `0` : Normal blend mode.
+        - `Phaser.BlendModes.ADD`, or `1` : Add blend mode.
+        - `Phaser.BlendModes.MULTIPLY`, or `2` : Multiply blend mode.
+        - `Phaser.BlendModes.SCREEN`, or `3` : Screen blend mode.
+- Add filter controller to camera
+    ```javascript
+    var controller = camera
+        .filters.internal.addVignette(x, y, radius, strength, color, blendMode);
+    ```
+- Set color
+    ```javascript
+    controller.setColor(color);
+    ```
+- Disable filter controller
+    ```javascript
+    controller.setActive(false);
+    // controller.active = false;
+    ```
+- Remove filter controller
+    ```javascript
+    gameObject.filters.internal.remove(controller);
+    ```
+    ```javascript
+    camera.filters.internal.remove(controller);
+    ```
+    - Also destroy this controller.
+- Properties
+    ```javascript
+    controller.x = x;
+    controller.y = y;
+    controller.radius = radius;
+    controller.strength = strength;
+    controller.blendMode = blendMode;
+    ```
+    ```javascript
+    var color = controller.color;
+    ```
+    - `color` : A `Phaser.Display.Color` instance.
+
+### Wipe/Reveal
+
+- Add filter controller to game object
+    ```javascript
+    var controller = gameObject
+        .enableFilters()
+        .filters.internal.addWipe(wipeWidth, direction, axis, reveal, wipeTexture);
+    ```
+    - `wipeWidth` : The width of the wipe effect. Range is `0` to `1`. Default value is `0.1`.
+    - `direction` : The direction of the wipe effect. Default value is `0`.
+        - `0` : Left to right on the X axis, or bottom to top on the Y axis.
+        - `1` : Right to left on the X axis, or top to bottom on the Y axis.
+    - `axis` : The axis of the wipe effect. Default value is `0`.
+        - `0` : X axis.
+        - `1` : Y axis.
+    - `reveal` : Is this a reveal or wipe effect? Default value is `0`.
+        - `0` : Wipe effect. Shows the input in unwiped areas.
+        - `1` : Reveal effect. Shows the input in wiped areas.
+    - `wipeTexture` : Texture or texture key to use where the input texture is not shown.
+        - `undefined` : Use built-in blank `'__DEFAULT'` texture.
+- Add filter controller to camera
+    ```javascript
+    var controller = camera
+        .filters.internal.addWipe(wipeWidth, direction, axis, reveal, wipeTexture);
+    ```
+- Progress transition
+    ```javascript
+    controller.setProgress(value);
+    ```
+    ```javascript
+    controller.progress = value;
+    ```
+    - `value` : Progress of the wipe effect. Range is `0` to `1`.
+        - `0` : The transition has not started.
+        - `1` : The transition is complete.
+- Set wipe width
+    ```javascript
+    controller.setWipeWidth(width);
+    ```
+    - `width` : The width of the wipe effect. Range is `0` to `1`. Default value is `0.1`.
+- Set direction
+    ```javascript
+    controller.setLeftToRight();
+    ```
+    ```javascript
+    controller.setRightToLeft();
+    ```
+    ```javascript
+    controller.setTopToBottom();
+    ```
+    ```javascript
+    controller.setBottomToTop();
+    ```
+    - Direction mappings :
+        - Left to right : `direction = 0`, `axis = 0`
+        - Right to left : `direction = 1`, `axis = 0`
+        - Top to bottom : `direction = 1`, `axis = 1`
+        - Bottom to top : `direction = 0`, `axis = 1`
+- Set effect mode
+    ```javascript
+    controller.setWipeEffect();
+    ```
+    ```javascript
+    controller.setRevealEffect();
+    ```
+    - `setWipeEffect()` : Sets `reveal` to `0`, and resets `progress` to `0`.
+    - `setRevealEffect()` : Sets `reveal` to `1`, resets `progress` to `0`, and resets `wipeTexture` to the default blank texture.
+- Set wipe texture
+    ```javascript
+    controller.setTexture(texture);
+    ```
+    - `texture` : Texture or texture key to use where the input is removed.
+        - `undefined` : Use built-in blank `'__DEFAULT'` texture.
+- Disable filter controller
+    ```javascript
+    controller.setActive(false);
+    // controller.active = false;
+    ```
+- Remove filter controller
+    ```javascript
+    gameObject.filters.internal.remove(controller);
+    ```
+    ```javascript
+    camera.filters.internal.remove(controller);
+    ```
+    - Also destroy this controller.
+- Properties
+    ```javascript
+    controller.progress = progress;
+    controller.wipeWidth = wipeWidth;
+    controller.direction = direction;
+    controller.axis = axis;
+    controller.reveal = reveal;
+    ```
+    ```javascript
+    var wipeTexture = controller.wipeTexture;
+    ```
+    - `wipeTexture` : A `Phaser.Textures.Texture` instance.
 
 ### Remove all effects
 

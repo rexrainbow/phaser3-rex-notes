@@ -375,10 +375,6 @@ See [game object](gameobject.md)
 
 ### Create mask
 
-```javascript
-var mask = checkbox.createGeometryMask();
-```
-
 See [mask](mask.md)
 
 ### Shader effects
