@@ -38,11 +38,13 @@ class Demo extends Phaser.Scene {
 const MinNoisePower = 0.01;
 const MaxNoisePower = 100;
 class Noise extends Phaser.GameObjects.Noise {
-    constructor(scene, x, y, width, height) {
+    constructor(scene, x, y, width, height, noisePowerTransformMode = 0) {
         var config = {
             noiseColorStart: new Phaser.Display.Color(0, 0, 0, 0)
         };
         super(scene, config, x, y, width, height);
+
+        this.noisePowerTransformMode = noisePowerTransformMode;
     }
     get noisePowerT() {
         return this._t;
@@ -50,11 +52,31 @@ class Noise extends Phaser.GameObjects.Noise {
 
     set noisePowerT(value) {
         this._t = value;
-        this.noisePower = Math.exp(
-            Math.log(MaxNoisePower) * (1 - value) +
-            Math.log(MinNoisePower) * value
-        );
+
+        switch (this.noisePowerTransformMode) {
+            case 0: this.noisePower = FromMeanOpacity(value); break;
+            case 1: this.noisePower = FromWhitePointCoverage(value); break;
+            default: this.noisePower = LogInterpolateNoisePower(value); break;
+        }
     }
+}
+
+var LogInterpolateNoisePower = function (t) {
+    return Math.exp(
+        Math.log(MaxNoisePower) * (1 - t) +
+        Math.log(MinNoisePower) * t
+    );
+}
+
+var FromWhitePointCoverage = function (t) {
+    const threshold = 0.9;
+    var coverage = Phaser.Math.Clamp(t, 0.001, 0.999);
+    return Math.log(threshold) / Math.log(1 - coverage);
+}
+
+var FromMeanOpacity = function (t) {
+    var brightness = Phaser.Math.Clamp(t, 0.001, 0.999);
+    return (1 / brightness) - 1;
 }
 
 var config = {
