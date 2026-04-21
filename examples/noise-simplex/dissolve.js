@@ -22,7 +22,7 @@ class Demo extends Phaser.Scene {
 
         this.tweens.add({
             targets: noise,
-            noisePowerT: { from: 0, to: 1 },
+            dissolveT: { from: 0, to: 1 },
             duration: 2000,
 
             onComplete() {
@@ -35,49 +35,35 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-const MinNoisePower = 0.01;
-const MaxNoisePower = 100;
-class Noise extends Phaser.GameObjects.Noise {
-    constructor(scene, x, y, width, height, noisePowerTransformMode = 0) {
+class Noise extends Phaser.GameObjects.NoiseSimplex2D {
+    constructor(scene, x, y, width, height) {
         var config = {
+            noiseCells: [4, 4],
+            noiseIterations: 1,
+            noiseWarpIterations: 2,
+            noiseWarpAmount: 1.5,
+            noiseValueFactor: 4,
+            noiseValueAdd: -4,
+            noiseValuePower: 1,
             noiseColorStart: new Phaser.Display.Color(0, 0, 0, 0),
             noiseColorEnd: new Phaser.Display.Color(255, 255, 255, 255)
         };
         super(scene, config, x, y, width, height);
 
-        this.noisePowerTransformMode = noisePowerTransformMode;
-    }
-    get noisePowerT() {
-        return this._t;
+        this.dissolveT = 0;
     }
 
-    set noisePowerT(value) {
-        this._t = value;
-
-        switch (this.noisePowerTransformMode) {
-            case 0: this.noisePower = FromMeanOpacity(value); break;
-            case 1: this.noisePower = FromWhitePointCoverage(value); break;
-            default: this.noisePower = LogInterpolateNoisePower(value); break;
-        }
+    get dissolveT() {
+        return this._dissolveT;
     }
-}
 
-var LogInterpolateNoisePower = function (t) {
-    return Math.exp(
-        Math.log(MaxNoisePower) * (1 - t) +
-        Math.log(MinNoisePower) * t
-    );
-}
+    set dissolveT(value) {
+        this._dissolveT = value;
 
-var FromWhitePointCoverage = function (t) {
-    const threshold = 0.9;
-    var coverage = Phaser.Math.Clamp(t, 0.001, 0.999);
-    return Math.log(threshold) / Math.log(1 - coverage);
-}
+        var edgeSharpness = this.noiseValueFactor;
 
-var FromMeanOpacity = function (t) {
-    var brightness = Phaser.Math.Clamp(t, 0.001, 0.999);
-    return (1 / brightness) - 1;
+        this.noiseValueAdd = Phaser.Math.Linear(-edgeSharpness, 1 + edgeSharpness, value);
+    }
 }
 
 var config = {
