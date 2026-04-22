@@ -164,19 +164,6 @@ rope.play(key);
     ```
     - `colorArray` : Array of color tint value.
 
-#### Tint fill mode
-
-Sets the tint fill mode.
-
-```javascript
-rope.setTintFill(mode);
-```
-
-- `mode` : 
-    - `0` : Additive tint, blends the vertices colors with the texture. Default behavior.
-    - `1` : Fill tint with alpha.
-    - `2` : Fill tint without alpha.
-
 ### Flip
 
 ```javascript

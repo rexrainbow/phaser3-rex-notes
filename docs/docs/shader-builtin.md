@@ -18,6 +18,7 @@ Built-in filters.
 - [Panorama Blur](#panorama-blur) : Panorama-aware blur for environment maps.
 - [Parallel](#parallel) : Blend result of 2 filter lists.
 - [Pixelate](#pixelate) : Blends colors in each block for a soft, mosaic look. Great for smooth transitions or gentle censorship.
+- [Quantize](#quantize) : Reduces the unique number of colors by quantizing RGBA or HSVA channels, with optional dithering.
 - [Shadow](#shadow) : Add a drop shadow behind a Game Object, with custom depth and color.
 - [Threshold](#threshold) : Converts channel values to hard or soft threshold output, with per-channel edge and invert controls.
 - [Vignette](#vignette) : Darken or color the edges of the view to draw attention toward a focal point.
@@ -931,6 +932,81 @@ Blend results of 2 filter lists
 - Properties
     ```javascript
     controller.amount = amount;
+    ```
+
+### Quantize
+
+- Add filter controller to game object
+    ```javascript
+    var controller = gameObject
+        .enableFilters()
+        .filters.internal.addQuantize({
+            steps: [8, 8, 8, 8],
+            gamma: [1, 1, 1, 1],
+            offset: [0, 0, 0, 0],
+            mode: 0,
+            dither: false
+        });
+    ```
+    - `steps` : How many steps to divide each channel into. Default value is `[8, 8, 8, 8]`.
+        - In RGBA mode, these channels are `[red, green, blue, alpha]`.
+        - In HSVA mode, these channels are `[hue, saturation, value, alpha]`.
+        - It is often useful to set the alpha channel to `1`.
+    - `gamma` : Gamma curve applied to each input channel. Default value is `[1, 1, 1, 1]`.
+        - Values above or below `1` bias quantization toward lighter/darker or higher/lower channel ranges.
+    - `offset` : Offset applied to each channel during quantization. Default value is `[0, 0, 0, 0]`.
+        - In HSVA mode, offset is useful for sliding the hue angle.
+    - `mode` : Color space.
+        - `0` : RGBA. Default value.
+        - `1` : HSVA.
+    - `dither` : Set `true` to dither the output, reducing visible banding.
+- Add filter controller to camera
+    ```javascript
+    var controller = camera
+        .filters.internal.addQuantize({
+            steps: [8, 8, 8, 1],
+            mode: 0
+        });
+    ```
+- RGBA example
+    ```javascript
+    var controller = gameObject
+        .enableFilters()
+        .filters.internal.addQuantize({
+            steps: [4, 4, 4, 1],
+            dither: true
+        });
+    ```
+- HSVA hue example
+    ```javascript
+    var controller = gameObject
+        .enableFilters()
+        .filters.internal.addQuantize({
+            steps: [16, 1, 1, 1],
+            mode: 1,
+            dither: true
+        });
+    ```
+- Disable filter controller
+    ```javascript
+    controller.setActive(false);
+    // controller.active = false;
+    ```
+- Remove filter controller
+    ```javascript
+    gameObject.filters.internal.remove(controller);
+    ```
+    ```javascript
+    camera.filters.internal.remove(controller);
+    ```
+    - Also destroy this controller.
+- Properties
+    ```javascript
+    controller.steps = [steps0, steps1, steps2, steps3];
+    controller.gamma = [gamma0, gamma1, gamma2, gamma3];
+    controller.offset = [offset0, offset1, offset2, offset3];
+    controller.mode = mode;
+    controller.dither = dither;
     ```
 
 ### Shadow

@@ -57,8 +57,7 @@ nav:
                 - Nine slice : nineslice.md
                 - Nine patch: ninepatch.md
                 - Nine patch2: ninepatch2.md
-            - Line: line.md
-        - Shader: shader.md        
+            - Line: line.md       
     - Mesh:
         - Mesh: mesh.md
         - Perspective:
@@ -136,6 +135,12 @@ nav:
         - Progress:
             - Circular progres: canvas-circularprogress.md
             - Line progres: canvas-lineprogress.md    
+    - Shader:
+        - Shader: shader.md
+        - Noise: noise.md
+        - Simplex noise: noise-simplex.md
+        - Cell noise: noise-cell.md
+        - Gradient: gradient.md
     - Tile map:
         - Tile map: tilemap.md
     - Container:
@@ -384,8 +389,9 @@ nav:
         - Rhombus: geom-rhombus.md
         - Hexagon: geom-hexagon.md
     - Curve: 
-        - Path : path.md
+        - Path: path.md
         - Spiral curve: curve-spiral.md
+    - Hash: hash.md
     - Raycaster: raycaster.md
     - Expression parser: expression-parser.md
     - Fuzzy: fuzzy.md

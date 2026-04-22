@@ -274,26 +274,44 @@ graphics
 
 ### Tint
 
-- Get
+- Tint color
+    - Get
+        ```javascript
+        var color = gameObject.tintTopLeft;     // color: 0xRRGGBB
+        var color = gameObject.tintTopRight;
+        var color = gameObject.tintBottomLeft;
+        var color = gameObject.tintBottomRight;
+        var tint = gameObject.tint; // tintTopLeft
+        ```
+    - Set
+        ```javascript
+        gameObject.setTint(color);
+        gameObject.setTint(colorTopLeft, colorTopRight, colorBottomLeft, colorBottomRight);
+        gameObject.tint = color;
+        ```
+- Tint mode
+    - Get
+        ```javascript
+        var tintMode = gameObject.tintMode;
+        var isTinted = gameObject.isTinted;
+        ```
+        - `tintMode` :
+            - `Phaser.TintModes.MULTIPLY`
+            - `Phaser.TintModes.FILL`
+            - `Phaser.TintModes.ADD`
+            - `Phaser.TintModes.SCREEN`
+            - `Phaser.TintModes.OVERLAY`
+            - `Phaser.TintModes.HARD_LIGHT`
+    - Set
+        ```javascript
+        gameObject.setTintMode(tintMode);
+        gameObject.tintMode = tintMode;
+        ``` 
+- Clear tint
     ```javascript
-    var color = gameObject.tintTopLeft;     // color: 0xRRGGBB
-    var color = gameObject.tintTopRight;
-    var color = gameObject.tintBottomLeft;
-    var color = gameObject.tintBottomRight;
-    var isTinted = gameObject.isTinted;
+    gameObject.clearTint();
+    // gameObject.setTint(0xffffff).setTintMode(Phaser.TintModes.MULTIPLY);
     ```
-- Set
-    ```javascript
-    gameObject.tint = color;
-    gameObject.setTint(color);  // multiply color value
-    gameObject.setTint(colorTopLeft, colorTopRight, colorBottomLeft, colorBottomRight);
-    gameObject.setTintFill(color);  // replace color value
-    gameObject.setTintFill(colorTopLeft, colorTopRight, colorBottomLeft, colorBottomRight);    
-    gameObject.clearTint();     // equal to `gameObject.setTint(0xffffff)`
-    ```
-
-!!! note 
-    `gameObject.tint` is a write-only property
 
 ### Blend mode
 

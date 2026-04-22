@@ -22,10 +22,34 @@ Reference: [load image](loader.md#image)
 ### Add nine slice object
 
 ```javascript
-var nineSlice = scene.add.nineslice(x, y, texture, frame, width, height, leftWidth, rightWidth, topHeight, bottomHeight);
+var nineSlice = scene.add.nineslice(
+    x, y, 
+    texture, frame, 
+    width, height, 
+    leftWidth, rightWidth, topHeight, bottomHeight,
+    tileX, tileY
+);
 ```
 
-or
+```
+     A                          B
+   +---+----------------------+---+
+ C | 1 |          2           | 3 |
+   +---+----------------------+---+
+   |   |                      |   |
+   | 4 |          5           | 6 |
+   |   |                      |   |
+   +---+----------------------+---+
+ D | 7 |          8           | 9 |
+   +---+----------------------+---+
+```
+
+- `leftWidth`, `rightWidth` : The size of the left/right vertical column (A)/(B).
+- `topHeight`, `bottomHeight` : The size of the top/bottom horizontal row (C)/(D).
+    - Set to `0` or `undefined` to create a 3 slice object.
+- `tileX`, `tileY` : When enabled, the scalable horizontal/vertical regions are repeated across the object instead of being stretched.
+
+
 
 ```javascript
 var nineSlice = scene.add.nineslice(x, y, texture, frame, width, height);
