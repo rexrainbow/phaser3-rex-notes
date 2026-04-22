@@ -40,7 +40,7 @@ var WebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
         src.colorBuffer,
         src.alphaBuffer,
         src.alpha,
-        src.tintFill,
+        src.tintMode,
         renderOptions,
         src.debugCallback
     );

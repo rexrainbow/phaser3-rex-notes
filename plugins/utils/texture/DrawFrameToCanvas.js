@@ -35,12 +35,6 @@ var DrawFrameToCanvas = function (frame, canvasOrContext, x, y, width, height, c
 
     var context = GetContext2D(canvasOrContext);
 
-    if (tintMode === true) {
-        tintMode = TintModes.FILL;
-    } else if (tintMode === false) {
-        tintMode = undefined;
-    }
-
     if (color === undefined || color === null || typeof tintMode !== 'number') {
         // Draw image directly
         context.drawImage(

@@ -1,7 +1,5 @@
 import DrawFrameToCanvas from '../DrawFrameToCanvas.js';
 
-const TintModes = Phaser.TintModes;
-
 var DrawImage = function (key, context, x, y, color, autoRound) {
     var imgData = this.get(key);
     if (!imgData) {
@@ -16,18 +14,15 @@ var DrawImage = function (key, context, x, y, color, autoRound) {
     x += imgData.left - (imgData.originX * width);
     y += imgData.y - (imgData.originY * height);
 
-    var tintFill = imgData.tintFill;
-    if (tintFill === true) {
-        tintFill = TintModes.FILL;
-    } else if (tintFill === false || tintFill === undefined) {
-        tintFill = undefined;
+    var tintMode = imgData.tintMode;
+    if (tintMode === undefined) {
         color = undefined;
     }
 
     DrawFrameToCanvas(
         frame, context,
         x, y, width, height,
-        color, autoRound, tintFill
+        color, autoRound, tintMode
     );
 }
 

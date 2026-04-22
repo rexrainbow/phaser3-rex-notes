@@ -784,18 +784,27 @@ New line symbol `'\n'` will be removed, use `[r]` to insert a new line character
     {
         images: {
             // key: {width, height},
-            // key: {key, frame, width, height, tintFill: false}
+            // key: {key, frame, width, height, tintFill: false, tintMode: undefined}
         }
     }
     ```
     - `tintFill` : 
         - `false` : Keep original color. Default behavior.
         - `true` : Change fill-color by color tag. `[color=...][img=...]`.
+    - `tintMode` : Tint mode used when applying color tag to image. It replaces `tintFill` when set.
+        - `undefined` : Keep original color. Default behavior.
+        - `true` : Use `Phaser.TintModes.FILL`.
+        - `Phaser.TintModes.MULTIPLY`
+        - `Phaser.TintModes.FILL`
+        - `Phaser.TintModes.ADD`
+        - `Phaser.TintModes.SCREEN`
+        - `Phaser.TintModes.OVERLAY`
+        - `Phaser.TintModes.HARD_LIGHT`
 - Set render size by method
     ```javascript
     txt.addImage({
         // key: {width, height},
-        // key: {key, frame, width, height, tintFill: false}
+        // key: {key, frame, width, height, tintFill: false, tintMode: undefined}
     })
     ```
 - Use origin render size by default

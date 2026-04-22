@@ -34,4 +34,15 @@ export default class ImageData extends RenderBase {
      */
     readonly frameHeight: number;
 
+    /**
+     * Set tint mode.
+     * @param tintMode - Tint mode.
+     * @returns This instance.
+     */
+    setTintMode(tintMode?: number): this;
+    /**
+     * Tint mode.
+     */
+    tintMode: number | undefined;
+
 }

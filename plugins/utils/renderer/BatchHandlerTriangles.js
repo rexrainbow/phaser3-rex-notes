@@ -46,7 +46,7 @@ class BatchHandlerTriangles extends BatchHandlerQuad {
         colors,
         alphas,
         alpha,
-        tintFill,
+        tintMode,
         renderOptions,
         debugCallback
     ) {
@@ -122,7 +122,7 @@ class BatchHandlerTriangles extends BatchHandlerQuad {
                 vertexViewF32[vertexOffset32++] = uv[vertexIndex];
                 vertexViewF32[vertexOffset32++] = uv[vertexIndex + 1];
                 vertexViewF32[vertexOffset32++] = textureDatum;
-                vertexViewF32[vertexOffset32++] = tintFill;
+                vertexViewF32[vertexOffset32++] = tintMode;
                 vertexViewU32[vertexOffset32++] = tint;
 
                 if (debugVertices) {

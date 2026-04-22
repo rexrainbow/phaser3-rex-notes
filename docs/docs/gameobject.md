@@ -313,6 +313,9 @@ graphics
     // gameObject.setTint(0xffffff).setTintMode(Phaser.TintModes.MULTIPLY);
     ```
 
+!!! warning "WebGL only"
+    Only work in WebGL render mode.
+
 ### Blend mode
 
 - Get

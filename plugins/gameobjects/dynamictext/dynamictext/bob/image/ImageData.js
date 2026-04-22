@@ -12,6 +12,7 @@ class ImageData extends RenderBase {
         super(parent, ImageTypeName);
         this.setTexture(key, frame);
         this.color = undefined;
+        this.tintMode = undefined;
     }
 
     get frameWidth() {
@@ -89,9 +90,17 @@ class ImageData extends RenderBase {
         return this;
     }
 
+    setTintMode(tintMode) {
+        this.tintMode = tintMode;
+        return this;
+    }
+
     modifyPorperties(o) {
         if (o.hasOwnProperty('color')) {
             this.setColor(o.color);
+        }
+        if (o.hasOwnProperty('tintMode')) {
+            this.setTintMode(o.tintMode);
         }
 
         super.modifyPorperties(o);
@@ -101,9 +110,8 @@ class ImageData extends RenderBase {
     renderContent() {
         var tintMode = undefined;
         if (this.color !== undefined && this.color !== null) {
-            tintMode = TintModes.FILL;
+            tintMode = (this.tintMode === undefined) ? TintModes.FILL : this.tintMode;
         }
-        // TODO: Pass tintMode from paremeter
 
         DrawFrameToCanvas(
             this.frameObj, this.context,

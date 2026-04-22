@@ -6,6 +6,7 @@ var OnParseImageTag = function (textPlayer, parser, config) {
         .on(`+${tagName}`, function (name) {
             var imgData = textPlayer.imageManager.get(name);
             if (imgData) {
+                var tintMode = imgData.tintMode;
                 AppendImageBase.call(textPlayer,
                     imgData.key, imgData.frame,
                     {
@@ -13,7 +14,8 @@ var OnParseImageTag = function (textPlayer, parser, config) {
                         hieght: imgData.height,
                         leftSpace: imgData.left,
                         rightSpace: imgData.right,
-                        color: (imgData.tintFill) ? textPlayer.textStyle.color : undefined,
+                        color: (tintMode !== undefined) ? textPlayer.textStyle.color : undefined,
+                        tintMode: tintMode,
                     }
                 )
             }

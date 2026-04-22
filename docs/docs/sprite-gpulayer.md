@@ -104,7 +104,7 @@ layer.addMember({
     originX: 0.5,
     originY: 0.5,
 
-    tintFill: false,
+    tintMode: false,
 
     scrollFactorX: 1,
     scrollFactorY: 1,
@@ -129,7 +129,7 @@ layer.addMember({
 value = base + amplitude * ease(time)
 ```
 
-- `tintFill` : 
+- `tintMode` : 
     - `false` : The member texture will be multiplied by the tint. 
     - `true` :  The member will use the texture alpha and the tint color.
 - `tintBlend` : The tint blend mode of the member. `0` is no tint (equivalent to white), `1` is full tint.
@@ -178,7 +178,7 @@ value = base + amplitude * ease(time)
 | 35    | tintTopRight        |
 | 36    | originX             |
 | 37    | originY             |
-| 38    | tintFill            |
+| 38    | tintMode            |
 | 39    | creationTime        |
 | 40    | scrollFactorX       |
 | 41    | scrollFactorY       |

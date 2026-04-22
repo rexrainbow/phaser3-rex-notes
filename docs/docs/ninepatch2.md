@@ -236,22 +236,26 @@ Will [update texture](ninepatch.md#update-texture)
     ```javascript
     ninePatch.setTint(tint);
     ```
+- Set tint mode
+    ```javascript
+    ninePatch.setTintMode(tintMode);
+    ```
 - Clear tint
     ```javascript
     ninePatch.clearTint();
     ```
-- Set tint fill
-    ```javascript
-    ninePatch.setTintFill(tint);
-    ```
 - Get tint
     ```javascript
     var tint = ninePatch.tint;
-    var tintFill = ninePatch.tintFill;
+    var tintMode = ninePatch.tintMode;
     ```
-    - `tintFill` :
-        - `false` : Solid tint + texture alpha
-        - `true` : Solid tint, no texture
+    - `tintMode` :
+        - `Phaser.TintModes.MULTIPLY`
+        - `Phaser.TintModes.FILL`
+        - `Phaser.TintModes.ADD`
+        - `Phaser.TintModes.SCREEN`
+        - `Phaser.TintModes.OVERLAY`
+        - `Phaser.TintModes.HARD_LIGHT`
 
 ### Set texture of source image
 

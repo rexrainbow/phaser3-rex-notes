@@ -1,11 +1,6 @@
 export default {
-    setTintFill(mode) {
-        if (mode === undefined || mode === true) {
-            mode = Phaser.TintModes.FILL;
-        } else if (mode === false) {
-            mode = Phaser.TintModes.MULTIPLY;
-        }
-        this.tintFill = mode;
+    setTintMode(mode) {
+        this.tintMode = mode;
         return this;
     },
 
@@ -15,8 +10,8 @@ export default {
     },
 
     clearTint() {
-        this.tint = 0xffffff;
-        this.tintFill = Phaser.TintModes.MULTIPLY;
+        this.setTint(0xffffff);
+        this.setTintMode(Phaser.TintModes.MULTIPLY);
         return this;
     }
 }

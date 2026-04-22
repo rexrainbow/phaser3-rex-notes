@@ -164,12 +164,12 @@ declare class Mesh extends Phaser.GameObjects.GameObject {
     ): boolean;
 
     /**
-     * Set tint fill mode.
-     *
-     * @param mode - Tint mode value.
+     * Sets the tint mode to use when applying the tint to the texture.
+     * 
+     * @param mode The tint mode to use.
      * @returns This mesh instance.
      */
-    setTintFill(mode: number): this;
+    setTintMode(mode: number | Phaser.TintModes): this;
     /**
      * Set tint color on all faces.
      *

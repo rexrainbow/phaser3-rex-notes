@@ -433,10 +433,22 @@ export default class CanvasGameObjectBase extends Phaser.GameObjects.GameObject 
      * Tint for the bottom-right corner.
      */
     tintBottomRight: number;
+
     /**
-     * True if tint fill mode is enabled.
+     * The tint mode to use when applying the tint to the texture.
+     * 
+     * Available modes are:
+     * - Phaser.TintModes.MULTIPLY (default)
+     * - Phaser.TintModes.FILL
+     * - Phaser.TintModes.ADD
+     * - Phaser.TintModes.SCREEN
+     * - Phaser.TintModes.OVERLAY
+     * - Phaser.TintModes.HARD_LIGHT
+     * 
+     * Note that in Phaser 3, tint mode and color were set at the same time.
+     * In Phaser 4 they are separate settings.
      */
-    tintFill: number;
+    tintMode: Phaser.TintModes;
     /**
      * Clear tint.
      * @returns This instance.
@@ -457,11 +469,14 @@ export default class CanvasGameObjectBase extends Phaser.GameObjects.GameObject 
         bottomRight?: number
     ): this;
     /**
-     * Sets the tint fill mode to use when applying the tint to the texture.
-     * @param number - The tint mode to use.
-     * @returns This instance.
+     * Sets the tint mode to use when applying the tint to the texture.
+     * 
+     * Note that, in Phaser 3, tint mode and color were set at the same time.
+     * In Phaser 4 they are separate settings.
+     * @param mode The tint mode to use.
+     * @returns This Game Object instance.
      */
-    setTintFill(mode:number): this;
+    setTintMode(mode: number | Phaser.TintModes): this;
     /**
      * Unified tint value.
      */

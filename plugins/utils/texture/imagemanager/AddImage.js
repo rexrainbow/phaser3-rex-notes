@@ -33,11 +33,9 @@ var AddImage = function (key, config) {
         }
     }
 
-    var tintFill = GetValue(config, 'tintFill', undefined);
-    if (tintFill === true) {
-        tintFill = TintModes.FILL;
-    } else if (tintFill === false) {
-        tintFill = undefined;
+    var tintMode = config.tintMode;
+    if ((tintMode === undefined) && (config.tintFill === true)) {
+        tintMode = TintModes.FILL;
     }
 
     this.images[key] = {
@@ -50,7 +48,7 @@ var AddImage = function (key, config) {
         right: GetValue(config, 'right', 0),
         originX: GetValue(config, 'originX', 0),
         originY: GetValue(config, 'originY', 0),
-        tintFill: tintFill,
+        tintMode: tintMode,
     }
 }
 

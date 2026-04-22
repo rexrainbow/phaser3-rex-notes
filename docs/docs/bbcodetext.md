@@ -582,6 +582,7 @@ txt.setFontStyle(style);
         originX: 0,
         originY: 0,
         tintFill: false,
+        tintMode: undefined,
     });
     ```
     - `imgKey` : Image key used in text content, i.e. `[img=imgKey]`.
@@ -597,6 +598,15 @@ txt.setFontStyle(style);
     - `tintFill` : 
         - `false` : Keep original color. Default behavior.
         - `true` : Change fill-color by color tag. `[color=...][img=...]`.
+    - `tintMode` : Tint mode used when applying color tag to image. It replaces `tintFill` when set.
+        - `undefined` : Keep original color. Default behavior.
+        - `true` : Use `Phaser.TintModes.FILL`.
+        - `Phaser.TintModes.MULTIPLY`
+        - `Phaser.TintModes.FILL`
+        - `Phaser.TintModes.ADD`
+        - `Phaser.TintModes.SCREEN`
+        - `Phaser.TintModes.OVERLAY`
+        - `Phaser.TintModes.HARD_LIGHT`
 - Add some image render informations
     ```javascript
     txt.addImage(data);

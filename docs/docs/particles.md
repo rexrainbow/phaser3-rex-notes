@@ -73,7 +73,7 @@ var particles = scene.add.particles(x, y, texture, {
     sortOrderAsc:
     sortProperty:
     stopAfter:
-    tintFill:
+    tintMode:
     timeScale:
     trackVisible:
     visible:
@@ -209,7 +209,7 @@ var particles = scene.add.particles(x, y, texture, {
 - `emitting` : Controls if the emitter is currently emitting a particle flow (when frequency >= 0). 
   Already alive particles will continue to update until they expire.
     - `false` : Equal to stop
-- `tintFill` : 
+- `tintMode` : 
 - `timeScale` : The time rate applied to active particles, affecting lifespan, movement, and tweens. Values larger than 1 are faster than normal.
 - `trackVisible` : Whether the emitter's `visible` state will track the follow target's visibility state.
 - `emitZone` :
