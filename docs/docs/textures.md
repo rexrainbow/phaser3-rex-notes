@@ -306,6 +306,57 @@ scene.textures.addSpriteSheet(undefined, texture, config);
 
 - `texture` : Phaser Texture.
 
+### Add flat color texture
+
+!!! note
+    WebGL only.
+
+Create a texture filled with a single color and alpha.
+
+```javascript
+var texture = scene.textures.addFlatColor(key, width, height);
+// var texture = scene.textures.addFlatColor(key, width, height, color, alpha);
+```
+
+- `key` : The unique string-based key of the Texture.
+- `width`, `height` : The width/height of the texture.
+- `color` : The color of the texture. Default is `0x000000`.
+- `alpha` : The alpha of the texture, from `0` to `1`. Default is `0`.
+
+This can be used as a placeholder or proxy texture, then replaced with a real texture source later.
+
+```javascript
+// Create a transparent proxy texture first.
+scene.textures.addFlatColor('avatar', 128, 128, 0x000000, 0);
+
+// Game objects can use this key immediately.
+var image = scene.add.image(400, 300, 'avatar');
+
+// Load the real texture under another key.
+scene.load.image('avatar-real', 'assets/avatar.png');
+
+scene.load.once('complete', function () {
+    var proxy = scene.textures.get('avatar');
+    var real = scene.textures.get('avatar-real');
+
+    // Replace the source of the proxy texture with the real texture source.
+    proxy.setSource(real.source);
+});
+
+scene.load.start();
+```
+
+It is recommended to use the same size for the proxy texture and the real texture. If the real texture has a different size, update the base frame and any game objects which cached the old size.
+
+```javascript
+proxy.setSource(real.source);
+
+var source = proxy.source[0];
+
+proxy.get('__BASE').setSize(source.width, source.height);
+image.setSize(source.width, source.height);
+```
+
 ### Events
 
 - Texture manager is ready
