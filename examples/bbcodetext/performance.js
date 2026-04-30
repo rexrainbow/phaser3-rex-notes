@@ -1,4 +1,4 @@
-import phaser from '../../../phaser/src/phaser.js';
+import Phaser from '../../node_modules/phaser/src/phaser.js';
 import BBCodeTextPlugin from '../../plugins/bbcodetext-plugin.js';
 
 var CreateText = function (scene, count) {

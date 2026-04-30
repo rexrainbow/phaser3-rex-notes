@@ -1,4 +1,4 @@
-import phaser from '../../../phaser/src/phaser.js';
+import Phaser from '../../node_modules/phaser/src/phaser.js';
 import GOManager from '../../plugins/utils/gameobject/gomanager/GOManager.js';
 
 class Demo extends Phaser.Scene {

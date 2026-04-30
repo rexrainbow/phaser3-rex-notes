@@ -1,4 +1,4 @@
-import phaser from '../../../phaser/src/phaser.js';
+import Phaser from '../../node_modules/phaser/src/phaser.js';
 import GraphPlugin from '../../plugins/graph-plugin.js';
 import RandomPlacePlugin from '../../plugins/randomplace-plugin.js';
 import MoveToPlugin from '../../plugins/moveto-plugin.js';

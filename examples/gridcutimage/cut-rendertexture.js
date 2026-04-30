@@ -1,4 +1,4 @@
-import phaser from '../../../phaser/src/phaser.js';
+import Phaser from '../../node_modules/phaser/src/phaser.js';
 import GridCutImagePlugin from '../../plugins/gridcutimage-plugin';
 
 class GameScene extends Phaser.Scene {

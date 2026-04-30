@@ -1,4 +1,4 @@
-import phaser from '../../../phaser/src/phaser.js';
+import Phaser from '../../node_modules/phaser/src/phaser.js';
 import MeshPlugin from '../../plugins/mesh-plugin.js';
 import RotateXYZ from '../../plugins/gameobjects/mesh/mesh/utils/RotateXYZ.js';
 

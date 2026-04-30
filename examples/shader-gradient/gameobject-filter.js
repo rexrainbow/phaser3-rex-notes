@@ -1,4 +1,4 @@
-import phaser from '../../../phaser/src/phaser.js';
+import Phaser from '../../node_modules/phaser/src/phaser.js';
 import GradientFilterPlugin from '../../plugins/gradientfilter-plugin.js';
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 

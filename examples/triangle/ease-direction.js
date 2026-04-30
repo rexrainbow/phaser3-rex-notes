@@ -1,4 +1,4 @@
-import phaser from '../../../phaser/src/phaser.js';
+import Phaser from '../../node_modules/phaser/src/phaser.js';
 import TrianglePlugin from '../../plugins/triangle-plugin.js';
 import GesturesPlugin from '../../plugins/gestures-plugin.js';
 

@@ -1,4 +1,4 @@
-import phaser from '../../../phaser/src/phaser.js';
+import Phaser from '../../node_modules/phaser/src/phaser.js';
 import TagTextPlugin from '../../plugins/tagtext-plugin.js';
 import TextPagePlugin from '../../plugins/textpage-plugin.js'
 

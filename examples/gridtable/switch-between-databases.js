@@ -1,4 +1,4 @@
-import phaser from '../../../phaser/src/phaser.js';
+import Phaser from '../../node_modules/phaser/src/phaser.js';
 import GridTablePlugin from '../../plugins/gridtable-plugin.js';
 import TouchStatePlugin from '../../plugins/touchstate-plugin.js';
 import ContainerLitePlugin from '../../plugins/containerlite-plugin.js';

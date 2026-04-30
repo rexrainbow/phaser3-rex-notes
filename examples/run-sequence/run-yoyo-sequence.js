@@ -1,4 +1,4 @@
-import phaser from '../../../phaser/src/phaser.js';
+import Phaser from '../../node_modules/phaser/src/phaser.js';
 import SequencePlugin from '../../plugins/sequence-plugin.js';
 
 class ActionKlass extends Phaser.Events.EventEmitter {

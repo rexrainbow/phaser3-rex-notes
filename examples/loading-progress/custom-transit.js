@@ -1,4 +1,4 @@
-import phaser from '../../../phaser/src/phaser.js';
+import Phaser from '../../node_modules/phaser/src/phaser.js';
 import LoadingProgressPlugin from '../../plugins/loadingprogress-plugin.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 import AwaitLoaderPlugin from '../../plugins/awaitloader-plugin.js';

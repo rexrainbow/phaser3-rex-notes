@@ -1,4 +1,4 @@
-import phaser from '../../../phaser/src/phaser.js';
+import Phaser from '../../node_modules/phaser/src/phaser.js';
 import KeysHubPlugin from '../../plugins/keyshub-plugin.js';
 import VirtualJoyStickPlugin from '../../plugins/virtualjoystick-plugin.js';
 

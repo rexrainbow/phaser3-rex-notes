@@ -1,4 +1,4 @@
-import phaser from '../../../phaser/src/phaser.js';
+import Phaser from '../../node_modules/phaser/src/phaser.js';
 import CustomProgressPlugin from '../../plugins/customprogress-plugin.js';
 import PerlinPlugin from '../../plugins/perlin-plugin.js';
 

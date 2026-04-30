@@ -1,4 +1,4 @@
-import phaser from '../../../phaser/src/phaser.js';
+import Phaser from '../../node_modules/phaser/src/phaser.js';
 import FSMPlugin from '../../plugins/fsm-plugin.js';
 
 class StateA {

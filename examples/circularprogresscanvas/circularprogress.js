@@ -1,4 +1,4 @@
-import phaser from '../../../phaser/src/phaser.js';
+import Phaser from '../../node_modules/phaser/src/phaser.js';
 import CircularProgressCanvasPlugin from '../../plugins/circularprogresscanvas-plugin.js';
 
 const COLOR_MAIN = 0x4e342e;

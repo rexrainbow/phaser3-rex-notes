@@ -1,4 +1,4 @@
-import phaser from '../../../phaser/src/phaser.js';
+import Phaser from '../../node_modules/phaser/src/phaser.js';
 import CanvasDataPlugin from '../../plugins/canvasdata-plugin.js';
 import CreateRectangleTexture from '../../plugins/utils/texture/CreateRectangleTexture.js';
 

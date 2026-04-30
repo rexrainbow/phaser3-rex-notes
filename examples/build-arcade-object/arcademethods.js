@@ -1,4 +1,4 @@
-import phaser from '../../../phaser/src/phaser.js';
+import Phaser from '../../node_modules/phaser/src/phaser.js';
 import BuildArcadeObjectPlugin from '../../plugins/buildarcadeobject-plugin.js';
 
 class Demo extends Phaser.Scene {

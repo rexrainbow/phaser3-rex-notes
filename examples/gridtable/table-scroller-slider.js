@@ -1,4 +1,4 @@
-import phaser from '../../../phaser/src/phaser.js';
+import Phaser from '../../node_modules/phaser/src/phaser.js';
 import GridTablePlugin from '../../plugins/gridtable-plugin.js';
 import ScrollerPlugin from '../../plugins/scroller-plugin.js';
 import SliderPlugin from '../../plugins/slider-plugin.js';
