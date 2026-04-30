@@ -6,7 +6,7 @@ const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
 class Demo extends Phaser.Scene {
-    declare rexUI: UIPlugin;
+    rexUI!: UIPlugin;
 
     constructor() {
         super({

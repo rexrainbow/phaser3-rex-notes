@@ -14,7 +14,7 @@ type CharacterData = {
 };
 
 class Demo extends Phaser.Scene {
-    declare rexUI: UIPlugin;
+    rexUI!: UIPlugin;
 
     constructor() {
         super({
