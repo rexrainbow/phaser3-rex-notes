@@ -5,8 +5,16 @@ const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
+type DataItem = { name: string; };
+
+type CharacterData = {
+    name: string;
+    skills: DataItem[];
+    items: DataItem[];
+};
+
 class Demo extends Phaser.Scene {
-    rexUI: UIPlugin;
+    declare rexUI: UIPlugin;
 
     constructor() {
         super({
@@ -17,7 +25,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var data = {
+        var data: CharacterData = {
             name: 'Rex',
             skills: [
                 { name: 'A' },
@@ -88,21 +96,32 @@ class Demo extends Phaser.Scene {
         // Set icon interactive
         this.input.topOnly = false;
         var print = this.add.text(0, 0, '');
-        var labels = [];
-        labels.push(...scrollablePanel.getElement('#skills.items', true) as Phaser.GameObjects.GameObject[]);
-        labels.push(...scrollablePanel.getElement('#items.items', true) as Phaser.GameObjects.GameObject[]);
+        var labels: UIPlugin.Label[] = [];
+        labels.push(...scrollablePanel.getElement('#skills.items', true) as UIPlugin.Label[]);
+        labels.push(...scrollablePanel.getElement('#items.items', true) as UIPlugin.Label[]);
         var scene = this;
         labels.forEach(function (label) {
             if (!label) {
                 return;
             }
 
-            var click = scene.rexUI.add.click(label.getElement('icon'))
+            var icon = label.getElement('icon') as Phaser.GameObjects.GameObject | null;
+            if (!icon) {
+                return;
+            }
+
+            var click = scene.rexUI.add.click(icon)
                 .on('click', function () {
-                    if (!label.getTopmostSizer().isInTouching()) {
+                    var topmostSizer = label.getTopmostSizer();
+                    if (!topmostSizer || !topmostSizer.isInTouching()) {
                         return;
                     }
-                    var category = label.getParentSizer().name;
+                    var parentSizer = label.getParentSizer();
+                    if (!parentSizer) {
+                        return;
+                    }
+
+                    var category = parentSizer.name;
                     print.text += `${category}:${label.text}\n`;
                 });
         })
@@ -111,7 +130,7 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var createPanel = function (scene: Demo, data) {
+var createPanel = function (scene: Demo, data: CharacterData) {
     var sizer = scene.rexUI.add.sizer({
         orientation: 'x',
         space: { item: 10 }
@@ -131,7 +150,7 @@ var createPanel = function (scene: Demo, data) {
     return sizer;
 }
 
-var createHeader = function (scene: Demo, data) {
+var createHeader = function (scene: Demo, data: CharacterData) {
     var title = scene.rexUI.add.label({
         orientation: 'x',
         text: scene.add.text(0, 0, 'Character'),
@@ -160,7 +179,7 @@ var createHeader = function (scene: Demo, data) {
         );
 };
 
-var createTable = function (scene: Demo, data, key, rows) {
+var createTable = function (scene: Demo, data: CharacterData, key: ('skills' | 'items'), rows: number) {
     var capKey = key.charAt(0).toUpperCase() + key.slice(1);
     var title = scene.rexUI.add.label({
         orientation: 'x',
@@ -214,7 +233,7 @@ var createTable = function (scene: Demo, data, key, rows) {
         );
 }
 
-var createIcon = function (scene: Demo, item, iconWidth, iconHeight) {
+var createIcon = function (scene: Demo, item: DataItem, iconWidth: number, iconHeight: number) {
     var label = scene.rexUI.add.label({
         orientation: 'y',
         icon: scene.rexUI.add.roundRectangle(0, 0, iconWidth, iconHeight, 5, COLOR_LIGHT),

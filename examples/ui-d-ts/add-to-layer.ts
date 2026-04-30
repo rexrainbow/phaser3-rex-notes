@@ -30,7 +30,7 @@ class Demo extends Phaser.Scene {
             card
                 .setInteractive()
                 .on('pointerdown', function () {
-                    this.children.bringToTop(card.getData('layer'));
+                    card.bringToTop();
                 }, this)
         }
     }
