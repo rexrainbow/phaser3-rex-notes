@@ -1,6 +1,7 @@
 import WorldXYToGameObjectLocalXY from '../../../../../utils/position/WorldXYToGameObjectLocalXY.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 
 var WorldXYToModelXY = function (worldX, worldY, camera, out) {
     if ((camera === undefined) || (camera === true) || IsPlainObject(camera)) {

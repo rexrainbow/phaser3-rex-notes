@@ -1,11 +1,12 @@
+import { Utils as PhaserUtils, Math as PhaserMath } from 'phaser';
 import TickTask from '../../utils/componentbase/SceneUpdateTickTask.js';
 import DegToRad from '../../utils/math/DegToRad.js';
 import RadToDeg from '../../utils/math/RadToDeg.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const MathWrap = Phaser.Math.Wrap;
-const WrapAngle = Phaser.Math.Angle.Wrap;
-const AngleBetween = Phaser.Math.Angle.Between;
+const GetValue = PhaserUtils.Objects.GetValue;
+const MathWrap = PhaserMath.Wrap;
+const WrapAngle = PhaserMath.Angle.Wrap;
+const AngleBetween = PhaserMath.Angle.Between;
 
 
 class RotateTo extends TickTask {

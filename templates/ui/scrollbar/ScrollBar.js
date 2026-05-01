@@ -2,7 +2,8 @@ import Sizer from '../sizer/Sizer.js';
 import Slider from '../slider/Slider.js';
 import InTouching from '../intouching/InTouching.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class ScrollBar extends Sizer {
     constructor(scene, config) {

@@ -4,7 +4,8 @@ import ExpandMethods from './methods/ExpandMethods.js';
 import { OnClick } from '../basesizer/ClickMethods.js';
 import ConfigurationMethods from './methods/ConfigurationMethods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Folder extends Sizer {
     constructor(scene, config) {

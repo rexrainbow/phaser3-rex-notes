@@ -2,8 +2,9 @@ import Methods from './methods/Methods.js';
 import GetGame from '../../utils/system/GetGame.js';
 import CreateTexture from '../../utils/texture/CreateTexture.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class FrameManager {
     constructor(scene, key, width, height, cellWidth, cellHeight, fillColor, useDynamicTexture) {

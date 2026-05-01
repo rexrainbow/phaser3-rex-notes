@@ -1,5 +1,6 @@
-const TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
-const GetTint = Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
+import { GameObjects as PhaserGameObjects, Renderer as PhaserRenderer } from 'phaser';
+const TransformMatrix = PhaserGameObjects.Components.TransformMatrix;
+const GetTint = PhaserRenderer.WebGL.Utils.getTintAppendFloatAlpha;
 
 var tempMatrix = new TransformMatrix();
 var tempTransformer = {

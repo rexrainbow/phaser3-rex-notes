@@ -1,6 +1,7 @@
 import CSVParser from 'papaparse/papaparse.min.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var CSVToArray = function (csvString, config) {
     var delimiter = GetValue(config, 'delimiter', ',');

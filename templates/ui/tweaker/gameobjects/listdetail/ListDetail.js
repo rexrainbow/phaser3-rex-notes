@@ -6,8 +6,9 @@ import ListTable from './gridtable/ListTable.js';
 import OnToolbarMethods from './OnToolbarMethods.js';
 
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Clamp = Phaser.Math.Clamp;
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const Clamp = PhaserMath.Clamp;
 
 class ListDetail extends SplitPanels {
     constructor(scene, config) {

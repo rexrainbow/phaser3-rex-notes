@@ -3,7 +3,8 @@ import IsGameObject from '../../../utils/system/IsGameObject.js';
 import { GetBounds } from '../../../utils/bounds/GetBounds.js';
 import DrawBounds from '../../../utils/bounds/DrawBounds.js';
 
-const MergeRect = Phaser.Geom.Rectangle.MergeRect;
+import { Geom as PhaserGeom } from 'phaser';
+const MergeRect = PhaserGeom.Rectangle.MergeRect;
 
 export default {
     forEachGameObject(callback) {
@@ -43,11 +44,11 @@ export default {
 
     getBounds(out) {
         if (out === undefined) {
-            out = new Phaser.Geom.Rectangle();
+            out = new PhaserGeom.Rectangle();
         }
 
         var firstBounds = true;
-        var source = new Phaser.Geom.Rectangle();
+        var source = new PhaserGeom.Rectangle();
         this.forEachGameObject(function (gameObject) {
             if (gameObject.getBounds) {
                 source = GetBounds(gameObject, source);

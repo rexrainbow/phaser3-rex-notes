@@ -1,7 +1,8 @@
 import { FilterName } from './const.js';
 import FragSrc from './split-frag.js';
 
-class SplitFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+import { Renderer as PhaserRenderer } from 'phaser';
+class SplitFilter extends PhaserRenderer.WebGL.RenderNodes.BaseFilterShader {
     static FilterName = FilterName;
 
     constructor(manager) {

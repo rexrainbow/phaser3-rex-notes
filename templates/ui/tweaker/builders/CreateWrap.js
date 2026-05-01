@@ -2,7 +2,8 @@ import CreateTitleLabel from './utils/CreateTitleLabel.js';
 import Wrap from '../gameobjects/wrap/Wrap.js';
 import CreateBackground from './utils/CreateBackground.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var CreateWrap = function (tweaker, config, style) {
     if (!config) { config = {}; }

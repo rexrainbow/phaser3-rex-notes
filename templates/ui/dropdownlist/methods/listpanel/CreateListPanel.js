@@ -2,7 +2,8 @@ import Buttons from '../../../buttons/Buttons.js';
 import FixWidthButtons from '../../../fixwidthbuttons/FixWidthButtons.js';
 import ScrollablePanel from '../../../scrollablepanel/ScrollablePanel.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var CreateListPanel = function () {
     var scene = this.scene;

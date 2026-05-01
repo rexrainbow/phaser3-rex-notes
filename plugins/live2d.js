@@ -4,8 +4,9 @@ import {
     Live2dGameObject
 } from './gameobjects/live2d/index.js';
 
-Phaser.Loader.FileTypesManager.register('rexLive2dCoreScript', Live2dCoreScriptFileCallback);
-Phaser.Loader.FileTypesManager.register('rexLive2d', Live2dFileCallback);
+import { Loader as PhaserLoader } from 'phaser';
+PhaserLoader.FileTypesManager.register('rexLive2dCoreScript', Live2dCoreScriptFileCallback);
+PhaserLoader.FileTypesManager.register('rexLive2d', Live2dFileCallback);
 
 export {
     Live2dCoreScriptFileCallback,

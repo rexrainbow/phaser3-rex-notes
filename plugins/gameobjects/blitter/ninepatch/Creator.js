@@ -1,6 +1,7 @@
 import NinePatch from './NinePatch.js';
 
-const BuildGameObject = Phaser.GameObjects.BuildGameObject;
+import { GameObjects as PhaserGameObjects } from 'phaser';
+const BuildGameObject = PhaserGameObjects.BuildGameObject;
 
 export default function (config, addToScene) {
     if (config === undefined) { config = {}; }

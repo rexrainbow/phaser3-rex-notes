@@ -1,4 +1,5 @@
-const BinaryFile = Phaser.Loader.FileTypes.BinaryFile;
+import { Loader as PhaserLoader } from 'phaser';
+const BinaryFile = PhaserLoader.FileTypes.BinaryFile;
 
 var CreateBinaryFile = function (loader, key, url, xhrSettings, dataKey) {
     var file = new BinaryFile(loader, key, url, xhrSettings);

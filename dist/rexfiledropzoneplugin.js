@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexfiledropzoneplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexfiledropzoneplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var Resize = function (width, height) {
         if (this.scene.sys.scale.autoRound) {
@@ -28,12 +28,12 @@
         return this;
     };
 
-    const GameClass = Phaser.Game;
+    const GameClass = phaser.Game;
     var IsGame = function (object) {
         return (object instanceof GameClass);
     };
 
-    const SceneClass = Phaser.Scene;
+    const SceneClass = phaser.Scene;
     var IsSceneObject = function (object) {
         return (object instanceof SceneClass);
     };
@@ -200,7 +200,7 @@
         drop: 'drop',
     };
 
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
 
     var RouteEvents = function (gameObject, element, elementEvents, config) {
         var preventDefault = GetValue$1(config, 'preventDefault', false);
@@ -218,9 +218,9 @@
         }
     };
 
-    const DOMElement = Phaser.GameObjects.DOMElement;
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue = Phaser.Utils.Objects.GetValue;
+    const DOMElement = phaser.GameObjects.DOMElement;
+    const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
+    const GetValue = phaser.Utils.Objects.GetValue;
 
     class FileDropZone extends DOMElement {
         constructor(scene, x, y, width, height, config) {
@@ -301,8 +301,8 @@
         return gameObject;
     }
 
-    const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-    const BuildGameObject = Phaser.GameObjects.BuildGameObject;
+    const GetAdvancedValue = phaser.Utils.Objects.GetAdvancedValue;
+    const BuildGameObject = phaser.GameObjects.BuildGameObject;
 
     function Creator (config, addToScene) {
         if (config === undefined) { config = {}; }
@@ -390,7 +390,7 @@
         return target;
     };
 
-    class FileDropZonePlugin extends Phaser.Plugins.BasePlugin {
+    class FileDropZonePlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

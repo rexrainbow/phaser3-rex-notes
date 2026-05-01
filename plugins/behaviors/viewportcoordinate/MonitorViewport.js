@@ -1,4 +1,5 @@
-const EventEmitter = Phaser.Events.EventEmitter;
+import { Events as PhaserEvents } from 'phaser';
+const EventEmitter = PhaserEvents.EventEmitter;
 
 var MonitorViewport = function (viewport) {
     // Don't monitor properties again

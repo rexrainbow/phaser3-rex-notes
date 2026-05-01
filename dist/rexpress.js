@@ -1,13 +1,13 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexpress = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexpress = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var EventEmitterMethods$1 = {
         setEventEmitter(eventEmitter, EventEmitterClass) {
             if (EventEmitterClass === undefined) {
-                EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+                EventEmitterClass = phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
             }
             this._privateEE = (eventEmitter === true) || (eventEmitter === undefined);
             this._eventEmitter = (this._privateEE) ? (new EventEmitterClass()) : eventEmitter;
@@ -96,7 +96,7 @@
         },
     };
 
-    const SceneClass = Phaser.Scene;
+    const SceneClass = phaser.Scene;
     var IsSceneObject = function (object) {
         return (object instanceof SceneClass);
     };
@@ -115,7 +115,7 @@
         }
     };
 
-    const GameClass = Phaser.Game;
+    const GameClass = phaser.Game;
     var IsGame = function (object) {
         return (object instanceof GameClass);
     };
@@ -134,7 +134,7 @@
         }
     };
 
-    const GetValue$7 = Phaser.Utils.Objects.GetValue;
+    const GetValue$7 = phaser.Utils.Objects.GetValue;
 
     class ComponentBase {
         constructor(parent, config) {
@@ -220,7 +220,7 @@
         EventEmitterMethods$1
     );
 
-    const GetValue$6 = Phaser.Utils.Objects.GetValue;
+    const GetValue$6 = phaser.Utils.Objects.GetValue;
 
     class TickTask extends ComponentBase {
         constructor(parent, config) {
@@ -349,10 +349,10 @@
         }
     };
 
-    const Rectangle = Phaser.Geom.Rectangle;
-    const Vector2 = Phaser.Math.Vector2;
-    const RotateAround$1 = Phaser.Math.RotateAround;
-    const P3Container = Phaser.GameObjects.Container;
+    const Rectangle = phaser.Geom.Rectangle;
+    const Vector2 = phaser.Math.Vector2;
+    const RotateAround$1 = phaser.Math.RotateAround;
+    const P3Container = phaser.GameObjects.Container;
 
     var GetBounds = function (gameObject, output) {
         if (output === undefined) {
@@ -626,7 +626,7 @@
         return PointerTest(gameObject, pointer, IsPointInBounds, preTest, postTest)
     };
 
-    const GetValue$5 = Phaser.Utils.Objects.GetValue;
+    const GetValue$5 = phaser.Utils.Objects.GetValue;
 
     class OnePointerTracer extends TickTask {
         constructor(gameObject, config) {
@@ -1791,10 +1791,10 @@
         }
     }
 
-    Phaser.Utils.Objects.GetValue;
-    Phaser.Math.Distance.Between;
+    phaser.Utils.Objects.GetValue;
+    phaser.Math.Distance.Between;
 
-    const GetValue$3 = Phaser.Utils.Objects.GetValue;
+    const GetValue$3 = phaser.Utils.Objects.GetValue;
 
     class Press extends OnePointerTracer {
         constructor(gameObject, config) {
@@ -1908,14 +1908,14 @@
     const BEGIN$2 = 'BEGIN';
     const RECOGNIZED$2 = 'RECOGNIZED';
 
-    Phaser.Utils.Objects.GetValue;
+    phaser.Utils.Objects.GetValue;
 
     var GetTickDelta = function (game) {
         return GetGame(game).loop.delta;
     };
 
-    const DistanceBetween$1 = Phaser.Math.Distance.Between;
-    const AngleBetween$1 = Phaser.Math.Angle.Between;
+    const DistanceBetween$1 = phaser.Math.Distance.Between;
+    const AngleBetween$1 = phaser.Math.Angle.Between;
 
     var VelocityMethods = {
         getDt: function () {
@@ -2034,8 +2034,8 @@
 
     var globOut = {};
 
-    const GetValue$2 = Phaser.Utils.Objects.GetValue;
-    const RadToDeg$1 = Phaser.Math.RadToDeg;
+    const GetValue$2 = phaser.Utils.Objects.GetValue;
+    const RadToDeg$1 = phaser.Math.RadToDeg;
 
     class Swipe extends OnePointerTracer {
         constructor(gameObject, config) {
@@ -2200,10 +2200,10 @@
         return obj;
     };
 
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
-    const SpliceOne = Phaser.Utils.Array.SpliceOne;
-    const DistanceBetween = Phaser.Math.Distance.Between;
-    const AngleBetween = Phaser.Math.Angle.Between;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
+    const SpliceOne = phaser.Utils.Array.SpliceOne;
+    const DistanceBetween = phaser.Math.Distance.Between;
+    const AngleBetween = phaser.Math.Angle.Between;
 
     class TwoPointersTracer {
         constructor(gameObject, config) {
@@ -2567,9 +2567,9 @@
 
     const IDLE$1 = 'IDLE';
 
-    Phaser.Utils.Objects.GetValue;
+    phaser.Utils.Objects.GetValue;
 
-    const RotateAround = Phaser.Math.RotateAround;
+    const RotateAround = phaser.Math.RotateAround;
 
     var RotateObjectAround = function (gameObject, x, y, angle) {
         RotateAround(gameObject, x, y, angle);
@@ -2623,11 +2623,11 @@
         return this;
     };
 
-    const GetValue = Phaser.Utils.Objects.GetValue;
-    const WrapDegrees = Phaser.Math.Angle.WrapDegrees; // Wrap degrees: -180 to 180 
-    const ShortestBetween = Phaser.Math.Angle.ShortestBetween;
-    const RadToDeg = Phaser.Math.RadToDeg;
-    const DegToRad = Phaser.Math.DegToRad;
+    const GetValue = phaser.Utils.Objects.GetValue;
+    const WrapDegrees = phaser.Math.Angle.WrapDegrees; // Wrap degrees: -180 to 180 
+    const ShortestBetween = phaser.Math.Angle.ShortestBetween;
+    const RadToDeg = phaser.Math.RadToDeg;
+    const DegToRad = phaser.Math.DegToRad;
 
     class Rotate extends TwoPointersTracer {
         constructor(gameObject, config) {

@@ -1,7 +1,9 @@
+import { Utils as PhaserUtils } from 'phaser';
+
 import TickTask from '../../utils/componentbase/SceneUpdateTickTask.js';
 import MoveMethods from './MoveMethods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class MoveTo extends TickTask {
     constructor(gameObject, config) {

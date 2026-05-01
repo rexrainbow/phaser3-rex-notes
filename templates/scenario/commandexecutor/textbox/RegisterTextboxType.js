@@ -4,8 +4,9 @@ import GenerateDefaultCreateGameObjectCallback from './GenerateDefaultCreateGame
 import Typing from './Typing.js';
 import Shake from '../utils/Shake.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 
 var RegisterTextboxType = function (commandExecutor, config) {
     var { viewport } = config;

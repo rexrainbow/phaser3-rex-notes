@@ -1,5 +1,6 @@
-const CanvasPool = Phaser.Display.Canvas.CanvasPool;
-const TintModes = Phaser.TintModes;
+import { CANVAS as PhaserCANVAS, Display as PhaserDisplay, TintModes as PhaserTintModes } from 'phaser';
+const CanvasPool = PhaserDisplay.Canvas.CanvasPool;
+const TintModes = PhaserTintModes;
 
 var GetContext2D = function (canvasOrContext) {
     if (
@@ -48,7 +49,7 @@ var DrawFrameToCanvas = function (frame, canvasOrContext, x, y, width, height, c
         // Draw image at tempCanvas
 
         // Get tempCanvas
-        var tempCanvas = CanvasPool.create(null, width, height, Phaser.CANVAS, true);
+        var tempCanvas = CanvasPool.create(null, width, height, PhaserCANVAS, true);
 
         var tempContext = tempCanvas.getContext('2d', { willReadFrequently: true });
 

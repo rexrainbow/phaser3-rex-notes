@@ -1,13 +1,13 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexinterceptionplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexinterceptionplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var EventEmitterMethods = {
         setEventEmitter(eventEmitter, EventEmitterClass) {
             if (EventEmitterClass === undefined) {
-                EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+                EventEmitterClass = phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
             }
             this._privateEE = (eventEmitter === true) || (eventEmitter === undefined);
             this._eventEmitter = (this._privateEE) ? (new EventEmitterClass()) : eventEmitter;
@@ -96,7 +96,7 @@
         },
     };
 
-    const SceneClass = Phaser.Scene;
+    const SceneClass = phaser.Scene;
     var IsSceneObject = function (object) {
         return (object instanceof SceneClass);
     };
@@ -115,7 +115,7 @@
         }
     };
 
-    const GameClass = Phaser.Game;
+    const GameClass = phaser.Game;
     var IsGame = function (object) {
         return (object instanceof GameClass);
     };
@@ -134,7 +134,7 @@
         }
     };
 
-    const GetValue$3 = Phaser.Utils.Objects.GetValue;
+    const GetValue$3 = phaser.Utils.Objects.GetValue;
 
     class ComponentBase {
         constructor(parent, config) {
@@ -220,7 +220,7 @@
         EventEmitterMethods
     );
 
-    const GetValue$2 = Phaser.Utils.Objects.GetValue;
+    const GetValue$2 = phaser.Utils.Objects.GetValue;
 
     class TickTask extends ComponentBase {
         constructor(parent, config) {
@@ -333,7 +333,7 @@
         'always': 2
     };
 
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
 
     class SceneUpdateTickTask extends TickTask {
         constructor(parent, config) {
@@ -380,7 +380,7 @@
         return (eventName === 'step') || (eventName === 'poststep');
     };
 
-    const Vector2$1 = Phaser.Math.Vector2;
+    const Vector2$1 = phaser.Math.Vector2;
     class SpeedMonitor {
         constructor() {
             this.position = new Vector2$1();
@@ -410,10 +410,10 @@
         }
     }
 
-    const GetValue = Phaser.Utils.Objects.GetValue;
-    const Vector2 = Phaser.Math.Vector2;
-    const Distance = Phaser.Math.Distance.Between;
-    const AngleBetweenPoint = Phaser.Math.Angle.BetweenPoints;
+    const GetValue = phaser.Utils.Objects.GetValue;
+    const Vector2 = phaser.Math.Vector2;
+    const Distance = phaser.Math.Distance.Between;
+    const AngleBetweenPoint = phaser.Math.Angle.BetweenPoints;
 
     class Interception extends SceneUpdateTickTask {
         constructor(gameObject, config) {
@@ -548,7 +548,7 @@
         }
     }
 
-    class InterceptionPlugin extends Phaser.Plugins.BasePlugin {
+    class InterceptionPlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

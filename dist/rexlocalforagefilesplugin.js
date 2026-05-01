@@ -1,8 +1,8 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-	typeof define === 'function' && define.amd ? define(factory) :
-	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexlocalforagefilesplugin = factory());
-})(this, (function () { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+	typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexlocalforagefilesplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
 	var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -3187,7 +3187,7 @@
 	    DataProcessMethods
 	);
 
-	class FilesPlugin extends Phaser.Plugins.BasePlugin {
+	class FilesPlugin extends phaser.Plugins.BasePlugin {
 	    constructor(pluginManager) {
 	        super(pluginManager);
 	    }

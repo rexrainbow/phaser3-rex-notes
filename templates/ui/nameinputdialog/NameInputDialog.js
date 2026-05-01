@@ -5,7 +5,8 @@ import CreateBackground from '../utils/build/CreateBackground.js';
 import CreateLabel from '../utils/build/CreateLabel.js';
 import RegisterEvents from '../dialog/utils/RegisterSimpleLabelButtonEvents.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class NameInputDialog extends Dialog {
     constructor(scene, config, creators) {

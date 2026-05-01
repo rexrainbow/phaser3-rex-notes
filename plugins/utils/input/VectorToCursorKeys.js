@@ -3,9 +3,10 @@ import RadToDeg from '../math/RadToDeg.js';
 import DIRMODE from '../math/angle/angletodirections/Const.js';
 import AngleToDirections from '../math/angle/angletodirections/AngleToDirections.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const GetDist = Phaser.Math.Distance.Between;
-const GetAngle = Phaser.Math.Angle.Between;
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const GetDist = PhaserMath.Distance.Between;
+const GetAngle = PhaserMath.Angle.Between;
 
 class VectorToCursorKeys extends CursorKeys {
     constructor(scene, config) {

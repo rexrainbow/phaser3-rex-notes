@@ -1,7 +1,8 @@
 import Base from '../base/Base.js';
 import UpdateShapeMethods from './UpdateShapeMethods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Arrow extends Base {
     constructor(scene, config) {

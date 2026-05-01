@@ -1,6 +1,7 @@
 import CSVToHashTable from './csvtohashtable.js';
 
-class CSVToHashTablePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class CSVToHashTablePlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
     }

@@ -14,8 +14,9 @@ import SetTextOXYMethods from './methods/SetTextOXYMethods.js';
 import MoveCursorMethods from './methods/MoveCursorMethods.js';
 import IsEmpty from '../../../utils/object/IsEmpty.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class CanvasInput extends DynamicText {
     constructor(scene, x, y, fixedWidth, fixedHeight, config) {

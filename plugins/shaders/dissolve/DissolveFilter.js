@@ -1,7 +1,8 @@
 import { FilterName } from './const.js';
 import FragSrc from './dissolve-frag.js';
 
-class DissolveFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+import { Renderer as PhaserRenderer } from 'phaser';
+class DissolveFilter extends PhaserRenderer.WebGL.RenderNodes.BaseFilterShader {
     static FilterName = FilterName;
 
     constructor(manager) {

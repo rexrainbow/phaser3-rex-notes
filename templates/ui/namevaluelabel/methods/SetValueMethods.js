@@ -1,6 +1,7 @@
 import EaseValueTask from '../../../../plugins/utils/ease/EaseValueTask.js';
 
-const Clamp = Phaser.Math.Clamp;
+import { Math as PhaserMath } from 'phaser';
+const Clamp = PhaserMath.Clamp;
 
 export default {
     setValueTextFormatCallback(callback, scope) {

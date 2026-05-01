@@ -2,7 +2,8 @@ import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import IsPointerInHitArea from '../../utils/input/IsPointerInHitArea.js';
 import IsPointerInBounds from '../../utils/input/IsPointerInBounds.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class ClickOutside extends ComponentBase {
     constructor(gameObject, config) {

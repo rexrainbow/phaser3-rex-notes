@@ -1,13 +1,13 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexclickboardtotextureplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexclickboardtotextureplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var EventEmitterMethods = {
         setEventEmitter(eventEmitter, EventEmitterClass) {
             if (EventEmitterClass === undefined) {
-                EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+                EventEmitterClass = phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
             }
             this._privateEE = (eventEmitter === true) || (eventEmitter === undefined);
             this._eventEmitter = (this._privateEE) ? (new EventEmitterClass()) : eventEmitter;
@@ -96,7 +96,7 @@
         },
     };
 
-    const SceneClass = Phaser.Scene;
+    const SceneClass = phaser.Scene;
     var IsSceneObject = function (object) {
         return (object instanceof SceneClass);
     };
@@ -115,7 +115,7 @@
         }
     };
 
-    const GameClass = Phaser.Game;
+    const GameClass = phaser.Game;
     var IsGame = function (object) {
         return (object instanceof GameClass);
     };
@@ -134,7 +134,7 @@
         }
     };
 
-    const GetValue = Phaser.Utils.Objects.GetValue;
+    const GetValue = phaser.Utils.Objects.GetValue;
 
     class ComponentBase {
         constructor(parent, config) {
@@ -372,7 +372,7 @@
         }
     }
 
-    class ClickboardToTexturePlugin extends Phaser.Plugins.BasePlugin {
+    class ClickboardToTexturePlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

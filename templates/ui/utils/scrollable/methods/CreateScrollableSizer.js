@@ -2,7 +2,8 @@ import GridSizer from '../../../gridsizer/GridSizer.js';
 import AddChild from './AddChild.js';
 import AddSlider from './AddSlider.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var CreateScrollableSizer = function (parent, config) {
     var scene = parent.scene;

@@ -1,7 +1,8 @@
 import { FilterName } from './const.js';
 import FragSrc from './crt-frag.js';
 
-class CrtFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+import { Renderer as PhaserRenderer } from 'phaser';
+class CrtFilter extends PhaserRenderer.WebGL.RenderNodes.BaseFilterShader {
     static FilterName = FilterName;
 
     constructor(manager) {

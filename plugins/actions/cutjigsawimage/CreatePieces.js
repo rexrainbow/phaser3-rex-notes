@@ -1,7 +1,8 @@
+import { GameObjects as PhaserGameObjects, Math as PhaserMath } from 'phaser';
 import GenerateFrames from './generateframes/GenerateFrames.js';
 
-const DefaultImageClass = Phaser.GameObjects.Image;
-const RotateAround = Phaser.Math.RotateAround;
+const DefaultImageClass = PhaserGameObjects.Image;
+const RotateAround = PhaserMath.RotateAround;
 
 var CreatePieces = function (gameObject, {
     piecesKey,

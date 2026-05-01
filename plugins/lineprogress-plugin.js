@@ -3,7 +3,8 @@ import Creator from './gameobjects/shape/lineprogress/Creator.js';
 import LineProgress from './gameobjects/shape/lineprogress/LineProgress.js';
 import SetValue from './utils/object/SetValue.js';
 
-class LineProgressPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class LineProgressPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

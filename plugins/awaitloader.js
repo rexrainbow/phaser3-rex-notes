@@ -1,5 +1,6 @@
 import LoaderCallback from './loader/awaitloader/AwaitLoaderCallback.js';
 
-Phaser.Loader.FileTypesManager.register('rexAwait', LoaderCallback);
+import { Loader as PhaserLoader } from 'phaser';
+PhaserLoader.FileTypesManager.register('rexAwait', LoaderCallback);
 
 export default LoaderCallback;

@@ -1,10 +1,11 @@
+import { Utils as PhaserUtils } from 'phaser';
 import OpenCloseTransition from '../openclosetransition/OpenCloseTransition.js';
 import PopUp from '../../popup.js';
 import ScaleDown from '../scale/ScaleDown.js';
 import SetPosition from './SetPosition.js';
 import IsPointInBounds from '../../utils/bounds/IsPointInBounds.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class DropDown extends OpenCloseTransition {
     constructor(gameObject, config) {

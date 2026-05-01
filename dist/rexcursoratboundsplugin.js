@@ -1,11 +1,11 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcursoratboundsplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcursoratboundsplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
-    const Key = Phaser.Input.Keyboard.Key;
-    const KeyCodes = Phaser.Input.Keyboard.KeyCodes;
+    const Key = phaser.Input.Keyboard.Key;
+    const KeyCodes = phaser.Input.Keyboard.KeyCodes;
     const KeyNames = ['up', 'down', 'left', 'right'];
 
     class CursorKeys {
@@ -131,13 +131,13 @@
         location: 0,
     };
 
-    const CameraClass = Phaser.Cameras.Scene2D.BaseCamera;
+    const CameraClass = phaser.Cameras.Scene2D.BaseCamera;
 
     var IsCameraObject = function (object) {
         return (object instanceof CameraClass);
     };
 
-    const Rectangle = Phaser.Geom.Rectangle;
+    const Rectangle = phaser.Geom.Rectangle;
 
     var GetViewport = function (scene, camera, out) {
         if (!IsCameraObject(camera)) {
@@ -160,7 +160,7 @@
 
     var globRect = new Rectangle();
 
-    const GetValue = Phaser.Utils.Objects.GetValue;
+    const GetValue = phaser.Utils.Objects.GetValue;
 
     class CursorAtBounds extends CursorKeys {
         constructor(scene, config) {
@@ -326,7 +326,7 @@
         }
     }
 
-    class CursorAtBoundsPlugin extends Phaser.Plugins.BasePlugin {
+    class CursorAtBoundsPlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

@@ -1,7 +1,8 @@
 import { StepFilterName as FilterName } from './const.js';
 import FragSrc from './bloomstep-frag.js';
 
-class BloomStepFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+import { Renderer as PhaserRenderer } from 'phaser';
+class BloomStepFilter extends PhaserRenderer.WebGL.RenderNodes.BaseFilterShader {
     static FilterName = FilterName;
 
     constructor(manager) {

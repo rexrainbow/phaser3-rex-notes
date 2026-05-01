@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import FilesPlugin from '../../plugins/localforage-files-plugin.js';
 
 class Demo extends Phaser.Scene {

@@ -8,7 +8,8 @@ import Methods from './methods/Methods.js';
 import { OnSelectGameObject, OnUnSelectGameObject } from './methods/SelectGameObjectMethods.js';
 
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Shell extends ComponentBase {
     constructor(scene, config) {

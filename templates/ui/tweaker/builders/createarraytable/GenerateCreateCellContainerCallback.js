@@ -5,8 +5,9 @@ import CreateMoveDownButton from '../utils/CreateMoveDownButton.js';
 import CreateBackground from '../utils/CreateBackground.js';
 import CellContainer from '../../gameobjects/arraytable/cellcontainer/CellContainer.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Format = Phaser.Utils.String.Format;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const Format = PhaserUtils.String.Format;
 
 var CreateCellContainer = function (tweaker, cell, config) {
     var scene = tweaker.scene;

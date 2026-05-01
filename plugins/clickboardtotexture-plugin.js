@@ -1,6 +1,7 @@
 import ClickboardToTexture from './clickboardtotexture.js';
 
-class ClickboardToTexturePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class ClickboardToTexturePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

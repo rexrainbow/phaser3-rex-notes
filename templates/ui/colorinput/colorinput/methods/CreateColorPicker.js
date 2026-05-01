@@ -1,6 +1,7 @@
 import ColorPicker from './ColorPicker.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var CreateColorPicker = function (scene) {
     var scene = this.scene;

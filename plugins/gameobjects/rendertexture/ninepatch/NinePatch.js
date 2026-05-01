@@ -3,7 +3,8 @@ import DrawImage from '../utils/DrawImage.js';
 import DrawTileSprite from '../utils/DrawTileSprite.js';
 import EndDraw from '../utils/EndDraw.js';
 
-const RenderTexture = Phaser.GameObjects.RenderTexture;
+import { GameObjects as PhaserGameObjects } from 'phaser';
+const RenderTexture = PhaserGameObjects.RenderTexture;
 
 class NinePatch extends NinePatchBase(RenderTexture, 'rexNinePatch') {
 }

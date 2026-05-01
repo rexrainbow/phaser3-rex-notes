@@ -1,14 +1,15 @@
-const ShaderSourceFS = Phaser.Renderer.WebGL.Shaders.MultiFrag
-const ShaderSourceVS = Phaser.Renderer.WebGL.Shaders.MultiVert;
-const ShaderAdditionMakers = Phaser.Renderer.WebGL.ShaderAdditionMakers;
+import { Renderer as PhaserRenderer } from 'phaser';
+const ShaderSourceFS = PhaserRenderer.WebGL.Shaders.MultiFrag
+const ShaderSourceVS = PhaserRenderer.WebGL.Shaders.MultiVert;
+const ShaderAdditionMakers = PhaserRenderer.WebGL.ShaderAdditionMakers;
 const MakeApplyTint = ShaderAdditionMakers.MakeApplyTint;
 const MakeDefineTexCount = ShaderAdditionMakers.MakeDefineTexCount;
 const MakeGetTexCoordOut = ShaderAdditionMakers.MakeGetTexCoordOut;
 const MakeGetTexRes = ShaderAdditionMakers.MakeGetTexRes;
 const MakeSmoothPixelArt = ShaderAdditionMakers.MakeSmoothPixelArt;
 const MakeGetTexture = ShaderAdditionMakers.MakeGetTexture;
-const Utils = Phaser.Renderer.WebGL.Utils;
-const BatchHandlerQuad = Phaser.Renderer.WebGL.RenderNodes.BatchHandlerQuad;
+const Utils = PhaserRenderer.WebGL.Utils;
+const BatchHandlerQuad = PhaserRenderer.WebGL.RenderNodes.BatchHandlerQuad;
 const getTint = Utils.getTintAppendFloatAlpha;
 
 class BatchHandlerTriangles extends BatchHandlerQuad {

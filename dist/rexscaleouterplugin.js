@@ -1,14 +1,14 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexscaleouterplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexscaleouterplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var WarnCounter = 0;
 
     var CheckScaleMode = function (scene) {
         var scaleManager = scene.sys.scale;
-        if (scaleManager.scaleMode === Phaser.Scale.RESIZE) {
+        if (scaleManager.scaleMode === phaser.Scale.RESIZE) {
             return true;
         }
 
@@ -47,7 +47,7 @@
         return out;
     };
 
-    const Rectangle$2 = Phaser.Geom.Rectangle;
+    const Rectangle$2 = phaser.Geom.Rectangle;
     var GetInnerViewport = function (scaleOuter, out) {
         if (out === undefined) {
             out = new Rectangle$2();
@@ -60,7 +60,7 @@
         return out;
     };
 
-    const Rectangle$1 = Phaser.Geom.Rectangle;
+    const Rectangle$1 = phaser.Geom.Rectangle;
     var GetOuterViewport = function (scaleOuter, out) {
         if (out === undefined) {
             out = new Rectangle$1();
@@ -94,8 +94,8 @@
         return rectangle;
     };
 
-    const Rectangle = Phaser.Geom.Rectangle;
-    const CopyRectangle = Phaser.Geom.Rectangle.CopyFrom;
+    const Rectangle = phaser.Geom.Rectangle;
+    const CopyRectangle = phaser.Geom.Rectangle.CopyFrom;
 
     class ScaleOuter {
         constructor(scene) {
@@ -218,7 +218,7 @@
         }
     }
 
-    class ScaleOuterPlugin extends Phaser.Plugins.ScenePlugin {
+    class ScaleOuterPlugin extends phaser.Plugins.ScenePlugin {
         constructor(scene, pluginManager) {
             super(scene, pluginManager);
             this.scaleOuter = new ScaleOuter(scene);

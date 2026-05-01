@@ -1,6 +1,7 @@
 import BuildFuzzyModule from './fuzzy';
 
-class FuzzyPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class FuzzyPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

@@ -6,7 +6,8 @@ import AlignLines from './AlignLines.js';
 import { IsNewLineChar, IsPageBreakChar } from '../../../bob/Types.js';
 import GetDefaultTextHeight from './GetDefaultTextHeight.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var RunWordWrap = function (config) {
     // Parse parameters

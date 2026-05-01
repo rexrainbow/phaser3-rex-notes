@@ -1,3 +1,4 @@
+import { TintModes as PhaserTintModes } from 'phaser';
 export default {
     setTintMode(mode) {
         this.tintMode = mode;
@@ -11,7 +12,7 @@ export default {
 
     clearTint() {
         this.setTint(0xffffff);
-        this.setTintMode(Phaser.TintModes.MULTIPLY);
+        this.setTintMode(PhaserTintModes.MULTIPLY);
         return this;
     }
 }

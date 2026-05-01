@@ -1,4 +1,5 @@
-const SceneClass = Phaser.Scene;
+import { Scene as PhaserScene } from 'phaser';
+const SceneClass = PhaserScene;
 var IsSceneObject = function (object) {
     return (object instanceof SceneClass);
 }

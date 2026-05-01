@@ -8,7 +8,8 @@ import CreateChildrenSizer from './node/CreateChildrenSizer.js';
 import GetOrientationMode from '../../utils/GetOrientationMode.js';
 import Merge from '../methods/Merge.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Tree extends ExtendNodeClass(Folder) {
     constructor(scene, config) {

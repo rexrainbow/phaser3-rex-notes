@@ -3,11 +3,12 @@ import ProgressBase from '../../../utils/progressbase/ProgressBase.js';
 import GetStyle from '../../../utils/canvas/GetStyle.js';
 import DrawContent from './DrawContent.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const Clamp = Phaser.Math.Clamp;
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const Clamp = PhaserMath.Clamp;
 
-const DefaultStartAngle = Phaser.Math.DegToRad(270);
+const DefaultStartAngle = PhaserMath.DegToRad(270);
 const PI2 = Math.PI * 2;
 
 class CircularProgress extends ProgressBase(Canvas) {

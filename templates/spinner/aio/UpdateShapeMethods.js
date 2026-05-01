@@ -18,7 +18,8 @@ import RadioUpdateShapeMethods from '../radio/UpdateShapeMethods.js';
 import RingsUpdateShapeMethods from '../rings/UpdateShapeMethods.js';
 import SpinnerUpdateShapeMethods from '../spinner/UpdateShapeMethods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 const AnimationModeMap = {
     leftArrow: ArrowUpdateShapesMethods,
@@ -50,7 +51,7 @@ for (var name in AnimationModeMap) {
     AnimationModeList.push(name);
 }
 
-const GetRandomItem = Phaser.Utils.Array.GetRandom;
+const GetRandomItem = PhaserUtils.Array.GetRandom;
 
 export default {
     setAnimationMode(mode, config) {

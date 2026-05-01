@@ -3,7 +3,8 @@ import Creator from './gameobjects/rendertexture/ninepatch/Creator.js';
 import NinePatch from './gameobjects/rendertexture/ninepatch/NinePatch.js';
 import SetValue from './utils/object/SetValue.js';
 
-class NinePatchPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class NinePatchPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

@@ -1,7 +1,8 @@
 import Triangulate from '../../delaunay/Triangulate.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Rectangle = Phaser.Geom.Rectangle;
+import { Geom as PhaserGeom, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const Rectangle = PhaserGeom.Rectangle;
 
 var RectangleToTriangles = function (config) {
     var rectangle = config.rectangle;
@@ -14,7 +15,7 @@ var RectangleToTriangles = function (config) {
 
     var totalPoints = Math.ceil(total / 2) + 3;
 
-    var points = Phaser.Geom.Rectangle.Decompose(rectangle);
+    var points = PhaserGeom.Rectangle.Decompose(rectangle);
 
     var width = rectangle.width, height = rectangle.height;
     InnerRectangle.setTo(

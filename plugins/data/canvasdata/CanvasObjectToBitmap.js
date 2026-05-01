@@ -3,7 +3,8 @@ import CanvasToData from './canvasdata/CanvasToData.js';
 import BooleanBuffer from '../../utils/arraybuffers/BooleanBuffer.js';
 import FillAlpha from './fillcallbacks/alpha.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var CanvasObjectToBitmap = function (canvasObject, config, out) {
     if (config instanceof CanvasData) {

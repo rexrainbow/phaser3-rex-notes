@@ -1,4 +1,5 @@
-const Wrap = Phaser.Math.Wrap;
+import { Math as PhaserMath } from 'phaser';
+const Wrap = PhaserMath.Wrap;
 
 var GetNextameObject = function ({
     startX, startY, backward,

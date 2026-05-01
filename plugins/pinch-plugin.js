@@ -1,6 +1,7 @@
 import Pinch from './pinch.js';
 
-class PinchPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class PinchPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

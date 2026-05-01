@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import StepPlugin from '../../plugins/step-plugin.js';
 import FadePlugin from '../../plugins/fade-plugin.js';
 

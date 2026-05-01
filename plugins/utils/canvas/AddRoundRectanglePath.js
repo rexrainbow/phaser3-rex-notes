@@ -1,6 +1,7 @@
 import RoundRectangle from '../../geom/roundrectangle/RoundRectangle.js';
 
-const DegToRad = Phaser.Math.DegToRad;
+import { Math as PhaserMath } from 'phaser';
+const DegToRad = PhaserMath.DegToRad;
 
 var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig, iteration) {
     var geom = new RoundRectangle(x, y, width, height, radiusConfig),

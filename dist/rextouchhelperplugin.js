@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextouchhelperplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextouchhelperplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var HitTest$1 = function (scene, topOnly, gameObjects, pointers, out) {
         var inputPlugin = scene.input;
@@ -130,10 +130,10 @@
         }
     };
 
-    const Rectangle = Phaser.Geom.Rectangle;
-    const Vector2 = Phaser.Math.Vector2;
-    const RotateAround = Phaser.Math.RotateAround;
-    const P3Container = Phaser.GameObjects.Container;
+    const Rectangle = phaser.Geom.Rectangle;
+    const Vector2 = phaser.Math.Vector2;
+    const RotateAround = phaser.Math.RotateAround;
+    const P3Container = phaser.GameObjects.Container;
 
     var GetBounds = function (gameObject, output) {
         if (output === undefined) {
@@ -407,7 +407,7 @@
         return PointerTest(gameObject, pointer, IsPointInBounds, preTest, postTest)
     };
 
-    const SceneClass = Phaser.Scene;
+    const SceneClass = phaser.Scene;
     var IsSceneObject = function (object) {
         return (object instanceof SceneClass);
     };
@@ -474,7 +474,7 @@
         }
     }
 
-    class TouchHelperPlugin extends Phaser.Plugins.BasePlugin {
+    class TouchHelperPlugin extends phaser.Plugins.BasePlugin {
         constructor(pluginManager) {
             super(pluginManager);
         }

@@ -1,8 +1,9 @@
+import { Utils as PhaserUtils } from 'phaser';
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import GetViewport from '../../utils/system/GetViewport.js';
 import DefaultResizeCallback from './DefaultResizeCallback.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Anchor extends ComponentBase {
     constructor(gameObject, config) {

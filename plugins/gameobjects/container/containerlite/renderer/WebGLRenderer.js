@@ -1,4 +1,5 @@
-const SKIP_CHECK_BLEND_MODE = Phaser.BlendModes.SKIP_CHECK;
+import { BlendModes as PhaserBlendModes } from 'phaser';
+const SKIP_CHECK_BLEND_MODE = PhaserBlendModes.SKIP_CHECK;
 
 var WebGLRenderer = function (renderer, container, drawingContext, parentMatrix, renderStep, displayList, displayListIndex) {
     var camera = drawingContext.camera;

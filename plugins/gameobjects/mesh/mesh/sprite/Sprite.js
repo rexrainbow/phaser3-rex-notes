@@ -1,7 +1,8 @@
 import Image from '../image/Image.js';
 import Methods from './methods/Methods.js';
 
-const AnimationState = Phaser.Animations.AnimationState;
+import { Animations as PhaserAnimations } from 'phaser';
+const AnimationState = PhaserAnimations.AnimationState;
 
 class Sprite extends Image {
     constructor(scene, x, y, texture, frame) {

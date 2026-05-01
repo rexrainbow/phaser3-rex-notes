@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import CanvasPlugin from '../../plugins/canvas-plugin.js'
 import TouchStatePlugin from '../../plugins/touchstate-plugin.js';
 

@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import Papa from 'papaparse/papaparse.js';
 import loki from 'lokijs/src/lokijs.js';
 

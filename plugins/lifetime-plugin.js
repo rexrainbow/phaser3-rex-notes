@@ -1,6 +1,7 @@
 import LifeTime from './lifetime.js';
 
-class LifeTimePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class LifeTimePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

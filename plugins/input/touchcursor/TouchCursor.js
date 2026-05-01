@@ -2,9 +2,10 @@ import VectorToCursorKeys from '../../utils/input/VectorToCursorKeys.js';
 import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 import GetPointerWorldXY from '../../utils/input/GetPointerWorldXY.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const CircleClass = Phaser.Geom.Circle;
-const CircleContains = Phaser.Geom.Circle.Contains;
+import { Geom as PhaserGeom, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const CircleClass = PhaserGeom.Circle;
+const CircleContains = PhaserGeom.Circle.Contains;
 
 class TouchCursor extends VectorToCursorKeys {
     constructor(gameObject, config) {

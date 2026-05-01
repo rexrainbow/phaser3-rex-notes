@@ -3,11 +3,12 @@ import IsGameObject from '../../../../plugins/utils/system/IsGameObject.js';
 import CreateLabel from '../../utils/build/CreateLabel.js';
 import CreateInputText from '../../utils/build/CreateInputText.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Color = Phaser.Display.Color;
-const ColorToRGBA = Phaser.Display.Color.ColorToRGBA;
-const HSVToRGB = Phaser.Display.Color.HSVToRGB;
-const Clamp = Phaser.Math.Clamp;
+import { Display as PhaserDisplay, Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const Color = PhaserDisplay.Color;
+const ColorToRGBA = PhaserDisplay.Color.ColorToRGBA;
+const HSVToRGB = PhaserDisplay.Color.HSVToRGB;
+const Clamp = PhaserMath.Clamp;
 
 class ColorComponents extends Sizer {
     constructor(scene, config) {

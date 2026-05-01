@@ -2,8 +2,9 @@ import Vertex from './Vertex.js';
 import GetInCenter from './GetInCenter.js';
 import Contains from './Contains.js';
 
-const RadToDeg = Phaser.Math.RadToDeg;
-const DegToRad = Phaser.Math.DegToRad;
+import { Math as PhaserMath } from 'phaser';
+const RadToDeg = PhaserMath.RadToDeg;
+const DegToRad = PhaserMath.DegToRad;
 
 class Face {
     constructor(vertex0, vertex1, vertex2) {

@@ -2,10 +2,11 @@ import BaseShapes from '../shapes/BaseShapes.js';
 import ShapesUpdateMethods from './methods/ShapesUpdateMethods.js';
 import EaseDirectionMethods from './methods/EaseDirectionMethods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const DegToRad = Phaser.Math.DegToRad;
-const RadToDeg = Phaser.Math.RadToDeg
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const DegToRad = PhaserMath.DegToRad;
+const RadToDeg = PhaserMath.RadToDeg
 
 class Triangle extends BaseShapes {
     constructor(scene, x, y, width, height, fillColor, fillAlpha) {

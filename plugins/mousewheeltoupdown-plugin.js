@@ -1,6 +1,7 @@
 import MouseWheelToUpDown from './mousewheeltoupdown.js';
 
-class MouseWheelToUpDownPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class MouseWheelToUpDownPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

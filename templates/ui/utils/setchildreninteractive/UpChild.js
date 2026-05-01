@@ -1,6 +1,7 @@
 import EmitChildEvent from './EmitChildEvent.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var UpChild = function (config) {
     var upConfig = GetValue(config, 'up', undefined);

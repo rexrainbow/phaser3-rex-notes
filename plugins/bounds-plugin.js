@@ -1,6 +1,7 @@
 import Bounds from './bounds.js';
 
-class BoundsPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class BoundsPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

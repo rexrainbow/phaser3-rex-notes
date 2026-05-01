@@ -1,6 +1,7 @@
 import AddViewportCoordinateProperties from '../../../../plugins/behaviors/viewportcoordinate/AddViewportCoordinateProperties.js';
 
-const AnimSprite = Phaser.GameObjects.Sprite;
+import { GameObjects as PhaserGameObjects } from 'phaser';
+const AnimSprite = PhaserGameObjects.Sprite;
 
 var GenerateDefaultCreateGameObjectCallback = function (
     style,

@@ -1,3 +1,4 @@
+import { Renderer as PhaserRenderer } from 'phaser';
 /*
 shapeData: {
     strokeColor,
@@ -10,7 +11,7 @@ shapeData: {
     strokePathMask
 }
 */
-var Utils = Phaser.Renderer.WebGL.Utils;
+var Utils = PhaserRenderer.WebGL.Utils;
 
 var StrokePathWebGL = function (drawingContext, submitter, calcMatrix, gameObject, shapeData, alpha, dx, dy) {
     var strokeTintColor = Utils.getTintAppendFloatAlpha(shapeData.strokeColor, shapeData.strokeAlpha * alpha);

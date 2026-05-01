@@ -1,6 +1,7 @@
+import { Utils as PhaserUtils } from 'phaser';
 import Fade from './Fade.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 
 var FadeIn = function (gameObject, duration, alpha, fade) {
     var startAlpha, endAlpha;

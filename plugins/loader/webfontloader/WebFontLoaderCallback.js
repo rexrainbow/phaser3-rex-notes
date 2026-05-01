@@ -1,6 +1,7 @@
 import WebFont from './WebFont.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 
 const loaderCallback = function (key, config) {
     if (IsPlainObject(key)) {

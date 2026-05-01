@@ -1,5 +1,6 @@
-const GetFirst = Phaser.Utils.Array.GetFirst;
-const Remove = Phaser.Utils.Array.Remove;
+import { Utils as PhaserUtils } from 'phaser';
+const GetFirst = PhaserUtils.Array.GetFirst;
+const Remove = PhaserUtils.Array.Remove;
 
 var RemoveInputHandler = function (name) {
     var handler = GetFirst(this.inputHandlers, 'name', name);

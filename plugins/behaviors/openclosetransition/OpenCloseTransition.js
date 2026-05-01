@@ -1,8 +1,9 @@
+import { Utils as PhaserUtils } from 'phaser';
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import State from './State.js';
 import Methods from './methods/Methods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class OpenCloseTransition extends ComponentBase {
     constructor(gameObject, config) {

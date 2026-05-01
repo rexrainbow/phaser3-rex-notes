@@ -1,6 +1,7 @@
 import SetChildrenInteractive from './SetChildrenInteractive.js';
 
-const GameObject = Phaser.GameObjects.GameObject;
+import { GameObjects as PhaserGameObjects } from 'phaser';
+const GameObject = PhaserGameObjects.GameObject;
 
 var SetInteractive = function (hitArea, hitAreaCallback, dropZone) {
     var isInteractived = !!this.input;

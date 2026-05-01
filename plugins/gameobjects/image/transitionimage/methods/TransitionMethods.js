@@ -1,9 +1,10 @@
 import EaseValueTask from '../../../../utils/ease/EaseValueTask.js';
 import OnTextureChange from './OnTextureChange.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
-const GetRandomItem = Phaser.Utils.Array.GetRandom;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
+const GetRandomItem = PhaserUtils.Array.GetRandom;
 
 var DirMode = {
     out: 0,

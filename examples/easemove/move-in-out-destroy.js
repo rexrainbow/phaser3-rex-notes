@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import EaseMovePlugin from '../../plugins/easemove-plugin.js';
 import EventPromisePlugin from '../../plugins/eventpromise-plugin.js';
 

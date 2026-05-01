@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import CutJigsawImagePlugin from '../../plugins/cutjigsawimage-plugin.js';
 import DrawBounds from '../../plugins/utils/bounds/DrawBounds.js';
 

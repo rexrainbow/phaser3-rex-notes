@@ -5,7 +5,8 @@ import ItemTableFactory from './parse/itemtable/Factory.js';
 import LeaderBoardFactory from './parse/leaderboard/Factory.js';
 import QuickLogin from './parse/quicklogin/QuickLogin.js';
 
-class ParsePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class ParsePlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
 

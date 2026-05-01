@@ -2,7 +2,8 @@ import { ANIMSPRITE } from '../../const/GameObjects.js';
 import { GOLayer } from '../../const/Layers.js';
 import GenerateDefaultCreateGameObjectCallback from './GenerateDefaultCreateGameObjectCallback.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var RegisterAnimSpriteType = function (commandExecutor, config) {
     var { viewport } = config;

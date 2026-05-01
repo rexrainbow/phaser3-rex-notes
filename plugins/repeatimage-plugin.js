@@ -3,7 +3,8 @@ import Creator from './gameobjects/canvas/repeatimage/Creator.js';
 import RepeatImage from './gameobjects/canvas/repeatimage/RepeatImage.js';
 import SetValue from './utils/object/SetValue.js';
 
-class RepeatImagePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class RepeatImagePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

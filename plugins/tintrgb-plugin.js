@@ -1,6 +1,7 @@
 import AddTintRGBProperties from './tintrgb.js';
 
-class TintRGBPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class TintRGBPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

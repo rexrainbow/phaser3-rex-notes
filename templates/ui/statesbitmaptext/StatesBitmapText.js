@@ -2,8 +2,9 @@ import AddEffectProperties from '../../../plugins/effectproperties.js';
 import Style from './Style.js';
 import HelperMethods from '../utils/stylemanager/HelperMethods.js';
 
-const PhaserBitmapText = Phaser.GameObjects.BitmapText;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { GameObjects as PhaserGameObjects, Utils as PhaserUtils } from 'phaser';
+const PhaserBitmapText = PhaserGameObjects.BitmapText;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class StatesBitmapText extends PhaserBitmapText {
     constructor(scene, config) {

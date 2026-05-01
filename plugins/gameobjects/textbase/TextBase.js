@@ -2,9 +2,10 @@ import Render from './render/Render.js';
 import MeasureTextMargins from './textstyle/MeasureTextMargins.js';
 
 import CheckP3Version from '../../utils/system/CheckP3Version.js';
+import { Class as PhaserClass, GameObjects as PhaserGameObjects } from 'phaser';
 CheckP3Version();
 
-const GameObject = Phaser.GameObjects.GameObject;
+const GameObject = PhaserGameObjects.GameObject;
 
 class TextBase extends GameObject {
 
@@ -193,8 +194,8 @@ class TextBase extends GameObject {
 
 }
 
-const Components = Phaser.GameObjects.Components;
-Phaser.Class.mixin(TextBase,
+const Components = PhaserGameObjects.Components;
+PhaserClass.mixin(TextBase,
     [
         Components.Alpha,
         Components.BlendMode,

@@ -1,7 +1,8 @@
 import Click from '../click/Click.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 
 class FullscreenButton extends Click {
     constructor(gameObject, config) {

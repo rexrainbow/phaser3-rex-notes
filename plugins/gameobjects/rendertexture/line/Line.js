@@ -1,7 +1,8 @@
 import UpdateTexture from './UpdateTexture.js';
 
-const RenderTexture = Phaser.GameObjects.RenderTexture;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { GameObjects as PhaserGameObjects, Utils as PhaserUtils } from 'phaser';
+const RenderTexture = PhaserGameObjects.RenderTexture;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Line extends RenderTexture {
     constructor(scene, config) {

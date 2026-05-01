@@ -5,7 +5,8 @@ import FillPathCanvas from '../../../utils/render/FillPathCanvas.js';
 import StrokePathCanvas from '../../../utils/render/StrokePathCanvas.js';
 import StrokePathMethods from '../../../utils/strokepath/StrokePathMethods.js';
 
-const Earcut = Phaser.Geom.Polygon.Earcut;
+import { Geom as PhaserGeom } from 'phaser';
+const Earcut = PhaserGeom.Polygon.Earcut;
 
 class PathBase extends BaseGeom {
     constructor() {

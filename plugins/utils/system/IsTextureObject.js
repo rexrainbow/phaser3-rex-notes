@@ -1,4 +1,5 @@
-const TextureClass = Phaser.Textures.Texture;
+import { Textures as PhaserTextures } from 'phaser';
+const TextureClass = PhaserTextures.Texture;
 var IsTextureObject = function (object) {
     return (object instanceof TextureClass);
 }

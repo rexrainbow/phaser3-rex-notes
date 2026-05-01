@@ -1,7 +1,8 @@
 import OnDragThumb from './OnDragThumb.js';
 import OnTouchTrack from './OnTouchTrack.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var RegisterInputEvents = function (config) {
     this.inputActive = false;

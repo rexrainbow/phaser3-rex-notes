@@ -6,8 +6,9 @@ import GetTypingString from './utils/GetTypingString.js';
 import GetPlainText from '../../utils/text/GetPlainText.js';
 import GetString from '../../utils/text/GetString.js';
 
-const GetFastValue = Phaser.Utils.Objects.GetFastValue;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetFastValue = PhaserUtils.Objects.GetFastValue;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class TextTyping extends ComponentBase {
     constructor(gameObject, config) {

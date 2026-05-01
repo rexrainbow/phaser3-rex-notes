@@ -3,7 +3,8 @@ import Extend from './storage/localstorage/data/Extend.js';
 import { SetItem, GetItem, RemoveItem } from './storage/localstorage/utils/StorageMethods.js';
 
 
-class DataManagerPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class DataManagerPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

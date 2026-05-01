@@ -1,13 +1,14 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import ProgressValueMethods from '../../utils/progressvalue/ProgressValueMethods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const BetweenPoints = Phaser.Math.Angle.BetweenPoints;
-const DistanceBetween = Phaser.Math.Distance.Between;
-const RotateAroundDistance = Phaser.Math.RotateAroundDistance;
-const Clamp = Phaser.Math.Clamp;
-const Linear = Phaser.Math.Linear;
-const Percent = Phaser.Math.Percent;
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const BetweenPoints = PhaserMath.Angle.BetweenPoints;
+const DistanceBetween = PhaserMath.Distance.Between;
+const RotateAroundDistance = PhaserMath.RotateAroundDistance;
+const Clamp = PhaserMath.Clamp;
+const Linear = PhaserMath.Linear;
+const Percent = PhaserMath.Percent;
 
 class Slider extends ComponentBase {
     constructor(gameObject, config) {

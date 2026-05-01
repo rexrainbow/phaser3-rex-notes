@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import CharacterCachePlugin from '../../plugins/charactercache-plugin.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 

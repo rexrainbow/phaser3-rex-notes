@@ -1,7 +1,8 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 
+import { Utils as PhaserUtils } from 'phaser';
 var i18next;
-const GetValue = Phaser.Utils.Objects.GetValue;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class TextTranslation extends ComponentBase {
     static setI18Next(obj) {

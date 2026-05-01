@@ -1,8 +1,9 @@
 import OnePointerTracer from "../onepointertracer/OnePointerTracer.js";
 import FSM from '../../../fsm.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const DistanceBetween = Phaser.Math.Distance.Between;
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const DistanceBetween = PhaserMath.Distance.Between;
 
 class Tap extends OnePointerTracer {
     constructor(gameObject, config) {

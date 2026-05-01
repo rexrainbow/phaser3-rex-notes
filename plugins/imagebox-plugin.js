@@ -3,7 +3,8 @@ import Creator from './gameobjects/image/imagebox/Creator.js';
 import ImageBox from './gameobjects/image/imagebox/ImageBox.js';
 import SetValue from './utils/object/SetValue.js';
 
-class ImageBoxPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class ImageBoxPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

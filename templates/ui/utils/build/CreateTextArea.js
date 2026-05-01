@@ -3,7 +3,8 @@ import DefaultCreateBackground from './CreateBackground.js';
 import DefaultCreateText from './CreateText.js';
 import TextArea from '../../textarea/TextArea.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var CreateTextArea = function (scene, config, creators) {
     config = (config) ? DeepClone(config) : {};

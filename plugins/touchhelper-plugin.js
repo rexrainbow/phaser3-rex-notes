@@ -3,7 +3,8 @@ import IsPointerInHitArea from './utils/input/IsPointerInHitArea.js';
 import IsPointerInBounds from './utils/input/IsPointerInBounds.js';
 import TouchGroup from './input/touchgroup/TouchGroup.js';
 
-class TouchHelperPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class TouchHelperPlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
     }

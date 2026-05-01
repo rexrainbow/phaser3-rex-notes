@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import CarouselPlugin from '../../plugins/carousel-plugin.js';
 
 const COLOR_MAIN = 0x4e342e;

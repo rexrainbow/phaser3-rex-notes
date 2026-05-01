@@ -1,10 +1,10 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexbuildarcadeobjectplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexbuildarcadeobjectplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
-    const Components = Phaser.Physics.Arcade.Components;
+    const Components = phaser.Physics.Arcade.Components;
 
     var ArcadeMethods = {};
     Object.assign(
@@ -49,7 +49,7 @@
         return gameObject;
     };
 
-    class BuildArcadeObjectPlugin extends Phaser.Plugins.BasePlugin {
+    class BuildArcadeObjectPlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);
@@ -70,7 +70,7 @@
         }
 
         injectMethodsToRootClass() {
-            this.injectMethods(Phaser.GameObjects.GameObject.prototype);
+            this.injectMethods(phaser.GameObjects.GameObject.prototype);
             return this;
         }
     }

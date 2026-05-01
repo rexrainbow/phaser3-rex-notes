@@ -2,7 +2,8 @@ import MaskChildren from './MaskChildren.js';
 import AddChildMask from './AddChildMask.js';
 import { SetMask } from '../../../../utils/mask/MaskMethods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 const MASKUPDATEMODE = {
     update: 0,

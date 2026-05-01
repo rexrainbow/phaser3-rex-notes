@@ -1,5 +1,6 @@
-const DistanceBetween = Phaser.Math.Distance.Between;
-const Linear = Phaser.Math.Linear;
+import { Math as PhaserMath } from 'phaser';
+const DistanceBetween = PhaserMath.Distance.Between;
+const Linear = PhaserMath.Linear;
 
 var GetPoint = function (t, points, lengths, out) {
     // points: [x0, y0, x1, y1, ....]

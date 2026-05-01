@@ -1,6 +1,7 @@
 import CutJigsawImage from './cutjigsawimage';
 
-class CutJigsawImagePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class CutJigsawImagePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

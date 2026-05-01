@@ -5,7 +5,8 @@ import FillPathCanvas from '../../../utils/render/FillPathCanvas.js';
 import StrokePathCanvas from '../../../utils/render/StrokePathCanvas.js';
 import StrokePathMethods from '../../../utils/strokepath/StrokePathMethods.js';
 
-const Earcut = Phaser.Geom.Polygon.Earcut;
+import { Geom as PhaserGeom } from 'phaser';
+const Earcut = PhaserGeom.Polygon.Earcut;
 
 class Triangle extends BaseGeom {
     constructor(x0, y0, x1, y1, x2, y2) {

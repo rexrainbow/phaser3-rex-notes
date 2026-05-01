@@ -1,6 +1,7 @@
 import AddPolarCoordinateProperties from './polarcoordinate.js';
 
-class PolarCoordinatePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class PolarCoordinatePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

@@ -1,4 +1,5 @@
-const Linear = Phaser.Math.Linear;
+import { Math as PhaserMath } from 'phaser';
+const Linear = PhaserMath.Linear;
 
 var InterpolateColor32 = function (color0, color1, t) {
     var r0 = (color0 >> 16) & 0xff;

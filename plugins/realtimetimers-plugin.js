@@ -1,6 +1,7 @@
 import RealTimeTimers from './realtimetimers.js';
 
-class RealTimeTimersPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class RealTimeTimersPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

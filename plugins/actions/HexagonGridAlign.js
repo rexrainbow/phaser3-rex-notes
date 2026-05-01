@@ -1,8 +1,10 @@
+import { Utils as PhaserUtils } from 'phaser';
 import HexagonGrid from '../utils/grid/hexagon/Hexagon.js';
 import GlobZone from '../utils/actions/GlobZone.js';
 import AlignIn from '../utils/align/align/in/QuickSet.js';
 
-const GetFastValue = Phaser.Utils.Objects.GetFastValue;
+import { Display as PhaserDisplay } from 'phaser';
+const GetFastValue = PhaserUtils.Objects.GetFastValue;
 
 var globHexagonGrid = new HexagonGrid();
 
@@ -31,7 +33,7 @@ var GridAlign = function (items, options) {
     var cellHeight = GetFastValue(options, 'cellHeight', cellWidth);
     var staggeraxis = GetFastValue(options, 'staggeraxis', 1);
     var staggerindex = GetFastValue(options, 'staggerindex', 1);
-    var position = GetFastValue(options, 'position', Phaser.Display.Align.CENTER);
+    var position = GetFastValue(options, 'position', PhaserDisplay.Align.CENTER);
     var x = GetFastValue(options, 'x', 0);
     var y = GetFastValue(options, 'y', 0);
 

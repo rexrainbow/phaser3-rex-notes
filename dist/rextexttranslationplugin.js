@@ -1,13 +1,13 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextexttranslationplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextexttranslationplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var EventEmitterMethods = {
         setEventEmitter(eventEmitter, EventEmitterClass) {
             if (EventEmitterClass === undefined) {
-                EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+                EventEmitterClass = phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
             }
             this._privateEE = (eventEmitter === true) || (eventEmitter === undefined);
             this._eventEmitter = (this._privateEE) ? (new EventEmitterClass()) : eventEmitter;
@@ -96,10 +96,10 @@
         },
     };
 
-    const FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
-    const UUID = Phaser.Utils.String.UUID;
+    const FILE_POPULATED = phaser.Loader.FILE_POPULATED;
+    const UUID = phaser.Utils.String.UUID;
 
-    class AwaitFile extends Phaser.Loader.File {
+    class AwaitFile extends phaser.Loader.File {
         constructor(loader, fileConfig) {
             if (!fileConfig.hasOwnProperty('type')) {
                 fileConfig.type = 'await';
@@ -175,7 +175,7 @@
         return obj && (typeof(obj) === 'function');
     };
 
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+    const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
 
     const LoaderCallback = function (key, config) {
         if (IsFunction(key)) {
@@ -205,7 +205,7 @@
         return this;
     };
 
-    Phaser.Loader.FileTypesManager.register('rexAwait', LoaderCallback);
+    phaser.Loader.FileTypesManager.register('rexAwait', LoaderCallback);
 
     function _typeof$1(o) {
       "@babel/helpers - typeof";
@@ -4033,7 +4033,7 @@
     var cjsExports = cjs.exports;
     var Backend = /*@__PURE__*/getDefaultExportFromCjs(cjsExports);
 
-    const SceneClass = Phaser.Scene;
+    const SceneClass = phaser.Scene;
     var IsSceneObject = function (object) {
         return (object instanceof SceneClass);
     };
@@ -4052,7 +4052,7 @@
         }
     };
 
-    const GameClass = Phaser.Game;
+    const GameClass = phaser.Game;
     var IsGame = function (object) {
         return (object instanceof GameClass);
     };
@@ -4071,7 +4071,7 @@
         }
     };
 
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
 
     class ComponentBase {
         constructor(parent, config) {
@@ -4158,7 +4158,7 @@
     );
 
     var i18next;
-    const GetValue = Phaser.Utils.Objects.GetValue;
+    const GetValue = phaser.Utils.Objects.GetValue;
 
     class TextTranslation extends ComponentBase {
         static setI18Next(obj) {
@@ -4240,7 +4240,7 @@
         gameObject.setText(text);
     };
 
-    class TextTranslationPlugin extends Phaser.Plugins.BasePlugin {
+    class TextTranslationPlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

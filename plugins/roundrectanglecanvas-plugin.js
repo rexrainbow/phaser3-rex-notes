@@ -3,7 +3,8 @@ import Creator from './gameobjects/canvas/roundrectangle/Creator.js';
 import RoundRectangle from './gameobjects/canvas/roundrectangle/RoundRectangle.js';
 import SetValue from './utils/object/SetValue.js';
 
-class CircleMaskImagePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class CircleMaskImagePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

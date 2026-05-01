@@ -2,11 +2,12 @@ import TwoPointersTracer from '../twopointerstracer/TwoPointersTracer.js';
 import FSM from '../../../fsm.js';
 import SpinObject from './SpinObject.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const WrapDegrees = Phaser.Math.Angle.WrapDegrees; // Wrap degrees: -180 to 180 
-const ShortestBetween = Phaser.Math.Angle.ShortestBetween;
-const RadToDeg = Phaser.Math.RadToDeg;
-const DegToRad = Phaser.Math.DegToRad;
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const WrapDegrees = PhaserMath.Angle.WrapDegrees; // Wrap degrees: -180 to 180 
+const ShortestBetween = PhaserMath.Angle.ShortestBetween;
+const RadToDeg = PhaserMath.RadToDeg;
+const DegToRad = PhaserMath.DegToRad;
 
 class Rotate extends TwoPointersTracer {
     constructor(gameObject, config) {

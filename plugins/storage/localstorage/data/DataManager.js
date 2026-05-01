@@ -1,8 +1,9 @@
 import Extend from './Extend.js';
 
-const Base = Phaser.Data.DataManager;
-const EventEmitterClass = Phaser.Events.EventEmitter;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+import { Data as PhaserData, Events as PhaserEvents, Utils as PhaserUtils } from 'phaser';
+const Base = PhaserData.DataManager;
+const EventEmitterClass = PhaserEvents.EventEmitter;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 
 class DataManager extends Base {
     constructor(parent, eventEmitter, config) {

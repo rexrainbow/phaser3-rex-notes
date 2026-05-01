@@ -9,15 +9,16 @@ import ImageManager from '../../../utils/texture/imagemanager/ImageManager.js';
 import CopyCanvasToTexture from '../../../utils/texture/CopyCanvasToTexture.js';
 import AppendText from '../../../utils/text/AppendText.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const AddToDOM = Phaser.DOM.AddToDOM;
-const CanvasPool = Phaser.Display.Canvas.CanvasPool;
-const GameObject = Phaser.GameObjects.GameObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
-const RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
+import { DOM as PhaserDOM, Display as PhaserDisplay, GameObjects as PhaserGameObjects, Renderer as PhaserRenderer, Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const AddToDOM = PhaserDOM.AddToDOM;
+const CanvasPool = PhaserDisplay.Canvas.CanvasPool;
+const GameObject = PhaserGameObjects.GameObject;
+const GetValue = PhaserUtils.Objects.GetValue;
+const RemoveFromDOM = PhaserDOM.RemoveFromDOM;
 const SPLITREGEXP = CONST.SPLITREGEXP;
-const UUID = Phaser.Utils.String.UUID;
-const DefaultImageNodes = Phaser.Renderer.WebGL.RenderNodes.Defaults.DefaultImageNodes;
+const UUID = PhaserUtils.String.UUID;
+const DefaultImageNodes = PhaserRenderer.WebGL.RenderNodes.Defaults.DefaultImageNodes;
 
 // Reuse objects can increase performance
 var SharedPensPools = null;

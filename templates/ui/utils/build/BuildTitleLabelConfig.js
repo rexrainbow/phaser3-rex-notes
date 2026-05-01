@@ -2,7 +2,8 @@ import BuildLabelConfig from './BuildLabelConfig.js';
 import DefaultCreateBackground from './CreateBackground.js';
 import DefaultCreateText from './CreateText.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var BuildTitleLabelConfig = function (scene, config, creators) {
     var createInnerBackground = GetValue(creators, 'innerBackground', DefaultCreateBackground);

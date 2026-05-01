@@ -1,7 +1,8 @@
 import FullWindowRectangle from '../../../fullwindowrectangle.js';
 import TouchEventStop from '../../../toucheventstop.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Cover extends FullWindowRectangle {
     constructor(scene, config) {

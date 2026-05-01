@@ -4,7 +4,8 @@ import MessageMethods from './methods/MessageMethods.js';
 import TransitionMode from './methods/TransitionMode.js';
 import Player from '../../../plugins/logic/runcommands/tcrp/Player.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Toast extends Label {
     constructor(scene, config) {

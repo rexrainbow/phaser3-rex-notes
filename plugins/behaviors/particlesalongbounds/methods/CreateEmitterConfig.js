@@ -1,6 +1,7 @@
+import { Utils as PhaserUtils } from 'phaser';
 import BoundsToPoints from './BoundsToPoints.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+const GetValue = PhaserUtils.Objects.GetValue;
 const TickTime = (1000 / 60);
 
 var CreateEmitterConfig = function (gameObject, config) {

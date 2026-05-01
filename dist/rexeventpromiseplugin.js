@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexeventpromiseplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexeventpromiseplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var WaitEvent = function (eventEmitter, eventName) {
         return new Promise(function (resolve, reject) {
@@ -27,7 +27,7 @@
         });
     };
 
-    class EventPromisePlugin extends Phaser.Plugins.BasePlugin {
+    class EventPromisePlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

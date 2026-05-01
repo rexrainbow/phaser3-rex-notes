@@ -1,6 +1,7 @@
 import IsArcCorner from '../../utils/IsArcCorner.js';
 
-var RadToDeg = Phaser.Math.RadToDeg;
+import { Math as PhaserMath } from 'phaser';
+var RadToDeg = PhaserMath.RadToDeg;
 
 var BuildRoundRectangleBarDirection1 = function (
     lines,

@@ -3,7 +3,8 @@ import { ImageTypeName } from '../Types.js';
 import WebglRender from './WebglRender.js';
 import CanvasRender from './CanvasRender.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+import { TintModes as PhaserTintModes, Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 
 class ImageData extends RenderBase {
     constructor(parent, frame) {
@@ -86,9 +87,9 @@ class ImageData extends RenderBase {
 
     setTintFill(mode) {
         if (mode === undefined || mode === true) {
-            mode = Phaser.TintModes.FILL;
+            mode = PhaserTintModes.FILL;
         } else if (mode === false) {
-            mode = Phaser.TintModes.MULTIPLY;
+            mode = PhaserTintModes.MULTIPLY;
         }
         this.tintFill = mode;
         return this;

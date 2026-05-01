@@ -13,7 +13,8 @@ import IdAliasFactory from './firebase/firestore/idalias/Factory.js';
 import LeaderBoardFactory from './firebase/firestore/leaderboard/Factory.js';
 import MessagesFactory from './firebase/firestore/messages/Factory.js';
 
-class FirebasePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class FirebasePlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
 

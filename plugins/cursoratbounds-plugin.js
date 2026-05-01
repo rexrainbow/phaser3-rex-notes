@@ -1,6 +1,7 @@
 import CursorAtBounds from './cursoratbounds.js';
 
-class CursorAtBoundsPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class CursorAtBoundsPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

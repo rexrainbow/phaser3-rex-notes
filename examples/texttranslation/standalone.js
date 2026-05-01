@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import i18next from 'i18next';
 import TextTranslationBehavior from '../../plugins/texttranslation.js';
 import Awaitloader from '../../plugins/awaitloader.js';

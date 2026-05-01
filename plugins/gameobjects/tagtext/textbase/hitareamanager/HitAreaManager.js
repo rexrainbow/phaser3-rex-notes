@@ -1,6 +1,7 @@
 import Pool from '../../../../pool.js';
 
-const Rectangle = Phaser.Geom.Rectangle;
+import { Geom as PhaserGeom } from 'phaser';
+const Rectangle = PhaserGeom.Rectangle;
 
 var RectanglePool = new Pool();
 class HitAreaManager {

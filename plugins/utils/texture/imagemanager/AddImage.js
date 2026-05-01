@@ -1,6 +1,7 @@
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
-const TintModes = Phaser.TintModes;
+import { TintModes as PhaserTintModes, Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
+const TintModes = PhaserTintModes;
 
 var AddImage = function (key, config) {
     if (IsPlainObject(key)) {

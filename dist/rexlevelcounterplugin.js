@@ -1,8 +1,8 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-	typeof define === 'function' && define.amd ? define(factory) :
-	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexlevelcounterplugin = factory());
-})(this, (function () { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+	typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexlevelcounterplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
 	function getDefaultExportFromCjs (x) {
 		return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
@@ -650,7 +650,7 @@
 	    }
 	}
 
-	class LevelCounterPlugin extends Phaser.Plugins.BasePlugin {
+	class LevelCounterPlugin extends phaser.Plugins.BasePlugin {
 	    constructor(pluginManager) {
 	        super(pluginManager);
 	    }

@@ -1,6 +1,7 @@
 import CanvasPositionToBobPosition from '../../methods/utils/transform/CanvasPositionToBobPosition.js';
 
-const Rectangle = Phaser.Geom.Rectangle;
+import { Geom as PhaserGeom } from 'phaser';
+const Rectangle = PhaserGeom.Rectangle;
 
 var Contains = function (canvasX, canvasY) {
     if ((this.width === 0) || (this.height === 0)) {

@@ -1,4 +1,5 @@
-const DynamicTexture = Phaser.Textures.DynamicTexture;
+import { Textures as PhaserTextures } from 'phaser';
+const DynamicTexture = PhaserTextures.DynamicTexture;
 
 var CreateDynamicTexture = function (scene, width, height) {
     if (width === undefined) {

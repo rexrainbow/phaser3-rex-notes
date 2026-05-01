@@ -4,7 +4,8 @@ import CreateLabel from '../../utils/build/CreateLabel.js';
 import CreateButtonsSizer from '../gameobjects/utils/CreateButtons.js';
 import InputRow from '../gameobjects/inputrow/InputRow.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var CreateButtons = function (tweaker, config, style) {
     if (!config) { config = {}; }

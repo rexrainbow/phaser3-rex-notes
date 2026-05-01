@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import TransitionImagePlugin from '../../plugins/transitionimage-plugin';
 import GridCutImagePlugin from '../../plugins/gridcutimage-plugin';
 

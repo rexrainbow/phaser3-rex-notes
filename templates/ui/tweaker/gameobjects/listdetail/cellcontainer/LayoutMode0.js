@@ -1,6 +1,7 @@
 import CreatExpandContainer from '../../utils/CreatExpandContainer.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var LayoutMode0 = function (config) {
     var scene = this.scene;

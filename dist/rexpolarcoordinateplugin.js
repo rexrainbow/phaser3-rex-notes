@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexpolarcoordinateplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexpolarcoordinateplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var PolarToCartesian = function (ox, oy, rotation, radius, out) {
         if (out === undefined) {
@@ -19,8 +19,8 @@
 
     var globOut = {};
 
-    var DegToRad = Phaser.Math.DegToRad;
-    var RadToDeg = Phaser.Math.RadToDeg;
+    var DegToRad = phaser.Math.DegToRad;
+    var RadToDeg = phaser.Math.RadToDeg;
 
     var AddPolarCoordinateProperties = function (gameObject, ox, oy, rotation, radius) {
         // Don't attach properties again
@@ -100,7 +100,7 @@
         PolarToCartesian(ox, oy, rotation, radius, gameObject);
     };
 
-    class PolarCoordinatePlugin extends Phaser.Plugins.BasePlugin {
+    class PolarCoordinatePlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

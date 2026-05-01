@@ -8,7 +8,8 @@ import ShatterRenderTexture from './gameobjects/mesh/shatter/rendertexture/Rende
 
 import SetValue from './utils/object/SetValue.js';
 
-class ShatterImagePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class ShatterImagePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

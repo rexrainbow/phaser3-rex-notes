@@ -1,6 +1,7 @@
 import RectangleToTriangles from '../../../../../utils/math/rectangletotriangles/delaunay/RectangleToTriangles.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 
 var ReTriangulate = function (config) {
     if (IsPlainObject(config)) {

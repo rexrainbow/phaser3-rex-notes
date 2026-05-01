@@ -1,6 +1,8 @@
+import { Utils as PhaserUtils } from 'phaser';
 import Perlin from '../../utils/math/noise/Perlin.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Math as PhaserMath } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 const PERIOD_SCALE = 1 / 5000;
 const ROTATE_SCALE = 0.3;
 
@@ -10,7 +12,7 @@ class PerlinGrivatyWell {
         this.noise = new Perlin(GetValue(config, 'seed', Math.random()));
         this.periodScale = GetValue(config, 'periodScale', PERIOD_SCALE);
         this.rotateScale = GetValue(config, 'rotateScale', ROTATE_SCALE);
-        this.velocity = new Phaser.Math.Vector2();
+        this.velocity = new PhaserMath.Vector2();
     }
 
     update(particle, delta) {

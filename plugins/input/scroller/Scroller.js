@@ -3,8 +3,9 @@ import State from './methods/State.js';
 import DrapSpeed from '../../dragspeed.js';
 import SlowDown from '../../utils/movement/SlowDown.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Clamp = Phaser.Math.Clamp;
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const Clamp = PhaserMath.Clamp;
 
 class Scroller extends ComponentBase {
     constructor(gameObject, config) {

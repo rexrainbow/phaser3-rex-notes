@@ -3,7 +3,8 @@ import SoundManager from '../audio/soundmanager/SoundManager.js';
 import Timeline from '../../time/progresses/Timeline.js';
 import WaitEventManager from './waiteventmanager/WaitEventManager.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var InitManagers = function (scene, config) {
     this.clickTarget = undefined;

@@ -14,7 +14,8 @@ import ContainerPerspective from './behaviors/containerperspective/ContainerPers
 
 import SetValue from './utils/object/SetValue.js';
 
-class PerspectiveImagePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class PerspectiveImagePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

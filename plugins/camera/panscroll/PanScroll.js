@@ -2,7 +2,8 @@ import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import { Pan } from '../../gestures.js';
 import GetCameraByName from '../../utils/camera/GetCameraByName.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class PanScroll extends ComponentBase {
     constructor(scene, config) {

@@ -1,6 +1,8 @@
-const DistanceBetween = Phaser.Math.Distance.Between;
-const Lerp = Phaser.Math.Linear;
-const AngleBetween = Phaser.Math.Angle.Between;
+import { Math as PhaserMath } from 'phaser';
+
+const DistanceBetween = PhaserMath.Distance.Between;
+const Lerp = PhaserMath.Linear;
+const AngleBetween = PhaserMath.Angle.Between;
 
 const ArriveEpsilon = 0.0001;
 

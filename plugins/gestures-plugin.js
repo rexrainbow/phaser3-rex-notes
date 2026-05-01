@@ -7,7 +7,8 @@ import SwipeFactory from './input/gestures/swipe/Factory.js';
 import PinchFactory from './input/gestures/pinch/Factory.js';
 import RotateFactory from './input/gestures/rotate/Factory.js';
 
-class GesturesPlugin extends Phaser.Plugins.ScenePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class GesturesPlugin extends PhaserPlugins.ScenePlugin {
     constructor(scene, pluginManager) {
         super(scene, pluginManager);
 

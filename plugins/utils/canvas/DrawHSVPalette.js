@@ -1,5 +1,6 @@
-const Color = Phaser.Display.Color;
-const Percent = Phaser.Math.Percent;
+import { Display as PhaserDisplay, Math as PhaserMath } from 'phaser';
+const Color = PhaserDisplay.Color;
+const Percent = PhaserMath.Percent;
 
 var DrawHPalette = function (canvas, context, verticalMode) {
     if (verticalMode === undefined) {

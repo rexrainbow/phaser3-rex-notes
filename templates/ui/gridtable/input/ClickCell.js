@@ -1,7 +1,8 @@
 import Button from '../../../../plugins/input/button/Button.js';
 import EmitCellEvent from './EmitCellEvent.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var ClickCell = function (table, tableConfig) {
     var buttonConfig = GetValue(tableConfig, 'click', undefined);

@@ -4,7 +4,8 @@ import CONST from '../../../textbase/const.js';
 import Clone from '../../../../utils/object/Clone.js';
 import NOOP from '../../../../utils/object/NOOP.js';
 
-const GetFastValue = Phaser.Utils.Objects.GetFastValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetFastValue = PhaserUtils.Objects.GetFastValue;
 const NO_NEWLINE = CONST.NO_NEWLINE;
 const WRAPPED_NEWLINE = CONST.WRAPPED_NEWLINE;
 

@@ -1,11 +1,11 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexmousewheeltoupdownplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexmousewheeltoupdownplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
-    const Key = Phaser.Input.Keyboard.Key;
-    const KeyCodes = Phaser.Input.Keyboard.KeyCodes;
+    const Key = phaser.Input.Keyboard.Key;
+    const KeyCodes = phaser.Input.Keyboard.KeyCodes;
     const KeyNames = ['up', 'down', 'left', 'right'];
 
     class CursorKeys {
@@ -212,7 +212,7 @@
         }
     }
 
-    class MouseWheelToUpDownPlugin extends Phaser.Plugins.BasePlugin {
+    class MouseWheelToUpDownPlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

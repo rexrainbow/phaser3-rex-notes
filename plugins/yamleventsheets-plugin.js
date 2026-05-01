@@ -1,7 +1,8 @@
 import YAMLEventSheets from './yamleventsheets.js';
 import CommandExecutor from './commandexecutor.js';
 
-class YAMLEventSheetsPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class YAMLEventSheetsPlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
     }

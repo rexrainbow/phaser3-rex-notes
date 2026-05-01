@@ -3,7 +3,8 @@ import Creator from './gameobjects/blitter/blitter/Creator.js';
 import Blitter from './gameobjects/blitter/blitter/Blitter.js';
 import SetValue from './utils/object/SetValue.js';
 
-class BlitterPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class BlitterPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

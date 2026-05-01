@@ -2,7 +2,8 @@ import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
 import PreLayoutChild from './utils/PreLayoutChild.js';
 import LayoutChild from './utils/LayoutChild.js';
 
-const ALIGN_CENTER = Phaser.Display.Align.CENTER;
+import { Display as PhaserDisplay } from 'phaser';
+const ALIGN_CENTER = PhaserDisplay.Align.CENTER;
 
 var LayoutBackgrounds = function () {
     if (this.backgroundChildren === undefined) {

@@ -1,6 +1,7 @@
 import SoundFade from './soundfade.js';
 
-class SoundFadePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class SoundFadePlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
     }

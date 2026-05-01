@@ -1,10 +1,11 @@
 import Image from '../image/Image.js';
 import Skew from './Skew.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
-const DegToRad = Phaser.Math.DegToRad;
-const RadToDeg = Phaser.Math.RadToDeg;
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
+const DegToRad = PhaserMath.DegToRad;
+const RadToDeg = PhaserMath.RadToDeg;
 
 class SkewImage extends Image {
     constructor(scene, x, y, key, frame) {

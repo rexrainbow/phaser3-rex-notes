@@ -1,6 +1,7 @@
 import Raycaster from './raycaster.js';
 
-class RaycasterPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class RaycasterPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

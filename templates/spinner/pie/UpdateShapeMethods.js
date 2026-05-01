@@ -1,6 +1,7 @@
 import Arc from '../../../plugins/gameobjects/shape/shapes/geoms/lines/arc/Arc.js';
 
-const Linear = Phaser.Math.Linear;
+import { Math as PhaserMath } from 'phaser';
+const Linear = PhaserMath.Linear;
 
 export default {
     buildShapes() {

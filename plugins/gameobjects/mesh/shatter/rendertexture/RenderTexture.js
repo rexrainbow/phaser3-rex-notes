@@ -1,8 +1,9 @@
 import Image from '../image/Image.js';
 import CreateDynamicTexture from '../../../../utils/rendertexture/CreateDynamicTexture.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class RenderTexture extends Image {
     constructor(scene, x, y, width, height, config) {

@@ -3,7 +3,8 @@ import BindingTargetMethods from './BindingTargetMethods.js';
 import InputRowTitleWidthMethods from './InputRowTitleWidthMethods.js';
 import SetReadOnlyMethods from './SetReadOnlyMethods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class SplitPanels extends SplitPanelsBase {
     constructor(scene, config) {

@@ -1,6 +1,7 @@
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
-const UUID = Phaser.Utils.String.UUID;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
+const UUID = PhaserUtils.String.UUID;
 
 var AddPage = function (key, tabGameObject, pageGameObject) {
     if (IsPlainObject(key)) {

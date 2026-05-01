@@ -7,8 +7,9 @@ import AddSpriteManager from './methods/spritemanager/AddSpriteManager.js';
 import Methods from './methods/Methods.js';
 import ClearEvents from './methods/utils/ClearEvents.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class TextPlayer extends Extend(DynamicText) {
     constructor(scene, x, y, fixedWidth, fixedHeight, config) {

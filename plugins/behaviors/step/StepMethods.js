@@ -1,6 +1,7 @@
 import Step from './Step.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 
 export default {
     onInitStep() {

@@ -1,7 +1,8 @@
 
 import LoaderCallback from './loader/imageuri/ImageURILoaderCallback.js';
 
-class ImageURILoaderPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class ImageURILoaderPlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
 

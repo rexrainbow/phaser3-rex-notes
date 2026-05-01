@@ -1,7 +1,8 @@
 import Tap from '../../tap/Tap.js';
 import EmitCellEvent from './EmitCellEvent.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var TapCell = function (table, tableConfig) {
     var tapConfig = GetValue(tableConfig, 'tap', undefined);

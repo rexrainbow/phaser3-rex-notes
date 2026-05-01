@@ -3,7 +3,8 @@ import Creator from './gameobjects/blitter/persistenceeffect/Creator.js';
 import PersistenceEffect from './gameobjects/blitter/persistenceeffect/PersistenceEffect.js';
 import SetValue from './utils/object/SetValue.js';
 
-class PersistenceEffectPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class PersistenceEffectPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

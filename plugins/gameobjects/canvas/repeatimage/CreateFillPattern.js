@@ -1,6 +1,7 @@
 import CopyFrameToCanvas from '../../../utils/texture/CopyFrameToCanvas.js';
 
-const CanvasPool = Phaser.Display.Canvas.CanvasPool;
+import { Display as PhaserDisplay } from 'phaser';
+const CanvasPool = PhaserDisplay.Canvas.CanvasPool;
 
 var CreateFillPattern = function (textureFrame) {
     var canvas = CanvasPool.create(this);

@@ -3,7 +3,8 @@ import Creator from './gameobjects/container/gridtable/Creator.js';
 import GridTable from './gameobjects/container/gridtable/GridTable.js';
 import SetValue from './utils/object/SetValue.js';
 
-class GridTablePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class GridTablePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

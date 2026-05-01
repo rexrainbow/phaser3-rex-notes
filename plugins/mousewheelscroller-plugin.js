@@ -1,6 +1,7 @@
 import MouseWheelScroller from './mousewheelscroller.js';
 
-class MouseWheelScrollerPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class MouseWheelScrollerPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

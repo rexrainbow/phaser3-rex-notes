@@ -1,6 +1,7 @@
+import { Math as PhaserMath } from 'phaser';
 //import QuadraticBezierInterpolation from '../../utils/math/interpolation/QuadraticBezierInterpolation.js';
 
-const QuadraticBezierInterpolation = Phaser.Math.Interpolation.QuadraticBezier;
+const QuadraticBezierInterpolation = PhaserMath.Interpolation.QuadraticBezier;
 
 var QuadraticBezierTo = function (cx, cy, x, y, iterations, pathData) {
     var pathDataCnt = pathData.length;

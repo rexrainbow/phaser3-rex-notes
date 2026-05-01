@@ -1,10 +1,10 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexawaytimeplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexawaytimeplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
-    const GetValue = Phaser.Utils.Objects.GetValue;
+    const GetValue = phaser.Utils.Objects.GetValue;
 
     class AwayTime {
         constructor(config) {
@@ -74,7 +74,7 @@
     const IDLE = 0;
     const UPDATING = 1;
 
-    class AwayTimePlugin extends Phaser.Plugins.BasePlugin {
+    class AwayTimePlugin extends phaser.Plugins.BasePlugin {
         constructor(pluginManager) {
             super(pluginManager);
         }

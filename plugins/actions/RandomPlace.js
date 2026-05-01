@@ -1,9 +1,10 @@
+import { Utils as PhaserUtils, Geom as PhaserGeom } from 'phaser';
 import GetViewport from '../utils/system/GetViewport.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const Circle = Phaser.Geom.Circle;
-const CircleToCircle = Phaser.Geom.Intersects.CircleToCircle;
+const GetValue = PhaserUtils.Objects.GetValue;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const Circle = PhaserGeom.Circle;
+const CircleToCircle = PhaserGeom.Intersects.CircleToCircle;
 
 var RandomPlace = function (items, options) {
     if (items.length === 0) {

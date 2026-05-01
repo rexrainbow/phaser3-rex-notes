@@ -9,7 +9,8 @@ import SetValue from '../../../plugins/utils/object/SetValue.js';
 import HasValue from '../../../plugins/utils/object/HasValue.js';
 import TextArea from '../textarea/TextArea.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class ConfirmDialog extends Dialog {
     constructor(scene, config, creators) {

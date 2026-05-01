@@ -1,13 +1,13 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexscripttagloaderplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexscripttagloaderplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
-    const FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
-    const UUID = Phaser.Utils.String.UUID;
+    const FILE_POPULATED = phaser.Loader.FILE_POPULATED;
+    const UUID = phaser.Utils.String.UUID;
 
-    class AwaitFile extends Phaser.Loader.File {
+    class AwaitFile extends phaser.Loader.File {
         constructor(loader, fileConfig) {
             if (!fileConfig.hasOwnProperty('type')) {
                 fileConfig.type = 'await';
@@ -117,8 +117,8 @@
         });
     };
 
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-    const GetFastValue = Phaser.Utils.Objects.GetFastValue;
+    const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
+    const GetFastValue = phaser.Utils.Objects.GetFastValue;
 
     const LoaderCallback = function (url) {
         if (Array.isArray(url)) {
@@ -169,7 +169,7 @@
         });
     };
 
-    class ScriptTagLoaderPlugin extends Phaser.Plugins.BasePlugin {
+    class ScriptTagLoaderPlugin extends phaser.Plugins.BasePlugin {
         constructor(pluginManager) {
             super(pluginManager);
 

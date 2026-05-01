@@ -3,7 +3,8 @@ import ScaleDownDestroy from './ScaleDownDestroy.js';
 import Yoyo from './Yoyo.js';
 import { WaitComplete } from '../../utils/promise/WaitEvent.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 
 export default {
     onInitScale() {

@@ -5,7 +5,8 @@ import {
     GetBottomRight,
 } from './GetBounds.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var DrawBounds = function (gameObjects, graphics, config) {
     var strokeColor, lineWidth, fillColor, fillAlpha, padding, includeParent;

@@ -1,6 +1,7 @@
 import LoaderCallback from './loader/awaitcomlink/AwaitComlinkCallback.js';
 
-class AwaitComlinkLoaderPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class AwaitComlinkLoaderPlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
 

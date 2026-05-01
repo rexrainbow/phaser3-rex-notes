@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import BoundsScroll from '../../plugins/camera/boundsscroll/BoundsScroll.js';
 
 class Demo extends Phaser.Scene {

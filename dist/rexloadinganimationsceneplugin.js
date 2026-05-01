@@ -1,13 +1,13 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexloadinganimationsceneplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexloadinganimationsceneplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
-    const FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
-    const UUID = Phaser.Utils.String.UUID;
+    const FILE_POPULATED = phaser.Loader.FILE_POPULATED;
+    const UUID = phaser.Utils.String.UUID;
 
-    class AwaitFile extends Phaser.Loader.File {
+    class AwaitFile extends phaser.Loader.File {
         constructor(loader, fileConfig) {
             if (!fileConfig.hasOwnProperty('type')) {
                 fileConfig.type = 'await';
@@ -83,7 +83,7 @@
         return obj && (typeof(obj) === 'function');
     };
 
-    const IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
+    const IsPlainObject$1 = phaser.Utils.Objects.IsPlainObject;
 
     const LoaderCallback = function (key, config) {
         if (IsFunction(key)) {
@@ -113,7 +113,7 @@
         return this;
     };
 
-    const SceneClass = Phaser.Scene;
+    const SceneClass = phaser.Scene;
     var IsSceneObject = function (object) {
         return (object instanceof SceneClass);
     };
@@ -139,7 +139,7 @@
         return progress;
     };
 
-    class LastLoadTask extends Phaser.Events.EventEmitter {
+    class LastLoadTask extends phaser.Events.EventEmitter {
         constructor(scene) {
             super();
             this.scene = scene;
@@ -188,7 +188,7 @@
         }
     }
 
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+    const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
 
     var StartLoadingAnimationScene = function (
         mainScene,
@@ -217,7 +217,7 @@
         }
 
         // Don't launch animation scene if it has been started
-        if (mainScene.scene.getStatus(animationSceneKey) < Phaser.Scenes.START) { // Phaser.Scenes.START = 2
+        if (mainScene.scene.getStatus(animationSceneKey) < phaser.Scenes.START) { // Phaser.Scenes.START = 2
             mainScene.scene.launch(animationSceneKey, data);
         }
 
@@ -241,7 +241,7 @@
 
     };
 
-    class LoadingAnimationScenePlugin extends Phaser.Plugins.BasePlugin {
+    class LoadingAnimationScenePlugin extends phaser.Plugins.BasePlugin {
         constructor(pluginManager) {
             super(pluginManager);
 

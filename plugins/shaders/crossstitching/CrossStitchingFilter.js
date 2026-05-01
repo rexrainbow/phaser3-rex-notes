@@ -1,7 +1,8 @@
 import { FilterName } from './const.js';
 import FragSrc from './crossstitching-frag.js';
 
-class CrossStitchingFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+import { Renderer as PhaserRenderer } from 'phaser';
+class CrossStitchingFilter extends PhaserRenderer.WebGL.RenderNodes.BaseFilterShader {
     static FilterName = FilterName;
 
     constructor(manager) {

@@ -3,7 +3,8 @@ import Methods from './Methods.js';
 import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
 import Clear from '../../../plugins/utils/object/Clear.js'
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Base extends Container {
     constructor(scene, x, y, minWidth, minHeight, config) {

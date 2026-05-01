@@ -1,6 +1,7 @@
 import GetFilterList from './GetFilterList.js';
 
-const SpliceOne = Phaser.Utils.Array.SpliceOne;
+import { Utils as PhaserUtils } from 'phaser';
+const SpliceOne = PhaserUtils.Array.SpliceOne;
 
 var RemoveController = function (gameObject, ControllerClass, name, external) {
     var list = GetFilterList(gameObject, external).list;

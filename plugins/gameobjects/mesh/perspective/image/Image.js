@@ -3,10 +3,11 @@ import Methods from './methods/Methods.js';
 import RotateXYZ from '../../mesh/utils/RotateXYZ.js';
 import IsBackFace from '../../mesh/utils/IsBackFace.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
-const RadToDeg = Phaser.Math.RadToDeg;
-const DegToRad = Phaser.Math.DegToRad;
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
+const RadToDeg = PhaserMath.RadToDeg;
+const DegToRad = PhaserMath.DegToRad;
 
 class Image extends Mesh {
     constructor(scene, x, y, key, frame, config) {

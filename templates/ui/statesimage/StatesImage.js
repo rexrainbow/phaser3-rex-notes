@@ -2,8 +2,9 @@ import AddEffectProperties from '../../../plugins/effectproperties.js';
 import Style from './Style.js';
 import HelperMethods from '../utils/stylemanager/HelperMethods.js';
 
-const PhaserImage = Phaser.GameObjects.Image;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { GameObjects as PhaserGameObjects, Utils as PhaserUtils } from 'phaser';
+const PhaserImage = PhaserGameObjects.Image;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class StatesImage extends PhaserImage {
     constructor(scene, config) {

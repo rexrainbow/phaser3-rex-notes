@@ -1,4 +1,5 @@
-const Clamp = Phaser.Math.Clamp;
+import { Math as PhaserMath } from 'phaser';
+const Clamp = PhaserMath.Clamp;
 
 var InsertNewCells = function (cellIdx, count) {
     if (typeof (cellIdx) === 'object') {

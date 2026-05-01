@@ -1,7 +1,8 @@
 import Swipe from '../../swipe/Swipe.js';
 import EmitChildEvent from './EmitChildEvent.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var SwipeChild = function (config) {
     var swipeConfig = GetValue(config, 'swipe', undefined);

@@ -1,6 +1,7 @@
 import GetObjUID from '../../graphitem/GetObjUID.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 
 export default {
     getEdgeAttribute(gameObject, key) {

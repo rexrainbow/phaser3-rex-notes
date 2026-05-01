@@ -5,10 +5,11 @@ import Width from './Width.js';
 import Height from './Height.js';
 import SetPoints from './SetPoints.js';
 
-const Polygon = Phaser.Geom.Polygon;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Line = Phaser.Geom.Line;
+import { Geom as PhaserGeom, Utils as PhaserUtils } from 'phaser';
+const Polygon = PhaserGeom.Polygon;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
+const Line = PhaserGeom.Line;
 
 class Hexagon extends Polygon {
     constructor(x, y, size, orientationType) {
@@ -203,6 +204,6 @@ const ORIENTATIONTYPE = {
 };
 
 // use `rexHexagon` to prevent name conflict
-Phaser.Geom.rexHexagon = Hexagon;
+PhaserGeom.rexHexagon = Hexagon;
 
 export default Hexagon;

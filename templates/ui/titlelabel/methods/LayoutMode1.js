@@ -10,7 +10,8 @@ Icon       Text        ActionIcon
 import Sizer from '../../sizer/Sizer.js';
 import AddChildCircleMask from '../../utils/AddChildCircleMask.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var LayoutMode1 = function (config) {
     this.setOrientation(1);

@@ -1,11 +1,12 @@
 import EventSheetManager from '../../plugins/logic/eventsheets/eventsheetmanager/EventSheetManager.js';
 import CreateMonitorPanel from './monitor/CreateMonitorPanel.js';
 
+import { Plugins as PhaserPlugins } from 'phaser';
 var Base = function (EventSheetManagerClass) {
     if (EventSheetManagerClass === undefined) {
         EventSheetManagerClass = EventSheetManager;
     }
-    return class Base extends Phaser.Plugins.BasePlugin {
+    return class Base extends PhaserPlugins.BasePlugin {
         constructor(pluginManager) {
             super(pluginManager);
         }

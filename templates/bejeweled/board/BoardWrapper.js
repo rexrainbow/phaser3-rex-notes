@@ -1,7 +1,8 @@
 import Methods from './methods/Methods.js';
 import { ClearMask } from '../../../plugins/utils/mask/MaskMethods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class BoardWrapper {
     constructor(scene, config) {

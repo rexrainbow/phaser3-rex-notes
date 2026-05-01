@@ -1,6 +1,7 @@
 import ArcadeStepClock from './ArcadeStepClock.js';
 
-class ArcadeStepClockPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class ArcadeStepClockPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

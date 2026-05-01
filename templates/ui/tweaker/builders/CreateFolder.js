@@ -2,7 +2,8 @@ import FolderTitle from '../gameobjects/label/FolderTitle.js';
 import CreateBackground from './utils/CreateBackground.js';
 import Folder from '../gameobjects/folder/Folder.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var CreateFolder = function (tweaker, config, style) {
     if (!config) { config = {}; }

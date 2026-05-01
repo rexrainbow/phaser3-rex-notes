@@ -3,12 +3,13 @@ import IsGameObject from '../../utils/system/IsGameObject.js';
 import GetPointerWorldXY from '../../utils/input/GetPointerWorldXY.js';
 
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const DistanceBetween = Phaser.Math.Distance.Between;
-const GetAngle = Phaser.Math.Angle.Between;
-const WrapAngle = Phaser.Math.Angle.Wrap;
-const RadToDeg = Phaser.Math.RadToDeg;
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const DistanceBetween = PhaserMath.Distance.Between;
+const GetAngle = PhaserMath.Angle.Between;
+const WrapAngle = PhaserMath.Angle.Wrap;
+const RadToDeg = PhaserMath.RadToDeg;
 
 const STATE_TOUCH0 = 0;
 const STATE_TOUCH1 = 1;

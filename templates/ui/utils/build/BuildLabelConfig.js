@@ -4,7 +4,8 @@ import DefaultCreateText from './CreateText.js';
 import DefaultCreateImage from './CreateImage.js';
 
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var BuildLabelConfig = function (scene, config, creators) {
     config = (config) ? DeepClone(config) : {};

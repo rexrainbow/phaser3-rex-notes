@@ -1,10 +1,11 @@
-const GameObject = Phaser.GameObjects.GameObject;
+import { Class as PhaserClass, GameObjects as PhaserGameObjects } from 'phaser';
+const GameObject = PhaserGameObjects.GameObject;
 
 class Image extends GameObject {
 }
 
-const Components = Phaser.GameObjects.Components;
-Phaser.Class.mixin(Image,
+const Components = PhaserGameObjects.Components;
+PhaserClass.mixin(Image,
     [
         Components.AlphaSingle,
         Components.BlendMode,

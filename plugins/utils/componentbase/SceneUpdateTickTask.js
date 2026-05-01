@@ -1,6 +1,7 @@
 import TickTask from './TickTask.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class SceneUpdateTickTask extends TickTask {
     constructor(parent, config) {

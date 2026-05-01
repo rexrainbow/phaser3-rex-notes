@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexframemanagerplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexframemanagerplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var Draw = function (frameName, callback, scope) {
         var index = this.getFrameIndex(frameName);
@@ -419,12 +419,12 @@
         RemoveMethods
     );
 
-    const GameClass = Phaser.Game;
+    const GameClass = phaser.Game;
     var IsGame = function (object) {
         return (object instanceof GameClass);
     };
 
-    const SceneClass = Phaser.Scene;
+    const SceneClass = phaser.Scene;
     var IsSceneObject = function (object) {
         return (object instanceof SceneClass);
     };
@@ -461,8 +461,8 @@
         return textureManager[methodName](key, width, height);
     };
 
-    const IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+    const IsPlainObject$1 = phaser.Utils.Objects.IsPlainObject;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
 
     class FrameManager {
         constructor(scene, key, width, height, cellWidth, cellHeight, fillColor, useDynamicTexture) {
@@ -619,8 +619,8 @@
         methods
     );
 
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue = Phaser.Utils.Objects.GetValue;
+    const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
+    const GetValue = phaser.Utils.Objects.GetValue;
 
     class FrameManagerPool {
         constructor(scene, keyGenerator, width, height, cellWidth, cellHeight, fillColor, useDynamicTexture) {
@@ -872,7 +872,7 @@
         }
     }
 
-    class FrameManagerPlugin extends Phaser.Plugins.BasePlugin {
+    class FrameManagerPlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

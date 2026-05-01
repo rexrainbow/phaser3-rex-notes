@@ -3,7 +3,8 @@ import CreateInputText from './utils/CreateInputText.js';
 import CreateLabel from './utils/CreateLabel.js';
 import DeepClone from '../../../../plugins/utils/object/DeepClone.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var SetInputTextReadOnly = function (gameObject, readOnly, force) {
     if (readOnly === undefined) {

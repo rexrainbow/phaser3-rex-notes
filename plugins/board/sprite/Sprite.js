@@ -1,7 +1,8 @@
 import CreateChessData from '../chess/GetChessData.js';
 import IsMiniBoardObject from '../miniboard/IsMiniBoardObject.js';
 
-const Base = Phaser.GameObjects.Sprite;
+import { GameObjects as PhaserGameObjects } from 'phaser';
+const Base = PhaserGameObjects.Sprite;
 class Sprite extends Base {
     constructor(board, tileX, tileY, tileZ, key, frame, addToBoard) {
         if (addToBoard === undefined) {

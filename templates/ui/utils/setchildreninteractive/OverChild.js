@@ -1,7 +1,8 @@
+import { Utils as PhaserUtils } from 'phaser';
 import ContainsPoint from './ContainsPoint.js';
 import EmitChildEvent from './EmitChildEvent.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var OverChild = function (config) {
     var overConfig = GetValue(config, 'over', undefined);

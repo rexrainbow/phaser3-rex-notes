@@ -7,7 +7,8 @@ import ClickChess from '../actions/ClickChess.js';
 import SwapChess from '../actions/SwapChess.js'
 import IsPromise from '../../../plugins/utils/object/IsPromise.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class State extends BaseState {
     constructor(bejeweled, config) {

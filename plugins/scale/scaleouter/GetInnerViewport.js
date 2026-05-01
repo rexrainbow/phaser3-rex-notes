@@ -1,4 +1,5 @@
-const Rectangle = Phaser.Geom.Rectangle;
+import { Geom as PhaserGeom } from 'phaser';
+const Rectangle = PhaserGeom.Rectangle;
 var GetInnerViewport = function (scaleOuter, out) {
     if (out === undefined) {
         out = new Rectangle();

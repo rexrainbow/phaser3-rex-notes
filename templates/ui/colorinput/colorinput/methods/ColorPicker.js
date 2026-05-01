@@ -3,7 +3,8 @@ import ColorPicker from '../../colorpicker/ColorPicker.js';
 import ColorComponents from '../../colorcomponents/ColorComponents.js';
 import TouchEventStop from '../../../toucheventstop/TouchEventStop.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class ColorPickerPanel extends Sizer {
     constructor(scene, config) {

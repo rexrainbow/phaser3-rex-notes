@@ -1,6 +1,7 @@
 import FrameManager from '../../framemanager/FrameManager.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var CreateFrameManager = function (scene, config) {
     var key = GetValue(config, 'key');

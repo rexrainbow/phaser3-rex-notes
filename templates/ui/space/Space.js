@@ -1,4 +1,5 @@
-const Zone = Phaser.GameObjects.Zone;
+import { GameObjects as PhaserGameObjects } from 'phaser';
+const Zone = PhaserGameObjects.Zone;
 
 class Space extends Zone {
     constructor(scene) {

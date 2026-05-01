@@ -6,7 +6,8 @@ import CheckboxShapeCreator from './gameobjects/shape/checkbox/CheckboxShapeCrea
 import CheckboxShape from './gameobjects/shape/checkbox/CheckboxShape.js';
 import SetValue from './utils/object/SetValue.js';
 
-class CheckboxPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class CheckboxPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

@@ -1,4 +1,5 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 export default function (colors) {
     var COLOR_PRIMARY = GetValue(colors, 'primary', 0x424242);

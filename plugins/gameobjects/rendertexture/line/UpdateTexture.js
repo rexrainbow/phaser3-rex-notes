@@ -2,8 +2,9 @@ import DrawImage from '../utils/DrawImage.js';
 import DrawTileSprite from '../utils/DrawTileSprite.js';
 import EndDraw from '../utils/EndDraw.js';
 
-const DistanceBetween = Phaser.Math.Distance.Between;
-const AngleBetween = Phaser.Math.Angle.Between;
+import { Math as PhaserMath } from 'phaser';
+const DistanceBetween = PhaserMath.Distance.Between;
+const AngleBetween = PhaserMath.Angle.Between;
 
 var UpdateTexture = function () {
     if (!this.redraw) {

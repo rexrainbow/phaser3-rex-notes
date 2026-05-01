@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexrhombusplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexrhombusplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var Offset = function (polygon, x, y) {
         var points = polygon.points,
@@ -17,11 +17,10 @@
 
     // https://www.redblobgames.com/grids/hexagons/
 
-
-    const Polygon = Phaser.Geom.Polygon;
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue = Phaser.Utils.Objects.GetValue;
-    const Line = Phaser.Geom.Line;
+    const Polygon = phaser.Geom.Polygon;
+    const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
+    const GetValue = phaser.Utils.Objects.GetValue;
+    const Line = phaser.Geom.Line;
 
     class Rhombus extends Polygon {
         constructor(x, y, width, height) {
@@ -207,9 +206,9 @@
     }
 
     // use `rexRhombus` to prevent name conflict
-    Phaser.Geom.rexRhombus = Rhombus;
+    phaser.Geom.rexRhombus = Rhombus;
 
-    class RhombusPlugin extends Phaser.Plugins.BasePlugin {
+    class RhombusPlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

@@ -1,9 +1,10 @@
+import { Utils as PhaserUtils, Math as PhaserMath } from 'phaser';
 import TickTask from '../../utils/componentbase/SceneUpdateTickTask.js';
 import { SetVelocity } from '../../utils/arcade/Helpers.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const DegToRad = Phaser.Math.DegToRad;
-const RadToDeg = Phaser.Math.RadToDeg;
+const GetValue = PhaserUtils.Objects.GetValue;
+const DegToRad = PhaserMath.DegToRad;
+const RadToDeg = PhaserMath.RadToDeg;
 
 class Bullet extends TickTask {
     constructor(gameObject, config) {
@@ -107,8 +108,8 @@ class Bullet extends TickTask {
         if (rotation == null) {
             rotation = gameObject.rotation;
         }
-        var vx = this.speed * Math.cos(rotation);
-        var vy = this.speed * Math.sin(rotation);
+        var vx = this.speed * PhaserMath.cos(rotation);
+        var vy = this.speed * PhaserMath.sin(rotation);
         SetVelocity(gameObject, vx, vy);
 
         if (this.wrap) {

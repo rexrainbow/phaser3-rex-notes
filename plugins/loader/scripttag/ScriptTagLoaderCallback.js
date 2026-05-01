@@ -2,8 +2,9 @@ import AwaitFile from '../awaitloader/AwaitFile.js';
 import LoadScriptPromise from '../../utils/loader/LoadScriptPromise.js';
 import Delay from '../../utils/promise/Delay.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetFastValue = Phaser.Utils.Objects.GetFastValue;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetFastValue = PhaserUtils.Objects.GetFastValue;
 
 const LoaderCallback = function (url) {
     if (Array.isArray(url)) {

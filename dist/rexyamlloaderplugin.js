@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexyamlloaderplugin = factory());
-})(this, (function () { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+  typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexyamlloaderplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
   /*! js-yaml 4.1.1 https://github.com/nodeca/js-yaml @license MIT */
   function isNothing(subject) {
@@ -3868,11 +3868,11 @@
       return doc;
   };
 
-  const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-  const FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
-  const FILE_PROCESSING = Phaser.Loader.FILE_PROCESSING;
+  const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
+  const FILE_POPULATED = phaser.Loader.FILE_POPULATED;
+  const FILE_PROCESSING = phaser.Loader.FILE_PROCESSING;
 
-  class YAMLFile extends Phaser.Loader.File {
+  class YAMLFile extends phaser.Loader.File {
       constructor(loader, key, url, xhrSettings, dataKey) {
           var extension = 'yml';
 
@@ -3953,7 +3953,7 @@
       return this;
   };
 
-  class YAMLLoaderPlugin extends Phaser.Plugins.BasePlugin {
+  class YAMLLoaderPlugin extends phaser.Plugins.BasePlugin {
       constructor(pluginManager) {
           super(pluginManager);
 

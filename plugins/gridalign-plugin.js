@@ -3,7 +3,8 @@ import {
     QuadGridAlign
 } from './gridalign.js';
 
-class GridAlignPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class GridAlignPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

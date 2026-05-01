@@ -1,10 +1,11 @@
 import { FilterName } from './const.js';
 import FragSrc from './outline-frag.js';
 
+import { Renderer as PhaserRenderer } from 'phaser';
 const MAX_SAMPLES = 100;
 const MIN_SAMPLES = 1;
 
-class OutlineFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+class OutlineFilter extends PhaserRenderer.WebGL.RenderNodes.BaseFilterShader {
     static FilterName = FilterName;
 
     constructor(manager) {

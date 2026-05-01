@@ -3,7 +3,8 @@ import Creator from './gameobjects/shape/cover/Creator.js';
 import Cover from './gameobjects/shape/cover/Cover.js';
 import SetValue from './utils/object/SetValue.js';
 
-class CoverPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class CoverPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

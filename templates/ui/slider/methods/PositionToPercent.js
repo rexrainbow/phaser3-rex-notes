@@ -1,4 +1,5 @@
-const Percent = Phaser.Math.Percent;
+import { Math as PhaserMath } from 'phaser';
+const Percent = PhaserMath.Percent;
 
 var PositionToPercent = function (startPoint, endPoint, currentPoint) {
     var value;

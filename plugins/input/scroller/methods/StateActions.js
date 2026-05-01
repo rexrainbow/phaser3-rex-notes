@@ -1,5 +1,6 @@
-const SnapTo = Phaser.Math.Snap.To;
-const Clamp = Phaser.Math.Clamp;
+import { Math as PhaserMath } from 'phaser';
+const SnapTo = PhaserMath.Snap.To;
+const Clamp = PhaserMath.Clamp;
 
 // this: Scroller
 

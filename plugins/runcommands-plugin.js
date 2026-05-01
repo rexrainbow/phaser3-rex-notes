@@ -1,6 +1,7 @@
 import RunCommands from './runcommands.js';
 
-class RunCommandsPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class RunCommandsPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

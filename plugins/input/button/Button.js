@@ -1,6 +1,7 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Button extends ComponentBase {
     constructor(gameObject, config) {

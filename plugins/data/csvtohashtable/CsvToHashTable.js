@@ -1,7 +1,8 @@
 import CSVParser from 'papaparse/papaparse.min.js';
 import TypeConvert from '../../utils/string/TypeConvert.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class CsvToHashTable {
     constructor(config) {

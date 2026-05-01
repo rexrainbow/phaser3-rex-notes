@@ -1,14 +1,15 @@
 import Render from './render/Render.js';
 import CanvasMethods from './CanvasMethods.js';
 import TextureMethods from './TextureMethods.js';
+import { Class as PhaserClass, Display as PhaserDisplay, GameObjects as PhaserGameObjects, Renderer as PhaserRenderer, Utils as PhaserUtils } from 'phaser';
 
 import CheckP3Version from '../../../utils/system/CheckP3Version.js';
 CheckP3Version();
 
-const CanvasPool = Phaser.Display.Canvas.CanvasPool;
-const GameObject = Phaser.GameObjects.GameObject;
-const UUID = Phaser.Utils.String.UUID;
-const DefaultImageNodes = Phaser.Renderer.WebGL.RenderNodes.Defaults.DefaultImageNodes;
+const CanvasPool = PhaserDisplay.Canvas.CanvasPool;
+const GameObject = PhaserGameObjects.GameObject;
+const UUID = PhaserUtils.String.UUID;
+const DefaultImageNodes = PhaserRenderer.WebGL.RenderNodes.Defaults.DefaultImageNodes;
 
 class Canvas extends GameObject {
     constructor(scene, x, y, width, height, resolution) {
@@ -198,8 +199,8 @@ class Canvas extends GameObject {
     }
 }
 
-const Components = Phaser.GameObjects.Components;
-Phaser.Class.mixin(Canvas,
+const Components = PhaserGameObjects.Components;
+PhaserClass.mixin(Canvas,
     [
         Components.Alpha,
         Components.BlendMode,

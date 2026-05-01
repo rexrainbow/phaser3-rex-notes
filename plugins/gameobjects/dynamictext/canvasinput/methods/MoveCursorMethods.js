@@ -1,4 +1,5 @@
-const Clamp = Phaser.Math.Clamp;
+import { Math as PhaserMath } from 'phaser';
+const Clamp = PhaserMath.Clamp;
 
 var GetIndex = function (characterCountOfLines, position) {
     var result = { lineIndex: 0, position: 0 };

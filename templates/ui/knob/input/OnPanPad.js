@@ -1,7 +1,8 @@
 import IsLocalPointInKnob from './IsLocalPointInKnob.js';
 
-const GetAngle = Phaser.Math.Angle.Between;
-const WrapAngle = Phaser.Math.Angle.Wrap;
+import { Math as PhaserMath } from 'phaser';
+const GetAngle = PhaserMath.Angle.Between;
+const WrapAngle = PhaserMath.Angle.Wrap;
 
 var OnPointerDown = function (pointer, localX, localY) {
     if ((!this.enable) || (this.panPointer)) {

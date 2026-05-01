@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexlineprogresscanvasplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexlineprogresscanvasplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     // copy from Phaser.GameObjects.Text
     var WebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
@@ -53,7 +53,7 @@
 
     };
 
-    const Color = Phaser.Display.Color;
+    const Color = phaser.Display.Color;
 
     var CanvasMethods = {
         clear() {
@@ -276,7 +276,7 @@
         if (minVersion === undefined) {
             minVersion = SubVersionNumber;
         }
-        var version = Phaser.VERSION.split('.');
+        var version = phaser.VERSION.split('.');
         var mainVersion = parseInt(version[0]);
         if (mainVersion === MainVersionNumber) {
             var subVersion = parseInt(version[1]);
@@ -292,10 +292,10 @@
 
     CheckP3Version();
 
-    const CanvasPool = Phaser.Display.Canvas.CanvasPool;
-    const GameObject = Phaser.GameObjects.GameObject;
-    const UUID = Phaser.Utils.String.UUID;
-    const DefaultImageNodes = Phaser.Renderer.WebGL.RenderNodes.Defaults.DefaultImageNodes;
+    const CanvasPool = phaser.Display.Canvas.CanvasPool;
+    const GameObject = phaser.GameObjects.GameObject;
+    const UUID = phaser.Utils.String.UUID;
+    const DefaultImageNodes = phaser.Renderer.WebGL.RenderNodes.Defaults.DefaultImageNodes;
 
     class Canvas extends GameObject {
         constructor(scene, x, y, width, height, resolution) {
@@ -485,8 +485,8 @@
         }
     }
 
-    const Components = Phaser.GameObjects.Components;
-    Phaser.Class.mixin(Canvas,
+    const Components = phaser.GameObjects.Components;
+    phaser.Class.mixin(Canvas,
         [
             Components.Alpha,
             Components.BlendMode,
@@ -508,8 +508,8 @@
         ]
     );
 
-    const Linear$1 = Phaser.Math.Linear;
-    const Percent$1 = Phaser.Math.Percent;
+    const Linear$1 = phaser.Math.Linear;
+    const Percent$1 = phaser.Math.Percent;
 
     var ProgressValueMethods = {
         setValue(value, min, max) {
@@ -544,7 +544,7 @@
     var EventEmitterMethods = {
         setEventEmitter(eventEmitter, EventEmitterClass) {
             if (EventEmitterClass === undefined) {
-                EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+                EventEmitterClass = phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
             }
             this._privateEE = (eventEmitter === true) || (eventEmitter === undefined);
             this._eventEmitter = (this._privateEE) ? (new EventEmitterClass()) : eventEmitter;
@@ -633,7 +633,7 @@
         },
     };
 
-    const SceneClass = Phaser.Scene;
+    const SceneClass = phaser.Scene;
     var IsSceneObject = function (object) {
         return (object instanceof SceneClass);
     };
@@ -652,7 +652,7 @@
         }
     };
 
-    const GameClass = Phaser.Game;
+    const GameClass = phaser.Game;
     var IsGame = function (object) {
         return (object instanceof GameClass);
     };
@@ -671,7 +671,7 @@
         }
     };
 
-    const GetValue$7 = Phaser.Utils.Objects.GetValue;
+    const GetValue$7 = phaser.Utils.Objects.GetValue;
 
     class ComponentBase {
         constructor(parent, config) {
@@ -757,7 +757,7 @@
         EventEmitterMethods
     );
 
-    const GetValue$6 = Phaser.Utils.Objects.GetValue;
+    const GetValue$6 = phaser.Utils.Objects.GetValue;
 
     class TickTask extends ComponentBase {
         constructor(parent, config) {
@@ -870,7 +870,7 @@
         'always': 2
     };
 
-    const GetValue$5 = Phaser.Utils.Objects.GetValue;
+    const GetValue$5 = phaser.Utils.Objects.GetValue;
 
     class SceneUpdateTickTask extends TickTask {
         constructor(parent, config) {
@@ -917,8 +917,8 @@
         return (eventName === 'step') || (eventName === 'poststep');
     };
 
-    const GetValue$4 = Phaser.Utils.Objects.GetValue;
-    const Clamp$1 = Phaser.Math.Clamp;
+    const GetValue$4 = phaser.Utils.Objects.GetValue;
+    const Clamp$1 = phaser.Math.Clamp;
 
     class Timer {
         constructor(config) {
@@ -1142,9 +1142,9 @@
 
     }
 
-    const GetValue$3 = Phaser.Utils.Objects.GetValue;
-    const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-    const GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
+    const GetValue$3 = phaser.Utils.Objects.GetValue;
+    const GetAdvancedValue = phaser.Utils.Objects.GetAdvancedValue;
+    const GetEaseFunction = phaser.Tweens.Builders.GetEaseFunction;
 
     class EaseValueTaskBase extends TimerTickTask {
         resetFromJSON(o) {
@@ -1274,8 +1274,8 @@
         }
     }
 
-    const GetValue$2 = Phaser.Utils.Objects.GetValue;
-    const Linear = Phaser.Math.Linear;
+    const GetValue$2 = phaser.Utils.Objects.GetValue;
+    const Linear = phaser.Math.Linear;
 
     class EaseValueTask extends EaseValueTaskBase {
         constructor(gameObject, config) {
@@ -1324,7 +1324,7 @@
         }
     }
 
-    const Percent = Phaser.Math.Percent;
+    const Percent = phaser.Math.Percent;
 
     var EaseValueMethods = {
         setEaseValuePropName(name) {
@@ -1396,8 +1396,8 @@
         },
     };
 
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
-    const Clamp = Phaser.Math.Clamp;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
+    const Clamp = phaser.Math.Clamp;
 
     function ProgressBase (BaseClass) {
         class ProgressBase extends BaseClass {
@@ -1445,7 +1445,7 @@
         return ProgressBase;
     }
 
-    const Pad = Phaser.Utils.String.Pad;
+    const Pad = phaser.Utils.String.Pad;
     var GetStyle = function (style, canvas, context) {
         if (style == null) {
             return style;
@@ -1661,8 +1661,8 @@
         return out;
     };
 
-    const GetValue = Phaser.Utils.Objects.GetValue;
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+    const GetValue = phaser.Utils.Objects.GetValue;
+    const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
 
     class LineProgress extends ProgressBase(Canvas) {
         constructor(scene, x, y, width, height, barColor, value, config) {
@@ -1837,7 +1837,7 @@
         return gameObject;
     }
 
-    const BuildGameObject = Phaser.GameObjects.BuildGameObject;
+    const BuildGameObject = phaser.GameObjects.BuildGameObject;
 
     function Creator (config, addToScene) {
         if (config === undefined) { config = {}; }
@@ -1923,7 +1923,7 @@
         return target;
     };
 
-    class LineProgressCanvasPlugin extends Phaser.Plugins.BasePlugin {
+    class LineProgressCanvasPlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

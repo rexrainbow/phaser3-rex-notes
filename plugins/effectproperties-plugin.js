@@ -1,6 +1,7 @@
 import AddEffectProperties from './effectproperties.js';
 
-class EffectPropertiesPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class EffectPropertiesPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

@@ -1,5 +1,6 @@
-const Vector2 = Phaser.Math.Vector2;
-const Distance = Phaser.Math.Distance.Between;
+import { Math as PhaserMath } from 'phaser';
+const Vector2 = PhaserMath.Vector2;
+const Distance = PhaserMath.Distance.Between;
 
 var AddAlignmentForce = function (myAgent, neighbors, weight, distanceThreshold, out) {
     // Steer towards average heading of neighbors               
@@ -34,8 +35,8 @@ var AddAlignmentForce = function (myAgent, neighbors, weight, distanceThreshold,
     }
     var angle = sum / validNeighborsCount;
     var p = weight;
-    out.x += (Math.cos(angle) * p);
-    out.y += (Math.sin(angle) * p);
+    out.x += (PhaserMath.cos(angle) * p);
+    out.y += (PhaserMath.sin(angle) * p);
 
     return out;
 }

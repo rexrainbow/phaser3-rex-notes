@@ -4,8 +4,9 @@ import VelocityMethods from './VelocityMethods.js';
 import DIRMODE from '../../../utils/math/angle/angletodirections/Const.js';
 import AngleToDirections from '../../../utils/math/angle/angletodirections/AngleToDirections.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const RadToDeg = Phaser.Math.RadToDeg;
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const RadToDeg = PhaserMath.RadToDeg;
 
 class Swipe extends OnePointerTracer {
     constructor(gameObject, config) {

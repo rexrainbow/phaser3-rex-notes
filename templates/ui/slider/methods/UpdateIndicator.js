@@ -2,10 +2,11 @@ import ResizeGameObject from '../../../../plugins/utils/size/ResizeGameObject.js
 import AlignIn from '../../../../plugins/utils/align/align/in/QuickSet.js';
 import { GetDisplayWidth, GetDisplayHeight } from '../../../../plugins/utils/size/GetDisplaySize.js';
 
-const AlignLeft = Phaser.Display.Align.LEFT_CENTER;
-const AlignTop = Phaser.Display.Align.TOP_CENTER;
-const AlignRight = Phaser.Display.Align.RIGHT_CENTER;
-const AlignBottom = Phaser.Display.Align.BOTTOM_CENTER;
+import { Display as PhaserDisplay } from 'phaser';
+const AlignLeft = PhaserDisplay.Align.LEFT_CENTER;
+const AlignTop = PhaserDisplay.Align.TOP_CENTER;
+const AlignRight = PhaserDisplay.Align.RIGHT_CENTER;
+const AlignBottom = PhaserDisplay.Align.BOTTOM_CENTER;
 
 var UpdateIndicator = function (t) {
     var indicator = this.childrenMap.indicator;

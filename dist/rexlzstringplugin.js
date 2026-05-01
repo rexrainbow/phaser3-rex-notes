@@ -1,8 +1,8 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-	typeof define === 'function' && define.amd ? define(factory) :
-	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexlzstringplugin = factory());
-})(this, (function () { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+	typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexlzstringplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
 	function getDefaultExportFromCjs (x) {
 		return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
@@ -19,7 +19,7 @@
 	var lzString_minExports = lzString_min.exports;
 	var lzstringBase = /*@__PURE__*/getDefaultExportFromCjs(lzString_minExports);
 
-	const GetFastValue = Phaser.Utils.Objects.GetFastValue;
+	const GetFastValue = phaser.Utils.Objects.GetFastValue;
 
 	class LZString {
 	    constructor(config) {
@@ -87,7 +87,7 @@
 	    'decompressFromEncodedURIComponent'
 	];
 
-	class LZStringPlugin extends Phaser.Plugins.BasePlugin {
+	class LZStringPlugin extends phaser.Plugins.BasePlugin {
 	    constructor(pluginManager) {
 	        super(pluginManager);
 

@@ -4,7 +4,8 @@ import LayoutMode1 from './LayoutMode1.js';
 import LayoutMode2 from './LayoutMode2.js';
 import LayoutMode3 from './LayoutMode3.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 const LayoutCallbacks = [LayoutMode0, LayoutMode1, LayoutMode2, LayoutMode3];
 
 var Build = function (config) {

@@ -1,10 +1,10 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexparticlesalongboundsplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexparticlesalongboundsplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
-    const GetValue$3 = Phaser.Utils.Objects.GetValue;
+    const GetValue$3 = phaser.Utils.Objects.GetValue;
 
     var GetBoundsConfig = function (config, out) {
         if (config === undefined) {
@@ -28,8 +28,8 @@
         return out;
     };
 
-    const Rectangle = Phaser.Geom.Rectangle;
-    const GetValue$2 = Phaser.Utils.Objects.GetValue;
+    const Rectangle = phaser.Geom.Rectangle;
+    const GetValue$2 = phaser.Utils.Objects.GetValue;
 
     var BoundsToPoints = function (gameObject, config) {
         if (globRect === undefined) {
@@ -52,7 +52,7 @@
     var globRect;
     var globPadding;
 
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
     const TickTime = (1000 / 60);
 
     var CreateEmitterConfig = function (gameObject, config) {
@@ -135,9 +135,9 @@
         return emitterConfig;
     };
 
-    const PreUpdate = Phaser.GameObjects.Particles.ParticleEmitter.prototype.preUpdate;
-    const GetValue = Phaser.Utils.Objects.GetValue;
-    const Vector2 = Phaser.Math.Vector2;
+    const PreUpdate = phaser.GameObjects.Particles.ParticleEmitter.prototype.preUpdate;
+    const GetValue = phaser.Utils.Objects.GetValue;
+    const Vector2 = phaser.Math.Vector2;
 
     var SyncToGameObject = function (particles, gameObject, config) {
         var gravityX = GetValue(config, 'gravityX', 0);
@@ -210,7 +210,7 @@
         return particles;
     };
 
-    class ParticlesAlongBoundsPlugin extends Phaser.Plugins.BasePlugin {
+    class ParticlesAlongBoundsPlugin extends phaser.Plugins.BasePlugin {
         constructor(pluginManager) {
             super(pluginManager);
         }

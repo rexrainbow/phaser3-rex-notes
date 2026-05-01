@@ -1,6 +1,7 @@
 import OverlapSizer from '../overlapsizer/OverlapSizer.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 const BadgeKeys = {
     leftTop: 'left-top', centerTop: 'center-top', rightTop: 'right-top',
     leftCenter: 'left-center', center: 'center', rightCenter: 'right-center',

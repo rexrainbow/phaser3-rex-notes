@@ -1,6 +1,7 @@
 import GridCutImage from './gridcutimage';
 
-class GridCutImagePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class GridCutImagePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

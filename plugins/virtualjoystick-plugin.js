@@ -1,7 +1,8 @@
 import VirtualJoyStick from './virtualjoystick.js';
 import VectorToCursorKeys from './vectortocursorkeys.js';
 
-class VirtualJoyStickPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class VirtualJoyStickPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

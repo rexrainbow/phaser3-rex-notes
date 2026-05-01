@@ -2,8 +2,9 @@ import Container from '../../../container/containerlite/ContainerLite.js';
 import RotateMethods from './RotateMethods.js';
 import ForEachFace from './ForEachFace.js';
 
-const RadToDeg = Phaser.Math.RadToDeg;
-const DegToRad = Phaser.Math.DegToRad;
+import { Math as PhaserMath } from 'phaser';
+const RadToDeg = PhaserMath.RadToDeg;
+const DegToRad = PhaserMath.DegToRad;
 
 class FaceContainer extends Container {
     constructor(scene, x, y, width, height, faces) {

@@ -1,6 +1,7 @@
 import WaitEvents from './waitevents.js';
 
-class WaitEventsPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class WaitEventsPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

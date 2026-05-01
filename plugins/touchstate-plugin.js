@@ -1,6 +1,7 @@
 import TouchState from './touchstate.js';
 
-class TouchStatePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class TouchStatePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

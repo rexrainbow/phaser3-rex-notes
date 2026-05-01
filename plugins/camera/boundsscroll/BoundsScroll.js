@@ -2,7 +2,8 @@ import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import CursorAtBounds from '../../cursoratbounds.js';
 import GetCameraByName from '../../utils/camera/GetCameraByName.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Cameras as PhaserCameras, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class BoundsScroll extends ComponentBase {
     constructor(scene, config) {
@@ -17,7 +18,7 @@ class BoundsScroll extends ComponentBase {
 
         var boundsCursorKeys = this.cursorAtBounds.createCursorKeys();
 
-        this.cameraController = new Phaser.Cameras.Controls.SmoothedKeyControl({
+        this.cameraController = new PhaserCameras.Controls.SmoothedKeyControl({
             left: boundsCursorKeys.left,
             right: boundsCursorKeys.right,
             up: boundsCursorKeys.up,

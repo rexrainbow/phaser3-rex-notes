@@ -3,8 +3,9 @@ import IsFunction from '../../../utils/object/IsFunction.js';
 import CreateInputTextFromText from './CreateInputText.js';
 import NextTick from '../../../utils/time/NextTick.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Merge = Phaser.Utils.Objects.Merge;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const Merge = PhaserUtils.Objects.Merge;
 
 var Open = function (config, onCloseCallback) {
     if (config === undefined) {

@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import DisolveFilterPlugin from '../../plugins/dissolvefilter-plugin.js';
 
 var DissolveMainCamera = function (scene, duration) {

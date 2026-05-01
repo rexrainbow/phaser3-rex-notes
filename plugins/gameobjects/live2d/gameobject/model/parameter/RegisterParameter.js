@@ -1,7 +1,8 @@
 import { CubismFramework } from '../../../framework/src/live2dcubismframework';
 import { CubismDefaultParameterId } from '../../../framework/src/cubismdefaultparameterid';
 
-const Capitalize = Phaser.Utils.String.UppercaseFirst;
+import { Utils as PhaserUtils } from 'phaser';
+const Capitalize = PhaserUtils.String.UppercaseFirst;
 
 var RegisterParameter = function (name) {
     var capName = `Param${Capitalize(name)}`;

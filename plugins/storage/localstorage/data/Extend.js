@@ -3,7 +3,8 @@ import Load from './Load.js';
 import GetDefaultValue from './GetDefaultValue.js';
 import AddCallbacks from './AddCallbacks.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var methods = {
     load: Load,

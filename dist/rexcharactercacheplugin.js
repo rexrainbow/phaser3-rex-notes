@@ -1,13 +1,13 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcharactercacheplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcharactercacheplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var EventEmitterMethods = {
         setEventEmitter(eventEmitter, EventEmitterClass) {
             if (EventEmitterClass === undefined) {
-                EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+                EventEmitterClass = phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
             }
             this._privateEE = (eventEmitter === true) || (eventEmitter === undefined);
             this._eventEmitter = (this._privateEE) ? (new EventEmitterClass()) : eventEmitter;
@@ -96,12 +96,12 @@
         },
     };
 
-    const GameClass = Phaser.Game;
+    const GameClass = phaser.Game;
     var IsGame = function (object) {
         return (object instanceof GameClass);
     };
 
-    const SceneClass = Phaser.Scene;
+    const SceneClass = phaser.Scene;
     var IsSceneObject = function (object) {
         return (object instanceof SceneClass);
     };
@@ -553,8 +553,8 @@
         return textureManager[methodName](key, width, height);
     };
 
-    const IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$3 = Phaser.Utils.Objects.GetValue;
+    const IsPlainObject$1 = phaser.Utils.Objects.IsPlainObject;
+    const GetValue$3 = phaser.Utils.Objects.GetValue;
 
     class FrameManager {
         constructor(scene, key, width, height, cellWidth, cellHeight, fillColor, useDynamicTexture) {
@@ -711,7 +711,7 @@
         methods
     );
 
-    const GetValue$2 = Phaser.Utils.Objects.GetValue;
+    const GetValue$2 = phaser.Utils.Objects.GetValue;
 
     var CreateFrameManager = function (scene, config) {
         var key = GetValue$2(config, 'key');
@@ -9279,7 +9279,7 @@
         return collection;
     };
 
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
 
     var CreateCharacterItem = function (character) {
         return {
@@ -9499,8 +9499,8 @@
         return BitmapTextClass;
     };
 
-    const BitmapTextClass = CreateBitmapTextClass(Phaser.GameObjects.BitmapText);
-    const DynamicBitmapTextClass = CreateBitmapTextClass(Phaser.GameObjects.DynamicBitmapText);
+    const BitmapTextClass = CreateBitmapTextClass(phaser.GameObjects.BitmapText);
+    const DynamicBitmapTextClass = CreateBitmapTextClass(phaser.GameObjects.DynamicBitmapText);
 
     var BitmapTextMethods = {
         overrideBitmapText(bitmapText) {
@@ -9539,8 +9539,8 @@
         BitmapTextMethods
     );
 
-    const GetValue = Phaser.Utils.Objects.GetValue;
-    const TextGameObjectClass = Phaser.GameObjects.Text;
+    const GetValue = phaser.Utils.Objects.GetValue;
+    const TextGameObjectClass = phaser.GameObjects.Text;
 
     class CharacterCache {
         constructor(scene, config) {
@@ -9614,9 +9614,9 @@
         Methods
     );
 
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+    const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
 
-    class CharacterCachePlugin extends Phaser.Plugins.BasePlugin {
+    class CharacterCachePlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

@@ -1,6 +1,7 @@
 import LoopInTicks from './loopinticks.js'
 
-class LoopInTicksPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class LoopInTicksPlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
     }

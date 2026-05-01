@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import RunCommandsPlugin from '../../plugins/runcommands-plugin.js';
 import CSVToArray from '../../plugins/csvtoarray.js';
 

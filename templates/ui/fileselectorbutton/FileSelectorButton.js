@@ -2,7 +2,8 @@ import Label from '../label/Label.js';
 import { FileChooser } from '../filechooser/FileChooser.js';
 import FileChooserMethods from './FileChooserMethods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class FileSelectorButton extends Label {
     constructor(scene, config) {

@@ -4,8 +4,9 @@ import ForEachFace from '../utils/ForEachFace.js';
 import LayoutFaces from './LayoutFaces.js';
 import Flip from './Flip.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 const FaceNames = ['back', 'front'];
 

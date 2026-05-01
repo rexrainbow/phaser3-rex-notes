@@ -1,4 +1,5 @@
-const DegToRad = Phaser.Math.DegToRad;
+import { Math as PhaserMath } from 'phaser';
+const DegToRad = PhaserMath.DegToRad;
 const Rad120 = DegToRad(120);
 
 var DrawCircleVerticesTriangle = function (triangle) {

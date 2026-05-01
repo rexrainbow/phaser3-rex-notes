@@ -1,4 +1,5 @@
-const GetRandom = Phaser.Utils.Array.GetRandom;
+import { Utils as PhaserUtils } from 'phaser';
+const GetRandom = PhaserUtils.Array.GetRandom;
 
 var RandomSymbol = function (board, tileX, tileY, callback, scope, excluded) {
     var symbol;

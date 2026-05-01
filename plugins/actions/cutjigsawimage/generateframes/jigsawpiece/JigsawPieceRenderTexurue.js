@@ -1,12 +1,13 @@
 /* 
 Sample JigsawPiece, draw to FrameManager
 */
+import { GameObjects as PhaserGameObjects } from 'phaser';
 import JigsawPieceBase from './JigsawPieceBase.js';
 import DefaultDrawShapeCallback from './DefaultDrawShapeCallback.js';
 import ConvertEdgeMode from './ConvertEdgeMode.js';
 import { SetMask } from '../../../../utils/mask/MaskMethods.js';
 
-const RenderTexture = Phaser.GameObjects.RenderTexture;
+const RenderTexture = PhaserGameObjects.RenderTexture;
 
 class JigsawPieceRenderTexurue extends JigsawPieceBase(RenderTexture) {
     constructor(scene, config) {

@@ -1,4 +1,5 @@
-const PhaserText = Phaser.GameObjects.Text;
+import { GameObjects as PhaserGameObjects } from 'phaser';
+const PhaserText = PhaserGameObjects.Text;
 
 var CreateBuiltInText = function (scene, style) {
     var gameObject = new PhaserText(scene, 0, 0, '', style);

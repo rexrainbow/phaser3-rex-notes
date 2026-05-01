@@ -1,7 +1,8 @@
 import AwaitFile from './AwaitFile.js';
 import IsFunction from '../../utils/object/IsFunction.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 
 const LoaderCallback = function (key, config) {
     if (IsFunction(key)) {

@@ -2,7 +2,8 @@ import Vertex from '../vertex/Vertex.js';
 import Face from '../vertex/Face.js';
 import GenerateGridVertices from '../../utils/GenerateGridVertices.js';
 
-const GetFirst = Phaser.Utils.Array.GetFirst;
+import { Utils as PhaserUtils } from 'phaser';
+const GetFirst = PhaserUtils.Array.GetFirst;
 
 export default {
     clear() {

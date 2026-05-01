@@ -1,9 +1,10 @@
 import ReshapeArray1DTo2D from '../../../utils/array/ReshapeArray1DTo2D.js';
 
-const ArrayAdd = Phaser.Utils.Array.Add;
-const ArrayAddAt = Phaser.Utils.Array.AddAt;
-const ArrayRemove = Phaser.Utils.Array.Remove;
-const Clamp = Phaser.Math.Clamp;
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const ArrayAdd = PhaserUtils.Array.Add;
+const ArrayAddAt = PhaserUtils.Array.AddAt;
+const ArrayRemove = PhaserUtils.Array.Remove;
+const Clamp = PhaserMath.Clamp;
 
 export default {
     setTargets(gameObjects, columns) {

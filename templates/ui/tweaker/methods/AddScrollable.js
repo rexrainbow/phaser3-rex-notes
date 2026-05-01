@@ -1,6 +1,7 @@
 import CreateScrollable from '../builders/CreateScrollable';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var AddScrollable = function (config) {
     if (config === undefined) {

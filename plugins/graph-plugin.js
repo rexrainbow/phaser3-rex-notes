@@ -6,7 +6,8 @@ import BuildGraphFromText from './graph/buildgraphfromtext/BuildGraphFromText.js
 import ELKLayout from './graph/layout/ELKLayout.js';
 import DagreLayout from './graph/layout/DagreLayout.js';
 
-class GraphPlugin extends Phaser.Plugins.ScenePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class GraphPlugin extends PhaserPlugins.ScenePlugin {
     constructor(scene, pluginManager) {
         super(scene, pluginManager);
 

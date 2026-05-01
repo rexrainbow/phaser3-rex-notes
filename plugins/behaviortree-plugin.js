@@ -1,7 +1,8 @@
 import ObjectFactory from './logic/behaviortree/ObjectFactory.js';
 import Factory from './logic/behaviortree/Factory.js';
 
-class BehaviorTreePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class BehaviorTreePlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
 

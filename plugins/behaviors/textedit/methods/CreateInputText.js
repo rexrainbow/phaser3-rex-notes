@@ -1,8 +1,9 @@
 import InputText from '../../../gameobjects/dom/inputtext/InputText.js';
 import IsTextGameObject from '../../../utils/text/IsTextGameObject.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Clone = Phaser.Utils.Objects.Clone;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const Clone = PhaserUtils.Objects.Clone;
 
 var CreateInputText = function (text, config) {
     if (config === undefined) {

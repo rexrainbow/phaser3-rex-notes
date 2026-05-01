@@ -1,7 +1,8 @@
 import Methods from './methods/Methods.js';
 import Pool from '../../../../pool.js';
 
-const GetFastValue = Phaser.Utils.Objects.GetFastValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetFastValue = PhaserUtils.Objects.GetFastValue;
 
 var PensPool = new Pool(); // default pens pool
 var LinesPool = new Pool(); // default lines pool

@@ -1,6 +1,7 @@
 import CreateWrap from '../builders/CreateWrap.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var AddWrap = function (config) {
     if (config === undefined) {

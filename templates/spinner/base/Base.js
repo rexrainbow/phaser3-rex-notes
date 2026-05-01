@@ -1,7 +1,8 @@
 import BaseShapes from '../../../plugins/gameobjects/shape/shapes/BaseShapes.js';
 import EaseValueMethods from './EaseValueMethods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Base extends BaseShapes {
     constructor(scene, config) {
@@ -89,7 +90,7 @@ class Base extends BaseShapes {
     }
 
     set value(value) {
-        value = Phaser.Math.Clamp(value, 0, 1);
+        value = PhaserMath.Clamp(value, 0, 1);
         this.dirty = this.dirty || (this._value != value);
         this._value = value;
     }

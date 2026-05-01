@@ -4,8 +4,9 @@ import AddSpriteManager from './methods/spritemanager/AddSpriteManager.js';
 import AddTextManager from './methods/textmanager/AddTextManager.js';
 import Methods from './methods/Methods.js';
 
-const EventEmitter = Phaser.Events.EventEmitter;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Events as PhaserEvents, Utils as PhaserUtils } from 'phaser';
+const EventEmitter = PhaserEvents.EventEmitter;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class TagPlayer extends Extend(EventEmitter) {
     constructor(scene, config) {

@@ -1,6 +1,7 @@
 import CreateTab from '../builders/CreateTab.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var AddTab = function (config) {
     if (config === undefined) {

@@ -1,10 +1,11 @@
 import Canvas from '../../../canvas/Canvas.js';
 import { DrawSVPalette } from '../../../../../plugins/utils/canvas/DrawHSVPalette.js';
 
-const Color = Phaser.Display.Color;
-const Percent = Phaser.Math.Percent;
-const ColorToRGBA = Phaser.Display.Color.ColorToRGBA;
-const HSVToRGB = Phaser.Display.Color.HSVToRGB;
+import { Display as PhaserDisplay, Math as PhaserMath } from 'phaser';
+const Color = PhaserDisplay.Color;
+const Percent = PhaserMath.Percent;
+const ColorToRGBA = PhaserDisplay.Color.ColorToRGBA;
+const HSVToRGB = PhaserDisplay.Color.HSVToRGB;
 
 class SVPaletteCanvas extends Canvas {
     constructor(scene, x, y, width, height, hue) {

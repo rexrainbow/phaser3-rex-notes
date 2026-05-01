@@ -1,7 +1,8 @@
 import ToggleSwitchShape from './ToggleSwitchShape.js';
 import Click from '../../../input/button/Button.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class ToggleSwitch extends ToggleSwitchShape {
     constructor(scene, x, y, width, height, color, config) {

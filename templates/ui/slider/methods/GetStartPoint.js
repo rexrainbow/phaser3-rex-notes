@@ -1,7 +1,8 @@
 import GetThumbAlignPoint from './GetThumbAlignPoint.js';
 
-const AlignLeft = Phaser.Display.Align.LEFT_CENTER;
-const AlignTop = Phaser.Display.Align.TOP_CENTER;
+import { Display as PhaserDisplay } from 'phaser';
+const AlignLeft = PhaserDisplay.Align.LEFT_CENTER;
+const AlignTop = PhaserDisplay.Align.TOP_CENTER;
 
 var GetStartPoint = function (out) {
     if (out === undefined) {

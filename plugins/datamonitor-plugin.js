@@ -1,6 +1,7 @@
 import AddDataMonitor from './datamonitor';
 
-class DataMonitorPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class DataMonitorPlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
     }

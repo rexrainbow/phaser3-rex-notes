@@ -1,6 +1,7 @@
 import KeysHub from './keyshub.js';
 
-class KeysHubPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class KeysHubPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

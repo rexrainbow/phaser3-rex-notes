@@ -1,5 +1,6 @@
-const Vector2 = Phaser.Math.Vector2;
-const Distance = Phaser.Math.Distance.Between;
+import { Math as PhaserMath } from 'phaser';
+const Vector2 = PhaserMath.Vector2;
+const Distance = PhaserMath.Distance.Between;
 
 var AddCohesionForce = function (myAgent, neighbors, weight, distanceThreshold, out) {
     // Steer towards average position of neighbors (long range attraction)
@@ -35,16 +36,16 @@ var AddCohesionForce = function (myAgent, neighbors, weight, distanceThreshold, 
 
     var dx = centerPosition.x - myAgent.x;
     var dy = centerPosition.y - myAgent.y;
-    var d = Math.sqrt((dx * dx) + (dy * dy));
+    var d = PhaserMath.sqrt((dx * dx) + (dy * dy));
 
     var p = weight;
     if (distanceThreshold !== Infinity) {
         p *= (d / distanceThreshold);
     }
 
-    var angle = Math.atan2(dy, dx);
-    out.x += (Math.cos(angle) * p);
-    out.y += (Math.sin(angle) * p);
+    var angle = PhaserMath.atan2(dy, dx);
+    out.x += (PhaserMath.cos(angle) * p);
+    out.y += (PhaserMath.sin(angle) * p);
 
     return out;
 }

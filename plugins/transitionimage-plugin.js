@@ -3,7 +3,8 @@ import Creator from './gameobjects/image/transitionimage/Creator.js';
 import TransitionImage from './gameobjects/image/transitionimage/TransitionImage.js';
 import SetValue from './utils/object/SetValue.js';
 
-class TransitionImagePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class TransitionImagePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

@@ -1,6 +1,7 @@
+import { Utils as PhaserUtils } from 'phaser';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var LookAt = function (x, y, config) {
     if (IsPlainObject(x)) {

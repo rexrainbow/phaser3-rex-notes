@@ -1,6 +1,7 @@
 import Perlin from './perlin.js';
 
-class PerlinPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class PerlinPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

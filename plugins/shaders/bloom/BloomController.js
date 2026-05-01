@@ -1,8 +1,9 @@
 import BloomStepController from './BloomStepController.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Filters as PhaserFilters, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
-class BloomController extends Phaser.Filters.ParallelFilters {
+class BloomController extends PhaserFilters.ParallelFilters {
     constructor(camera, config) {
         super(camera);
 

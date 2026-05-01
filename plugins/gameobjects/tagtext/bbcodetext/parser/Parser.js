@@ -4,7 +4,8 @@ import PropToContextStyle from './PropToContextStyle.js'
 import PropToTagText from './PropToTagText.js';
 import { GetTagRegex, SetDelimiters } from './TagRegex.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Parser {
     constructor(style) {

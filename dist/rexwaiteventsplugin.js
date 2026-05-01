@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexwaiteventsplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexwaiteventsplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     class WaitEvents {
         constructor(completeCallback, scope) {
@@ -64,7 +64,7 @@
         }
     }
 
-    class WaitEventsPlugin extends Phaser.Plugins.BasePlugin {
+    class WaitEventsPlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

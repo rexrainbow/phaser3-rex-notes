@@ -4,7 +4,8 @@ import DeepClone from '../../../../plugins/utils/object/DeepClone.js';
 import { GetOptionIndex } from './utils/OptionsMethods.js';
 import SetButtonsActiveStateByIndex from './utils/SetButtonsActiveState.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var SetOptions = function (gameObject, options) {
     var buttons = gameObject.childrenMap.buttons;

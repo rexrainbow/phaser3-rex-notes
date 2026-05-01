@@ -3,7 +3,8 @@ import Creator from './gameobjects/shape/customshapes/Creator.js';
 import CustomShapes from './gameobjects/shape/customshapes/CustomShapes.js';
 import SetValue from './utils/object/SetValue.js';
 
-class CustomShapesPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class CustomShapesPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

@@ -1,4 +1,5 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var CreateRectangle = function (scene, config) {
     var x = GetValue(config, 'x', 0);

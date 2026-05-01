@@ -1,13 +1,13 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcameracontrollerplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcameracontrollerplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var EventEmitterMethods$1 = {
         setEventEmitter(eventEmitter, EventEmitterClass) {
             if (EventEmitterClass === undefined) {
-                EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+                EventEmitterClass = phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
             }
             this._privateEE = (eventEmitter === true) || (eventEmitter === undefined);
             this._eventEmitter = (this._privateEE) ? (new EventEmitterClass()) : eventEmitter;
@@ -96,7 +96,7 @@
         },
     };
 
-    const SceneClass = Phaser.Scene;
+    const SceneClass = phaser.Scene;
     var IsSceneObject = function (object) {
         return (object instanceof SceneClass);
     };
@@ -115,7 +115,7 @@
         }
     };
 
-    const GameClass = Phaser.Game;
+    const GameClass = phaser.Game;
     var IsGame = function (object) {
         return (object instanceof GameClass);
     };
@@ -134,7 +134,7 @@
         }
     };
 
-    const GetValue$h = Phaser.Utils.Objects.GetValue;
+    const GetValue$h = phaser.Utils.Objects.GetValue;
 
     class ComponentBase {
         constructor(parent, config) {
@@ -220,7 +220,7 @@
         EventEmitterMethods$1
     );
 
-    const GetValue$g = Phaser.Utils.Objects.GetValue;
+    const GetValue$g = phaser.Utils.Objects.GetValue;
 
     class TickTask extends ComponentBase {
         constructor(parent, config) {
@@ -349,10 +349,10 @@
         }
     };
 
-    const Rectangle$1 = Phaser.Geom.Rectangle;
-    const Vector2 = Phaser.Math.Vector2;
-    const RotateAround$1 = Phaser.Math.RotateAround;
-    const P3Container = Phaser.GameObjects.Container;
+    const Rectangle$1 = phaser.Geom.Rectangle;
+    const Vector2 = phaser.Math.Vector2;
+    const RotateAround$1 = phaser.Math.RotateAround;
+    const P3Container = phaser.GameObjects.Container;
 
     var GetBounds = function (gameObject, output) {
         if (output === undefined) {
@@ -626,7 +626,7 @@
         return PointerTest(gameObject, pointer, IsPointInBounds, preTest, postTest)
     };
 
-    const GetValue$f = Phaser.Utils.Objects.GetValue;
+    const GetValue$f = phaser.Utils.Objects.GetValue;
 
     class OnePointerTracer extends TickTask {
         constructor(gameObject, config) {
@@ -1791,12 +1791,12 @@
         }
     }
 
-    Phaser.Utils.Objects.GetValue;
-    Phaser.Math.Distance.Between;
+    phaser.Utils.Objects.GetValue;
+    phaser.Math.Distance.Between;
 
-    Phaser.Utils.Objects.GetValue;
+    phaser.Utils.Objects.GetValue;
 
-    const GetValue$d = Phaser.Utils.Objects.GetValue;
+    const GetValue$d = phaser.Utils.Objects.GetValue;
 
     class Pan extends OnePointerTracer {
         constructor(gameObject, config) {
@@ -1924,8 +1924,8 @@
         return GetGame(game).loop.delta;
     };
 
-    const DistanceBetween$1 = Phaser.Math.Distance.Between;
-    const AngleBetween$1 = Phaser.Math.Angle.Between;
+    const DistanceBetween$1 = phaser.Math.Distance.Between;
+    const AngleBetween$1 = phaser.Math.Angle.Between;
 
     var VelocityMethods = {
         getDt: function () {
@@ -2044,8 +2044,8 @@
 
     var globOut = {};
 
-    const GetValue$c = Phaser.Utils.Objects.GetValue;
-    const RadToDeg$1 = Phaser.Math.RadToDeg;
+    const GetValue$c = phaser.Utils.Objects.GetValue;
+    const RadToDeg$1 = phaser.Math.RadToDeg;
 
     class Swipe extends OnePointerTracer {
         constructor(gameObject, config) {
@@ -2210,10 +2210,10 @@
         return obj;
     };
 
-    const GetValue$b = Phaser.Utils.Objects.GetValue;
-    const SpliceOne = Phaser.Utils.Array.SpliceOne;
-    const DistanceBetween = Phaser.Math.Distance.Between;
-    const AngleBetween = Phaser.Math.Angle.Between;
+    const GetValue$b = phaser.Utils.Objects.GetValue;
+    const SpliceOne = phaser.Utils.Array.SpliceOne;
+    const DistanceBetween = phaser.Math.Distance.Between;
+    const AngleBetween = phaser.Math.Angle.Between;
 
     class TwoPointersTracer {
         constructor(gameObject, config) {
@@ -2577,7 +2577,7 @@
 
     const IDLE$3 = 'IDLE';
 
-    const GetValue$a = Phaser.Utils.Objects.GetValue;
+    const GetValue$a = phaser.Utils.Objects.GetValue;
 
     class Pinch extends TwoPointersTracer {
         constructor(gameObject, config) {
@@ -2669,7 +2669,7 @@
     const BEGIN$1 = 'BEGIN';
     const RECOGNIZED$1 = 'RECOGNIZED';
 
-    const RotateAround = Phaser.Math.RotateAround;
+    const RotateAround = phaser.Math.RotateAround;
 
     var RotateObjectAround = function (gameObject, x, y, angle) {
         RotateAround(gameObject, x, y, angle);
@@ -2723,11 +2723,11 @@
         return this;
     };
 
-    const GetValue$9 = Phaser.Utils.Objects.GetValue;
-    const WrapDegrees = Phaser.Math.Angle.WrapDegrees; // Wrap degrees: -180 to 180 
-    const ShortestBetween = Phaser.Math.Angle.ShortestBetween;
-    const RadToDeg = Phaser.Math.RadToDeg;
-    const DegToRad = Phaser.Math.DegToRad;
+    const GetValue$9 = phaser.Utils.Objects.GetValue;
+    const WrapDegrees = phaser.Math.Angle.WrapDegrees; // Wrap degrees: -180 to 180 
+    const ShortestBetween = phaser.Math.Angle.ShortestBetween;
+    const RadToDeg = phaser.Math.RadToDeg;
+    const DegToRad = phaser.Math.DegToRad;
 
     class Rotate extends TwoPointersTracer {
         constructor(gameObject, config) {
@@ -2857,7 +2857,7 @@
         return camera;
     };
 
-    const GetValue$8 = Phaser.Utils.Objects.GetValue;
+    const GetValue$8 = phaser.Utils.Objects.GetValue;
 
     class PanScroll extends ComponentBase {
         constructor(scene, config) {
@@ -2939,7 +2939,7 @@
         }
     }
 
-    const GetValue$7 = Phaser.Utils.Objects.GetValue;
+    const GetValue$7 = phaser.Utils.Objects.GetValue;
 
     class PinchZoom extends ComponentBase {
         constructor(scene, config) {
@@ -3069,8 +3069,8 @@
         }
     }
 
-    const Key = Phaser.Input.Keyboard.Key;
-    const KeyCodes = Phaser.Input.Keyboard.KeyCodes;
+    const Key = phaser.Input.Keyboard.Key;
+    const KeyCodes = phaser.Input.Keyboard.KeyCodes;
     const KeyNames = ['up', 'down', 'left', 'right'];
 
     class CursorKeys {
@@ -3196,13 +3196,13 @@
         location: 0,
     };
 
-    const CameraClass = Phaser.Cameras.Scene2D.BaseCamera;
+    const CameraClass = phaser.Cameras.Scene2D.BaseCamera;
 
     var IsCameraObject = function (object) {
         return (object instanceof CameraClass);
     };
 
-    const Rectangle = Phaser.Geom.Rectangle;
+    const Rectangle = phaser.Geom.Rectangle;
 
     var GetViewport = function (scene, camera, out) {
         if (!IsCameraObject(camera)) {
@@ -3225,7 +3225,7 @@
 
     var globRect = new Rectangle();
 
-    const GetValue$6 = Phaser.Utils.Objects.GetValue;
+    const GetValue$6 = phaser.Utils.Objects.GetValue;
 
     class CursorAtBounds extends CursorKeys {
         constructor(scene, config) {
@@ -3391,7 +3391,7 @@
         }
     }
 
-    const GetValue$5 = Phaser.Utils.Objects.GetValue;
+    const GetValue$5 = phaser.Utils.Objects.GetValue;
 
     class BoundsScroll extends ComponentBase {
         constructor(scene, config) {
@@ -3406,7 +3406,7 @@
 
             var boundsCursorKeys = this.cursorAtBounds.createCursorKeys();
 
-            this.cameraController = new Phaser.Cameras.Controls.SmoothedKeyControl({
+            this.cameraController = new phaser.Cameras.Controls.SmoothedKeyControl({
                 left: boundsCursorKeys.left,
                 right: boundsCursorKeys.right,
                 up: boundsCursorKeys.up,
@@ -3484,7 +3484,7 @@
         }
     }
 
-    const GetValue$4 = Phaser.Utils.Objects.GetValue;
+    const GetValue$4 = phaser.Utils.Objects.GetValue;
 
     class SceneUpdateTickTask extends TickTask {
         constructor(parent, config) {
@@ -3531,8 +3531,8 @@
         return (eventName === 'step') || (eventName === 'poststep');
     };
 
-    const GetValue$3 = Phaser.Utils.Objects.GetValue;
-    const Clamp = Phaser.Math.Clamp;
+    const GetValue$3 = phaser.Utils.Objects.GetValue;
+    const Clamp = phaser.Math.Clamp;
 
     class Timer {
         constructor(config) {
@@ -3756,9 +3756,9 @@
 
     }
 
-    const GetValue$2 = Phaser.Utils.Objects.GetValue;
-    const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-    const GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
+    const GetValue$2 = phaser.Utils.Objects.GetValue;
+    const GetAdvancedValue = phaser.Utils.Objects.GetAdvancedValue;
+    const GetEaseFunction = phaser.Tweens.Builders.GetEaseFunction;
 
     class EaseValueTaskBase extends TimerTickTask {
         resetFromJSON(o) {
@@ -3904,7 +3904,7 @@
         camera.scrollY -= (newWorldXY.y - worldXY.y);
     };
 
-    const Linear = Phaser.Math.Linear;
+    const Linear = phaser.Math.Linear;
 
     class EaseZoom extends EaseValueTaskBase {
         constructor(parent, config) {
@@ -3936,8 +3936,8 @@
         }
     }
 
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
-    Phaser.Math.Clamp;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
+    phaser.Math.Clamp;
 
     class MouseWheelZoom extends ComponentBase {
         constructor(scene, config) {
@@ -4125,7 +4125,7 @@
         return clonedObj;
     }
 
-    const GetValue = Phaser.Utils.Objects.GetValue;
+    const GetValue = phaser.Utils.Objects.GetValue;
 
     class ControllerPack extends ComponentBase {
         constructor(scene, config) {
@@ -4399,7 +4399,7 @@
         }
     }
 
-    class CameraControllerPlugin extends Phaser.Plugins.BasePlugin {
+    class CameraControllerPlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

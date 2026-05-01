@@ -1,7 +1,8 @@
+import { Utils as PhaserUtils } from 'phaser';
 import GetValueFromAlias from '../../utils/object/GetValueFromAliasKeys.js';
 import GetViewport from '../../utils/system/GetViewport.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var SetPosition = function (gameObject, config) {
     var expandDirection = GetValue(config, 'expandDirection', undefined);

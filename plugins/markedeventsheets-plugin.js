@@ -2,7 +2,8 @@ import MarkedEventSheets from './markedeventsheets.js';
 import CommandExecutor from './commandexecutor.js';
 import CSV2MD from './logic/eventsheets/markedeventsheets/CSV2MD.js';
 
-class MarkedEventSheetsPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class MarkedEventSheetsPlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
     }

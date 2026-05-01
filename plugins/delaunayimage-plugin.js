@@ -8,7 +8,8 @@ import DelaunayRenderTexture from './gameobjects/mesh/delaunay/rendertexture/Ren
 
 import SetValue from './utils/object/SetValue.js';
 
-class DelaunayImagePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class DelaunayImagePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

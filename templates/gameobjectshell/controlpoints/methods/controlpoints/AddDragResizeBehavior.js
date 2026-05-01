@@ -1,3 +1,4 @@
+import { Math as PhaserMath } from 'phaser';
 var AddDragResizeBehavior = function (parent, dragPoint, fixedPoint, dragAxis) {
     var canDragWidth = (dragAxis.indexOf('x') !== -1);
     var canDragHeight = (dragAxis.indexOf('y') !== -1);
@@ -17,7 +18,7 @@ var AddDragResizeBehavior = function (parent, dragPoint, fixedPoint, dragAxis) {
                 fixedY = fixedPoint.y;
 
             if (GlobalDragVector === undefined) {
-                GlobalDragVector = new Phaser.Math.Vector2();
+                GlobalDragVector = new PhaserMath.Vector2();
             }
             GlobalDragVector
                 .setTo(dragX - fixedX, dragY - fixedY)

@@ -10,7 +10,8 @@ import Refresh from './Refresh.js';
 import ScrollMethods from './ScrollMethods.js';
 import PointerOverTestMethods from './input/PointerOverTestMethods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class GridTable extends Scrollable {
     constructor(scene, config) {

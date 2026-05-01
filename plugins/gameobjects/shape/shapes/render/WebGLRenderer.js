@@ -1,4 +1,5 @@
-const GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
+import { GameObjects as PhaserGameObjects } from 'phaser';
+const GetCalcMatrix = PhaserGameObjects.GetCalcMatrix;
 
 var WebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
     src.updateData();

@@ -1,7 +1,8 @@
 import { FilterName } from './const.js';
 import FragSrc from './colorreplace-frag.js';
 
-class ColorReplaceFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+import { Renderer as PhaserRenderer } from 'phaser';
+class ColorReplaceFilter extends PhaserRenderer.WebGL.RenderNodes.BaseFilterShader {
     static FilterName = FilterName;
 
     constructor(manager) {

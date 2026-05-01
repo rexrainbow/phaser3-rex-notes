@@ -4,7 +4,8 @@ import FillStyleCanvas from '../../../utils/render/FillStyleCanvas.js';
 import StrokePathCanvas from '../../../utils/render/StrokePathCanvas.js';
 import StrokePathMethods from '../../../utils/strokepath/StrokePathMethods.js';
 
-var Utils = Phaser.Renderer.WebGL.Utils;
+import { Renderer as PhaserRenderer } from 'phaser';
+var Utils = PhaserRenderer.WebGL.Utils;
 
 class Rectangle extends BaseGeom {
     constructor(x, y, width, height) {

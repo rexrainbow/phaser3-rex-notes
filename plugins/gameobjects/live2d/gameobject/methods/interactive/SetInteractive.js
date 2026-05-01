@@ -1,7 +1,8 @@
 import HitAreaCallback from './HitAreaCallback.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GameObject = Phaser.GameObjects.GameObject;
+import { GameObjects as PhaserGameObjects, Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GameObject = PhaserGameObjects.GameObject;
 
 var SetInteractive = function (hitArea, hitAreaCallback, dropZone) {
     var isInit = !this.input;

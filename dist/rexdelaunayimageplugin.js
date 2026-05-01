@@ -1,16 +1,16 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexdelaunayimageplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexdelaunayimageplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
-    const GameObject = Phaser.GameObjects.GameObject;
+    const GameObject = phaser.GameObjects.GameObject;
 
     let Image$1 = class Image extends GameObject {
     };
 
-    const Components = Phaser.GameObjects.Components;
-    Phaser.Class.mixin(Image$1,
+    const Components = phaser.GameObjects.Components;
+    phaser.Class.mixin(Image$1,
         [
             Components.AlphaSingle,
             Components.BlendMode,
@@ -27,7 +27,7 @@
         ]
     );
 
-    const GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
+    const GetCalcMatrix = phaser.GameObjects.GetCalcMatrix;
 
     var renderOptions = {
         multiTexturing: false,
@@ -88,7 +88,7 @@
         skipRender: SkipRender,
     };
 
-    const RotateAround$1 = Phaser.Math.RotateAround;
+    const RotateAround$1 = phaser.Math.RotateAround;
 
     var LocalXYToWorldXY = function (gameObject, localX, localY, out) {
         if (out === undefined) {
@@ -134,8 +134,8 @@
 
     var GlobalXY$1 = {};
 
-    const Linear = Phaser.Math.Linear;
-    const RotateAround = Phaser.Math.RotateAround;
+    const Linear = phaser.Math.Linear;
+    const RotateAround = phaser.Math.RotateAround;
 
     class Vertex {
         constructor() {
@@ -389,7 +389,7 @@
 
     var GlobalXY = {};
 
-    const InCenter = Phaser.Geom.Triangle.InCenter;
+    const InCenter = phaser.Geom.Triangle.InCenter;
 
     var GetInCenter = function (face, out) {
         if (out === undefined) {
@@ -425,10 +425,10 @@
         return GlobTriangle.contains(x, y);
     };
 
-    var GlobTriangle = new Phaser.Geom.Triangle();
+    var GlobTriangle = new phaser.Geom.Triangle();
 
-    const RadToDeg = Phaser.Math.RadToDeg;
-    const DegToRad = Phaser.Math.DegToRad;
+    const RadToDeg = phaser.Math.RadToDeg;
+    const DegToRad = phaser.Math.DegToRad;
 
     class Face {
         constructor(vertex0, vertex1, vertex2) {
@@ -788,7 +788,7 @@
         return faces;
     };
 
-    const GetFirst = Phaser.Utils.Array.GetFirst;
+    const GetFirst = phaser.Utils.Array.GetFirst;
 
     var VertexMethods = {
         clear() {
@@ -1034,7 +1034,7 @@
 
         clearTint() {
             this.setTint(0xffffff);
-            this.setTintMode(Phaser.TintModes.MULTIPLY);
+            this.setTintMode(phaser.TintModes.MULTIPLY);
             return this;
         }
     };
@@ -1074,8 +1074,8 @@
         },
     };
 
-    const TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
-    const TransformXY = Phaser.Math.TransformXY;
+    const TransformMatrix = phaser.GameObjects.Components.TransformMatrix;
+    const TransformXY = phaser.Math.TransformXY;
 
     var WorldXYToGameObjectLocalXY = function (gameObject, worldX, worldY, camera, out) {
         if (camera === undefined) {
@@ -1224,17 +1224,17 @@
         PointMethods,
     );
 
-    const ShaderSourceFS = Phaser.Renderer.WebGL.Shaders.MultiFrag;
-    const ShaderSourceVS = Phaser.Renderer.WebGL.Shaders.MultiVert;
-    const ShaderAdditionMakers = Phaser.Renderer.WebGL.ShaderAdditionMakers;
+    const ShaderSourceFS = phaser.Renderer.WebGL.Shaders.MultiFrag;
+    const ShaderSourceVS = phaser.Renderer.WebGL.Shaders.MultiVert;
+    const ShaderAdditionMakers = phaser.Renderer.WebGL.ShaderAdditionMakers;
     const MakeApplyTint = ShaderAdditionMakers.MakeApplyTint;
     const MakeDefineTexCount = ShaderAdditionMakers.MakeDefineTexCount;
     const MakeGetTexCoordOut = ShaderAdditionMakers.MakeGetTexCoordOut;
     const MakeGetTexRes = ShaderAdditionMakers.MakeGetTexRes;
     const MakeSmoothPixelArt = ShaderAdditionMakers.MakeSmoothPixelArt;
     const MakeGetTexture = ShaderAdditionMakers.MakeGetTexture;
-    const Utils = Phaser.Renderer.WebGL.Utils;
-    const BatchHandlerQuad = Phaser.Renderer.WebGL.RenderNodes.BatchHandlerQuad;
+    const Utils = phaser.Renderer.WebGL.Utils;
+    const BatchHandlerQuad = phaser.Renderer.WebGL.RenderNodes.BatchHandlerQuad;
     const getTint = Utils.getTintAppendFloatAlpha;
 
     class BatchHandlerTriangles extends BatchHandlerQuad {
@@ -1408,12 +1408,12 @@
         }
     };
 
-    const GameClass = Phaser.Game;
+    const GameClass = phaser.Game;
     var IsGame = function (object) {
         return (object instanceof GameClass);
     };
 
-    const SceneClass = Phaser.Scene;
+    const SceneClass = phaser.Scene;
     var IsSceneObject = function (object) {
         return (object instanceof SceneClass);
     };
@@ -1439,7 +1439,7 @@
         }
     };
 
-    const DefaultMeshNodes = new Phaser.Structs.Map([
+    const DefaultMeshNodes = new phaser.Structs.Map([
         ['BatchHandler', 'rexBatchHandlerTriangles']
     ]);
 
@@ -1467,7 +1467,7 @@
             this.alphaBuffer = null;
             this.colorBuffer = null;
 
-            this.tintMode = Phaser.TintModes.MULTIPLY;
+            this.tintMode = phaser.TintModes.MULTIPLY;
 
             this.debugCallback = null;
             this.debugGraphic = null;
@@ -1605,7 +1605,7 @@
         AnmiationMethods,
     );
 
-    const AnimationState = Phaser.Animations.AnimationState;
+    const AnimationState = phaser.Animations.AnimationState;
 
     class Sprite extends Image {
         constructor(scene, x, y, texture, frame) {
@@ -1892,7 +1892,7 @@
     var delaunayExports = delaunay.exports;
     var Delaunay = /*@__PURE__*/getDefaultExportFromCjs(delaunayExports);
 
-    const Triangle = Phaser.Geom.Triangle;
+    const Triangle = phaser.Geom.Triangle;
 
     var Triangulate = function (vertices, triangleResult) {
         if (triangleResult === undefined) {
@@ -1918,8 +1918,8 @@
         }
     };
 
-    const GetValue$2 = Phaser.Utils.Objects.GetValue;
-    const Rectangle = Phaser.Geom.Rectangle;
+    const GetValue$2 = phaser.Utils.Objects.GetValue;
+    const Rectangle = phaser.Geom.Rectangle;
 
     var RectangleToTriangles = function (config) {
         var rectangle = config.rectangle;
@@ -1932,7 +1932,7 @@
 
         var totalPoints = Math.ceil(total / 2) + 3;
 
-        var points = Phaser.Geom.Rectangle.Decompose(rectangle);
+        var points = phaser.Geom.Rectangle.Decompose(rectangle);
 
         var width = rectangle.width, height = rectangle.height;
         InnerRectangle.setTo(
@@ -1958,7 +1958,7 @@
 
     var InnerRectangle = new Rectangle();
 
-    const IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
+    const IsPlainObject$2 = phaser.Utils.Objects.IsPlainObject;
 
     var ReTriangulate = function (config) {
         if (IsPlainObject$2(config)) {
@@ -2009,8 +2009,8 @@
         ConfigurationMethods
     );
 
-    const IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+    const IsPlainObject$1 = phaser.Utils.Objects.IsPlainObject;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
 
     class ShatterImage extends Sprite {
         constructor(scene, x, y, key, frame, config) {
@@ -2042,8 +2042,8 @@
         return gameObject;
     }
 
-    const GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
-    const BuildGameObject$1 = Phaser.GameObjects.BuildGameObject;
+    const GetAdvancedValue$1 = phaser.Utils.Objects.GetAdvancedValue;
+    const BuildGameObject$1 = phaser.GameObjects.BuildGameObject;
 
     function DelaunayImageCreator (config, addToScene) {
         if (config === undefined) { config = {}; }
@@ -2058,7 +2058,7 @@
         return gameObject;
     }
 
-    const DynamicTexture = Phaser.Textures.DynamicTexture;
+    const DynamicTexture = phaser.Textures.DynamicTexture;
 
     var CreateDynamicTexture = function (scene, width, height) {
         if (width === undefined) {
@@ -2071,8 +2071,8 @@
         return dt;
     };
 
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue = Phaser.Utils.Objects.GetValue;
+    const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
+    const GetValue = phaser.Utils.Objects.GetValue;
 
     class RenderTexture extends ShatterImage {
         constructor(scene, x, y, width, height, config) {
@@ -2111,8 +2111,8 @@
         return gameObject;
     }
 
-    const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-    const BuildGameObject = Phaser.GameObjects.BuildGameObject;
+    const GetAdvancedValue = phaser.Utils.Objects.GetAdvancedValue;
+    const BuildGameObject = phaser.GameObjects.BuildGameObject;
 
     function DelaunayRenderTextureCreator (config, addToScene) {
         if (config === undefined) { config = {}; }
@@ -2201,7 +2201,7 @@
         return target;
     };
 
-    class DelaunayImagePlugin extends Phaser.Plugins.BasePlugin {
+    class DelaunayImagePlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

@@ -1,4 +1,5 @@
-var Rectangle = Phaser.Geom.Rectangle;
+import { Geom as PhaserGeom } from 'phaser';
+var Rectangle = PhaserGeom.Rectangle;
 var GetBoardBounds = function (out) {
     if (out === undefined) {
         out = new Rectangle();

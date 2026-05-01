@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexlineplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexlineplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var DrawImage = function (key, frame, x, y, width, height) {
         var textureFrame = this.scene.sys.textures.getFrame(key, frame);
@@ -27,8 +27,8 @@
         this.render();
     };
 
-    const DistanceBetween = Phaser.Math.Distance.Between;
-    const AngleBetween = Phaser.Math.Angle.Between;
+    const DistanceBetween = phaser.Math.Distance.Between;
+    const AngleBetween = phaser.Math.Angle.Between;
 
     var UpdateTexture = function () {
         if (!this.redraw) {
@@ -122,8 +122,8 @@
         EndDraw.call(this);
     };
 
-    const RenderTexture = Phaser.GameObjects.RenderTexture;
-    const GetValue = Phaser.Utils.Objects.GetValue;
+    const RenderTexture = phaser.GameObjects.RenderTexture;
+    const GetValue = phaser.Utils.Objects.GetValue;
 
     class Line extends RenderTexture {
         constructor(scene, config) {
@@ -309,7 +309,7 @@
         return gameObject;
     }
 
-    const BuildGameObject = Phaser.GameObjects.BuildGameObject;
+    const BuildGameObject = phaser.GameObjects.BuildGameObject;
 
     function Creator (config, addToScene) {
         if (config === undefined) { config = {}; }
@@ -395,7 +395,7 @@
         return target;
     };
 
-    class LinePlugin extends Phaser.Plugins.BasePlugin {
+    class LinePlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

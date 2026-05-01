@@ -1,7 +1,8 @@
 import Press from '../../press/Press.js';
 import EmitCellEvent from './EmitCellEvent.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var PressCell = function (table, tableConfig) {
     var pressConfig = GetValue(tableConfig, 'press', undefined);

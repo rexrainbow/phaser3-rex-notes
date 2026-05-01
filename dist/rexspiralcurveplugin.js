@@ -1,16 +1,16 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexspiralcurveplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexspiralcurveplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
-    const Base = Phaser.Curves.Curve;
-    const GetValue = Phaser.Utils.Objects.GetValue;
-    const DegToRad = Phaser.Math.DegToRad;
-    const RadToDeg = Phaser.Math.RadToDeg;
-    const Vector2 = Phaser.Math.Vector2;
-    const GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
-    const Linear = Phaser.Math.Linear;
+    const Base = phaser.Curves.Curve;
+    const GetValue = phaser.Utils.Objects.GetValue;
+    const DegToRad = phaser.Math.DegToRad;
+    const RadToDeg = phaser.Math.RadToDeg;
+    const Vector2 = phaser.Math.Vector2;
+    const GetEaseFunction = phaser.Tweens.Builders.GetEaseFunction;
+    const Linear = phaser.Math.Linear;
 
     class SpiralCurve extends Base {
         constructor(x, y, startRadius, endRadius, startAngle, endAngle, rotation) {
@@ -546,7 +546,7 @@
         return target;
     };
 
-    class SpiralCurvePlugin extends Phaser.Plugins.BasePlugin {
+    class SpiralCurvePlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

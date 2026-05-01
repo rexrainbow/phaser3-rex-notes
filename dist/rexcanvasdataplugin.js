@@ -1,10 +1,10 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcanvasdataplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcanvasdataplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
-    const Linear = Phaser.Math.Linear;
+    const Linear = phaser.Math.Linear;
 
     var InterpolateColor32 = function (color0, color1, t) {
         var r0 = (color0 >> 16) & 0xff;
@@ -25,7 +25,7 @@
         return (a << 24) | (r << 16) | (g << 8) | b;
     };
 
-    const Color = Phaser.Display.Color;
+    const Color = phaser.Display.Color;
 
     var Color32Methods = {
         rgbaToColor32(r, g, b, a) {
@@ -266,7 +266,7 @@
         return (imgData[imgDataIndex + 3] > 0);
     };
 
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
 
     var CanvasObjectToBitmap = function (canvasObject, config, out) {
         if (config instanceof CanvasData) {
@@ -330,8 +330,8 @@
             imgData[imgDataIndex + 2];
     };
 
-    const GameObjectClass = Phaser.GameObjects.GameObject;
-    const LayerClass = Phaser.GameObjects.Layer;
+    const GameObjectClass = phaser.GameObjects.GameObject;
+    const LayerClass = phaser.GameObjects.Layer;
 
     var IsGameObject = function (object) {
         return (object instanceof GameObjectClass) || (object instanceof LayerClass);
@@ -345,8 +345,8 @@
         return canvas;
     };
 
-    const GetValue = Phaser.Utils.Objects.GetValue;
-    const CanvasPool$1 = Phaser.Display.Canvas.CanvasPool;
+    const GetValue = phaser.Utils.Objects.GetValue;
+    const CanvasPool$1 = phaser.Display.Canvas.CanvasPool;
 
     var TextureTColorMap = function (key, frameName, config, out) {
         var frame;
@@ -399,9 +399,9 @@
         textureTColorMap: TextureTColorMap,
     };
 
-    const CanvasPool = Phaser.Display.Canvas.CanvasPool;
+    const CanvasPool = phaser.Display.Canvas.CanvasPool;
 
-    class CanvasDataPlugin extends Phaser.Plugins.BasePlugin {
+    class CanvasDataPlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

@@ -1,8 +1,9 @@
+import { Scale as PhaserScale } from 'phaser';
 var WarnCounter = 0;
 
 var CheckScaleMode = function (scene) {
     var scaleManager = scene.sys.scale;
-    if (scaleManager.scaleMode === Phaser.Scale.RESIZE) {
+    if (scaleManager.scaleMode === PhaserScale.RESIZE) {
         return true;
     }
 

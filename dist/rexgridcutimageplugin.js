@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexgridcutimageplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexgridcutimageplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var GetFrameNameCallback = function (baseFrameName, delimiter) {
         if (typeof (baseFrameName) === 'object') {
@@ -78,10 +78,10 @@
         }
     };
 
-    const GetValue = Phaser.Utils.Objects.GetValue;
-    const DefaultImageClass = Phaser.GameObjects.Image;
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-    const RotateAround = Phaser.Math.RotateAround;
+    const GetValue = phaser.Utils.Objects.GetValue;
+    const DefaultImageClass = phaser.GameObjects.Image;
+    const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
+    const RotateAround = phaser.Math.RotateAround;
 
     var GridCutImage = function (gameObject, columns, rows, config) {
         if (IsPlainObject(columns)) {
@@ -159,7 +159,7 @@
         return cellGameObjects;
     };
 
-    class GridCutImagePlugin extends Phaser.Plugins.BasePlugin {
+    class GridCutImagePlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

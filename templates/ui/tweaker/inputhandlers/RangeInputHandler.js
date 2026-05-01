@@ -1,9 +1,10 @@
 import CreateSlider from './utils/CreateSlider.js';
 import CreateInputText from './utils/CreateInputText.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Linear = Phaser.Math.Linear;
-const SnapFloor = Phaser.Math.Snap.Floor;
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const Linear = PhaserMath.Linear;
+const SnapFloor = PhaserMath.Snap.Floor;
 
 var SetRange = function (gameObject, min, max, step) {
     gameObject.minValue = min;

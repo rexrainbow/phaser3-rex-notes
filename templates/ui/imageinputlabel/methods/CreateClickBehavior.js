@@ -1,7 +1,8 @@
 import Click from '../../click/Click.js';
 import GetClickTarget from './GetClickTarget.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var CreateClickBehavior = function (parent, config) {
     var clickTarget = GetClickTarget(parent, config);

@@ -6,8 +6,9 @@ import Methods from './methods/Methods.js';
 import { CacheName } from './Const.js';
 import GetCharacterCache from './methods/GetCharacterCache.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const TextGameObjectClass = Phaser.GameObjects.Text;
+import { GameObjects as PhaserGameObjects, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const TextGameObjectClass = PhaserGameObjects.Text;
 
 class CharacterCache {
     constructor(scene, config) {

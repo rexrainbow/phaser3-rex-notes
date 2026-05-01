@@ -1,4 +1,5 @@
-const DistanceBetween = Phaser.Math.Distance.Between;
+import { Math as PhaserMath } from 'phaser';
+const DistanceBetween = PhaserMath.Distance.Between;
 
 var GetNearestChildIndex = function (x, y) {
     var children = this.sizerChildren;

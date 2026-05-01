@@ -2,7 +2,8 @@ import IsGameObject from '../../../../../plugins/utils/system/IsGameObject.js';
 import Node from '../node/Node.js';
 import SyncDisplayList from '../../methods/SyncDisplayList.js';
 
-const UUID = Phaser.Utils.String.UUID;
+import { Utils as PhaserUtils } from 'phaser';
+const UUID = PhaserUtils.String.UUID;
 
 export default {
     addTree(config, nodeKey) {

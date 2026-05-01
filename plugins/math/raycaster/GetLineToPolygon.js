@@ -1,8 +1,9 @@
 import GetLineToPoints from './GetLineToPoints.js';
 import Clone from '../../utils/object/Clone.js';
 
-const GetAABB = Phaser.Geom.Polygon.GetAABB;
-const LineToRectangle = Phaser.Geom.Intersects.LineToRectangle;
+import { Geom as PhaserGeom } from 'phaser';
+const GetAABB = PhaserGeom.Polygon.GetAABB;
+const LineToRectangle = PhaserGeom.Intersects.LineToRectangle;
 
 var GetLineToPolygon = function (line, polygons, out) {
     if (out === undefined) {
@@ -52,6 +53,6 @@ var GetLineToPolygon = function (line, polygons, out) {
 };
 
 var globResult = {};
-var AABBRect = new Phaser.Geom.Rectangle();
+var AABBRect = new PhaserGeom.Rectangle();
 
 export default GetLineToPolygon;

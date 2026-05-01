@@ -1,7 +1,8 @@
 import LoaderCallback from './loader/awaitloader/AwaitLoaderCallback.js';
 import StartLoadingAnimationScene from './loadinganimationscene.js';
 
-class LoadingAnimationScenePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class LoadingAnimationScenePlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
 

@@ -8,7 +8,8 @@ import RefreshSymbolCache from '../match/RefreshSymbolCache.js';
 import GetMatchN from '../match/GetMatchN.js';
 import RandomSymbol from '../chess/RandomSymobl.js';
 
-const GetRandom = Phaser.Utils.Array.GetRandom;
+import { Utils as PhaserUtils } from 'phaser';
+const GetRandom = PhaserUtils.Array.GetRandom;
 
 var BreakMatch3 = function () {
     var tileZ = this.chessTileZ,

@@ -1,4 +1,5 @@
-const Capitalize = Phaser.Utils.String.UppercaseFirst;
+import { Utils as PhaserUtils } from 'phaser';
+const Capitalize = PhaserUtils.String.UppercaseFirst;
 
 var ResetParameterValue = function (name) {
     var propertyName = `_idParam${Capitalize(name)}`;

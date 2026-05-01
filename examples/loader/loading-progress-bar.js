@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import AwaitLoaderPlugin from '../../plugins/awaitloader-plugin.js';
 import EventPromisePlugin from '../../plugins/eventpromise-plugin.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';

@@ -1,4 +1,5 @@
-const PointRotateAround = Phaser.Math.RotateAround;
+import { Math as PhaserMath } from 'phaser';
+const PointRotateAround = PhaserMath.RotateAround;
 
 var RotateAround = function (polygon, centerX, centerY, angle) {
     var points = polygon.points;

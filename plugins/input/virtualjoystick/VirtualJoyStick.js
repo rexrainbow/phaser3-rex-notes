@@ -1,7 +1,8 @@
 import TouchCursor from '../../touchcursor.js';
 import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class VirtualJoyStick {
     constructor(scene, config) {

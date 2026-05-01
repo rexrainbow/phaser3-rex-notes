@@ -1,8 +1,9 @@
 import DuplicateLast from '../DuplicateLast';
 
-const DistanceBetween = Phaser.Math.Distance.Between;
-const Wrap = Phaser.Math.Wrap;
-const Linear = Phaser.Math.Linear;
+import { Math as PhaserMath } from 'phaser';
+const DistanceBetween = PhaserMath.Distance.Between;
+const Wrap = PhaserMath.Wrap;
+const Linear = PhaserMath.Linear;
 
 var AppendFromPathSegment = function (srcPathData, accumulationLengths, startT, endT, destPathData) {
     if (endT === undefined) {

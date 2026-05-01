@@ -3,7 +3,8 @@ import Creator from './gameobjects/dom/filedropzone/Creator.js';
 import FileDropZone from './gameobjects/dom/filedropzone/FileDropZone.js';
 import SetValue from './utils/object/SetValue.js';
 
-class FileDropZonePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class FileDropZonePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

@@ -1,8 +1,8 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-	typeof define === 'function' && define.amd ? define(factory) :
-	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcsvtoarrayplugin = factory());
-})(this, (function () { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+	typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcsvtoarrayplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
 	var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -26,7 +26,7 @@
 	var papaparse_minExports = papaparse_min.exports;
 	var CSVParser = /*@__PURE__*/getDefaultExportFromCjs(papaparse_minExports);
 
-	const GetValue = Phaser.Utils.Objects.GetValue;
+	const GetValue = phaser.Utils.Objects.GetValue;
 
 	var CSVToArray = function (csvString, config) {
 	    var delimiter = GetValue(config, 'delimiter', ',');
@@ -39,7 +39,7 @@
 	    return arr;
 	};
 
-	class CSVToArrayPlugin extends Phaser.Plugins.BasePlugin {
+	class CSVToArrayPlugin extends phaser.Plugins.BasePlugin {
 	    constructor(pluginManager) {
 	        super(pluginManager);
 	    }

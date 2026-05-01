@@ -1,4 +1,5 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var SetProperties = function (properties, config, out) {
     if (out === undefined) {

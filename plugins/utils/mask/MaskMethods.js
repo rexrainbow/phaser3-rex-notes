@@ -1,6 +1,7 @@
 import IsWebGLRenderMode from '../system/IsWebGLRenderMode.js';
 
-const MaskController = Phaser.Filters.Mask;
+import { Filters as PhaserFilters } from 'phaser';
+const MaskController = PhaserFilters.Mask;
 
 var SetMask = function (gameObject, maskGameObject, invert, maskType) {
     if (IsWebGLRenderMode(gameObject)) {

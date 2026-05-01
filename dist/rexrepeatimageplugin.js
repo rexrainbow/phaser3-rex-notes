@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexrepeatimageplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexrepeatimageplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     // copy from Phaser.GameObjects.Text
     var WebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
@@ -53,7 +53,7 @@
 
     };
 
-    const Color = Phaser.Display.Color;
+    const Color = phaser.Display.Color;
 
     var CanvasMethods = {
         clear() {
@@ -276,7 +276,7 @@
         if (minVersion === undefined) {
             minVersion = SubVersionNumber;
         }
-        var version = Phaser.VERSION.split('.');
+        var version = phaser.VERSION.split('.');
         var mainVersion = parseInt(version[0]);
         if (mainVersion === MainVersionNumber) {
             var subVersion = parseInt(version[1]);
@@ -292,10 +292,10 @@
 
     CheckP3Version();
 
-    const CanvasPool$1 = Phaser.Display.Canvas.CanvasPool;
-    const GameObject = Phaser.GameObjects.GameObject;
-    const UUID = Phaser.Utils.String.UUID;
-    const DefaultImageNodes = Phaser.Renderer.WebGL.RenderNodes.Defaults.DefaultImageNodes;
+    const CanvasPool$1 = phaser.Display.Canvas.CanvasPool;
+    const GameObject = phaser.GameObjects.GameObject;
+    const UUID = phaser.Utils.String.UUID;
+    const DefaultImageNodes = phaser.Renderer.WebGL.RenderNodes.Defaults.DefaultImageNodes;
 
     class Canvas extends GameObject {
         constructor(scene, x, y, width, height, resolution) {
@@ -485,8 +485,8 @@
         }
     }
 
-    const Components = Phaser.GameObjects.Components;
-    Phaser.Class.mixin(Canvas,
+    const Components = phaser.GameObjects.Components;
+    phaser.Class.mixin(Canvas,
         [
             Components.Alpha,
             Components.BlendMode,
@@ -516,7 +516,7 @@
         return canvas;
     };
 
-    const CanvasPool = Phaser.Display.Canvas.CanvasPool;
+    const CanvasPool = phaser.Display.Canvas.CanvasPool;
 
     var CreateFillPattern = function (textureFrame) {
         var canvas = CanvasPool.create(this);
@@ -699,8 +699,8 @@
         return gameObject;
     }
 
-    const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-    const BuildGameObject = Phaser.GameObjects.BuildGameObject;
+    const GetAdvancedValue = phaser.Utils.Objects.GetAdvancedValue;
+    const BuildGameObject = phaser.GameObjects.BuildGameObject;
 
     function Creator (config, addToScene) {
         if (config === undefined) { config = {}; }
@@ -790,7 +790,7 @@
         return target;
     };
 
-    class RepeatImagePlugin extends Phaser.Plugins.BasePlugin {
+    class RepeatImagePlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

@@ -1,7 +1,8 @@
 import Render from './render/Render.js';
 import StrokePathMethods from '../strokepath/StrokePathMethods.js';
 
-const Shape = Phaser.GameObjects.Shape;
+import { GameObjects as PhaserGameObjects } from 'phaser';
+const Shape = PhaserGameObjects.Shape;
 
 class PolygnBase extends Shape {
     init() {

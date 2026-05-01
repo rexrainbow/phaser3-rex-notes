@@ -1,7 +1,8 @@
 import Image from '../image/Image.js';
 import RenderTexture from '../rendertexture/RenderTexture.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 const DefaultImageConfig = { key: '__WHITE' };
 const ClassMap = {
     image: Image,

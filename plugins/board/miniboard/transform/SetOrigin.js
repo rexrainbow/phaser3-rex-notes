@@ -2,7 +2,8 @@ import Linear from '../../../utils/math/Linear.js';
 import OffsetTransfer from './transferfunctions/Offset.js';
 import ResetChessTileXYZ from './ResetChessTileXYZ.js';
 
-const SetOriginBase = Phaser.GameObjects.Components.Origin.setOrigin;
+import { GameObjects as PhaserGameObjects } from 'phaser';
+const SetOriginBase = PhaserGameObjects.Components.Origin.setOrigin;
 
 var SetOrigin = function (originX, originY) {
     switch (originX) {

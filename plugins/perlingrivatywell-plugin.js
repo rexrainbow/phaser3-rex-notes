@@ -1,6 +1,7 @@
 import PerlinGrivatyWell from './perlingrivatywell.js';
 
-class PerlinGrivatyWellPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class PerlinGrivatyWellPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

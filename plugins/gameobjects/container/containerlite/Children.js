@@ -1,7 +1,8 @@
 import { GetParent } from './GetParent.js';
 import { DepthFirstSearch, BreadthFirstSearch } from './utils/Traversal.js';
 
-const ArrayUtils = Phaser.Utils.Array;
+import { Utils as PhaserUtils } from 'phaser';
+const ArrayUtils = PhaserUtils.Array;
 
 export default {
     getChildren(out) {

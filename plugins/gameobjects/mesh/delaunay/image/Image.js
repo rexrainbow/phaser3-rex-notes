@@ -1,8 +1,9 @@
 import Mesh from '../../mesh/sprite/Sprite.js';
 import Methods from './methods/Methods.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class ShatterImage extends Mesh {
     constructor(scene, x, y, key, frame, config) {

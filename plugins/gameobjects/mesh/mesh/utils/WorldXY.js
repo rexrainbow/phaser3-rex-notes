@@ -1,4 +1,5 @@
-const RotateAround = Phaser.Math.RotateAround;
+import { Math as PhaserMath } from 'phaser';
+const RotateAround = PhaserMath.RotateAround;
 
 var LocalXYToWorldXY = function (gameObject, localX, localY, out) {
     if (out === undefined) {

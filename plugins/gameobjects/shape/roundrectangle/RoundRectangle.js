@@ -4,9 +4,10 @@ import IsArcCorner from '../utils/IsArcCorner.js';
 import LineTo from '../../../geom/pathdata/LineTo.js';
 import ArcTo from '../../../geom/pathdata/ArcTo.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Earcut = Phaser.Geom.Polygon.Earcut;
+import { Geom as PhaserGeom, Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
+const Earcut = PhaserGeom.Polygon.Earcut;
 
 class RoundRectangle extends PolygnBase {
     constructor(scene, x, y, width, height, radiusConfig, fillColor, fillAlpha) {

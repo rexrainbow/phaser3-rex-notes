@@ -1,8 +1,9 @@
 import Line from '../../../plugins/gameobjects/shape/shapes/geoms/lines/Line.js';
 import Yoyo from '../utils/Yoyo.js';
 
-const Linear = Phaser.Math.Linear;
-const ExpoIn = Phaser.Math.Easing.Expo.In;
+import { Math as PhaserMath } from 'phaser';
+const Linear = PhaserMath.Linear;
+const ExpoIn = PhaserMath.Easing.Expo.In;
 const RowNum = 2;
 const ColNum = 2;
 

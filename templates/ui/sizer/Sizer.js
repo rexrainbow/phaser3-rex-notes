@@ -3,8 +3,9 @@ import Methods from './Methods.js';
 import GetChildrenProportion from './GetChildrenProportion.js';
 import GetOrientationMode from '../utils/GetOrientationMode.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Sizer extends BaseSizer {
     constructor(scene, x, y, minWidth, minHeight, orientation, config) {

@@ -3,7 +3,8 @@ import Creator from './gameobjects/dom/youtubeplayer/Creator.js';
 import YoutubePlayer from './gameobjects/dom/youtubeplayer/YoutubePlayer.js';
 import SetValue from './utils/object/SetValue.js';
 
-class YoutubePlayerPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class YoutubePlayerPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

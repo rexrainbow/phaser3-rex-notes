@@ -1,7 +1,8 @@
 import CreateBinaryFile from './CreateBinaryFile.js';
 
-const GetFastValue = Phaser.Utils.Objects.GetFastValue;
-const ImageFile = Phaser.Loader.FileTypes.ImageFile;
+import { Loader as PhaserLoader, Utils as PhaserUtils } from 'phaser';
+const GetFastValue = PhaserUtils.Objects.GetFastValue;
+const ImageFile = PhaserLoader.FileTypes.ImageFile;
 
 var LoadChildrenFiles = function (parent, setting) {
     var loader = parent.loader;

@@ -2,8 +2,9 @@ import QuestionManager from '../../plugins/logic/quest/questions/QuestionManager
 import QuestMethods from './QuestMethods.js';
 import DataMethods from './DataMethods.js';
 
-const EE = Phaser.Events.EventEmitter;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Events as PhaserEvents, Utils as PhaserUtils } from 'phaser';
+const EE = PhaserEvents.EventEmitter;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class DialogQuest extends EE {
     constructor(config) {

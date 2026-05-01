@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import JSZip from 'jszip';
 import AwaitLoaderPlugin from '../../plugins/awaitloader-plugin.js';
 

@@ -1,5 +1,6 @@
-const RectangleGeom = Phaser.Geom.Rectangle;
-const CircleGemo = Phaser.Geom.Circle;
+import { Geom as PhaserGeom } from 'phaser';
+const RectangleGeom = PhaserGeom.Rectangle;
+const CircleGemo = PhaserGeom.Circle;
 
 var GetGeom = function (shapeType, width, height, padding, originX, originY, out) {
     switch (shapeType) {

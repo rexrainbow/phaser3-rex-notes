@@ -1,6 +1,7 @@
 import CreateSplitPanels from '../builders/CreateSplitPanels.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var AddSplit = function (config) {
     if (config === undefined) {

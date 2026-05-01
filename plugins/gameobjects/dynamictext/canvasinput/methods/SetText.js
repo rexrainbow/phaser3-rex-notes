@@ -1,6 +1,7 @@
 import { diffChars } from '../../../../utils/jsdiff/index.js'
 
-const RemoveItem = Phaser.Utils.Array.Remove;
+import { Utils as PhaserUtils } from 'phaser';
+const RemoveItem = PhaserUtils.Array.Remove;
 
 var SetText = function (textObject, newText) {
     var text = textObject.text;

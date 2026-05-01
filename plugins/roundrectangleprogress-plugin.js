@@ -3,7 +3,8 @@ import Creator from './gameobjects/shape/roundrectangleprogress/Creator.js';
 import RoundRectangleProgress from './gameobjects/shape/roundrectangleprogress/RoundRectangleProgress.js';
 import SetValue from './utils/object/SetValue.js';
 
-class RoundRectangleProgressPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class RoundRectangleProgressPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

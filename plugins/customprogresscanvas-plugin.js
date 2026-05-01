@@ -3,7 +3,8 @@ import Creator from './gameobjects/canvas/customprogress/Creator.js';
 import CustomProgressCanvas from './gameobjects/canvas/customprogress/CustomProgress.js';
 import SetValue from './utils/object/SetValue.js';
 
-class CustomProgressPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class CustomProgressPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

@@ -1,6 +1,7 @@
 import AppendCommandBase from '../../../dynamictext/methods/AppendCommand.js';
 
-const DegToRad = Phaser.Math.DegToRad;
+import { Math as PhaserMath } from 'phaser';
+const DegToRad = PhaserMath.DegToRad;
 
 var OnParseRotateCameraTag = function (textPlayer, parser, config) {
     var tagName = 'camera.rotate';

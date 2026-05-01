@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import TextTypingPlugin from '../../plugins/texttyping-plugin.js';
 import TagTextPlugin from '../../plugins/tagtext-plugin.js';
 

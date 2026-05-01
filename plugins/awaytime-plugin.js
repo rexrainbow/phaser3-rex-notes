@@ -1,6 +1,7 @@
 import AwayTime from './awaytime.js'
 
-class AwayTimePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class AwayTimePlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
     }

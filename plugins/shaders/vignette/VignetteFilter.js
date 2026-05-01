@@ -1,7 +1,8 @@
 import { FilterName } from './const.js';
 import FragSrc from './vignette-frag.js';
 
-class VignetteFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+import { Renderer as PhaserRenderer } from 'phaser';
+class VignetteFilter extends PhaserRenderer.WebGL.RenderNodes.BaseFilterShader {
     static FilterName = FilterName;
 
     constructor(manager) {

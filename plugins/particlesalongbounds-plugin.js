@@ -1,6 +1,7 @@
 import ParticlesAlongBounds from './particlesalongbounds.js'
 
-class ParticlesAlongBoundsPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class ParticlesAlongBoundsPlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
     }

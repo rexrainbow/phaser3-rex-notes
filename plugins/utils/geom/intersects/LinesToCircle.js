@@ -1,6 +1,7 @@
-const LineToCircle = Phaser.Geom.Intersects.LineToCircle;
+import { Geom as PhaserGeom } from 'phaser';
+const LineToCircle = PhaserGeom.Intersects.LineToCircle;
 
-const tmpLine = new Phaser.Geom.Line();
+const tmpLine = new PhaserGeom.Line();
 
 var LinesToCircle = function (points, circle) {
     tmpLine.x1 = points[0];

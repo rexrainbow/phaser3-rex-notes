@@ -1,7 +1,8 @@
 import Shake from '../shake/Shake.js';
 import { WaitComplete } from '../utils/WaitEvent.js'
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 
 var OnInitShake = function (gameObject, shake) {
     // Route 'complete' of shake to gameObject

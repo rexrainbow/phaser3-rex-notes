@@ -1,6 +1,7 @@
 import Scroller from './scroller.js';
 
-class ScrollerPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class ScrollerPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

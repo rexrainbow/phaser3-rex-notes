@@ -8,7 +8,8 @@ import Sizer from '../../../sizer/Sizer.js';
 import GenerateCreateCellContainerCallback from './GenerateCreateCellContainerCallback.js';
 import Merge from '../../../../../plugins/utils/object/Merge.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var CreateArrayTable = function (tweaker, config, style) {
     if (!config) { config = {}; }

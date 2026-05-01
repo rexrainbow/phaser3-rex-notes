@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import CameraControllerPlugin from '../../plugins/cameracontroller-plugin.js';
 
 class SceneA extends Phaser.Scene {

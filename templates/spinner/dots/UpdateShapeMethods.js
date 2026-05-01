@@ -1,7 +1,8 @@
 import Circle from '../../../plugins/gameobjects/shape/shapes/geoms/lines/arc/Circle.js';
 import Yoyo from '../utils/Yoyo.js';
 
-const Linear = Phaser.Math.Linear;
+import { Math as PhaserMath } from 'phaser';
+const Linear = PhaserMath.Linear;
 
 export default {
     buildShapes() {

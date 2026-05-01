@@ -1,8 +1,9 @@
 import ContainerLite from './ContainerLite.js';
 
-const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-const GetValue = Phaser.Utils.Objects.GetValue;
-const BuildGameObject = Phaser.GameObjects.BuildGameObject;
+import { GameObjects as PhaserGameObjects, Utils as PhaserUtils } from 'phaser';
+const GetAdvancedValue = PhaserUtils.Objects.GetAdvancedValue;
+const GetValue = PhaserUtils.Objects.GetValue;
+const BuildGameObject = PhaserGameObjects.BuildGameObject;
 
 export default function (config, addToScene) {
     if (config === undefined) { config = {}; }

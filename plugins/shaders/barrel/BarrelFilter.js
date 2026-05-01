@@ -1,7 +1,8 @@
 import { FilterName } from './const.js';
 import FragSrc from './barrel-frag.js';
 
-class BarrelFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+import { Renderer as PhaserRenderer } from 'phaser';
+class BarrelFilter extends PhaserRenderer.WebGL.RenderNodes.BaseFilterShader {
     static FilterName = FilterName;
 
     constructor(manager) {

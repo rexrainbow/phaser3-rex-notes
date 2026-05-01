@@ -8,7 +8,8 @@ import ParseEaseConfig from './methods/ParseEaseConfig.js';
 import GetEaseConfig from './methods/GetEaseConfig.js';
 import Expand from './methods/Expand.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Menu extends Buttons {
     constructor(scene, config) {

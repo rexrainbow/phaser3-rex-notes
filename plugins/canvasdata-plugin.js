@@ -1,8 +1,9 @@
 import Methods from './canvasdata.js';
 
-const CanvasPool = Phaser.Display.Canvas.CanvasPool;
+import { Display as PhaserDisplay, Plugins as PhaserPlugins } from 'phaser';
+const CanvasPool = PhaserDisplay.Canvas.CanvasPool;
 
-class CanvasDataPlugin extends Phaser.Plugins.BasePlugin {
+class CanvasDataPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

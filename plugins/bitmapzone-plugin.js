@@ -1,6 +1,7 @@
 import BitmapZone from './bitmapzone.js';
 
-class BitmapZonePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class BitmapZonePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

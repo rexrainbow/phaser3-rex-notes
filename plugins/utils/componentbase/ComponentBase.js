@@ -2,7 +2,8 @@ import EventEmitterMethods from '../eventemitter/EventEmitterMethods.js';
 import GetSceneObject from '../system/GetSceneObject.js';
 import GetGame from '../system/GetGame.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class ComponentBase {
     constructor(parent, config) {

@@ -1,4 +1,5 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 class Input {
     constructor(bejeweled, config) {
         this.bejeweled = bejeweled;      // Bejeweled

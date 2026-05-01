@@ -3,9 +3,10 @@ import Methods from './Methods.js';
 import SCROLLMODE from '../../utils/ScrollModeConst.js';
 import { GetDisplayWidth, GetDisplayHeight } from '../../../../plugins/utils/size/GetDisplaySize.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
-const ALIGN_LEFTTOP = Phaser.Display.Align.TOP_LEFT;
+import { Display as PhaserDisplay, Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
+const ALIGN_LEFTTOP = PhaserDisplay.Align.TOP_LEFT;
 
 class ScrollableBlock extends BaseSizer {
     constructor(scene, x, y, minWidth, minHeight, config) {

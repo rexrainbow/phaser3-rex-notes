@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexyoutubeplayerplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexyoutubeplayerplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var Resize = function (width, height) {
         if (this.scene.sys.scale.autoRound) {
@@ -63,11 +63,11 @@
     };
     var CallbackQueue = [];
 
-    const DOMElement = Phaser.GameObjects.DOMElement;
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue = Phaser.Utils.Objects.GetValue;
-    const Clamp = Phaser.Math.Clamp;
-    const UUID = Phaser.Utils.String.UUID;
+    const DOMElement = phaser.GameObjects.DOMElement;
+    const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
+    const GetValue = phaser.Utils.Objects.GetValue;
+    const Clamp = phaser.Math.Clamp;
+    const UUID = phaser.Utils.String.UUID;
 
     class YoutubePlayer extends DOMElement {
         constructor(scene, x, y, width, height, config) {
@@ -322,8 +322,8 @@
         return gameObject;
     }
 
-    const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-    const BuildGameObject = Phaser.GameObjects.BuildGameObject;
+    const GetAdvancedValue = phaser.Utils.Objects.GetAdvancedValue;
+    const BuildGameObject = phaser.GameObjects.BuildGameObject;
 
     function Creator (config, addToScene) {
         if (config === undefined) { config = {}; }
@@ -411,7 +411,7 @@
         return target;
     };
 
-    class YoutubePlayerPlugin extends Phaser.Plugins.BasePlugin {
+    class YoutubePlayerPlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

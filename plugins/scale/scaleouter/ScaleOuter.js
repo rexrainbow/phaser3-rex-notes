@@ -4,8 +4,9 @@ import GetInnerViewport from './GetInnerViewport.js';
 import GetOuterViewport from './GetOuterViewport.js';
 import ShrinkSizeByRatio from './ShrinkSizeByRatio.js'
 
-const Rectangle = Phaser.Geom.Rectangle;
-const CopyRectangle = Phaser.Geom.Rectangle.CopyFrom;
+import { Geom as PhaserGeom } from 'phaser';
+const Rectangle = PhaserGeom.Rectangle;
+const CopyRectangle = PhaserGeom.Rectangle.CopyFrom;
 
 class ScaleOuter {
     constructor(scene) {

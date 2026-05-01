@@ -1,4 +1,6 @@
-const Color = Phaser.Display.Color;
+import { Display as PhaserDisplay } from 'phaser';
+
+const Color = PhaserDisplay.Color;
 
 export default {
     clear() {

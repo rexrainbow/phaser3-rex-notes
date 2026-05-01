@@ -1,7 +1,8 @@
 import CursorKeys from '../../utils/input/CursorKeys.js';
 import BindGamepadMethods from './methods/BindGamepadMethods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 const KeyNames = ['A', 'Y', 'X', 'B', 'L1', 'L2', 'R1', 'R2', 'START', 'SELECT'];
 const KeyNameToButtonIndex = {
     left: 14, right: 15, up: 12, down: 13,

@@ -2,10 +2,11 @@
 
 import Offset from '../utils/Offset.js';
 
-const Polygon = Phaser.Geom.Polygon;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Line = Phaser.Geom.Line;
+import { Geom as PhaserGeom, Utils as PhaserUtils } from 'phaser';
+const Polygon = PhaserGeom.Polygon;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
+const Line = PhaserGeom.Line;
 
 class Rhombus extends Polygon {
     constructor(x, y, width, height) {
@@ -191,6 +192,6 @@ class Rhombus extends Polygon {
 }
 
 // use `rexRhombus` to prevent name conflict
-Phaser.Geom.rexRhombus = Rhombus;
+PhaserGeom.rexRhombus = Rhombus;
 
 export default Rhombus;

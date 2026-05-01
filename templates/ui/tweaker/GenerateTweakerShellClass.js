@@ -4,7 +4,8 @@ import Methods from './methods/Methods.js';
 import CreateBackground from './builders/utils/CreateBackground.js';
 import SetValue from '../../../plugins/utils/object/SetValue.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var GenerateTweakerShellClass = function (config) {
     var isWrapMode = GetValue(config, 'wrap', false);

@@ -3,8 +3,9 @@ import Methods from './Methods.js';
 import Clear from '../../../plugins/utils/object/Clear.js';
 import IndexOf from '../../../plugins/utils/object/IndexOf.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class OverlapSizer extends BaseSizer {
     constructor(scene, x, y, minWidth, minHeight, config) {

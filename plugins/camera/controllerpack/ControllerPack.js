@@ -5,7 +5,8 @@ import BoundsScroll from '../boundsscroll/BoundsScroll.js';
 import MouseWheelZoom from '../mousewheelzoom/MouseWheelZoom.js';
 import DeepClone from '../../utils/object/DeepClone.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class ControllerPack extends ComponentBase {
     constructor(scene, config) {

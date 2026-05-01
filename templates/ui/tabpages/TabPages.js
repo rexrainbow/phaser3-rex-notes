@@ -4,7 +4,8 @@ import FixWidthButtons from '../fixwidthbuttons/FixWidthButtons.js';
 import Pages from '../pages/Pages.js';
 import Methods from './methods/Methods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 const SizerAdd = GridSizer.prototype.add;
 
 class TabPages extends GridSizer {

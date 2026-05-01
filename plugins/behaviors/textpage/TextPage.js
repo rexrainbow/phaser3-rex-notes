@@ -7,8 +7,9 @@ import TextToLines from '../../utils/text/TextToLines.js';
 import TextHeightToLineCount from '../../utils/text/TextHeightToLineCount.js';
 import Methods from './methods/Methods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Clamp = Phaser.Math.Clamp;
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const Clamp = PhaserMath.Clamp;
 
 class TextPage extends ComponentBase {
     constructor(gameObject, config) {

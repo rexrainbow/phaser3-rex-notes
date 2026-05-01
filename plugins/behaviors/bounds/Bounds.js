@@ -1,8 +1,9 @@
+import { Utils as PhaserUtils, Geom as PhaserGeom } from 'phaser';
 import TickTask from '../../utils/componentbase/SceneUpdateTickTask.js';
 import { GetBounds } from '../../utils/bounds/GetBounds.js';
 
-const Rectangle = Phaser.Geom.Rectangle;
-const GetValue = Phaser.Utils.Objects.GetValue;
+const Rectangle = PhaserGeom.Rectangle;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Bounds extends TickTask {
     constructor(gameObject, config) {

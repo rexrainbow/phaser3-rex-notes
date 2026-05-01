@@ -2,7 +2,8 @@ import Columns from '../gameobjects/columns/Columns.js';
 import CreateTitleLabel from './utils/CreateTitleLabel.js';
 import CreateBackground from './utils/CreateBackground.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var CreateColumns = function (tweaker, config, style) {
     if (!config) { config = {}; }

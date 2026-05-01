@@ -1,7 +1,8 @@
 import { RoundRectangle } from '../../shapes/geoms';
 import MixColor from '../../../../utils/color/MixColor';
 
-const Linear = Phaser.Math.Linear;
+import { Math as PhaserMath } from 'phaser';
+const Linear = PhaserMath.Linear;
 
 export default {
     buildShapes() {

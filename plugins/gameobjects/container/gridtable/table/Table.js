@@ -1,8 +1,9 @@
 import Cell from './Cell.js';
 import Pool from '../../../../pool.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const SpliceOne = Phaser.Utils.Array.SpliceOne;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const SpliceOne = PhaserUtils.Array.SpliceOne;
 const DefaultCellSize = 60;
 
 class Table {

@@ -3,7 +3,8 @@ import CreateSlider from './CreateSlider.js';
 import CreateBackground from './utils/CreateBackground.js';
 import Scrollable from '../gameobjects/scrollable/Scrollable.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var CreateScrollable = function (tweaker, config, style) {
     if (!config) { config = {}; }

@@ -1,6 +1,7 @@
 import UniqueItemList from './uniqueitemlist.js';
 
-class UniqueItemListPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class UniqueItemListPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

@@ -8,7 +8,8 @@ import GameObjectPanelFactory from './gameobjectpanel/Factory.js';
 import ShellFactory from './shell/Factory.js';
 
 
-class GameObjectShellPlugin extends Phaser.Plugins.ScenePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class GameObjectShellPlugin extends PhaserPlugins.ScenePlugin {
     constructor(scene, pluginManager) {
         super(scene, pluginManager);
 

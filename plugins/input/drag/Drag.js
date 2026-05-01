@@ -1,9 +1,10 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import RequestDrag from '../../utils/input/RequestDrag.js'
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const DistanceBetween = Phaser.Math.Distance.Between;
-const RotateAroundDistance = Phaser.Math.RotateAroundDistance;
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const DistanceBetween = PhaserMath.Distance.Between;
+const RotateAroundDistance = PhaserMath.RotateAroundDistance;
 
 class Drag extends ComponentBase {
     constructor(gameObject, config) {

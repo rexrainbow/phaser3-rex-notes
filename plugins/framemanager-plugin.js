@@ -2,7 +2,8 @@ import {
     FrameManager, FrameManagerPool
 } from './framemanager.js';
 
-class FrameManagerPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class FrameManagerPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

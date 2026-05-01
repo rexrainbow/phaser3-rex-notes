@@ -1,7 +1,8 @@
 import HiddenInputText from './behaviors/hiddentextedit/HiddenTextEdit.js';
 import SetValue from './utils/object/SetValue.js';
 
-class HiddenInputTextPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class HiddenInputTextPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

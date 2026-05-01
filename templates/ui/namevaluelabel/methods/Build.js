@@ -3,8 +3,9 @@ import LineProgressCanvas from '../../lineprogresscanvas/LineProgressCanvas.js';
 import CircularProgress from '../../circularprogresscanvas/CircularProgressCanvas.js';
 import AddChildCircleMask from '../../utils/AddChildCircleMask.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 
 var Build = function (scene, config) {
     // Add elements

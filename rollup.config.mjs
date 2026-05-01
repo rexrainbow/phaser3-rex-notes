@@ -13,6 +13,9 @@ import pluginList from './plugin-list.js';
 
 let prefix = 'rex';
 let outputs = [];
+const phaserGlobals = {
+    phaser: 'Phaser'
+};
 
 for (var key in pluginList) {
     let inputConfig = pluginList[key];
@@ -38,6 +41,32 @@ for (var key in pluginList) {
             file: outFile,
             name: libName,
             format: 'umd',
+            globals: phaserGlobals,
+        },
+        external: ['phaser'],
+        plugins: [
+            nodeResolve({
+                browser: true,
+                preferBuiltins: true
+            }),
+
+            commonjs(),
+
+            globals(),
+
+            builtins(),
+
+            (useTypescript) ? typescript({
+                target: 'es6',
+            }) : undefined,
+        ]
+    })
+
+    outputs.push({
+        input: inputFile,
+        output: {
+            file: `./dist/${libName}.esm.js`,
+            format: 'es',
         },
         external: ['phaser'],
         plugins: [

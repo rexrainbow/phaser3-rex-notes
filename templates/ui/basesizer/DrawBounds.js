@@ -2,9 +2,10 @@ import ALIGNMODE from '../utils/AlignConst.js';
 import AlignIn from '../../../plugins/utils/actions/AlignIn.js';
 import { GetBounds } from '../../../plugins/utils/bounds/GetBounds.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Group = Phaser.GameObjects.Group;
-const P3Container = Phaser.GameObjects.Container;
+import { GameObjects as PhaserGameObjects, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const Group = PhaserGameObjects.Group;
+const P3Container = PhaserGameObjects.Container;
 
 var DrawBounds = function (graphics, config) {
     var scene = graphics.scene;

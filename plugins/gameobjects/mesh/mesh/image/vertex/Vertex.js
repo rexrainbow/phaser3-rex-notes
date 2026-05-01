@@ -1,7 +1,8 @@
 import { LocalXYToWorldXY, WorldXYToLocalXY } from '../../utils/WorldXY.js';
 
-const Linear = Phaser.Math.Linear;
-const RotateAround = Phaser.Math.RotateAround;
+import { Math as PhaserMath } from 'phaser';
+const Linear = PhaserMath.Linear;
+const RotateAround = PhaserMath.RotateAround;
 
 class Vertex {
     constructor() {

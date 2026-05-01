@@ -1,6 +1,7 @@
 import ScaleOuter from "./scaleouter.js";
 
-class ScaleOuterPlugin extends Phaser.Plugins.ScenePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class ScaleOuterPlugin extends PhaserPlugins.ScenePlugin {
     constructor(scene, pluginManager) {
         super(scene, pluginManager);
         this.scaleOuter = new ScaleOuter(scene);

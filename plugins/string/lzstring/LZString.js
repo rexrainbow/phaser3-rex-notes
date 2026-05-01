@@ -1,6 +1,7 @@
 import lzstringBase from '../../utils/lzstring/lz-string.min.js';
 
-const GetFastValue = Phaser.Utils.Objects.GetFastValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetFastValue = PhaserUtils.Objects.GetFastValue;
 
 class LZString {
     constructor(config) {

@@ -1,13 +1,13 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexscrollerplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexscrollerplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var EventEmitterMethods$1 = {
         setEventEmitter(eventEmitter, EventEmitterClass) {
             if (EventEmitterClass === undefined) {
-                EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+                EventEmitterClass = phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
             }
             this._privateEE = (eventEmitter === true) || (eventEmitter === undefined);
             this._eventEmitter = (this._privateEE) ? (new EventEmitterClass()) : eventEmitter;
@@ -96,7 +96,7 @@
         },
     };
 
-    const SceneClass = Phaser.Scene;
+    const SceneClass = phaser.Scene;
     var IsSceneObject = function (object) {
         return (object instanceof SceneClass);
     };
@@ -115,7 +115,7 @@
         }
     };
 
-    const GameClass = Phaser.Game;
+    const GameClass = phaser.Game;
     var IsGame = function (object) {
         return (object instanceof GameClass);
     };
@@ -134,7 +134,7 @@
         }
     };
 
-    const GetValue$4 = Phaser.Utils.Objects.GetValue;
+    const GetValue$4 = phaser.Utils.Objects.GetValue;
 
     class ComponentBase {
         constructor(parent, config) {
@@ -1129,8 +1129,8 @@
         }
     }
 
-    const SnapTo = Phaser.Math.Snap.To;
-    Phaser.Math.Clamp;
+    const SnapTo = phaser.Math.Snap.To;
+    phaser.Math.Clamp;
 
     // this: Scroller
 
@@ -1380,10 +1380,10 @@
         }
     };
 
-    const Rectangle = Phaser.Geom.Rectangle;
-    const Vector2 = Phaser.Math.Vector2;
-    const RotateAround = Phaser.Math.RotateAround;
-    const P3Container = Phaser.GameObjects.Container;
+    const Rectangle = phaser.Geom.Rectangle;
+    const Vector2 = phaser.Math.Vector2;
+    const RotateAround = phaser.Math.RotateAround;
+    const P3Container = phaser.GameObjects.Container;
 
     var GetBounds = function (gameObject, output) {
         if (output === undefined) {
@@ -1657,8 +1657,8 @@
         return PointerTest(gameObject, pointer, IsPointInBounds, preTest, postTest)
     };
 
-    const GetValue$2 = Phaser.Utils.Objects.GetValue;
-    const DistanceBetween = Phaser.Math.Distance.Between;
+    const GetValue$2 = phaser.Utils.Objects.GetValue;
+    const DistanceBetween = phaser.Math.Distance.Between;
 
     class DragSpeed extends ComponentBase {
         constructor(gameObject, config) {
@@ -1917,7 +1917,7 @@
         }
     }
 
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
 
     class Movement {
         constructor(config) {
@@ -2052,8 +2052,8 @@
         }
     }
 
-    const GetValue = Phaser.Utils.Objects.GetValue;
-    const Clamp = Phaser.Math.Clamp;
+    const GetValue = phaser.Utils.Objects.GetValue;
+    const Clamp = phaser.Math.Clamp;
 
     class Scroller extends ComponentBase {
         constructor(gameObject, config) {
@@ -2350,7 +2350,7 @@
         horizontal: 1,
     };
 
-    class ScrollerPlugin extends Phaser.Plugins.BasePlugin {
+    class ScrollerPlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

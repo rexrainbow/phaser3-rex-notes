@@ -7,7 +7,8 @@ import {
 } from './gameobjects/live2d/index.js';
 import SetValue from './utils/object/SetValue.js';
 
-class Live2dPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class Live2dPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

@@ -6,7 +6,8 @@ import VideoDOM from './gameobjects/video/videodom/VideoDOM.js';
 import VideoCanvas from './gameobjects/video/videocanvas/VideoCanvas.js';
 import SetValue from './utils/object/SetValue.js';
 
-class VideoPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class VideoPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

@@ -1,7 +1,8 @@
 import TickTask from '../../utils/componentbase/TickTask.js';
 import Timer from '../../utils/componentbase/timerticktask/Timer.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class ShakePosition extends TickTask {
     constructor(gameObject, config) {

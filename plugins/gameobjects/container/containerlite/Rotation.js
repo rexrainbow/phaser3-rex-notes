@@ -1,6 +1,7 @@
 import GetLocalState from './utils/GetLocalState.js';
 
-const DegToRad = Phaser.Math.DegToRad;
+import { Math as PhaserMath } from 'phaser';
+const DegToRad = PhaserMath.DegToRad;
 
 export default {
     updateChildRotation(child) {

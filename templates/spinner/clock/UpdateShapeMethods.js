@@ -1,12 +1,13 @@
 import Circle from '../../../plugins/gameobjects/shape/shapes/geoms/lines/arc/Circle.js';
 import Line from '../../../plugins/gameobjects/shape/shapes/geoms/lines/Line.js';
 
-const RadToDeg = Phaser.Math.RadToDeg;
-const WrapDegrees = Phaser.Math.Angle.WrapDegrees;
-const WrapRad = Phaser.Math.Angle.Wrap;
-const ShortestBetween = Phaser.Math.Angle.ShortestBetween;
-const DegToRad = Phaser.Math.DegToRad;
-const Rad270 = Phaser.Math.DegToRad(270);
+import { Math as PhaserMath } from 'phaser';
+const RadToDeg = PhaserMath.RadToDeg;
+const WrapDegrees = PhaserMath.Angle.WrapDegrees;
+const WrapRad = PhaserMath.Angle.Wrap;
+const ShortestBetween = PhaserMath.Angle.ShortestBetween;
+const DegToRad = PhaserMath.DegToRad;
+const Rad270 = PhaserMath.DegToRad(270);
 
 export default {
     buildShapes() {

@@ -1,6 +1,7 @@
 import LZString from './lzstring.js';
 
-class LZStringPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class LZStringPlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
 

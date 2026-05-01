@@ -1,6 +1,7 @@
 import InTouching from './intouching.js';
 
-class InTouchingPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class InTouchingPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

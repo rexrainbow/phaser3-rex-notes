@@ -141,7 +141,8 @@ import RequestDrag from '../../plugins/utils/input/RequestDrag.js';
 import { OpenFileChooser } from './filechooser/FileChooser.js';
 
 
-class UIPlugin extends Phaser.Plugins.ScenePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class UIPlugin extends PhaserPlugins.ScenePlugin {
     constructor(scene, pluginManager) {
         super(scene, pluginManager);
 

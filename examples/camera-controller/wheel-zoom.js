@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import MouseWheelZoom from '../../plugins/camera/mousewheelzoom/MouseWheelZoom.js';
 import PanScroll from '../../plugins/camera/panscroll/PanScroll.js';
 import FullWindowRectangle from '../../plugins/fullwindowrectangle.js'

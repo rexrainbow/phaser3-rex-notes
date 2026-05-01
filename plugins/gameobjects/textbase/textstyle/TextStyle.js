@@ -4,8 +4,9 @@ import CONST from '../const.js';
 import WRAPMODE from './WrapModes.js';
 import GetStyle from '../../../utils/canvas/GetStyle.js';
 
-const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetAdvancedValue = PhaserUtils.Objects.GetAdvancedValue;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class TextStyle {
     constructor(text, style, propertyMap) {

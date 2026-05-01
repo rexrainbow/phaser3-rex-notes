@@ -1,7 +1,8 @@
 import GetSoundManager from '../../../utils/system/GetSoundManager.js';
 import Methods from './methods/Methods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class SoundManager {
     constructor(game, config) {

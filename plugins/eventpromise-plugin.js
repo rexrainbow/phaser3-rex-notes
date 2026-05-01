@@ -1,6 +1,7 @@
 import { WaitEvent, WaitComplete, Delay } from './eventpromise.js'
 
-class EventPromisePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class EventPromisePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

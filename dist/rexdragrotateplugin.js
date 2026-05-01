@@ -1,13 +1,13 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexdragrotateplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexdragrotateplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var EventEmitterMethods = {
         setEventEmitter(eventEmitter, EventEmitterClass) {
             if (EventEmitterClass === undefined) {
-                EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+                EventEmitterClass = phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
             }
             this._privateEE = (eventEmitter === true) || (eventEmitter === undefined);
             this._eventEmitter = (this._privateEE) ? (new EventEmitterClass()) : eventEmitter;
@@ -96,7 +96,7 @@
         },
     };
 
-    const SceneClass = Phaser.Scene;
+    const SceneClass = phaser.Scene;
     var IsSceneObject = function (object) {
         return (object instanceof SceneClass);
     };
@@ -115,7 +115,7 @@
         }
     };
 
-    const GameClass = Phaser.Game;
+    const GameClass = phaser.Game;
     var IsGame = function (object) {
         return (object instanceof GameClass);
     };
@@ -134,7 +134,7 @@
         }
     };
 
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
 
     class ComponentBase {
         constructor(parent, config) {
@@ -220,8 +220,8 @@
         EventEmitterMethods
     );
 
-    const GameObjectClass = Phaser.GameObjects.GameObject;
-    const LayerClass = Phaser.GameObjects.Layer;
+    const GameObjectClass = phaser.GameObjects.GameObject;
+    const LayerClass = phaser.GameObjects.Layer;
 
     var IsGameObject = function (object) {
         return (object instanceof GameObjectClass) || (object instanceof LayerClass);
@@ -251,12 +251,12 @@
 
     var globalOut = {};
 
-    const GetValue = Phaser.Utils.Objects.GetValue;
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-    const DistanceBetween = Phaser.Math.Distance.Between;
-    const GetAngle = Phaser.Math.Angle.Between;
-    const WrapAngle = Phaser.Math.Angle.Wrap;
-    const RadToDeg = Phaser.Math.RadToDeg;
+    const GetValue = phaser.Utils.Objects.GetValue;
+    const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
+    const DistanceBetween = phaser.Math.Distance.Between;
+    const GetAngle = phaser.Math.Angle.Between;
+    const WrapAngle = phaser.Math.Angle.Wrap;
+    const RadToDeg = phaser.Math.RadToDeg;
 
     const STATE_TOUCH0 = 0;
     const STATE_TOUCH1 = 1;
@@ -528,7 +528,7 @@
         }
     }
 
-    class DragRotatePlugin extends Phaser.Plugins.BasePlugin {
+    class DragRotatePlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

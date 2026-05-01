@@ -4,7 +4,8 @@ import ScrollableBlock from './scrollableblock/ScrollableBlock.js';
 import SetChildrenInteractive from '../utils/setchildreninteractive/SetChildrenInteractive.js';
 import ScrollToChild from './methods/ScrollToChild.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class ScrollablePanel extends Scrollable {
     constructor(scene, config) {

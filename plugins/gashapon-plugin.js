@@ -1,6 +1,7 @@
 import Gashapon from './gashapon.js';
 
-class GashaponPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class GashaponPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

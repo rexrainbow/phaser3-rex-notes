@@ -1,5 +1,6 @@
+import { GameObjects as PhaserGameObjects } from 'phaser';
 var AddFilterListMethod = function (name, callback) {
-    var FilterListComponent = Phaser.GameObjects.Components.FilterList.prototype;
+    var FilterListComponent = PhaserGameObjects.Components.FilterList.prototype;
     if (FilterListComponent[name]) {
         return;
     }

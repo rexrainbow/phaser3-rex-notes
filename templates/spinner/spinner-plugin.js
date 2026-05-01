@@ -23,7 +23,8 @@ import RingsFactory from './rings/Factory.js';
 import SpinnerFactory from './spinner/Factory.js';
 
 
-class SpinnerPlugin extends Phaser.Plugins.ScenePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class SpinnerPlugin extends PhaserPlugins.ScenePlugin {
     constructor(scene, pluginManager) {
         super(scene, pluginManager);
 

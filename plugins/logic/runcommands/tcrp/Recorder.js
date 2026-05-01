@@ -2,7 +2,8 @@ import ComponentBase from '../../../utils/componentbase/ComponentBase.js';
 import Clock from '../../../clock.js';
 import Clone from '../../../utils/object/Clone.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Recorder extends ComponentBase {
     constructor(parent, config) {

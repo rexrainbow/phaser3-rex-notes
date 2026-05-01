@@ -1,7 +1,8 @@
 import Buttons from '../../../buttons/Buttons.js';
 import FixWidthButtons from '../../../fixwidthbuttons/FixWidthButtons.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var CreateButtons = function (scene, config) {
     var wrap = GetValue(config, 'wrap', false);

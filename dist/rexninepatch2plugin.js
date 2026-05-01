@@ -1,11 +1,11 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexninepatch2plugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexninepatch2plugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
-    const GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
-    const TransformMatrix$1 = Phaser.GameObjects.Components.TransformMatrix;
+    const GetCalcMatrix = phaser.GameObjects.GetCalcMatrix;
+    const TransformMatrix$1 = phaser.GameObjects.Components.TransformMatrix;
     var tempMatrix$1 = new TransformMatrix$1();
 
     var WebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
@@ -33,7 +33,7 @@
         }
     };
 
-    const SetTransform = Phaser.Renderer.Canvas.SetTransform;
+    const SetTransform = phaser.Renderer.Canvas.SetTransform;
 
     var CanvasRenderer = function (renderer, src, camera, parentMatrix) {
         var ctx = renderer.currentContext;
@@ -106,7 +106,7 @@
         return this;
     };
 
-    const RemoveItem = Phaser.Utils.Array.Remove;
+    const RemoveItem = phaser.Utils.Array.Remove;
 
     var RemoveChild = function (bob) {
         if (this.poolManager) {
@@ -150,9 +150,9 @@
 
         setTintFill(mode) {
             if (mode === undefined || mode === true) {
-                mode = Phaser.TintModes.FILL;
+                mode = phaser.TintModes.FILL;
             } else if (mode === false) {
-                mode = Phaser.TintModes.MULTIPLY;
+                mode = phaser.TintModes.MULTIPLY;
             }
             this.tintFill = mode;
             return this;
@@ -160,7 +160,7 @@
 
         clearTint() {
             this.tint = 0xffffff;
-            this.tintFill = Phaser.TintModes.MULTIPLY;
+            this.tintFill = phaser.TintModes.MULTIPLY;
             return this;
         }
     };
@@ -213,7 +213,7 @@
         }
     }
 
-    const GetValue$5 = Phaser.Utils.Objects.GetValue;
+    const GetValue$5 = phaser.Utils.Objects.GetValue;
 
     var Pools = {};
     class PoolManager {
@@ -271,7 +271,7 @@
         if (minVersion === undefined) {
             minVersion = SubVersionNumber;
         }
-        var version = Phaser.VERSION.split('.');
+        var version = phaser.VERSION.split('.');
         var mainVersion = parseInt(version[0]);
         if (mainVersion === MainVersionNumber) {
             var subVersion = parseInt(version[1]);
@@ -287,12 +287,12 @@
 
     CheckP3Version();
 
-    const GameObject = Phaser.GameObjects.GameObject;
-    const IsPlainObject$3 = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$4 = Phaser.Utils.Objects.GetValue;
-    const List = Phaser.Structs.List;
-    const StableSort = Phaser.Utils.Array.StableSort;
-    const DefaultBlitterNodes = Phaser.Renderer.WebGL.RenderNodes.Defaults.DefaultBlitterNodes;
+    const GameObject = phaser.GameObjects.GameObject;
+    const IsPlainObject$3 = phaser.Utils.Objects.IsPlainObject;
+    const GetValue$4 = phaser.Utils.Objects.GetValue;
+    const List = phaser.Structs.List;
+    const StableSort = phaser.Utils.Array.StableSort;
+    const DefaultBlitterNodes = phaser.Renderer.WebGL.RenderNodes.Defaults.DefaultBlitterNodes;
 
     class Blitter extends GameObject {
         constructor(scene, x, y, texture, frame, config) {
@@ -380,8 +380,8 @@
         return childA._depth - childB._depth;
     };
 
-    const Components = Phaser.GameObjects.Components;
-    Phaser.Class.mixin(Blitter,
+    const Components = phaser.GameObjects.Components;
+    phaser.Class.mixin(Blitter,
         [
             Components.Alpha,
             Components.BlendMode,
@@ -699,8 +699,8 @@
         this._endDraw();
     };
 
-    const IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$3 = Phaser.Utils.Objects.GetValue;
+    const IsPlainObject$2 = phaser.Utils.Objects.IsPlainObject;
+    const GetValue$3 = phaser.Utils.Objects.GetValue;
 
     var SetStretchMode = function(mode) {
         if (IsPlainObject$2(mode)) {
@@ -773,8 +773,8 @@
         setMaxFixedPartScale: SetMaxFixedPartScale,
     };
 
-    const IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$2 = Phaser.Utils.Objects.GetValue;
+    const IsPlainObject$1 = phaser.Utils.Objects.IsPlainObject;
+    const GetValue$2 = phaser.Utils.Objects.GetValue;
 
     var NinePatchBase = function (GOClass, type) {
         class NinePatch extends GOClass {
@@ -1147,9 +1147,9 @@
         DataMethods
     );
 
-    const DegToRad = Phaser.Math.DegToRad;
-    const RadToDeg = Phaser.Math.RadToDeg;
-    const GetValue = Phaser.Utils.Objects.GetValue;
+    const DegToRad = phaser.Math.DegToRad;
+    const RadToDeg = phaser.Math.RadToDeg;
+    const GetValue = phaser.Utils.Objects.GetValue;
 
     class RenderBase extends Base {
 
@@ -1463,8 +1463,8 @@
         }
     }
 
-    const TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
-    const GetTint = Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
+    const TransformMatrix = phaser.GameObjects.Components.TransformMatrix;
+    const GetTint = phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
     var tempMatrix = new TransformMatrix();
     var tempTransformer = {
@@ -1643,7 +1643,7 @@
 
     };
 
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+    const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
 
     class ImageData extends RenderBase {
         constructor(parent, frame) {
@@ -1726,9 +1726,9 @@
 
         setTintFill(mode) {
             if (mode === undefined || mode === true) {
-                mode = Phaser.TintModes.FILL;
+                mode = phaser.TintModes.FILL;
             } else if (mode === false) {
-                mode = Phaser.TintModes.MULTIPLY;
+                mode = phaser.TintModes.MULTIPLY;
             }
             this.tintFill = mode;
             return this;
@@ -1947,7 +1947,7 @@
         return gameObject;
     }
 
-    const BuildGameObject = Phaser.GameObjects.BuildGameObject;
+    const BuildGameObject = phaser.GameObjects.BuildGameObject;
 
     function Creator (config, addToScene) {
         if (config === undefined) { config = {}; }
@@ -2033,7 +2033,7 @@
         return target;
     };
 
-    class NinePatchPlugin extends Phaser.Plugins.BasePlugin {
+    class NinePatchPlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

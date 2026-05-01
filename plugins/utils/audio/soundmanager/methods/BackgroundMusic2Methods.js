@@ -1,7 +1,8 @@
 import FadeIn from '../../../../audio/fade/FadeIn.js';
 import FadeOut from '../../../../audio/fade/FadeOut.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 export default {
     setBackgroundMusic2Loop(value) {

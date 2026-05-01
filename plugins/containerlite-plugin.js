@@ -3,7 +3,8 @@ import Creator from './gameobjects/container/containerlite/Creator.js';
 import ContainerLite from './gameobjects/container/containerlite/ContainerLite.js';
 import SetValue from './utils/object/SetValue.js';
 
-class ContainerLitePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class ContainerLitePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

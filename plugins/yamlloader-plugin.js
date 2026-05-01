@@ -1,6 +1,7 @@
 import LoaderCallback from './loader/yamlloader/YAMLLoaderCallback.js';
 
-class YAMLLoaderPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class YAMLLoaderPlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
 

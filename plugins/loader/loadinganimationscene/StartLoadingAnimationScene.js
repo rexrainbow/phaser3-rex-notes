@@ -1,7 +1,8 @@
 import IsSceneObject from '../../utils/system/IsSceneObject.js';
 import LastLoadTask from '../../utils/loader/LastLoadTask.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+import { Scenes as PhaserScenes, Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 
 var StartLoadingAnimationScene = function (
     mainScene,
@@ -30,7 +31,7 @@ var StartLoadingAnimationScene = function (
     }
 
     // Don't launch animation scene if it has been started
-    if (mainScene.scene.getStatus(animationSceneKey) < Phaser.Scenes.START) { // Phaser.Scenes.START = 2
+    if (mainScene.scene.getStatus(animationSceneKey) < PhaserScenes.START) { // Phaser.Scenes.START = 2
         mainScene.scene.launch(animationSceneKey, data);
     }
 

@@ -6,7 +6,8 @@ import CreateMoveDownButton from '../utils/CreateMoveDownButton.js';
 import CreateBackground from '../utils/CreateBackground.js';
 import CellContainer from '../../gameobjects/listdetail/cellcontainer/CellContainer.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 
 var CreateCellContainer = function (parent, cell, config) {

@@ -1,10 +1,11 @@
-const Base = Phaser.Curves.Curve;
-const GetValue = Phaser.Utils.Objects.GetValue;
-const DegToRad = Phaser.Math.DegToRad;
-const RadToDeg = Phaser.Math.RadToDeg;
-const Vector2 = Phaser.Math.Vector2;
-const GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
-const Linear = Phaser.Math.Linear;
+import { Curves as PhaserCurves, Math as PhaserMath, Tweens as PhaserTweens, Utils as PhaserUtils } from 'phaser';
+const Base = PhaserCurves.Curve;
+const GetValue = PhaserUtils.Objects.GetValue;
+const DegToRad = PhaserMath.DegToRad;
+const RadToDeg = PhaserMath.RadToDeg;
+const Vector2 = PhaserMath.Vector2;
+const GetEaseFunction = PhaserTweens.Builders.GetEaseFunction;
+const Linear = PhaserMath.Linear;
 
 class SpiralCurve extends Base {
     constructor(x, y, startRadius, endRadius, startAngle, endAngle, rotation) {

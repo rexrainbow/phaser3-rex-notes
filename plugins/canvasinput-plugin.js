@@ -4,7 +4,8 @@ import CanvasInput from './gameobjects/dynamictext/canvasinput/CanvasInput.js';
 
 import SetValue from './utils/object/SetValue.js';
 
-class CanvasInputPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class CanvasInputPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

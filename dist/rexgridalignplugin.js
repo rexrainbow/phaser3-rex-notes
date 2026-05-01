@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexgridalignplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexgridalignplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     const SQRT3$1 = Math.sqrt(3);
 
@@ -424,7 +424,7 @@
         //  NOOP
     };
 
-    var globZone = new Phaser.GameObjects.Zone({
+    var globZone = new phaser.GameObjects.Zone({
         sys: {
             queueDepthSort: NOOP,
             events: {
@@ -752,7 +752,7 @@
         return AlignInMap[position](child, alignIn, offsetX, offsetY);
     };
 
-    const GetFastValue$1 = Phaser.Utils.Objects.GetFastValue;
+    const GetFastValue$1 = phaser.Utils.Objects.GetFastValue;
 
     var globHexagonGrid = new Hexagon();
 
@@ -781,7 +781,7 @@
         var cellHeight = GetFastValue$1(options, 'cellHeight', cellWidth);
         var staggeraxis = GetFastValue$1(options, 'staggeraxis', 1);
         var staggerindex = GetFastValue$1(options, 'staggerindex', 1);
-        var position = GetFastValue$1(options, 'position', Phaser.Display.Align.CENTER);
+        var position = GetFastValue$1(options, 'position', phaser.Display.Align.CENTER);
         var x = GetFastValue$1(options, 'x', 0);
         var y = GetFastValue$1(options, 'y', 0);
 
@@ -991,7 +991,7 @@
         '8dir': 8
     };
 
-    const GetFastValue = Phaser.Utils.Objects.GetFastValue;
+    const GetFastValue = phaser.Utils.Objects.GetFastValue;
 
     var globQuadGrid = new Quad();
 
@@ -1019,7 +1019,7 @@
         var cellWidth = GetFastValue(options, 'cellWidth', 1);
         var cellHeight = GetFastValue(options, 'cellHeight', cellWidth);
         var type = GetFastValue(options, 'type', 0);
-        var position = GetFastValue(options, 'position', Phaser.Display.Align.CENTER);
+        var position = GetFastValue(options, 'position', phaser.Display.Align.CENTER);
         var x = GetFastValue(options, 'x', 0);
         var y = GetFastValue(options, 'y', 0);
 
@@ -1060,7 +1060,7 @@
         return items;
     };
 
-    class GridAlignPlugin extends Phaser.Plugins.BasePlugin {
+    class GridAlignPlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

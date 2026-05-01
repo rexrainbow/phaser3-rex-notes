@@ -5,7 +5,8 @@ import Popup from './popup.js';
 import Yoyo from './behaviors/scale/Yoyo.js';
 import ScaleMethods from './behaviors/scale/ScaleMethods.js';
 
-class ScalePlugin extends Phaser.Plugins.BasePlugin {
+import { GameObjects as PhaserGameObjects, Plugins as PhaserPlugins } from 'phaser';
+class ScalePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);
@@ -26,7 +27,7 @@ class ScalePlugin extends Phaser.Plugins.BasePlugin {
     }
 
     injectMethodsToRootClass() {
-        this.injectMethods(Phaser.GameObjects.GameObject.prototype);
+        this.injectMethods(PhaserGameObjects.GameObject.prototype);
         return this;
     }
 }

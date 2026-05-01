@@ -1,9 +1,10 @@
 import KeyMap from '../../../utils/input/KeyMap.js';
 import CreateFakeKeyboardEvent from '../../../utils/input/CreateFakeKeyboardEvent.js';
 
-const Key = Phaser.Input.Keyboard.Key;
-const AddItem = Phaser.Utils.Array.Add;
-const RemoveItem = Phaser.Utils.Array.Remove;
+import { Input as PhaserInput, Utils as PhaserUtils } from 'phaser';
+const Key = PhaserInput.Keyboard.Key;
+const AddItem = PhaserUtils.Array.Add;
+const RemoveItem = PhaserUtils.Array.Remove;
 
 class KeyHub extends Key {
     constructor(parent, keyCode) {

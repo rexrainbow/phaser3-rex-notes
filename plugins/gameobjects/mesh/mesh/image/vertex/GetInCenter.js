@@ -1,4 +1,5 @@
-const InCenter = Phaser.Geom.Triangle.InCenter;
+import { Geom as PhaserGeom } from 'phaser';
+const InCenter = PhaserGeom.Triangle.InCenter;
 
 var GetInCenter = function (face, out) {
     if (out === undefined) {

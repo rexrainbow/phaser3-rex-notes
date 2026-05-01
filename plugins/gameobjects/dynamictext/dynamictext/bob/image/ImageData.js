@@ -2,7 +2,8 @@ import RenderBase from '../renderbase/RenderBase.js';
 import { ImageTypeName } from '../Types.js';
 import DrawFrameToCanvas from '../../../../../utils/texture/DrawFrameToCanvas.js';
 
-const TintModes = Phaser.TintModes;
+import { TintModes as PhaserTintModes } from 'phaser';
+const TintModes = PhaserTintModes;
 
 class ImageData extends RenderBase {
     constructor(

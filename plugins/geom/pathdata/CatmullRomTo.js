@@ -1,6 +1,7 @@
+import { Math as PhaserMath } from 'phaser';
 //import CatmullRomInterpolation from '../../utils/math/interpolation/CatmullRomInterpolation.js';
 
-const CatmullRomInterpolation = Phaser.Math.Interpolation.CatmullRom;
+const CatmullRomInterpolation = PhaserMath.Interpolation.CatmullRom;
 
 var CatmullRomTo = function (points, iterations, pathData) {
     var pathDataCnt = pathData.length;

@@ -1,7 +1,8 @@
 import EventEmitterMethods from '../../../../utils/eventemitter/EventEmitterMethods.js';
 import Methods from './Methods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class TypeWriter {
     constructor(textPlayer, config) {

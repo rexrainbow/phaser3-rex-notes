@@ -4,7 +4,8 @@ import Methods from './methods/Methods.js';
 import BatchHandlerTriangles from '../../../../utils/renderer/BatchHandlerTriangles.js';
 import AddNodeConstructor from '../../../../utils/renderer/AddNodeConstructor.js';
 
-const DefaultMeshNodes = new Phaser.Structs.Map([
+import { Structs as PhaserStructs, TintModes as PhaserTintModes } from 'phaser';
+const DefaultMeshNodes = new PhaserStructs.Map([
     ['BatchHandler', 'rexBatchHandlerTriangles']
 ]);
 
@@ -32,7 +33,7 @@ class Image extends Base {
         this.alphaBuffer = null;
         this.colorBuffer = null;
 
-        this.tintMode = Phaser.TintModes.MULTIPLY;
+        this.tintMode = PhaserTintModes.MULTIPLY;
 
         this.debugCallback = null;
         this.debugGraphic = null;

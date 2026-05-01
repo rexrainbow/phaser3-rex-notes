@@ -9,7 +9,8 @@ import AddDragResizeBehavior from './AddDragResizeBehavior.js';
 import AddDragRotationBehavior from './AddDragRotationBehavior.js';
 
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var GetPointCallback = function (config, key) {
     var callback = GetValue(config, key);

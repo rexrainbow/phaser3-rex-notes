@@ -2,7 +2,8 @@ import AlignIn from '../../../utils/actions/AlignIn.js';
 import GetPath from './GetPath.js';
 import DefaultLayoutEdgeCallback from '../utils/DefaultLayoutEdgeCallback.js';
 
-const ALIGN_CENTER = Phaser.Display.Align.CENTER;
+import { Display as PhaserDisplay } from 'phaser';
+const ALIGN_CENTER = PhaserDisplay.Align.CENTER;
 
 var PlaceGameObjects = function (graph, graphData, config) {
     if (config === undefined) {

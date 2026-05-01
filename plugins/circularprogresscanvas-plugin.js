@@ -3,7 +3,8 @@ import Creator from './gameobjects/canvas/circularprogress/Creator.js';
 import CircularProgressCanvas from './gameobjects/canvas/circularprogress/CircularProgress.js';
 import SetValue from './utils/object/SetValue.js';
 
-class CircularProgressCanvasPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class CircularProgressCanvasPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

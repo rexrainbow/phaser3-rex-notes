@@ -1,8 +1,8 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-	typeof define === 'function' && define.amd ? define(factory) :
-	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexwebfontloaderplugin = factory());
-})(this, (function () { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+	typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexwebfontloaderplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
 	function getDefaultExportFromCjs (x) {
 		return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
@@ -35,7 +35,7 @@
 	var webfontloaderExports = webfontloader.exports;
 	var googleWebFontLoader = /*@__PURE__*/getDefaultExportFromCjs(webfontloaderExports);
 
-	const CanvasPool = Phaser.Display.Canvas.CanvasPool;
+	const CanvasPool = phaser.Display.Canvas.CanvasPool;
 
 	var TestFont = function (familyName, testString) {
 	    // Get canvas from pool
@@ -78,10 +78,10 @@
 	    return hasPixel;
 	};
 
-	const FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
-	const GetValue = Phaser.Utils.Objects.GetValue;
+	const FILE_POPULATED = phaser.Loader.FILE_POPULATED;
+	const GetValue = phaser.Utils.Objects.GetValue;
 
-	class WebFont extends Phaser.Loader.File {
+	class WebFont extends phaser.Loader.File {
 	    // constructor(loader, fileConfig) {
 	    //     super(loader, fileConfig);
 	    // }
@@ -162,7 +162,7 @@
 	    }
 	}
 
-	const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+	const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
 
 	const loaderCallback = function (key, config) {
 	    if (IsPlainObject(key)) {
@@ -191,7 +191,7 @@
 	    return this;
 	};
 
-	class WebFontLoaderPlugin extends Phaser.Plugins.BasePlugin {
+	class WebFontLoaderPlugin extends phaser.Plugins.BasePlugin {
 	    constructor(pluginManager) {
 	        super(pluginManager);
 

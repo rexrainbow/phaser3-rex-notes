@@ -2,8 +2,9 @@ import Sizer from '../sizer/Sizer.js';
 import Drag from '../../../plugins/input/drag/Drag.js';
 import OnDragSplitter from './methods/OnDragSplitter.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Clamp = Phaser.Math.Clamp;
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const Clamp = PhaserMath.Clamp;
 
 
 class SplitPanels extends Sizer {

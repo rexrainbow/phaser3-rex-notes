@@ -1,4 +1,5 @@
-const Rectangle = Phaser.Geom.Rectangle;
+import { Geom as PhaserGeom } from 'phaser';
+const Rectangle = PhaserGeom.Rectangle;
 
 var GetBounds = function (points, out) {
     if (out === undefined) {

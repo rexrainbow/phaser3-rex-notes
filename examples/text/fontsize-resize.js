@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import SetFontSizeToFitWidth from '../../plugins/utils/text/fontsizefit/FontSizeFit.js';
 
 class Demo extends Phaser.Scene {

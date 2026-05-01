@@ -1,4 +1,5 @@
-const DataManager = Phaser.Data.DataManager;
+import { Data as PhaserData } from 'phaser';
+const DataManager = PhaserData.DataManager;
 
 export default {
     // this.data

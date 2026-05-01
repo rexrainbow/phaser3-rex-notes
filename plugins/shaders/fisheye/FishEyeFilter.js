@@ -1,7 +1,8 @@
 import { FilterName } from './const.js';
 import FragSrc from './fisheye-frag.js';
 
-class FishEyeFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+import { Renderer as PhaserRenderer } from 'phaser';
+class FishEyeFilter extends PhaserRenderer.WebGL.RenderNodes.BaseFilterShader {
     static FilterName = FilterName;
 
     constructor(manager) {

@@ -1,3 +1,5 @@
+import { VERSION as PhaserVERSION } from 'phaser';
+
 const MainVersionNumber = 4;
 const SubVersionNumber = 0;
 
@@ -11,7 +13,7 @@ var CheckP3Version = function (minVersion) {
     if (minVersion === undefined) {
         minVersion = SubVersionNumber;
     }
-    var version = Phaser.VERSION.split('.');
+    var version = PhaserVERSION.split('.');
     var mainVersion = parseInt(version[0]);
     if (mainVersion === MainVersionNumber) {
         var subVersion = parseInt(version[1])

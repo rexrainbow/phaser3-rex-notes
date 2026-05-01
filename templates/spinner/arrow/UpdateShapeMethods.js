@@ -1,9 +1,10 @@
 import Lines from '../../../plugins/gameobjects/shape/shapes/geoms/lines/Lines.js';
 import Yoyo from '../utils/Yoyo.js';
 
-const DegToRad = Phaser.Math.DegToRad;
-const Linear = Phaser.Math.Linear;
-const ExpoIn = Phaser.Math.Easing.Expo.In;
+import { Math as PhaserMath } from 'phaser';
+const DegToRad = PhaserMath.DegToRad;
+const Linear = PhaserMath.Linear;
+const ExpoIn = PhaserMath.Easing.Expo.In;
 
 const DIRMAP = {
     right: 0,

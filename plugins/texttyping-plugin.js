@@ -1,6 +1,7 @@
 import TextTyping from './texttyping.js';
 
-class TextTypingPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class TextTypingPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

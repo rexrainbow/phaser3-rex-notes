@@ -1,7 +1,8 @@
 import HelperMethods from '../utils/stylemanager/HelperMethods.js';
 
-const PhaserText = Phaser.GameObjects.Text;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { GameObjects as PhaserGameObjects, Utils as PhaserUtils } from 'phaser';
+const PhaserText = PhaserGameObjects.Text;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class StatesText extends PhaserText {
     constructor(scene, config) {

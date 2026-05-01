@@ -1,8 +1,10 @@
+import { Utils as PhaserUtils } from 'phaser';
 import QuadGrid from '../utils/grid/quad/Quad.js';
 import GlobZone from '../utils/actions/GlobZone.js';
 import AlignIn from '../utils/align/align/in/QuickSet.js';
 
-const GetFastValue = Phaser.Utils.Objects.GetFastValue;
+import { Display as PhaserDisplay } from 'phaser';
+const GetFastValue = PhaserUtils.Objects.GetFastValue;
 
 var globQuadGrid = new QuadGrid();
 
@@ -30,7 +32,7 @@ var GridAlign = function (items, options) {
     var cellWidth = GetFastValue(options, 'cellWidth', 1);
     var cellHeight = GetFastValue(options, 'cellHeight', cellWidth);
     var type = GetFastValue(options, 'type', 0);
-    var position = GetFastValue(options, 'position', Phaser.Display.Align.CENTER);
+    var position = GetFastValue(options, 'position', PhaserDisplay.Align.CENTER);
     var x = GetFastValue(options, 'x', 0);
     var y = GetFastValue(options, 'y', 0);
 

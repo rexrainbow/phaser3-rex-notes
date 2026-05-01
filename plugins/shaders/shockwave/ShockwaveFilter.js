@@ -1,7 +1,8 @@
 import { FilterName } from './const.js';
 import FragSrc from './shockwave-frag.js';
 
-class ShockwaveFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+import { Renderer as PhaserRenderer } from 'phaser';
+class ShockwaveFilter extends PhaserRenderer.WebGL.RenderNodes.BaseFilterShader {
     static FilterName = FilterName;
 
     constructor(manager) {

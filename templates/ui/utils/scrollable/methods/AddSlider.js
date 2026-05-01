@@ -2,8 +2,9 @@ import CreateScrollbar from './CreateScrollbar.js';
 import Scroller from '../../../../../plugins/scroller.js';
 import MouseWheelScroller from '../../../../../plugins/input/mousewheelscroller/MouseWheelScroller.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const SnapTo = Phaser.Math.Snap.To;
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const SnapTo = PhaserMath.Snap.To;
 
 var AddSlider = function (topPatent, sliderParent, axis, config) {
     axis = axis.toUpperCase();

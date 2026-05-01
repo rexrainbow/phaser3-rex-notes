@@ -2,8 +2,9 @@ import BaseShapes from '../shapes/BaseShapes.js';
 import Methods from './methods/Methods.js';
 import { DefaultBoxFillColor, DefaultCheckerColor } from './Const.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 
 class CheckboxShape extends BaseShapes {
     constructor(scene, x, y, width, height, color, config) {

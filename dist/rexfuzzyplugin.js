@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexfuzzyplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexfuzzyplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var GetVariableName = function (setName) {
         if (setName.indexOf('.') !== -1) {
@@ -1687,7 +1687,7 @@
         return fuzzyModule;
     };
 
-    class FuzzyPlugin extends Phaser.Plugins.BasePlugin {
+    class FuzzyPlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

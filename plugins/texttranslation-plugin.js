@@ -4,7 +4,8 @@ import i18next from 'i18next';
 import Backend from 'i18next-http-backend/cjs';
 import TextTranslation from './texttranslation.js';
 
-class TextTranslationPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class TextTranslationPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

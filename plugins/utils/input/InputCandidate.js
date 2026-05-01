@@ -1,4 +1,5 @@
-const RENDER_MASK = Phaser.GameObjects.GameObject.RENDER_MASK;
+import { GameObjects as PhaserGameObjects } from 'phaser';
+const RENDER_MASK = PhaserGameObjects.GameObject.RENDER_MASK;
 
 var InputCandidate = function (gameObject) {
     if (gameObject.renderFlags !== RENDER_MASK) {

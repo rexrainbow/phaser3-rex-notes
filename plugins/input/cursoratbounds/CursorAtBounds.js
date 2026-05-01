@@ -1,7 +1,8 @@
 import CursorKeys from '../../utils/input/CursorKeys.js'
 import GetViewport from '../../utils/system/GetViewport.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class CursorAtBounds extends CursorKeys {
     constructor(scene, config) {

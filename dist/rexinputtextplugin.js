@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexinputtextplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexinputtextplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var Resize = function (width, height) {
         if (this.scene.sys.scale.autoRound) {
@@ -79,7 +79,7 @@
         select: 'select',
     };
 
-    const GetValue$2 = Phaser.Utils.Objects.GetValue;
+    const GetValue$2 = phaser.Utils.Objects.GetValue;
 
     var SetProperties = function (properties, config, out) {
         if (out === undefined) {
@@ -98,7 +98,7 @@
         return out;
     };
 
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
 
     var RouteEvents = function (gameObject, element, elementEvents, config) {
         var preventDefault = GetValue$1(config, 'preventDefault', false);
@@ -130,9 +130,9 @@
         e.stopPropagation();
     };
 
-    const DOMElement = Phaser.GameObjects.DOMElement;
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue = Phaser.Utils.Objects.GetValue;
+    const DOMElement = phaser.GameObjects.DOMElement;
+    const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
+    const GetValue = phaser.Utils.Objects.GetValue;
 
     class InputText extends DOMElement {
         constructor(scene, x, y, width, height, config) {
@@ -429,8 +429,8 @@
         return gameObject;
     }
 
-    const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-    const BuildGameObject = Phaser.GameObjects.BuildGameObject;
+    const GetAdvancedValue = phaser.Utils.Objects.GetAdvancedValue;
+    const BuildGameObject = phaser.GameObjects.BuildGameObject;
 
     function Creator (config, addToScene) {
         if (config === undefined) { config = {}; }
@@ -518,7 +518,7 @@
         return target;
     };
 
-    class InputTextPlugin extends Phaser.Plugins.BasePlugin {
+    class InputTextPlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

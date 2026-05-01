@@ -6,7 +6,8 @@ import ToggleSwitchShapeCreator from './gameobjects/shape/toggleswitch/ToggleSwi
 import ToggleSwitchShape from './gameobjects/shape/toggleswitch/ToggleSwitchShape.js';
 import SetValue from './utils/object/SetValue.js';
 
-class ToggleSwitchPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class ToggleSwitchPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

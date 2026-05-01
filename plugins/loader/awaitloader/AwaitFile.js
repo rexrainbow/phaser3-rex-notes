@@ -1,7 +1,8 @@
-const FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
-const UUID = Phaser.Utils.String.UUID;
+import { Loader as PhaserLoader, Utils as PhaserUtils } from 'phaser';
+const FILE_POPULATED = PhaserLoader.FILE_POPULATED;
+const UUID = PhaserUtils.String.UUID;
 
-class AwaitFile extends Phaser.Loader.File {
+class AwaitFile extends PhaserLoader.File {
     constructor(loader, fileConfig) {
         if (!fileConfig.hasOwnProperty('type')) {
             fileConfig.type = 'await';

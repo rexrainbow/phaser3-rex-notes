@@ -1,7 +1,8 @@
 import CreateLabel from '../../utils/build/CreateLabel.js';
 import CreateTextArea from '../../utils/build/CreateTextArea.js'
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var CreateContent = function (scene, config, creators) {
     var type = GetValue(config, '$type');

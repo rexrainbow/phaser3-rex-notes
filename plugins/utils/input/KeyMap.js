@@ -1,5 +1,6 @@
+import { Input as PhaserInput } from 'phaser';
 // KeyCodes : Key (string) to KeyCode (number)
-const KeyCodes = Phaser.Input.Keyboard.KeyCodes;
+const KeyCodes = PhaserInput.Keyboard.KeyCodes;
 
 var KeyMap = {};
 for (var key in KeyCodes) {

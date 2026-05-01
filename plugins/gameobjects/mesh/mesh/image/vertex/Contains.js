@@ -1,3 +1,4 @@
+import { Geom as PhaserGeom } from 'phaser';
 var Contains = function (face, x, y) {
     var vertices = face.vertices;
     var v0 = vertices[0];
@@ -12,6 +13,6 @@ var Contains = function (face, x, y) {
     return GlobTriangle.contains(x, y);
 }
 
-var GlobTriangle = new Phaser.Geom.Triangle();
+var GlobTriangle = new PhaserGeom.Triangle();
 
 export default Contains

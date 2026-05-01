@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import Live2dPlugin from '../../plugins/live2d-plugin.js';
 import OutlineFilterPlugin from '../../plugins/outlinefilter-plugin.js';
 

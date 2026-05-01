@@ -1,6 +1,7 @@
 import FullWindow from '../../../behaviors/fullwindow/FullWindow.js';
 
-const Zone = Phaser.GameObjects.Zone;
+import { GameObjects as PhaserGameObjects } from 'phaser';
+const Zone = PhaserGameObjects.Zone;
 
 class FullWindowRectangle extends Zone {
     constructor(scene) {

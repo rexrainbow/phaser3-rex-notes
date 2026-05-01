@@ -1,7 +1,8 @@
 import { Lines, Circle } from '../shapes/geoms';
 
-const RadToDeg = Phaser.Math.RadToDeg;
-const DegToRad = Phaser.Math.DegToRad;
+import { Math as PhaserMath } from 'phaser';
+const RadToDeg = PhaserMath.RadToDeg;
+const DegToRad = PhaserMath.DegToRad;
 
 var FillArc = function (shape, x, y, outerRadius, innerRadius, startAngle, endAngle, anticlockwise) {
     var isCircle = Math.abs(endAngle - startAngle) === 360;

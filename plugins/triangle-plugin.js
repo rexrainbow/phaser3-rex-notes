@@ -3,7 +3,8 @@ import Creator from './gameobjects/shape/triangle/Creator.js';
 import Triangle from './gameobjects/shape/triangle/Triangle.js';
 import SetValue from './utils/object/SetValue.js';
 
-class TrianglePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class TrianglePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

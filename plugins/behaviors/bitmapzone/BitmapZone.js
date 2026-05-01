@@ -1,5 +1,6 @@
-const GetRandom = Phaser.Utils.Array.GetRandom;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetRandom = PhaserUtils.Array.GetRandom;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class BitmapZone {
     constructor(canvasObject, config) {

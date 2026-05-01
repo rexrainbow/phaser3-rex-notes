@@ -1,8 +1,9 @@
 import Triangulate from '../../delaunay/Triangulate.js';
 import IsFunction from '../../../object/IsFunction.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Clamp = Phaser.Math.Clamp;
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const Clamp = PhaserMath.Clamp;
 const DefaultRingRadiusList = [1 / 27, 3 / 27, 9 / 27];
 
 var RectangleToTriangles = function (config) {

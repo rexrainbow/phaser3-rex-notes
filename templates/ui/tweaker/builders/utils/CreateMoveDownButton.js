@@ -2,7 +2,8 @@ import ButtonStyleBase from './ButtonStyleBase.js';
 import DeepClone from '../../../../../plugins/utils/object/DeepClone.js';
 import CreateLabel from '../../../utils/build/CreateLabel.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var CreateMoveDownButton = function (scene, config, style) {
     var moveDownButtonStyle = GetValue(style, 'moveDownButton');

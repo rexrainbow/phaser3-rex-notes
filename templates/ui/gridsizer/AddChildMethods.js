@@ -2,9 +2,10 @@ import AddChild from '../basesizer/utils/AddChild.js';
 import GetBoundsConfig from '../utils/GetBoundsConfig.js';
 import ALIGNMODE from '../utils/AlignConst.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
-const ALIGN_CENTER = Phaser.Display.Align.CENTER;
+import { Display as PhaserDisplay, Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
+const ALIGN_CENTER = PhaserDisplay.Align.CENTER;
 
 
 var GetEmptyCellIndex = function (columnIndex, rowIndex, cells, columnCount, rowCount) {

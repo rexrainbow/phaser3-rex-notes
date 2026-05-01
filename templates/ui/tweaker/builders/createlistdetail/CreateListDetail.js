@@ -15,7 +15,8 @@ import CreateBackground from '../utils/CreateBackground.js';
 import Sizer from '../../../sizer/Sizer.js';
 import Merge from '../../../../../plugins/utils/object/Merge.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 const DefaultSplitStyle = {
     width: 10,

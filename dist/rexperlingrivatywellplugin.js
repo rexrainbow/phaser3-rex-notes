@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexperlingrivatywellplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexperlingrivatywellplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     // https://github.com/josephg/noisejs
 
@@ -315,7 +315,7 @@
         }
     }
 
-    const GetValue = Phaser.Utils.Objects.GetValue;
+    const GetValue = phaser.Utils.Objects.GetValue;
     const PERIOD_SCALE = 1 / 5000;
     const ROTATE_SCALE = 0.3;
 
@@ -325,7 +325,7 @@
             this.noise = new Noise(GetValue(config, 'seed', Math.random()));
             this.periodScale = GetValue(config, 'periodScale', PERIOD_SCALE);
             this.rotateScale = GetValue(config, 'rotateScale', ROTATE_SCALE);
-            this.velocity = new Phaser.Math.Vector2();
+            this.velocity = new phaser.Math.Vector2();
         }
 
         update(particle, delta) {
@@ -344,7 +344,7 @@
         }
     }
 
-    class PerlinGrivatyWellPlugin extends Phaser.Plugins.BasePlugin {
+    class PerlinGrivatyWellPlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import SpinnerPlugin from '../../templates/spinner/spinner-plugin.js';
 import Arrow from '../../templates/spinner/arrow/Arrow.js';
 

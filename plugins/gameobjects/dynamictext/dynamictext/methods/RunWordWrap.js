@@ -1,6 +1,7 @@
 import RunWordWrapBase from './wrap/runwordwrap/RunWordWrap.js';
 
-const Merge = Phaser.Utils.Objects.Merge;
+import { Utils as PhaserUtils } from 'phaser';
+const Merge = PhaserUtils.Objects.Merge;
 
 var RunWordWrap = function (config) {
     if (config === undefined) {

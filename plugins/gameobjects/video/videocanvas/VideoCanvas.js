@@ -1,8 +1,9 @@
 import VideoBase from '../videobase/VideoBase.js';
 import Canvas from '../../canvas/canvasbase/Canvas.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class VideoCanvas extends VideoBase(Canvas) {
     constructor(scene, x, y, width, height, config) {

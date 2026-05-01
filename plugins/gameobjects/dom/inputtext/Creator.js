@@ -1,7 +1,8 @@
 import InputText from './InputText.js';
 
-const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-const BuildGameObject = Phaser.GameObjects.BuildGameObject;
+import { GameObjects as PhaserGameObjects, Utils as PhaserUtils } from 'phaser';
+const GetAdvancedValue = PhaserUtils.Objects.GetAdvancedValue;
+const BuildGameObject = PhaserGameObjects.BuildGameObject;
 
 export default function (config, addToScene) {
     if (config === undefined) { config = {}; }

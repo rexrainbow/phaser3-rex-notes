@@ -1,7 +1,8 @@
+import { Utils as PhaserUtils } from 'phaser';
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import EaseValueTask from '../../utils/ease/EaseValueTask.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 
 class EaseData extends ComponentBase {
     constructor(parent, config) {

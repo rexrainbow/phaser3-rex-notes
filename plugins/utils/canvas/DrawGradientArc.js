@@ -1,8 +1,9 @@
 import ColorStringToInteger from '../color/ColorStringToInteger.js';
 import { GetRGB } from '../color/GetRGB.js';
 
-const DegToRad = Phaser.Math.DegToRad;
-const Linear = Phaser.Math.Linear;
+import { Math as PhaserMath } from 'phaser';
+const DegToRad = PhaserMath.DegToRad;
+const Linear = PhaserMath.Linear;
 
 var DrawGradientArc = function (
     canvas, context,

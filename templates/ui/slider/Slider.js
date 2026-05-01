@@ -7,10 +7,11 @@ import GetEndPoint from './methods/GetEndPoint.js';
 import UpdateThumb from './methods/UpdateThumb.js';
 import UpdateIndicator from './methods/UpdateIndicator.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const Clamp = Phaser.Math.Clamp;
-const SnapTo = Phaser.Math.Snap.To;
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const Clamp = PhaserMath.Clamp;
+const SnapTo = PhaserMath.Snap.To;
 
 class Slider extends ProgressBase(Sizer) {
     constructor(scene, config) {

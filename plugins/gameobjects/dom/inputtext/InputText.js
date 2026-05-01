@@ -8,9 +8,10 @@ import SetPrpoerties from '../utils/SetProperties.js';
 import RouteEvents from '../utils/RouteEvents.js';
 import StopPropagationTouchEvents from '../utils/StopPropagationTouchEvents.js';
 
-const DOMElement = Phaser.GameObjects.DOMElement;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { GameObjects as PhaserGameObjects, Utils as PhaserUtils } from 'phaser';
+const DOMElement = PhaserGameObjects.DOMElement;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class InputText extends DOMElement {
     constructor(scene, x, y, width, height, config) {

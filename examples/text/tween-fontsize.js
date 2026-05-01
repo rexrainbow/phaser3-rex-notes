@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 
 const MaskR = (~(0xff << 16) & 0xffffff);
 const MaskG = (~(0xff << 8) & 0xffffff);

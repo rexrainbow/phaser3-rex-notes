@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import ViewportCoordinatePlugin from '../../plugins/viewportcoordinate-plugin.js';
 import ScaleOuterPlugin from '../../plugins/scaleouter-plugin.js';
 

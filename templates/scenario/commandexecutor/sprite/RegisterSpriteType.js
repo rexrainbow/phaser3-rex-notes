@@ -7,8 +7,9 @@ import Unfocus from './Unfocus.js';
 import Say from './Say.js';
 import Shake from '../utils/Shake.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 
 var RegisterSpriteType = function (commandExecutor, config) {
     var { viewport } = config;

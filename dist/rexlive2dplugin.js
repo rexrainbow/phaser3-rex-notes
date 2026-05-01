@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexlive2dplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexlive2dplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     const MainVersionNumber = 4;
     const SubVersionNumber = 0;
@@ -17,7 +17,7 @@
         if (minVersion === undefined) {
             minVersion = SubVersionNumber;
         }
-        var version = Phaser.VERSION.split('.');
+        var version = phaser.VERSION.split('.');
         var mainVersion = parseInt(version[0]);
         if (mainVersion === MainVersionNumber) {
             var subVersion = parseInt(version[1]);
@@ -33,14 +33,14 @@
 
     CheckP3Version();
 
-    const Extern = Phaser.GameObjects.Extern;
+    const Extern = phaser.GameObjects.Extern;
 
     class Live2dGameObjectBase extends Extern { 
 
     }
 
-    const Components = Phaser.GameObjects.Components;
-    Phaser.Class.mixin(Live2dGameObjectBase,
+    const Components = phaser.GameObjects.Components;
+    phaser.Class.mixin(Live2dGameObjectBase,
         [
             Components.AlphaSingle,
             Components.ComputedSize,
@@ -11150,12 +11150,12 @@
         }
     }
 
-    const GameClass = Phaser.Game;
+    const GameClass = phaser.Game;
     var IsGame = function (object) {
         return (object instanceof GameClass);
     };
 
-    const SceneClass = Phaser.Scene;
+    const SceneClass = phaser.Scene;
     var IsSceneObject = function (object) {
         return (object instanceof SceneClass);
     };
@@ -11431,7 +11431,7 @@
         gameObject.emit('idle');
     };
 
-    const Capitalize$3 = Phaser.Utils.String.UppercaseFirst;
+    const Capitalize$3 = phaser.Utils.String.UppercaseFirst;
 
     var Update = function (time, delta) {
         var deltaTimeSeconds = delta / 1000;
@@ -11848,7 +11848,7 @@
         Live2DCubismFramework.PartsIdCore = CubismDefaultParameterId.PartsIdCore;
     })(Live2DCubismFramework$2 || (Live2DCubismFramework$2 = {}));
 
-    const Capitalize$2 = Phaser.Utils.String.UppercaseFirst;
+    const Capitalize$2 = phaser.Utils.String.UppercaseFirst;
 
     var RegisterParameter$1 = function (name) {
         var capName = `Param${Capitalize$2(name)}`;
@@ -11869,7 +11869,7 @@
         return this;
     };
 
-    const Capitalize$1 = Phaser.Utils.String.UppercaseFirst;
+    const Capitalize$1 = phaser.Utils.String.UppercaseFirst;
 
     var AddParameterValue$1 = function (name, value) {
         var propertyName = `_idParam${Capitalize$1(name)}`;
@@ -11888,7 +11888,7 @@
         return this;
     };
 
-    const Capitalize = Phaser.Utils.String.UppercaseFirst;
+    const Capitalize = phaser.Utils.String.UppercaseFirst;
 
     var ResetParameterValue$1 = function (name) {
         var propertyName = `_idParam${Capitalize(name)}`;
@@ -11933,7 +11933,7 @@
         return undefined;
     };
 
-    const Rectangle = Phaser.Geom.Rectangle;
+    const Rectangle = phaser.Geom.Rectangle;
 
     var GetDrawableBounds = function (index, bounds) {
         if (bounds === undefined) {
@@ -12060,7 +12060,7 @@
         Methods$1
     );
 
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
 
     var SetModel = function (key, config) {
         if (this.key === key) {
@@ -12180,8 +12180,8 @@
         return this.model._addParamValues;
     };
 
-    const IsPlainObject$3 = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue = Phaser.Utils.Objects.GetValue;
+    const IsPlainObject$3 = phaser.Utils.Objects.IsPlainObject;
+    const GetValue = phaser.Utils.Objects.GetValue;
 
     var LookAt = function (x, y, config) {
         if (IsPlainObject$3(x)) {
@@ -12261,8 +12261,8 @@
         return anyHit;
     };
 
-    const IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
-    const GameObject = Phaser.GameObjects.GameObject;
+    const IsPlainObject$2 = phaser.Utils.Objects.IsPlainObject;
+    const GameObject = phaser.GameObjects.GameObject;
 
     var SetInteractive = function (hitArea, hitAreaCallback, dropZone) {
         var isInit = !this.input;
@@ -12336,8 +12336,8 @@
         return this.model.hitTest(hitAreaName, modelXY);
     };
 
-    const TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
-    const TransformXY = Phaser.Math.TransformXY;
+    const TransformMatrix = phaser.GameObjects.Components.TransformMatrix;
+    const TransformXY = phaser.Math.TransformXY;
 
     var WorldXYToGameObjectLocalXY = function (gameObject, worldX, worldY, camera, out) {
         if (camera === undefined) {
@@ -12376,7 +12376,7 @@
     var tempMatrix, parentMatrix;
     var globOut$1 = {};
 
-    const IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
+    const IsPlainObject$1 = phaser.Utils.Objects.IsPlainObject;
 
     var WorldXYToModelXY = function (worldX, worldY, camera, out) {
         if ((camera === undefined) || (camera === true) || IsPlainObject$1(camera)) {
@@ -12511,8 +12511,8 @@
         return gameObject;
     }
 
-    const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-    const BuildGameObject = Phaser.GameObjects.BuildGameObject;
+    const GetAdvancedValue = phaser.Utils.Objects.GetAdvancedValue;
+    const BuildGameObject = phaser.GameObjects.BuildGameObject;
 
     function Creator (config, addToScene) {
         if (config === undefined) { config = {}; }
@@ -12525,10 +12525,10 @@
         return gameObject;
     }
 
-    const FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
-    const UUID = Phaser.Utils.String.UUID;
+    const FILE_POPULATED = phaser.Loader.FILE_POPULATED;
+    const UUID = phaser.Utils.String.UUID;
 
-    class AwaitFile extends Phaser.Loader.File {
+    class AwaitFile extends phaser.Loader.File {
         constructor(loader, fileConfig) {
             if (!fileConfig.hasOwnProperty('type')) {
                 fileConfig.type = 'await';
@@ -12696,7 +12696,7 @@
         return this;
     };
 
-    const BinaryFile = Phaser.Loader.FileTypes.BinaryFile;
+    const BinaryFile = phaser.Loader.FileTypes.BinaryFile;
 
     var CreateBinaryFile = function (loader, key, url, xhrSettings, dataKey) {
         var file = new BinaryFile(loader, key, url, xhrSettings);
@@ -13380,8 +13380,8 @@
         Live2DCubismFramework.CubismModelSettingJson = CubismModelSettingJson;
     })(Live2DCubismFramework || (Live2DCubismFramework = {}));
 
-    const GetFastValue$1 = Phaser.Utils.Objects.GetFastValue;
-    const ImageFile = Phaser.Loader.FileTypes.ImageFile;
+    const GetFastValue$1 = phaser.Utils.Objects.GetFastValue;
+    const ImageFile = phaser.Loader.FileTypes.ImageFile;
 
     var LoadChildrenFiles = function (parent, setting) {
         var loader = parent.loader;
@@ -13633,10 +13633,10 @@
         return target;
     };
 
-    const GetFastValue = Phaser.Utils.Objects.GetFastValue;
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+    const GetFastValue = phaser.Utils.Objects.GetFastValue;
+    const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
 
-    class Live2dFile extends Phaser.Loader.MultiFile {
+    class Live2dFile extends phaser.Loader.MultiFile {
         constructor(loader, key, url, xhrSettings) {
             if (IsPlainObject(key)) {
                 var config = key;
@@ -13758,7 +13758,7 @@
         }
     };
 
-    class Live2dPlugin extends Phaser.Plugins.BasePlugin {
+    class Live2dPlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

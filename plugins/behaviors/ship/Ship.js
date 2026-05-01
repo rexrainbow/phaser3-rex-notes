@@ -3,7 +3,8 @@
 import TickTask from '../../utils/componentbase/SceneUpdateTickTask.js';
 import { SetAcceleration, SetAngularVelocity } from '../../utils/arcade/Helpers.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Ship extends TickTask {
     constructor(gameObject, config) {

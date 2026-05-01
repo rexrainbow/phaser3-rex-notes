@@ -1,6 +1,7 @@
 import CSVToArray from './csvtoarray.js'
 
-class CSVToArrayPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class CSVToArrayPlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
     }

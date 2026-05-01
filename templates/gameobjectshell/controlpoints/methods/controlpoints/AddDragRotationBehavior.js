@@ -1,4 +1,5 @@
-const AngleBetween = Phaser.Math.Angle.Between;
+import { Math as PhaserMath } from 'phaser';
+const AngleBetween = PhaserMath.Angle.Between;
 
 var AddDragRotationBehavior = function (parent, dragPoint, originPoint) {
     dragPoint

@@ -2,7 +2,8 @@
 import EaseValueTaskBase from '../../utils/componentbase/tweentask/EaseValueTaskBase.js';
 import ZoomAt from '../../utils/camera/ZoomAt.js';
 
-const Linear = Phaser.Math.Linear;
+import { Math as PhaserMath } from 'phaser';
+const Linear = PhaserMath.Linear;
 
 class EaseZoom extends EaseValueTaskBase {
     constructor(parent, config) {

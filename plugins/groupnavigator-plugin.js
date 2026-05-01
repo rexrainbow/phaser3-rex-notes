@@ -1,6 +1,7 @@
 import GroupNavigator from './groupnavigator.js';
 
-class GroupNavigatorPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class GroupNavigatorPlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
     }

@@ -1,8 +1,9 @@
 import CharacterCache from './charactercache.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+import { Plugins as PhaserPlugins, Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 
-class CharacterCachePlugin extends Phaser.Plugins.BasePlugin {
+class CharacterCachePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

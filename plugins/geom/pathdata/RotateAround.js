@@ -1,6 +1,7 @@
+import { Math as PhaserMath } from 'phaser';
 //import PointRotateAround from '../../utils/math/RotateAround.js';
 
-const PointRotateAround = Phaser.Math.RotateAround;
+const PointRotateAround = PhaserMath.RotateAround;
 
 var RotateAround = function (centerX, centerY, angle, pathData) {
     var point = { x: 0, y: 0 };

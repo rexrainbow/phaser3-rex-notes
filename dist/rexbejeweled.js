@@ -1,13 +1,13 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexbejeweled = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexbejeweled = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var EventEmitterMethods$1 = {
         setEventEmitter(eventEmitter, EventEmitterClass) {
             if (EventEmitterClass === undefined) {
-                EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+                EventEmitterClass = phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
             }
             this._privateEE = (eventEmitter === true) || (eventEmitter === undefined);
             this._eventEmitter = (this._privateEE) ? (new EventEmitterClass()) : eventEmitter;
@@ -96,7 +96,7 @@
         },
     };
 
-    const SceneClass = Phaser.Scene;
+    const SceneClass = phaser.Scene;
     var IsSceneObject = function (object) {
         return (object instanceof SceneClass);
     };
@@ -115,7 +115,7 @@
         }
     };
 
-    const GameClass = Phaser.Game;
+    const GameClass = phaser.Game;
     var IsGame = function (object) {
         return (object instanceof GameClass);
     };
@@ -134,7 +134,7 @@
         }
     };
 
-    const GetValue$b = Phaser.Utils.Objects.GetValue;
+    const GetValue$b = phaser.Utils.Objects.GetValue;
 
     class ComponentBase {
         constructor(parent, config) {
@@ -1213,8 +1213,8 @@
         return obj && (typeof obj.then === 'function');
     };
 
-    const GetValue$9 = Phaser.Utils.Objects.GetValue;
-    Phaser.Structs.Set;
+    const GetValue$9 = phaser.Utils.Objects.GetValue;
+    phaser.Structs.Set;
 
     let State$1 = class State extends BaseState {
         constructor(bejeweled, config) {
@@ -1398,7 +1398,7 @@
         }
     };
 
-    const GetValue$8 = Phaser.Utils.Objects.GetValue;
+    const GetValue$8 = phaser.Utils.Objects.GetValue;
 
     class TickTask extends ComponentBase {
         constructor(parent, config) {
@@ -1511,7 +1511,7 @@
         'always': 2
     };
 
-    const GetValue$7 = Phaser.Utils.Objects.GetValue;
+    const GetValue$7 = phaser.Utils.Objects.GetValue;
 
     class SceneUpdateTickTask extends TickTask {
         constructor(parent, config) {
@@ -1558,8 +1558,8 @@
         return (eventName === 'step') || (eventName === 'poststep');
     };
 
-    const GetValue$6 = Phaser.Utils.Objects.GetValue;
-    const Clamp = Phaser.Math.Clamp;
+    const GetValue$6 = phaser.Utils.Objects.GetValue;
+    const Clamp = phaser.Math.Clamp;
 
     class Timer {
         constructor(config) {
@@ -1783,9 +1783,9 @@
 
     }
 
-    const GetValue$5 = Phaser.Utils.Objects.GetValue;
-    const GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
-    const GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
+    const GetValue$5 = phaser.Utils.Objects.GetValue;
+    const GetAdvancedValue$1 = phaser.Utils.Objects.GetAdvancedValue;
+    const GetEaseFunction = phaser.Tweens.Builders.GetEaseFunction;
 
     class EaseValueTaskBase extends TimerTickTask {
         resetFromJSON(o) {
@@ -1915,9 +1915,9 @@
         }
     }
 
-    const GetValue$4 = Phaser.Utils.Objects.GetValue;
-    const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-    const Linear = Phaser.Math.Linear;
+    const GetValue$4 = phaser.Utils.Objects.GetValue;
+    const GetAdvancedValue = phaser.Utils.Objects.GetAdvancedValue;
+    const Linear = phaser.Math.Linear;
 
     class Scale extends EaseValueTaskBase {
         constructor(gameObject, config) {
@@ -2134,7 +2134,7 @@
         }
     };
 
-    const GetValue$3 = Phaser.Utils.Objects.GetValue;
+    const GetValue$3 = phaser.Utils.Objects.GetValue;
 
     class State extends BaseState {
         constructor(bejeweled, config) {
@@ -2673,7 +2673,7 @@
         this.breakMatch3();
     };
 
-    const GetRandom$1 = Phaser.Utils.Array.GetRandom;
+    const GetRandom$1 = phaser.Utils.Array.GetRandom;
 
     var RandomSymbol = function (board, tileX, tileY, callback, scope, excluded) {
         var symbol;
@@ -2848,8 +2848,7 @@
     3. Change symbol to a different value of all neighbors
     */
 
-
-    const GetRandom = Phaser.Utils.Array.GetRandom;
+    const GetRandom = phaser.Utils.Array.GetRandom;
 
     var BreakMatch3 = function () {
         var tileZ = this.chessTileZ,
@@ -3011,7 +3010,7 @@
         return symbols;
     };
 
-    var Rectangle = Phaser.Geom.Rectangle;
+    var Rectangle = phaser.Geom.Rectangle;
     var GetBoardBounds = function (out) {
         if (out === undefined) {
             out = new Rectangle();
@@ -3048,7 +3047,7 @@
         return !!renderer.gl;
     };
 
-    const MaskController = Phaser.Filters.Mask;
+    const MaskController = phaser.Filters.Mask;
 
     var SetMask = function (gameObject, maskGameObject, invert, maskType) {
         if (IsWebGLRenderMode(gameObject)) {
@@ -3325,7 +3324,7 @@
         ChessSymbolMethods,
     );
 
-    const GetValue$2 = Phaser.Utils.Objects.GetValue;
+    const GetValue$2 = phaser.Utils.Objects.GetValue;
 
     class BoardWrapper {
         constructor(scene, config) {
@@ -3463,7 +3462,7 @@
         Methods
     );
 
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
     class Input {
         constructor(bejeweled, config) {
             this.bejeweled = bejeweled;      // Bejeweled
@@ -3780,7 +3779,7 @@
         },
     };
 
-    const DataManager = Phaser.Data.DataManager;
+    const DataManager = phaser.Data.DataManager;
 
     var DataManagerMethods = {
         // this.data
@@ -3861,7 +3860,7 @@
         intersection: Intersection
     };
 
-    const GetValue = Phaser.Utils.Objects.GetValue;
+    const GetValue = phaser.Utils.Objects.GetValue;
 
     class Bejeweled extends ComponentBase {
         constructor(scene, config) {

@@ -1,4 +1,5 @@
-const Clamp = Phaser.Math.Clamp;
+import { Math as PhaserMath } from 'phaser';
+const Clamp = PhaserMath.Clamp;
 
 export default {
     setChildOY(value, clamp) {

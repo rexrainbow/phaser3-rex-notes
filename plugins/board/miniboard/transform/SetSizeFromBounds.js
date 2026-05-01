@@ -1,5 +1,6 @@
-const SetSizeBase = Phaser.GameObjects.Components.Size.setSize;
-const SetOriginBase = Phaser.GameObjects.Components.Origin.setOrigin;
+import { GameObjects as PhaserGameObjects } from 'phaser';
+const SetSizeBase = PhaserGameObjects.Components.Size.setSize;
+const SetOriginBase = PhaserGameObjects.Components.Origin.setOrigin;
 
 var SetSizeFromBounds = function () {
     var bounds = this.getBounds(true);

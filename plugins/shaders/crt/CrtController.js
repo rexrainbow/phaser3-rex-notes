@@ -1,8 +1,9 @@
 import { FilterName } from './const.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Filters as PhaserFilters, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
-class CrtController extends Phaser.Filters.Controller {
+class CrtController extends PhaserFilters.Controller {
     static FilterName = FilterName;
 
     constructor(camera, config) {

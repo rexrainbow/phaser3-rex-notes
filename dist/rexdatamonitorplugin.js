@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexdatamonitorplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexdatamonitorplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var GetPropertyPath = function (parentPath, property) {
         return (parentPath === '') ? property : `${parentPath}.${property}`;
@@ -198,7 +198,7 @@
         return proxyData;
     };
 
-    class DataMonitorPlugin extends Phaser.Plugins.BasePlugin {
+    class DataMonitorPlugin extends phaser.Plugins.BasePlugin {
         constructor(pluginManager) {
             super(pluginManager);
         }

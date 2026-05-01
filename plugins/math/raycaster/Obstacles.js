@@ -1,8 +1,9 @@
 import IsGameObject from '../../utils/system/IsGameObject.js';
 import BoundsToPolygon from '../../utils/bounds/BoundsToPolygon.js';
 
-const Polygon = Phaser.Geom.Polygon;
-const SpliceOne = Phaser.Utils.Array.SpliceOne;
+import { Geom as PhaserGeom, Utils as PhaserUtils } from 'phaser';
+const Polygon = PhaserGeom.Polygon;
+const SpliceOne = PhaserUtils.Array.SpliceOne;
 
 class Obstacles {
     constructor() {

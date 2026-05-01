@@ -1,7 +1,8 @@
 import GetGraphItem from '../../graphitem/GetGraphItem.js';
 import GetObjUID from '../../graphitem/GetObjUID.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 
 const DIRAtoB = 1;
 const DIRBtoA = 2;

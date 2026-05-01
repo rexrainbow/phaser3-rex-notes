@@ -1,7 +1,8 @@
 import Step from './step.js';
 import StepMethods from './behaviors/step/StepMethods.js';
 
-class StepPlugin extends Phaser.Plugins.BasePlugin {
+import { GameObjects as PhaserGameObjects, Plugins as PhaserPlugins } from 'phaser';
+class StepPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);
@@ -22,7 +23,7 @@ class StepPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     injectMethodsToRootClass() {
-        this.injectMethods(Phaser.GameObjects.GameObject.prototype);
+        this.injectMethods(PhaserGameObjects.GameObject.prototype);
         return this;
     }
 }

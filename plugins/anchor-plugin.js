@@ -1,6 +1,7 @@
 import Anchor from './anchor.js'
 
-class AnchorPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class AnchorPlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
     }

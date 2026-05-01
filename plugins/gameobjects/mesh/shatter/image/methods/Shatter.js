@@ -1,8 +1,9 @@
 import RectangleToTriangles from '../../../../../utils/math/rectangletotriangles/fantriangulate/RectangleToTriangles.js';
 import { WorldXYToLocalXY } from '../../../mesh/utils/WorldXY.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const DistanceSquared = Phaser.Math.Distance.Squared;
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const DistanceSquared = PhaserMath.Distance.Squared;
 
 var Shatter = function (centerX, centerY, config) {
     if (IsPlainObject(centerX)) {

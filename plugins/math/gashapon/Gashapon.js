@@ -2,7 +2,8 @@ import Clone from '../../utils/object/Clone.js';
 import IsEmpty from '../../utils/object/IsEmpty.js';
 import Clear from '../../utils/object/Clear.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Gashapon {
     constructor(config) {

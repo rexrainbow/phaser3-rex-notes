@@ -1,6 +1,7 @@
 import CONST from '../../../textbase/const.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 const NO_NEWLINE = CONST.NO_NEWLINE;
 const RAW_NEWLINE = CONST.RAW_NEWLINE;
 

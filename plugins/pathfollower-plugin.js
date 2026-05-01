@@ -1,6 +1,7 @@
 import PathFollower from './pathfollower.js';
 
-class PathFollowerPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class PathFollowerPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

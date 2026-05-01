@@ -1,7 +1,8 @@
 import Canvas from '../canvasbase/Canvas.js';
 import AddRoundRectanglePath from '../../../utils/canvas/AddRoundRectanglePath.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class CircleMaskImage extends Canvas {
     constructor(scene, x, y, key, frame, config) {

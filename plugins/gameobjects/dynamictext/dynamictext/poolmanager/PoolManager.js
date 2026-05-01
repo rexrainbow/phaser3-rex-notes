@@ -1,6 +1,7 @@
 import Pool from '../../../../pool.js';
 
-const GetFastValue = Phaser.Utils.Objects.GetFastValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetFastValue = PhaserUtils.Objects.GetFastValue;
 
 var Pools = {};
 class PoolManager {

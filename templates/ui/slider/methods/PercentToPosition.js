@@ -1,4 +1,5 @@
-const Linear = Phaser.Math.Linear;
+import { Math as PhaserMath } from 'phaser';
+const Linear = PhaserMath.Linear;
 
 var PercentToPosition = function (t, startPoint, endPoint, out) {
     if (out === undefined) {

@@ -4,7 +4,8 @@ import MonitorTargetMethods from './MonitorTargetMethods.js';
 import SetReadOnlyMethods from './SetReadOnlyMethods.js';
 import MinTitleWidthMethods from './MinTitleWidthMethods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class InputRow extends Sizer {
     constructor(scene, config) {

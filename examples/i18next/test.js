@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import i18next from 'i18next';
 
 i18next.init();  // Can run `18next.init()` before creating game instance

@@ -1,16 +1,16 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexquadimageplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexquadimageplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
-    const GameObject = Phaser.GameObjects.GameObject;
+    const GameObject = phaser.GameObjects.GameObject;
 
     let Image$2 = class Image extends GameObject {
     };
 
-    const Components = Phaser.GameObjects.Components;
-    Phaser.Class.mixin(Image$2,
+    const Components = phaser.GameObjects.Components;
+    phaser.Class.mixin(Image$2,
         [
             Components.AlphaSingle,
             Components.BlendMode,
@@ -27,7 +27,7 @@
         ]
     );
 
-    const GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
+    const GetCalcMatrix = phaser.GameObjects.GetCalcMatrix;
 
     var renderOptions = {
         multiTexturing: false,
@@ -88,7 +88,7 @@
         skipRender: SkipRender,
     };
 
-    const RotateAround$2 = Phaser.Math.RotateAround;
+    const RotateAround$2 = phaser.Math.RotateAround;
 
     var LocalXYToWorldXY = function (gameObject, localX, localY, out) {
         if (out === undefined) {
@@ -134,8 +134,8 @@
 
     var GlobalXY$1 = {};
 
-    const Linear = Phaser.Math.Linear;
-    const RotateAround$1 = Phaser.Math.RotateAround;
+    const Linear = phaser.Math.Linear;
+    const RotateAround$1 = phaser.Math.RotateAround;
 
     class Vertex {
         constructor() {
@@ -389,7 +389,7 @@
 
     var GlobalXY = {};
 
-    const InCenter = Phaser.Geom.Triangle.InCenter;
+    const InCenter = phaser.Geom.Triangle.InCenter;
 
     var GetInCenter = function (face, out) {
         if (out === undefined) {
@@ -425,10 +425,10 @@
         return GlobTriangle.contains(x, y);
     };
 
-    var GlobTriangle = new Phaser.Geom.Triangle();
+    var GlobTriangle = new phaser.Geom.Triangle();
 
-    const RadToDeg$1 = Phaser.Math.RadToDeg;
-    const DegToRad$1 = Phaser.Math.DegToRad;
+    const RadToDeg$1 = phaser.Math.RadToDeg;
+    const DegToRad$1 = phaser.Math.DegToRad;
 
     class Face {
         constructor(vertex0, vertex1, vertex2) {
@@ -788,7 +788,7 @@
         return faces;
     };
 
-    const GetFirst = Phaser.Utils.Array.GetFirst;
+    const GetFirst = phaser.Utils.Array.GetFirst;
 
     var VertexMethods = {
         clear() {
@@ -1034,7 +1034,7 @@
 
         clearTint() {
             this.setTint(0xffffff);
-            this.setTintMode(Phaser.TintModes.MULTIPLY);
+            this.setTintMode(phaser.TintModes.MULTIPLY);
             return this;
         }
     };
@@ -1074,8 +1074,8 @@
         },
     };
 
-    const TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
-    const TransformXY = Phaser.Math.TransformXY;
+    const TransformMatrix = phaser.GameObjects.Components.TransformMatrix;
+    const TransformXY = phaser.Math.TransformXY;
 
     var WorldXYToGameObjectLocalXY = function (gameObject, worldX, worldY, camera, out) {
         if (camera === undefined) {
@@ -1224,17 +1224,17 @@
         PointMethods,
     );
 
-    const ShaderSourceFS = Phaser.Renderer.WebGL.Shaders.MultiFrag;
-    const ShaderSourceVS = Phaser.Renderer.WebGL.Shaders.MultiVert;
-    const ShaderAdditionMakers = Phaser.Renderer.WebGL.ShaderAdditionMakers;
+    const ShaderSourceFS = phaser.Renderer.WebGL.Shaders.MultiFrag;
+    const ShaderSourceVS = phaser.Renderer.WebGL.Shaders.MultiVert;
+    const ShaderAdditionMakers = phaser.Renderer.WebGL.ShaderAdditionMakers;
     const MakeApplyTint = ShaderAdditionMakers.MakeApplyTint;
     const MakeDefineTexCount = ShaderAdditionMakers.MakeDefineTexCount;
     const MakeGetTexCoordOut = ShaderAdditionMakers.MakeGetTexCoordOut;
     const MakeGetTexRes = ShaderAdditionMakers.MakeGetTexRes;
     const MakeSmoothPixelArt = ShaderAdditionMakers.MakeSmoothPixelArt;
     const MakeGetTexture = ShaderAdditionMakers.MakeGetTexture;
-    const Utils = Phaser.Renderer.WebGL.Utils;
-    const BatchHandlerQuad = Phaser.Renderer.WebGL.RenderNodes.BatchHandlerQuad;
+    const Utils = phaser.Renderer.WebGL.Utils;
+    const BatchHandlerQuad = phaser.Renderer.WebGL.RenderNodes.BatchHandlerQuad;
     const getTint = Utils.getTintAppendFloatAlpha;
 
     class BatchHandlerTriangles extends BatchHandlerQuad {
@@ -1408,12 +1408,12 @@
         }
     };
 
-    const GameClass = Phaser.Game;
+    const GameClass = phaser.Game;
     var IsGame = function (object) {
         return (object instanceof GameClass);
     };
 
-    const SceneClass = Phaser.Scene;
+    const SceneClass = phaser.Scene;
     var IsSceneObject = function (object) {
         return (object instanceof SceneClass);
     };
@@ -1439,7 +1439,7 @@
         }
     };
 
-    const DefaultMeshNodes = new Phaser.Structs.Map([
+    const DefaultMeshNodes = new phaser.Structs.Map([
         ['BatchHandler', 'rexBatchHandlerTriangles']
     ]);
 
@@ -1467,7 +1467,7 @@
             this.alphaBuffer = null;
             this.colorBuffer = null;
 
-            this.tintMode = Phaser.TintModes.MULTIPLY;
+            this.tintMode = phaser.TintModes.MULTIPLY;
 
             this.debugCallback = null;
             this.debugGraphic = null;
@@ -1605,7 +1605,7 @@
         AnmiationMethods,
     );
 
-    const AnimationState = Phaser.Animations.AnimationState;
+    const AnimationState = phaser.Animations.AnimationState;
 
     class Sprite extends Image$1 {
         constructor(scene, x, y, texture, frame) {
@@ -1721,8 +1721,8 @@
         4, 8, 5
     ];
 
-    const IsPlainObject$3 = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$5 = Phaser.Utils.Objects.GetValue;
+    const IsPlainObject$3 = phaser.Utils.Objects.IsPlainObject;
+    const GetValue$5 = phaser.Utils.Objects.GetValue;
 
     class Image extends Sprite {
         constructor(scene, x, y, key, frame, config) {
@@ -1758,8 +1758,8 @@
         return gameObject;
     }
 
-    const GetAdvancedValue$3 = Phaser.Utils.Objects.GetAdvancedValue;
-    const BuildGameObject$3 = Phaser.GameObjects.BuildGameObject;
+    const GetAdvancedValue$3 = phaser.Utils.Objects.GetAdvancedValue;
+    const BuildGameObject$3 = phaser.GameObjects.BuildGameObject;
 
     function QuadImageCreator (config, addToScene) {
         if (config === undefined) { config = {}; }
@@ -1774,7 +1774,7 @@
         return gameObject;
     }
 
-    const DynamicTexture = Phaser.Textures.DynamicTexture;
+    const DynamicTexture = phaser.Textures.DynamicTexture;
 
     var CreateDynamicTexture = function (scene, width, height) {
         if (width === undefined) {
@@ -1803,10 +1803,10 @@
         }
     };
 
-    const Rectangle$1 = Phaser.Geom.Rectangle;
-    const Vector2 = Phaser.Math.Vector2;
-    const RotateAround = Phaser.Math.RotateAround;
-    const P3Container = Phaser.GameObjects.Container;
+    const Rectangle$1 = phaser.Geom.Rectangle;
+    const Vector2 = phaser.Math.Vector2;
+    const RotateAround = phaser.Math.RotateAround;
+    const P3Container = phaser.GameObjects.Container;
 
     var GetBounds = function (gameObject, output) {
         if (output === undefined) {
@@ -1982,8 +1982,8 @@
         return output;
     };
 
-    const Rectangle = Phaser.Geom.Rectangle;
-    const Union = Phaser.Geom.Rectangle.Union;
+    const Rectangle = phaser.Geom.Rectangle;
+    const Union = phaser.Geom.Rectangle.Union;
 
     var GetBoundsOfGameObjects = function (gameObjects, out) {
         if (out === undefined) {
@@ -2118,14 +2118,14 @@
         return gameObjects;
     };
 
-    const GameObjectClass = Phaser.GameObjects.GameObject;
-    const LayerClass = Phaser.GameObjects.Layer;
+    const GameObjectClass = phaser.GameObjects.GameObject;
+    const LayerClass = phaser.GameObjects.Layer;
 
     var IsGameObject = function (object) {
         return (object instanceof GameObjectClass) || (object instanceof LayerClass);
     };
 
-    var GetValue$4 = Phaser.Utils.Objects.GetValue;
+    var GetValue$4 = phaser.Utils.Objects.GetValue;
 
     var Snapshot = function (config) {
         if (!config) {
@@ -2219,8 +2219,8 @@
         return renderTexture;
     };
 
-    const IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$3 = Phaser.Utils.Objects.GetValue;
+    const IsPlainObject$2 = phaser.Utils.Objects.IsPlainObject;
+    const GetValue$3 = phaser.Utils.Objects.GetValue;
 
     class RenderTexture extends Image {
         constructor(scene, x, y, width, height, config) {
@@ -2283,8 +2283,8 @@
         return gameObject;
     }
 
-    const GetAdvancedValue$2 = Phaser.Utils.Objects.GetAdvancedValue;
-    const BuildGameObject$2 = Phaser.GameObjects.BuildGameObject;
+    const GetAdvancedValue$2 = phaser.Utils.Objects.GetAdvancedValue;
+    const BuildGameObject$2 = phaser.GameObjects.BuildGameObject;
 
     function QuadRenderTextureCreator (config, addToScene) {
         if (config === undefined) { config = {}; }
@@ -2331,10 +2331,10 @@
         }
     };
 
-    const IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$2 = Phaser.Utils.Objects.GetValue;
-    const DegToRad = Phaser.Math.DegToRad;
-    const RadToDeg = Phaser.Math.RadToDeg;
+    const IsPlainObject$1 = phaser.Utils.Objects.IsPlainObject;
+    const GetValue$2 = phaser.Utils.Objects.GetValue;
+    const DegToRad = phaser.Math.DegToRad;
+    const RadToDeg = phaser.Math.RadToDeg;
 
     class SkewImage extends Image {
         constructor(scene, x, y, key, frame) {
@@ -2433,8 +2433,8 @@
         return gameObject;
     }
 
-    const GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
-    const BuildGameObject$1 = Phaser.GameObjects.BuildGameObject;
+    const GetAdvancedValue$1 = phaser.Utils.Objects.GetAdvancedValue;
+    const BuildGameObject$1 = phaser.GameObjects.BuildGameObject;
 
     function SkewImageCreator (config, addToScene) {
         if (config === undefined) { config = {}; }
@@ -2449,8 +2449,8 @@
         return gameObject;
     }
 
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+    const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
 
     class SkewRenderTexture extends SkewImage {
         constructor(scene, x, y, width, height) {
@@ -2513,8 +2513,8 @@
         return gameObject;
     }
 
-    const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-    const BuildGameObject = Phaser.GameObjects.BuildGameObject;
+    const GetAdvancedValue = phaser.Utils.Objects.GetAdvancedValue;
+    const BuildGameObject = phaser.GameObjects.BuildGameObject;
 
     function SkewRenderTextureCreator (config, addToScene) {
         if (config === undefined) { config = {}; }
@@ -2529,7 +2529,7 @@
         return gameObject;
     }
 
-    const GetValue = Phaser.Utils.Objects.GetValue;
+    const GetValue = phaser.Utils.Objects.GetValue;
 
     var Init = function (parentContainer, rtOwner, config) {
         rtOwner.visibleSibling = [];
@@ -2715,7 +2715,7 @@
         return target;
     };
 
-    class QuadImagePlugin extends Phaser.Plugins.BasePlugin {
+    class QuadImagePlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

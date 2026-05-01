@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcrtfilterplugin = factory());
-})(this, (function () { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+  typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcrtfilterplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
   const FilterName = 'rexFilterCrt';
 
@@ -55,7 +55,7 @@ void main (void) {
 }
 `;
 
-  class CrtFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+  class CrtFilter extends phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
       static FilterName = FilterName;
 
       constructor(manager) {
@@ -73,9 +73,9 @@ void main (void) {
 
   }
 
-  const GetValue = Phaser.Utils.Objects.GetValue;
+  const GetValue = phaser.Utils.Objects.GetValue;
 
-  class CrtController extends Phaser.Filters.Controller {
+  class CrtController extends phaser.Filters.Controller {
       static FilterName = FilterName;
 
       constructor(camera, config) {
@@ -115,12 +115,12 @@ void main (void) {
       }
   }
 
-  const GameClass = Phaser.Game;
+  const GameClass = phaser.Game;
   var IsGame = function (object) {
       return (object instanceof GameClass);
   };
 
-  const SceneClass = Phaser.Scene;
+  const SceneClass = phaser.Scene;
   var IsSceneObject = function (object) {
       return (object instanceof SceneClass);
   };
@@ -151,7 +151,7 @@ void main (void) {
   };
 
   var AddFilterListMethod = function (name, callback) {
-      var FilterListComponent = Phaser.GameObjects.Components.FilterList.prototype;
+      var FilterListComponent = phaser.GameObjects.Components.FilterList.prototype;
       if (FilterListComponent[name]) {
           return;
       }
@@ -191,7 +191,7 @@ void main (void) {
       return controller;
   };
 
-  const SpliceOne = Phaser.Utils.Array.SpliceOne;
+  const SpliceOne = phaser.Utils.Array.SpliceOne;
 
   var RemoveController = function (gameObject, ControllerClass, name, external) {
       var list = GetFilterList(gameObject, external).list;
@@ -236,7 +236,7 @@ void main (void) {
       }
   };
 
-  class FilterPluginBase extends Phaser.Plugins.BasePlugin {
+  class FilterPluginBase extends phaser.Plugins.BasePlugin {
       setFilterClass(FilterClass, ControllerClass) {
           this.FilterClass = FilterClass;
           this.ControllerClass = ControllerClass;

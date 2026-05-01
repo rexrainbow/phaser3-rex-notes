@@ -1,10 +1,11 @@
 import LinesToCircle from '../../../../utils/geom/intersects/LinesToCircle.js';
 
-const Rectangle = Phaser.Geom.Rectangle;
-const RectangleContains = Phaser.Geom.Rectangle.Contains;
-const SetInteractiveBase = Phaser.GameObjects.GameObject.prototype.setInteractive;
+import { GameObjects as PhaserGameObjects, Geom as PhaserGeom } from 'phaser';
+const Rectangle = PhaserGeom.Rectangle;
+const RectangleContains = PhaserGeom.Rectangle.Contains;
+const SetInteractiveBase = PhaserGameObjects.GameObject.prototype.setInteractive;
 
-const GlobPoint = new Phaser.Geom.Circle();
+const GlobPoint = new PhaserGeom.Circle();
 
 var HitAreaCallback = function (shape, x, y, gameObject) {
     if (!RectangleContains(shape, x, y)) {

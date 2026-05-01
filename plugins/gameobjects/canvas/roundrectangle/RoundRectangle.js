@@ -2,7 +2,8 @@ import Canvas from '../canvasbase/Canvas.js';
 import GetStyle from '../../../utils/canvas/GetStyle.js';
 import DrawContent from './DrawContent.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class RoundRectangle extends Canvas {
     constructor(

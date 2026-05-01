@@ -3,9 +3,10 @@ import SyncTo from '../utils/SyncTo.js';
 import LoadFileMethods from '../utils/LoadFileMethods.js';
 import ClickPromose from './ClickPromise.js';
 
-const DOMElement = Phaser.GameObjects.DOMElement;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { GameObjects as PhaserGameObjects, Utils as PhaserUtils } from 'phaser';
+const DOMElement = PhaserGameObjects.DOMElement;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class FileChooser extends DOMElement {
     constructor(scene, x, y, width, height, config) {

@@ -1,5 +1,6 @@
-const Vector3 = Phaser.Math.Vector3;
-const Matrix4 = Phaser.Math.Matrix4;
+import { Math as PhaserMath } from 'phaser';
+const Vector3 = PhaserMath.Vector3;
+const Matrix4 = PhaserMath.Matrix4;
 
 var tempPosition = new Vector3();
 var tempRotation = new Vector3();

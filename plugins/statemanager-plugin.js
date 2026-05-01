@@ -1,7 +1,8 @@
 import StateManager from './statemanager.js';
 import SetValue from './utils/object/SetValue.js';
 
-class StateManagerPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class StateManagerPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

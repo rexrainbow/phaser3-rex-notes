@@ -1,10 +1,10 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-    typeof define === 'function' && define.amd ? define(['exports'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.rexfilechooser = {}));
-})(this, (function (exports) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['exports', 'phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.rexfilechooser = {}, global.Phaser));
+})(this, (function (exports, phaser) { 'use strict';
 
-    const GetValue$2 = Phaser.Utils.Objects.GetValue;
+    const GetValue$2 = phaser.Utils.Objects.GetValue;
 
     var CreateFileInput = function (game, config) {
         var fileInput = document.createElement('input');
@@ -23,12 +23,12 @@
         return fileInput;
     };
 
-    const GameClass = Phaser.Game;
+    const GameClass = phaser.Game;
     var IsGame = function (object) {
         return (object instanceof GameClass);
     };
 
-    const SceneClass = Phaser.Scene;
+    const SceneClass = phaser.Scene;
     var IsSceneObject = function (object) {
         return (object instanceof SceneClass);
     };
@@ -83,8 +83,8 @@
     // Note: Not working in iOS9+
 
 
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
-    const RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
+    const RemoveFromDOM = phaser.DOM.RemoveFromDOM;
 
     var Open = function (game, config) {
         // game: game, scene, or game object
@@ -216,9 +216,9 @@
         loadFilePromise: LoadFilePromise,
     };
 
-    const DOMElement = Phaser.GameObjects.DOMElement;
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue = Phaser.Utils.Objects.GetValue;
+    const DOMElement = phaser.GameObjects.DOMElement;
+    const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
+    const GetValue = phaser.Utils.Objects.GetValue;
 
     class FileChooser extends DOMElement {
         constructor(scene, x, y, width, height, config) {

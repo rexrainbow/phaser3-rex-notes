@@ -1,6 +1,7 @@
 import DropDown from './behaviors/dropdown/DropDown.js';
 
-class DropDownPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class DropDownPlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
     }

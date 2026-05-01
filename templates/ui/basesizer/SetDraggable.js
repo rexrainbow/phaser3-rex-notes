@@ -1,4 +1,5 @@
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 var SetDraggable = function (sensor, draggable, dragTarget) {
     if (IsPlainObject(sensor)) {
         var config = sensor;

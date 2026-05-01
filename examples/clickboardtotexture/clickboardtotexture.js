@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import ClickboardToTexturePlugin from '../../plugins/clickboardtotexture-plugin.js';
 
 class Demo extends Phaser.Scene {

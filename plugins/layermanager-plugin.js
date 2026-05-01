@@ -1,6 +1,7 @@
 import LayerManager from './layermanager.js';
 
-class LayerManagerPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class LayerManagerPlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
     }

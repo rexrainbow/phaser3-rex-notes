@@ -1,6 +1,7 @@
 import LevelCounter from './levelcounter.js'
 
-class LevelCounterPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class LevelCounterPlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
     }

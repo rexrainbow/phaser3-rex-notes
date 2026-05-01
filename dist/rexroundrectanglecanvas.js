@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexroundrectanglecanvas = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexroundrectanglecanvas = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     // copy from Phaser.GameObjects.Text
     var WebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
@@ -53,7 +53,7 @@
 
     };
 
-    const Color = Phaser.Display.Color;
+    const Color = phaser.Display.Color;
 
     var CanvasMethods = {
         clear() {
@@ -276,7 +276,7 @@
         if (minVersion === undefined) {
             minVersion = SubVersionNumber;
         }
-        var version = Phaser.VERSION.split('.');
+        var version = phaser.VERSION.split('.');
         var mainVersion = parseInt(version[0]);
         if (mainVersion === MainVersionNumber) {
             var subVersion = parseInt(version[1]);
@@ -292,10 +292,10 @@
 
     CheckP3Version();
 
-    const CanvasPool = Phaser.Display.Canvas.CanvasPool;
-    const GameObject = Phaser.GameObjects.GameObject;
-    const UUID = Phaser.Utils.String.UUID;
-    const DefaultImageNodes = Phaser.Renderer.WebGL.RenderNodes.Defaults.DefaultImageNodes;
+    const CanvasPool = phaser.Display.Canvas.CanvasPool;
+    const GameObject = phaser.GameObjects.GameObject;
+    const UUID = phaser.Utils.String.UUID;
+    const DefaultImageNodes = phaser.Renderer.WebGL.RenderNodes.Defaults.DefaultImageNodes;
 
     class Canvas extends GameObject {
         constructor(scene, x, y, width, height, resolution) {
@@ -485,8 +485,8 @@
         }
     }
 
-    const Components = Phaser.GameObjects.Components;
-    Phaser.Class.mixin(Canvas,
+    const Components = phaser.GameObjects.Components;
+    phaser.Class.mixin(Canvas,
         [
             Components.Alpha,
             Components.BlendMode,
@@ -508,7 +508,7 @@
         ]
     );
 
-    const Pad = Phaser.Utils.String.Pad;
+    const Pad = phaser.Utils.String.Pad;
     var GetStyle = function (style, canvas, context) {
         if (style == null) {
             return style;
@@ -538,7 +538,7 @@
         }
     };
 
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
 
     let RoundRectangle$1 = class RoundRectangle {
         constructor(x, y, width, height, radiusConfig) {
@@ -714,7 +714,7 @@
         radius.y = Math.abs(radius.y);
     };
 
-    const DegToRad = Phaser.Math.DegToRad;
+    const DegToRad = phaser.Math.DegToRad;
 
     var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig, iteration) {
         var geom = new RoundRectangle$1(x, y, width, height, radiusConfig),
@@ -938,7 +938,7 @@
         );
     };
 
-    const GetValue = Phaser.Utils.Objects.GetValue;
+    const GetValue = phaser.Utils.Objects.GetValue;
 
     class RoundRectangle extends Canvas {
         constructor(

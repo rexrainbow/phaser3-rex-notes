@@ -1,10 +1,10 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexviewportcoordinateplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexviewportcoordinateplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
-    const EventEmitter = Phaser.Events.EventEmitter;
+    const EventEmitter = phaser.Events.EventEmitter;
 
     var MonitorViewport = function (viewport) {
         // Don't monitor properties again
@@ -187,7 +187,7 @@
         Transform();
     };
 
-    class ViewportCoordinatePlugin extends Phaser.Plugins.BasePlugin {
+    class ViewportCoordinatePlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

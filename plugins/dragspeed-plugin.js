@@ -1,6 +1,7 @@
 import DragSpeed from './dragspeed.js';
 
-class DragSpeedPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class DragSpeedPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

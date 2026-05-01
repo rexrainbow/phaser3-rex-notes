@@ -1,7 +1,8 @@
 import Container from '../../container/Container.js';
 import GetParentSizerMethods from '../GetParentSizerMethods.js';
 
-const RemoveItem = Phaser.Utils.Array.Remove;
+import { Utils as PhaserUtils } from 'phaser';
+const RemoveItem = PhaserUtils.Array.Remove;
 const ContainerRemove = Container.prototype.remove;
 const GetParentSizer = GetParentSizerMethods.getParentSizer;
 

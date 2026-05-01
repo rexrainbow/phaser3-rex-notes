@@ -1,6 +1,7 @@
 import { EaseData } from './easedata.js';
 
-class EaseDataPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class EaseDataPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

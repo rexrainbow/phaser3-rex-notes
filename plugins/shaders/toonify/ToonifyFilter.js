@@ -1,7 +1,8 @@
 import { FilterName } from './const.js';
 import FragSrc from './toonify-frag.js';
 
-class ToonifyFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+import { Renderer as PhaserRenderer } from 'phaser';
+class ToonifyFilter extends PhaserRenderer.WebGL.RenderNodes.BaseFilterShader {
     static FilterName = FilterName;
 
     constructor(manager) {

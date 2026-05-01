@@ -1,9 +1,10 @@
 import { FilterName } from './const.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Clamp = Phaser.Math.Clamp;
+import { Filters as PhaserFilters, Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const Clamp = PhaserMath.Clamp;
 
-class DissolveController extends Phaser.Filters.Controller {
+class DissolveController extends PhaserFilters.Controller {
     static FilterName = FilterName;
 
     constructor(camera, config) {

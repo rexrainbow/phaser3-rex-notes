@@ -1,4 +1,5 @@
-const RectangleContains = Phaser.Geom.Rectangle.Contains;
+import { Geom as PhaserGeom } from 'phaser';
+const RectangleContains = PhaserGeom.Rectangle.Contains;
 
 var HitAreaCallback = function (shape, x, y, gameObject) {
     if (!RectangleContains(shape, x, y)) {

@@ -1,7 +1,8 @@
 import Base from './Base.js';
 import GetLocalState from './utils/GetLocalState.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 const BaseAdd = Base.prototype.add;
 
 var Add = function (gameObject, config) {

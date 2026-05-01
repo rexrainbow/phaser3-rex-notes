@@ -1,7 +1,8 @@
 import FillPathCanvas from '../../render/FillPathCanvas.js';
 import StrokePathCanvas from '../../render/StrokePathCanvas.js';
 
-const SetTransform = Phaser.Renderer.Canvas.SetTransform;
+import { Renderer as PhaserRenderer } from 'phaser';
+const SetTransform = PhaserRenderer.Canvas.SetTransform;
 
 var PolygonCanvasRenderer = function (renderer, src, camera, parentMatrix) {
     if (src.dirty) {

@@ -1,6 +1,7 @@
 import Interception from './interception.js';
 
-class InterceptionPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class InterceptionPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

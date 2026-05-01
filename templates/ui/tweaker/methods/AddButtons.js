@@ -1,6 +1,7 @@
 import CreateButtons from '../builders/CreateButtons.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var AddButtons = function (config) {
     if (config === undefined) {

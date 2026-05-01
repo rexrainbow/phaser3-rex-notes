@@ -1,7 +1,8 @@
 import CreateChessData from '../chess/GetChessData.js';
 import IsMiniBoardObject from './../miniboard/IsMiniBoardObject.js';
 
-const Base = Phaser.GameObjects.Polygon;
+import { GameObjects as PhaserGameObjects } from 'phaser';
+const Base = PhaserGameObjects.Polygon;
 class Shape extends Base {
     constructor(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard) {
         if (addToBoard === undefined) {

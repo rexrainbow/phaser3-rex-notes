@@ -1,7 +1,8 @@
 import Tap from '../../tap/Tap.js';
 import EmitChildEvent from './EmitChildEvent.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var TapChild = function (config) {
     var tapConfig = GetValue(config, 'tap', undefined);

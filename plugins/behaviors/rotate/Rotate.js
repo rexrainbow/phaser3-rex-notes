@@ -1,6 +1,7 @@
+import { Utils as PhaserUtils } from 'phaser';
 import TickTask from '../../utils/componentbase/SceneUpdateTickTask.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Rotate extends TickTask {
     constructor(gameObject, config) {

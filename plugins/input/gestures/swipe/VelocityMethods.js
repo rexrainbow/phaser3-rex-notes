@@ -1,7 +1,8 @@
 import GetTickDelta from '../../../utils/system/GetTickDelta.js';
 
-const DistanceBetween = Phaser.Math.Distance.Between;
-const AngleBetween = Phaser.Math.Angle.Between;
+import { Math as PhaserMath } from 'phaser';
+const DistanceBetween = PhaserMath.Distance.Between;
+const AngleBetween = PhaserMath.Angle.Between;
 
 export default {
     getDt: function () {

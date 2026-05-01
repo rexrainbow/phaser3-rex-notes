@@ -1,11 +1,11 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexvirtualjoystickplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexvirtualjoystickplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
-    const Key = Phaser.Input.Keyboard.Key;
-    const KeyCodes = Phaser.Input.Keyboard.KeyCodes;
+    const Key = phaser.Input.Keyboard.Key;
+    const KeyCodes = phaser.Input.Keyboard.KeyCodes;
     const KeyNames = ['up', 'down', 'left', 'right'];
 
     class CursorKeys {
@@ -233,9 +233,9 @@
 
     var globOut = {};
 
-    const GetValue$2 = Phaser.Utils.Objects.GetValue;
-    const GetDist = Phaser.Math.Distance.Between;
-    const GetAngle = Phaser.Math.Angle.Between;
+    const GetValue$2 = phaser.Utils.Objects.GetValue;
+    const GetDist = phaser.Math.Distance.Between;
+    const GetAngle = phaser.Math.Angle.Between;
 
     class VectorToCursorKeys extends CursorKeys {
         constructor(scene, config) {
@@ -414,7 +414,7 @@
     var EventEmitterMethods = {
         setEventEmitter(eventEmitter, EventEmitterClass) {
             if (EventEmitterClass === undefined) {
-                EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+                EventEmitterClass = phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
             }
             this._privateEE = (eventEmitter === true) || (eventEmitter === undefined);
             this._eventEmitter = (this._privateEE) ? (new EventEmitterClass()) : eventEmitter;
@@ -527,9 +527,9 @@
 
     var globalOut = {};
 
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
-    const CircleClass = Phaser.Geom.Circle;
-    const CircleContains = Phaser.Geom.Circle.Contains;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
+    const CircleClass = phaser.Geom.Circle;
+    const CircleContains = phaser.Geom.Circle.Contains;
 
     class TouchCursor extends VectorToCursorKeys {
         constructor(gameObject, config) {
@@ -682,7 +682,7 @@
         EventEmitterMethods
     );
 
-    const GetValue = Phaser.Utils.Objects.GetValue;
+    const GetValue = phaser.Utils.Objects.GetValue;
 
     class VirtualJoyStick {
         constructor(scene, config) {
@@ -951,7 +951,7 @@
         EventEmitterMethods
     );
 
-    class VirtualJoyStickPlugin extends Phaser.Plugins.BasePlugin {
+    class VirtualJoyStickPlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

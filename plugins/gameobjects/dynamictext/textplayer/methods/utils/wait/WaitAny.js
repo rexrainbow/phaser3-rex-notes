@@ -1,7 +1,8 @@
 import { IsWaitCameraEffect } from './WaitCameraEffect.js';
 import { IsWaitGameObject, WaitGameObject } from './WaitGameObject.js'
 
-const KeyCodes = Phaser.Input.Keyboard.KeyCodes;
+import { Input as PhaserInput } from 'phaser';
+const KeyCodes = PhaserInput.Keyboard.KeyCodes;
 
 var WaitAny = function (textPlayer, names, callback, scope) {
     var waitEventManager = textPlayer.waitEventManager;

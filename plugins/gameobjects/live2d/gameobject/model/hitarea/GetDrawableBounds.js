@@ -1,6 +1,7 @@
 import HitAreaNameToDrawIndex from './HitAreaNameToDrawIndex.js';
 
-const Rectangle = Phaser.Geom.Rectangle;
+import { Geom as PhaserGeom } from 'phaser';
+const Rectangle = PhaserGeom.Rectangle;
 
 var GetDrawableBounds = function (index, bounds) {
     if (bounds === undefined) {

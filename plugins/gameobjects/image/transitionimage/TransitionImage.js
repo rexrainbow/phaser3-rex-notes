@@ -8,9 +8,10 @@ import {
 import OnTextureChange from './methods/OnTextureChange.js';
 import FitImages from './methods/FitImages.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Clamp = Phaser.Math.Clamp;
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
+const Clamp = PhaserMath.Clamp;
 
 class TransitionImage extends Container {
     constructor(scene, x, y, texture, frame, config) {

@@ -1,7 +1,8 @@
 import CreateBitmapTextClass from './CreateBitmapTextClass.js';
 
-const BitmapTextClass = CreateBitmapTextClass(Phaser.GameObjects.BitmapText);
-const DynamicBitmapTextClass = CreateBitmapTextClass(Phaser.GameObjects.DynamicBitmapText);
+import { GameObjects as PhaserGameObjects } from 'phaser';
+const BitmapTextClass = CreateBitmapTextClass(PhaserGameObjects.BitmapText);
+const DynamicBitmapTextClass = CreateBitmapTextClass(PhaserGameObjects.DynamicBitmapText);
 
 export default {
     overrideBitmapText(bitmapText) {

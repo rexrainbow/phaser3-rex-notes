@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import HitTest from '../../plugins/utils/input/HitTest.js';
 
 class Demo extends Phaser.Scene {

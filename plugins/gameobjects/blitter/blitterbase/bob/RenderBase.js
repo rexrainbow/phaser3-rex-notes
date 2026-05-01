@@ -1,8 +1,9 @@
 import Base from './Base.js';
 
-const DegToRad = Phaser.Math.DegToRad;
-const RadToDeg = Phaser.Math.RadToDeg;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const DegToRad = PhaserMath.DegToRad;
+const RadToDeg = PhaserMath.RadToDeg;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class RenderBase extends Base {
 

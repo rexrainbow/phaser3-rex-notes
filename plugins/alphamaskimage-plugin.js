@@ -3,7 +3,8 @@ import Creator from './gameobjects/canvas/alphamaskimage/Creator.js';
 import AlphaMaskImage from './gameobjects/canvas/alphamaskimage/AlphaMaskImage.js';
 import SetValue from './utils/object/SetValue.js';
 
-class AlphaMaskImagePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class AlphaMaskImagePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

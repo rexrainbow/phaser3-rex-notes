@@ -3,14 +3,15 @@ import Methods from './methods/Methods.js';
 import PoolManager from './poolmanager/PoolManager.js';
 
 import CheckP3Version from '../../../utils/system/CheckP3Version.js';
+import { Class as PhaserClass, GameObjects as PhaserGameObjects, Renderer as PhaserRenderer, Structs as PhaserStructs, Utils as PhaserUtils } from 'phaser';
 CheckP3Version();
 
-const GameObject = Phaser.GameObjects.GameObject;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
-const List = Phaser.Structs.List;
-const StableSort = Phaser.Utils.Array.StableSort;
-const DefaultBlitterNodes = Phaser.Renderer.WebGL.RenderNodes.Defaults.DefaultBlitterNodes;
+const GameObject = PhaserGameObjects.GameObject;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
+const List = PhaserStructs.List;
+const StableSort = PhaserUtils.Array.StableSort;
+const DefaultBlitterNodes = PhaserRenderer.WebGL.RenderNodes.Defaults.DefaultBlitterNodes;
 
 class Blitter extends GameObject {
     constructor(scene, x, y, texture, frame, config) {
@@ -98,8 +99,8 @@ var SortByDepth = function (childA, childB) {
     return childA._depth - childB._depth;
 }
 
-const Components = Phaser.GameObjects.Components;
-Phaser.Class.mixin(Blitter,
+const Components = PhaserGameObjects.Components;
+PhaserClass.mixin(Blitter,
     [
         Components.Alpha,
         Components.BlendMode,

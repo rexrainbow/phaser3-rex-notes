@@ -1,10 +1,11 @@
+import { Utils as PhaserUtils, Math as PhaserMath } from 'phaser';
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Vector2 = Phaser.Math.Vector2;
-const DegToRad = Phaser.Math.DegToRad;
-const AngleBetween = Phaser.Math.Angle.Between;
-const Linear = Phaser.Math.Linear;
+const GetValue = PhaserUtils.Objects.GetValue;
+const Vector2 = PhaserMath.Vector2;
+const DegToRad = PhaserMath.DegToRad;
+const AngleBetween = PhaserMath.Angle.Between;
+const Linear = PhaserMath.Linear;
 
 class PathFollower extends ComponentBase {
     constructor(gameObject, config) {
@@ -96,7 +97,7 @@ class PathFollower extends ComponentBase {
 
         } else {
             var start = (this.spacePoints.length - 1) * t;
-            var index = Math.floor(start);
+            var index = PhaserMath.floor(start);
             var p0 = this.spacePoints[index],
                 p1 = this.spacePoints[index + 1];
             if (!p1) {

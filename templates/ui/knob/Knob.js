@@ -5,8 +5,9 @@ import InstallTouchPadEvents from './input/OnTouchPad.js';
 import InstallPanPadEvents from './input/OnPanPad.js';
 import TextObjectMethods from './TextObjectMethods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const SnapTo = Phaser.Math.Snap.To;
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const SnapTo = PhaserMath.Snap.To;
 
 class Knob extends ProgressBase(OverlapSizer) {
     constructor(scene, config) {

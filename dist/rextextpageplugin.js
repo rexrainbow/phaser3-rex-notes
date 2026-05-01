@@ -1,13 +1,13 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextextpageplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextextpageplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var EventEmitterMethods = {
         setEventEmitter(eventEmitter, EventEmitterClass) {
             if (EventEmitterClass === undefined) {
-                EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+                EventEmitterClass = phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
             }
             this._privateEE = (eventEmitter === true) || (eventEmitter === undefined);
             this._eventEmitter = (this._privateEE) ? (new EventEmitterClass()) : eventEmitter;
@@ -96,7 +96,7 @@
         },
     };
 
-    const SceneClass = Phaser.Scene;
+    const SceneClass = phaser.Scene;
     var IsSceneObject = function (object) {
         return (object instanceof SceneClass);
     };
@@ -115,7 +115,7 @@
         }
     };
 
-    const GameClass = Phaser.Game;
+    const GameClass = phaser.Game;
     var IsGame = function (object) {
         return (object instanceof GameClass);
     };
@@ -134,7 +134,7 @@
         }
     };
 
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
 
     class ComponentBase {
         constructor(parent, config) {
@@ -220,13 +220,13 @@
         EventEmitterMethods
     );
 
-    const TextClass = Phaser.GameObjects.Text;
+    const TextClass = phaser.GameObjects.Text;
 
     var IsTextGameObject = function (gameObject) {
         return (gameObject instanceof TextClass);
     };
 
-    const BitmapTextClass = Phaser.GameObjects.BitmapText;
+    const BitmapTextClass = phaser.GameObjects.BitmapText;
 
     var IsBitmapTextGameObject = function (gameObject) {
         return (gameObject instanceof BitmapTextClass);
@@ -467,7 +467,7 @@
 
     };
 
-    const Clamp = Phaser.Math.Clamp;
+    const Clamp = phaser.Math.Clamp;
 
     var GetPageMethods = {
 
@@ -697,8 +697,8 @@
         ShowMethods
     );
 
-    const GetValue = Phaser.Utils.Objects.GetValue;
-    Phaser.Math.Clamp;
+    const GetValue = phaser.Utils.Objects.GetValue;
+    phaser.Math.Clamp;
 
     class TextPage extends ComponentBase {
         constructor(gameObject, config) {
@@ -973,7 +973,7 @@
         Methods,
     );
 
-    class TextPagePlugin extends Phaser.Plugins.BasePlugin {
+    class TextPagePlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

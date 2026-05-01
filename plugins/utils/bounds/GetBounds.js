@@ -3,10 +3,11 @@ import {
     GetDisplayHeight
 } from '../size/GetDisplaySize.js';
 
-const Rectangle = Phaser.Geom.Rectangle;
-const Vector2 = Phaser.Math.Vector2;
-const RotateAround = Phaser.Math.RotateAround;
-const P3Container = Phaser.GameObjects.Container;
+import { GameObjects as PhaserGameObjects, Geom as PhaserGeom, Math as PhaserMath } from 'phaser';
+const Rectangle = PhaserGeom.Rectangle;
+const Vector2 = PhaserMath.Vector2;
+const RotateAround = PhaserMath.RotateAround;
+const P3Container = PhaserGameObjects.Container;
 
 var GetBounds = function (gameObject, output) {
     if (output === undefined) {

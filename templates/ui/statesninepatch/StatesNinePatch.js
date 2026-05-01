@@ -3,7 +3,8 @@ import AddEffectProperties from '../../../plugins/effectproperties.js';
 import Style from './Style.js';
 import HelperMethods from '../utils/stylemanager/HelperMethods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class StatesNinePatch extends NinePatch {
     constructor(scene, config) {

@@ -1,7 +1,8 @@
 import ImageBoxBase from '../../plugins/gameobjects/image/imagebox/ImageBoxBase.js';
 import SpinnerMethods from './SpinnerMethods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class LazyLoadImageBox extends ImageBoxBase {
     constructor(scene, config) {

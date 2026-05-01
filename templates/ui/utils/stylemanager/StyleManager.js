@@ -3,7 +3,8 @@ import ExtractByPrefix from '../../../../plugins/utils/object/ExtractByPrefix.js
 import GetPartialData from '../../../../plugins/utils/object/GetPartialData.js';
 import IsKeyValueEqual from '../../../../plugins/utils/object/IsKeyValueEqual.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class StyleManager extends ComponentBase {
     constructor(gameObject, config) {

@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import TCRPPlugin from '../../plugins/arcadetcrp-plugin.js'
 
 class PlayerSprite extends Phaser.GameObjects.Line {

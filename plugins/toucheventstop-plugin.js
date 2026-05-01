@@ -1,6 +1,7 @@
 import TouchEventStop from './toucheventstop.js'
 
-class TouchEventStopPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class TouchEventStopPlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
     }

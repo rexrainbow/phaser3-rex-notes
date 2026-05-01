@@ -3,7 +3,8 @@ import Creator from './gameobjects/shape/circularprogress/Creator.js';
 import CircularProgress from './gameobjects/shape/circularprogress/CircularProgress.js';
 import SetValue from './utils/object/SetValue.js';
 
-class CircularProgressPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class CircularProgressPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

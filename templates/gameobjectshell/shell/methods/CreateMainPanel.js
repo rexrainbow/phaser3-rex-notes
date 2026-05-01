@@ -1,7 +1,8 @@
 import Sizer from '../../../ui/sizer/Sizer.js';
 import GameObjectPanel from '../../gameobjectpanel/GameObjectPanel.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var CreateMainPanel = function (config) {
     var mainPanel = new Sizer(this.scene, {

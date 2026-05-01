@@ -3,7 +3,8 @@ import GetOrientationMode from '../../utils/GetOrientationMode.js';
 import CreateLabel from '../../utils/build/CreateLabel.js';
 import CreateInputText from '../../utils/build/CreateInputText.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var CreateContent = function (scene, config, creators) {
     // Names-sizer as content

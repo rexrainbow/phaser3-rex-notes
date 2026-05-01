@@ -1,6 +1,7 @@
 import MoveTo from './moveto.js';
 
-class MoveToPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class MoveToPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

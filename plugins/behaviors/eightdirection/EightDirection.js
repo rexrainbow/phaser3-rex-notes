@@ -1,10 +1,11 @@
+import { Utils as PhaserUtils } from 'phaser';
 import TickTask from '../../utils/componentbase/SceneUpdateTickTask.js';
 import {
     SetVelocity
 } from '../../utils/arcade/Helpers.js';
 import DegToRad from '../../utils/math/DegToRad.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class EightDirection extends TickTask {
     constructor(gameObject, config) {

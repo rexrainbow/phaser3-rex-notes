@@ -1,6 +1,7 @@
 import Hexagon from './hexagon.js';
 
-class HexagonPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class HexagonPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

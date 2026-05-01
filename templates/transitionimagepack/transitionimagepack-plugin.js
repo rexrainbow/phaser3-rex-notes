@@ -3,7 +3,8 @@ import Creator from './Creator.js';
 import TransitionImagePack from './TransitionImagePack.js';
 import SetValue from '../../plugins/utils/object/SetValue.js';
 
-class TransitionImagePackPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class TransitionImagePackPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

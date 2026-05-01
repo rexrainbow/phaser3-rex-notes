@@ -1,9 +1,10 @@
+import { Utils as PhaserUtils } from 'phaser';
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import CopyElementConfig from './methods/CopyElementConfig.js';
 import IsPointerInHitArea from '../../utils/input/IsPointerInHitArea.js';
 import Methods from './methods/Methods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class HiddenTextEditBase extends ComponentBase {
     constructor(gameObject, config) {

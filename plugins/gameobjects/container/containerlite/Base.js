@@ -5,10 +5,11 @@ import Renderer from './renderer/Renderer.js';
 import ChildrenDisplayList from './renderer/ChildrenDisplayList.js';
 import AddToContainer from './p3container/AddToContainer.js';
 
-const Zone = Phaser.GameObjects.Zone;
-const AddItem = Phaser.Utils.Array.Add;
-const RemoveItem = Phaser.Utils.Array.Remove;
-const SKIP_CHECK_BLEND_MODE = Phaser.BlendModes.SKIP_CHECK;
+import { BlendModes as PhaserBlendModes, Class as PhaserClass, GameObjects as PhaserGameObjects, Utils as PhaserUtils } from 'phaser';
+const Zone = PhaserGameObjects.Zone;
+const AddItem = PhaserUtils.Array.Add;
+const RemoveItem = PhaserUtils.Array.Remove;
+const SKIP_CHECK_BLEND_MODE = PhaserBlendModes.SKIP_CHECK;
 
 class Base extends Zone {
     constructor(scene, x, y, width, height) {
@@ -176,8 +177,8 @@ class Base extends Zone {
     }
 }
 
-const Components = Phaser.GameObjects.Components;
-Phaser.Class.mixin(Base,
+const Components = PhaserGameObjects.Components;
+PhaserClass.mixin(Base,
     [
         Components.Alpha,
         Components.Flip

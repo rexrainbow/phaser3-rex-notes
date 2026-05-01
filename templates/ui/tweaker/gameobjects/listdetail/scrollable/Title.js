@@ -1,6 +1,7 @@
 import Sizer from '../../../../sizer/Sizer.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Title extends Sizer {
     constructor(scene, config) {

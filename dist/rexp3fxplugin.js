@@ -1,15 +1,15 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexp3fxplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexp3fxplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
-    const GameClass = Phaser.Game;
+    const GameClass = phaser.Game;
     var IsGame = function (object) {
         return (object instanceof GameClass);
     };
 
-    const SceneClass = Phaser.Scene;
+    const SceneClass = phaser.Scene;
     var IsSceneObject = function (object) {
         return (object instanceof SceneClass);
     };
@@ -40,7 +40,7 @@
     };
 
     var AddFilterListMethod = function (name, callback) {
-        var FilterListComponent = Phaser.GameObjects.Components.FilterList.prototype;
+        var FilterListComponent = phaser.GameObjects.Components.FilterList.prototype;
         if (FilterListComponent[name]) {
             return;
         }
@@ -85,7 +85,7 @@ void main (void) {
 }
 `;
 
-    class BloomStepFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+    class BloomStepFilter extends phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
         static FilterName = StepFilterName;
 
         constructor(manager) {
@@ -107,9 +107,9 @@ void main (void) {
 
     }
 
-    const GetValue$6 = Phaser.Utils.Objects.GetValue;
+    const GetValue$6 = phaser.Utils.Objects.GetValue;
 
-    class BloomStepController extends Phaser.Filters.Controller {
+    class BloomStepController extends phaser.Filters.Controller {
         static FilterName = StepFilterName;
 
         constructor(camera, config) {
@@ -163,9 +163,9 @@ void main (void) {
 
     }
 
-    const GetValue$5 = Phaser.Utils.Objects.GetValue;
+    const GetValue$5 = phaser.Utils.Objects.GetValue;
 
-    let BloomController$1 = class BloomController extends Phaser.Filters.ParallelFilters {
+    let BloomController$1 = class BloomController extends phaser.Filters.ParallelFilters {
         constructor(camera, config) {
             super(camera);
 
@@ -404,7 +404,7 @@ void main (void) {
 }
 `;
 
-    class CircleFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+    class CircleFilter extends phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
         static FilterName = FilterName$4;
 
         constructor(manager) {
@@ -423,9 +423,9 @@ void main (void) {
 
     }
 
-    const GetValue$4 = Phaser.Utils.Objects.GetValue;
+    const GetValue$4 = phaser.Utils.Objects.GetValue;
 
-    class CircleController extends Phaser.Filters.Controller {
+    class CircleController extends phaser.Filters.Controller {
         static FilterName = FilterName$4;
 
         constructor(camera, config) {
@@ -631,7 +631,7 @@ void main ()
 }
 `;
 
-    class GradientFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+    class GradientFilter extends phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
         static FilterName = FilterName$3;
 
         constructor(manager) {
@@ -653,9 +653,9 @@ void main ()
 
     }
 
-    const GetValue$3 = Phaser.Utils.Objects.GetValue;
+    const GetValue$3 = phaser.Utils.Objects.GetValue;
 
-    class GradientController extends Phaser.Filters.Controller {
+    class GradientController extends phaser.Filters.Controller {
         static FilterName = FilterName$3;
 
         constructor(camera, config) {
@@ -840,7 +840,7 @@ void main (void) {
         return currentTime;
     };
 
-    class ShineFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+    class ShineFilter extends phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
         static FilterName = FilterName$2;
 
         constructor(manager) {
@@ -859,9 +859,9 @@ void main (void) {
 
     }
 
-    const GetValue$2 = Phaser.Utils.Objects.GetValue;
+    const GetValue$2 = phaser.Utils.Objects.GetValue;
 
-    class ShineController extends Phaser.Filters.Controller {
+    class ShineController extends phaser.Filters.Controller {
         static FilterName = FilterName$2;
 
         constructor(camera, config) {
@@ -978,7 +978,7 @@ void main (void) {
 }
 `;
 
-    class VignetteFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+    class VignetteFilter extends phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
         static FilterName = FilterName$1;
 
         constructor(manager) {
@@ -995,9 +995,9 @@ void main (void) {
 
     }
 
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
 
-    class VignetteController extends Phaser.Filters.Controller {
+    class VignetteController extends phaser.Filters.Controller {
         static FilterName = FilterName$1;
 
         constructor(camera, config) {
@@ -1115,7 +1115,7 @@ void main (void) {
 }
 `;
 
-    class WarpFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+    class WarpFilter extends phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
         static FilterName = FilterName;
 
         constructor(manager) {
@@ -1132,10 +1132,10 @@ void main (void) {
 
     }
 
-    const GetValue = Phaser.Utils.Objects.GetValue;
-    const Clamp = Phaser.Math.Clamp;
+    const GetValue = phaser.Utils.Objects.GetValue;
+    const Clamp = phaser.Math.Clamp;
 
-    class WipeController extends Phaser.Filters.Controller {
+    class WipeController extends phaser.Filters.Controller {
         static FilterName = FilterName;
 
         constructor(camera, config) {
@@ -1273,7 +1273,7 @@ void main (void) {
         return success;
     };
 
-    class P3FXPlugin extends Phaser.Plugins.BasePlugin {
+    class P3FXPlugin extends phaser.Plugins.BasePlugin {
         constructor(pluginManager) {
             super(pluginManager);
         }

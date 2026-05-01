@@ -6,7 +6,8 @@ import {
 
 import GetTextObjectType from '../../../plugins/utils/text/GetTextObjectType.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var TextBoxBase = function (GOClass, type) {
     if (type === undefined) {

@@ -1,6 +1,7 @@
+import { Utils as PhaserUtils } from 'phaser';
 import TickTask from '../../utils/componentbase/timerticktask/TimerTask';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Flash extends TickTask {
     constructor(gameObject, config) {

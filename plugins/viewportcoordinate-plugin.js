@@ -1,7 +1,8 @@
 import AddViewportCoordinateProperties from './viewportcoordinate.js';
 import { VPXYToXY } from './viewportcoordinate.js';
 
-class ViewportCoordinatePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class ViewportCoordinatePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

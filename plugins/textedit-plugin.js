@@ -1,6 +1,7 @@
 import { TextEdit, Edit } from './textedit.js';
 
-class TextEditPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class TextEditPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

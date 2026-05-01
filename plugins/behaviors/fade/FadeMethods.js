@@ -1,8 +1,9 @@
+import { Utils as PhaserUtils } from 'phaser';
 import FadeIn from './FadeIn.js';
 import FadeOutDestroy from './FadeOutDestroy.js';
 import { WaitComplete } from '../../utils/promise/WaitEvent.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 
 export default {
     onInitFade() {

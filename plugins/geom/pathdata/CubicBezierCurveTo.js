@@ -1,6 +1,7 @@
+import { Math as PhaserMath } from 'phaser';
 // import CubicBezierInterpolation from '../../utils/math/interpolation/CubicBezierInterpolation.js';
 
-const CubicBezierInterpolation = Phaser.Math.Interpolation.CubicBezier;
+const CubicBezierInterpolation = PhaserMath.Interpolation.CubicBezier;
 
 var CubicBezierCurveTo = function (cx0, cy0, cx1, cy1, x, y, iterations, pathData) {
     var pathDataCnt = pathData.length;

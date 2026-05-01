@@ -1,9 +1,10 @@
 import { FilterName } from './const.js';
 
-const Vector2 = Phaser.Math.Vector2;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Filters as PhaserFilters, Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const Vector2 = PhaserMath.Vector2;
+const GetValue = PhaserUtils.Objects.GetValue;
 
-class WarpController extends Phaser.Filters.Controller {
+class WarpController extends PhaserFilters.Controller {
     static FilterName = FilterName;
 
     constructor(camera, config) {

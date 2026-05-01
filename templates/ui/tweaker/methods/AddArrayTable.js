@@ -2,7 +2,8 @@ import GetLeafKey from '../../../../plugins/utils/string/GetLeafKey.js';
 import CreateArrayTable from '../builders/createarraytable/CreateArrayTable.js';
 import CreateListDetail from '../builders/createlistdetail/CreateListDetail.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 
 var AddArrayTable = function (target, bindingKey, config) {

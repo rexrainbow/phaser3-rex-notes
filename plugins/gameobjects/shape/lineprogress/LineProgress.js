@@ -3,8 +3,9 @@ import ProgressBase from '../../../utils/progressbase/ProgressBase.js';
 import { Lines } from '../shapes/geoms';
 import UpdateShapes from './UpdateShapes.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 
 class LineProgress extends ProgressBase(BaseShapes) {
     constructor(scene, x, y, width, height, barColor, value, config) {

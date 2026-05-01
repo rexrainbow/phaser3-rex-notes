@@ -1,8 +1,9 @@
 import ProgressValueMethods from '../progressvalue/ProgressValueMethods.js';
 import EaseValueMethods from '../ease/EaseValueMethods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Clamp = Phaser.Math.Clamp;
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const Clamp = PhaserMath.Clamp;
 
 export default function (BaseClass) {
     class ProgressBase extends BaseClass {

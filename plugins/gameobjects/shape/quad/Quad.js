@@ -3,10 +3,11 @@ import PointMethods from './methods/PointMethods.js';
 import QuadGeom from './methods/QuadGeom.js';
 import LineTo from '../../../geom/pathdata/LineTo.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Linear = Phaser.Math.Linear;
-const Earcut = Phaser.Geom.Polygon.Earcut;
+import { Geom as PhaserGeom, Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
+const Linear = PhaserMath.Linear;
+const Earcut = PhaserGeom.Polygon.Earcut;
 
 class Quad extends PolygnBase {
     constructor(scene, x, y, width, height, fillColor, fillAlpha) {

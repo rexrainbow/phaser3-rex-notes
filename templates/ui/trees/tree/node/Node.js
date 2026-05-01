@@ -4,7 +4,8 @@ import CreateGameObjectFromConfig from '../../builders/CreateGameObjectFromConfi
 import DefaultCreateBackgroundCallback from '../../builders/DefaultCreateBackgroundCallback.js';
 import DefaultCreateNodeBodyCallback from '../../builders/DefaultCreateNodeBodyCallback.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Node extends ExtendNodeClass(Sizer) {
     constructor(scene, config, createCallbackData) {

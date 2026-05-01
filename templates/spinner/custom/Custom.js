@@ -1,7 +1,8 @@
 import Base from '../base/Base.js';
 import ShapesUpdateMethods from '../../../plugins/gameobjects/shape/customshapes/ShapesUpdateMethods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Custom extends Base {
     constructor(scene, config) {

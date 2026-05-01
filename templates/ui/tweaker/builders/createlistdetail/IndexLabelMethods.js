@@ -1,7 +1,8 @@
 import CreateTitleLabel from '../utils/CreateTitleLabel.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Format = Phaser.Utils.String.Format;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const Format = PhaserUtils.String.Format;
 
 var GetIndexLabelStyle = function (style) {
     var indexStyle = GetValue(style, 'index');

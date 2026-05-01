@@ -1,3 +1,4 @@
+import { Renderer as PhaserRenderer } from 'phaser';
 /*
 shapeData: {
     fillColor, 
@@ -7,7 +8,7 @@ shapeData: {
 }
 */
 
-var Utils = Phaser.Renderer.WebGL.Utils;
+var Utils = PhaserRenderer.WebGL.Utils;
 
 var FillPathWebGL = function (drawingContext, submitter, calcMatrix, gameObject, shapeData, alpha, dx, dy) {
     // This is very similar to the FillPath RenderNode, but it already

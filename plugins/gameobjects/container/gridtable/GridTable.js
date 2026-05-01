@@ -2,8 +2,9 @@ import ContainerLite from '../../container/containerlite/ContainerLite.js';
 import Table from './table/Table.js';
 import Methods from './methods/Methods.js';
 
-const Group = Phaser.GameObjects.Group;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { GameObjects as PhaserGameObjects, Utils as PhaserUtils } from 'phaser';
+const Group = PhaserGameObjects.Group;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class GridTable extends ContainerLite {
     constructor(scene, x, y, width, height, config) {

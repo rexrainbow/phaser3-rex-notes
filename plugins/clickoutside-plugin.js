@@ -1,6 +1,7 @@
 import ClickOutside from './clickoutside';
 
-class ClickOutsidePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class ClickOutsidePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

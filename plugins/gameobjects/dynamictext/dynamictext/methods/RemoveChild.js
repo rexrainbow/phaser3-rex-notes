@@ -1,4 +1,5 @@
-const RemoveItem = Phaser.Utils.Array.Remove;
+import { Utils as PhaserUtils } from 'phaser';
+const RemoveItem = PhaserUtils.Array.Remove;
 
 var RemoveChild = function (child) {
     this.poolManager.free(child);

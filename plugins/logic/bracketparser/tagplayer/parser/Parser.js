@@ -2,7 +2,8 @@ import BracketParser from '../../bracketparser/BracketParser.js';
 import AddParseCallbacks from './AddParseCallbacks.js';
 import PreProcessSource from './PreProcessSource.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Parser extends BracketParser {
     constructor(tagPlayer, config) {

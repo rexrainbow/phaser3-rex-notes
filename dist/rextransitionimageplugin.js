@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextransitionimageplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextransitionimageplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     const MainVersionNumber = 4;
     const SubVersionNumber = 0;
@@ -17,7 +17,7 @@
         if (minVersion === undefined) {
             minVersion = SubVersionNumber;
         }
-        var version = Phaser.VERSION.split('.');
+        var version = phaser.VERSION.split('.');
         var mainVersion = parseInt(version[0]);
         if (mainVersion === MainVersionNumber) {
             var subVersion = parseInt(version[1]);
@@ -31,7 +31,7 @@
         IsChecked = true;
     };
 
-    const SKIP_CHECK_BLEND_MODE$1 = Phaser.BlendModes.SKIP_CHECK;
+    const SKIP_CHECK_BLEND_MODE$1 = phaser.BlendModes.SKIP_CHECK;
 
     var WebGLRenderer = function (renderer, container, drawingContext, parentMatrix, renderStep, displayList, displayListIndex) {
         var camera = drawingContext.camera;
@@ -157,10 +157,10 @@
 
     };
 
-    const List = Phaser.Structs.List;
-    const StableSort = Phaser.Utils.Array.StableSort;
-    const GameObjectEvents = Phaser.GameObjects.Events;
-    const SceneEvents = Phaser.Scenes.Events;
+    const List = phaser.Structs.List;
+    const StableSort = phaser.Utils.Array.StableSort;
+    const GameObjectEvents = phaser.GameObjects.Events;
+    const SceneEvents = phaser.Scenes.Events;
 
     class ChildrenDisplayList extends List {
         constructor(parent) {
@@ -231,8 +231,8 @@
         }
     }
 
-    const DegToRad$1 = Phaser.Math.DegToRad;
-    const RadToDeg = Phaser.Math.RadToDeg;
+    const DegToRad$1 = phaser.Math.DegToRad;
+    const RadToDeg = phaser.Math.RadToDeg;
 
     var GetLocalState = function (gameObject) {
         if (!gameObject.hasOwnProperty('rexContainer')) {
@@ -402,11 +402,10 @@
     };
 
     CheckP3Version();
-
-    const Zone = Phaser.GameObjects.Zone;
-    const AddItem = Phaser.Utils.Array.Add;
-    const RemoveItem = Phaser.Utils.Array.Remove;
-    const SKIP_CHECK_BLEND_MODE = Phaser.BlendModes.SKIP_CHECK;
+    const Zone = phaser.GameObjects.Zone;
+    const AddItem = phaser.Utils.Array.Add;
+    const RemoveItem = phaser.Utils.Array.Remove;
+    const SKIP_CHECK_BLEND_MODE = phaser.BlendModes.SKIP_CHECK;
 
     class Base extends Zone {
         constructor(scene, x, y, width, height) {
@@ -574,8 +573,8 @@
         }
     }
 
-    const Components = Phaser.GameObjects.Components;
-    Phaser.Class.mixin(Base,
+    const Components = phaser.GameObjects.Components;
+    phaser.Class.mixin(Base,
         [
             Components.Alpha,
             Components.Flip
@@ -649,7 +648,7 @@
         }
     };
 
-    const GetValue$d = Phaser.Utils.Objects.GetValue;
+    const GetValue$d = phaser.Utils.Objects.GetValue;
     const BaseAdd = Base.prototype.add;
 
     var Add = function (gameObject, config) {
@@ -1002,7 +1001,7 @@
 
     };
 
-    const DegToRad = Phaser.Math.DegToRad;
+    const DegToRad = phaser.Math.DegToRad;
 
     var Rotation = {
         updateChildRotation(child) {
@@ -1760,7 +1759,7 @@
         }
     };
 
-    const ArrayUtils = Phaser.Utils.Array;
+    const ArrayUtils = phaser.Utils.Array;
 
     var Children = {
         getChildren(out) {
@@ -2047,7 +2046,7 @@
         }
     };
 
-    const LayerClass$1 = Phaser.GameObjects.Layer;
+    const LayerClass$1 = phaser.GameObjects.Layer;
 
     var IsLayerGameObject = function (gameObject) {
         return (gameObject instanceof LayerClass$1);
@@ -2288,10 +2287,10 @@
         }
     };
 
-    const Rectangle$1 = Phaser.Geom.Rectangle;
-    const Vector2 = Phaser.Math.Vector2;
-    const RotateAround$2 = Phaser.Math.RotateAround;
-    const P3Container = Phaser.GameObjects.Container;
+    const Rectangle$1 = phaser.Geom.Rectangle;
+    const Vector2 = phaser.Math.Vector2;
+    const RotateAround$2 = phaser.Math.RotateAround;
+    const P3Container = phaser.GameObjects.Container;
 
     var GetBounds = function (gameObject, output) {
         if (output === undefined) {
@@ -2467,8 +2466,8 @@
         return output;
     };
 
-    const Rectangle = Phaser.Geom.Rectangle;
-    const Union = Phaser.Geom.Rectangle.Union;
+    const Rectangle = phaser.Geom.Rectangle;
+    const Union = phaser.Geom.Rectangle.Union;
 
     var GetBoundsOfGameObjects = function (gameObjects, out) {
         if (out === undefined) {
@@ -2550,14 +2549,14 @@
         return out;
     };
 
-    const GameObjectClass = Phaser.GameObjects.GameObject;
-    const LayerClass = Phaser.GameObjects.Layer;
+    const GameObjectClass = phaser.GameObjects.GameObject;
+    const LayerClass = phaser.GameObjects.Layer;
 
     var IsGameObject = function (object) {
         return (object instanceof GameObjectClass) || (object instanceof LayerClass);
     };
 
-    var GetValue$c = Phaser.Utils.Objects.GetValue;
+    var GetValue$c = phaser.Utils.Objects.GetValue;
 
     var Snapshot = function (config) {
         if (!config) {
@@ -2686,7 +2685,7 @@
         }
     };
 
-    const GetValue$b = Phaser.Utils.Objects.GetValue;
+    const GetValue$b = phaser.Utils.Objects.GetValue;
 
     var DrawBounds$1 = function (gameObjects, graphics, config) {
         var strokeColor, lineWidth, fillColor, fillAlpha, padding, includeParent;
@@ -2753,7 +2752,7 @@
 
     var Points = [{ x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }];
 
-    const GetValue$a = Phaser.Utils.Objects.GetValue;
+    const GetValue$a = phaser.Utils.Objects.GetValue;
 
     var DrawBounds = function (graphics, config) {
         var drawContainer = GetValue$a(config, 'drawContainer', true);
@@ -2774,7 +2773,7 @@
         return this;
     };
 
-    const RotateAround$1 = Phaser.Math.RotateAround;
+    const RotateAround$1 = phaser.Math.RotateAround;
 
     var ChangeOrigin$1 = function (gameObject, originX, originY) {
         if (originY === undefined) {
@@ -3134,7 +3133,7 @@
     var EventEmitterMethods = {
         setEventEmitter(eventEmitter, EventEmitterClass) {
             if (EventEmitterClass === undefined) {
-                EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+                EventEmitterClass = phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
             }
             this._privateEE = (eventEmitter === true) || (eventEmitter === undefined);
             this._eventEmitter = (this._privateEE) ? (new EventEmitterClass()) : eventEmitter;
@@ -3223,7 +3222,7 @@
         },
     };
 
-    const SceneClass = Phaser.Scene;
+    const SceneClass = phaser.Scene;
     var IsSceneObject = function (object) {
         return (object instanceof SceneClass);
     };
@@ -3242,7 +3241,7 @@
         }
     };
 
-    const GameClass = Phaser.Game;
+    const GameClass = phaser.Game;
     var IsGame = function (object) {
         return (object instanceof GameClass);
     };
@@ -3261,7 +3260,7 @@
         }
     };
 
-    const GetValue$9 = Phaser.Utils.Objects.GetValue;
+    const GetValue$9 = phaser.Utils.Objects.GetValue;
 
     class ComponentBase {
         constructor(parent, config) {
@@ -3347,7 +3346,7 @@
         EventEmitterMethods
     );
 
-    const GetValue$8 = Phaser.Utils.Objects.GetValue;
+    const GetValue$8 = phaser.Utils.Objects.GetValue;
 
     class TickTask extends ComponentBase {
         constructor(parent, config) {
@@ -3460,7 +3459,7 @@
         'always': 2
     };
 
-    const GetValue$7 = Phaser.Utils.Objects.GetValue;
+    const GetValue$7 = phaser.Utils.Objects.GetValue;
 
     class SceneUpdateTickTask extends TickTask {
         constructor(parent, config) {
@@ -3507,8 +3506,8 @@
         return (eventName === 'step') || (eventName === 'poststep');
     };
 
-    const GetValue$6 = Phaser.Utils.Objects.GetValue;
-    const Clamp$1 = Phaser.Math.Clamp;
+    const GetValue$6 = phaser.Utils.Objects.GetValue;
+    const Clamp$1 = phaser.Math.Clamp;
 
     class Timer {
         constructor(config) {
@@ -3732,9 +3731,9 @@
 
     }
 
-    const GetValue$5 = Phaser.Utils.Objects.GetValue;
-    const GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
-    const GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
+    const GetValue$5 = phaser.Utils.Objects.GetValue;
+    const GetAdvancedValue$1 = phaser.Utils.Objects.GetAdvancedValue;
+    const GetEaseFunction = phaser.Tweens.Builders.GetEaseFunction;
 
     class EaseValueTaskBase extends TimerTickTask {
         resetFromJSON(o) {
@@ -3864,8 +3863,8 @@
         }
     }
 
-    const GetValue$4 = Phaser.Utils.Objects.GetValue;
-    const Linear = Phaser.Math.Linear;
+    const GetValue$4 = phaser.Utils.Objects.GetValue;
+    const Linear = phaser.Math.Linear;
 
     class EaseValueTask extends EaseValueTaskBase {
         constructor(gameObject, config) {
@@ -3938,11 +3937,11 @@
     };
 
     var ExcludeClassList$1 = [
-        Phaser.GameObjects.Image,
-        Phaser.GameObjects.Sprite,
-        Phaser.GameObjects.Mesh,
-        Phaser.GameObjects.Shader,
-        Phaser.GameObjects.Video
+        phaser.GameObjects.Image,
+        phaser.GameObjects.Sprite,
+        phaser.GameObjects.Mesh,
+        phaser.GameObjects.Shader,
+        phaser.GameObjects.Video
     ];
 
     var CanSetDisplaySize = function (gameObject) {
@@ -3961,7 +3960,7 @@
     };
 
     var ExcludeClassList = [
-        Phaser.GameObjects.BitmapText,
+        phaser.GameObjects.BitmapText,
     ];
 
     var ResizeGameObject = function (gameObject, newDisplayWidth, newDisplayHeight) {
@@ -4075,9 +4074,9 @@
         }
     };
 
-    const IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$3 = Phaser.Utils.Objects.GetValue;
-    const GetRandomItem = Phaser.Utils.Array.GetRandom;
+    const IsPlainObject$2 = phaser.Utils.Objects.IsPlainObject;
+    const GetValue$3 = phaser.Utils.Objects.GetValue;
+    const GetRandomItem = phaser.Utils.Array.GetRandom;
 
     var DirMode = {
         out: 0,
@@ -4240,7 +4239,7 @@
         },
     };
 
-    const SetPositionBase = Phaser.GameObjects.Graphics.prototype.setPosition;
+    const SetPositionBase = phaser.GameObjects.Graphics.prototype.setPosition;
 
     var SetPosition = function (x, y) {
         var parent = this.parent;
@@ -4255,8 +4254,8 @@
         return this;
     };
 
-    const RectangleGeom = Phaser.Geom.Rectangle;
-    const CircleGemo = Phaser.Geom.Circle;
+    const RectangleGeom = phaser.Geom.Rectangle;
+    const CircleGemo = phaser.Geom.Circle;
 
     var GetGeom = function (shapeType, width, height, padding, originX, originY, out) {
         switch (shapeType) {
@@ -4404,7 +4403,7 @@
         contains: Contains,
     };
 
-    const GetValue$2 = Phaser.Utils.Objects.GetValue;
+    const GetValue$2 = phaser.Utils.Objects.GetValue;
 
     var GetBoundsConfig$1 = function (config, out) {
         if (config === undefined) {
@@ -4428,7 +4427,7 @@
         return out;
     };
 
-    const Graphics = Phaser.GameObjects.Graphics;
+    const Graphics = phaser.GameObjects.Graphics;
 
     class DefaultMaskGraphics extends Graphics {
         constructor(parent, shapeType, padding) {
@@ -4488,7 +4487,7 @@
         return !!renderer.gl;
     };
 
-    const MaskController = Phaser.Filters.Mask;
+    const MaskController = phaser.Filters.Mask;
 
     var SetMask = function (gameObject, maskGameObject, invert, maskType) {
         if (IsWebGLRenderMode(gameObject)) {
@@ -4820,10 +4819,10 @@
         }
     };
 
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
-    const DefaultImageClass = Phaser.GameObjects.Image;
-    const IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
-    const RotateAround = Phaser.Math.RotateAround;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
+    const DefaultImageClass = phaser.GameObjects.Image;
+    const IsPlainObject$1 = phaser.Utils.Objects.IsPlainObject;
+    const RotateAround = phaser.Math.RotateAround;
 
     var GridCutImage = function (gameObject, columns, rows, config) {
         if (IsPlainObject$1(columns)) {
@@ -5018,9 +5017,9 @@
         parent.setChildLocalAlpha(currentImage, 1);
     };
 
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue = Phaser.Utils.Objects.GetValue;
-    const Clamp = Phaser.Math.Clamp;
+    const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
+    const GetValue = phaser.Utils.Objects.GetValue;
+    const Clamp = phaser.Math.Clamp;
 
     class TransitionImage extends ContainerLite {
         constructor(scene, x, y, texture, frame, config) {
@@ -5390,8 +5389,8 @@
         return gameObject;
     }
 
-    const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-    const BuildGameObject = Phaser.GameObjects.BuildGameObject;
+    const GetAdvancedValue = phaser.Utils.Objects.GetAdvancedValue;
+    const BuildGameObject = phaser.GameObjects.BuildGameObject;
 
     function Creator (config, addToScene) {
         if (config === undefined) { config = {}; }
@@ -5480,7 +5479,7 @@
         return target;
     };
 
-    class TransitionImagePlugin extends Phaser.Plugins.BasePlugin {
+    class TransitionImagePlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

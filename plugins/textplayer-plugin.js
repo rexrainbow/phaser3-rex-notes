@@ -3,7 +3,8 @@ import Creator from './gameobjects/dynamictext/textplayer/Creator.js';
 import TextPlayer from './gameobjects/dynamictext/textplayer/TextPlayer.js';
 import SetValue from './utils/object/SetValue.js';
 
-class DynamicTextPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class DynamicTextPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

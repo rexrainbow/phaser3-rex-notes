@@ -1,7 +1,8 @@
 import GetThumbAlignPoint from './GetThumbAlignPoint.js';
 
-const AlignRight = Phaser.Display.Align.RIGHT_CENTER;
-const AlignBottom = Phaser.Display.Align.BOTTOM_CENTER;
+import { Display as PhaserDisplay } from 'phaser';
+const AlignRight = PhaserDisplay.Align.RIGHT_CENTER;
+const AlignBottom = PhaserDisplay.Align.BOTTOM_CENTER;
 
 var GetEndoint = function (out) {
     if (out === undefined) {

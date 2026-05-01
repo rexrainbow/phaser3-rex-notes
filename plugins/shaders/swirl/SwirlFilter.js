@@ -1,7 +1,8 @@
 import { FilterName } from './const.js';
 import FragSrc from './swirl-frag.js';
 
-class SwirlFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+import { Renderer as PhaserRenderer } from 'phaser';
+class SwirlFilter extends PhaserRenderer.WebGL.RenderNodes.BaseFilterShader {
     static FilterName = FilterName;
 
     constructor(manager) {

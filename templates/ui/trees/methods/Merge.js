@@ -1,4 +1,5 @@
-const Clone = Phaser.Utils.Objects.Clone;
+import { Utils as PhaserUtils } from 'phaser';
+const Clone = PhaserUtils.Objects.Clone;
 
 var Merge = function (defaultConfig, overrideConfig) {
     var config = (defaultConfig) ? Clone(defaultConfig) : {};

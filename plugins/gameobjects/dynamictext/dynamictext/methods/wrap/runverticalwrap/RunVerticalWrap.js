@@ -3,7 +3,8 @@ import { SetPadding } from '../../../../../../utils/padding/PaddingMethods.js';
 import AlignLines from './AlignLines.js';
 import { IsNewLineChar, IsPageBreakChar } from '../../../bob/Types.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var RunVerticalWrap = function (config) {
     // Parse parameters

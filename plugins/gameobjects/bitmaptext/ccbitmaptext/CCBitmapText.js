@@ -1,6 +1,7 @@
 import CreateBitmapTextClass from '../createbitmaptextclass/CreateBitmapTextClass.js';
 
-class CCBitmapText extends CreateBitmapTextClass(Phaser.GameObjects.BitmapText) {
+import { GameObjects as PhaserGameObjects } from 'phaser';
+class CCBitmapText extends CreateBitmapTextClass(PhaserGameObjects.BitmapText) {
 
 }
 

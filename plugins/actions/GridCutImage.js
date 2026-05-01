@@ -1,9 +1,10 @@
+import { GameObjects as PhaserGameObjects, Utils as PhaserUtils, Math as PhaserMath } from 'phaser';
 import GenerateFrames from '../utils/texture/gridcut/GenerateFrames.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const DefaultImageClass = Phaser.GameObjects.Image;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const RotateAround = Phaser.Math.RotateAround;
+const GetValue = PhaserUtils.Objects.GetValue;
+const DefaultImageClass = PhaserGameObjects.Image;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const RotateAround = PhaserMath.RotateAround;
 
 var GridCutImage = function (gameObject, columns, rows, config) {
     if (IsPlainObject(columns)) {

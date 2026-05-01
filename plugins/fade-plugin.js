@@ -2,7 +2,8 @@ import Fade from './fade.js';
 import FadeOutDestroy from './fade-out-destroy.js';
 import FadeMethods from './behaviors/fade/FadeMethods.js';
 
-class FadePlugin extends Phaser.Plugins.BasePlugin {
+import { GameObjects as PhaserGameObjects, Plugins as PhaserPlugins } from 'phaser';
+class FadePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);
@@ -23,7 +24,7 @@ class FadePlugin extends Phaser.Plugins.BasePlugin {
     }
 
     injectMethodsToRootClass() {
-        this.injectMethods(Phaser.GameObjects.GameObject.prototype);
+        this.injectMethods(PhaserGameObjects.GameObject.prototype);
         return this;
     }
 }

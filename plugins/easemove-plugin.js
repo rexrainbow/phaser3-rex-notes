@@ -5,7 +5,8 @@ import {
     EaseMoveMethods
 } from './easemove.js';
 
-class EaseMovePlugin extends Phaser.Plugins.BasePlugin {
+import { GameObjects as PhaserGameObjects, Plugins as PhaserPlugins } from 'phaser';
+class EaseMovePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);
@@ -26,7 +27,7 @@ class EaseMovePlugin extends Phaser.Plugins.BasePlugin {
     }
 
     injectMethodsToRootClass() {
-        this.injectMethods(Phaser.GameObjects.GameObject.prototype);
+        this.injectMethods(PhaserGameObjects.GameObject.prototype);
         return this;
     }
 }

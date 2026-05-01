@@ -2,7 +2,8 @@ import CreateTitleLabel from './utils/CreateTitleLabel.js';
 import CreateBackground from './utils/CreateBackground.js';
 import SplitPanels from '../gameobjects/splitpanels/SplitPanels.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 const DefaultSplitStyle = {
     width: 10,

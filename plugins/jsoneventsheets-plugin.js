@@ -1,7 +1,8 @@
 import JSONEventSheets from './jsoneventsheets.js';
 import CommandExecutor from './commandexecutor.js';
 
-class JSONEventSheetsPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class JSONEventSheetsPlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
     }

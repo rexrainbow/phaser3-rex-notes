@@ -10,7 +10,8 @@ import DataManagerMethods from '../../plugins/utils/data/DataManagerMethods.js';
 import CommandMethods from './methods/CommandMethods.js';
 import SetMethods from './methods/SetMethods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Bejeweled extends ComponentBase {
     constructor(scene, config) {

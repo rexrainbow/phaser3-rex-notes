@@ -1,7 +1,8 @@
 import IsLocalPointInKnob from './IsLocalPointInKnob.js';
 
-const GetAngle = Phaser.Math.Angle.Between;
-const NormalizeAngle = Phaser.Math.Angle.Normalize;
+import { Math as PhaserMath } from 'phaser';
+const GetAngle = PhaserMath.Angle.Between;
+const NormalizeAngle = PhaserMath.Angle.Normalize;
 
 var OnTouchPad = function (pointer, localX, localY) {
     if (!this.enable) {

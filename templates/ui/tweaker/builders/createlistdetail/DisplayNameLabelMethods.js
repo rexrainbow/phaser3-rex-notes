@@ -1,6 +1,7 @@
 import CreateTitleLabel from '../utils/CreateTitleLabel.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var GetDisplayNameStyle = function (style) {
     var displayNameStyle = GetValue(style, 'displayName');

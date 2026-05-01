@@ -1,6 +1,7 @@
 import ConditionsTable from './conditionstable.js'
 
-class ConditionsTablePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class ConditionsTablePlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
     }

@@ -1,10 +1,11 @@
+import { Display as PhaserDisplay } from 'phaser';
 /**
  * @author       Richard Davey <rich@photonstorm.com>
  * @copyright    2018 Photon Storm Ltd.
  * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
  */
 
-const CanvasPool = Phaser.Display.Canvas.CanvasPool;
+const CanvasPool = PhaserDisplay.Canvas.CanvasPool;
 
 /**
  * Calculates the ascent, descent and fontSize of a given font style.

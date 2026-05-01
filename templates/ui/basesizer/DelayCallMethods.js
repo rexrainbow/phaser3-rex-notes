@@ -1,4 +1,5 @@
-var RemoveItem = Phaser.Utils.Array.Remove;
+import { Utils as PhaserUtils } from 'phaser';
+var RemoveItem = PhaserUtils.Array.Remove;
 
 var OnInitDelayCallTimers = function (gameObject) {
     gameObject._delayCallTimers = [];

@@ -3,7 +3,8 @@ import Creator from './Creator.js';
 import LazyLoadImageBox from './LazyLoadImageBox.js';
 import SetValue from '../../plugins/utils/object/SetValue.js';
 
-class LazyLoadImageBoxPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class LazyLoadImageBoxPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

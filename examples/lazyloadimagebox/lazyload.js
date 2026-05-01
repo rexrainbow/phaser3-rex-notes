@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import LazyLoadImageBoxPlugin from '../../templates/lazyloadimagebox/lazyloadimagebox-plugin.js';
 
 class Demo extends Phaser.Scene {

@@ -1,7 +1,8 @@
 import Text from '../textbase/Text.js';
 import ParserClass from './Parser.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class TagText extends Text {
     constructor(scene, x, y, text, style) {

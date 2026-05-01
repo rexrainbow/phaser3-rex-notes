@@ -3,7 +3,8 @@ import Creator from './gameobjects/shape/roundrectangle/Creator.js';
 import RoundRectangle from './gameobjects/shape/roundrectangle/RoundRectangle.js';
 import SetValue from './utils/object/SetValue.js';
 
-class RoundRectanglePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class RoundRectanglePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

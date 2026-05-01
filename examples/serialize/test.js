@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import ToJSON from '../../plugins/utils/gameobject/serialize/ToJSON.js';
 import FromJSON from '../../plugins/utils/gameobject/serialize/FromJSON.js';
 

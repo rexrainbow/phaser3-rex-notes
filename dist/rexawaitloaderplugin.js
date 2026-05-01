@@ -1,13 +1,13 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexawaitloaderplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexawaitloaderplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
-    const FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
-    const UUID = Phaser.Utils.String.UUID;
+    const FILE_POPULATED = phaser.Loader.FILE_POPULATED;
+    const UUID = phaser.Utils.String.UUID;
 
-    class AwaitFile extends Phaser.Loader.File {
+    class AwaitFile extends phaser.Loader.File {
         constructor(loader, fileConfig) {
             if (!fileConfig.hasOwnProperty('type')) {
                 fileConfig.type = 'await';
@@ -83,7 +83,7 @@
         return obj && (typeof(obj) === 'function');
     };
 
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+    const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
 
     const LoaderCallback = function (key, config) {
         if (IsFunction(key)) {
@@ -113,7 +113,7 @@
         return this;
     };
 
-    class AwaitLoaderPlugin extends Phaser.Plugins.BasePlugin {
+    class AwaitLoaderPlugin extends phaser.Plugins.BasePlugin {
         constructor(pluginManager) {
             super(pluginManager);
 

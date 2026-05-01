@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import TextPlayerPlugin from '../../plugins/textplayer-plugin.js';
 
 var content = `

@@ -2,7 +2,8 @@ import Label from '../label/Label.js';
 import Methods from './methods/Methods.js'
 
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class DropDownList extends Label {
     constructor(scene, config) {

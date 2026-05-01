@@ -4,7 +4,8 @@ import Creator from './gameobjects/dom/filechooser/Creator.js';
 import FileChooser from './gameobjects/dom/filechooser/FileChooser.js';
 import SetValue from './utils/object/SetValue.js';
 
-class FileChooserPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class FileChooserPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

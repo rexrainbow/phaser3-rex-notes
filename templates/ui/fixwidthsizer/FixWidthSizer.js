@@ -4,8 +4,9 @@ import GetOrientationMode from '../utils/GetOrientationMode.js';
 import GetMaxChildWidth from './GetMaxChildWidth.js';
 import GetMaxChildHeight from './GetMaxChildHeight.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class FixWidthSizer extends BaseSizer {
     constructor(scene, x, y, minWidth, minHeight, config) {

@@ -1,8 +1,9 @@
 import Render from './render/Render.js';
 import Clear from '../../../utils/object/Clear.js';
 
-const Shape = Phaser.GameObjects.Shape;
-const RemoveItem = Phaser.Utils.Array.Remove;
+import { GameObjects as PhaserGameObjects, Utils as PhaserUtils } from 'phaser';
+const Shape = PhaserGameObjects.Shape;
+const RemoveItem = PhaserUtils.Array.Remove;
 
 class BaseShapes extends Shape {
     constructor(scene, x, y, width, height) {

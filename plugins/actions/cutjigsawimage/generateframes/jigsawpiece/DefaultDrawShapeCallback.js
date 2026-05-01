@@ -1,4 +1,6 @@
-const DegToRad = Phaser.Math.DegToRad;
+import { Math as PhaserMath } from 'phaser';
+
+const DegToRad = PhaserMath.DegToRad;
 const RAD0 = DegToRad(0);
 const RAD90 = DegToRad(90);
 const RAD180 = DegToRad(180);

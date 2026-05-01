@@ -1,6 +1,7 @@
 import RandomPlace from './randomplace.js';
 
-class RandomPlacePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class RandomPlacePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

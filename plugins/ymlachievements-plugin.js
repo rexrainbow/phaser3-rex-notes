@@ -1,6 +1,7 @@
 import Achievements from './ymlachievements.js'
 
-class AchievementsPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class AchievementsPlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
     }

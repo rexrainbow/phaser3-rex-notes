@@ -3,7 +3,8 @@ import Methods from './methods/Methods.js';
 import GetScrollMode from '../GetScrollMode.js';
 import CreateScrollableSizer from './methods/CreateScrollableSizer.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Scrollable extends Sizer {
     constructor(scene, config) {

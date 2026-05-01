@@ -3,7 +3,8 @@ import Creator from './gameobjects/shape/quad/Creator.js';
 import Quad from './gameobjects/shape/quad/Quad.js';
 import SetValue from './utils/object/SetValue.js';
 
-class QuadPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class QuadPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

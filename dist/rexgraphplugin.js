@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexgraphplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexgraphplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     class ObjectFactory {
         constructor(scene) {
@@ -558,7 +558,7 @@
     var EventEmitterMethods = {
         setEventEmitter(eventEmitter, EventEmitterClass) {
             if (EventEmitterClass === undefined) {
-                EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+                EventEmitterClass = phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
             }
             this._privateEE = (eventEmitter === true) || (eventEmitter === undefined);
             this._eventEmitter = (this._privateEE) ? (new EventEmitterClass()) : eventEmitter;
@@ -647,7 +647,7 @@
         },
     };
 
-    const SceneClass = Phaser.Scene;
+    const SceneClass = phaser.Scene;
     var IsSceneObject = function (object) {
         return (object instanceof SceneClass);
     };
@@ -666,7 +666,7 @@
         }
     };
 
-    const GameClass = Phaser.Game;
+    const GameClass = phaser.Game;
     var IsGame = function (object) {
         return (object instanceof GameClass);
     };
@@ -685,7 +685,7 @@
         }
     };
 
-    const GetValue$2 = Phaser.Utils.Objects.GetValue;
+    const GetValue$2 = phaser.Utils.Objects.GetValue;
 
     class ComponentBase {
         constructor(parent, config) {
@@ -1038,7 +1038,7 @@
         },
     };
 
-    const IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
+    const IsPlainObject$1 = phaser.Utils.Objects.IsPlainObject;
 
     var NodeAttributeMethods = {
         getNodeAttribute(gameObject, key) {
@@ -1075,7 +1075,7 @@
         }
     };
 
-    Phaser.Utils.Objects.IsPlainObject;
+    phaser.Utils.Objects.IsPlainObject;
 
     const DIRAtoB = 1;
     const DIRBtoA = 2;
@@ -1251,7 +1251,7 @@
         return DistanceBetweenPoints(nodeGameObjects[0], nodeGameObjects[1]);
     };
 
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+    const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
 
     var EdgeAttributeMethods = {
         getEdgeAttribute(gameObject, key) {
@@ -1413,8 +1413,8 @@
         Methods$2
     );
 
-    const GameObjectClass = Phaser.GameObjects.GameObject;
-    const LayerClass$1 = Phaser.GameObjects.Layer;
+    const GameObjectClass = phaser.GameObjects.GameObject;
+    const LayerClass$1 = phaser.GameObjects.Layer;
 
     var IsGameObject = function (object) {
         return (object instanceof GameObjectClass) || (object instanceof LayerClass$1);
@@ -1436,10 +1436,10 @@
         }
     };
 
-    const Rectangle$3 = Phaser.Geom.Rectangle;
-    const Vector2 = Phaser.Math.Vector2;
-    const RotateAround$1 = Phaser.Math.RotateAround;
-    const P3Container = Phaser.GameObjects.Container;
+    const Rectangle$3 = phaser.Geom.Rectangle;
+    const Vector2 = phaser.Math.Vector2;
+    const RotateAround$1 = phaser.Math.RotateAround;
+    const P3Container = phaser.GameObjects.Container;
 
     var GetBounds$1 = function (gameObject, output) {
         if (output === undefined) {
@@ -1615,7 +1615,7 @@
         return output;
     };
 
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
 
     var DrawBounds = function (gameObjects, graphics, config) {
         var strokeColor, lineWidth, fillColor, fillAlpha, padding, includeParent;
@@ -1682,7 +1682,7 @@
 
     var Points = [{ x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }];
 
-    const MergeRect = Phaser.Geom.Rectangle.MergeRect;
+    const MergeRect = phaser.Geom.Rectangle.MergeRect;
 
     var GameObjectsMethods = {
         forEachGameObject(callback) {
@@ -1722,11 +1722,11 @@
 
         getBounds(out) {
             if (out === undefined) {
-                out = new Phaser.Geom.Rectangle();
+                out = new phaser.Geom.Rectangle();
             }
 
             var firstBounds = true;
-            var source = new Phaser.Geom.Rectangle();
+            var source = new phaser.Geom.Rectangle();
             this.forEachGameObject(function (gameObject) {
                 if (gameObject.getBounds) {
                     source = GetBounds$1(gameObject, source);
@@ -1769,19 +1769,19 @@
         },
     };
 
-    const LayerClass = Phaser.GameObjects.Layer;
+    const LayerClass = phaser.GameObjects.Layer;
 
     var IsLayerGameObject = function (gameObject) {
         return (gameObject instanceof LayerClass);
     };
 
-    const ContainerClass = Phaser.GameObjects.Container;
+    const ContainerClass = phaser.GameObjects.Container;
 
     var IsContainerGameObject = function (gameObject) {
         return (gameObject instanceof ContainerClass);
     };
 
-    const GetValue = Phaser.Utils.Objects.GetValue;
+    const GetValue = phaser.Utils.Objects.GetValue;
 
     var GetBoundsConfig = function (config, out) {
         if (config === undefined) {
@@ -1965,7 +1965,7 @@
 
     SetValue(window, 'RexPlugins.Graph.Graph', Graph$8);
 
-    const GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
+    const GetCalcMatrix = phaser.GameObjects.GetCalcMatrix;
 
     var WebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
         src.updateData();
@@ -1992,7 +1992,7 @@
         }
     };
 
-    const SetTransform = Phaser.Renderer.Canvas.SetTransform;
+    const SetTransform = phaser.Renderer.Canvas.SetTransform;
 
     var CanvasRenderer = function (renderer, src, camera, parentMatrix) {
         src.updateData();
@@ -2040,8 +2040,8 @@
         return obj;
     };
 
-    const Shape = Phaser.GameObjects.Shape;
-    const RemoveItem = Phaser.Utils.Array.Remove;
+    const Shape = phaser.GameObjects.Shape;
+    const RemoveItem = phaser.Utils.Array.Remove;
 
     class BaseShapes extends Shape {
         constructor(scene, x, y, width, height) {
@@ -2508,7 +2508,7 @@
     }
     */
 
-    var Utils$2 = Phaser.Renderer.WebGL.Utils;
+    var Utils$2 = phaser.Renderer.WebGL.Utils;
 
     var FillPathWebGL = function (drawingContext, submitter, calcMatrix, gameObject, shapeData, alpha, dx, dy) {
         // This is very similar to the FillPath RenderNode, but it already
@@ -2561,7 +2561,7 @@
         strokePathMask
     }
     */
-    var Utils$1 = Phaser.Renderer.WebGL.Utils;
+    var Utils$1 = phaser.Renderer.WebGL.Utils;
 
     var StrokePathWebGL = function (drawingContext, submitter, calcMatrix, gameObject, shapeData, alpha, dx, dy) {
         var strokeTintColor = Utils$1.getTintAppendFloatAlpha(shapeData.strokeColor, shapeData.strokeAlpha * alpha);
@@ -3096,7 +3096,7 @@
         StrokePathConfigMethods,
     );
 
-    const Earcut$1 = Phaser.Geom.Polygon.Earcut;
+    const Earcut$1 = phaser.Geom.Polygon.Earcut;
 
     class PathBase extends BaseGeom {
         constructor() {
@@ -3163,7 +3163,7 @@
         return pathData;
     };
 
-    const DegToRad$1 = Phaser.Math.DegToRad;
+    const DegToRad$1 = phaser.Math.DegToRad;
 
     var ArcTo = function (centerX, centerY, radiusX, radiusY, startAngle, endAngle, antiClockWise, iteration, pathData) {
         // startAngle, endAngle: 0 ~ 360
@@ -3185,7 +3185,7 @@
         return pathData;
     };
 
-    Phaser.Math.DegToRad;
+    phaser.Math.DegToRad;
 
     var StartAt = function (x, y, pathData) {
         pathData.length = 0;
@@ -3199,7 +3199,7 @@
 
     //import QuadraticBezierInterpolation from '../../utils/math/interpolation/QuadraticBezierInterpolation.js';
 
-    const QuadraticBezierInterpolation = Phaser.Math.Interpolation.QuadraticBezier;
+    const QuadraticBezierInterpolation = phaser.Math.Interpolation.QuadraticBezier;
 
     var QuadraticBezierTo = function (cx, cy, x, y, iterations, pathData) {
         var pathDataCnt = pathData.length;
@@ -3217,7 +3217,7 @@
 
     // import CubicBezierInterpolation from '../../utils/math/interpolation/CubicBezierInterpolation.js';
 
-    const CubicBezierInterpolation = Phaser.Math.Interpolation.CubicBezier;
+    const CubicBezierInterpolation = phaser.Math.Interpolation.CubicBezier;
 
     var CubicBezierCurveTo = function (cx0, cy0, cx1, cy1, x, y, iterations, pathData) {
         var pathDataCnt = pathData.length;
@@ -3235,7 +3235,7 @@
 
     //import CatmullRomInterpolation from '../../utils/math/interpolation/CatmullRomInterpolation.js';
 
-    const CatmullRomInterpolation = Phaser.Math.Interpolation.CatmullRom;
+    const CatmullRomInterpolation = phaser.Math.Interpolation.CatmullRom;
 
     var CatmullRomTo = function (points, iterations, pathData) {
         var pathDataCnt = pathData.length;
@@ -3475,7 +3475,7 @@
 
     //import PointRotateAround from '../../utils/math/RotateAround.js';
 
-    const PointRotateAround$1 = Phaser.Math.RotateAround;
+    const PointRotateAround$1 = phaser.Math.RotateAround;
 
     var RotateAround = function (centerX, centerY, angle, pathData) {
         var point = { x: 0, y: 0 };
@@ -3509,8 +3509,8 @@
         return pathData;
     };
 
-    const DegToRad = Phaser.Math.DegToRad;
-    const PointRotateAround = Phaser.Math.RotateAround;
+    const DegToRad = phaser.Math.DegToRad;
+    const PointRotateAround = phaser.Math.RotateAround;
 
     var TransformPointsMethods = {
         rotateAround(centerX, centerY, angle) {
@@ -3616,9 +3616,9 @@
         },
     };
 
-    const DistanceBetween = Phaser.Math.Distance.Between;
-    const Wrap = Phaser.Math.Wrap;
-    const Linear = Phaser.Math.Linear;
+    const DistanceBetween = phaser.Math.Distance.Between;
+    const Wrap = phaser.Math.Wrap;
+    const Linear = phaser.Math.Linear;
 
     var AppendFromPathSegment = function (srcPathData, accumulationLengths, startT, endT, destPathData) {
         if (endT === undefined) {
@@ -3788,7 +3788,7 @@
 
     //import Polygon from '../../utils/geom/polygon/Polygon.js';
 
-    const Polygon = Phaser.Geom.Polygon;
+    const Polygon = phaser.Geom.Polygon;
 
     var ToPolygon = function (pathData, polygon) {
         if (polygon === undefined) {
@@ -4031,7 +4031,7 @@
         }
     }
 
-    var Utils = Phaser.Renderer.WebGL.Utils;
+    var Utils = phaser.Renderer.WebGL.Utils;
 
     let Rectangle$2 = class Rectangle extends BaseGeom {
         constructor(x, y, width, height) {
@@ -4187,9 +4187,9 @@
         Methods$1,
     );
 
-    Phaser.Utils.Objects.GetValue;
+    phaser.Utils.Objects.GetValue;
 
-    const Earcut = Phaser.Geom.Polygon.Earcut;
+    const Earcut = phaser.Geom.Polygon.Earcut;
 
     class Triangle extends BaseGeom {
         constructor(x0, y0, x1, y1, x2, y2) {
@@ -4404,7 +4404,7 @@
         line.end();
     };
 
-    const Rectangle$1 = Phaser.Geom.Rectangle;
+    const Rectangle$1 = phaser.Geom.Rectangle;
 
     var GetBounds = function (points, out) {
         if (out === undefined) {
@@ -4638,9 +4638,9 @@
         }
     };
 
-    const LineToCircle = Phaser.Geom.Intersects.LineToCircle;
+    const LineToCircle = phaser.Geom.Intersects.LineToCircle;
 
-    const tmpLine = new Phaser.Geom.Line();
+    const tmpLine = new phaser.Geom.Line();
 
     var LinesToCircle = function (points, circle) {
         tmpLine.x1 = points[0];
@@ -4660,11 +4660,11 @@
         return false;
     };
 
-    const Rectangle = Phaser.Geom.Rectangle;
-    const RectangleContains = Phaser.Geom.Rectangle.Contains;
-    const SetInteractiveBase = Phaser.GameObjects.GameObject.prototype.setInteractive;
+    const Rectangle = phaser.Geom.Rectangle;
+    const RectangleContains = phaser.Geom.Rectangle.Contains;
+    const SetInteractiveBase = phaser.GameObjects.GameObject.prototype.setInteractive;
 
-    const GlobPoint = new Phaser.Geom.Circle();
+    const GlobPoint = new phaser.Geom.Circle();
 
     var HitAreaCallback = function (shape, x, y, gameObject) {
         if (!RectangleContains(shape, x, y)) {
@@ -12841,7 +12841,7 @@
         //  NOOP
     };
 
-    var globZone = new Phaser.GameObjects.Zone({
+    var globZone = new phaser.GameObjects.Zone({
         sys: {
             queueDepthSort: NOOP,
             events: {
@@ -13206,7 +13206,7 @@
         }
     };
 
-    const ALIGN_CENTER$1 = Phaser.Display.Align.CENTER;
+    const ALIGN_CENTER$1 = phaser.Display.Align.CENTER;
 
     var PlaceGameObjects$1 = function (graph, graphData, config) {
         if (config === undefined) {
@@ -26717,7 +26717,7 @@
         return edgeData.points;
     };
 
-    const ALIGN_CENTER = Phaser.Display.Align.CENTER;
+    const ALIGN_CENTER = phaser.Display.Align.CENTER;
 
     var PlaceGameObjects = function (graph, graphData, config) {
         if (config === undefined) {
@@ -26784,7 +26784,7 @@
         await Layout$2(LayoutConfig, graph, config);
     };
 
-    class GraphPlugin extends Phaser.Plugins.ScenePlugin {
+    class GraphPlugin extends phaser.Plugins.ScenePlugin {
         constructor(scene, pluginManager) {
             super(scene, pluginManager);
 

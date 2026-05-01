@@ -3,7 +3,8 @@ import Creator from './gameobjects/container/carousel/Creator.js';
 import Carousel from './gameobjects/container/carousel/Carousel.js';
 import SetValue from './utils/object/SetValue.js';
 
-class CarouselPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class CarouselPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

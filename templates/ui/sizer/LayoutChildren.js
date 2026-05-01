@@ -4,7 +4,8 @@ import LayoutChild from '../basesizer/utils/LayoutChild.js';
 import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
 import CheckSize from '../basesizer/utils/CheckSize.js';
 
-const Wrap = Phaser.Math.Wrap;
+import { Math as PhaserMath } from 'phaser';
+const Wrap = PhaserMath.Wrap;
 
 var LayoutChildren = function () {
     var children = this.sizerChildren;

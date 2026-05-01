@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import AlphaMaskImagePlugin from '../../plugins/alphamaskimage-plugin.js';
 
 class Demo extends Phaser.Scene {

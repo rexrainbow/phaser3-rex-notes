@@ -3,7 +3,8 @@ import Creator from './gameobjects/tagtext/tagtext/Creator.js';
 import TagText from './gameobjects/tagtext/tagtext/TagText.js';
 import SetValue from './utils/object/SetValue.js';
 
-class TagTextPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class TagTextPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

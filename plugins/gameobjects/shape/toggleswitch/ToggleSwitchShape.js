@@ -2,8 +2,9 @@ import BaseShapes from '../shapes/BaseShapes.js';
 import Methods from './methods/Methods.js';
 import GrayScale from '../../../utils/color/GrayScale.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 const DefaultTrackFillColor = 0x005cb2;
 const DefaultThumbFillColor = 0xffffff;
 

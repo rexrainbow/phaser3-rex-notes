@@ -1,10 +1,11 @@
 import googleWebFontLoader from 'webfontloader';
 import TestFont from './TestFont.js';
 
-const FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Loader as PhaserLoader, Utils as PhaserUtils } from 'phaser';
+const FILE_POPULATED = PhaserLoader.FILE_POPULATED;
+const GetValue = PhaserUtils.Objects.GetValue;
 
-class WebFont extends Phaser.Loader.File {
+class WebFont extends PhaserLoader.File {
     // constructor(loader, fileConfig) {
     //     super(loader, fileConfig);
     // }

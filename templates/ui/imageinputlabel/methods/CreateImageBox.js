@@ -1,7 +1,8 @@
 import ImageBox from '../../imagebox/ImageBox.js';
 import Canvas from '../../canvas/Canvas.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var CreateCanvas = function (scene, config) {
     var canvasConfig = GetValue(config, 'canvas');

@@ -1,7 +1,8 @@
 import ImageBoxBase from './ImageBoxBase.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class ImageBox extends ImageBoxBase {
     constructor(scene, x, y, texture, frame, config) {

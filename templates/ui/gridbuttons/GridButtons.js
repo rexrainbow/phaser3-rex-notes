@@ -5,7 +5,8 @@ import ButtonGroup from '../utils/buttongroup/ButtonGroup.js';
 import ButtonMethods from '../utils/buttongroup/ButtonMethods.js';
 import ButtonStateMethods from '../utils/buttongroup/ButtonStateMethods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class GridButtons extends GridSizer {
     constructor(scene, config) {

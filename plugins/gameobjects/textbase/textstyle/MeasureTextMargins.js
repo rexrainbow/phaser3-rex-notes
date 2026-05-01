@@ -1,4 +1,5 @@
-const CanvasPool = Phaser.Display.Canvas.CanvasPool;
+import { Display as PhaserDisplay } from 'phaser';
+const CanvasPool = PhaserDisplay.Canvas.CanvasPool;
 
 var MeasureTextMargins = function (textStyle, testString, out) {
     if (out === undefined) {

@@ -1,6 +1,7 @@
 import FontSizeFit from '../../../../plugins/utils/text/fontsizefit/FontSizeFit.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var FontSizeExpandText = function (textObject, config) {
     if (typeof (config) === 'number') {

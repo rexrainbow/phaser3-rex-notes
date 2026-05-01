@@ -1,9 +1,10 @@
-const GetAABB = Phaser.Geom.Polygon.GetAABB;
-const Translate = Phaser.Geom.Polygon.Translate;
-const PolygonShape = Phaser.GameObjects.Polygon;
+import { GameObjects as PhaserGameObjects, Geom as PhaserGeom } from 'phaser';
+const GetAABB = PhaserGeom.Polygon.GetAABB;
+const Translate = PhaserGeom.Polygon.Translate;
+const PolygonShape = PhaserGameObjects.Polygon;
 
 var tmpPolygon = {};
-var tmpRectangle = new Phaser.Geom.Rectangle();
+var tmpRectangle = new PhaserGeom.Rectangle();
 
 var CreateBoundingPolygon = function (scene, points) {
     tmpPolygon.points = points;

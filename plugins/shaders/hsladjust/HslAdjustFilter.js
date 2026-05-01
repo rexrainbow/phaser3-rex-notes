@@ -1,7 +1,8 @@
 import { FilterName } from './const.js';
 import FragSrc from './hslAdjust-frag.js';
 
-class HslAdjustFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+import { Renderer as PhaserRenderer } from 'phaser';
+class HslAdjustFilter extends PhaserRenderer.WebGL.RenderNodes.BaseFilterShader {
     static FilterName = FilterName;
 
     constructor(manager) {

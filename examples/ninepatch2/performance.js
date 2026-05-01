@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import NinePatchPlugin from '../../plugins/ninepatch-plugin.js';
 import NinePatch2Plugin from '../../plugins/ninepatch2-plugin.js';
 

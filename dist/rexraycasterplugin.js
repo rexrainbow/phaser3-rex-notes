@@ -1,11 +1,11 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexraycasterplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexraycasterplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
-    const GameObjectClass = Phaser.GameObjects.GameObject;
-    const LayerClass = Phaser.GameObjects.Layer;
+    const GameObjectClass = phaser.GameObjects.GameObject;
+    const LayerClass = phaser.GameObjects.Layer;
 
     var IsGameObject = function (object) {
         return (object instanceof GameObjectClass) || (object instanceof LayerClass);
@@ -27,10 +27,10 @@
         }
     };
 
-    Phaser.Geom.Rectangle;
-    const Vector2 = Phaser.Math.Vector2;
-    const RotateAround = Phaser.Math.RotateAround;
-    Phaser.GameObjects.Container;
+    phaser.Geom.Rectangle;
+    const Vector2 = phaser.Math.Vector2;
+    const RotateAround = phaser.Math.RotateAround;
+    phaser.GameObjects.Container;
 
     var GetTopLeft = function (gameObject, output, includeParent) {
         if (output === undefined) {
@@ -130,7 +130,7 @@
         return output;
     };
 
-    const Polygon$1 = Phaser.Geom.Polygon;
+    const Polygon$1 = phaser.Geom.Polygon;
 
     var BoundsToPolygon = function (gameObject, out) {
         if (out === undefined) {
@@ -144,8 +144,8 @@
         return out;
     };
 
-    const Polygon = Phaser.Geom.Polygon;
-    const SpliceOne = Phaser.Utils.Array.SpliceOne;
+    const Polygon = phaser.Geom.Polygon;
+    const SpliceOne = phaser.Utils.Array.SpliceOne;
 
     class Obstacles {
         constructor() {
@@ -252,8 +252,8 @@
 
     var Obstacle = {};
 
-    const GetLineToLine = Phaser.Geom.Intersects.GetLineToLine;
-    const PointToLine = Phaser.Geom.Intersects.PointToLine;
+    const GetLineToLine = phaser.Geom.Intersects.GetLineToLine;
+    const PointToLine = phaser.Geom.Intersects.PointToLine;
 
     var GetLineToPoints = function (line, points, out) {
         if (out === undefined) {
@@ -304,9 +304,9 @@
     };
 
     var globResult$1 = {};
-    var startPoint = new Phaser.Math.Vector2();
-    var segment = new Phaser.Geom.Line();
-    var tempIntersect = new Phaser.Math.Vector3();
+    var startPoint = new phaser.Math.Vector2();
+    var segment = new phaser.Geom.Line();
+    var tempIntersect = new phaser.Math.Vector3();
 
     var Clear = function (obj) {
         if ((typeof (obj) !== 'object') || (obj === null)) {
@@ -353,8 +353,8 @@
         return out;
     };
 
-    const GetAABB = Phaser.Geom.Polygon.GetAABB;
-    const LineToRectangle = Phaser.Geom.Intersects.LineToRectangle;
+    const GetAABB = phaser.Geom.Polygon.GetAABB;
+    const LineToRectangle = phaser.Geom.Intersects.LineToRectangle;
 
     var GetLineToPolygon = function (line, polygons, out) {
         if (out === undefined) {
@@ -404,12 +404,12 @@
     };
 
     var globResult = {};
-    var AABBRect = new Phaser.Geom.Rectangle();
+    var AABBRect = new phaser.Geom.Rectangle();
 
-    const GetValue = Phaser.Utils.Objects.GetValue;
-    const Line = Phaser.Geom.Line;
-    const SetToAngle = Phaser.Geom.Line.SetToAngle;
-    const ReflectAngle = Phaser.Geom.Line.ReflectAngle;
+    const GetValue = phaser.Utils.Objects.GetValue;
+    const Line = phaser.Geom.Line;
+    const SetToAngle = phaser.Geom.Line.SetToAngle;
+    const ReflectAngle = phaser.Geom.Line.ReflectAngle;
 
     class Reflection {
         constructor(config) {
@@ -513,7 +513,7 @@
         }
     }
 
-    class RaycasterPlugin extends Phaser.Plugins.BasePlugin {
+    class RaycasterPlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

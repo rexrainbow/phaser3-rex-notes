@@ -7,7 +7,8 @@ import FontSizeExpandText from '../utils/fontsizeexpandtext/FontSizeExpandText.j
 import IsBitmapTextGameObject from '../../../plugins/utils/bitmaptext/IsBitmapTextGameObject.js';
 
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Label extends LabelBase {
     constructor(scene, config) {

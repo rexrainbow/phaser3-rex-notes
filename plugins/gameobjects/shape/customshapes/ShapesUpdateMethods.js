@@ -10,6 +10,7 @@ import {
     Triangle
 } from '../shapes/geoms';
 
+import { Utils as PhaserUtils } from 'phaser';
 const ShapeClasses = {
     arc: Arc,
     circle: Circle,
@@ -22,8 +23,8 @@ const ShapeClasses = {
     triangle: Triangle
 }
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 
 const ClearAll = function () {
     var shapes = this.getShapes();

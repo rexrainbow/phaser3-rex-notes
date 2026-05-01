@@ -1,3 +1,4 @@
+import { Utils as PhaserUtils } from 'phaser';
 import OpenCloseTransition from '../openclosetransition/OpenCloseTransition.js';
 import CreateCover from './CreateCover.js';
 import DefaultTransitCallbacks from './DefaultTransitCallbacks.js';
@@ -7,7 +8,7 @@ import {
 } from './DefaultCoverTransitCallbacks.js';
 import IsPointInBounds from '../../utils/bounds/IsPointInBounds.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Modal extends OpenCloseTransition {
     constructor(gameObject, config) {

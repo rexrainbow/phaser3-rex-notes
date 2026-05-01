@@ -1,8 +1,9 @@
 import Mesh from '../../mesh/sprite/Sprite.js';
 import Methods from './methods/Methods.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
 const DefaultRingRadiusList = [1 / 27, 3 / 27, 9 / 27];
 
 class ShatterImage extends Mesh {

@@ -2,7 +2,8 @@ import PathBase from '../PathBase.js';
 import ArcTo from '../../../../../../geom/pathdata/ArcTo.js';
 import FillStyleCanvas from '../../../../utils/render/FillStyleCanvas.js';
 import LineStyleCanvas from '../../../../utils/render/LineStyleCanvas.js';
-const DegToRad = Phaser.Math.DegToRad;
+import { Math as PhaserMath } from 'phaser';
+const DegToRad = PhaserMath.DegToRad;
 
 class Arc extends PathBase {
     constructor(x, y, radiusX, radiusY, startAngle, endAngle, anticlockwise, pie) {

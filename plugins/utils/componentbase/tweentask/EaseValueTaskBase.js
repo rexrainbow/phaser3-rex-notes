@@ -1,8 +1,9 @@
 import TimerTask from '../timerticktask/TimerTask.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-const GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
+import { Tweens as PhaserTweens, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const GetAdvancedValue = PhaserUtils.Objects.GetAdvancedValue;
+const GetEaseFunction = PhaserTweens.Builders.GetEaseFunction;
 
 class EaseValueTaskBase extends TimerTask {
     resetFromJSON(o) {

@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexstatesroundrectangle = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexstatesroundrectangle = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     /*
     shapeData: {
@@ -13,7 +13,7 @@
     }
     */
 
-    var Utils$1 = Phaser.Renderer.WebGL.Utils;
+    var Utils$1 = phaser.Renderer.WebGL.Utils;
 
     var FillPathWebGL = function (drawingContext, submitter, calcMatrix, gameObject, shapeData, alpha, dx, dy) {
         // This is very similar to the FillPath RenderNode, but it already
@@ -66,7 +66,7 @@
         strokePathMask
     }
     */
-    var Utils = Phaser.Renderer.WebGL.Utils;
+    var Utils = phaser.Renderer.WebGL.Utils;
 
     var StrokePathWebGL = function (drawingContext, submitter, calcMatrix, gameObject, shapeData, alpha, dx, dy) {
         var strokeTintColor = Utils.getTintAppendFloatAlpha(shapeData.strokeColor, shapeData.strokeAlpha * alpha);
@@ -178,7 +178,7 @@
 
     };
 
-    const GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
+    const GetCalcMatrix = phaser.GameObjects.GetCalcMatrix;
 
     var PolygonWebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
         if (src.dirty) {
@@ -337,7 +337,7 @@
         ctx.stroke();
     };
 
-    const SetTransform = Phaser.Renderer.Canvas.SetTransform;
+    const SetTransform = phaser.Renderer.Canvas.SetTransform;
 
     var PolygonCanvasRenderer = function (renderer, src, camera, parentMatrix) {
         if (src.dirty) {
@@ -665,7 +665,7 @@
         StrokePathConfigMethods,
     );
 
-    const Shape = Phaser.GameObjects.Shape;
+    const Shape = phaser.GameObjects.Shape;
 
     class PolygnBase extends Shape {
         init() {
@@ -788,7 +788,7 @@
         Render
     );
 
-    const GetValue$3 = Phaser.Utils.Objects.GetValue;
+    const GetValue$3 = phaser.Utils.Objects.GetValue;
 
     let RoundRectangle$1 = class RoundRectangle {
         constructor(x, y, width, height, radiusConfig) {
@@ -982,7 +982,7 @@
         return pathData;
     };
 
-    const DegToRad = Phaser.Math.DegToRad;
+    const DegToRad = phaser.Math.DegToRad;
 
     var ArcTo = function (centerX, centerY, radiusX, radiusY, startAngle, endAngle, antiClockWise, iteration, pathData) {
         // startAngle, endAngle: 0 ~ 360
@@ -1004,9 +1004,9 @@
         return pathData;
     };
 
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$2 = Phaser.Utils.Objects.GetValue;
-    const Earcut = Phaser.Geom.Polygon.Earcut;
+    const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
+    const GetValue$2 = phaser.Utils.Objects.GetValue;
+    const Earcut = phaser.Geom.Polygon.Earcut;
 
     class RoundRectangle extends PolygnBase {
         constructor(scene, x, y, width, height, radiusConfig, fillColor, fillAlpha) {
@@ -1322,7 +1322,7 @@
     var EventEmitterMethods = {
         setEventEmitter(eventEmitter, EventEmitterClass) {
             if (EventEmitterClass === undefined) {
-                EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+                EventEmitterClass = phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
             }
             this._privateEE = (eventEmitter === true) || (eventEmitter === undefined);
             this._eventEmitter = (this._privateEE) ? (new EventEmitterClass()) : eventEmitter;
@@ -1411,7 +1411,7 @@
         },
     };
 
-    const SceneClass = Phaser.Scene;
+    const SceneClass = phaser.Scene;
     var IsSceneObject = function (object) {
         return (object instanceof SceneClass);
     };
@@ -1430,7 +1430,7 @@
         }
     };
 
-    const GameClass = Phaser.Game;
+    const GameClass = phaser.Game;
     var IsGame = function (object) {
         return (object instanceof GameClass);
     };
@@ -1449,7 +1449,7 @@
         }
     };
 
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
 
     class ComponentBase {
         constructor(parent, config) {
@@ -1605,7 +1605,7 @@
         return true;
     };
 
-    const GetValue = Phaser.Utils.Objects.GetValue;
+    const GetValue = phaser.Utils.Objects.GetValue;
 
     class StyleManager extends ComponentBase {
         constructor(gameObject, config) {

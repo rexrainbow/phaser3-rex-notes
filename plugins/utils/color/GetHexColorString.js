@@ -1,4 +1,5 @@
-const Pad = Phaser.Utils.String.Pad;
+import { Utils as PhaserUtils } from 'phaser';
+const Pad = PhaserUtils.String.Pad;
 
 var GetHexColorString = function (value, prefix) {
     if (prefix === undefined) {

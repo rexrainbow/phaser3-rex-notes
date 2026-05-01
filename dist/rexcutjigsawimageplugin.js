@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcutjigsawimageplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcutjigsawimageplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var Draw = function (frameName, callback, scope) {
         var index = this.getFrameIndex(frameName);
@@ -419,12 +419,12 @@
         RemoveMethods
     );
 
-    const GameClass = Phaser.Game;
+    const GameClass = phaser.Game;
     var IsGame = function (object) {
         return (object instanceof GameClass);
     };
 
-    const SceneClass = Phaser.Scene;
+    const SceneClass = phaser.Scene;
     var IsSceneObject = function (object) {
         return (object instanceof SceneClass);
     };
@@ -461,8 +461,8 @@
         return textureManager[methodName](key, width, height);
     };
 
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue = Phaser.Utils.Objects.GetValue;
+    const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
+    const GetValue = phaser.Utils.Objects.GetValue;
 
     class FrameManager {
         constructor(scene, key, width, height, cellWidth, cellHeight, fillColor, useDynamicTexture) {
@@ -693,7 +693,7 @@
         2: 1
     };
 
-    const DegToRad = Phaser.Math.DegToRad;
+    const DegToRad = phaser.Math.DegToRad;
     const RAD0 = DegToRad(0);
     const RAD90 = DegToRad(90);
     const RAD180 = DegToRad(180);
@@ -866,7 +866,7 @@
         return !!renderer.gl;
     };
 
-    const MaskController = Phaser.Filters.Mask;
+    const MaskController = phaser.Filters.Mask;
 
     var SetMask = function (gameObject, maskGameObject, invert, maskType) {
         if (IsWebGLRenderMode(gameObject)) {
@@ -1032,7 +1032,7 @@
     Sample JigsawPiece, draw to FrameManager
     */
 
-    const RenderTexture = Phaser.GameObjects.RenderTexture;
+    const RenderTexture = phaser.GameObjects.RenderTexture;
 
     class JigsawPieceRenderTexurue extends JigsawPieceBase(RenderTexture) {
         constructor(scene, config) {
@@ -1304,8 +1304,8 @@
         }
     };
 
-    const DefaultImageClass = Phaser.GameObjects.Image;
-    const RotateAround = Phaser.Math.RotateAround;
+    const DefaultImageClass = phaser.GameObjects.Image;
+    const RotateAround = phaser.Math.RotateAround;
 
     var CreatePieces = function (gameObject, {
         piecesKey,
@@ -1405,7 +1405,7 @@
         return pieceGameObjects;
     };
 
-    class CutJigsawImagePlugin extends Phaser.Plugins.BasePlugin {
+    class CutJigsawImagePlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

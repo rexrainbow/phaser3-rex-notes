@@ -3,8 +3,9 @@ import KeyHub from './methods/KeyHub.js';
 import Methods from './methods/Methods.js';
 import KeyMap from '../../utils/input/KeyMap.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const KeyCodes = Phaser.Input.Keyboard.KeyCodes;
+import { Input as PhaserInput, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const KeyCodes = PhaserInput.Keyboard.KeyCodes;
 
 class KeysHub extends ComponentBase {
     constructor(scene, config) {

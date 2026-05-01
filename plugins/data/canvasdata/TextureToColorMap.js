@@ -5,8 +5,9 @@ import FillColor from './fillcallbacks/color32.js';
 import IsGameObject from '../../utils/system/IsGameObject.js';
 import CopyFrameToCanvas from '../../utils/texture/CopyFrameToCanvas.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const CanvasPool = Phaser.Display.Canvas.CanvasPool;
+import { Display as PhaserDisplay, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const CanvasPool = PhaserDisplay.Canvas.CanvasPool;
 
 var TextureTColorMap = function (key, frameName, config, out) {
     var frame;

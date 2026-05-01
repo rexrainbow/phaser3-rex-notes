@@ -1,10 +1,11 @@
 import { FilterName } from './const.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const IntegerToRGB = Phaser.Display.Color.IntegerToRGB;
-const Color = Phaser.Display.Color;
+import { Display as PhaserDisplay, Filters as PhaserFilters, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const IntegerToRGB = PhaserDisplay.Color.IntegerToRGB;
+const Color = PhaserDisplay.Color;
 
-class ColorReplaceController extends Phaser.Filters.Controller {
+class ColorReplaceController extends PhaserFilters.Controller {
     static FilterName = FilterName;
 
     constructor(camera, config) {

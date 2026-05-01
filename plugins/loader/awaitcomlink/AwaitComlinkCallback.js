@@ -9,7 +9,8 @@ import {
 import DefaultWorkerCode from './DefaultWorker.js';
 
 
-const GetFastValue = Phaser.Utils.Objects.GetFastValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetFastValue = PhaserUtils.Objects.GetFastValue;
 
 const LoaderCallback = function (config) {
     var loader = this;

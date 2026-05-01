@@ -2,7 +2,8 @@ import OnePointerTracer from "../onepointertracer/OnePointerTracer.js";
 import FSM from '../../../fsm.js';
 import GetPointerWorldXY from "../../../utils/input/GetPointerWorldXY.js";
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Pan extends OnePointerTracer {
     constructor(gameObject, config) {

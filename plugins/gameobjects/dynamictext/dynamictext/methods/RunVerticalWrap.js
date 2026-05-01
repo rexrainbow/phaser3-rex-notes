@@ -1,6 +1,7 @@
 import RunVerticalWrapBase from './wrap/runverticalwrap/RunVerticalWrap.js';
 
-const Merge = Phaser.Utils.Objects.Merge;
+import { Utils as PhaserUtils } from 'phaser';
+const Merge = PhaserUtils.Objects.Merge;
 
 var RunVerticalWrap = function (config) {
     if (config === undefined) {

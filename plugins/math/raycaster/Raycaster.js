@@ -1,10 +1,11 @@
 import Obstacles from './Obstacles.js';
 import GetLineToPolygon from './GetLineToPolygon.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Line = Phaser.Geom.Line;
-const SetToAngle = Phaser.Geom.Line.SetToAngle;
-const ReflectAngle = Phaser.Geom.Line.ReflectAngle;
+import { Geom as PhaserGeom, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const Line = PhaserGeom.Line;
+const SetToAngle = PhaserGeom.Line.SetToAngle;
+const ReflectAngle = PhaserGeom.Line.ReflectAngle;
 
 class Reflection {
     constructor(config) {

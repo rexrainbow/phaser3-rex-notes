@@ -1,13 +1,13 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexlayermanagerplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexlayermanagerplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var EventEmitterMethods = {
         setEventEmitter(eventEmitter, EventEmitterClass) {
             if (EventEmitterClass === undefined) {
-                EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+                EventEmitterClass = phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
             }
             this._privateEE = (eventEmitter === true) || (eventEmitter === undefined);
             this._eventEmitter = (this._privateEE) ? (new EventEmitterClass()) : eventEmitter;
@@ -538,7 +538,7 @@
         return gameObject;
     };
 
-    const EventEmitter = Phaser.Events.EventEmitter;
+    const EventEmitter = phaser.Events.EventEmitter;
 
     var MonitorViewport = function (viewport) {
         // Don't monitor properties again
@@ -945,12 +945,12 @@
         return gameObject;
     };
 
-    const GameClass = Phaser.Game;
+    const GameClass = phaser.Game;
     var IsGame = function (object) {
         return (object instanceof GameClass);
     };
 
-    const SceneClass = Phaser.Scene;
+    const SceneClass = phaser.Scene;
     var IsSceneObject = function (object) {
         return (object instanceof SceneClass);
     };
@@ -981,7 +981,7 @@
     };
 
     var AddFilterListMethod = function (name, callback) {
-        var FilterListComponent = Phaser.GameObjects.Components.FilterList.prototype;
+        var FilterListComponent = phaser.GameObjects.Components.FilterList.prototype;
         if (FilterListComponent[name]) {
             return;
         }
@@ -1026,7 +1026,7 @@ void main (void) {
 }
 `;
 
-    class BloomStepFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+    class BloomStepFilter extends phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
         static FilterName = StepFilterName;
 
         constructor(manager) {
@@ -1048,9 +1048,9 @@ void main (void) {
 
     }
 
-    const GetValue$9 = Phaser.Utils.Objects.GetValue;
+    const GetValue$9 = phaser.Utils.Objects.GetValue;
 
-    class BloomStepController extends Phaser.Filters.Controller {
+    class BloomStepController extends phaser.Filters.Controller {
         static FilterName = StepFilterName;
 
         constructor(camera, config) {
@@ -1104,9 +1104,9 @@ void main (void) {
 
     }
 
-    const GetValue$8 = Phaser.Utils.Objects.GetValue;
+    const GetValue$8 = phaser.Utils.Objects.GetValue;
 
-    let BloomController$1 = class BloomController extends Phaser.Filters.ParallelFilters {
+    let BloomController$1 = class BloomController extends phaser.Filters.ParallelFilters {
         constructor(camera, config) {
             super(camera);
 
@@ -1703,7 +1703,7 @@ void main (void) {
 }
 `;
 
-    class CircleFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+    class CircleFilter extends phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
         static FilterName = FilterName$4;
 
         constructor(manager) {
@@ -1722,9 +1722,9 @@ void main (void) {
 
     }
 
-    const GetValue$7 = Phaser.Utils.Objects.GetValue;
+    const GetValue$7 = phaser.Utils.Objects.GetValue;
 
-    class CircleController extends Phaser.Filters.Controller {
+    class CircleController extends phaser.Filters.Controller {
         static FilterName = FilterName$4;
 
         constructor(camera, config) {
@@ -2242,7 +2242,7 @@ void main ()
 }
 `;
 
-    class GradientFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+    class GradientFilter extends phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
         static FilterName = FilterName$3;
 
         constructor(manager) {
@@ -2264,9 +2264,9 @@ void main ()
 
     }
 
-    const GetValue$6 = Phaser.Utils.Objects.GetValue;
+    const GetValue$6 = phaser.Utils.Objects.GetValue;
 
-    class GradientController extends Phaser.Filters.Controller {
+    class GradientController extends phaser.Filters.Controller {
         static FilterName = FilterName$3;
 
         constructor(camera, config) {
@@ -2718,7 +2718,7 @@ void main (void) {
 }
 `;
 
-    class WarpFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+    class WarpFilter extends phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
         static FilterName = FilterName$2;
 
         constructor(manager) {
@@ -2735,10 +2735,10 @@ void main (void) {
 
     }
 
-    const GetValue$5 = Phaser.Utils.Objects.GetValue;
-    const Clamp = Phaser.Math.Clamp;
+    const GetValue$5 = phaser.Utils.Objects.GetValue;
+    const Clamp = phaser.Math.Clamp;
 
-    class WipeController extends Phaser.Filters.Controller {
+    class WipeController extends phaser.Filters.Controller {
         static FilterName = FilterName$2;
 
         constructor(camera, config) {
@@ -3262,7 +3262,7 @@ void main (void) {
         return currentTime;
     };
 
-    class ShineFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+    class ShineFilter extends phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
         static FilterName = FilterName$1;
 
         constructor(manager) {
@@ -3281,9 +3281,9 @@ void main (void) {
 
     }
 
-    const GetValue$4 = Phaser.Utils.Objects.GetValue;
+    const GetValue$4 = phaser.Utils.Objects.GetValue;
 
-    class ShineController extends Phaser.Filters.Controller {
+    class ShineController extends phaser.Filters.Controller {
         static FilterName = FilterName$1;
 
         constructor(camera, config) {
@@ -3619,7 +3619,7 @@ void main (void) {
 }
 `;
 
-    class VignetteFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+    class VignetteFilter extends phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
         static FilterName = FilterName;
 
         constructor(manager) {
@@ -3636,9 +3636,9 @@ void main (void) {
 
     }
 
-    const GetValue$3 = Phaser.Utils.Objects.GetValue;
+    const GetValue$3 = phaser.Utils.Objects.GetValue;
 
-    class VignetteController extends Phaser.Filters.Controller {
+    class VignetteController extends phaser.Filters.Controller {
         static FilterName = FilterName;
 
         constructor(camera, config) {
@@ -4038,7 +4038,7 @@ void main (void) {
         return gameObject;
     };
 
-    const RemoveItem = Phaser.Utils.Array.Remove;
+    const RemoveItem = phaser.Utils.Array.Remove;
 
     var AddMethods = {
         addGO(name, gameObject) {
@@ -4439,10 +4439,10 @@ void main (void) {
         }
     };
 
-    Phaser.Geom.Rectangle;
-    const Vector2 = Phaser.Math.Vector2;
-    const RotateAround = Phaser.Math.RotateAround;
-    Phaser.GameObjects.Container;
+    phaser.Geom.Rectangle;
+    const Vector2 = phaser.Math.Vector2;
+    const RotateAround = phaser.Math.RotateAround;
+    phaser.GameObjects.Container;
 
     var GetTopLeft = function (gameObject, output, includeParent) {
         if (output === undefined) {
@@ -4542,7 +4542,7 @@ void main (void) {
         return output;
     };
 
-    const GetValue$2 = Phaser.Utils.Objects.GetValue;
+    const GetValue$2 = phaser.Utils.Objects.GetValue;
 
     var DrawBounds = function (gameObjects, graphics, config) {
         var strokeColor, lineWidth, fillColor, fillAlpha, padding, includeParent;
@@ -4689,13 +4689,13 @@ void main (void) {
         CameraMethods$1,
     );
 
-    const CameraClass = Phaser.Cameras.Scene2D.BaseCamera;
+    const CameraClass = phaser.Cameras.Scene2D.BaseCamera;
 
     var IsCameraObject = function (object) {
         return (object instanceof CameraClass);
     };
 
-    const Rectangle = Phaser.Geom.Rectangle;
+    const Rectangle = phaser.Geom.Rectangle;
 
     var GetViewport = function (scene, camera, out) {
         if (!IsCameraObject(camera)) {
@@ -4718,7 +4718,7 @@ void main (void) {
 
     var globRect = new Rectangle();
 
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
 
     class GOManager {
         constructor(scene, config) {
@@ -4846,14 +4846,14 @@ void main (void) {
         Methods
     );
 
-    const GameObjectClass = Phaser.GameObjects.GameObject;
-    const LayerClass$1 = Phaser.GameObjects.Layer;
+    const GameObjectClass = phaser.GameObjects.GameObject;
+    const LayerClass$1 = phaser.GameObjects.Layer;
 
     var IsGameObject = function (object) {
         return (object instanceof GameObjectClass) || (object instanceof LayerClass$1);
     };
 
-    const LayerClass = Phaser.GameObjects.Layer;
+    const LayerClass = phaser.GameObjects.Layer;
 
     var IsLayerGameObject = function (gameObject) {
         return (gameObject instanceof LayerClass);
@@ -5047,7 +5047,7 @@ void main (void) {
         }
     };
 
-    const ArrayUtils = Phaser.Utils.Array;
+    const ArrayUtils = phaser.Utils.Array;
 
     const BringMeToTop = function () {
         var list;
@@ -5226,7 +5226,7 @@ void main (void) {
         CameraMethods,
     );
 
-    const GetValue = Phaser.Utils.Objects.GetValue;
+    const GetValue = phaser.Utils.Objects.GetValue;
 
     class LayerManager extends GOManager {
         constructor(scene, config) {
@@ -5342,7 +5342,7 @@ void main (void) {
         methods
     );
 
-    class LayerManagerPlugin extends Phaser.Plugins.BasePlugin {
+    class LayerManagerPlugin extends phaser.Plugins.BasePlugin {
         constructor(pluginManager) {
             super(pluginManager);
         }

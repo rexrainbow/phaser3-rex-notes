@@ -3,8 +3,9 @@ import RegisterPointerEvents from './RegisterPointerEvents.js';
 import RegisterDragEvents from './RegisterDragEvents.js';
 
 
-const Rectangle = Phaser.Geom.Rectangle;
-const SetInteractiveBase = Phaser.GameObjects.GameObject.prototype.setInteractive;
+import { GameObjects as PhaserGameObjects, Geom as PhaserGeom } from 'phaser';
+const Rectangle = PhaserGeom.Rectangle;
+const SetInteractiveBase = PhaserGameObjects.GameObject.prototype.setInteractive;
 
 var SetInteractive = function (config) {
 

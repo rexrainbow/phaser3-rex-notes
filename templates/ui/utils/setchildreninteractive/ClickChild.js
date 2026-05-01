@@ -1,7 +1,8 @@
+import { Utils as PhaserUtils } from 'phaser';
 import Button from '../../../../plugins/input/button/Button.js';
 import EmitChildEvent from './EmitChildEvent.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var ClickChild = function (config) {
     var clickConfig = GetValue(config, 'click', undefined);

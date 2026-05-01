@@ -7,7 +7,8 @@ import WrapExpandText from '../utils/wrapexpandtext/WrapExpandText.js';
 import FontSizeExpandText from '../utils/fontsizeexpandtext/FontSizeExpandText.js';
 
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 const LayoutCallbacks = [LayoutMode0, LayoutMode1];
 
 class TitleLabel extends LabelBase {

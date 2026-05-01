@@ -2,7 +2,8 @@ import Sizer from '../../../sizer/Sizer.js';
 import CreateGameObjectFromConfig from '../../builders/CreateGameObjectFromConfig.js';
 import DefaultCreateBackgroundCallback from '../../builders/DefaultCreateBackgroundCallback.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var CreateChildrenSizer = function (scene, config) {
     var childrenSizer = new Sizer(scene, {

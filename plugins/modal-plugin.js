@@ -1,6 +1,7 @@
 import { ModalBehavoir, Modal, ModalPromise, ModalClose } from './modal.js'
 
-class ModalPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class ModalPlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
     }

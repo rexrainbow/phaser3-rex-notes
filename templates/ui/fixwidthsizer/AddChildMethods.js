@@ -3,9 +3,10 @@ import GetBoundsConfig from '../utils/GetBoundsConfig.js';
 import IsArray from '../../../plugins/utils/object/IsArray.js';
 import GetNearestChildIndex from './GetNearestChildIndex.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
-const ALIGN_CENTER = Phaser.Display.Align.CENTER;
+import { Display as PhaserDisplay, Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
+const ALIGN_CENTER = PhaserDisplay.Align.CENTER;
 
 var Add = function (gameObject, paddingConfig, childKey, index) {
     if (gameObject === '\n') {

@@ -1,10 +1,11 @@
 import { FilterName } from './const.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const DegToRad = Phaser.Math.DegToRad;
-const RadToDeg = Phaser.Math.RadToDeg;
+import { Filters as PhaserFilters, Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const DegToRad = PhaserMath.DegToRad;
+const RadToDeg = PhaserMath.RadToDeg;
 
-class SwirlController extends Phaser.Filters.Controller {
+class SwirlController extends PhaserFilters.Controller {
     static FilterName = FilterName;
 
     constructor(camera, config) {

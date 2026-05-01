@@ -1,6 +1,7 @@
 import EightDirection from './eightdirection.js';
 
-class EightDirectionPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class EightDirectionPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

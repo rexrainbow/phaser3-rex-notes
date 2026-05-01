@@ -2,7 +2,8 @@ import Sizer from '../../sizer/Sizer.js';
 import HPalette from './methods/HPalette.js';
 import SVPalette from './methods/SVPalette.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class ColorPicker extends Sizer {
     constructor(scene, config) {

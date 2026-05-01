@@ -2,7 +2,8 @@ import GridSizer from '../gridsizer/GridSizer.js';
 import Buttons from '../buttons/Buttons.js';
 import ButtonMethods from './ButtonMethods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Tabs extends GridSizer {
     constructor(scene, config) {

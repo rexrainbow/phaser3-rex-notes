@@ -4,7 +4,8 @@ import Mesh from './gameobjects/mesh/mesh/sprite/Sprite.js';
 
 import SetValue from './utils/object/SetValue.js';
 
-class MeshPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class MeshPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

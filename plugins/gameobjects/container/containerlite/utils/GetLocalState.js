@@ -1,5 +1,6 @@
-const DegToRad = Phaser.Math.DegToRad;
-const RadToDeg = Phaser.Math.RadToDeg;
+import { Math as PhaserMath } from 'phaser';
+const DegToRad = PhaserMath.DegToRad;
+const RadToDeg = PhaserMath.RadToDeg;
 
 var GetLocalState = function (gameObject) {
     if (!gameObject.hasOwnProperty('rexContainer')) {

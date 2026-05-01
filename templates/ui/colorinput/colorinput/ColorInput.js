@@ -2,7 +2,8 @@ import ColorInputBase from '../colorinputbase/ColorInputBase.js';
 import Methods from './methods/Methods.js';
 import CreateBackground from '../../utils/build/CreateBackground.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class ColorInput extends ColorInputBase {
     constructor(scene, config) {

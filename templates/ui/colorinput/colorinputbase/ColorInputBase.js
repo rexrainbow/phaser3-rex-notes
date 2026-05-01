@@ -6,9 +6,10 @@ import GetHexColorString from '../../../../plugins/utils/color/GetHexColorString
 import SetSwatchColor from './methods/SetSwatchColor.js';
 import ResizeGameObject from '../../../../plugins/utils/size/ResizeGameObject.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const Clamp = Phaser.Math.Clamp;
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const Clamp = PhaserMath.Clamp;
 
 class ColorInput extends Sizer {
     constructor(scene, config) {

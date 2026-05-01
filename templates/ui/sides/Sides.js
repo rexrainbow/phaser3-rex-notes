@@ -4,7 +4,8 @@ import GetDefaultCallbacks from './defaultcallbacks/GetDefaultCallbacks.js';
 import ShowChildMethods from './ShowChildMethods.js';
 import ChildBehaviorMethods from './childbehaviors/index.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Sides extends OverlapSizer {
     constructor(scene, config) {

@@ -1,4 +1,5 @@
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 
 var Load = function (video, src, availableVideoTypes) {
     if (IsPlainObject(src)) {

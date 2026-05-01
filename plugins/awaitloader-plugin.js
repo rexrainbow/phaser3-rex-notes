@@ -1,6 +1,7 @@
 import LoaderCallback from './loader/awaitloader/AwaitLoaderCallback.js';
 
-class AwaitLoaderPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class AwaitLoaderPlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
 

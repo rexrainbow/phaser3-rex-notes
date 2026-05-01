@@ -1,10 +1,11 @@
 import ParseYaml from '../../utils/yaml/ParseYaml.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
-const FILE_PROCESSING = Phaser.Loader.FILE_PROCESSING;
+import { Loader as PhaserLoader, Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const FILE_POPULATED = PhaserLoader.FILE_POPULATED;
+const FILE_PROCESSING = PhaserLoader.FILE_PROCESSING;
 
-class YAMLFile extends Phaser.Loader.File {
+class YAMLFile extends PhaserLoader.File {
     constructor(loader, key, url, xhrSettings, dataKey) {
         var extension = 'yml';
 

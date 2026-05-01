@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexninepatch = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexninepatch = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var SetGetFrameNameCallback = function(callback) {
         if (callback === undefined) {
@@ -303,8 +303,8 @@
         this._endDraw();
     };
 
-    const IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+    const IsPlainObject$1 = phaser.Utils.Objects.IsPlainObject;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
 
     var SetStretchMode = function(mode) {
         if (IsPlainObject$1(mode)) {
@@ -377,8 +377,8 @@
         setMaxFixedPartScale: SetMaxFixedPartScale,
     };
 
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue = Phaser.Utils.Objects.GetValue;
+    const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
+    const GetValue = phaser.Utils.Objects.GetValue;
 
     var NinePatchBase = function (GOClass, type) {
         class NinePatch extends GOClass {
@@ -549,7 +549,7 @@
         this.render();
     };
 
-    const RenderTexture = Phaser.GameObjects.RenderTexture;
+    const RenderTexture = phaser.GameObjects.RenderTexture;
 
     class NinePatch extends NinePatchBase(RenderTexture, 'rexNinePatch') {
     }

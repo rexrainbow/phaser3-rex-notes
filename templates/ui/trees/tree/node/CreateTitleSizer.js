@@ -3,7 +3,8 @@ import CreateGameObjectFromConfig from '../../builders/CreateGameObjectFromConfi
 import DefaultCreateToggleButtonCallback from '../../builders/DefaultCreateToggleButtonCallback.js';
 
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var CreateTitleSizer = function (scene, config) {
     var nodeSizer = new Node(scene, config, { isLeaf: false });

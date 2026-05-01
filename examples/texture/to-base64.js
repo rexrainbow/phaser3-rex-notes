@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import ToBase64 from '../../plugins/utils/texture/ToBase64.js';
 
 class Demo extends Phaser.Scene {

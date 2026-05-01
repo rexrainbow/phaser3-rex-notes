@@ -1,13 +1,13 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexpathfollowerplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexpathfollowerplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var EventEmitterMethods = {
         setEventEmitter(eventEmitter, EventEmitterClass) {
             if (EventEmitterClass === undefined) {
-                EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+                EventEmitterClass = phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
             }
             this._privateEE = (eventEmitter === true) || (eventEmitter === undefined);
             this._eventEmitter = (this._privateEE) ? (new EventEmitterClass()) : eventEmitter;
@@ -96,7 +96,7 @@
         },
     };
 
-    const SceneClass = Phaser.Scene;
+    const SceneClass = phaser.Scene;
     var IsSceneObject = function (object) {
         return (object instanceof SceneClass);
     };
@@ -115,7 +115,7 @@
         }
     };
 
-    const GameClass = Phaser.Game;
+    const GameClass = phaser.Game;
     var IsGame = function (object) {
         return (object instanceof GameClass);
     };
@@ -134,7 +134,7 @@
         }
     };
 
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
 
     class ComponentBase {
         constructor(parent, config) {
@@ -220,11 +220,11 @@
         EventEmitterMethods
     );
 
-    const GetValue = Phaser.Utils.Objects.GetValue;
-    const Vector2 = Phaser.Math.Vector2;
-    const DegToRad = Phaser.Math.DegToRad;
-    const AngleBetween = Phaser.Math.Angle.Between;
-    const Linear = Phaser.Math.Linear;
+    const GetValue = phaser.Utils.Objects.GetValue;
+    const Vector2 = phaser.Math.Vector2;
+    const DegToRad = phaser.Math.DegToRad;
+    const AngleBetween = phaser.Math.Angle.Between;
+    const Linear = phaser.Math.Linear;
 
     class PathFollower extends ComponentBase {
         constructor(gameObject, config) {
@@ -316,7 +316,7 @@
 
             } else {
                 var start = (this.spacePoints.length - 1) * t;
-                var index = Math.floor(start);
+                var index = phaser.Math.floor(start);
                 var p0 = this.spacePoints[index],
                     p1 = this.spacePoints[index + 1];
                 if (!p1) {
@@ -354,7 +354,7 @@
         }
     }
 
-    class PathFollowerPlugin extends Phaser.Plugins.BasePlugin {
+    class PathFollowerPlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

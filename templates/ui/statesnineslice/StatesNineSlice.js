@@ -2,8 +2,9 @@ import AddEffectProperties from '../../../plugins/effectproperties.js';
 import Style from './Style.js';
 import HelperMethods from '../utils/stylemanager/HelperMethods.js';
 
-const PhaserNineSlice = Phaser.GameObjects.NineSlice;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { GameObjects as PhaserGameObjects, Utils as PhaserUtils } from 'phaser';
+const PhaserNineSlice = PhaserGameObjects.NineSlice;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class StatesNineSlice extends PhaserNineSlice {
     constructor(scene, config) {

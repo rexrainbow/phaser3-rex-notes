@@ -1,6 +1,7 @@
 import ObjectPool from './objectpool.js';
 
-class ObjectPoolPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class ObjectPoolPlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
     }

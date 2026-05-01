@@ -3,7 +3,8 @@ import Creator from './gameobjects/dom/inputtext/Creator.js';
 import InputText from './gameobjects/dom/inputtext/InputText.js';
 import SetValue from './utils/object/SetValue.js';
 
-class InputTextPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class InputTextPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

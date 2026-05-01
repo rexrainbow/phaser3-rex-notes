@@ -1,7 +1,8 @@
 import IsFunction from '../../../../plugins/utils/object/IsFunction.js';
 import ModalMethods from '../../basesizer/ModalMethods.js';
 
-const Merge = Phaser.Utils.Objects.Merge;
+import { Utils as PhaserUtils } from 'phaser';
+const Merge = PhaserUtils.Objects.Merge;
 
 var Modal = function (config, onClose) {
     if (IsFunction(config)) {

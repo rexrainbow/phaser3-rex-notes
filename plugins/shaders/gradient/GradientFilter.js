@@ -1,7 +1,8 @@
 import { FilterName } from './const.js';
 import FragSrc from './gradient-frag.js';
 
-class GradientFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+import { Renderer as PhaserRenderer } from 'phaser';
+class GradientFilter extends PhaserRenderer.WebGL.RenderNodes.BaseFilterShader {
     static FilterName = FilterName;
 
     constructor(manager) {

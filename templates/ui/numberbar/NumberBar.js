@@ -2,7 +2,8 @@ import Sizer from '../sizer/Sizer.js';
 import AddChildCircleMask from '../utils/AddChildCircleMask.js';
 import Slider from '../slider/Slider.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class NumberBar extends Sizer {
     constructor(scene, config) {

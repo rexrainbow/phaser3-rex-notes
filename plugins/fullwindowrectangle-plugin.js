@@ -3,7 +3,8 @@ import Creator from './gameobjects/fullwindow/fullwindowrectangle/Creator.js';
 import FullWindowRectangle from './gameobjects/fullwindow/fullwindowrectangle/FullWindowRectangle.js';
 import SetValue from './utils/object/SetValue.js';
 
-class FullWindowRectanglePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class FullWindowRectanglePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

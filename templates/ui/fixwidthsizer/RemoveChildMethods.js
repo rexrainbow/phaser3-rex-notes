@@ -1,7 +1,8 @@
 import RemoveChild from '../basesizer/utils/RemoveChild.js';
 import ClearChildren from '../basesizer/utils/ClearChildren.js';
 
-const RemoveItem = Phaser.Utils.Array.Remove;
+import { Utils as PhaserUtils } from 'phaser';
+const RemoveItem = PhaserUtils.Array.Remove;
 
 export default {
     remove(gameObject, destroyChild) {

@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexrestorabledataplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexrestorabledataplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var Clear = function (obj) {
         if ((typeof (obj) !== 'object') || (obj === null)) {
@@ -20,9 +20,9 @@
         return obj;
     };
 
-    const Base = Phaser.Data.DataManager;
-    const GetValue = Phaser.Utils.Objects.GetValue;
-    const EventEmitterClass = Phaser.Events.EventEmitter;
+    const Base = phaser.Data.DataManager;
+    const GetValue = phaser.Utils.Objects.GetValue;
+    const EventEmitterClass = phaser.Events.EventEmitter;
 
     class DataManager extends Base {
         constructor(parent, eventEmitter, config) {
@@ -235,7 +235,7 @@
         }
     }
 
-    class DataManagerPlugin extends Phaser.Plugins.BasePlugin {
+    class DataManagerPlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

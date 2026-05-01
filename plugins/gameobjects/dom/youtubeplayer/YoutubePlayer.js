@@ -1,11 +1,12 @@
 import Resize from '../utils/Resize.js';
 import LoadAPI from './LoadAPI.js';
 
-const DOMElement = Phaser.GameObjects.DOMElement;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Clamp = Phaser.Math.Clamp;
-const UUID = Phaser.Utils.String.UUID;
+import { GameObjects as PhaserGameObjects, Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const DOMElement = PhaserGameObjects.DOMElement;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
+const Clamp = PhaserMath.Clamp;
+const UUID = PhaserUtils.String.UUID;
 
 class YoutubePlayer extends DOMElement {
     constructor(scene, x, y, width, height, config) {

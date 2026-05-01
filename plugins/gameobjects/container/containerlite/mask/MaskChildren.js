@@ -1,7 +1,8 @@
 import { SetMask, ClearMask } from '../../../../utils/mask/MaskMethods.js';
 
-const Intersects = Phaser.Geom.Intersects.RectangleToRectangle;
-const Overlaps = Phaser.Geom.Rectangle.Overlaps;
+import { Geom as PhaserGeom } from 'phaser';
+const Intersects = PhaserGeom.Intersects.RectangleToRectangle;
+const Overlaps = PhaserGeom.Rectangle.Overlaps;
 
 var MaskChildren = function ({
     parent,

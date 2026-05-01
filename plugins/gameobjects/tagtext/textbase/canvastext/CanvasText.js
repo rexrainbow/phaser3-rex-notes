@@ -8,7 +8,8 @@ import WrapText from '../wraptext/WrapText.js';
 import Clone from '../../../../utils/object/Clone.js';
 import MeasureText from '../../../textbase/textstyle/MeasureText.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 const NO_WRAP = CONST.NO_WRAP;
 const NO_NEWLINE = CONST.NO_NEWLINE;
 const RAW_NEWLINE = CONST.RAW_NEWLINE;

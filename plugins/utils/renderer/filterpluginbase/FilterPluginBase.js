@@ -4,7 +4,8 @@ import AddController from './AddController.js';
 import RemoveController from './RemoveController.js';
 import GetController from './GetController.js'
 
-class FilterPluginBase extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class FilterPluginBase extends PhaserPlugins.BasePlugin {
     setFilterClass(FilterClass, ControllerClass) {
         this.FilterClass = FilterClass;
         this.ControllerClass = ControllerClass;

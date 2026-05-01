@@ -4,8 +4,9 @@ import EliminateChess from '../actions/EliminateChess.js';
 import FallingAllChess from '../actions/FallingAllChess.js';
 import IsPromise from '../../../plugins/utils/object/IsPromise.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const SetStruct = Phaser.Structs.Set;
+import { Structs as PhaserStructs, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const SetStruct = PhaserStructs.Set;
 
 class State extends BaseState {
     constructor(bejeweled, config) {

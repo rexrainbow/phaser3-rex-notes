@@ -1,5 +1,6 @@
 import LoaderCallback from './loader/webfontloader/WebFontLoaderCallback.js';
 
-Phaser.Loader.FileTypesManager.register('rexWebFont', LoaderCallback);
+import { Loader as PhaserLoader } from 'phaser';
+PhaserLoader.FileTypesManager.register('rexWebFont', LoaderCallback);
 
 export default LoaderCallback;

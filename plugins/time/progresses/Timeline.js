@@ -2,7 +2,8 @@ import Clock from '../clock/Clock.js';
 import Timer from './Timer.js';
 import Pool from './TimerPool.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 const TimerPool = new Pool();
 
 class Timeline extends Clock {

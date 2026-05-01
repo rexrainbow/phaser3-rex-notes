@@ -4,7 +4,8 @@ import FlipMethods from '../../container/utils/FlipMethods.js';
 import FitToSize from '../../../utils/size/FitTo.js';
 import ResizeGameObject from '../../../utils/size/ResizeGameObject.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 
 class ImageBoxBase extends Container {
 

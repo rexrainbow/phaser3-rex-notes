@@ -1,7 +1,8 @@
 import SpiralCurve from './spiralcurve.js';
 import SetValue from './utils/object/SetValue.js';
 
-class SpiralCurvePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class SpiralCurvePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

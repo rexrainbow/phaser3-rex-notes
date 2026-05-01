@@ -1,7 +1,8 @@
 import Swipe from '../../swipe/Swipe.js';
 import EmitCellEvent from './EmitCellEvent.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var SwipeCell = function (table, tableConfig) {
     var swipeConfig = GetValue(tableConfig, 'swipe', undefined);

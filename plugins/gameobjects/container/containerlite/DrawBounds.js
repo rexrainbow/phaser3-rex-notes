@@ -1,6 +1,7 @@
 import Draw from '../../../utils/bounds/DrawBounds.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var DrawBounds = function (graphics, config) {
     var drawContainer = GetValue(config, 'drawContainer', true);

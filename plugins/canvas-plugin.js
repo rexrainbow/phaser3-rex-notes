@@ -3,7 +3,8 @@ import Creator from './gameobjects/canvas/canvas/Creator.js';
 import Canvas from './gameobjects/canvas/canvas/Canvas.js';
 import SetValue from './utils/object/SetValue.js';
 
-class CanvasPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class CanvasPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

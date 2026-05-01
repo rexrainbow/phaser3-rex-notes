@@ -1,7 +1,8 @@
+import { Math as PhaserMath } from 'phaser';
 import PolarToCartesian from '../../utils/math/coordinate/PolarToCartesian.js';
 
-var DegToRad = Phaser.Math.DegToRad;
-var RadToDeg = Phaser.Math.RadToDeg;
+var DegToRad = PhaserMath.DegToRad;
+var RadToDeg = PhaserMath.RadToDeg;
 
 var AddPolarCoordinateProperties = function (gameObject, ox, oy, rotation, radius) {
     // Don't attach properties again

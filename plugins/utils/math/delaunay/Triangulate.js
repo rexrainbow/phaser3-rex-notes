@@ -1,6 +1,7 @@
 import Delaunay from './delaunay.js';
 
-const Triangle = Phaser.Geom.Triangle;
+import { Geom as PhaserGeom } from 'phaser';
+const Triangle = PhaserGeom.Triangle;
 
 var Triangulate = function (vertices, triangleResult) {
     if (triangleResult === undefined) {

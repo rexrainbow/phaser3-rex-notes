@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexpngappenderplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexpngappenderplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var ByteArrayToUint32 = function (a, b, c, d, bigEndian) {
         if (bigEndian === undefined) {
@@ -238,7 +238,7 @@
         extract: ExtractData
     };
 
-    class PNGAppenderPlugin extends Phaser.Plugins.BasePlugin {
+    class PNGAppenderPlugin extends phaser.Plugins.BasePlugin {
         constructor(pluginManager) {
             super(pluginManager);
         }

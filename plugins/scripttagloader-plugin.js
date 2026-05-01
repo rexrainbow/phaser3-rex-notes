@@ -1,7 +1,8 @@
 
 import LoaderCallback from './loader/scripttag/ScriptTagLoaderCallback.js';
 
-class ScriptTagLoaderPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class ScriptTagLoaderPlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
 

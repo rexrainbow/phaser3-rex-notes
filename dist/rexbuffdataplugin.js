@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexbuffdataplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexbuffdataplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     class Buff {
         constructor() {
@@ -80,8 +80,8 @@
     const ADD = 0;
     const ADD_BASE_PERCENT = 1;
 
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue = Phaser.Utils.Objects.GetValue;
+    const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
+    const GetValue = phaser.Utils.Objects.GetValue;
 
     class MinMaxBounds {
         constructor(min, max) {
@@ -261,8 +261,8 @@
         return dataManager;
     };
 
-    const Base = Phaser.Data.DataManager;
-    const EventEmitterClass = Phaser.Events.EventEmitter;
+    const Base = phaser.Data.DataManager;
+    const EventEmitterClass = phaser.Events.EventEmitter;
 
     class DataManager extends Base {
         constructor(parent, eventEmitter) {
@@ -289,7 +289,7 @@
         methods
     );
 
-    class DataManagerPlugin extends Phaser.Plugins.BasePlugin {
+    class DataManagerPlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

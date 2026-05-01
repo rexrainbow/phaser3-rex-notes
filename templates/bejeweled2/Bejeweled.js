@@ -9,7 +9,8 @@ import WaitEventMethods from './methods/WaitEventMethods.js';
 import DataManagerMethods from '../../plugins/utils/data/DataManagerMethods.js';
 
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Bejeweled extends ComponentBase {
     constructor(scene, config) {

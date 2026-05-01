@@ -1,9 +1,10 @@
+import { Utils as PhaserUtils, Math as PhaserMath } from 'phaser';
 import HiddenTextEditBase from './HiddenTextEditBase.js';
 import NumberInputUpdateCallback from './defaultcallbacks/NumberInputUpdateCallback.js';
 import GetTickDelta from '../../utils/system/GetTickDelta.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Wrap = Phaser.Math.Wrap;
+const GetValue = PhaserUtils.Objects.GetValue;
+const Wrap = PhaserMath.Wrap;
 
 class HiddenTextEdit extends HiddenTextEditBase {
     constructor(gameObject, config) {

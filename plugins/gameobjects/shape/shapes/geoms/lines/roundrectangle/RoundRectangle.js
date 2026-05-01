@@ -3,7 +3,8 @@ import ArcTo from '../../../../../../geom/pathdata/ArcTo.js';
 import LineTo from '../../../../../../geom/pathdata/LineTo.js';
 import Offset from '../../../../../../geom/pathdata/Offset.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class RoundRectangle extends PathBase {
     constructor(x, y, width, height, radius, iterations) {

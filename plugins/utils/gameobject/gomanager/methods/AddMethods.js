@@ -2,7 +2,8 @@ import AddTintRGBProperties from '../../../../behaviors/tintrgb/AddTintRGBProper
 import AddViewportCoordinateProperties from '../../../../behaviors/viewportcoordinate/AddViewportCoordinateProperties.js';
 import AddEffectProperties from '../../../../behaviors/effectproperties/AddEffectProperties.js';
 
-const RemoveItem = Phaser.Utils.Array.Remove;
+import { Utils as PhaserUtils } from 'phaser';
+const RemoveItem = PhaserUtils.Array.Remove;
 
 export default {
     addGO(name, gameObject) {

@@ -5,8 +5,9 @@ import UpdateShapes from './methods/UpdateShapes.js';
 import RoundRectangleGeom from '../../../geom/roundrectangle/RoundRectangle.js';
 import GetOrientationMode from '../../../utils/orientation/GetOrientationMode.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 
 class RoundRectangleProgress extends ProgressBase(BaseShapes) {
     constructor(scene, x, y, width, height, radiusConfig, barColor, value, config) {

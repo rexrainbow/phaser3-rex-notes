@@ -1,6 +1,7 @@
 import GetGame from '../../../utils/system/GetGame';
 
-const GameObjectClasses = Phaser.GameObjects;
+import { GameObjects as PhaserGameObjects } from 'phaser';
+const GameObjectClasses = PhaserGameObjects;
 
 var GameObjects = undefined;
 

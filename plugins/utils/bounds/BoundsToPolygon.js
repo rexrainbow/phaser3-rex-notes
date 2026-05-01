@@ -3,7 +3,8 @@ import {
     GetBottomLeft, GetBottomRight
 } from './GetBounds.js';
 
-const Polygon = Phaser.Geom.Polygon;
+import { Geom as PhaserGeom } from 'phaser';
+const Polygon = PhaserGeom.Polygon;
 
 var BoundsToPolygon = function (gameObject, out) {
     if (out === undefined) {

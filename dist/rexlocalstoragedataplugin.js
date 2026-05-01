@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexlocalstoragedataplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexlocalstoragedataplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var GetStoreKey = function (key, prefix) {
         if (prefix && prefix !== '') {
@@ -154,7 +154,7 @@
 
     };
 
-    const GetValue = Phaser.Utils.Objects.GetValue;
+    const GetValue = phaser.Utils.Objects.GetValue;
 
     var methods = {
         load: Load,
@@ -191,9 +191,9 @@
         return dataManager;
     };
 
-    const Base = Phaser.Data.DataManager;
-    const EventEmitterClass = Phaser.Events.EventEmitter;
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+    const Base = phaser.Data.DataManager;
+    const EventEmitterClass = phaser.Events.EventEmitter;
+    const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
 
     class DataManager extends Base {
         constructor(parent, eventEmitter, config) {
@@ -227,7 +227,7 @@
         }
     }
 
-    class DataManagerPlugin extends Phaser.Plugins.BasePlugin {
+    class DataManagerPlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

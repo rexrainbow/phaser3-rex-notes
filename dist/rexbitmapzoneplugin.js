@@ -1,11 +1,11 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexbitmapzoneplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexbitmapzoneplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
-    const GetRandom = Phaser.Utils.Array.GetRandom;
-    const GetValue = Phaser.Utils.Objects.GetValue;
+    const GetRandom = phaser.Utils.Array.GetRandom;
+    const GetValue = phaser.Utils.Objects.GetValue;
 
     class BitmapZone {
         constructor(canvasObject, config) {
@@ -90,7 +90,7 @@
         }
     }
 
-    class BitmapZonePlugin extends Phaser.Plugins.BasePlugin {
+    class BitmapZonePlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

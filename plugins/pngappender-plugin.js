@@ -1,6 +1,7 @@
 import PNGAppender from './pngappender.js';
 
-class PNGAppenderPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class PNGAppenderPlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
     }

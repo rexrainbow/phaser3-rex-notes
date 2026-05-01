@@ -1,10 +1,11 @@
+import { Utils as PhaserUtils, Math as PhaserMath } from 'phaser';
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import AddSeparationForce from './AddSeparationForce.js';
 import AddAlignmentForce from './AddAlignmentForce.js';
 import AddCohesionForce from './AddCohesionForce.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Vector2 = Phaser.Math.Vector2;
+const GetValue = PhaserUtils.Objects.GetValue;
+const Vector2 = PhaserMath.Vector2;
 
 class Boids extends ComponentBase {
     constructor(parent, config) {

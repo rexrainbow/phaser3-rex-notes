@@ -1,3 +1,4 @@
+import { Utils as PhaserUtils } from 'phaser';
 import {
     ElementProperties,
     StyleProperties,
@@ -7,7 +8,7 @@ import StopPropagationTouchEvents from '../../../gameobjects/dom/utils/StopPropa
 import OnOpen from './OnOpen.js';
 import OnClose from './OnClose.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var CreateElement = function (parent, config) {
     var element;

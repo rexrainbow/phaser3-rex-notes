@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 import RDataPlugin from '../../plugins/restorabledata-plugin.js';
 import LZStringPlugin from '../../plugins/lzstring-plugin.js';

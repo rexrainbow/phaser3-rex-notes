@@ -1,6 +1,7 @@
 import OnIdle from '../../events/OnIdle.js';
 
-const Capitalize = Phaser.Utils.String.UppercaseFirst;
+import { Utils as PhaserUtils } from 'phaser';
+const Capitalize = PhaserUtils.String.UppercaseFirst;
 
 var Update = function (time, delta) {
     var deltaTimeSeconds = delta / 1000;

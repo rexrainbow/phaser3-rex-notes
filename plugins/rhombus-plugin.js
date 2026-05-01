@@ -1,6 +1,7 @@
 import Rhombus from './rhombus.js';
 
-class RhombusPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class RhombusPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

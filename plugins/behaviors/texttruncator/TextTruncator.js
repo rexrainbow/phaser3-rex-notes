@@ -1,7 +1,8 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import Methods from './method/Methods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class TextTruncator extends ComponentBase {
     constructor(gameObject, config) {

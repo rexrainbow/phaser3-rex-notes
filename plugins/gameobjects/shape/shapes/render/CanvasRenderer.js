@@ -1,4 +1,5 @@
-const SetTransform = Phaser.Renderer.Canvas.SetTransform;
+import { Renderer as PhaserRenderer } from 'phaser';
+const SetTransform = PhaserRenderer.Canvas.SetTransform;
 
 var CanvasRenderer = function (renderer, src, camera, parentMatrix) {
     src.updateData();

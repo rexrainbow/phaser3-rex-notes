@@ -2,7 +2,8 @@ import { FilterName } from './const.js';
 import FragSrc from './warp-frag.js';
 import GetCurrentTime from '../utils/GetCurrentTime.js';
 
-class WarpFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+import { Renderer as PhaserRenderer } from 'phaser';
+class WarpFilter extends PhaserRenderer.WebGL.RenderNodes.BaseFilterShader {
     static FilterName = FilterName;
 
     constructor(manager) {

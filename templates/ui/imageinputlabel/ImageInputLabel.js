@@ -6,7 +6,8 @@ import CreateFileChooser from './methods/CreateFileChooser.js';
 import methods from './methods/Methods.js';
 
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 /*
 Label :

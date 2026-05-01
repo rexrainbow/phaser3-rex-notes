@@ -1,13 +1,13 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexgroupnavigatorplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexgroupnavigatorplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     var EventEmitterMethods = {
         setEventEmitter(eventEmitter, EventEmitterClass) {
             if (EventEmitterClass === undefined) {
-                EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+                EventEmitterClass = phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
             }
             this._privateEE = (eventEmitter === true) || (eventEmitter === undefined);
             this._eventEmitter = (this._privateEE) ? (new EventEmitterClass()) : eventEmitter;
@@ -106,10 +106,10 @@
         }, []);
     };
 
-    const ArrayAdd = Phaser.Utils.Array.Add;
-    const ArrayAddAt = Phaser.Utils.Array.AddAt;
-    const ArrayRemove = Phaser.Utils.Array.Remove;
-    const Clamp = Phaser.Math.Clamp;
+    const ArrayAdd = phaser.Utils.Array.Add;
+    const ArrayAddAt = phaser.Utils.Array.AddAt;
+    const ArrayRemove = phaser.Utils.Array.Remove;
+    const Clamp = phaser.Math.Clamp;
 
     var TargetsMethods = {
         setTargets(gameObjects, columns) {
@@ -203,7 +203,7 @@
 
     };
 
-    const Wrap = Phaser.Math.Wrap;
+    const Wrap = phaser.Math.Wrap;
 
     var GetNextameObject = function ({
         startX, startY, backward,
@@ -493,8 +493,8 @@
         FocusMethods
     );
 
-    const GetValue = Phaser.Utils.Objects.GetValue;
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+    const GetValue = phaser.Utils.Objects.GetValue;
+    const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
 
     class GroupNavigator {
         constructor(scene, config) {
@@ -587,7 +587,7 @@
         Methods,
     );
 
-    class GroupNavigatorPlugin extends Phaser.Plugins.BasePlugin {
+    class GroupNavigatorPlugin extends phaser.Plugins.BasePlugin {
         constructor(pluginManager) {
             super(pluginManager);
         }

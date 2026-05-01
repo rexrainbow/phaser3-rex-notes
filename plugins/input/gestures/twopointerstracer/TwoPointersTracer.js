@@ -3,10 +3,11 @@ import GetSceneObject from '../../../utils/system/GetSceneObject.js';
 import Clear from '../../../utils/object/Clear.js';
 import IsPointerInBounds from '../../../utils/input/IsPointerInBounds.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const SpliceOne = Phaser.Utils.Array.SpliceOne;
-const DistanceBetween = Phaser.Math.Distance.Between;
-const AngleBetween = Phaser.Math.Angle.Between;
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const SpliceOne = PhaserUtils.Array.SpliceOne;
+const DistanceBetween = PhaserMath.Distance.Between;
+const AngleBetween = PhaserMath.Angle.Between;
 
 class TwoPointersTracer {
     constructor(gameObject, config) {

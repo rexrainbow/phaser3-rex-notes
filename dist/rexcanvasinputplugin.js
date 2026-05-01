@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcanvasinputplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcanvasinputplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     // copy from Phaser.GameObjects.Text
     var WebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
@@ -53,7 +53,7 @@
 
     };
 
-    const Color = Phaser.Display.Color;
+    const Color = phaser.Display.Color;
 
     var CanvasMethods = {
         clear() {
@@ -276,7 +276,7 @@
         if (minVersion === undefined) {
             minVersion = SubVersionNumber;
         }
-        var version = Phaser.VERSION.split('.');
+        var version = phaser.VERSION.split('.');
         var mainVersion = parseInt(version[0]);
         if (mainVersion === MainVersionNumber) {
             var subVersion = parseInt(version[1]);
@@ -292,10 +292,10 @@
 
     CheckP3Version();
 
-    const CanvasPool$1 = Phaser.Display.Canvas.CanvasPool;
-    const GameObject$1 = Phaser.GameObjects.GameObject;
-    const UUID = Phaser.Utils.String.UUID;
-    const DefaultImageNodes = Phaser.Renderer.WebGL.RenderNodes.Defaults.DefaultImageNodes;
+    const CanvasPool$1 = phaser.Display.Canvas.CanvasPool;
+    const GameObject$1 = phaser.GameObjects.GameObject;
+    const UUID = phaser.Utils.String.UUID;
+    const DefaultImageNodes = phaser.Renderer.WebGL.RenderNodes.Defaults.DefaultImageNodes;
 
     class Canvas extends GameObject$1 {
         constructor(scene, x, y, width, height, resolution) {
@@ -485,8 +485,8 @@
         }
     }
 
-    const Components = Phaser.GameObjects.Components;
-    Phaser.Class.mixin(Canvas,
+    const Components = phaser.GameObjects.Components;
+    phaser.Class.mixin(Canvas,
         [
             Components.Alpha,
             Components.BlendMode,
@@ -508,7 +508,7 @@
         ]
     );
 
-    const GetValue$g = Phaser.Utils.Objects.GetValue;
+    const GetValue$g = phaser.Utils.Objects.GetValue;
 
     var GetPadding$1 = function (padding, key) {
         if (key === undefined) {
@@ -813,7 +813,7 @@
         },
     };
 
-    const RotateAround$1 = Phaser.Math.RotateAround;
+    const RotateAround$1 = phaser.Math.RotateAround;
 
     var CanvasPositionToBobPosition = function (canvasX, canvasY, bob, out) {
         if (out === undefined) {
@@ -836,7 +836,7 @@
 
     var globPoint$1;
 
-    const Rectangle = Phaser.Geom.Rectangle;
+    const Rectangle = phaser.Geom.Rectangle;
 
     var Contains = function (canvasX, canvasY) {
         if ((this.width === 0) || (this.height === 0)) {
@@ -861,7 +861,7 @@
 
     var bobBounds;
 
-    const RotateAround = Phaser.Math.RotateAround;
+    const RotateAround = phaser.Math.RotateAround;
 
     var BobPositionToCanvasPosition = function (bob, bobX, bobY, out) {
         if (out === undefined) {
@@ -888,7 +888,7 @@
 
     var globPoint;
 
-    const TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
+    const TransformMatrix = phaser.GameObjects.Components.TransformMatrix;
 
     var GameObjectLocalXYToWorldXY = function (gameObject, localX, localY, out) {
         if (out === undefined) {
@@ -951,9 +951,9 @@
         RenderMethods
     );
 
-    const DegToRad$1 = Phaser.Math.DegToRad;
-    const RadToDeg = Phaser.Math.RadToDeg;
-    const GetValue$e = Phaser.Utils.Objects.GetValue;
+    const DegToRad$1 = phaser.Math.DegToRad;
+    const RadToDeg = phaser.Math.RadToDeg;
+    const GetValue$e = phaser.Utils.Objects.GetValue;
 
     class RenderBase extends Base {
         constructor(parent, type) {
@@ -1307,7 +1307,7 @@
         Methods$2,
     );
 
-    const Pad = Phaser.Utils.String.Pad;
+    const Pad = phaser.Utils.String.Pad;
     var GetStyle = function (style, canvas, context) {
         if (style == null) {
             return style;
@@ -1345,7 +1345,7 @@
         }
     };
 
-    const GetValue$d = Phaser.Utils.Objects.GetValue;
+    const GetValue$d = phaser.Utils.Objects.GetValue;
 
     class RoundRectangle {
         constructor(x, y, width, height, radiusConfig) {
@@ -1521,7 +1521,7 @@
         radius.y = Math.abs(radius.y);
     };
 
-    const DegToRad = Phaser.Math.DegToRad;
+    const DegToRad = phaser.Math.DegToRad;
 
     var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig, iteration) {
         var geom = new RoundRectangle(x, y, width, height, radiusConfig),
@@ -1732,7 +1732,7 @@
         );
     };
 
-    const GetValue$c = Phaser.Utils.Objects.GetValue;
+    const GetValue$c = phaser.Utils.Objects.GetValue;
 
     class Background extends RenderBase {
         constructor(parent, config) {
@@ -1897,7 +1897,7 @@
         }
     }
 
-    const GetValue$b = Phaser.Utils.Objects.GetValue;
+    const GetValue$b = phaser.Utils.Objects.GetValue;
 
     class InnerBounds extends RenderBase {
         constructor(parent, config) {
@@ -2040,7 +2040,7 @@
         }
     }
 
-    const GetValue$a = Phaser.Utils.Objects.GetValue;
+    const GetValue$a = phaser.Utils.Objects.GetValue;
 
     class TextStyle {
         constructor(parent, config) {
@@ -2503,7 +2503,7 @@
         return this;
     };
 
-    const RemoveItem$2 = Phaser.Utils.Array.Remove;
+    const RemoveItem$2 = phaser.Utils.Array.Remove;
 
     var RemoveChild = function (child) {
         this.poolManager.free(child);
@@ -2523,7 +2523,7 @@
         return this;
     };
 
-    const RemoveItem$1 = Phaser.Utils.Array.Remove;
+    const RemoveItem$1 = phaser.Utils.Array.Remove;
 
     var PopChild = function (child) {
         RemoveItem$1(this.children, child);
@@ -2922,8 +2922,8 @@
         return text;
     };
 
-    const CanvasPool = Phaser.Display.Canvas.CanvasPool;
-    const TintModes$1 = Phaser.TintModes;
+    const CanvasPool = phaser.Display.Canvas.CanvasPool;
+    const TintModes$1 = phaser.TintModes;
 
     var GetContext2D = function (canvasOrContext) {
         if (
@@ -2971,7 +2971,7 @@
             // Draw image at tempCanvas
 
             // Get tempCanvas
-            var tempCanvas = CanvasPool.create(null, width, height, Phaser.CANVAS, true);
+            var tempCanvas = CanvasPool.create(null, width, height, phaser.CANVAS, true);
 
             var tempContext = tempCanvas.getContext('2d', { willReadFrequently: true });
 
@@ -3043,7 +3043,7 @@
 
     };
 
-    const TintModes = Phaser.TintModes;
+    const TintModes = phaser.TintModes;
 
     class ImageData extends RenderBase {
         constructor(
@@ -3771,7 +3771,7 @@
 
     var Result = {};
 
-    const GetValue$9 = Phaser.Utils.Objects.GetValue;
+    const GetValue$9 = phaser.Utils.Objects.GetValue;
 
     var RunWordWrap$1 = function (config) {
         // Parse parameters
@@ -3982,7 +3982,7 @@
         return result;
     };
 
-    const Merge$1 = Phaser.Utils.Objects.Merge;
+    const Merge$1 = phaser.Utils.Objects.Merge;
 
     var RunWordWrap = function (config) {
         if (config === undefined) {
@@ -4053,7 +4053,7 @@
         }
     };
 
-    const GetValue$8 = Phaser.Utils.Objects.GetValue;
+    const GetValue$8 = phaser.Utils.Objects.GetValue;
 
     var RunVerticalWrap$1 = function (config) {
         // Parse parameters
@@ -4236,7 +4236,7 @@
         return result;
     };
 
-    const Merge = Phaser.Utils.Objects.Merge;
+    const Merge = phaser.Utils.Objects.Merge;
 
     var RunVerticalWrap = function (config) {
         if (config === undefined) {
@@ -4246,7 +4246,7 @@
         return RunVerticalWrap$1.call(this, Merge(config, this.wrapConfig));
     };
 
-    const GetValue$7 = Phaser.Utils.Objects.GetValue;
+    const GetValue$7 = phaser.Utils.Objects.GetValue;
 
     var RunWrap = function (config) {
         var wrapCallback = GetValue$7(this.wrapConfig, 'callback');
@@ -4442,7 +4442,7 @@
         return this.children;
     };
 
-    const GetAll = Phaser.Utils.Array.GetAll;
+    const GetAll = phaser.Utils.Array.GetAll;
 
     var GetActiveChildren = function () {
         return GetAll(this.children, 'active', true);
@@ -4475,7 +4475,7 @@
         return BobPositionToCanvasPosition(bob, bobX, bobY, out);
     };
 
-    const GetDistance = Phaser.Math.Distance.BetweenPointsSquared;
+    const GetDistance = phaser.Math.Distance.BetweenPointsSquared;
 
     var GetNearestChild = function (canvasX, canvasY) {
         var pointA = { x: canvasX, y: canvasY };
@@ -4705,7 +4705,7 @@
         this.lastOverChild = child;
     };
 
-    const GameObject = Phaser.GameObjects.GameObject;
+    const GameObject = phaser.GameObjects.GameObject;
 
     var SetInteractive = function (hitArea, hitAreaCallback, dropZone) {
         var isInteractived = !!this.input;
@@ -4719,12 +4719,12 @@
         return this;
     };
 
-    const BringToTop = Phaser.Utils.Array.BringToTop;
-    const SendToBack = Phaser.Utils.Array.SendToBack;
-    const MoveUp = Phaser.Utils.Array.MoveUp;
-    const MoveDown = Phaser.Utils.Array.MoveDown;
-    const MoveAbove = Phaser.Utils.Array.MoveAbove;
-    const MoveBelow = Phaser.Utils.Array.MoveBelow;
+    const BringToTop = phaser.Utils.Array.BringToTop;
+    const SendToBack = phaser.Utils.Array.SendToBack;
+    const MoveUp = phaser.Utils.Array.MoveUp;
+    const MoveDown = phaser.Utils.Array.MoveDown;
+    const MoveAbove = phaser.Utils.Array.MoveAbove;
+    const MoveBelow = phaser.Utils.Array.MoveBelow;
 
     var MoveChildMethods = {
         moveChildToFist(child) {
@@ -4886,7 +4886,7 @@
         }
     }
 
-    const GetFastValue = Phaser.Utils.Objects.GetFastValue;
+    const GetFastValue = phaser.Utils.Objects.GetFastValue;
 
     var Pools = {};
     class PoolManager {
@@ -4927,8 +4927,8 @@
         }
     }
 
-    const IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$6 = Phaser.Utils.Objects.GetValue;
+    const IsPlainObject$1 = phaser.Utils.Objects.IsPlainObject;
+    const GetValue$6 = phaser.Utils.Objects.GetValue;
 
     class DynamicText extends Canvas {
         constructor(scene, x, y, fixedWidth, fixedHeight, resolution, config) {
@@ -5027,7 +5027,7 @@
     var EventEmitterMethods = {
         setEventEmitter(eventEmitter, EventEmitterClass) {
             if (EventEmitterClass === undefined) {
-                EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+                EventEmitterClass = phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
             }
             this._privateEE = (eventEmitter === true) || (eventEmitter === undefined);
             this._eventEmitter = (this._privateEE) ? (new EventEmitterClass()) : eventEmitter;
@@ -5116,7 +5116,7 @@
         },
     };
 
-    const SceneClass = Phaser.Scene;
+    const SceneClass = phaser.Scene;
     var IsSceneObject = function (object) {
         return (object instanceof SceneClass);
     };
@@ -5135,7 +5135,7 @@
         }
     };
 
-    const GameClass = Phaser.Game;
+    const GameClass = phaser.Game;
     var IsGame = function (object) {
         return (object instanceof GameClass);
     };
@@ -5154,7 +5154,7 @@
         }
     };
 
-    const GetValue$5 = Phaser.Utils.Objects.GetValue;
+    const GetValue$5 = phaser.Utils.Objects.GetValue;
 
     class ComponentBase {
         constructor(parent, config) {
@@ -5372,7 +5372,7 @@
         LastOpenedEditor = undefined;
     };
 
-    const GetValue$4 = Phaser.Utils.Objects.GetValue;
+    const GetValue$4 = phaser.Utils.Objects.GetValue;
 
     var SetProperties = function (properties, config, out) {
         if (out === undefined) {
@@ -5411,7 +5411,7 @@
         return this;
     };
 
-    const ArrayUtils = Phaser.Utils.Array;
+    const ArrayUtils = phaser.Utils.Array;
 
     const MoveMyDepthBelow = function (gameObject) {
         var list;
@@ -5542,7 +5542,7 @@
 
     };
 
-    const GetValue$3 = Phaser.Utils.Objects.GetValue;
+    const GetValue$3 = phaser.Utils.Objects.GetValue;
 
     var CreateElement = function (parent, config) {
         var element;
@@ -5638,7 +5638,7 @@
         close: Close,
     };
 
-    const GetValue$2 = Phaser.Utils.Objects.GetValue;
+    const GetValue$2 = phaser.Utils.Objects.GetValue;
 
     class HiddenTextEditBase extends ComponentBase {
         constructor(gameObject, config) {
@@ -6189,7 +6189,7 @@
         hiddenTextEdit.prevCursorPosition = null;
     };
 
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
 
     class HiddenTextEdit extends HiddenTextEditBase {
         constructor(gameObject, config) {
@@ -6341,7 +6341,7 @@
         }
     }
 
-    const GetValue = Phaser.Utils.Objects.GetValue;
+    const GetValue = phaser.Utils.Objects.GetValue;
     const PropertiesList = [
         'inputType',
         'onOpen', 'clickOutSideTarget', 'onFocus', 'onClose', 'onBlur', 'onUpdate',
@@ -6463,7 +6463,7 @@
         return target;
     };
 
-    const LayerClass = Phaser.GameObjects.Layer;
+    const LayerClass = phaser.GameObjects.Layer;
 
     var IsLayerGameObject = function (gameObject) {
         return (gameObject instanceof LayerClass);
@@ -6570,7 +6570,7 @@
 
     }
 
-    const Zone = Phaser.GameObjects.Zone;
+    const Zone = phaser.GameObjects.Zone;
 
     class FullWindowRectangle extends Zone {
         constructor(scene) {
@@ -7219,7 +7219,7 @@
       return value;
     };
 
-    const RemoveItem = Phaser.Utils.Array.Remove;
+    const RemoveItem = phaser.Utils.Array.Remove;
 
     var SetText = function (textObject, newText) {
         var text = textObject.text;
@@ -7342,7 +7342,7 @@
 
     };
 
-    const Clamp = Phaser.Math.Clamp;
+    const Clamp = phaser.Math.Clamp;
 
     var GetIndex = function (characterCountOfLines, position) {
         var result = { lineIndex: 0, position: 0 };
@@ -7439,8 +7439,8 @@
         },
     };
 
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-    Phaser.Utils.Objects.GetValue;
+    const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
+    phaser.Utils.Objects.GetValue;
 
     class CanvasInput extends DynamicText {
         constructor(scene, x, y, fixedWidth, fixedHeight, config) {
@@ -7873,8 +7873,8 @@
         return gameObject;
     }
 
-    const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-    const BuildGameObject = Phaser.GameObjects.BuildGameObject;
+    const GetAdvancedValue = phaser.Utils.Objects.GetAdvancedValue;
+    const BuildGameObject = phaser.GameObjects.BuildGameObject;
 
     function Creator (config, addToScene) {
         if (config === undefined) { config = {}; }
@@ -7888,7 +7888,7 @@
         return gameObject;
     }
 
-    class CanvasInputPlugin extends Phaser.Plugins.BasePlugin {
+    class CanvasInputPlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

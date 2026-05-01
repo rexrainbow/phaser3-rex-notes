@@ -1,6 +1,7 @@
 import CSVScenario from './csvscenario.js';
 
-class CSVScenarioPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class CSVScenarioPlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
     }

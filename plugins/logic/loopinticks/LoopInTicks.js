@@ -2,7 +2,8 @@ import TickTask from '../../utils/componentbase/TickTask.js';
 import LoopIndexGenerator from '../loopindexgenerator/LoopIndexGenerator.js';
 import Clear from '../../utils/object/Clear.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class LoopInTicks extends TickTask {
     constructor(scene, config) {

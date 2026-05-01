@@ -1,8 +1,9 @@
+import { Utils as PhaserUtils, Math as PhaserMath } from 'phaser';
 import EaseValueTaskBase from '../../utils/componentbase/tweentask/EaseValueTaskBase.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-const Linear = Phaser.Math.Linear;
+const GetValue = PhaserUtils.Objects.GetValue;
+const GetAdvancedValue = PhaserUtils.Objects.GetAdvancedValue;
+const Linear = PhaserMath.Linear;
 
 class Fade extends EaseValueTaskBase {
     constructor(gameObject, config) {

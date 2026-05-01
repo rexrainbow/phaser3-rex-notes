@@ -1,3 +1,4 @@
+import { Utils as PhaserUtils } from 'phaser';
 import OpenCloseTransition from '../openclosetransition/OpenCloseTransition.js';
 import PopUp from '../../popup.js';
 import ScaleDown from '../scale/ScaleDown.js';
@@ -5,7 +6,7 @@ import NOOP from '../../utils/object/NOOP.js';
 import AwaitLoader from '../../awaitloader.js';
 import GetProgress from '../../utils/loader/GetProgress.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class LoadingProgress extends OpenCloseTransition {
     constructor(gameObject, config) {

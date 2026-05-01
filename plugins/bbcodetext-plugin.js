@@ -3,7 +3,8 @@ import Creator from './gameobjects/tagtext/bbcodetext/Creator.js';
 import BBCodeText from './gameobjects/tagtext/bbcodetext/BBCodeText.js';
 import SetValue from './utils/object/SetValue.js';
 
-class BBCodeTextPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class BBCodeTextPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

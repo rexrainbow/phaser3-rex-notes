@@ -1,7 +1,8 @@
 import AIOSpinner from '../spinner/aio/AIO.js';
 import IsGameObject from '../../plugins/utils/system/IsGameObject.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 export default {
     setSpinner(spinner) {

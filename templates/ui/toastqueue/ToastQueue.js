@@ -2,7 +2,8 @@ import Sizer from '../sizer/Sizer.js';
 import Methods from './methods/Methods.js';
 import DefaultTransitionCallbacks from './methods/DefaultTransitionMethods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class ToastQueue extends Sizer {
     constructor(scene, config) {

@@ -5,7 +5,8 @@ import FixWidthButtons from '../fixwidthbuttons/FixWidthButtons.js';
 import GridButtons from '../gridbuttons/GridButtons.js';
 import Methods from './methods/Methods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Dialog extends Sizer {
     constructor(scene, config) {

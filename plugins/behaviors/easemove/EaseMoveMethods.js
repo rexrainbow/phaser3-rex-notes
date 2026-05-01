@@ -1,9 +1,10 @@
+import { Utils as PhaserUtils, Math as PhaserMath } from 'phaser';
 import EaseMoveTo from './EaseMoveTo.js';
 import EaseMoveFrom from './EaseMoveFrom.js';
 import { WaitComplete } from '../../utils/promise/WaitEvent.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const DistanceBetween = Phaser.Math.Distance.Between;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const DistanceBetween = PhaserMath.Distance.Between;
 
 export default {
     onInitEaseMove() {

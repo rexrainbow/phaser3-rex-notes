@@ -4,7 +4,8 @@ import IsEmpty from '../../object/IsEmpty.js';
 import Methods from './methods/Methods.js';
 import GetViewport from '../../system/GetViewport.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class GOManager {
     constructor(scene, config) {

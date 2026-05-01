@@ -1,9 +1,10 @@
-const BringToTop = Phaser.Utils.Array.BringToTop;
-const SendToBack = Phaser.Utils.Array.SendToBack;
-const MoveUp = Phaser.Utils.Array.MoveUp;
-const MoveDown = Phaser.Utils.Array.MoveDown;
-const MoveAbove = Phaser.Utils.Array.MoveAbove;
-const MoveBelow = Phaser.Utils.Array.MoveBelow;
+import { Utils as PhaserUtils } from 'phaser';
+const BringToTop = PhaserUtils.Array.BringToTop;
+const SendToBack = PhaserUtils.Array.SendToBack;
+const MoveUp = PhaserUtils.Array.MoveUp;
+const MoveDown = PhaserUtils.Array.MoveDown;
+const MoveAbove = PhaserUtils.Array.MoveAbove;
+const MoveBelow = PhaserUtils.Array.MoveBelow;
 
 export default {
     moveChildToFist(child) {

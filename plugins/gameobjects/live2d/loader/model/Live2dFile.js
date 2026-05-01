@@ -3,10 +3,11 @@ import { CubismModelSettingJson } from '../../framework/src/cubismmodelsettingjs
 import LoadChildrenFiles from './LoadChildrenFiles.js';
 import SetValue from '../../../../utils/object/SetValue.js';
 
-const GetFastValue = Phaser.Utils.Objects.GetFastValue;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+import { Loader as PhaserLoader, Utils as PhaserUtils } from 'phaser';
+const GetFastValue = PhaserUtils.Objects.GetFastValue;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 
-class Live2dFile extends Phaser.Loader.MultiFile {
+class Live2dFile extends PhaserLoader.MultiFile {
     constructor(loader, key, url, xhrSettings) {
         if (IsPlainObject(key)) {
             var config = key;

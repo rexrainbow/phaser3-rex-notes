@@ -3,8 +3,9 @@ import Methods from './Methods.js';
 import GetTotalColumnProportions from './GetTotalColumnProportions.js';
 import GetTotalRowProportions from './GetTotalRowProportions.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class GridSizer extends BaseSizer {
     constructor(scene, x, y, minWidth, minHeight, columnCount, rowCount, columnProportions, rowProportions, config) {

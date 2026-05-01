@@ -1,6 +1,7 @@
 import Yoyo from '../../utils/math/Yoyo.js';
 
-const Clamp = Phaser.Math.Clamp;
+import { Math as PhaserMath } from 'phaser';
+const Clamp = PhaserMath.Clamp;
 
 class Timer {
     constructor(timeline, config) {

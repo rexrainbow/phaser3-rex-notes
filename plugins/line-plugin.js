@@ -3,7 +3,8 @@ import Creator from './gameobjects/rendertexture/line/Creator.js';
 import Line from './gameobjects/rendertexture/line/Line.js';
 import SetValue from './utils/object/SetValue.js';
 
-class LinePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class LinePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

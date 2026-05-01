@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import PNGAppenderPlugin from '../../plugins/pngappender-plugin.js';
 import BinaryToTextureCache from '../../plugins/utils/loader/BinaryToTextureCache.js';
 import { saveAs } from 'file-saver';

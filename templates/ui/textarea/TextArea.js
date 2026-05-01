@@ -7,7 +7,8 @@ import InjectProperties from './InjectProperties.js';
 import SetTextMethods from './SetTextMethods.js';
 import ScrollMethods from './ScrollMethods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class TextArea extends Scrollable {
     constructor(scene, config) {

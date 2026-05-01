@@ -1,6 +1,7 @@
 import TouchCursor from './touchcursor.js';
 
-class TouchCursorPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class TouchCursorPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

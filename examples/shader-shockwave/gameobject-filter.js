@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import ShockwaveFilterPlugin from '../../plugins/shockwavefilter-plugin.js'
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 

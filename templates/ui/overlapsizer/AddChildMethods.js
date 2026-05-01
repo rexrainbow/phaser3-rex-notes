@@ -3,10 +3,11 @@ import ALIGNMODE from '../utils/AlignConst.js';
 import GetBoundsConfig from '../utils/GetBoundsConfig.js';
 import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
-const ALIGN_CENTER = Phaser.Display.Align.CENTER;
-const UUID = Phaser.Utils.String.UUID;
+import { Display as PhaserDisplay, Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
+const ALIGN_CENTER = PhaserDisplay.Align.CENTER;
+const UUID = PhaserUtils.String.UUID;
 
 var NormalizeExpand = function (value) {
     var expandRatio;

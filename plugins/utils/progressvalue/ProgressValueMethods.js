@@ -1,5 +1,6 @@
-const Linear = Phaser.Math.Linear;
-const Percent = Phaser.Math.Percent;
+import { Math as PhaserMath } from 'phaser';
+const Linear = PhaserMath.Linear;
+const Percent = PhaserMath.Percent;
 
 export default {
     setValue(value, min, max) {

@@ -1,9 +1,10 @@
 import { FilterName } from './const.js';
 import Methods from './methods/Methods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Filters as PhaserFilters, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
-class HorrifiController extends Phaser.Filters.Controller {
+class HorrifiController extends PhaserFilters.Controller {
     static FilterName = FilterName;
 
     constructor(camera, config) {

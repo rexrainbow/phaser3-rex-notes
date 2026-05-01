@@ -1,6 +1,7 @@
 import ConfirmDialog from './ConfirmDialog.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var ConfirmAction = function (scene, config) {
     var dialog = config.dialog;

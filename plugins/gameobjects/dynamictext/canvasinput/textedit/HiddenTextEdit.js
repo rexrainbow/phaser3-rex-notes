@@ -5,7 +5,8 @@ import MoveCursor from './MoveCursor.js';
 import ClearSelectRange from './ClearSelectRange.js';
 import ClearCursor from './ClearCursor.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class HiddenTextEdit extends HiddenTextEditBase {
     constructor(gameObject, config) {

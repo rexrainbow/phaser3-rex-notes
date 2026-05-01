@@ -1,4 +1,5 @@
-const SetPositionBase = Phaser.GameObjects.Graphics.prototype.setPosition;
+import { GameObjects as PhaserGameObjects } from 'phaser';
+const SetPositionBase = PhaserGameObjects.Graphics.prototype.setPosition;
 
 var SetPosition = function (x, y) {
     var parent = this.parent;

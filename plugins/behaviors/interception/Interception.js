@@ -1,10 +1,11 @@
+import { Utils as PhaserUtils, Math as PhaserMath } from 'phaser';
 import TickTask from '../../utils/componentbase/SceneUpdateTickTask.js';
 import SpeedMonitor from '../../utils/speedmonitor/SpeedMonitor.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Vector2 = Phaser.Math.Vector2;
-const Distance = Phaser.Math.Distance.Between;
-const AngleBetweenPoint = Phaser.Math.Angle.BetweenPoints;
+const GetValue = PhaserUtils.Objects.GetValue;
+const Vector2 = PhaserMath.Vector2;
+const Distance = PhaserMath.Distance.Between;
+const AngleBetweenPoint = PhaserMath.Angle.BetweenPoints;
 
 class Interception extends TickTask {
     constructor(gameObject, config) {

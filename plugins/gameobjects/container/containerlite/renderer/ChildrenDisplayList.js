@@ -1,7 +1,8 @@
-const List = Phaser.Structs.List;
-const StableSort = Phaser.Utils.Array.StableSort;
-const GameObjectEvents = Phaser.GameObjects.Events;
-const SceneEvents = Phaser.Scenes.Events;
+import { GameObjects as PhaserGameObjects, Scenes as PhaserScenes, Structs as PhaserStructs, Utils as PhaserUtils } from 'phaser';
+const List = PhaserStructs.List;
+const StableSort = PhaserUtils.Array.StableSort;
+const GameObjectEvents = PhaserGameObjects.Events;
+const SceneEvents = PhaserScenes.Events;
 
 class ChildrenDisplayList extends List {
     constructor(parent) {

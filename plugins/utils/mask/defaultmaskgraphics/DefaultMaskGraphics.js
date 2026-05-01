@@ -1,7 +1,8 @@
 import Methods from './methods/Methods.js';
 import GetBoundsConfig from '../../bounds/GetBoundsConfig.js';
 
-const Graphics = Phaser.GameObjects.Graphics;
+import { GameObjects as PhaserGameObjects } from 'phaser';
+const Graphics = PhaserGameObjects.Graphics;
 
 class DefaultMaskGraphics extends Graphics {
     constructor(parent, shapeType, padding) {

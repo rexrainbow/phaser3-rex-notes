@@ -22,7 +22,8 @@ import CreateTileTexture from './board/texture/CreateTileTexture.js';
 
 import CreateBoardFromTilemap from './board/tilemap/CreateBoardFromTilemap.js';
 
-class BoardPlugin extends Phaser.Plugins.ScenePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class BoardPlugin extends PhaserPlugins.ScenePlugin {
     constructor(scene, pluginManager) {
         super(scene, pluginManager);
 

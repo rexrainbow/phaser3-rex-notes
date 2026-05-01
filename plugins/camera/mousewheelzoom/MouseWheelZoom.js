@@ -2,8 +2,9 @@ import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import GetCameraByName from '../../utils/camera/GetCameraByName.js';
 import EaseZoom from './EaseZoom.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Clamp = Phaser.Math.Clamp;
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const Clamp = PhaserMath.Clamp;
 
 class MouseWheelZoom extends ComponentBase {
     constructor(scene, config) {

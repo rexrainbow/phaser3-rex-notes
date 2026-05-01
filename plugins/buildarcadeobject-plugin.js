@@ -1,7 +1,8 @@
 import BuildArcadeObject from './buildarcadeobject.js';
 import ArcadeMethods from './utils/arcade/ArcadeMethods.js';
 
-class BuildArcadeObjectPlugin extends Phaser.Plugins.BasePlugin {
+import { GameObjects as PhaserGameObjects, Plugins as PhaserPlugins } from 'phaser';
+class BuildArcadeObjectPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);
@@ -22,7 +23,7 @@ class BuildArcadeObjectPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     injectMethodsToRootClass() {
-        this.injectMethods(Phaser.GameObjects.GameObject.prototype);
+        this.injectMethods(PhaserGameObjects.GameObject.prototype);
         return this;
     }
 }

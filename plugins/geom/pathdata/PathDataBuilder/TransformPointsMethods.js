@@ -2,8 +2,9 @@ import RotateAround from '../RotateAround.js';
 import Scale from '../Scale.js';
 import Offset from '../Offset.js';
 
-const DegToRad = Phaser.Math.DegToRad;
-const PointRotateAround = Phaser.Math.RotateAround;
+import { Math as PhaserMath } from 'phaser';
+const DegToRad = PhaserMath.DegToRad;
+const PointRotateAround = PhaserMath.RotateAround;
 
 export default {
     rotateAround(centerX, centerY, angle) {

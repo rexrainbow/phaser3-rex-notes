@@ -1,5 +1,6 @@
-const GetLineToLine = Phaser.Geom.Intersects.GetLineToLine;
-const PointToLine = Phaser.Geom.Intersects.PointToLine
+import { Geom as PhaserGeom, Math as PhaserMath } from 'phaser';
+const GetLineToLine = PhaserGeom.Intersects.GetLineToLine;
+const PointToLine = PhaserGeom.Intersects.PointToLine
 
 var GetLineToPoints = function (line, points, out) {
     if (out === undefined) {
@@ -50,8 +51,8 @@ var GetLineToPoints = function (line, points, out) {
 };
 
 var globResult = {};
-var startPoint = new Phaser.Math.Vector2();
-var segment = new Phaser.Geom.Line();
-var tempIntersect = new Phaser.Math.Vector3();
+var startPoint = new PhaserMath.Vector2();
+var segment = new PhaserGeom.Line();
+var tempIntersect = new PhaserMath.Vector3();
 
 export default GetLineToPoints;

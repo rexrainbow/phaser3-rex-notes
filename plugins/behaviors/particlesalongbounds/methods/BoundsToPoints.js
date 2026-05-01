@@ -1,7 +1,8 @@
+import { Utils as PhaserUtils, Geom as PhaserGeom } from 'phaser';
 import GetBoundsConfig from '../../../utils/bounds/GetBoundsConfig.js';
 
-const Rectangle = Phaser.Geom.Rectangle;
-const GetValue = Phaser.Utils.Objects.GetValue;
+const Rectangle = PhaserGeom.Rectangle;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var BoundsToPoints = function (gameObject, config) {
     if (globRect === undefined) {

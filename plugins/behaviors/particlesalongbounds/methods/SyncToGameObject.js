@@ -1,6 +1,8 @@
-const PreUpdate = Phaser.GameObjects.Particles.ParticleEmitter.prototype.preUpdate;
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Vector2 = Phaser.Math.Vector2;
+import { GameObjects as PhaserGameObjects, Utils as PhaserUtils, Math as PhaserMath } from 'phaser';
+
+const PreUpdate = PhaserGameObjects.Particles.ParticleEmitter.prototype.preUpdate;
+const GetValue = PhaserUtils.Objects.GetValue;
+const Vector2 = PhaserMath.Vector2;
 
 var SyncToGameObject = function (particles, gameObject, config) {
     var gravityX = GetValue(config, 'gravityX', 0);

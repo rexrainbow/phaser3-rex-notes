@@ -2,7 +2,8 @@ import { FilterName } from './const.js';
 import FragSrc from './shine-frag.js';
 import GetCurrentTime from '../utils/GetCurrentTime.js';
 
-class ShineFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+import { Renderer as PhaserRenderer } from 'phaser';
+class ShineFilter extends PhaserRenderer.WebGL.RenderNodes.BaseFilterShader {
     static FilterName = FilterName;
 
     constructor(manager) {

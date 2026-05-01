@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexquadshapeplugin = factory());
-})(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('phaser')) :
+    typeof define === 'function' && define.amd ? define(['phaser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexquadshapeplugin = factory(global.Phaser));
+})(this, (function (phaser) { 'use strict';
 
     /*
     shapeData: {
@@ -13,7 +13,7 @@
     }
     */
 
-    var Utils$1 = Phaser.Renderer.WebGL.Utils;
+    var Utils$1 = phaser.Renderer.WebGL.Utils;
 
     var FillPathWebGL = function (drawingContext, submitter, calcMatrix, gameObject, shapeData, alpha, dx, dy) {
         // This is very similar to the FillPath RenderNode, but it already
@@ -66,7 +66,7 @@
         strokePathMask
     }
     */
-    var Utils = Phaser.Renderer.WebGL.Utils;
+    var Utils = phaser.Renderer.WebGL.Utils;
 
     var StrokePathWebGL = function (drawingContext, submitter, calcMatrix, gameObject, shapeData, alpha, dx, dy) {
         var strokeTintColor = Utils.getTintAppendFloatAlpha(shapeData.strokeColor, shapeData.strokeAlpha * alpha);
@@ -178,7 +178,7 @@
 
     };
 
-    const GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
+    const GetCalcMatrix = phaser.GameObjects.GetCalcMatrix;
 
     var PolygonWebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
         if (src.dirty) {
@@ -337,7 +337,7 @@
         ctx.stroke();
     };
 
-    const SetTransform = Phaser.Renderer.Canvas.SetTransform;
+    const SetTransform = phaser.Renderer.Canvas.SetTransform;
 
     var PolygonCanvasRenderer = function (renderer, src, camera, parentMatrix) {
         if (src.dirty) {
@@ -665,7 +665,7 @@
         StrokePathConfigMethods,
     );
 
-    const Shape = Phaser.GameObjects.Shape;
+    const Shape = phaser.GameObjects.Shape;
 
     class PolygnBase extends Shape {
         init() {
@@ -1122,10 +1122,10 @@
         return pathData;
     };
 
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue = Phaser.Utils.Objects.GetValue;
-    const Linear = Phaser.Math.Linear;
-    const Earcut = Phaser.Geom.Polygon.Earcut;
+    const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
+    const GetValue = phaser.Utils.Objects.GetValue;
+    const Linear = phaser.Math.Linear;
+    const Earcut = phaser.Geom.Polygon.Earcut;
 
     class Quad extends PolygnBase {
         constructor(scene, x, y, width, height, fillColor, fillAlpha) {
@@ -1370,8 +1370,8 @@
         return gameObject;
     }
 
-    const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-    const BuildGameObject = Phaser.GameObjects.BuildGameObject;
+    const GetAdvancedValue = phaser.Utils.Objects.GetAdvancedValue;
+    const BuildGameObject = phaser.GameObjects.BuildGameObject;
 
     function Creator (config, addToScene) {
         if (config === undefined) { config = {}; }
@@ -1463,7 +1463,7 @@
         return target;
     };
 
-    class QuadPlugin extends Phaser.Plugins.BasePlugin {
+    class QuadPlugin extends phaser.Plugins.BasePlugin {
 
         constructor(pluginManager) {
             super(pluginManager);

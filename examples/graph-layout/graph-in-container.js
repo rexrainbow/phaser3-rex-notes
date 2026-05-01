@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import GraphPlugin from '../../plugins/graph-plugin.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 

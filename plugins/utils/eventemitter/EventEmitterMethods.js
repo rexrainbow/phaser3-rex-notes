@@ -1,7 +1,8 @@
+import { Events as PhaserEvents } from 'phaser';
 export default {
     setEventEmitter(eventEmitter, EventEmitterClass) {
         if (EventEmitterClass === undefined) {
-            EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+            EventEmitterClass = PhaserEvents.EventEmitter; // Use built-in EventEmitter class by default
         }
         this._privateEE = (eventEmitter === true) || (eventEmitter === undefined);
         this._eventEmitter = (this._privateEE) ? (new EventEmitterClass()) : eventEmitter;

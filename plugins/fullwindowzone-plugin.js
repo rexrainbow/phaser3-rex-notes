@@ -3,7 +3,8 @@ import Creator from './gameobjects/fullwindow/fullwindowzone/Creator.js';
 import FullWindowZone from './gameobjects/fullwindow/fullwindowzone/FullWindowZone.js';
 import SetValue from './utils/object/SetValue.js';
 
-class FullWindowZonePlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class FullWindowZonePlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

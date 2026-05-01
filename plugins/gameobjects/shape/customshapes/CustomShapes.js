@@ -2,8 +2,9 @@ import BaseShapes from '../shapes/BaseShapes.js';
 import ShapesUpdateMethods from './ShapesUpdateMethods.js';
 import WorldXYToGameObjectLocalXY from '../../../utils/position/WorldXYToGameObjectLocalXY.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 
 class CustomShapes extends BaseShapes {
     constructor(scene, x, y, width, height, config) {

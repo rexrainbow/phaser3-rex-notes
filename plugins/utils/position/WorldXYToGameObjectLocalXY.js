@@ -1,5 +1,6 @@
-const TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
-const TransformXY = Phaser.Math.TransformXY;
+import { GameObjects as PhaserGameObjects, Math as PhaserMath } from 'phaser';
+const TransformMatrix = PhaserGameObjects.Components.TransformMatrix;
+const TransformXY = PhaserMath.TransformXY;
 
 var WorldXYToGameObjectLocalXY = function (gameObject, worldX, worldY, camera, out) {
     if (camera === undefined) {

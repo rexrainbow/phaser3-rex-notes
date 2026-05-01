@@ -1,4 +1,5 @@
-const RotateAround = Phaser.Math.RotateAround;
+import { Math as PhaserMath } from 'phaser';
+const RotateAround = PhaserMath.RotateAround;
 
 var CanvasPositionToBobPosition = function (canvasX, canvasY, bob, out) {
     if (out === undefined) {

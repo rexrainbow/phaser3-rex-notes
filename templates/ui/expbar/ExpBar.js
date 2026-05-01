@@ -4,7 +4,8 @@ import Player from '../../../plugins/logic/runcommands/tcrp/Player.js';
 import OnLevelUp from './methods/OnLevelUp.js';
 import ExpMethods from './methods/ExpMethods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class ExpBar extends NameValueLabel {
     constructor(scene, config) {

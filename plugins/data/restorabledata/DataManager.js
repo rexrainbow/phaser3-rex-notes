@@ -1,8 +1,9 @@
 import Clear from '../../utils/object/Clear.js';
 
-const Base = Phaser.Data.DataManager;
-const GetValue = Phaser.Utils.Objects.GetValue;
-const EventEmitterClass = Phaser.Events.EventEmitter;
+import { Data as PhaserData, Events as PhaserEvents, Utils as PhaserUtils } from 'phaser';
+const Base = PhaserData.DataManager;
+const GetValue = PhaserUtils.Objects.GetValue;
+const EventEmitterClass = PhaserEvents.EventEmitter;
 
 class DataManager extends Base {
     constructor(parent, eventEmitter, config) {

@@ -1,7 +1,8 @@
 import GridTable from './GridTable.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const BuildGameObject = Phaser.GameObjects.BuildGameObject;
+import { GameObjects as PhaserGameObjects, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const BuildGameObject = PhaserGameObjects.BuildGameObject;
 
 export default function (config, addToScene) {
     if (config === undefined) { config = {}; }

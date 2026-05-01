@@ -1,6 +1,7 @@
 import GetBobCenterPosition from './utils/transform/GetBobCenterPosition';
 
-const GetDistance = Phaser.Math.Distance.BetweenPointsSquared;
+import { Math as PhaserMath } from 'phaser';
+const GetDistance = PhaserMath.Distance.BetweenPointsSquared;
 
 var GetNearestChild = function (canvasX, canvasY) {
     var pointA = { x: canvasX, y: canvasY };

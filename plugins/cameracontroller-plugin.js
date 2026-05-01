@@ -6,7 +6,8 @@ import {
     MouseWheelZoom
 } from './cameracontroller';
 
-class CameraControllerPlugin extends Phaser.Plugins.BasePlugin {
+import { Plugins as PhaserPlugins } from 'phaser';
+class CameraControllerPlugin extends PhaserPlugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);

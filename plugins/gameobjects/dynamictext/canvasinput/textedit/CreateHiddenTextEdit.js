@@ -1,7 +1,8 @@
 import HiddenTextEdit from './HiddenTextEdit.js';
 import CopyProperty from '../../../../utils/object/CopyProperty.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 const PropertiesList = [
     'inputType',
     'onOpen', 'clickOutSideTarget', 'onFocus', 'onClose', 'onBlur', 'onUpdate',

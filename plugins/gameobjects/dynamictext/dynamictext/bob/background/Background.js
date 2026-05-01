@@ -3,7 +3,8 @@ import GetStyle from '../../../../../utils/canvas/GetStyle.js';
 import GetProperty from '../utils/GetProperty.js';
 import DrawRoundRectangleBackground from '../../../../canvas/utils/DrawRoundRectangleBackground.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Background extends RenderBase {
     constructor(parent, config) {

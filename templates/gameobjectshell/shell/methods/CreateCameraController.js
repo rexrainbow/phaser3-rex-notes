@@ -1,7 +1,8 @@
 import CameraController from '../../cameracontroller/CameraController.js'
 import { GOCamera } from './Layers.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 var CreateCameraController = function (config) {
     var camera = this.scene.cameras.getCamera(GOCamera);

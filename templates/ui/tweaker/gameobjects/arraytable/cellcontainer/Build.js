@@ -2,7 +2,8 @@ import RemoveFromParent from '../../../../utils/RemoveFromParent.js';
 import LayoutMode0 from './LayoutMode0.js';
 import LayoutMode1 from './LayoutMode1.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 const LayoutCallbacks = [LayoutMode0, LayoutMode1];
 
 var Build = function (config) {

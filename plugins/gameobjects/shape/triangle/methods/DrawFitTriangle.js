@@ -1,5 +1,6 @@
-const Wrap = Phaser.Math.Wrap;
-const Linear = Phaser.Math.Linear;
+import { Math as PhaserMath } from 'phaser';
+const Wrap = PhaserMath.Wrap;
+const Linear = PhaserMath.Linear;
 
 var DrawFitTriangle = function () {
     var triangle = this.getShape('triangle');

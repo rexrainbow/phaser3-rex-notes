@@ -2,8 +2,9 @@ import SkewImage from '../skewimage/SkewImage.js';
 import CreateDynamicTexture from '../../../../utils/rendertexture/CreateDynamicTexture.js';
 import Snapshot from '../../../../utils/rendertexture/Snapshot.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class SkewRenderTexture extends SkewImage {
     constructor(scene, x, y, width, height) {

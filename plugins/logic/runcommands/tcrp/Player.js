@@ -4,7 +4,8 @@ import ArrayCopy from '../../../utils/array/Copy.js';
 import RunCommands from '../../../runcommands.js';
 import IsArray from '../../../utils/object/IsArray.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
 
 class Player extends ComponentBase {
     constructor(parent, config) {

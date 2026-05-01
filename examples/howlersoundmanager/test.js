@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import HowlerSoundManager from '../../plugins/utils/audio/howlersoundmanager/HowlerSoundManager';
 import Awaitloader from '../../plugins/awaitloader.js';
 

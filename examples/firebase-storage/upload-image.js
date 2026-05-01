@@ -1,4 +1,4 @@
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import Phaser from 'phaser';
 import firebase from 'firebase/app';
 import 'firebase/storage';
 import firebaseConfig from './firebaseConfig.js';
