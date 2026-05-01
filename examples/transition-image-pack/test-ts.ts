@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 import TransitionImagePackPlugin from '../../templates/transitionimagepack/transitionimagepack-plugin.js';
 
 class Demo extends Phaser.Scene {

@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 import BoardPlugin from '../../plugins/board-plugin.js';
 import { Tap, Press, Swipe } from '../../plugins/gestures';
 import { TileXYType } from '../../plugins/board/types/Position';

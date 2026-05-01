@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 import ScriptTagLoad from '../../plugins/scripttagloader';
 
 type FirebaseGlobal = {

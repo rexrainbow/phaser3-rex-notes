@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 import ImageURILoader from '../../plugins/imageuriloader';
 
 class Demo extends Phaser.Scene {

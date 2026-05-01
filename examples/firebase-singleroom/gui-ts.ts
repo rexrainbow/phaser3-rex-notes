@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 import '../../plugins/awaitloader';
 import firebaseConfig from './firebaseConfig';
 import { Preload as SetupFirebase, SingleRoom, Broadcast } from '../../plugins/firebase-components';

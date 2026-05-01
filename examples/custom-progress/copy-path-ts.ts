@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 import CustomProgress from '../../plugins/customprogress';
 
 class Demo extends Phaser.Scene {

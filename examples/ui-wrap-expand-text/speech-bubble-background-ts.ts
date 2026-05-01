@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 import UIPlugin from '../../templates/ui/ui-plugin';
 import { CustomShapes } from '../../templates/ui/ui-components';
 

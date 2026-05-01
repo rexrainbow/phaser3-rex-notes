@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 import { Sizer, RoundRectangle, Chart } from '../../templates/ui/ui-components';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 

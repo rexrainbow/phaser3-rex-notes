@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 
 import Live2dPlugin from '../../plugins/live2d-plugin.js';
 

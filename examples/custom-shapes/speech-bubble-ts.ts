@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 import CustomShapes from '../../plugins/customshapes';
 
 class SpeechBubble extends CustomShapes {

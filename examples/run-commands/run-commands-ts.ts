@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 import RunCommandsPlugin from '../../plugins/runcommands-plugin';
 
 const Map = Phaser.Structs.Map;

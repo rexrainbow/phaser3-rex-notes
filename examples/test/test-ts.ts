@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 
 class Demo extends Phaser.Scene {
     constructor() {

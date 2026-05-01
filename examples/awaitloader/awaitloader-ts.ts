@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 import AwaitLoaderPlugin from '../../plugins/awaitloader-plugin';
 
 class Demo extends Phaser.Scene {

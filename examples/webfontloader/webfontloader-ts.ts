@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 import WebFontLoader from '../../plugins/webfontloader';
 
 class Demo extends Phaser.Scene {
