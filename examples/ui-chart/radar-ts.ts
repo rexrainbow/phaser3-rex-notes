@@ -8,6 +8,12 @@ const COLOR_DARK = 0x260e04;
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
+type CardData = {
+    name?: string,
+    title?: string,
+    [key: string]: string | number | undefined
+};
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -44,7 +50,7 @@ class Card extends Sizer {
     constructor(
         scene: Phaser.Scene,
         x: number, y: number,
-        data
+        data: CardData
     ) {
 
         var background = new RoundRectangle(scene, 0, 0, 0, 0, 20, COLOR_MAIN);
@@ -152,13 +158,13 @@ class Card extends Sizer {
         this.updateData(data);
     }
 
-    updateData(data) {
+    updateData(data: CardData) {
         (this.getElement('name') as Phaser.GameObjects.Text).text = GetValue(data, 'name', 'Name');
         (this.getElement('title') as Phaser.GameObjects.Text).text = GetValue(data, 'title', 'Title');
 
         var chart = (this.getElement('attributes') as Chart).chart;
-        var labels = chart.data.labels;
-        var dataset = chart.data.datasets[0].data;
+        var labels = chart.data.labels as string[];
+        var dataset = chart.data.datasets[0].data as number[];
         for (var i = 0, cnt = labels.length; i < cnt; i++) {
             dataset[i] = GetValue(data, labels[i], 0);
         }

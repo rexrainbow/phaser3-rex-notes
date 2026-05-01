@@ -13,7 +13,7 @@ class Demo extends Phaser.Scene {
     preload() {
         const FontName = 'SEASRN';
         const FontURL = 'assets/fonts/SeasideResortNF/SEASRN.ttf';
-        AwaitLoader.call(this.load, async function (successCallback: Function, failureCallback: Function) {
+        this.load.rexAwait(async function (successCallback: Function, failureCallback: Function) {
             const newFontFace = new FontFace(FontName, `url(${FontURL})`);
             document.fonts.add(newFontFace);
 

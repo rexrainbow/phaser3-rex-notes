@@ -5,6 +5,7 @@ import {
     Shape,
     MoveTo, PathFinder
 } from '../../plugins/board-components';
+import { TileXYType } from '../../plugins/board/types/Position';
 
 class Demo extends Phaser.Scene {
 
@@ -80,7 +81,9 @@ class MyBoard extends Board {
         });
         this.forEachTileXY(function (tileXY, board) {
             var points = board.getGridPoints(tileXY.x, tileXY.y, true);
-            graphics.strokePoints(points, true);
+            graphics.strokePoints(points.map(function (point) {
+                return new Phaser.Math.Vector2(point.x, point.y);
+            }), true);
         });
         // enable touch events
         this.setInteractive();
@@ -90,7 +93,7 @@ class MyBoard extends Board {
 class Blocker extends Shape {
     constructor(
         board: Board,
-        tileXY?: { x: number, y: number }
+        tileXY?: TileXYType
     ) {
 
         var scene = board.scene;
@@ -111,7 +114,7 @@ class MyChess extends Shape {
 
     constructor(
         board: Board,
-        tileXY?: { x: number, y: number }
+        tileXY?: TileXYType
     ) {
 
         var scene = board.scene;
@@ -153,7 +156,7 @@ class MyChess extends Shape {
         return this;
     }
 
-    moveToTile(endTile) {
+    moveToTile(endTile: MoveableMarker) {
         if (this.moveTo.isRunning) {
             return false;
         }
@@ -162,16 +165,16 @@ class MyChess extends Shape {
         return true;
     }
 
-    moveAlongPath(path) {
+    moveAlongPath(path: PathFinder.NodeType[]) {
         if (path.length === 0) {
             this.showMoveableArea();
             return;
         }
 
-        this.moveTo.once('complete', function () {
+        this.moveTo.once('complete', function (this: MyChess) {
             this.moveAlongPath(path);
         }, this);
-        this.moveTo.moveTo(path.shift());
+        this.moveTo.moveTo(path.shift()!);
         return this;
     }
 }
@@ -179,7 +182,7 @@ class MyChess extends Shape {
 class MoveableMarker extends Shape {
     constructor(
         chess: MyChess,
-        tileXY?: { x: number, y: number }
+        tileXY: TileXYType
     ) {
 
         var board = Board.GetBoard(chess);
@@ -190,7 +193,7 @@ class MoveableMarker extends Shape {
         this.setScale(0.5);
 
         // on pointer down, move to this tile
-        this.on('board.pointerdown', function () {
+        this.on('board.pointerdown', function (this: MoveableMarker) {
             if (!chess.moveToTile(this)) {
                 return;
             }

@@ -1,5 +1,5 @@
 import 'phaser';
-import AwaitLoader from '../../plugins/awaitloader';
+import '../../plugins/awaitloader';
 import firebaseConfig from './firebaseConfig';
 import { Preload as SetupFirebase, SingleRoom, Broadcast } from '../../plugins/firebase-components';
 import {
@@ -17,7 +17,7 @@ class Demo extends Phaser.Scene {
 
     preload() {
 
-        AwaitLoader.call(this.load, async function (successCallback: Function, failureCallback: Function) {
+        this.load.rexAwait(async function (successCallback: () => void, failureCallback: () => void) {
             await SetupFirebase({}, firebaseConfig);
             successCallback();
         })
@@ -80,15 +80,15 @@ class Demo extends Phaser.Scene {
 interface IMainPanelConfig {
     x?: number, y?: number,
     width?: number, height?: number,
-    color?: {
-        background?: number,
-        messageBackground?: number,
-        track?: number,
-        thumb?: number,
-        inputBackground?: number,
-        inputBox?: number
+    color: {
+        background: number,
+        messageBackground: number,
+        track: number,
+        thumb: number,
+        inputBackground: number,
+        inputBox: number
     },
-    userName?: string
+    userName: string
 }
 
 interface IUserName {
@@ -166,7 +166,7 @@ class MainPanel extends Sizer {
         const messageBox = this.getElement('MessageBox') as GridTable;
         const messages = messageBox.items as IMessage[];
         messages.push({
-            name: message.senderName,
+            name: message.senderName ?? '',
             content: message.message as string,
             isLeft: (myUserID !== message.senderID)
         })
@@ -182,8 +182,8 @@ class MainPanel extends Sizer {
         const myUserID = userInfo.userID;
         const messages = receiveData.map(function (message) {
             return {
-                name: message.senderName,
-                content: message.message,
+                name: message.senderName ?? '',
+                content: String(message.message),
                 isLeft: (myUserID !== message.senderID)
             }
         })
@@ -220,24 +220,25 @@ var CreateUserListBox = function (parent: MainPanel, config: IMainPanelConfig) {
 
         slider: false,
 
-        createCellContainerCallback(cell, cellContainer: Label) {
+        createCellContainerCallback(cell: GridTable.ICell, cellContainer: Phaser.GameObjects.GameObject | null) {
             var scene = cell.scene,
                 width = cell.width,
                 height = cell.height,
                 item = cell.item as IUserName;
-            if (cellContainer === null) {
+            var label = cellContainer as Label | null;
+            if (label === null) {
                 const text = new BBCodeText(scene, 0, 0, '');
                 scene.add.existing(text);
 
-                cellContainer = new Label(scene, {
+                label = new Label(scene, {
                     text: text
                 });
-                scene.add.existing(cellContainer);
+                scene.add.existing(label);
             }
 
-            cellContainer.setMinSize(width, height);
-            cellContainer.setText(item.text)
-            return cellContainer;
+            label.setMinSize(width, height);
+            label.setText(item.text)
+            return label;
         },
 
         name: 'userListBox'
@@ -273,14 +274,15 @@ var CreateMessageBox = function (parent: MainPanel, config: IMainPanelConfig) {
             thumb: thumb,
         },
 
-        createCellContainerCallback(cell: GridTable.CellType, cellContainer: TitleLabel) {
+        createCellContainerCallback(cell: GridTable.ICell, cellContainer: Phaser.GameObjects.GameObject | null) {
             var scene = cell.scene,
                 width = cell.width,
                 item = cell.item as IMessage,
                 items = cell.items as IMessage[],
                 index = cell.index;
+            var titleLabel = cellContainer as TitleLabel | null;
 
-            if (cellContainer === null) {
+            if (titleLabel === null) {
                 const icon = new RoundRectangle(scene, { color: 0xffebcd, radius: 20 });
                 scene.add.existing(icon);
 
@@ -309,7 +311,7 @@ var CreateMessageBox = function (parent: MainPanel, config: IMainPanelConfig) {
                 })
                 scene.add.existing(textLabel);
 
-                cellContainer = new TitleLabel(scene, {
+                titleLabel = new TitleLabel(scene, {
                     space: {
                         item: 10,
                         title: 5
@@ -327,7 +329,7 @@ var CreateMessageBox = function (parent: MainPanel, config: IMainPanelConfig) {
                 })
                     .setOrigin(0);
 
-                scene.add.existing(cellContainer);
+                scene.add.existing(titleLabel);
             }
 
             // Set properties from item value
@@ -335,43 +337,43 @@ var CreateMessageBox = function (parent: MainPanel, config: IMainPanelConfig) {
             var isTheSameName = (previousItem) ? (previousItem.name === item.name) : false;
 
             // Set icon
-            var iconGameObject = cellContainer.getElement('icon') as RoundRectangle;
+            var iconGameObject = titleLabel.getElement('icon') as RoundRectangle;
             if (isTheSameName) {
-                cellContainer.setChildVisible(iconGameObject, false);
+                titleLabel.setChildVisible(iconGameObject, false);
             } else {
-                cellContainer.setChildVisible(iconGameObject, true);
+                titleLabel.setChildVisible(iconGameObject, true);
             }
 
             // Set name
-            var nameGameObject = cellContainer.getElement('title') as BBCodeText;
+            var nameGameObject = titleLabel.getElement('title') as BBCodeText;
             if (isTheSameName) {
                 Hide(nameGameObject);
             } else {
                 Show(nameGameObject);
                 nameGameObject.setText(item.name);
-                cellContainer.setChildAlign(nameGameObject, (item.isLeft) ? 'left' : 'right');
+                titleLabel.setChildAlign(nameGameObject, (item.isLeft) ? 'left' : 'right');
             }
 
             // Set content
-            (cellContainer.getElement('text.text') as BBCodeText)
+            (titleLabel.getElement('text.text') as BBCodeText)
                 .setWrapWidth(width - 200)
                 .setText(item.content);
 
             // Set rtl
-            cellContainer.setRTL(!item.isLeft);
+            titleLabel.setRTL(!item.isLeft);
             cell.setCellContainerAlign((item.isLeft) ? 'left' : 'right');
 
             // Set padding
-            cellContainer.setInnerPadding('top', (isTheSameName) ? 5 : 20);
+            titleLabel.setInnerPadding('top', (isTheSameName) ? 5 : 20);
 
             // Layout manually, to get cell height
-            cellContainer
+            titleLabel
                 .setDirty(true).layout()  // Run layout manually
                 .setDirty(false)          // Don't run layout again
 
-            cell.height = cellContainer.height;
+            cell.height = titleLabel.height;
 
-            return cellContainer;
+            return titleLabel;
         },
 
         name: 'messageBox'

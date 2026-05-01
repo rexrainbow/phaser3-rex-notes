@@ -2,7 +2,7 @@ import 'phaser';
 import AwaitLoaderPlugin from '../../plugins/awaitloader-plugin';
 
 class Demo extends Phaser.Scene {
-    print: Phaser.GameObjects.Text;
+    declare print: Phaser.GameObjects.Text;
 
     constructor() {
         super({

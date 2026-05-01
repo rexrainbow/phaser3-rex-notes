@@ -14,10 +14,10 @@ class Demo extends Phaser.Scene {
                 families: ['Bangers']
             }
         });
-        this.load.on('webfontactive', function (fileObj, familyName) {
+        this.load.on('webfontactive', function (fileObj: Phaser.Loader.File, familyName: string) {
             console.log('font-active: ' + familyName)
         });
-        this.load.on('webfontinactive', function (fileObj, familyName) {
+        this.load.on('webfontinactive', function (fileObj: Phaser.Loader.File, familyName: string) {
             console.log('font-inactive: ' + familyName)
         })
     }

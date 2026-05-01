@@ -101,4 +101,20 @@ declare class Swipe extends OnePointerTracer {
      * True if a swipe has occurred.
      */
     readonly isSwiped: boolean;
+    /**
+     * True if the recognized swipe includes a left direction.
+     */
+    readonly left: boolean;
+    /**
+     * True if the recognized swipe includes a right direction.
+     */
+    readonly right: boolean;
+    /**
+     * True if the recognized swipe includes an up direction.
+     */
+    readonly up: boolean;
+    /**
+     * True if the recognized swipe includes a down direction.
+     */
+    readonly down: boolean;
 }

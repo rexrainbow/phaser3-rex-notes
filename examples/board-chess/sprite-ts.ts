@@ -2,7 +2,7 @@ import 'phaser';
 import BoardPlugin from '../../plugins/board-plugin.js';
 
 class Demo extends Phaser.Scene {
-    rexBoard: BoardPlugin;
+    declare rexBoard: BoardPlugin;
 
     constructor() {
         super({
@@ -30,13 +30,9 @@ class Demo extends Phaser.Scene {
                 console.log(chess.rexChess.tileXYZ);
             }, this);
     }
-
-    update(time, delta) {
-
-    }
 }
 
-var getQuadGrid = function (scene) {
+var getQuadGrid = function (scene: Demo) {
     var grid = scene.rexBoard.add.quadGrid({
         x: 400,
         y: 100,
@@ -47,15 +43,13 @@ var getQuadGrid = function (scene) {
     return grid;
 }
 
-var getHexagonGrid = function (scene) {
-    var staggeraxis = 'x';
-    var staggerindex = 'odd';
+var getHexagonGrid = function (scene: Demo) {
     var grid = scene.rexBoard.add.hexagonGrid({
         x: 50,
         y: 50,
         size: 50,
-        staggeraxis: staggeraxis,
-        staggerindex: staggerindex
+        staggeraxis: 'x',
+        staggerindex: 'odd'
     })
     return grid;
 };

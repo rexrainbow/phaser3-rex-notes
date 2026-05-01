@@ -6,6 +6,8 @@ const Map = Phaser.Structs.Map;
 class ActionKlass {
     scene: Phaser.Scene;
     objs: Phaser.Structs.Map<string, Phaser.GameObjects.Sprite>;
+    ['create-sprite']: ActionKlass['createSprite'];
+    ['move-sprite-to']: ActionKlass['moveSpriteTo'];
 
     constructor(scene: Phaser.Scene) {
         this.scene = scene;

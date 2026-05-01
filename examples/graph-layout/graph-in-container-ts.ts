@@ -92,20 +92,22 @@ S *> *1
     }
 }
 
-var CreateNode = function (
-    scene: Demo,
-    label: string,
-    parameter: { color?: number }
-) {
-    if (label === undefined) {
-        label = ''
-    }
-    var { color = 0x888888 } = parameter;
+type UIScene = Phaser.Scene & {
+    rexUI: UIPlugin;
+};
 
-    return scene.rexUI.add.label({
+var CreateNode = function (
+    scene: Phaser.Scene,
+    label: string | number,
+    parameter: Record<string, unknown>
+) {
+    var uiScene = scene as UIScene;
+    var color = (typeof parameter.color === 'number') ? parameter.color : 0x888888;
+
+    return uiScene.rexUI.add.label({
         width: 40, height: 40,
         background: scene.add.rectangle().setStrokeStyle(3, color),
-        text: scene.add.text(0, 0, label),
+        text: scene.add.text(0, 0, String(label)),
         align: 'center',
     }).layout();
 }

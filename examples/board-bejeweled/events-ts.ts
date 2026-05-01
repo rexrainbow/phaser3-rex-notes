@@ -3,7 +3,7 @@ import BoardPlugin from '../../plugins/board-plugin';
 import Bejeweled from '../../templates/bejeweled/Bejeweled';
 
 class Demo extends Phaser.Scene {
-    rexBoard: BoardPlugin;
+    declare rexBoard: BoardPlugin;
     constructor() {
         super({
             key: 'examples'
@@ -67,7 +67,12 @@ class Demo extends Phaser.Scene {
                 for (const line of lines) {
                     const parts: string[] = [`Match ${line.size}`];
                     for (const piece of line) {
-                        const { x, y } = board.chessToTileXYZ(piece);
+                        const tileXYZ = board.chessToTileXYZ(piece);
+                        if (!tileXYZ) {
+                            continue;
+                        }
+
+                        const { x, y } = tileXYZ;
                         parts.push(`(${x},${y})`);
                     }
                     console.log(parts.join(' '));
@@ -111,7 +116,7 @@ var colors = [
     0x212121,  // 6: #212121
     0xF5F5F5,  // 7: #F5F5F5
 ]
-var GetColor = function (symbol) {
+var GetColor = function (symbol: number) {
     return colors[symbol];
 }
 

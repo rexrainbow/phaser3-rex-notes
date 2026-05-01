@@ -3,7 +3,7 @@ import SpinnerPlugin from '../../templates/spinner/spinner-plugin';
 import {Custom} from '../../templates/spinner/spinner-components';
 
 class Demo extends Phaser.Scene {
-    rexSpinner: SpinnerPlugin;
+    declare rexSpinner: SpinnerPlugin;
 
     constructor() {
         super({

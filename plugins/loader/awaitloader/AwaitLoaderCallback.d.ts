@@ -8,11 +8,11 @@ declare namespace AwaitLoaderCallback {
         /**
          * Call to mark the task as successful.
          */
-        successCallback: Function,
+        successCallback: () => void,
         /**
          * Call to mark the task as failed.
          */
-        failureCallback: Function
+        failureCallback: () => void
     ) => Promise<void> | void;
 
     /**

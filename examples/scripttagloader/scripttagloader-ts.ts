@@ -1,8 +1,12 @@
 import 'phaser';
 import ScriptTagLoad from '../../plugins/scripttagloader';
 
+type FirebaseGlobal = {
+    SDK_VERSION: string;
+};
+
 class Demo extends Phaser.Scene {
-    print: Phaser.GameObjects.Text;
+    declare print: Phaser.GameObjects.Text;
     constructor() {
         super({
             key: 'examples'
@@ -12,12 +16,12 @@ class Demo extends Phaser.Scene {
     preload() {
         this.print = this.add.text(0, 0, 'Preload\n');
 
-        ScriptTagLoad.call(this.load, 'https://www.gstatic.com/firebasejs/7.5.2/firebase-app.js');
+        this.load.rexScriptTag('https://www.gstatic.com/firebasejs/7.5.2/firebase-app.js');
     }
 
     create() {
         this.print.text += 'Create\n';
-        this.print.text += (window['firebase'] as any).SDK_VERSION;
+        this.print.text += ((window as unknown) as Window & { firebase: FirebaseGlobal }).firebase.SDK_VERSION;
     }
 
     update() {

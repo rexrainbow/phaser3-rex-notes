@@ -4,7 +4,7 @@ import BoardPlugin from '../../plugins/board-plugin';
 const Random = Phaser.Math.Between;
 
 class Demo extends Phaser.Scene {
-    rexBoard: BoardPlugin;
+    declare rexBoard: BoardPlugin;
     constructor() {
         super({
             key: 'examples'
@@ -36,7 +36,9 @@ class Demo extends Phaser.Scene {
         })
             .forEachTileXY(function (tileXY, board) {
                 var points = board.getGridPoints(tileXY.x, tileXY.y, true);
-                graphics.strokePoints(points, true);
+                graphics.strokePoints(points.map(function (point) {
+                    return new Phaser.Math.Vector2(point.x, point.y);
+                }), true);
             }, this);
 
 

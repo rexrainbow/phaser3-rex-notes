@@ -2,7 +2,7 @@ import 'phaser';
 import AwaitLoader from '../../plugins/awaitloader';
 
 class Demo extends Phaser.Scene {
-    print: Phaser.GameObjects.Text;
+    declare print: Phaser.GameObjects.Text;
 
     constructor() {
         super({
@@ -13,7 +13,7 @@ class Demo extends Phaser.Scene {
     preload() {
         var textObject = this.add.text(0, 0, 'Preload\n');
 
-        AwaitLoader.call(this.load, async function (successCallback: Function, failureCallback: Function) {
+        this.load.rexAwait(async function (successCallback: Function, failureCallback: Function) {
             textObject.text += 'Async start\n';
             await Delay(1000);
             textObject.text += 'Async end\n';
@@ -31,7 +31,7 @@ class Demo extends Phaser.Scene {
     }
 }
 
-var Delay = function (time) {   
+var Delay = function (time: number) {
     return new Promise(function (resolve, reject) {
         setTimeout(resolve, time);
     });

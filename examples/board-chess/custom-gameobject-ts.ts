@@ -5,10 +5,10 @@ import {
 } from '../../plugins/board-components';
 
 class MyChess extends Phaser.GameObjects.Image {
-    readonly rexChess: ChessData;
+    declare readonly rexChess: ChessData;
     constructor(
         board: Board, tileX: number, tileY: number, tileZ: number,
-        key?: string | Phaser.Textures.Texture, frame?: string | number
+        key: string | Phaser.Textures.Texture, frame?: string | number
     ) {
 
         let scene = board.scene;
@@ -39,15 +39,11 @@ class Demo extends Phaser.Scene {
         CreateTileTexture(board, 'chess', 'white');
 
         board
-            .forEachTileXY(function (tileXY, board: Board) {
+            .forEachTileXY(function (tileXY) {
                 let chess = new MyChess(board, tileXY.x, tileXY.y, 0, 'chess')
                     .setTint(Phaser.Math.Between(0, 0xffffff));
                 console.log(chess.rexChess.tileXYZ);
             }, this);
-    }
-
-    update(time, delta) {
-
     }
 }
 

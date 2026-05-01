@@ -1,13 +1,15 @@
 import 'phaser';
 import BoardPlugin from '../../plugins/board-plugin.js';
+import { Tap, Press, Swipe } from '../../plugins/gestures';
+import { TileXYType } from '../../plugins/board/types/Position';
 
 const Random = Phaser.Math.Between;
 
 class Demo extends Phaser.Scene {
-    rexBoard: BoardPlugin;
-    board: BoardPlugin.Board;
-    print: Phaser.GameObjects.Text;
-    cameraController: Phaser.Cameras.Controls.SmoothedKeyControl;
+    declare rexBoard: BoardPlugin;
+    declare board: BoardPlugin.Board;
+    declare print: Phaser.GameObjects.Text;
+    declare cameraController: Phaser.Cameras.Controls.SmoothedKeyControl;
 
     constructor() {
         super({
@@ -47,45 +49,50 @@ class Demo extends Phaser.Scene {
 
         board
             .setInteractive()
-            .on('tiledown', function (pointer, tileXY) {
+            .on('tiledown', function (pointer: Phaser.Input.Pointer, tileXY: TileXYType) {
                 console.log('down ' + tileXY.x + ',' + tileXY.y);
             })
-            .on('tileup', function (pointer, tileXY) {
+            .on('tileup', function (pointer: Phaser.Input.Pointer, tileXY: TileXYType) {
                 console.log('up ' + tileXY.x + ',' + tileXY.y);
             })
-            .on('tilemove', function (pointer, tileXY) {
+            .on('tilemove', function (pointer: Phaser.Input.Pointer, tileXY: TileXYType) {
                 console.log('move ' + tileXY.x + ',' + tileXY.y);
             })
-            .on('tileover', function (pointer, tileXY) {
+            .on('tileover', function (pointer: Phaser.Input.Pointer, tileXY: TileXYType) {
                 console.log('over ' + tileXY.x + ',' + tileXY.y);
             })
-            .on('tileout', function (pointer, tileXY) {
+            .on('tileout', function (pointer: Phaser.Input.Pointer, tileXY: TileXYType) {
                 console.log('out ' + tileXY.x + ',' + tileXY.y);
             })
-            .on('gameobjectdown', function (pointer, gameObject) {
+            .on('gameobjectdown', function (pointer: Phaser.Input.Pointer, gameObject: BoardPlugin.Shape) {
                 gameObject.setFillStyle(Random(0, 0xffffff), 0.7);
             })
-            .on('tile1tap', function (tap, tileXY) {
+            .on('tile1tap', function (tap: Tap, tileXY: TileXYType) {
                 console.log('1 tap ' + tileXY.x + ',' + tileXY.y);
             })
-            .on('tile2tap', function (tap, tileXY) {
+            .on('tile2tap', function (tap: Tap, tileXY: TileXYType) {
                 console.log('2 tap ' + tileXY.x + ',' + tileXY.y);
             })
-            .on('tilepressstart', function (press, tileXY) {
+            .on('tilepressstart', function (press: Press, tileXY: TileXYType) {
                 console.log('press start ' + tileXY.x + ',' + tileXY.y);
             })
-            .on('tilepressend', function (press, tileXY) {
+            .on('tilepressend', function (press: Press, tileXY: TileXYType) {
                 console.log('press end ' + tileXY.x + ',' + tileXY.y);
             })
-            .on('tileswipe', function (swipe, tileXY) {
-                console.log(`swipe-${swipe.direction} ` + tileXY.x + ',' + tileXY.y);
+            .on('tileswipe', function (swipe: Swipe, tileXY: TileXYType) {
+                console.log(`swipe-${GetSwipeDirection(swipe)} ` + tileXY.x + ',' + tileXY.y);
             })
 
         this.board = board;
         this.print = this.add.text(0, 0, '').setScrollFactor(0);
 
 
-        var cursors = this.input.keyboard.createCursorKeys();
+        var keyboard = this.input.keyboard;
+        if (!keyboard) {
+            return;
+        }
+
+        var cursors = keyboard.createCursorKeys();
         this.cameraController = new Phaser.Cameras.Controls.SmoothedKeyControl({
             camera: this.cameras.main,
 
@@ -93,8 +100,8 @@ class Demo extends Phaser.Scene {
             right: cursors.right,
             up: cursors.up,
             down: cursors.down,
-            zoomIn: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A),
-            zoomOut: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E),
+            zoomIn: keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A),
+            zoomOut: keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E),
 
             acceleration: 0.06,
             drag: 0.003,
@@ -102,7 +109,7 @@ class Demo extends Phaser.Scene {
         });
     }
 
-    update(time, delta) {
+    update(time: number, delta: number) {
         this.cameraController.update(delta);
 
         var pointer = this.input.activePointer;
@@ -132,6 +139,23 @@ var getHexagonGrid = function (scene: Demo) {
     })
     return grid;
 };
+
+var GetSwipeDirection = function (swipe: Swipe) {
+    var directions: string[] = [];
+    if (swipe.left) {
+        directions.push('left');
+    }
+    if (swipe.right) {
+        directions.push('right');
+    }
+    if (swipe.up) {
+        directions.push('up');
+    }
+    if (swipe.down) {
+        directions.push('down');
+    }
+    return directions.join('-');
+}
 
 var config = {
     type: Phaser.AUTO,

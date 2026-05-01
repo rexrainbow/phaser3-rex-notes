@@ -48,7 +48,7 @@ class SpeechBubble extends CustomShapes {
 }
 
 class Demo extends Phaser.Scene {
-    rexUI: UIPlugin;
+    declare rexUI: UIPlugin;
 
     constructor() {
         super({

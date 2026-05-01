@@ -7,6 +7,11 @@ import MiniBoard from '../miniboard/MiniBoard';
  */
 export default class Shape extends Phaser.GameObjects.Polygon {
     /**
+     * Board chess data attached when this object is added to a board.
+     */
+    readonly rexChess: import('../chess/ChessData').default;
+
+    /**
      * Create a shape chess piece.
      * @param board - Board or mini board instance.
      * @param tileX - Tile x.
