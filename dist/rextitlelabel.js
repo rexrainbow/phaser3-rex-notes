@@ -17885,12 +17885,6 @@ void main (void) {
 
         var context = GetContext2D(canvasOrContext);
 
-        if (tintMode === true) {
-            tintMode = TintModes$1.FILL;
-        } else if (tintMode === false) {
-            tintMode = undefined;
-        }
-
         if (color === undefined || color === null || typeof tintMode !== 'number') {
             // Draw image directly
             context.drawImage(
@@ -17986,6 +17980,7 @@ void main (void) {
             super(parent, ImageTypeName);
             this.setTexture(key, frame);
             this.color = undefined;
+            this.tintMode = undefined;
         }
 
         get frameWidth() {
@@ -18063,9 +18058,17 @@ void main (void) {
             return this;
         }
 
+        setTintMode(tintMode) {
+            this.tintMode = tintMode;
+            return this;
+        }
+
         modifyPorperties(o) {
             if (o.hasOwnProperty('color')) {
                 this.setColor(o.color);
+            }
+            if (o.hasOwnProperty('tintMode')) {
+                this.setTintMode(o.tintMode);
             }
 
             super.modifyPorperties(o);
@@ -18075,9 +18078,8 @@ void main (void) {
         renderContent() {
             var tintMode = undefined;
             if (this.color !== undefined && this.color !== null) {
-                tintMode = TintModes.FILL;
+                tintMode = (this.tintMode === undefined) ? TintModes.FILL : this.tintMode;
             }
-            // TODO: Pass tintMode from paremeter
 
             DrawFrameToCanvas(
                 this.frameObj, this.context,

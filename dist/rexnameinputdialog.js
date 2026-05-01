@@ -21696,7 +21696,7 @@ void main (void) {
     };
 
     const CanvasPool$3 = Phaser.Display.Canvas.CanvasPool;
-    const TintModes$3 = Phaser.TintModes;
+    const TintModes$2 = Phaser.TintModes;
 
     var GetContext2D = function (canvasOrContext) {
         if (
@@ -21731,12 +21731,6 @@ void main (void) {
 
         var context = GetContext2D(canvasOrContext);
 
-        if (tintMode === true) {
-            tintMode = TintModes$3.FILL;
-        } else if (tintMode === false) {
-            tintMode = undefined;
-        }
-
         if (color === undefined || color === null || typeof tintMode !== 'number') {
             // Draw image directly
             context.drawImage(
@@ -21766,7 +21760,7 @@ void main (void) {
                 0, 0, width, height
             );
 
-            if (tintMode === TintModes$3.FILL) {
+            if (tintMode === TintModes$2.FILL) {
                 tempContext.globalCompositeOperation = 'source-in';
                 tempContext.fillStyle = color;
                 tempContext.fillRect(0, 0, width, height);
@@ -21774,19 +21768,19 @@ void main (void) {
                 var compositeOperation = 'source-in';
 
                 switch (tintMode) {
-                    case TintModes$3.MULTIPLY:
+                    case TintModes$2.MULTIPLY:
                         compositeOperation = 'multiply';
                         break;
-                    case TintModes$3.ADD:
+                    case TintModes$2.ADD:
                         compositeOperation = 'lighter';
                         break;
-                    case TintModes$3.SCREEN:
+                    case TintModes$2.SCREEN:
                         compositeOperation = 'screen';
                         break;
-                    case TintModes$3.OVERLAY:
+                    case TintModes$2.OVERLAY:
                         compositeOperation = 'overlay';
                         break;
-                    case TintModes$3.HARD_LIGHT:
+                    case TintModes$2.HARD_LIGHT:
                         compositeOperation = 'hard-light';
                         break;
                 }
@@ -21822,7 +21816,7 @@ void main (void) {
 
     };
 
-    const TintModes$2 = Phaser.TintModes;
+    const TintModes$1 = Phaser.TintModes;
 
     class ImageData extends RenderBase {
         constructor(
@@ -21832,6 +21826,7 @@ void main (void) {
             super(parent, ImageTypeName);
             this.setTexture(key, frame);
             this.color = undefined;
+            this.tintMode = undefined;
         }
 
         get frameWidth() {
@@ -21909,9 +21904,17 @@ void main (void) {
             return this;
         }
 
+        setTintMode(tintMode) {
+            this.tintMode = tintMode;
+            return this;
+        }
+
         modifyPorperties(o) {
             if (o.hasOwnProperty('color')) {
                 this.setColor(o.color);
+            }
+            if (o.hasOwnProperty('tintMode')) {
+                this.setTintMode(o.tintMode);
             }
 
             super.modifyPorperties(o);
@@ -21921,9 +21924,8 @@ void main (void) {
         renderContent() {
             var tintMode = undefined;
             if (this.color !== undefined && this.color !== null) {
-                tintMode = TintModes$2.FILL;
+                tintMode = (this.tintMode === undefined) ? TintModes$1.FILL : this.tintMode;
             }
-            // TODO: Pass tintMode from paremeter
 
             DrawFrameToCanvas(
                 this.frameObj, this.context,
@@ -34434,7 +34436,7 @@ void main (void) {
 
     const IsPlainObject$4 = Phaser.Utils.Objects.IsPlainObject;
     const GetValue$p = Phaser.Utils.Objects.GetValue;
-    const TintModes$1 = Phaser.TintModes;
+    const TintModes = Phaser.TintModes;
 
     var AddImage = function (key, config) {
         if (IsPlainObject$4(key)) {
@@ -34467,11 +34469,9 @@ void main (void) {
             }
         }
 
-        var tintFill = GetValue$p(config, 'tintFill', undefined);
-        if (tintFill === true) {
-            tintFill = TintModes$1.FILL;
-        } else if (tintFill === false) {
-            tintFill = undefined;
+        var tintMode = config.tintMode;
+        if ((tintMode === undefined) && (config.tintFill === true)) {
+            tintMode = TintModes.FILL;
         }
 
         this.images[key] = {
@@ -34484,11 +34484,9 @@ void main (void) {
             right: GetValue$p(config, 'right', 0),
             originX: GetValue$p(config, 'originX', 0),
             originY: GetValue$p(config, 'originY', 0),
-            tintFill: tintFill,
+            tintMode: tintMode,
         };
     };
-
-    const TintModes = Phaser.TintModes;
 
     var DrawImage = function (key, context, x, y, color, autoRound) {
         var imgData = this.get(key);
@@ -34504,18 +34502,15 @@ void main (void) {
         x += imgData.left - (imgData.originX * width);
         y += imgData.y - (imgData.originY * height);
 
-        var tintFill = imgData.tintFill;
-        if (tintFill === true) {
-            tintFill = TintModes.FILL;
-        } else if (tintFill === false || tintFill === undefined) {
-            tintFill = undefined;
+        var tintMode = imgData.tintMode;
+        if (tintMode === undefined) {
             color = undefined;
         }
 
         DrawFrameToCanvas(
             frame, context,
             x, y, width, height,
-            color, autoRound, tintFill
+            color, autoRound, tintMode
         );
     };
 

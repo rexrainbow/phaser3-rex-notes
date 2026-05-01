@@ -4,21 +4,6 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextexttranslationplugin = factory());
 })(this, (function () { 'use strict';
 
-    function _mergeNamespaces(n, m) {
-        m.forEach(function (e) {
-            e && typeof e !== 'string' && !Array.isArray(e) && Object.keys(e).forEach(function (k) {
-                if (k !== 'default' && !(k in n)) {
-                    var d = Object.getOwnPropertyDescriptor(e, k);
-                    Object.defineProperty(n, k, d.get ? d : {
-                        enumerable: true,
-                        get: function () { return e[k]; }
-                    });
-                }
-            });
-        });
-        return Object.freeze(n);
-    }
-
     var EventEmitterMethods = {
         setEventEmitter(eventEmitter, EventEmitterClass) {
             if (EventEmitterClass === undefined) {
@@ -222,26 +207,26 @@
 
     Phaser.Loader.FileTypesManager.register('rexAwait', LoaderCallback);
 
-    function _typeof$3(o) {
+    function _typeof$1(o) {
       "@babel/helpers - typeof";
 
-      return _typeof$3 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+      return _typeof$1 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
         return typeof o;
       } : function (o) {
         return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-      }, _typeof$3(o);
+      }, _typeof$1(o);
     }
 
-    function _classCallCheck$1(a, n) {
+    function _classCallCheck(a, n) {
       if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function");
     }
 
     function toPrimitive(t, r) {
-      if ("object" != _typeof$3(t) || !t) return t;
+      if ("object" != _typeof$1(t) || !t) return t;
       var e = t[Symbol.toPrimitive];
       if (void 0 !== e) {
         var i = e.call(t, r || "default");
-        if ("object" != _typeof$3(i)) return i;
+        if ("object" != _typeof$1(i)) return i;
         throw new TypeError("@@toPrimitive must return a primitive value.");
       }
       return ("string" === r ? String : Number)(t);
@@ -249,17 +234,17 @@
 
     function toPropertyKey(t) {
       var i = toPrimitive(t, "string");
-      return "symbol" == _typeof$3(i) ? i : i + "";
+      return "symbol" == _typeof$1(i) ? i : i + "";
     }
 
-    function _defineProperties$1(e, r) {
+    function _defineProperties(e, r) {
       for (var t = 0; t < r.length; t++) {
         var o = r[t];
         o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, toPropertyKey(o.key), o);
       }
     }
-    function _createClass$1(e, r, t) {
-      return r && _defineProperties$1(e.prototype, r), t && _defineProperties$1(e, t), Object.defineProperty(e, "prototype", {
+    function _createClass(e, r, t) {
+      return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", {
         writable: !1
       }), e;
     }
@@ -289,7 +274,7 @@
     }
 
     function _possibleConstructorReturn(t, e) {
-      if (e && ("object" == _typeof$3(e) || "function" == typeof e)) return e;
+      if (e && ("object" == _typeof$1(e) || "function" == typeof e)) return e;
       if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined");
       return _assertThisInitialized(t);
     }
@@ -300,7 +285,7 @@
       }, _getPrototypeOf(t);
     }
 
-    function _defineProperty$2(e, r, t) {
+    function _defineProperty(e, r, t) {
       return (r = toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
         value: t,
         enumerable: !0,
@@ -317,17 +302,17 @@
       if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r);
     }
 
-    function _arrayLikeToArray(r, a) {
+    function _arrayLikeToArray$1(r, a) {
       (null == a || a > r.length) && (a = r.length);
       for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
       return n;
     }
 
-    function _unsupportedIterableToArray(r, a) {
+    function _unsupportedIterableToArray$1(r, a) {
       if (r) {
-        if ("string" == typeof r) return _arrayLikeToArray(r, a);
+        if ("string" == typeof r) return _arrayLikeToArray$1(r, a);
         var t = {}.toString.call(r).slice(8, -1);
-        return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0;
+        return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray$1(r, a) : void 0;
       }
     }
 
@@ -336,11 +321,11 @@
     }
 
     function _toArray(r) {
-      return _arrayWithHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableRest();
+      return _arrayWithHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray$1(r) || _nonIterableRest();
     }
 
     function ownKeys$6(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-    function _objectSpread$6(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$6(Object(source), !0).forEach(function (key) { _defineProperty$2(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$6(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+    function _objectSpread$6(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$6(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$6(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
     var consoleLogger = {
       type: 'logger',
       log: function log(args) {
@@ -359,10 +344,10 @@
     var Logger = function () {
       function Logger(concreteLogger) {
         var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-        _classCallCheck$1(this, Logger);
+        _classCallCheck(this, Logger);
         this.init(concreteLogger, options);
       }
-      _createClass$1(Logger, [{
+      _createClass(Logger, [{
         key: "init",
         value: function init(concreteLogger) {
           var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -436,10 +421,10 @@
 
     var EventEmitter = function () {
       function EventEmitter() {
-        _classCallCheck$1(this, EventEmitter);
+        _classCallCheck(this, EventEmitter);
         this.observers = {};
       }
-      _createClass$1(EventEmitter, [{
+      _createClass(EventEmitter, [{
         key: "on",
         value: function on(events, listener) {
           var _this = this;
@@ -648,7 +633,7 @@
     }
 
     function ownKeys$5(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-    function _objectSpread$5(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$5(Object(source), !0).forEach(function (key) { _defineProperty$2(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$5(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+    function _objectSpread$5(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$5(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$5(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
     function _createSuper$3(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$3(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
     function _isNativeReflectConstruct$3() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
     var ResourceStore = function (_EventEmitter) {
@@ -660,7 +645,7 @@
           ns: ['translation'],
           defaultNS: 'translation'
         };
-        _classCallCheck$1(this, ResourceStore);
+        _classCallCheck(this, ResourceStore);
         _this = _super.call(this);
         if (isIE10) {
           EventEmitter.call(_assertThisInitialized(_this));
@@ -675,7 +660,7 @@
         }
         return _this;
       }
-      _createClass$1(ResourceStore, [{
+      _createClass(ResourceStore, [{
         key: "addNamespaces",
         value: function addNamespaces(ns) {
           if (this.options.ns.indexOf(ns) < 0) {
@@ -819,7 +804,7 @@
     };
 
     function ownKeys$4(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-    function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$4(Object(source), !0).forEach(function (key) { _defineProperty$2(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$4(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+    function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$4(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$4(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
     function _createSuper$2(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$2(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
     function _isNativeReflectConstruct$2() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
     var checkedLoadedFor = {};
@@ -829,7 +814,7 @@
       function Translator(services) {
         var _this;
         var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-        _classCallCheck$1(this, Translator);
+        _classCallCheck(this, Translator);
         _this = _super.call(this);
         if (isIE10) {
           EventEmitter.call(_assertThisInitialized(_this));
@@ -842,7 +827,7 @@
         _this.logger = baseLogger.create('translator');
         return _this;
       }
-      _createClass$1(Translator, [{
+      _createClass(Translator, [{
         key: "changeLanguage",
         value: function changeLanguage(lng) {
           if (lng) this.language = lng;
@@ -890,10 +875,10 @@
         key: "translate",
         value: function translate(keys, options, lastKey) {
           var _this2 = this;
-          if (_typeof$3(options) !== 'object' && this.options.overloadTranslationOptionHandler) {
+          if (_typeof$1(options) !== 'object' && this.options.overloadTranslationOptionHandler) {
             options = this.options.overloadTranslationOptionHandler(arguments);
           }
-          if (_typeof$3(options) === 'object') options = _objectSpread$4({}, options);
+          if (_typeof$1(options) === 'object') options = _objectSpread$4({}, options);
           if (!options) options = {};
           if (keys === undefined || keys === null) return '';
           if (!Array.isArray(keys)) keys = [String(keys)];
@@ -1200,12 +1185,12 @@
     }
     var LanguageUtil = function () {
       function LanguageUtil(options) {
-        _classCallCheck$1(this, LanguageUtil);
+        _classCallCheck(this, LanguageUtil);
         this.options = options;
         this.supportedLngs = this.options.supportedLngs || false;
         this.logger = baseLogger.create('languageUtils');
       }
-      _createClass$1(LanguageUtil, [{
+      _createClass(LanguageUtil, [{
         key: "getScriptPartFromCode",
         value: function getScriptPartFromCode(code) {
           if (!code || code.indexOf('-') < 0) return null;
@@ -1511,7 +1496,7 @@
     var PluralResolver = function () {
       function PluralResolver(languageUtils) {
         var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-        _classCallCheck$1(this, PluralResolver);
+        _classCallCheck(this, PluralResolver);
         this.languageUtils = languageUtils;
         this.options = options;
         this.logger = baseLogger.create('pluralResolver');
@@ -1521,7 +1506,7 @@
         }
         this.rules = createRules();
       }
-      _createClass$1(PluralResolver, [{
+      _createClass(PluralResolver, [{
         key: "addRule",
         value: function addRule(lng, obj) {
           this.rules[lng] = obj;
@@ -1630,7 +1615,7 @@
     }();
 
     function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-    function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$3(Object(source), !0).forEach(function (key) { _defineProperty$2(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+    function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$3(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
     function deepFindWithDefaults(data, defaultData, key) {
       var keySeparator = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '.';
       var ignoreJSONStructure = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
@@ -1644,7 +1629,7 @@
     var Interpolator = function () {
       function Interpolator() {
         var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-        _classCallCheck$1(this, Interpolator);
+        _classCallCheck(this, Interpolator);
         this.logger = baseLogger.create('interpolator');
         this.options = options;
         this.format = options.interpolation && options.interpolation.format || function (value) {
@@ -1652,7 +1637,7 @@
         };
         this.init(options);
       }
-      _createClass$1(Interpolator, [{
+      _createClass(Interpolator, [{
         key: "init",
         value: function init() {
           var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -1835,7 +1820,7 @@
     }();
 
     function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-    function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$2(Object(source), !0).forEach(function (key) { _defineProperty$2(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+    function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$2(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
     function parseFormatStr(formatStr) {
       var formatName = formatStr.toLowerCase().trim();
       var formatOptions = {};
@@ -1883,7 +1868,7 @@
     var Formatter = function () {
       function Formatter() {
         var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-        _classCallCheck$1(this, Formatter);
+        _classCallCheck(this, Formatter);
         this.logger = baseLogger.create('formatter');
         this.options = options;
         this.formats = {
@@ -1922,7 +1907,7 @@
         };
         this.init(options);
       }
-      _createClass$1(Formatter, [{
+      _createClass(Formatter, [{
         key: "init",
         value: function init(services) {
           var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
@@ -1972,8 +1957,8 @@
       return Formatter;
     }();
 
-    function ownKeys$1$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-    function _objectSpread$1$1(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$1$1(Object(source), !0).forEach(function (key) { _defineProperty$2(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$1$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+    function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+    function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$1(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
     function _createSuper$1(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$1(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
     function _isNativeReflectConstruct$1() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
     function removePending(q, name) {
@@ -1988,7 +1973,7 @@
       function Connector(backend, store, services) {
         var _this;
         var options = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
-        _classCallCheck$1(this, Connector);
+        _classCallCheck(this, Connector);
         _this = _super.call(this);
         if (isIE10) {
           EventEmitter.call(_assertThisInitialized(_this));
@@ -2011,7 +1996,7 @@
         }
         return _this;
       }
-      _createClass$1(Connector, [{
+      _createClass(Connector, [{
         key: "queueLoad",
         value: function queueLoad(languages, namespaces, options, callback) {
           var _this2 = this;
@@ -2202,7 +2187,7 @@
           }
           if (key === undefined || key === null || key === '') return;
           if (this.backend && this.backend.create) {
-            var opts = _objectSpread$1$1(_objectSpread$1$1({}, options), {}, {
+            var opts = _objectSpread$1(_objectSpread$1({}, options), {}, {
               isUpdate: isUpdate
             });
             var fc = this.backend.create.bind(this.backend);
@@ -2271,10 +2256,10 @@
         appendNamespaceToCIMode: false,
         overloadTranslationOptionHandler: function handle(args) {
           var ret = {};
-          if (_typeof$3(args[1]) === 'object') ret = args[1];
+          if (_typeof$1(args[1]) === 'object') ret = args[1];
           if (typeof args[1] === 'string') ret.defaultValue = args[1];
           if (typeof args[2] === 'string') ret.tDescription = args[2];
-          if (_typeof$3(args[2]) === 'object' || _typeof$3(args[3]) === 'object') {
+          if (_typeof$1(args[2]) === 'object' || _typeof$1(args[3]) === 'object') {
             var options = args[3] || args[2];
             Object.keys(options).forEach(function (key) {
               ret[key] = options[key];
@@ -2309,8 +2294,8 @@
       return options;
     }
 
-    function ownKeys$7(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-    function _objectSpread$7(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$7(Object(source), !0).forEach(function (key) { _defineProperty$2(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$7(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+    function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+    function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
     function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
     function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
     function noop() {}
@@ -2329,7 +2314,7 @@
         var _this;
         var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
         var callback = arguments.length > 1 ? arguments[1] : undefined;
-        _classCallCheck$1(this, I18n);
+        _classCallCheck(this, I18n);
         _this = _super.call(this);
         if (isIE10) {
           EventEmitter.call(_assertThisInitialized(_this));
@@ -2352,7 +2337,7 @@
         }
         return _this;
       }
-      _createClass$1(I18n, [{
+      _createClass(I18n, [{
         key: "init",
         value: function init() {
           var _this2 = this;
@@ -2370,9 +2355,9 @@
             }
           }
           var defOpts = get();
-          this.options = _objectSpread$7(_objectSpread$7(_objectSpread$7({}, defOpts), this.options), transformOptions(options));
+          this.options = _objectSpread(_objectSpread(_objectSpread({}, defOpts), this.options), transformOptions(options));
           if (this.options.compatibilityAPI !== 'v1') {
-            this.options.interpolation = _objectSpread$7(_objectSpread$7({}, defOpts.interpolation), this.options.interpolation);
+            this.options.interpolation = _objectSpread(_objectSpread({}, defOpts.interpolation), this.options.interpolation);
           }
           if (options.keySeparator !== undefined) {
             this.options.userDefinedKeySeparator = options.keySeparator;
@@ -2644,13 +2629,13 @@
           var _this5 = this;
           var fixedT = function fixedT(key, opts) {
             var options;
-            if (_typeof$3(opts) !== 'object') {
+            if (_typeof$1(opts) !== 'object') {
               for (var _len3 = arguments.length, rest = new Array(_len3 > 2 ? _len3 - 2 : 0), _key3 = 2; _key3 < _len3; _key3++) {
                 rest[_key3 - 2] = arguments[_key3];
               }
               options = _this5.options.overloadTranslationOptionHandler([key, opts].concat(rest));
             } else {
-              options = _objectSpread$7({}, opts);
+              options = _objectSpread({}, opts);
             }
             options.lng = options.lng || fixedT.lng;
             options.lngs = options.lngs || fixedT.lngs;
@@ -2777,7 +2762,7 @@
           var _this8 = this;
           var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
           var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : noop;
-          var mergedOptions = _objectSpread$7(_objectSpread$7(_objectSpread$7({}, this.options), options), {
+          var mergedOptions = _objectSpread(_objectSpread(_objectSpread({}, this.options), options), {
             isClone: true
           });
           var clone = new I18n(mergedOptions);
@@ -2788,7 +2773,7 @@
           membersToCopy.forEach(function (m) {
             clone[m] = _this8[m];
           });
-          clone.services = _objectSpread$7({}, this.services);
+          clone.services = _objectSpread({}, this.services);
           clone.services.utils = {
             hasLoadedNamespace: clone.hasLoadedNamespace.bind(clone)
           };
@@ -2820,7 +2805,7 @@
       }]);
       return I18n;
     }(EventEmitter);
-    _defineProperty$2(I18n, "createInstance", function () {
+    _defineProperty(I18n, "createInstance", function () {
       var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
       var callback = arguments.length > 1 ? arguments[1] : undefined;
       return new I18n(options, callback);
@@ -2843,9 +2828,77 @@
     instance.loadNamespaces;
     instance.loadLanguages;
 
-    function _typeof$2(o) { "@babel/helpers - typeof"; return _typeof$2 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof$2(o); }
+    var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+    function getDefaultExportFromCjs (x) {
+    	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+    }
+
+    var cjs = {exports: {}};
+
+    var utils = {};
+
+    Object.defineProperty(utils, "__esModule", {
+      value: true
+    });
+    utils.defaults = defaults;
+    utils.hasXMLHttpRequest = hasXMLHttpRequest;
+    utils.interpolate = interpolate;
+    utils.interpolateUrl = interpolateUrl;
+    utils.isSafeUrlSegment = isSafeUrlSegment;
+    utils.makePromise = makePromise;
+    utils.redactUrlCredentials = redactUrlCredentials;
+    utils.sanitizeLogValue = sanitizeLogValue;
+    function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
+    function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+    function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+    function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+    var arr = [];
+    var each = arr.forEach;
+    var slice = arr.slice;
+    var UNSAFE_KEYS = ['__proto__', 'constructor', 'prototype'];
+    function defaults(obj) {
+      each.call(slice.call(arguments, 1), function (source) {
+        if (source) {
+          for (var _i = 0, _Object$keys = Object.keys(source); _i < _Object$keys.length; _i++) {
+            var prop = _Object$keys[_i];
+            if (UNSAFE_KEYS.indexOf(prop) > -1) continue;
+            if (obj[prop] === undefined) obj[prop] = source[prop];
+          }
+        }
+      });
+      return obj;
+    }
+    function isSafeUrlSegment(v) {
+      if (typeof v !== 'string') return false;
+      if (v.length === 0 || v.length > 128) return false;
+      if (UNSAFE_KEYS.indexOf(v) > -1) return false;
+      if (v.indexOf('..') > -1) return false;
+      if (v.indexOf('/') > -1 || v.indexOf('\\') > -1) return false;
+      if (/[?#%\s@]/.test(v)) return false;
+      if (/[\x00-\x1F\x7F]/.test(v)) return false;
+      return true;
+    }
+    function sanitizeLogValue(v) {
+      if (typeof v !== 'string') return v;
+      return v.replace(/[\r\n\x00-\x1F\x7F]/g, ' ');
+    }
+    function redactUrlCredentials(u) {
+      if (typeof u !== 'string' || u.length === 0) return u;
+      try {
+        var parsed = new URL(u);
+        if (parsed.username || parsed.password) {
+          parsed.username = '';
+          parsed.password = '';
+          return parsed.toString();
+        }
+        return u;
+      } catch (e) {
+        return u.replace(/(\/\/)[^/@\s]+@/g, '$1');
+      }
+    }
     function hasXMLHttpRequest() {
-      return typeof XMLHttpRequest === 'function' || (typeof XMLHttpRequest === "undefined" ? "undefined" : _typeof$2(XMLHttpRequest)) === 'object';
+      return typeof XMLHttpRequest === 'function' || (typeof XMLHttpRequest === "undefined" ? "undefined" : _typeof(XMLHttpRequest)) === 'object';
     }
     function isPromise(maybePromise) {
       return !!maybePromise && typeof maybePromise.then === 'function';
@@ -2856,22 +2909,44 @@
       }
       return Promise.resolve(maybePromise);
     }
-
-    var global$1 = (typeof global !== "undefined" ? global :
-                typeof self !== "undefined" ? self :
-                typeof window !== "undefined" ? window : {});
-
-    var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
-
-    function getDefaultExportFromCjs (x) {
-    	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+    var interpolationRegexp = /\{\{(.+?)\}\}/g;
+    function interpolate(str, data) {
+      return str.replace(interpolationRegexp, function (match, key) {
+        var k = key.trim();
+        if (UNSAFE_KEYS.indexOf(k) > -1) return match;
+        var value = data[k];
+        return value != null ? value : match;
+      });
+    }
+    function interpolateUrl(str, data) {
+      var unsafe = false;
+      var result = str.replace(interpolationRegexp, function (match, key) {
+        var k = key.trim();
+        if (UNSAFE_KEYS.indexOf(k) > -1) return match;
+        var value = data[k];
+        if (value == null) return match;
+        var segments = String(value).split('+');
+        var _iterator = _createForOfIteratorHelper(segments),
+          _step;
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var seg = _step.value;
+            if (!isSafeUrlSegment(seg)) {
+              unsafe = true;
+              return match;
+            }
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+        return segments.join('+');
+      });
+      return unsafe ? null : result;
     }
 
-    function commonjsRequire(path) {
-    	throw new Error('Could not dynamically require "' + path + '". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.');
-    }
-
-    var getFetch$1 = {exports: {}};
+    var request = {exports: {}};
 
     var browserPonyfill = {exports: {}};
 
@@ -2901,17 +2976,20 @@
 
     		((function (exports) {
 
-    		  var global =
+    		  /* eslint-disable no-prototype-builtins */
+    		  var g =
     		    (typeof globalThis !== 'undefined' && globalThis) ||
     		    (typeof self !== 'undefined' && self) ||
-    		    (typeof global !== 'undefined' && global);
+    		    // eslint-disable-next-line no-undef
+    		    (typeof commonjsGlobal !== 'undefined' && commonjsGlobal) ||
+    		    {};
 
     		  var support = {
-    		    searchParams: 'URLSearchParams' in global,
-    		    iterable: 'Symbol' in global && 'iterator' in Symbol,
+    		    searchParams: 'URLSearchParams' in g,
+    		    iterable: 'Symbol' in g && 'iterator' in Symbol,
     		    blob:
-    		      'FileReader' in global &&
-    		      'Blob' in global &&
+    		      'FileReader' in g &&
+    		      'Blob' in g &&
     		      (function() {
     		        try {
     		          new Blob();
@@ -2920,8 +2998,8 @@
     		          return false
     		        }
     		      })(),
-    		    formData: 'FormData' in global,
-    		    arrayBuffer: 'ArrayBuffer' in global
+    		    formData: 'FormData' in g,
+    		    arrayBuffer: 'ArrayBuffer' in g
     		  };
 
     		  function isDataView(obj) {
@@ -2992,6 +3070,9 @@
     		      }, this);
     		    } else if (Array.isArray(headers)) {
     		      headers.forEach(function(header) {
+    		        if (header.length != 2) {
+    		          throw new TypeError('Headers constructor: expected name/value pair to be length 2, found' + header.length)
+    		        }
     		        this.append(header[0], header[1]);
     		      }, this);
     		    } else if (headers) {
@@ -3062,6 +3143,7 @@
     		  }
 
     		  function consumed(body) {
+    		    if (body._noBody) return
     		    if (body.bodyUsed) {
     		      return Promise.reject(new TypeError('Already read'))
     		    }
@@ -3089,7 +3171,9 @@
     		  function readBlobAsText(blob) {
     		    var reader = new FileReader();
     		    var promise = fileReaderReady(reader);
-    		    reader.readAsText(blob);
+    		    var match = /charset=([A-Za-z0-9_-]+)/.exec(blob.type);
+    		    var encoding = match ? match[1] : 'utf-8';
+    		    reader.readAsText(blob, encoding);
     		    return promise
     		  }
 
@@ -3127,9 +3211,11 @@
     		        semantic of setting Request.bodyUsed in the constructor before
     		        _initBody is called.
     		      */
+    		      // eslint-disable-next-line no-self-assign
     		      this.bodyUsed = this.bodyUsed;
     		      this._bodyInit = body;
     		      if (!body) {
+    		        this._noBody = true;
     		        this._bodyText = '';
     		      } else if (typeof body === 'string') {
     		        this._bodyText = body;
@@ -3177,28 +3263,29 @@
     		          return Promise.resolve(new Blob([this._bodyText]))
     		        }
     		      };
-
-    		      this.arrayBuffer = function() {
-    		        if (this._bodyArrayBuffer) {
-    		          var isConsumed = consumed(this);
-    		          if (isConsumed) {
-    		            return isConsumed
-    		          }
-    		          if (ArrayBuffer.isView(this._bodyArrayBuffer)) {
-    		            return Promise.resolve(
-    		              this._bodyArrayBuffer.buffer.slice(
-    		                this._bodyArrayBuffer.byteOffset,
-    		                this._bodyArrayBuffer.byteOffset + this._bodyArrayBuffer.byteLength
-    		              )
-    		            )
-    		          } else {
-    		            return Promise.resolve(this._bodyArrayBuffer)
-    		          }
-    		        } else {
-    		          return this.blob().then(readBlobAsArrayBuffer)
-    		        }
-    		      };
     		    }
+
+    		    this.arrayBuffer = function() {
+    		      if (this._bodyArrayBuffer) {
+    		        var isConsumed = consumed(this);
+    		        if (isConsumed) {
+    		          return isConsumed
+    		        } else if (ArrayBuffer.isView(this._bodyArrayBuffer)) {
+    		          return Promise.resolve(
+    		            this._bodyArrayBuffer.buffer.slice(
+    		              this._bodyArrayBuffer.byteOffset,
+    		              this._bodyArrayBuffer.byteOffset + this._bodyArrayBuffer.byteLength
+    		            )
+    		          )
+    		        } else {
+    		          return Promise.resolve(this._bodyArrayBuffer)
+    		        }
+    		      } else if (support.blob) {
+    		        return this.blob().then(readBlobAsArrayBuffer)
+    		      } else {
+    		        throw new Error('could not read as ArrayBuffer')
+    		      }
+    		    };
 
     		    this.text = function() {
     		      var rejected = consumed(this);
@@ -3231,7 +3318,7 @@
     		  }
 
     		  // HTTP methods whose capitalization should be normalized
-    		  var methods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'POST', 'PUT'];
+    		  var methods = ['CONNECT', 'DELETE', 'GET', 'HEAD', 'OPTIONS', 'PATCH', 'POST', 'PUT', 'TRACE'];
 
     		  function normalizeMethod(method) {
     		    var upcased = method.toUpperCase();
@@ -3272,7 +3359,12 @@
     		    }
     		    this.method = normalizeMethod(options.method || this.method || 'GET');
     		    this.mode = options.mode || this.mode || null;
-    		    this.signal = options.signal || this.signal;
+    		    this.signal = options.signal || this.signal || (function () {
+    		      if ('AbortController' in g) {
+    		        var ctrl = new AbortController();
+    		        return ctrl.signal;
+    		      }
+    		    }());
     		    this.referrer = null;
 
     		    if ((this.method === 'GET' || this.method === 'HEAD') && body) {
@@ -3334,7 +3426,11 @@
     		        var key = parts.shift().trim();
     		        if (key) {
     		          var value = parts.join(':').trim();
-    		          headers.append(key, value);
+    		          try {
+    		            headers.append(key, value);
+    		          } catch (error) {
+    		            console.warn('Response ' + error.message);
+    		          }
     		        }
     		      });
     		    return headers
@@ -3352,6 +3448,9 @@
 
     		    this.type = 'default';
     		    this.status = options.status === undefined ? 200 : options.status;
+    		    if (this.status < 200 || this.status > 599) {
+    		      throw new RangeError("Failed to construct 'Response': The status provided (0) is outside the range [200, 599].")
+    		    }
     		    this.ok = this.status >= 200 && this.status < 300;
     		    this.statusText = options.statusText === undefined ? '' : '' + options.statusText;
     		    this.headers = new Headers(options.headers);
@@ -3371,7 +3470,9 @@
     		  };
 
     		  Response.error = function() {
-    		    var response = new Response(null, {status: 0, statusText: ''});
+    		    var response = new Response(null, {status: 200, statusText: ''});
+    		    response.ok = false;
+    		    response.status = 0;
     		    response.type = 'error';
     		    return response
     		  };
@@ -3386,7 +3487,7 @@
     		    return new Response(null, {status: status, headers: {location: url}})
     		  };
 
-    		  exports.DOMException = global.DOMException;
+    		  exports.DOMException = g.DOMException;
     		  try {
     		    new exports.DOMException();
     		  } catch (err) {
@@ -3416,10 +3517,16 @@
 
     		      xhr.onload = function() {
     		        var options = {
-    		          status: xhr.status,
     		          statusText: xhr.statusText,
     		          headers: parseHeaders(xhr.getAllResponseHeaders() || '')
     		        };
+    		        // This check if specifically for when a user fetches a file locally from the file system
+    		        // Only if the status is out of a normal range
+    		        if (request.url.indexOf('file://') === 0 && (xhr.status < 200 || xhr.status > 599)) {
+    		          options.status = 200;
+    		        } else {
+    		          options.status = xhr.status;
+    		        }
     		        options.url = 'responseURL' in xhr ? xhr.responseURL : options.headers.get('X-Request-URL');
     		        var body = 'response' in xhr ? xhr.response : xhr.responseText;
     		        setTimeout(function() {
@@ -3435,7 +3542,7 @@
 
     		      xhr.ontimeout = function() {
     		        setTimeout(function() {
-    		          reject(new TypeError('Network request failed'));
+    		          reject(new TypeError('Network request timed out'));
     		        }, 0);
     		      };
 
@@ -3447,7 +3554,7 @@
 
     		      function fixUrl(url) {
     		        try {
-    		          return url === '' && global.location.href ? global.location.href : url
+    		          return url === '' && g.location.href ? g.location.href : url
     		        } catch (e) {
     		          return url
     		        }
@@ -3465,17 +3572,22 @@
     		        if (support.blob) {
     		          xhr.responseType = 'blob';
     		        } else if (
-    		          support.arrayBuffer &&
-    		          request.headers.get('Content-Type') &&
-    		          request.headers.get('Content-Type').indexOf('application/octet-stream') !== -1
+    		          support.arrayBuffer
     		        ) {
     		          xhr.responseType = 'arraybuffer';
     		        }
     		      }
 
-    		      if (init && typeof init.headers === 'object' && !(init.headers instanceof Headers)) {
+    		      if (init && typeof init.headers === 'object' && !(init.headers instanceof Headers || (g.Headers && init.headers instanceof g.Headers))) {
+    		        var names = [];
     		        Object.getOwnPropertyNames(init.headers).forEach(function(name) {
+    		          names.push(normalizeName(name));
     		          xhr.setRequestHeader(name, normalizeValue(init.headers[name]));
+    		        });
+    		        request.headers.forEach(function(value, name) {
+    		          if (names.indexOf(name) === -1) {
+    		            xhr.setRequestHeader(name, value);
+    		          }
     		        });
     		      } else {
     		        request.headers.forEach(function(value, name) {
@@ -3500,11 +3612,11 @@
 
     		  fetch.polyfill = true;
 
-    		  if (!global.fetch) {
-    		    global.fetch = fetch;
-    		    global.Headers = Headers;
-    		    global.Request = Request;
-    		    global.Response = Response;
+    		  if (!g.fetch) {
+    		    g.fetch = fetch;
+    		    g.Headers = Headers;
+    		    g.Request = Request;
+    		    g.Response = Response;
     		  }
 
     		  exports.Headers = Headers;
@@ -3533,376 +3645,393 @@
     }
 
     (function (module, exports) {
-    	var fetchApi;
-    	if (typeof fetch === 'function') {
-    	  if (typeof commonjsGlobal !== 'undefined' && commonjsGlobal.fetch) {
-    	    fetchApi = commonjsGlobal.fetch;
-    	  } else if (typeof window !== 'undefined' && window.fetch) {
-    	    fetchApi = window.fetch;
-    	  } else {
-    	    fetchApi = fetch;
+
+    	Object.defineProperty(exports, "__esModule", {
+    	  value: true
+    	});
+    	exports.default = void 0;
+    	var _utils = utils;
+    	function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+    	function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+    	function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+    	function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+    	function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+    	function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+    	var fetchApi = typeof fetch === 'function' ? fetch : undefined;
+    	if (typeof commonjsGlobal !== 'undefined' && commonjsGlobal.fetch) {
+    	  fetchApi = commonjsGlobal.fetch;
+    	} else if (typeof window !== 'undefined' && window.fetch) {
+    	  fetchApi = window.fetch;
+    	}
+    	var XmlHttpRequestApi;
+    	if ((0, _utils.hasXMLHttpRequest)()) {
+    	  if (typeof commonjsGlobal !== 'undefined' && commonjsGlobal.XMLHttpRequest) {
+    	    XmlHttpRequestApi = commonjsGlobal.XMLHttpRequest;
+    	  } else if (typeof window !== 'undefined' && window.XMLHttpRequest) {
+    	    XmlHttpRequestApi = window.XMLHttpRequest;
     	  }
     	}
+    	var ActiveXObjectApi;
+    	if (typeof ActiveXObject === 'function') {
+    	  if (typeof commonjsGlobal !== 'undefined' && commonjsGlobal.ActiveXObject) {
+    	    ActiveXObjectApi = commonjsGlobal.ActiveXObject;
+    	  } else if (typeof window !== 'undefined' && window.ActiveXObject) {
+    	    ActiveXObjectApi = window.ActiveXObject;
+    	  }
+    	}
+    	if (typeof fetchApi !== 'function') fetchApi = undefined;
+    	if (!fetchApi && !XmlHttpRequestApi && !ActiveXObjectApi) {
+    	  try {
+    	    fetchApi = requireBrowserPonyfill();
+    	  } catch (e) {}
+    	}
+    	var UNSAFE_KEYS = ['__proto__', 'constructor', 'prototype'];
+    	var addQueryString = function addQueryString(url, params) {
+    	  if (params && _typeof(params) === 'object') {
+    	    var queryString = '';
+    	    for (var _i = 0, _Object$keys = Object.keys(params); _i < _Object$keys.length; _i++) {
+    	      var paramName = _Object$keys[_i];
+    	      if (UNSAFE_KEYS.indexOf(paramName) > -1) continue;
+    	      queryString += '&' + encodeURIComponent(paramName) + '=' + encodeURIComponent(params[paramName]);
+    	    }
+    	    if (!queryString) return url;
+    	    url = url + (url.indexOf('?') !== -1 ? '&' : '?') + queryString.slice(1);
+    	  }
+    	  return url;
+    	};
+    	var fetchIt = function fetchIt(url, fetchOptions, callback, altFetch) {
+    	  var resolver = function resolver(response) {
+    	    if (!response.ok) return callback(response.statusText || 'Error', {
+    	      status: response.status
+    	    });
+    	    response.text().then(function (data) {
+    	      callback(null, {
+    	        status: response.status,
+    	        data: data
+    	      });
+    	    }).catch(callback);
+    	  };
+    	  if (altFetch) {
+    	    var altResponse = altFetch(url, fetchOptions);
+    	    if (altResponse instanceof Promise) {
+    	      altResponse.then(resolver).catch(callback);
+    	      return;
+    	    }
+    	  }
+    	  if (typeof fetch === 'function') {
+    	    fetch(url, fetchOptions).then(resolver).catch(callback);
+    	  } else {
+    	    fetchApi(url, fetchOptions).then(resolver).catch(callback);
+    	  }
+    	};
+    	var requestWithFetch = function requestWithFetch(options, url, payload, callback) {
+    	  if (options.queryStringParams) {
+    	    url = addQueryString(url, options.queryStringParams);
+    	  }
+    	  var headers = _objectSpread({}, typeof options.customHeaders === 'function' ? options.customHeaders() : options.customHeaders);
+    	  if (typeof window === 'undefined' && typeof commonjsGlobal !== 'undefined' && typeof commonjsGlobal.process !== 'undefined' && commonjsGlobal.process.versions && commonjsGlobal.process.versions.node) {
+    	    headers['User-Agent'] = "i18next-http-backend (node/".concat(commonjsGlobal.process.version, "; ").concat(commonjsGlobal.process.platform, " ").concat(commonjsGlobal.process.arch, ")");
+    	  }
+    	  if (payload) headers['Content-Type'] = 'application/json';
+    	  var reqOptions = typeof options.requestOptions === 'function' ? options.requestOptions(payload) : options.requestOptions;
+    	  var fetchOptions = _objectSpread({
+    	    method: payload ? 'POST' : 'GET',
+    	    body: payload ? options.stringify(payload) : undefined,
+    	    headers: headers
+    	  }, options._omitFetchOptions ? {} : reqOptions);
+    	  var altFetch = typeof options.alternateFetch === 'function' && options.alternateFetch.length >= 1 ? options.alternateFetch : undefined;
+    	  try {
+    	    fetchIt(url, fetchOptions, callback, altFetch);
+    	  } catch (e) {
+    	    if (!reqOptions || Object.keys(reqOptions).length === 0 || !e.message || e.message.indexOf('not implemented') < 0) {
+    	      return callback(e);
+    	    }
+    	    try {
+    	      Object.keys(reqOptions).forEach(function (opt) {
+    	        delete fetchOptions[opt];
+    	      });
+    	      fetchIt(url, fetchOptions, callback, altFetch);
+    	      options._omitFetchOptions = true;
+    	    } catch (err) {
+    	      callback(err);
+    	    }
+    	  }
+    	};
+    	var requestWithXmlHttpRequest = function requestWithXmlHttpRequest(options, url, payload, callback) {
+    	  if (payload && _typeof(payload) === 'object') {
+    	    payload = addQueryString('', payload).slice(1);
+    	  }
+    	  if (options.queryStringParams) {
+    	    url = addQueryString(url, options.queryStringParams);
+    	  }
+    	  try {
+    	    var x = XmlHttpRequestApi ? new XmlHttpRequestApi() : new ActiveXObjectApi('MSXML2.XMLHTTP.3.0');
+    	    x.open(payload ? 'POST' : 'GET', url, 1);
+    	    if (!options.crossDomain) {
+    	      x.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    	    }
+    	    x.withCredentials = !!options.withCredentials;
+    	    if (payload) {
+    	      x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    	    }
+    	    if (x.overrideMimeType) {
+    	      x.overrideMimeType('application/json');
+    	    }
+    	    var h = options.customHeaders;
+    	    h = typeof h === 'function' ? h() : h;
+    	    if (h) {
+    	      for (var _i2 = 0, _Object$keys2 = Object.keys(h); _i2 < _Object$keys2.length; _i2++) {
+    	        var i = _Object$keys2[_i2];
+    	        if (UNSAFE_KEYS.indexOf(i) > -1) continue;
+    	        x.setRequestHeader(i, h[i]);
+    	      }
+    	    }
+    	    x.onreadystatechange = function () {
+    	      x.readyState > 3 && callback(x.status >= 400 ? x.statusText : null, {
+    	        status: x.status,
+    	        data: x.responseText
+    	      });
+    	    };
+    	    x.send(payload);
+    	  } catch (e) {
+    	    console && console.log(e);
+    	  }
+    	};
+    	var request = function request(options, url, payload, callback) {
+    	  if (typeof payload === 'function') {
+    	    callback = payload;
+    	    payload = undefined;
+    	  }
+    	  callback = callback || function () {};
+    	  if (fetchApi && url.indexOf('file:') !== 0) {
+    	    return requestWithFetch(options, url, payload, callback);
+    	  }
+    	  if ((0, _utils.hasXMLHttpRequest)() || typeof ActiveXObject === 'function') {
+    	    return requestWithXmlHttpRequest(options, url, payload, callback);
+    	  }
+    	  callback(new Error('No fetch and no xhr implementation found!'));
+    	};
+    	exports.default = request;
+    	module.exports = exports.default; 
+    } (request, request.exports));
 
-    	if (typeof commonjsRequire !== 'undefined' && typeof window === 'undefined') {
-    	  var f = fetchApi || requireBrowserPonyfill();
-    	  if (f.default) f = f.default;
-    	  exports.default = f;
-    	  module.exports = exports.default;
-    	} 
-    } (getFetch$1, getFetch$1.exports));
+    var requestExports = request.exports;
 
-    var getFetchExports = getFetch$1.exports;
-    var getFetch = /*@__PURE__*/getDefaultExportFromCjs(getFetchExports);
+    (function (module, exports) {
 
-    var fetchNode = /*#__PURE__*/_mergeNamespaces({
-        __proto__: null,
-        default: getFetch
-    }, [getFetchExports]);
+    	Object.defineProperty(exports, "__esModule", {
+    	  value: true
+    	});
+    	exports.default = void 0;
+    	var _utils = utils;
+    	var _request = _interopRequireDefault(requestExports);
+    	function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+    	function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+    	function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+    	function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+    	function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+    	function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+    	function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+    	function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+    	function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+    	function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+    	var getDefaults = function getDefaults() {
+    	  return {
+    	    loadPath: '/locales/{{lng}}/{{ns}}.json',
+    	    addPath: '/locales/add/{{lng}}/{{ns}}',
+    	    parse: function parse(data) {
+    	      return JSON.parse(data);
+    	    },
+    	    stringify: JSON.stringify,
+    	    parsePayload: function parsePayload(namespace, key, fallbackValue) {
+    	      return _defineProperty({}, key, fallbackValue || '');
+    	    },
+    	    parseLoadPayload: function parseLoadPayload(languages, namespaces) {
+    	      return undefined;
+    	    },
+    	    request: _request.default,
+    	    reloadInterval: typeof window !== 'undefined' ? false : 60 * 60 * 1000,
+    	    customHeaders: {},
+    	    queryStringParams: {},
+    	    crossDomain: false,
+    	    withCredentials: false,
+    	    overrideMimeType: false,
+    	    requestOptions: {
+    	      mode: 'cors',
+    	      credentials: 'same-origin',
+    	      cache: 'default'
+    	    }
+    	  };
+    	};
+    	var Backend = function () {
+    	  function Backend(services) {
+    	    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    	    var allOptions = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+    	    _classCallCheck(this, Backend);
+    	    this.services = services;
+    	    this.options = options;
+    	    this.allOptions = allOptions;
+    	    this.type = 'backend';
+    	    this.init(services, options, allOptions);
+    	  }
+    	  return _createClass(Backend, [{
+    	    key: "init",
+    	    value: function init(services) {
+    	      var _this = this;
+    	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    	      var allOptions = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+    	      this.services = services;
+    	      this.options = _objectSpread(_objectSpread(_objectSpread({}, getDefaults()), this.options || {}), options);
+    	      this.allOptions = allOptions;
+    	      if (this.services && this.options.reloadInterval) {
+    	        var timer = setInterval(function () {
+    	          return _this.reload();
+    	        }, this.options.reloadInterval);
+    	        if (_typeof(timer) === 'object' && typeof timer.unref === 'function') timer.unref();
+    	      }
+    	    }
+    	  }, {
+    	    key: "readMulti",
+    	    value: function readMulti(languages, namespaces, callback) {
+    	      this._readAny(languages, languages, namespaces, namespaces, callback);
+    	    }
+    	  }, {
+    	    key: "read",
+    	    value: function read(language, namespace, callback) {
+    	      this._readAny([language], language, [namespace], namespace, callback);
+    	    }
+    	  }, {
+    	    key: "_readAny",
+    	    value: function _readAny(languages, loadUrlLanguages, namespaces, loadUrlNamespaces, callback) {
+    	      var _this2 = this;
+    	      var loadPath = this.options.loadPath;
+    	      if (typeof this.options.loadPath === 'function') {
+    	        loadPath = this.options.loadPath(languages, namespaces);
+    	      }
+    	      loadPath = (0, _utils.makePromise)(loadPath);
+    	      loadPath.then(function (resolvedLoadPath) {
+    	        if (!resolvedLoadPath) return callback(null, {});
+    	        var url = (0, _utils.interpolateUrl)(resolvedLoadPath, {
+    	          lng: languages.join('+'),
+    	          ns: namespaces.join('+')
+    	        });
+    	        if (url == null) {
+    	          var safeLngs = languages.map(_utils.sanitizeLogValue).join(', ');
+    	          var safeNss = namespaces.map(_utils.sanitizeLogValue).join(', ');
+    	          return callback(new Error('i18next-http-backend: unsafe lng/ns value — refusing to build request URL for languages=[' + safeLngs + '] namespaces=[' + safeNss + ']'), false);
+    	        }
+    	        _this2.loadUrl(url, callback, loadUrlLanguages, loadUrlNamespaces);
+    	      });
+    	    }
+    	  }, {
+    	    key: "loadUrl",
+    	    value: function loadUrl(url, callback, languages, namespaces) {
+    	      var _this3 = this;
+    	      var lng = typeof languages === 'string' ? [languages] : languages;
+    	      var ns = typeof namespaces === 'string' ? [namespaces] : namespaces;
+    	      var payload = this.options.parseLoadPayload(lng, ns);
+    	      var safeUrl = (0, _utils.sanitizeLogValue)((0, _utils.redactUrlCredentials)(url));
+    	      this.options.request(this.options, url, payload, function (err, res) {
+    	        if (res && (res.status >= 500 && res.status < 600 || !res.status)) return callback('failed loading ' + safeUrl + '; status code: ' + res.status, true);
+    	        if (res && res.status >= 400 && res.status < 500) return callback('failed loading ' + safeUrl + '; status code: ' + res.status, false);
+    	        if (!res && err && err.message) {
+    	          var errorMessage = err.message.toLowerCase();
+    	          var isNetworkError = ['failed', 'fetch', 'network', 'load'].find(function (term) {
+    	            return errorMessage.indexOf(term) > -1;
+    	          });
+    	          if (isNetworkError) {
+    	            return callback('failed loading ' + safeUrl + ': ' + (0, _utils.sanitizeLogValue)(err.message), true);
+    	          }
+    	        }
+    	        if (err) return callback(err, false);
+    	        var ret, parseErr;
+    	        try {
+    	          if (typeof res.data === 'string') {
+    	            ret = _this3.options.parse(res.data, languages, namespaces);
+    	          } else {
+    	            ret = res.data;
+    	          }
+    	        } catch (e) {
+    	          parseErr = 'failed parsing ' + safeUrl + ' to json';
+    	        }
+    	        if (parseErr) return callback(parseErr, false);
+    	        callback(null, ret);
+    	      });
+    	    }
+    	  }, {
+    	    key: "create",
+    	    value: function create(languages, namespace, key, fallbackValue, callback) {
+    	      var _this4 = this;
+    	      if (!this.options.addPath) return;
+    	      if (typeof languages === 'string') languages = [languages];
+    	      var payload = this.options.parsePayload(namespace, key, fallbackValue);
+    	      var finished = 0;
+    	      var dataArray = [];
+    	      var resArray = [];
+    	      languages.forEach(function (lng) {
+    	        var addPath = _this4.options.addPath;
+    	        if (typeof _this4.options.addPath === 'function') {
+    	          addPath = _this4.options.addPath(lng, namespace);
+    	        }
+    	        var url = (0, _utils.interpolateUrl)(addPath, {
+    	          lng: lng,
+    	          ns: namespace
+    	        });
+    	        if (url == null) {
+    	          finished += 1;
+    	          if (callback && finished === languages.length) callback(dataArray, resArray);
+    	          return;
+    	        }
+    	        _this4.options.request(_this4.options, url, payload, function (data, res) {
+    	          finished += 1;
+    	          dataArray.push(data);
+    	          resArray.push(res);
+    	          if (finished === languages.length) {
+    	            if (typeof callback === 'function') callback(dataArray, resArray);
+    	          }
+    	        });
+    	      });
+    	    }
+    	  }, {
+    	    key: "reload",
+    	    value: function reload() {
+    	      var _this5 = this;
+    	      var _this$services = this.services,
+    	        backendConnector = _this$services.backendConnector,
+    	        languageUtils = _this$services.languageUtils,
+    	        logger = _this$services.logger;
+    	      var currentLanguage = backendConnector.language;
+    	      if (currentLanguage && currentLanguage.toLowerCase() === 'cimode') return;
+    	      var toLoad = [];
+    	      var append = function append(lng) {
+    	        var lngs = languageUtils.toResolveHierarchy(lng);
+    	        lngs.forEach(function (l) {
+    	          if (toLoad.indexOf(l) < 0) toLoad.push(l);
+    	        });
+    	      };
+    	      append(currentLanguage);
+    	      if (this.allOptions.preload) this.allOptions.preload.forEach(function (l) {
+    	        return append(l);
+    	      });
+    	      toLoad.forEach(function (lng) {
+    	        _this5.allOptions.ns.forEach(function (ns) {
+    	          backendConnector.read(lng, ns, 'read', null, null, function (err, data) {
+    	            if (err) logger.warn("loading namespace ".concat(ns, " for language ").concat(lng, " failed"), err);
+    	            if (!err && data) logger.log("loaded namespace ".concat(ns, " for language ").concat(lng), data);
+    	            backendConnector.loaded("".concat(lng, "|").concat(ns), err, data);
+    	          });
+    	        });
+    	      });
+    	    }
+    	  }]);
+    	}();
+    	Backend.type = 'backend';
+    	exports.default = Backend;
+    	module.exports = exports.default; 
+    } (cjs, cjs.exports));
 
-    function ownKeys$1(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-    function _objectSpread$1(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$1(Object(t), !0).forEach(function (r) { _defineProperty$1(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$1(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
-    function _defineProperty$1(obj, key, value) { key = _toPropertyKey$1(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-    function _toPropertyKey$1(t) { var i = _toPrimitive$1(t, "string"); return "symbol" == _typeof$1(i) ? i : i + ""; }
-    function _toPrimitive$1(t, r) { if ("object" != _typeof$1(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof$1(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-    function _typeof$1(o) { "@babel/helpers - typeof"; return _typeof$1 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof$1(o); }
-    var fetchApi;
-    if (typeof fetch === 'function') {
-      if (typeof global$1 !== 'undefined' && global$1.fetch) {
-        fetchApi = global$1.fetch;
-      } else if (typeof window !== 'undefined' && window.fetch) {
-        fetchApi = window.fetch;
-      } else {
-        fetchApi = fetch;
-      }
-    }
-    var XmlHttpRequestApi;
-    if (hasXMLHttpRequest()) {
-      if (typeof global$1 !== 'undefined' && global$1.XMLHttpRequest) {
-        XmlHttpRequestApi = global$1.XMLHttpRequest;
-      } else if (typeof window !== 'undefined' && window.XMLHttpRequest) {
-        XmlHttpRequestApi = window.XMLHttpRequest;
-      }
-    }
-    var ActiveXObjectApi;
-    if (typeof ActiveXObject === 'function') {
-      if (typeof global$1 !== 'undefined' && global$1.ActiveXObject) {
-        ActiveXObjectApi = global$1.ActiveXObject;
-      } else if (typeof window !== 'undefined' && window.ActiveXObject) {
-        ActiveXObjectApi = window.ActiveXObject;
-      }
-    }
-    if (!fetchApi && fetchNode && !XmlHttpRequestApi && !ActiveXObjectApi) fetchApi = getFetch || fetchNode;
-    if (typeof fetchApi !== 'function') fetchApi = undefined;
-    var addQueryString = function addQueryString(url, params) {
-      if (params && _typeof$1(params) === 'object') {
-        var queryString = '';
-        for (var paramName in params) {
-          queryString += '&' + encodeURIComponent(paramName) + '=' + encodeURIComponent(params[paramName]);
-        }
-        if (!queryString) return url;
-        url = url + (url.indexOf('?') !== -1 ? '&' : '?') + queryString.slice(1);
-      }
-      return url;
-    };
-    var fetchIt = function fetchIt(url, fetchOptions, callback, altFetch) {
-      var resolver = function resolver(response) {
-        if (!response.ok) return callback(response.statusText || 'Error', {
-          status: response.status
-        });
-        response.text().then(function (data) {
-          callback(null, {
-            status: response.status,
-            data: data
-          });
-        }).catch(callback);
-      };
-      if (altFetch) {
-        var altResponse = altFetch(url, fetchOptions);
-        if (altResponse instanceof Promise) {
-          altResponse.then(resolver).catch(callback);
-          return;
-        }
-      }
-      if (typeof fetch === 'function') {
-        fetch(url, fetchOptions).then(resolver).catch(callback);
-      } else {
-        fetchApi(url, fetchOptions).then(resolver).catch(callback);
-      }
-    };
-    var omitFetchOptions = false;
-    var requestWithFetch = function requestWithFetch(options, url, payload, callback) {
-      if (options.queryStringParams) {
-        url = addQueryString(url, options.queryStringParams);
-      }
-      var headers = _objectSpread$1({}, typeof options.customHeaders === 'function' ? options.customHeaders() : options.customHeaders);
-      if (typeof window === 'undefined' && typeof global$1 !== 'undefined' && typeof global$1.process !== 'undefined' && global$1.process.versions && global$1.process.versions.node) {
-        headers['User-Agent'] = "i18next-http-backend (node/".concat(global$1.process.version, "; ").concat(global$1.process.platform, " ").concat(global$1.process.arch, ")");
-      }
-      if (payload) headers['Content-Type'] = 'application/json';
-      var reqOptions = typeof options.requestOptions === 'function' ? options.requestOptions(payload) : options.requestOptions;
-      var fetchOptions = _objectSpread$1({
-        method: payload ? 'POST' : 'GET',
-        body: payload ? options.stringify(payload) : undefined,
-        headers: headers
-      }, omitFetchOptions ? {} : reqOptions);
-      var altFetch = typeof options.alternateFetch === 'function' && options.alternateFetch.length >= 1 ? options.alternateFetch : undefined;
-      try {
-        fetchIt(url, fetchOptions, callback, altFetch);
-      } catch (e) {
-        if (!reqOptions || Object.keys(reqOptions).length === 0 || !e.message || e.message.indexOf('not implemented') < 0) {
-          return callback(e);
-        }
-        try {
-          Object.keys(reqOptions).forEach(function (opt) {
-            delete fetchOptions[opt];
-          });
-          fetchIt(url, fetchOptions, callback, altFetch);
-          omitFetchOptions = true;
-        } catch (err) {
-          callback(err);
-        }
-      }
-    };
-    var requestWithXmlHttpRequest = function requestWithXmlHttpRequest(options, url, payload, callback) {
-      if (payload && _typeof$1(payload) === 'object') {
-        payload = addQueryString('', payload).slice(1);
-      }
-      if (options.queryStringParams) {
-        url = addQueryString(url, options.queryStringParams);
-      }
-      try {
-        var x;
-        if (XmlHttpRequestApi) {
-          x = new XmlHttpRequestApi();
-        } else {
-          x = new ActiveXObjectApi('MSXML2.XMLHTTP.3.0');
-        }
-        x.open(payload ? 'POST' : 'GET', url, 1);
-        if (!options.crossDomain) {
-          x.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-        }
-        x.withCredentials = !!options.withCredentials;
-        if (payload) {
-          x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        }
-        if (x.overrideMimeType) {
-          x.overrideMimeType('application/json');
-        }
-        var h = options.customHeaders;
-        h = typeof h === 'function' ? h() : h;
-        if (h) {
-          for (var i in h) {
-            x.setRequestHeader(i, h[i]);
-          }
-        }
-        x.onreadystatechange = function () {
-          x.readyState > 3 && callback(x.status >= 400 ? x.statusText : null, {
-            status: x.status,
-            data: x.responseText
-          });
-        };
-        x.send(payload);
-      } catch (e) {
-        console && console.log(e);
-      }
-    };
-    var request = function request(options, url, payload, callback) {
-      if (typeof payload === 'function') {
-        callback = payload;
-        payload = undefined;
-      }
-      callback = callback || function () {};
-      if (fetchApi && url.indexOf('file:') !== 0) {
-        return requestWithFetch(options, url, payload, callback);
-      }
-      if (hasXMLHttpRequest() || typeof ActiveXObject === 'function') {
-        return requestWithXmlHttpRequest(options, url, payload, callback);
-      }
-      callback(new Error('No fetch and no xhr implementation found!'));
-    };
-
-    function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-    function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-    function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
-    function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-    function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
-    function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-    function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-    function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-    function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-    var getDefaults = function getDefaults() {
-      return {
-        loadPath: '/locales/{{lng}}/{{ns}}.json',
-        addPath: '/locales/add/{{lng}}/{{ns}}',
-        parse: function parse(data) {
-          return JSON.parse(data);
-        },
-        stringify: JSON.stringify,
-        parsePayload: function parsePayload(namespace, key, fallbackValue) {
-          return _defineProperty({}, key, fallbackValue || '');
-        },
-        parseLoadPayload: function parseLoadPayload(languages, namespaces) {
-          return undefined;
-        },
-        request: request,
-        reloadInterval: typeof window !== 'undefined' ? false : 60 * 60 * 1000,
-        customHeaders: {},
-        queryStringParams: {},
-        crossDomain: false,
-        withCredentials: false,
-        overrideMimeType: false,
-        requestOptions: {
-          mode: 'cors',
-          credentials: 'same-origin',
-          cache: 'default'
-        }
-      };
-    };
-    var Backend = function () {
-      function Backend(services) {
-        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-        var allOptions = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-        _classCallCheck(this, Backend);
-        this.services = services;
-        this.options = options;
-        this.allOptions = allOptions;
-        this.type = 'backend';
-        this.init(services, options, allOptions);
-      }
-      return _createClass(Backend, [{
-        key: "init",
-        value: function init(services) {
-          var _this = this;
-          var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-          var allOptions = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-          this.services = services;
-          this.options = _objectSpread(_objectSpread(_objectSpread({}, getDefaults()), this.options || {}), options);
-          this.allOptions = allOptions;
-          if (this.services && this.options.reloadInterval) {
-            var timer = setInterval(function () {
-              return _this.reload();
-            }, this.options.reloadInterval);
-            if (_typeof(timer) === 'object' && typeof timer.unref === 'function') timer.unref();
-          }
-        }
-      }, {
-        key: "readMulti",
-        value: function readMulti(languages, namespaces, callback) {
-          this._readAny(languages, languages, namespaces, namespaces, callback);
-        }
-      }, {
-        key: "read",
-        value: function read(language, namespace, callback) {
-          this._readAny([language], language, [namespace], namespace, callback);
-        }
-      }, {
-        key: "_readAny",
-        value: function _readAny(languages, loadUrlLanguages, namespaces, loadUrlNamespaces, callback) {
-          var _this2 = this;
-          var loadPath = this.options.loadPath;
-          if (typeof this.options.loadPath === 'function') {
-            loadPath = this.options.loadPath(languages, namespaces);
-          }
-          loadPath = makePromise(loadPath);
-          loadPath.then(function (resolvedLoadPath) {
-            if (!resolvedLoadPath) return callback(null, {});
-            var url = _this2.services.interpolator.interpolate(resolvedLoadPath, {
-              lng: languages.join('+'),
-              ns: namespaces.join('+')
-            });
-            _this2.loadUrl(url, callback, loadUrlLanguages, loadUrlNamespaces);
-          });
-        }
-      }, {
-        key: "loadUrl",
-        value: function loadUrl(url, callback, languages, namespaces) {
-          var _this3 = this;
-          var lng = typeof languages === 'string' ? [languages] : languages;
-          var ns = typeof namespaces === 'string' ? [namespaces] : namespaces;
-          var payload = this.options.parseLoadPayload(lng, ns);
-          this.options.request(this.options, url, payload, function (err, res) {
-            if (res && (res.status >= 500 && res.status < 600 || !res.status)) return callback('failed loading ' + url + '; status code: ' + res.status, true);
-            if (res && res.status >= 400 && res.status < 500) return callback('failed loading ' + url + '; status code: ' + res.status, false);
-            if (!res && err && err.message && err.message.indexOf('Failed to fetch') > -1) return callback('failed loading ' + url + ': ' + err.message, true);
-            if (err) return callback(err, false);
-            var ret, parseErr;
-            try {
-              if (typeof res.data === 'string') {
-                ret = _this3.options.parse(res.data, languages, namespaces);
-              } else {
-                ret = res.data;
-              }
-            } catch (e) {
-              parseErr = 'failed parsing ' + url + ' to json';
-            }
-            if (parseErr) return callback(parseErr, false);
-            callback(null, ret);
-          });
-        }
-      }, {
-        key: "create",
-        value: function create(languages, namespace, key, fallbackValue, callback) {
-          var _this4 = this;
-          if (!this.options.addPath) return;
-          if (typeof languages === 'string') languages = [languages];
-          var payload = this.options.parsePayload(namespace, key, fallbackValue);
-          var finished = 0;
-          var dataArray = [];
-          var resArray = [];
-          languages.forEach(function (lng) {
-            var addPath = _this4.options.addPath;
-            if (typeof _this4.options.addPath === 'function') {
-              addPath = _this4.options.addPath(lng, namespace);
-            }
-            var url = _this4.services.interpolator.interpolate(addPath, {
-              lng: lng,
-              ns: namespace
-            });
-            _this4.options.request(_this4.options, url, payload, function (data, res) {
-              finished += 1;
-              dataArray.push(data);
-              resArray.push(res);
-              if (finished === languages.length) {
-                if (typeof callback === 'function') callback(dataArray, resArray);
-              }
-            });
-          });
-        }
-      }, {
-        key: "reload",
-        value: function reload() {
-          var _this5 = this;
-          var _this$services = this.services,
-            backendConnector = _this$services.backendConnector,
-            languageUtils = _this$services.languageUtils,
-            logger = _this$services.logger;
-          var currentLanguage = backendConnector.language;
-          if (currentLanguage && currentLanguage.toLowerCase() === 'cimode') return;
-          var toLoad = [];
-          var append = function append(lng) {
-            var lngs = languageUtils.toResolveHierarchy(lng);
-            lngs.forEach(function (l) {
-              if (toLoad.indexOf(l) < 0) toLoad.push(l);
-            });
-          };
-          append(currentLanguage);
-          if (this.allOptions.preload) this.allOptions.preload.forEach(function (l) {
-            return append(l);
-          });
-          toLoad.forEach(function (lng) {
-            _this5.allOptions.ns.forEach(function (ns) {
-              backendConnector.read(lng, ns, 'read', null, null, function (err, data) {
-                if (err) logger.warn("loading namespace ".concat(ns, " for language ").concat(lng, " failed"), err);
-                if (!err && data) logger.log("loaded namespace ".concat(ns, " for language ").concat(lng), data);
-                backendConnector.loaded("".concat(lng, "|").concat(ns), err, data);
-              });
-            });
-          });
-        }
-      }]);
-    }();
-    Backend.type = 'backend';
+    var cjsExports = cjs.exports;
+    var Backend = /*@__PURE__*/getDefaultExportFromCjs(cjsExports);
 
     const SceneClass = Phaser.Scene;
     var IsSceneObject = function (object) {

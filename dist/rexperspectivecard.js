@@ -13131,7 +13131,7 @@
             src.colorBuffer,
             src.alphaBuffer,
             src.alpha,
-            src.tintFill,
+            src.tintMode,
             renderOptions,
             src.debugCallback
         );
@@ -14084,13 +14084,8 @@
     };
 
     var TintMethods = {
-        setTintFill(mode) {
-            if (mode === undefined || mode === true) {
-                mode = Phaser.TintModes.FILL;
-            } else if (mode === false) {
-                mode = Phaser.TintModes.MULTIPLY;
-            }
-            this.tintFill = mode;
+        setTintMode(mode) {
+            this.tintMode = mode;
             return this;
         },
 
@@ -14100,8 +14095,8 @@
         },
 
         clearTint() {
-            this.tint = 0xffffff;
-            this.tintFill = Phaser.TintModes.MULTIPLY;
+            this.setTint(0xffffff);
+            this.setTintMode(Phaser.TintModes.MULTIPLY);
             return this;
         }
     };
@@ -14339,7 +14334,7 @@
             colors,
             alphas,
             alpha,
-            tintFill,
+            tintMode,
             renderOptions,
             debugCallback
         ) {
@@ -14415,7 +14410,7 @@
                     vertexViewF32[vertexOffset32++] = uv[vertexIndex];
                     vertexViewF32[vertexOffset32++] = uv[vertexIndex + 1];
                     vertexViewF32[vertexOffset32++] = textureDatum;
-                    vertexViewF32[vertexOffset32++] = tintFill;
+                    vertexViewF32[vertexOffset32++] = tintMode;
                     vertexViewU32[vertexOffset32++] = tint;
 
                     if (debugVertices) {
@@ -14510,7 +14505,7 @@
             this.alphaBuffer = null;
             this.colorBuffer = null;
 
-            this.tintFill = Phaser.TintModes.MULTIPLY;
+            this.tintMode = Phaser.TintModes.MULTIPLY;
 
             this.debugCallback = null;
             this.debugGraphic = null;

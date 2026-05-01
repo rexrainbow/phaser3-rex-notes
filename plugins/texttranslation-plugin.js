@@ -1,7 +1,7 @@
 import EventEmitterMethods from './utils/eventemitter/EventEmitterMethods.js';
 import Awaitloader from './awaitloader.js';
 import i18next from 'i18next';
-import Backend from 'i18next-http-backend';
+import Backend from 'i18next-http-backend/cjs';
 import TextTranslation from './texttranslation.js';
 
 class TextTranslationPlugin extends Phaser.Plugins.BasePlugin {

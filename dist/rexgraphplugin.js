@@ -17293,7 +17293,7 @@
      * @name has
      * @memberOf SetCache
      * @param {*} value The value to search for.
-     * @returns {number} Returns `true` if `value` is found, else `false`.
+     * @returns {boolean} Returns `true` if `value` is found, else `false`.
      */
 
     var _setCacheHas;
@@ -23595,7 +23595,7 @@
     	      if (isArray(iteratee)) {
     	        return function(value) {
     	          return baseGet(value, iteratee.length === 1 ? iteratee[0] : iteratee);
-    	        }
+    	        };
     	      }
     	      return iteratee;
     	    });

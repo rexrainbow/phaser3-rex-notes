@@ -1,5 +1,4 @@
 import { SetMask } from '../../../../plugins/utils/mask/MaskMethods.js';
-import LayerGameObjectClassPatch from '../../../../plugins/utils/monkeypatch/LayerGameObjectClassPatch.js';
 
 export default {
     enableBoardLayer(layer) {
@@ -9,7 +8,6 @@ export default {
 
         if ((layer === undefined) || (layer === true)) {
             layer = this.scene.add.layer();
-            LayerGameObjectClassPatch(layer);
         }
         this.layer = layer;
         return this;

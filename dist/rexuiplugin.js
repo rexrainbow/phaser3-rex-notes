@@ -7732,7 +7732,7 @@
 
     const IsPlainObject$Q = Phaser.Utils.Objects.IsPlainObject;
     const GetValue$4g = Phaser.Utils.Objects.GetValue;
-    const TintModes$3 = Phaser.TintModes;
+    const TintModes$2 = Phaser.TintModes;
 
     var AddImage$1 = function (key, config) {
         if (IsPlainObject$Q(key)) {
@@ -7765,11 +7765,9 @@
             }
         }
 
-        var tintFill = GetValue$4g(config, 'tintFill', undefined);
-        if (tintFill === true) {
-            tintFill = TintModes$3.FILL;
-        } else if (tintFill === false) {
-            tintFill = undefined;
+        var tintMode = config.tintMode;
+        if ((tintMode === undefined) && (config.tintFill === true)) {
+            tintMode = TintModes$2.FILL;
         }
 
         this.images[key] = {
@@ -7782,12 +7780,12 @@
             right: GetValue$4g(config, 'right', 0),
             originX: GetValue$4g(config, 'originX', 0),
             originY: GetValue$4g(config, 'originY', 0),
-            tintFill: tintFill,
+            tintMode: tintMode,
         };
     };
 
     const CanvasPool$1 = Phaser.Display.Canvas.CanvasPool;
-    const TintModes$2 = Phaser.TintModes;
+    const TintModes$1 = Phaser.TintModes;
 
     var GetContext2D = function (canvasOrContext) {
         if (
@@ -7822,12 +7820,6 @@
 
         var context = GetContext2D(canvasOrContext);
 
-        if (tintMode === true) {
-            tintMode = TintModes$2.FILL;
-        } else if (tintMode === false) {
-            tintMode = undefined;
-        }
-
         if (color === undefined || color === null || typeof tintMode !== 'number') {
             // Draw image directly
             context.drawImage(
@@ -7857,7 +7849,7 @@
                 0, 0, width, height
             );
 
-            if (tintMode === TintModes$2.FILL) {
+            if (tintMode === TintModes$1.FILL) {
                 tempContext.globalCompositeOperation = 'source-in';
                 tempContext.fillStyle = color;
                 tempContext.fillRect(0, 0, width, height);
@@ -7865,19 +7857,19 @@
                 var compositeOperation = 'source-in';
 
                 switch (tintMode) {
-                    case TintModes$2.MULTIPLY:
+                    case TintModes$1.MULTIPLY:
                         compositeOperation = 'multiply';
                         break;
-                    case TintModes$2.ADD:
+                    case TintModes$1.ADD:
                         compositeOperation = 'lighter';
                         break;
-                    case TintModes$2.SCREEN:
+                    case TintModes$1.SCREEN:
                         compositeOperation = 'screen';
                         break;
-                    case TintModes$2.OVERLAY:
+                    case TintModes$1.OVERLAY:
                         compositeOperation = 'overlay';
                         break;
-                    case TintModes$2.HARD_LIGHT:
+                    case TintModes$1.HARD_LIGHT:
                         compositeOperation = 'hard-light';
                         break;
                 }
@@ -7913,8 +7905,6 @@
 
     };
 
-    const TintModes$1 = Phaser.TintModes;
-
     var DrawImage = function (key, context, x, y, color, autoRound) {
         var imgData = this.get(key);
         if (!imgData) {
@@ -7929,18 +7919,15 @@
         x += imgData.left - (imgData.originX * width);
         y += imgData.y - (imgData.originY * height);
 
-        var tintFill = imgData.tintFill;
-        if (tintFill === true) {
-            tintFill = TintModes$1.FILL;
-        } else if (tintFill === false || tintFill === undefined) {
-            tintFill = undefined;
+        var tintMode = imgData.tintMode;
+        if (tintMode === undefined) {
             color = undefined;
         }
 
         DrawFrameToCanvas(
             frame, context,
             x, y, width, height,
-            color, autoRound, tintFill
+            color, autoRound, tintMode
         );
     };
 
@@ -11732,6 +11719,7 @@
             super(parent, ImageTypeName);
             this.setTexture(key, frame);
             this.color = undefined;
+            this.tintMode = undefined;
         }
 
         get frameWidth() {
@@ -11809,9 +11797,17 @@
             return this;
         }
 
+        setTintMode(tintMode) {
+            this.tintMode = tintMode;
+            return this;
+        }
+
         modifyPorperties(o) {
             if (o.hasOwnProperty('color')) {
                 this.setColor(o.color);
+            }
+            if (o.hasOwnProperty('tintMode')) {
+                this.setTintMode(o.tintMode);
             }
 
             super.modifyPorperties(o);
@@ -11821,9 +11817,8 @@
         renderContent() {
             var tintMode = undefined;
             if (this.color !== undefined && this.color !== null) {
-                tintMode = TintModes.FILL;
+                tintMode = (this.tintMode === undefined) ? TintModes.FILL : this.tintMode;
             }
-            // TODO: Pass tintMode from paremeter
 
             DrawFrameToCanvas(
                 this.frameObj, this.context,
@@ -22989,6 +22984,7 @@ void main (void) {
             .on(`+${tagName}`, function (name) {
                 var imgData = textPlayer.imageManager.get(name);
                 if (imgData) {
+                    var tintMode = imgData.tintMode;
                     AppendImage.call(textPlayer,
                         imgData.key, imgData.frame,
                         {
@@ -22996,7 +22992,8 @@ void main (void) {
                             hieght: imgData.height,
                             leftSpace: imgData.left,
                             rightSpace: imgData.right,
-                            color: (imgData.tintFill) ? textPlayer.textStyle.color : undefined,
+                            color: (tintMode !== undefined) ? textPlayer.textStyle.color : undefined,
+                            tintMode: tintMode,
                         }
                     );
                 }
@@ -70007,7 +70004,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             src.colorBuffer,
             src.alphaBuffer,
             src.alpha,
-            src.tintFill,
+            src.tintMode,
             renderOptions,
             src.debugCallback
         );
@@ -70960,13 +70957,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     };
 
     var TintMethods = {
-        setTintFill(mode) {
-            if (mode === undefined || mode === true) {
-                mode = Phaser.TintModes.FILL;
-            } else if (mode === false) {
-                mode = Phaser.TintModes.MULTIPLY;
-            }
-            this.tintFill = mode;
+        setTintMode(mode) {
+            this.tintMode = mode;
             return this;
         },
 
@@ -70976,8 +70968,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         },
 
         clearTint() {
-            this.tint = 0xffffff;
-            this.tintFill = Phaser.TintModes.MULTIPLY;
+            this.setTint(0xffffff);
+            this.setTintMode(Phaser.TintModes.MULTIPLY);
             return this;
         }
     };
@@ -71175,7 +71167,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             colors,
             alphas,
             alpha,
-            tintFill,
+            tintMode,
             renderOptions,
             debugCallback
         ) {
@@ -71251,7 +71243,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     vertexViewF32[vertexOffset32++] = uv[vertexIndex];
                     vertexViewF32[vertexOffset32++] = uv[vertexIndex + 1];
                     vertexViewF32[vertexOffset32++] = textureDatum;
-                    vertexViewF32[vertexOffset32++] = tintFill;
+                    vertexViewF32[vertexOffset32++] = tintMode;
                     vertexViewU32[vertexOffset32++] = tint;
 
                     if (debugVertices) {
@@ -71346,7 +71338,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.alphaBuffer = null;
             this.colorBuffer = null;
 
-            this.tintFill = Phaser.TintModes.MULTIPLY;
+            this.tintMode = Phaser.TintModes.MULTIPLY;
 
             this.debugCallback = null;
             this.debugGraphic = null;

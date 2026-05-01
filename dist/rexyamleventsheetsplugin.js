@@ -7087,7 +7087,8 @@
 	  if (instance.helpers[helperName]) {
 	    instance.hooks[helperName] = instance.helpers[helperName];
 	    if (!keepHelper) {
-	      delete instance.helpers[helperName];
+	      // Using delete is slow
+	      instance.helpers[helperName] = undefined;
 	    }
 	  }
 	}
@@ -7198,28 +7199,6 @@
 
 	var protoAccess = {};
 
-	var createNewLookupObject$1 = {};
-
-	createNewLookupObject$1.__esModule = true;
-	createNewLookupObject$1.createNewLookupObject = createNewLookupObject;
-
-	var _utils$4 = utils;
-
-	/**
-	 * Create a new object with "null"-prototype to avoid truthy results on prototype properties.
-	 * The resulting object can be used with "object[property]" to check if a property exists
-	 * @param {...object} sources a varargs parameter of source objects that will be merged
-	 * @returns {object}
-	 */
-
-	function createNewLookupObject() {
-	  for (var _len = arguments.length, sources = Array(_len), _key = 0; _key < _len; _key++) {
-	    sources[_key] = arguments[_key];
-	  }
-
-	  return _utils$4.extend.apply(undefined, [Object.create(null)].concat(sources));
-	}
-
 	protoAccess.__esModule = true;
 	protoAccess.createProtoAccessControl = createProtoAccessControl;
 	protoAccess.resultIsAllowed = resultIsAllowed;
@@ -7228,7 +7207,7 @@
 
 	function _interopRequireDefault$5(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _createNewLookupObject = createNewLookupObject$1;
+	var _utils$4 = utils;
 
 	var _logger$1 = loggerExports;
 
@@ -7237,23 +7216,28 @@
 	var loggedProperties = Object.create(null);
 
 	function createProtoAccessControl(runtimeOptions) {
-	  var defaultMethodWhiteList = Object.create(null);
-	  defaultMethodWhiteList['constructor'] = false;
-	  defaultMethodWhiteList['__defineGetter__'] = false;
-	  defaultMethodWhiteList['__defineSetter__'] = false;
-	  defaultMethodWhiteList['__lookupGetter__'] = false;
-
-	  var defaultPropertyWhiteList = Object.create(null);
+	  // Create an object with "null"-prototype to avoid truthy results on
+	  // prototype properties.
+	  var propertyWhiteList = Object.create(null);
 	  // eslint-disable-next-line no-proto
-	  defaultPropertyWhiteList['__proto__'] = false;
+	  propertyWhiteList['__proto__'] = false;
+	  _utils$4.extend(propertyWhiteList, runtimeOptions.allowedProtoProperties);
+
+	  var methodWhiteList = Object.create(null);
+	  methodWhiteList['constructor'] = false;
+	  methodWhiteList['__defineGetter__'] = false;
+	  methodWhiteList['__defineSetter__'] = false;
+	  methodWhiteList['__lookupGetter__'] = false;
+	  methodWhiteList['__lookupSetter__'] = false;
+	  _utils$4.extend(methodWhiteList, runtimeOptions.allowedProtoMethods);
 
 	  return {
 	    properties: {
-	      whitelist: _createNewLookupObject.createNewLookupObject(defaultPropertyWhiteList, runtimeOptions.allowedProtoProperties),
+	      whitelist: propertyWhiteList,
 	      defaultValue: runtimeOptions.allowProtoPropertiesByDefault
 	    },
 	    methods: {
-	      whitelist: _createNewLookupObject.createNewLookupObject(defaultMethodWhiteList, runtimeOptions.allowedProtoMethods),
+	      whitelist: methodWhiteList,
 	      defaultValue: runtimeOptions.allowProtoMethodsByDefault
 	    }
 	  };
@@ -7299,9 +7283,9 @@
 
 	var _utils$3 = utils;
 
-	var _exception$3 = exceptionExports;
+	var _exception$4 = exceptionExports;
 
-	var _exception2$3 = _interopRequireDefault$4(_exception$3);
+	var _exception2$4 = _interopRequireDefault$4(_exception$4);
 
 	var _helpers$2 = helpers$1;
 
@@ -7313,7 +7297,7 @@
 
 	var _internalProtoAccess$1 = protoAccess;
 
-	var VERSION = '4.7.8';
+	var VERSION = '4.7.9';
 	base$1.VERSION = VERSION;
 	var COMPILER_REVISION = 8;
 	base$1.COMPILER_REVISION = COMPILER_REVISION;
@@ -7352,7 +7336,7 @@
 	  registerHelper: function registerHelper(name, fn) {
 	    if (_utils$3.toString.call(name) === objectType) {
 	      if (fn) {
-	        throw new _exception2$3['default']('Arg not supported with multiple helpers');
+	        throw new _exception2$4['default']('Arg not supported with multiple helpers');
 	      }
 	      _utils$3.extend(this.helpers, name);
 	    } else {
@@ -7368,7 +7352,7 @@
 	      _utils$3.extend(this.partials, name);
 	    } else {
 	      if (typeof partial === 'undefined') {
-	        throw new _exception2$3['default']('Attempting to register a partial called "' + name + '" as undefined');
+	        throw new _exception2$4['default']('Attempting to register a partial called "' + name + '" as undefined');
 	      }
 	      this.partials[name] = partial;
 	    }
@@ -7380,7 +7364,7 @@
 	  registerDecorator: function registerDecorator(name, fn) {
 	    if (_utils$3.toString.call(name) === objectType) {
 	      if (fn) {
-	        throw new _exception2$3['default']('Arg not supported with multiple decorators');
+	        throw new _exception2$4['default']('Arg not supported with multiple decorators');
 	      }
 	      _utils$3.extend(this.decorators, name);
 	    } else {
@@ -7465,9 +7449,9 @@
 
 	var Utils = _interopRequireWildcard$1(_utils$2);
 
-	var _exception$2 = exceptionExports;
+	var _exception$3 = exceptionExports;
 
-	var _exception2$2 = _interopRequireDefault$3(_exception$2);
+	var _exception2$3 = _interopRequireDefault$3(_exception$3);
 
 	var _base = base$1;
 
@@ -7488,20 +7472,20 @@
 	  if (compilerRevision < _base.LAST_COMPATIBLE_COMPILER_REVISION) {
 	    var runtimeVersions = _base.REVISION_CHANGES[currentRevision],
 	        compilerVersions = _base.REVISION_CHANGES[compilerRevision];
-	    throw new _exception2$2['default']('Template was precompiled with an older version of Handlebars than the current runtime. ' + 'Please update your precompiler to a newer version (' + runtimeVersions + ') or downgrade your runtime to an older version (' + compilerVersions + ').');
+	    throw new _exception2$3['default']('Template was precompiled with an older version of Handlebars than the current runtime. ' + 'Please update your precompiler to a newer version (' + runtimeVersions + ') or downgrade your runtime to an older version (' + compilerVersions + ').');
 	  } else {
 	    // Use the embedded version info since the runtime doesn't know about this revision yet
-	    throw new _exception2$2['default']('Template was precompiled with a newer version of Handlebars than the current runtime. ' + 'Please update your runtime to a newer version (' + compilerInfo[1] + ').');
+	    throw new _exception2$3['default']('Template was precompiled with a newer version of Handlebars than the current runtime. ' + 'Please update your runtime to a newer version (' + compilerInfo[1] + ').');
 	  }
 	}
 
 	function template(templateSpec, env) {
 	  /* istanbul ignore next */
 	  if (!env) {
-	    throw new _exception2$2['default']('No environment passed to template');
+	    throw new _exception2$3['default']('No environment passed to template');
 	  }
 	  if (!templateSpec || !templateSpec.main) {
-	    throw new _exception2$2['default']('Unknown template object: ' + typeof templateSpec);
+	    throw new _exception2$3['default']('Unknown template object: ' + typeof templateSpec);
 	  }
 
 	  templateSpec.main.decorator = templateSpec.main_d;
@@ -7522,16 +7506,14 @@
 	    }
 	    partial = env.VM.resolvePartial.call(this, partial, context, options);
 
-	    var extendedOptions = Utils.extend({}, options, {
-	      hooks: this.hooks,
-	      protoAccessControl: this.protoAccessControl
-	    });
+	    options.hooks = this.hooks;
+	    options.protoAccessControl = this.protoAccessControl;
 
-	    var result = env.VM.invokePartial.call(this, partial, context, extendedOptions);
+	    var result = env.VM.invokePartial.call(this, partial, context, options);
 
 	    if (result == null && env.compile) {
 	      options.partials[options.name] = env.compile(partial, templateSpec.compilerOptions, env);
-	      result = options.partials[options.name](context, extendedOptions);
+	      result = options.partials[options.name](context, options);
 	    }
 	    if (result != null) {
 	      if (options.indent) {
@@ -7547,7 +7529,7 @@
 	      }
 	      return result;
 	    } else {
-	      throw new _exception2$2['default']('The partial ' + options.name + ' could not be compiled when running in runtime-only mode');
+	      throw new _exception2$3['default']('The partial ' + options.name + ' could not be compiled when running in runtime-only mode');
 	    }
 	  }
 
@@ -7555,7 +7537,7 @@
 	  var container = {
 	    strict: function strict(obj, name, loc) {
 	      if (!obj || !(name in obj)) {
-	        throw new _exception2$2['default']('"' + name + '" not defined in ' + obj, {
+	        throw new _exception2$3['default']('"' + name + '" not defined in ' + obj, {
 	          loc: loc
 	        });
 	      }
@@ -7580,7 +7562,7 @@
 	      for (var i = 0; i < len; i++) {
 	        var result = depths[i] && container.lookupProperty(depths[i], name);
 	        if (result != null) {
-	          return depths[i][name];
+	          return result;
 	        }
 	      }
 	    },
@@ -7662,8 +7644,9 @@
 
 	  ret._setup = function (options) {
 	    if (!options.partial) {
-	      var mergedHelpers = Utils.extend({}, env.helpers, options.helpers);
-	      wrapHelpersToPassLookupProperty(mergedHelpers, container);
+	      var mergedHelpers = {};
+	      addHelpers(mergedHelpers, env.helpers, container);
+	      addHelpers(mergedHelpers, options.helpers, container);
 	      container.helpers = mergedHelpers;
 
 	      if (templateSpec.usePartial) {
@@ -7691,10 +7674,10 @@
 
 	  ret._child = function (i, data, blockParams, depths) {
 	    if (templateSpec.useBlockParams && !blockParams) {
-	      throw new _exception2$2['default']('must pass block params');
+	      throw new _exception2$3['default']('must pass block params');
 	    }
 	    if (templateSpec.useDepths && !depths) {
-	      throw new _exception2$2['default']('must pass parent depths');
+	      throw new _exception2$3['default']('must pass parent depths');
 	    }
 
 	    return wrapProgram(container, i, templateSpec[i], data, 0, blockParams, depths);
@@ -7729,21 +7712,21 @@
 	function resolvePartial(partial, context, options) {
 	  if (!partial) {
 	    if (options.name === '@partial-block') {
-	      partial = options.data['partial-block'];
+	      partial = lookupOwnProperty(options.data, 'partial-block');
 	    } else {
-	      partial = options.partials[options.name];
+	      partial = lookupOwnProperty(options.partials, options.name);
 	    }
 	  } else if (!partial.call && !options.name) {
 	    // This is a dynamic partial that returned a string
 	    options.name = partial;
-	    partial = options.partials[partial];
+	    partial = lookupOwnProperty(options.partials, partial);
 	  }
 	  return partial;
 	}
 
 	function invokePartial(partial, context, options) {
 	  // Use the current closure context to save the partial-block if this partial
-	  var currentPartialBlock = options.data && options.data['partial-block'];
+	  var currentPartialBlock = lookupOwnProperty(options.data, 'partial-block');
 	  options.partial = true;
 	  if (options.ids) {
 	    options.data.contextPath = options.ids[0] || options.data.contextPath;
@@ -7775,7 +7758,7 @@
 	  }
 
 	  if (partial === undefined) {
-	    throw new _exception2$2['default']('The partial ' + options.name + ' could not be found');
+	    throw new _exception2$3['default']('The partial ' + options.name + ' could not be found');
 	  } else if (partial instanceof Function) {
 	    return partial(context, options);
 	  }
@@ -7783,6 +7766,12 @@
 
 	function noop() {
 	  return '';
+	}
+
+	function lookupOwnProperty(obj, name) {
+	  if (obj && Object.prototype.hasOwnProperty.call(obj, name)) {
+	    return obj[name];
+	  }
 	}
 
 	function initData(context, data) {
@@ -7802,9 +7791,10 @@
 	  return prog;
 	}
 
-	function wrapHelpersToPassLookupProperty(mergedHelpers, container) {
-	  Object.keys(mergedHelpers).forEach(function (helperName) {
-	    var helper = mergedHelpers[helperName];
+	function addHelpers(mergedHelpers, helpers, container) {
+	  if (!helpers) return;
+	  Object.keys(helpers).forEach(function (helperName) {
+	    var helper = helpers[helperName];
 	    mergedHelpers[helperName] = passLookupPropertyOption(helper, container);
 	  });
 	}
@@ -7812,7 +7802,8 @@
 	function passLookupPropertyOption(helper, container) {
 	  var lookupProperty = container.lookupProperty;
 	  return _internalWrapHelper.wrapHelper(helper, function (options) {
-	    return Utils.extend({ lookupProperty: lookupProperty }, options);
+	    options.lookupProperty = lookupProperty;
+	    return options;
 	  });
 	}
 
@@ -8623,7 +8614,7 @@
 		                    return 5;
 		            }
 		        };
-		        lexer.rules = [/^(?:[^\x00]*?(?=(\{\{)))/, /^(?:[^\x00]+)/, /^(?:[^\x00]{2,}?(?=(\{\{|\\\{\{|\\\\\{\{|$)))/, /^(?:\{\{\{\{(?=[^/]))/, /^(?:\{\{\{\{\/[^\s!"#%-,\.\/;->@\[-\^`\{-~]+(?=[=}\s\/.])\}\}\}\})/, /^(?:[^\x00]+?(?=(\{\{\{\{)))/, /^(?:[\s\S]*?--(~)?\}\})/, /^(?:\()/, /^(?:\))/, /^(?:\{\{\{\{)/, /^(?:\}\}\}\})/, /^(?:\{\{(~)?>)/, /^(?:\{\{(~)?#>)/, /^(?:\{\{(~)?#\*?)/, /^(?:\{\{(~)?\/)/, /^(?:\{\{(~)?\^\s*(~)?\}\})/, /^(?:\{\{(~)?\s*else\s*(~)?\}\})/, /^(?:\{\{(~)?\^)/, /^(?:\{\{(~)?\s*else\b)/, /^(?:\{\{(~)?\{)/, /^(?:\{\{(~)?&)/, /^(?:\{\{(~)?!--)/, /^(?:\{\{(~)?![\s\S]*?\}\})/, /^(?:\{\{(~)?\*?)/, /^(?:=)/, /^(?:\.\.)/, /^(?:\.(?=([=~}\s\/.)|])))/, /^(?:[\/.])/, /^(?:\s+)/, /^(?:\}(~)?\}\})/, /^(?:(~)?\}\})/, /^(?:"(\\["]|[^"])*")/, /^(?:'(\\[']|[^'])*')/, /^(?:@)/, /^(?:true(?=([~}\s)])))/, /^(?:false(?=([~}\s)])))/, /^(?:undefined(?=([~}\s)])))/, /^(?:null(?=([~}\s)])))/, /^(?:-?[0-9]+(?:\.[0-9]+)?(?=([~}\s)])))/, /^(?:as\s+\|)/, /^(?:\|)/, /^(?:([^\s!"#%-,\.\/;->@\[-\^`\{-~]+(?=([=~}\s\/.)|]))))/, /^(?:\[(\\\]|[^\]])*\])/, /^(?:.)/, /^(?:$)/];
+		        lexer.rules = [/^(?:[^\x00]*?(?=(\{\{)))/, /^(?:[^\x00]+)/, /^(?:[^\x00]{2,}?(?=(\{\{|\\\{\{|\\\\\{\{|$)))/, /^(?:\{\{\{\{(?=[^\/]))/, /^(?:\{\{\{\{\/[^\s!"#%-,\.\/;->@\[-\^`\{-~]+(?=[=}\s\/.])\}\}\}\})/, /^(?:[^\x00]+?(?=(\{\{\{\{)))/, /^(?:[\s\S]*?--(~)?\}\})/, /^(?:\()/, /^(?:\))/, /^(?:\{\{\{\{)/, /^(?:\}\}\}\})/, /^(?:\{\{(~)?>)/, /^(?:\{\{(~)?#>)/, /^(?:\{\{(~)?#\*?)/, /^(?:\{\{(~)?\/)/, /^(?:\{\{(~)?\^\s*(~)?\}\})/, /^(?:\{\{(~)?\s*else\s*(~)?\}\})/, /^(?:\{\{(~)?\^)/, /^(?:\{\{(~)?\s*else\b)/, /^(?:\{\{(~)?\{)/, /^(?:\{\{(~)?&)/, /^(?:\{\{(~)?!--)/, /^(?:\{\{(~)?![\s\S]*?\}\})/, /^(?:\{\{(~)?\*?)/, /^(?:=)/, /^(?:\.\.)/, /^(?:\.(?=([=~}\s\/.)|])))/, /^(?:[\/.])/, /^(?:\s+)/, /^(?:\}(~)?\}\})/, /^(?:(~)?\}\})/, /^(?:"(\\["]|[^"])*")/, /^(?:'(\\[']|[^'])*')/, /^(?:@)/, /^(?:true(?=([~}\s)])))/, /^(?:false(?=([~}\s)])))/, /^(?:undefined(?=([~}\s)])))/, /^(?:null(?=([~}\s)])))/, /^(?:-?[0-9]+(?:\.[0-9]+)?(?=([~}\s)])))/, /^(?:as\s+\|)/, /^(?:\|)/, /^(?:([^\s!"#%-,\.\/;->@\[-\^`\{-~]+(?=([=~}\s\/.)|]))))/, /^(?:\[(\\\]|[^\]])*\])/, /^(?:.)/, /^(?:$)/];
 		        lexer.conditions = { "mu": { "rules": [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44], "inclusive": false }, "emu": { "rules": [2], "inclusive": false }, "com": { "rules": [6], "inclusive": false }, "raw": { "rules": [3, 4, 5], "inclusive": false }, "INITIAL": { "rules": [0, 1, 44], "inclusive": true } };
 		        return lexer;
 		    })();
@@ -9029,9 +9020,9 @@
 
 	function _interopRequireDefault$2(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _exception$1 = exceptionExports;
+	var _exception$2 = exceptionExports;
 
-	var _exception2$1 = _interopRequireDefault$2(_exception$1);
+	var _exception2$2 = _interopRequireDefault$2(_exception$2);
 
 	function validateClose(open, close) {
 	  close = close.path ? close.path.original : close;
@@ -9039,7 +9030,7 @@
 	  if (open.path.original !== close) {
 	    var errorNode = { loc: open.path.loc };
 
-	    throw new _exception2$1['default'](open.path.original + " doesn't match " + close, errorNode);
+	    throw new _exception2$2['default'](open.path.original + " doesn't match " + close, errorNode);
 	  }
 	}
 
@@ -9091,7 +9082,7 @@
 
 	    if (!isLiteral && (part === '..' || part === '.' || part === 'this')) {
 	      if (dig.length > 0) {
-	        throw new _exception2$1['default']('Invalid path: ' + original, { loc: loc });
+	        throw new _exception2$2['default']('Invalid path: ' + original, { loc: loc });
 	      } else if (part === '..') {
 	        depth++;
 	      }
@@ -9165,7 +9156,7 @@
 
 	  if (inverseAndProgram) {
 	    if (decorator) {
-	      throw new _exception2$1['default']('Unexpected inverse block on decorator', inverseAndProgram);
+	      throw new _exception2$2['default']('Unexpected inverse block on decorator', inverseAndProgram);
 	    }
 
 	    if (inverseAndProgram.chain) {
@@ -9263,6 +9254,10 @@
 
 	var Helpers = _interopRequireWildcard(_helpers);
 
+	var _exception$1 = exceptionExports;
+
+	var _exception2$1 = _interopRequireDefault$1(_exception$1);
+
 	var _utils$1 = utils;
 
 	base.parser = _parser2['default'];
@@ -9273,6 +9268,9 @@
 	function parseWithoutProcessing(input, options) {
 	  // Just return if an already-compiled AST was passed in.
 	  if (input.type === 'Program') {
+	    // When a pre-parsed AST is passed in, validate all node values to prevent
+	    // code injection via type-confused literals.
+	    validateInputAst(input);
 	    return input;
 	  }
 
@@ -9293,6 +9291,58 @@
 	  var strip = new _whitespaceControl2['default'](options);
 
 	  return strip.accept(ast);
+	}
+
+	function validateInputAst(ast) {
+	  validateAstNode(ast);
+	}
+
+	function validateAstNode(node) {
+	  if (node == null) {
+	    return;
+	  }
+
+	  if (Array.isArray(node)) {
+	    node.forEach(validateAstNode);
+	    return;
+	  }
+
+	  if (typeof node !== 'object') {
+	    return;
+	  }
+
+	  if (node.type === 'PathExpression') {
+	    if (!isValidDepth(node.depth)) {
+	      throw new _exception2$1['default']('Invalid AST: PathExpression.depth must be an integer');
+	    }
+	    if (!Array.isArray(node.parts)) {
+	      throw new _exception2$1['default']('Invalid AST: PathExpression.parts must be an array');
+	    }
+	    for (var i = 0; i < node.parts.length; i++) {
+	      if (typeof node.parts[i] !== 'string') {
+	        throw new _exception2$1['default']('Invalid AST: PathExpression.parts must only contain strings');
+	      }
+	    }
+	  } else if (node.type === 'NumberLiteral') {
+	    if (typeof node.value !== 'number' || !isFinite(node.value)) {
+	      throw new _exception2$1['default']('Invalid AST: NumberLiteral.value must be a number');
+	    }
+	  } else if (node.type === 'BooleanLiteral') {
+	    if (typeof node.value !== 'boolean') {
+	      throw new _exception2$1['default']('Invalid AST: BooleanLiteral.value must be a boolean');
+	    }
+	  }
+
+	  Object.keys(node).forEach(function (propertyName) {
+	    if (propertyName === 'loc') {
+	      return;
+	    }
+	    validateAstNode(node[propertyName]);
+	  });
+	}
+
+	function isValidDepth(depth) {
+	  return typeof depth === 'number' && isFinite(depth) && Math.floor(depth) === depth && depth >= 0;
 	}
 
 	var compiler = {};
@@ -13434,12 +13484,10 @@
 		      var decorators = _context.decorators;
 
 		      for (i = 0, l = programs.length; i < l; i++) {
-		        if (programs[i]) {
-		          ret[i] = programs[i];
-		          if (decorators[i]) {
-		            ret[i + '_d'] = decorators[i];
-		            ret.useDecorators = true;
-		          }
+		        ret[i] = programs[i];
+		        if (decorators[i]) {
+		          ret[i + '_d'] = decorators[i];
+		          ret.useDecorators = true;
 		        }
 		      }
 
@@ -13765,20 +13813,21 @@
 		    this.resolvePath('data', parts, 0, true, strict);
 		  },
 
-		  resolvePath: function resolvePath(type, parts, i, falsy, strict) {
+		  resolvePath: function resolvePath(type, parts, startPartIndex, falsy, strict) {
 		    // istanbul ignore next
 
 		    var _this2 = this;
 
 		    if (this.options.strict || this.options.assumeObjects) {
-		      this.push(strictLookup(this.options.strict && strict, this, parts, i, type));
+		      this.push(strictLookup(this.options.strict && strict, this, parts, startPartIndex, type));
 		      return;
 		    }
 
 		    var len = parts.length;
-		    for (; i < len; i++) {
+
+		    var _loop = function (i) {
 		      /* eslint-disable no-loop-func */
-		      this.replaceStack(function (current) {
+		      _this2.replaceStack(function (current) {
 		        var lookup = _this2.nameLookup(current, parts[i], type);
 		        // We want to ensure that zero and false are handled properly if the context (falsy flag)
 		        // needs to have the special handling for these values.
@@ -13790,6 +13839,10 @@
 		        }
 		      });
 		      /* eslint-enable no-loop-func */
+		    };
+
+		    for (var i = startPartIndex; i < len; i++) {
+		      _loop(i);
 		    }
 		  },
 
@@ -13907,7 +13960,12 @@
 		    var foundDecorator = this.nameLookup('decorators', name, 'decorator'),
 		        options = this.setupHelperArgs(name, paramSize);
 
-		    this.decorators.push(['fn = ', this.decorators.functionCall(foundDecorator, '', ['fn', 'props', 'container', options]), ' || fn;']);
+		    // Store the resolved decorator in a variable and verify it is a function before
+		    // calling it. Without this, unregistered decorators can cause an unhandled TypeError
+		    // (calling undefined), which crashes the process — enabling Denial of Service.
+		    this.decorators.push(['var decorator = ', foundDecorator, ';']);
+		    this.decorators.push(['if (typeof decorator !== "function") { throw new Error(', this.quotedString('Missing decorator: "' + name + '"'), '); }']);
+		    this.decorators.push(['fn = ', this.decorators.functionCall('decorator', '', ['fn', 'props', 'container', options]), ' || fn;']);
 		  },
 
 		  // [invokeHelper]
@@ -14090,8 +14148,8 @@
 		      var existing = this.matchExistingProgram(child);
 
 		      if (existing == null) {
-		        this.context.programs.push(''); // Placeholder to prevent name conflicts for nested children
-		        var index = this.context.programs.length;
+		        // Placeholder to prevent name conflicts for nested children
+		        var index = this.context.programs.push('') - 1;
 		        child.index = index;
 		        child.name = 'program' + index;
 		        this.context.programs[index] = compiler.compile(child, options, this.context, !this.precompile);
@@ -14411,19 +14469,19 @@
 		  return !JavaScriptCompiler.RESERVED_WORDS[name] && /^[a-zA-Z_$][0-9a-zA-Z_$]*$/.test(name);
 		};
 
-		function strictLookup(requireTerminal, compiler, parts, i, type) {
+		function strictLookup(requireTerminal, compiler, parts, startPartIndex, type) {
 		  var stack = compiler.popStack(),
 		      len = parts.length;
 		  if (requireTerminal) {
 		    len--;
 		  }
 
-		  for (; i < len; i++) {
+		  for (var i = startPartIndex; i < len; i++) {
 		    stack = compiler.nameLookup(stack, parts[i], type);
 		  }
 
 		  if (requireTerminal) {
-		    return [compiler.aliasable('container.strict'), '(', stack, ', ', compiler.quotedString(parts[i]), ', ', JSON.stringify(compiler.source.currentLocation), ' )'];
+		    return [compiler.aliasable('container.strict'), '(', stack, ', ', compiler.quotedString(parts[len]), ', ', JSON.stringify(compiler.source.currentLocation), ' )'];
 		  } else {
 		    return stack;
 		  }
@@ -15511,7 +15569,7 @@
 	    }
 	}
 
-	/*! js-yaml 4.1.0 https://github.com/nodeca/js-yaml @license MIT */
+	/*! js-yaml 4.1.1 https://github.com/nodeca/js-yaml @license MIT */
 	function isNothing(subject) {
 	  return (typeof subject === 'undefined') || (subject === null);
 	}
@@ -16722,6 +16780,22 @@
 	  );
 	}
 
+	// set a property of a literal object, while protecting against prototype pollution,
+	// see https://github.com/nodeca/js-yaml/issues/164 for more details
+	function setProperty(object, key, value) {
+	  // used for this specific key only because Object.defineProperty is slow
+	  if (key === '__proto__') {
+	    Object.defineProperty(object, key, {
+	      configurable: true,
+	      enumerable: true,
+	      writable: true,
+	      value: value
+	    });
+	  } else {
+	    object[key] = value;
+	  }
+	}
+
 	var simpleEscapeCheck = new Array(256); // integer, for fast access
 	var simpleEscapeMap = new Array(256);
 	for (var i = 0; i < 256; i++) {
@@ -16900,7 +16974,7 @@
 	    key = sourceKeys[index];
 
 	    if (!_hasOwnProperty$1.call(destination, key)) {
-	      destination[key] = source[key];
+	      setProperty(destination, key, source[key]);
 	      overridableKeys[key] = true;
 	    }
 	  }
@@ -16960,17 +17034,7 @@
 	      throwError(state, 'duplicated mapping key');
 	    }
 
-	    // used for this specific key only because Object.defineProperty is slow
-	    if (keyNode === '__proto__') {
-	      Object.defineProperty(_result, keyNode, {
-	        configurable: true,
-	        enumerable: true,
-	        writable: true,
-	        value: valueNode
-	      });
-	    } else {
-	      _result[keyNode] = valueNode;
-	    }
+	    setProperty(_result, keyNode, valueNode);
 	    delete overridableKeys[keyNode];
 	  }
 

@@ -3383,7 +3383,7 @@
 
     const IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
     const GetValue$2 = Phaser.Utils.Objects.GetValue;
-    const TintModes$2 = Phaser.TintModes;
+    const TintModes$1 = Phaser.TintModes;
 
     var AddImage = function (key, config) {
         if (IsPlainObject$1(key)) {
@@ -3416,11 +3416,9 @@
             }
         }
 
-        var tintFill = GetValue$2(config, 'tintFill', undefined);
-        if (tintFill === true) {
-            tintFill = TintModes$2.FILL;
-        } else if (tintFill === false) {
-            tintFill = undefined;
+        var tintMode = config.tintMode;
+        if ((tintMode === undefined) && (config.tintFill === true)) {
+            tintMode = TintModes$1.FILL;
         }
 
         this.images[key] = {
@@ -3433,12 +3431,12 @@
             right: GetValue$2(config, 'right', 0),
             originX: GetValue$2(config, 'originX', 0),
             originY: GetValue$2(config, 'originY', 0),
-            tintFill: tintFill,
+            tintMode: tintMode,
         };
     };
 
     const CanvasPool$1 = Phaser.Display.Canvas.CanvasPool;
-    const TintModes$1 = Phaser.TintModes;
+    const TintModes = Phaser.TintModes;
 
     var GetContext2D = function (canvasOrContext) {
         if (
@@ -3473,12 +3471,6 @@
 
         var context = GetContext2D(canvasOrContext);
 
-        if (tintMode === true) {
-            tintMode = TintModes$1.FILL;
-        } else if (tintMode === false) {
-            tintMode = undefined;
-        }
-
         if (color === undefined || color === null || typeof tintMode !== 'number') {
             // Draw image directly
             context.drawImage(
@@ -3508,7 +3500,7 @@
                 0, 0, width, height
             );
 
-            if (tintMode === TintModes$1.FILL) {
+            if (tintMode === TintModes.FILL) {
                 tempContext.globalCompositeOperation = 'source-in';
                 tempContext.fillStyle = color;
                 tempContext.fillRect(0, 0, width, height);
@@ -3516,19 +3508,19 @@
                 var compositeOperation = 'source-in';
 
                 switch (tintMode) {
-                    case TintModes$1.MULTIPLY:
+                    case TintModes.MULTIPLY:
                         compositeOperation = 'multiply';
                         break;
-                    case TintModes$1.ADD:
+                    case TintModes.ADD:
                         compositeOperation = 'lighter';
                         break;
-                    case TintModes$1.SCREEN:
+                    case TintModes.SCREEN:
                         compositeOperation = 'screen';
                         break;
-                    case TintModes$1.OVERLAY:
+                    case TintModes.OVERLAY:
                         compositeOperation = 'overlay';
                         break;
-                    case TintModes$1.HARD_LIGHT:
+                    case TintModes.HARD_LIGHT:
                         compositeOperation = 'hard-light';
                         break;
                 }
@@ -3564,8 +3556,6 @@
 
     };
 
-    const TintModes = Phaser.TintModes;
-
     var DrawImage = function (key, context, x, y, color, autoRound) {
         var imgData = this.get(key);
         if (!imgData) {
@@ -3580,18 +3570,15 @@
         x += imgData.left - (imgData.originX * width);
         y += imgData.y - (imgData.originY * height);
 
-        var tintFill = imgData.tintFill;
-        if (tintFill === true) {
-            tintFill = TintModes.FILL;
-        } else if (tintFill === false || tintFill === undefined) {
-            tintFill = undefined;
+        var tintMode = imgData.tintMode;
+        if (tintMode === undefined) {
             color = undefined;
         }
 
         DrawFrameToCanvas(
             frame, context,
             x, y, width, height,
-            color, autoRound, tintFill
+            color, autoRound, tintMode
         );
     };
 
