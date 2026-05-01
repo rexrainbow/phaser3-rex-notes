@@ -3,8 +3,8 @@ import GraphPlugin from '../../plugins/graph-plugin.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
 class Demo extends Phaser.Scene {
-    rexGraph: GraphPlugin;
-    rexUI: UIPlugin;
+    declare rexGraph: GraphPlugin;
+    declare rexUI: UIPlugin;
 
     constructor() {
         super({

@@ -98,6 +98,9 @@ module.exports = {
             "http": false,
             "https": false,
             "stream": false,
+        },
+        alias: {
+            phaser$: path.resolve(__dirname, 'node_modules/phaser/src/phaser.js')
         }
     }
 }

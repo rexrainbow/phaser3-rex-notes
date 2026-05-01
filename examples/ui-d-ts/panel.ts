@@ -1,5 +1,4 @@
-// @ts-ignore
-import Phaser from '../../node_modules/phaser/src/phaser.js';
+import 'phaser';
 import UIPlugin from '../../templates/ui/ui-plugin';
 
 const COLOR_MAIN = 0x4e342e;
