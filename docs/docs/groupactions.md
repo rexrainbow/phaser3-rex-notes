@@ -474,5 +474,3 @@ var mask = Phaser.Actions.AddMaskShape(gameObjects, {
 
 !!! warning "WebGL only"
     Only work in WebGL render mode.
-
-### 
