@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const projectMain = process.env.main;
 const assetsFolder = process.env.assets || './assets';
@@ -26,7 +25,28 @@ module.exports = {
         libraryTarget: 'umd',
         filename: '[name].js'
     },
-    watch: true,
+    devServer: {
+        host: process.env.IP || 'localhost',
+        port: process.env.PORT || 3000,
+        static: [
+            {
+                directory: path.resolve(__dirname, '.'),
+                publicPath: '/'
+            },
+            {
+                directory: path.resolve(__dirname, assetsFolder),
+                publicPath: '/assets'
+            }
+        ],
+        devMiddleware: {
+            writeToDisk: true
+        },
+        liveReload: true,
+        hot: false,
+        client: {
+            overlay: true
+        }
+    },
     plugins: [
         new webpack.DefinePlugin({
             __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true')),
@@ -49,17 +69,6 @@ module.exports = {
                 removeEmptyAttributes: false
             },
             hash: false
-        }),
-        new BrowserSyncPlugin({
-            host: process.env.IP || 'localhost',
-            port: process.env.PORT || 3000,
-            server: {
-                baseDir: './',
-                routes: {
-                    '/assets': assetsFolder,
-                }
-            },
-            ui: false,
         })
     ],
     module: {

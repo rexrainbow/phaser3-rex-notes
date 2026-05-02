@@ -9,7 +9,7 @@
         "dist"
     ],
     "scripts": {
-        "dev": "webpack --config webpack.config.js",
+        "dev": "webpack serve --config webpack.config.js",
         "build": "rollup -c rollup.config.mjs",
         "build-app": "webpack --config webpack.production.config.js"
     },
@@ -44,8 +44,6 @@
         "@types/js-yaml": "^4.0.9",
         "babel-eslint": "^9.0.0",
         "babel-loader": "^8.3.0",
-        "browser-sync": "2.29.3",
-        "browser-sync-webpack-plugin": "^2.3.0",
         "chart.js": "^2.9.4",
         "clean-webpack-plugin": "^4.0.0",
         "copy-webpack-plugin": "^14.0.0",
@@ -71,7 +69,8 @@
         "tslib": "^2.6.3",
         "typescript": "^5.5.2",
         "webpack": "^5.92.1",
-        "webpack-cli": "^4.10.0",
+        "webpack-cli": "^5.1.4",
+        "webpack-dev-server": "^5.2.3",
         "webpack-shell-plugin": "^0.5.0"
     },
     "dependencies": {
