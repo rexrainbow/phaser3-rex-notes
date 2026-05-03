@@ -1,15 +1,12 @@
 import HasProperty from '../../utils/object/HasProperty.js';
 import GetFilterList from '../../utils/renderer/filterpluginbase/GetFilterList.js';
 import AddClearEffectCallback from './AddClearEffectCallback.js';
-import InstallVignetteFX from '../../shaders/p3fx/InstallVignetteFX.js'
 
 var AddVignetteProperties = function (gameObject) {
     // Don't attach properties again
     if (HasProperty(gameObject, 'vignetteRadius')) {
         return gameObject;
     }
-
-    InstallVignetteFX(gameObject);
 
     var filterList = GetFilterList(gameObject);
 
@@ -35,7 +32,7 @@ var AddVignetteProperties = function (gameObject) {
                 }
             } else {
                 if (!gameObject._vignette) {
-                    gameObject._vignette = filterList.addP3Vignette(vignetteX, vignetteY, vignetteRadius, vignetteStrength);
+                    gameObject._vignette = filterList.addVignette(vignetteX, 1 - vignetteY, vignetteRadius, vignetteStrength);
                 }
 
                 gameObject._vignette.radius = vignetteRadius;
@@ -73,7 +70,7 @@ var AddVignetteProperties = function (gameObject) {
             vignetteY = value;
 
             if (gameObject._vignette) {
-                gameObject._vignette.y = vignetteY;
+                gameObject._vignette.y = 1 - vignetteY;
             }
         },
     })
@@ -103,3 +100,8 @@ var AddVignetteProperties = function (gameObject) {
 }
 
 export default AddVignetteProperties;
+
+/*
+Phaser 4's built-in Vignette filter uses a different falloff curve 
+from the Phaser 3 built-in FX shader.
+*/

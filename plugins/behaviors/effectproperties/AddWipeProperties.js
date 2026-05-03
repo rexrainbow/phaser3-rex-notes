@@ -1,15 +1,13 @@
 import HasProperty from '../../utils/object/HasProperty.js';
 import GetFilterList from '../../utils/renderer/filterpluginbase/GetFilterList.js';
+import Clamp from '../../utils/math/Clamp.js';
 import AddClearEffectCallback from './AddClearEffectCallback.js';
-import InstallWipeFX from '../../shaders/p3fx/InstallWipeFX.js';
 
 var AddWipeProperties = function (gameObject) {
     // Don't attach properties again
     if (HasProperty(gameObject, 'wipeLeft')) {
         return gameObject;
     }
-
-    InstallWipeFX(gameObject);
 
     var filterList = GetFilterList(gameObject);
 
@@ -49,8 +47,10 @@ var AddWipeProperties = function (gameObject) {
             if ((wipeLeft === null) || (wipeLeft === false)) {
                 RemoveEffect(gameObject);
             } else {
+                wipeLeft = Clamp(wipeLeft, 0, 1);
+
                 if (!gameObject._wipeEffect) {
-                    gameObject._wipeEffect = filterList.addP3Wipe(wipeWidth, 0, 0);
+                    gameObject._wipeEffect = filterList.addWipe(wipeWidth, 0, 0, 0);
                 }
 
                 gameObject._wipeEffect.direction = 1;
@@ -77,8 +77,10 @@ var AddWipeProperties = function (gameObject) {
             if ((wipeRight === null) || (wipeRight === false)) {
                 RemoveEffect(gameObject);
             } else {
+                wipeRight = Clamp(wipeRight, 0, 1);
+
                 if (!gameObject._wipeEffect) {
-                    gameObject._wipeEffect = filterList.addP3Wipe(wipeWidth, 0, 0);
+                    gameObject._wipeEffect = filterList.addWipe(wipeWidth, 0, 0, 0);
                 }
                 gameObject._wipeEffect.direction = 0;
                 gameObject._wipeEffect.axis = 0;
@@ -104,8 +106,10 @@ var AddWipeProperties = function (gameObject) {
             if ((wipeUp === null) || (wipeUp === false)) {
                 RemoveEffect(gameObject);
             } else {
+                wipeUp = Clamp(wipeUp, 0, 1);
+
                 if (!gameObject._wipeEffect) {
-                    gameObject._wipeEffect = filterList.addP3Wipe(wipeWidth, 0, 0);
+                    gameObject._wipeEffect = filterList.addWipe(wipeWidth, 0, 0, 0);
                 }
                 gameObject._wipeEffect.direction = 1;
                 gameObject._wipeEffect.axis = 1;
@@ -131,8 +135,10 @@ var AddWipeProperties = function (gameObject) {
             if ((wipeDown === null) || (wipeDown === false)) {
                 RemoveEffect(gameObject);
             } else {
+                wipeDown = Clamp(wipeDown, 0, 1);
+
                 if (!gameObject._wipeEffect) {
-                    gameObject._wipeEffect = filterList.addP3Wipe(wipeWidth, 0, 0);
+                    gameObject._wipeEffect = filterList.addWipe(wipeWidth, 0, 0, 0);
                 }
                 gameObject._wipeEffect.direction = 0;
                 gameObject._wipeEffect.axis = 1;
@@ -151,7 +157,7 @@ var AddWipeProperties = function (gameObject) {
                 return;
             }
 
-            wipeWidth = value;
+            wipeWidth = Clamp(value, 0, 1);
 
             if (gameObject._wipeEffect) {
                 gameObject._wipeEffect.wipeWidth = wipeWidth;

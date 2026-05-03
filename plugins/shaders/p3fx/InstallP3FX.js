@@ -2,14 +2,10 @@ import InstallBloomFX from './InstallBloomFX.js';
 import InstallCircleFX from './InstallCircleFX.js';
 import InstallGradientFX from './InstallGradientFX.js';
 import InstallShineFX from './InstallShineFX.js';
-import InstallVignetteFX from './InstallVignetteFX.js';
-import InstallWipeFX from './InstallWipeFX.js';
 import { BloomController } from './InstallBloomFX.js';
 import { CircleController } from './InstallCircleFX.js';
 import { GradientController } from './InstallGradientFX.js';
 import { ShineController } from './InstallShineFX.js';
-import { VignetteController } from './InstallVignetteFX.js';
-import { WipeController } from './InstallWipeFX.js';
 
 
 var InstallCallbacks = [
@@ -17,8 +13,6 @@ var InstallCallbacks = [
     InstallCircleFX,
     InstallGradientFX,
     InstallShineFX,
-    InstallVignetteFX,
-    InstallWipeFX
 ]
 
 var InstallP3FX = function (game) {
@@ -32,5 +26,5 @@ var InstallP3FX = function (game) {
 export default InstallP3FX;
 
 export {
-    BloomController, CircleController, GradientController, ShineController, VignetteController, WipeController
+    BloomController, CircleController, GradientController, ShineController, 
 }

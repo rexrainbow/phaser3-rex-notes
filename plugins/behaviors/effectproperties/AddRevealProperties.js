@@ -1,15 +1,13 @@
 import HasProperty from '../../utils/object/HasProperty.js';
 import GetFilterList from '../../utils/renderer/filterpluginbase/GetFilterList.js';
+import Clamp from '../../utils/math/Clamp.js';
 import AddClearEffectCallback from './AddClearEffectCallback.js';
-import InstallWipeFX from '../../shaders/p3fx/InstallWipeFX.js';
 
 var AddRevealProperties = function (gameObject) {
     // Don't attach properties again
     if (HasProperty(gameObject, 'revealLeft')) {
         return gameObject;
     }
-
-    InstallWipeFX(gameObject);
 
     var filterList = GetFilterList(gameObject);
 
@@ -49,8 +47,10 @@ var AddRevealProperties = function (gameObject) {
             if ((revealLeft === null) || (revealLeft === false)) {
                 RemoveEffect(gameObject);
             } else {
+                revealLeft = Clamp(revealLeft, 0, 1);
+
                 if (!gameObject._revealEffect) {
-                    gameObject._revealEffect = filterList.addP3Reveal(revealWidth, 0, 0);
+                    gameObject._revealEffect = filterList.addWipe(revealWidth, 0, 0, 1);
                 }
 
                 gameObject._revealEffect.direction = 1;
@@ -77,8 +77,10 @@ var AddRevealProperties = function (gameObject) {
             if ((revealRight === null) || (revealRight === false)) {
                 RemoveEffect(gameObject);
             } else {
+                revealRight = Clamp(revealRight, 0, 1);
+
                 if (!gameObject._revealEffect) {
-                    gameObject._revealEffect = filterList.addP3Reveal(revealWidth, 0, 0);
+                    gameObject._revealEffect = filterList.addWipe(revealWidth, 0, 0, 1);
                 }
                 gameObject._revealEffect.direction = 0;
                 gameObject._revealEffect.axis = 0;
@@ -104,8 +106,10 @@ var AddRevealProperties = function (gameObject) {
             if ((revealUp === null) || (revealUp === false)) {
                 RemoveEffect(gameObject);
             } else {
+                revealUp = Clamp(revealUp, 0, 1);
+
                 if (!gameObject._revealEffect) {
-                    gameObject._revealEffect = filterList.addP3Reveal(revealWidth, 0, 0);
+                    gameObject._revealEffect = filterList.addWipe(revealWidth, 0, 0, 1);
                 }
                 gameObject._revealEffect.direction = 1;
                 gameObject._revealEffect.axis = 1;
@@ -131,8 +135,10 @@ var AddRevealProperties = function (gameObject) {
             if ((revealDown === null) || (revealDown === false)) {
                 RemoveEffect(gameObject);
             } else {
+                revealDown = Clamp(revealDown, 0, 1);
+
                 if (!gameObject._revealEffect) {
-                    gameObject._revealEffect = filterList.addP3Reveal(revealWidth, 0, 0);
+                    gameObject._revealEffect = filterList.addWipe(revealWidth, 0, 0, 1);
                 }
                 gameObject._revealEffect.direction = 0;
                 gameObject._revealEffect.axis = 1;
@@ -151,7 +157,7 @@ var AddRevealProperties = function (gameObject) {
                 return;
             }
 
-            revealWidth = value;
+            revealWidth = Clamp(value, 0, 1);
 
             if (gameObject._revealEffect) {
                 gameObject._revealEffect.wipeWidth = revealWidth;

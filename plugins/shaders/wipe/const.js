@@ -1,1 +1,0 @@
-export const FilterName = 'FilterP3Wipe';
