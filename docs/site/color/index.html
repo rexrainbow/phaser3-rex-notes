@@ -6476,44 +6476,6 @@
   
   
   
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_19" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_19" id="__nav_4_19_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Display
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_19_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_19">
-            <span class="md-nav__icon md-icon"></span>
-            Display
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
     <li class="md-nav__item">
       <a href="../mask/" class="md-nav__link">
         
@@ -6549,14 +6511,6 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -15420,7 +15374,7 @@
 </ul>
 </li>
 <li>RGB string to color
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">.</span><span class="nx">RGBStringToColor</span><span class="p">(</span><span class="nx">rgb</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">.</span><span class="nx">RGBStringToColor</span><span class="p">(</span><span class="nx">rgb</span><span class="p">).</span><span class="nx">color</span><span class="p">;</span>
 </code></pre></div><ul>
 <li>rgb : <code>'rgb(r,g,b)'</code>, or <code>'rgba(r,g,b,a)'</code><ul>
 <li>r, g, b : 0 ~ 255</li>
@@ -15433,6 +15387,12 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">.</span><span class="nx">HSVToRGB</span><span class="p">(</span><span class="nx">h</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="p">).</span><span class="nx">color</span><span class="p">;</span>
 </code></pre></div><ul>
 <li><code>h</code>, <code>s</code>, <code>v</code> : 0 ~ 1</li>
+</ul>
+</li>
+<li>HSL to color
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">.</span><span class="nx">HSLToColor</span><span class="p">(</span><span class="nx">h</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">,</span><span class="w"> </span><span class="nx">l</span><span class="p">).</span><span class="nx">color</span><span class="p">;</span>
+</code></pre></div><ul>
+<li><code>h</code>, <code>s</code>, <code>l</code> : 0 ~ 1</li>
 </ul>
 </li>
 </ul>
@@ -15466,6 +15426,40 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">.</span><span class="nx">IntegerToColor</span><span class="p">(</span><span class="nx">colorInteger</span><span class="p">);</span>
 </code></pre></div><ul>
 <li>colorInteger : Color integer (<code>0xAARRGGBB</code>)</li>
+</ul>
+</li>
+<li>Create via <code>{r, g, b, a}</code>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">.</span><span class="nx">ObjectToColor</span><span class="p">(</span><span class="nx">input</span><span class="p">)</span>
+</code></pre></div><ul>
+<li><code>input</code> : An object containing <code>r</code>, <code>g</code>, <code>b</code> and <code>a</code> properties in the range <code>0</code> to <code>255</code>.</li>
+</ul>
+</li>
+<li>Create via RGB string
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">.</span><span class="nx">RGBStringToColor</span><span class="p">(</span><span class="nx">rgb</span><span class="p">);</span>
+</code></pre></div><ul>
+<li>rgb : <code>'rgb(r,g,b)'</code>, or <code>'rgba(r,g,b,a)'</code><ul>
+<li>r, g, b : 0 ~ 255</li>
+<li>a : 0 ~ 1</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Create via hex string
+    <div class="highlight"><pre><span></span><code>var color = Phaser.Display.Color.HexStringToColor(&#39;#0033ff&#39;);
+</code></pre></div><ul>
+<li><code>hex</code> : The hex color value to convert, such as <code>#0033ff</code> or the short-hand format: <code>#03f</code>.</li>
+</ul>
+</li>
+<li>Create via HSV
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">.</span><span class="nx">HSVToRGB</span><span class="p">(</span><span class="nx">h</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>h</code>, <code>s</code>, <code>v</code> : 0 ~ 1</li>
+</ul>
+</li>
+<li>Create via HSL
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">.</span><span class="nx">HSLToColor</span><span class="p">(</span><span class="nx">h</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">,</span><span class="w"> </span><span class="nx">l</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>h</code>, <code>s</code>, <code>l</code> : 0 ~ 1</li>
 </ul>
 </li>
 </ul>
@@ -15624,11 +15618,26 @@
 <h3 id="interpolation">Interpolation<a class="headerlink" href="#interpolation" title="Permanent link">&para;</a></h3>
 <p>Interpolate between 2 colors.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">colorOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">.</span><span class="nx">Interpolate</span><span class="p">.</span><span class="nx">RGBWithRGB</span><span class="p">(</span><span class="nx">r1</span><span class="p">,</span><span class="w"> </span><span class="nx">g1</span><span class="p">,</span><span class="w"> </span><span class="nx">b1</span><span class="p">,</span><span class="w"> </span><span class="nx">r2</span><span class="p">,</span><span class="w"> </span><span class="nx">g2</span><span class="p">,</span><span class="w"> </span><span class="nx">b2</span><span class="p">,</span><span class="w"> </span><span class="nx">length</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">);</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">colorOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">.</span><span class="nx">Interpolate</span><span class="p">.</span><span class="nx">ColorWithColor</span><span class="p">(</span><span class="nx">color1</span><span class="p">,</span><span class="w"> </span><span class="nx">color2</span><span class="p">,</span><span class="w"> </span><span class="nx">length</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">colorOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">.</span><span class="nx">Interpolate</span><span class="p">.</span><span class="nx">ColorWithColor</span><span class="p">(</span><span class="nx">color1</span><span class="p">,</span><span class="w"> </span><span class="nx">color2</span><span class="p">,</span><span class="w"> </span><span class="nx">length</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">,</span><span class="w"> </span><span class="nx">hsv</span><span class="p">,</span><span class="w"> </span><span class="nx">hsvSign</span><span class="p">);</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">colorOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">.</span><span class="nx">Interpolate</span><span class="p">.</span><span class="nx">ColorWithRGB</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="nx">g</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">length</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">);</span>
 </code></pre></div>
 <ul>
 <li><code>length</code>, <code>index</code> : t = <code>index/length</code> (0~1)</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">colorOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">.</span><span class="nx">Interpolate</span><span class="p">.</span><span class="nx">HSVWithHSV</span><span class="p">(</span><span class="nx">h1</span><span class="p">,</span><span class="w"> </span><span class="nx">s1</span><span class="p">,</span><span class="w"> </span><span class="nx">v1</span><span class="p">,</span><span class="w"> </span><span class="nx">h2</span><span class="p">,</span><span class="w"> </span><span class="nx">s2</span><span class="p">,</span><span class="w"> </span><span class="nx">v2</span><span class="p">,</span><span class="w"> </span><span class="nx">length</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">,</span><span class="w"> </span><span class="nx">sign</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><code>h1</code>, <code>h2</code> : Hue of the first/second color (<code>0</code> to <code>1</code>).</li>
+<li><code>s1</code>, <code>s2</code> : Saturation of the first/second color (<code>0</code> to <code>1</code>).</li>
+<li><code>v1</code>, <code>v2</code> : Value (brightness) of the first/second color (<code>0</code> to <code>1</code>).</li>
+<li><code>length</code> : Distance to interpolate over. Default value is <code>100</code>.</li>
+<li><code>index</code> : Index to start from. Default value is <code>0</code>.</li>
+<li><code>sign</code> : Hue interpolation direction. <ul>
+<li><code>0</code> : nearest. Default behavior.</li>
+<li>positive : always increase.</li>
+<li>negative : always decrease.</li>
+</ul>
+</li>
 </ul>
 
 

@@ -190,7 +190,7 @@ Will try to create preFX effect if gameObject has preFX, otherwise, try to creat
 - `blockOffsetX`, `blockOffsetY`
     - A number
 
-#### [Bloom](shader-p3fx.md#bloom)
+#### [Bloom](groupactions.md#add-bloom-effect)
 
 - `bloomColor` : 
     - A number : Enable this effect and set color of bloom (0xffffff).
@@ -318,7 +318,7 @@ Will try to create preFX effect if gameObject has preFX, otherwise, try to creat
     - `true`, or `1` : Enable this effect.
     - `null` : Remove this effect
 
-#### [Reveal](shader-p3fx.md#reveal)
+#### [Reveal](shader-builtin.md#wipereveal)
 
 - `revealLeft`, `revealRight`, `revealUp`, or `revealDown` :
     - A number : Enable this effect with specific reveal direction and set progress (0~1).
@@ -374,7 +374,7 @@ Will try to create preFX effect if gameObject has preFX, otherwise, try to creat
 - `tiltShiftAmount`, `tiltShiftContrast`, `tiltShiftBlurX`, `tiltShiftBlurY`, `tiltShiftStrength` : 
     - A number
 
-#### [Vignette](shader-p3fx.md#vignette)
+#### [Vignette](shader-builtin.md#vignette)
 
 - `vignetteRadius` : 
     - A number : Enable this effect and set radius of vignette (0~1).
@@ -388,7 +388,7 @@ Will try to create preFX effect if gameObject has preFX, otherwise, try to creat
     - `true`, or `1` : Enable this effect.
     - `null` : Remove this effect
 
-#### [Wipe](shader-p3fx.md#wipe)
+#### [Wipe](shader-builtin.md#wipereveal)
 
 - `wipeLeft`, `wipeRight`, `wipeUp`, or `wipeDown` :
     - A number : Enable this effect with specific wipe direction and set progress (0~1).
