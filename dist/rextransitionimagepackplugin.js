@@ -648,7 +648,7 @@
         }
     };
 
-    const GetValue$l = phaser.Utils.Objects.GetValue;
+    const GetValue$k = phaser.Utils.Objects.GetValue;
     const BaseAdd = Base.prototype.add;
 
     var Add = function (gameObject, config) {
@@ -720,13 +720,13 @@
             state.syncCameraFilter = config;
             state.syncDisplayList = config;
         } else {
-            state.syncPosition = GetValue$l(config, 'syncPosition', true);
-            state.syncRotation = GetValue$l(config, 'syncRotation', true);
-            state.syncScale = GetValue$l(config, 'syncScale', true);
-            state.syncAlpha = GetValue$l(config, 'syncAlpha', true);
-            state.syncScrollFactor = GetValue$l(config, 'syncScrollFactor', true);
-            state.syncCameraFilter = GetValue$l(config, 'syncCameraFilter', true);
-            state.syncDisplayList = GetValue$l(config, 'syncDisplayList', true);
+            state.syncPosition = GetValue$k(config, 'syncPosition', true);
+            state.syncRotation = GetValue$k(config, 'syncRotation', true);
+            state.syncScale = GetValue$k(config, 'syncScale', true);
+            state.syncAlpha = GetValue$k(config, 'syncAlpha', true);
+            state.syncScrollFactor = GetValue$k(config, 'syncScrollFactor', true);
+            state.syncCameraFilter = GetValue$k(config, 'syncCameraFilter', true);
+            state.syncDisplayList = GetValue$k(config, 'syncDisplayList', true);
         }
 
     };
@@ -2556,7 +2556,7 @@
         return (object instanceof GameObjectClass) || (object instanceof LayerClass);
     };
 
-    var GetValue$k = phaser.Utils.Objects.GetValue;
+    var GetValue$j = phaser.Utils.Objects.GetValue;
 
     var Snapshot = function (config) {
         if (!config) {
@@ -2569,13 +2569,13 @@
         }
         var renderTexture = config.renderTexture;  // renderTexture, or dynamicTexture
         var saveTexture = config.saveTexture;
-        var x = GetValue$k(config, 'x', undefined);
-        var y = GetValue$k(config, 'y', undefined);
-        var width = GetValue$k(config, 'width', undefined);
-        var height = GetValue$k(config, 'height', undefined);
-        var originX = GetValue$k(config, 'originX', 0);
-        var originY = GetValue$k(config, 'originY', 0);
-        var padding = GetValue$k(config, 'padding', 0);
+        var x = GetValue$j(config, 'x', undefined);
+        var y = GetValue$j(config, 'y', undefined);
+        var width = GetValue$j(config, 'width', undefined);
+        var height = GetValue$j(config, 'height', undefined);
+        var originX = GetValue$j(config, 'originX', 0);
+        var originY = GetValue$j(config, 'originY', 0);
+        var padding = GetValue$j(config, 'padding', 0);
 
         var scrollX, scrollY;
         if ((width === undefined) || (height === undefined) || (x === undefined) || (y === undefined)) {
@@ -2685,19 +2685,19 @@
         }
     };
 
-    const GetValue$j = phaser.Utils.Objects.GetValue;
+    const GetValue$i = phaser.Utils.Objects.GetValue;
 
     var DrawBounds$1 = function (gameObjects, graphics, config) {
         var strokeColor, lineWidth, fillColor, fillAlpha, padding, includeParent;
         if (typeof (config) === 'number') {
             strokeColor = config;
         } else {
-            strokeColor = GetValue$j(config, 'color');
-            lineWidth = GetValue$j(config, 'lineWidth');
-            fillColor = GetValue$j(config, 'fillColor');
-            fillAlpha = GetValue$j(config, 'fillAlpha');
-            padding = GetValue$j(config, 'padding');
-            includeParent = GetValue$j(config, 'includeParent');
+            strokeColor = GetValue$i(config, 'color');
+            lineWidth = GetValue$i(config, 'lineWidth');
+            fillColor = GetValue$i(config, 'fillColor');
+            fillAlpha = GetValue$i(config, 'fillAlpha');
+            padding = GetValue$i(config, 'padding');
+            includeParent = GetValue$i(config, 'includeParent');
         }
 
         if (strokeColor === undefined) { strokeColor = 0xffffff; }
@@ -2752,12 +2752,12 @@
 
     var Points = [{ x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }];
 
-    const GetValue$i = phaser.Utils.Objects.GetValue;
+    const GetValue$h = phaser.Utils.Objects.GetValue;
 
     var DrawBounds = function (graphics, config) {
-        var drawContainer = GetValue$i(config, 'drawContainer', true);
+        var drawContainer = GetValue$h(config, 'drawContainer', true);
 
-        var gameObjects = GetValue$i(config, 'children');
+        var gameObjects = GetValue$h(config, 'children');
         if (gameObjects === undefined) {
             gameObjects = this.getAllVisibleChildren([this]);
         }
@@ -3260,7 +3260,7 @@
         }
     };
 
-    const GetValue$h = phaser.Utils.Objects.GetValue;
+    const GetValue$g = phaser.Utils.Objects.GetValue;
 
     class ComponentBase {
         constructor(parent, config) {
@@ -3269,7 +3269,7 @@
             this.isShutdown = false;
 
             // Event emitter, default is private event emitter
-            this.setEventEmitter(GetValue$h(config, 'eventEmitter', true));
+            this.setEventEmitter(GetValue$g(config, 'eventEmitter', true));
 
             // Register callback of parent destroy event, also see `shutdown` method
             if (this.parent) {
@@ -3346,7 +3346,7 @@
         EventEmitterMethods
     );
 
-    const GetValue$g = phaser.Utils.Objects.GetValue;
+    const GetValue$f = phaser.Utils.Objects.GetValue;
 
     class TickTask extends ComponentBase {
         constructor(parent, config) {
@@ -3355,7 +3355,7 @@
             this._isRunning = false;
             this.isPaused = false;
             this.tickingState = false;
-            this.setTickingMode(GetValue$g(config, 'tickingMode', 1));
+            this.setTickingMode(GetValue$f(config, 'tickingMode', 1));
             // boot() later
         }
 
@@ -3459,7 +3459,7 @@
         'always': 2
     };
 
-    const GetValue$f = phaser.Utils.Objects.GetValue;
+    const GetValue$e = phaser.Utils.Objects.GetValue;
 
     class SceneUpdateTickTask extends TickTask {
         constructor(parent, config) {
@@ -3470,7 +3470,7 @@
 
             // If this.scene is not available, use game's 'step' event
             var defaultEventName = (this.scene) ? 'update' : 'step';
-            this.tickEventName = GetValue$f(config, 'tickEventName', defaultEventName);
+            this.tickEventName = GetValue$e(config, 'tickEventName', defaultEventName);
             this.isSceneTicker = !IsGameUpdateEvent(this.tickEventName);
 
         }
@@ -3506,8 +3506,8 @@
         return (eventName === 'step') || (eventName === 'poststep');
     };
 
-    const GetValue$e = phaser.Utils.Objects.GetValue;
-    const Clamp$4 = phaser.Math.Clamp;
+    const GetValue$d = phaser.Utils.Objects.GetValue;
+    const Clamp$3 = phaser.Math.Clamp;
 
     class Timer {
         constructor(config) {
@@ -3515,15 +3515,15 @@
         }
 
         resetFromJSON(o) {
-            this.state = GetValue$e(o, 'state', IDLE);
-            this.timeScale = GetValue$e(o, 'timeScale', 1);
-            this.delay = GetValue$e(o, 'delay', 0);
-            this.repeat = GetValue$e(o, 'repeat', 0);
-            this.repeatCounter = GetValue$e(o, 'repeatCounter', 0);
-            this.repeatDelay = GetValue$e(o, 'repeatDelay', 0);
-            this.duration = GetValue$e(o, 'duration', 0);
-            this.nowTime = GetValue$e(o, 'nowTime', 0);
-            this.justRestart = GetValue$e(o, 'justRestart', false);
+            this.state = GetValue$d(o, 'state', IDLE);
+            this.timeScale = GetValue$d(o, 'timeScale', 1);
+            this.delay = GetValue$d(o, 'delay', 0);
+            this.repeat = GetValue$d(o, 'repeat', 0);
+            this.repeatCounter = GetValue$d(o, 'repeatCounter', 0);
+            this.repeatDelay = GetValue$d(o, 'repeatDelay', 0);
+            this.duration = GetValue$d(o, 'duration', 0);
+            this.nowTime = GetValue$d(o, 'nowTime', 0);
+            this.justRestart = GetValue$d(o, 'justRestart', false);
         }
 
         toJSON() {
@@ -3633,11 +3633,11 @@
                     t = 1;
                     break;
             }
-            return Clamp$4(t, 0, 1);
+            return Clamp$3(t, 0, 1);
         }
 
         set t(value) {
-            value = Clamp$4(value, -1, 1);
+            value = Clamp$3(value, -1, 1);
             if (value < 0) {
                 this.state = DELAY;
                 this.nowTime = -this.delay * value;
@@ -3731,19 +3731,19 @@
 
     }
 
-    const GetValue$d = phaser.Utils.Objects.GetValue;
+    const GetValue$c = phaser.Utils.Objects.GetValue;
     const GetAdvancedValue$1 = phaser.Utils.Objects.GetAdvancedValue;
     const GetEaseFunction = phaser.Tweens.Builders.GetEaseFunction;
 
     class EaseValueTaskBase extends TimerTickTask {
         resetFromJSON(o) {
-            this.timer.resetFromJSON(GetValue$d(o, 'timer'));
-            this.setEnable(GetValue$d(o, 'enable', true));
-            this.setTarget(GetValue$d(o, 'target', this.parent));
+            this.timer.resetFromJSON(GetValue$c(o, 'timer'));
+            this.setEnable(GetValue$c(o, 'enable', true));
+            this.setTarget(GetValue$c(o, 'target', this.parent));
             this.setDelay(GetAdvancedValue$1(o, 'delay', 0));
             this.setDuration(GetAdvancedValue$1(o, 'duration', 1000));
-            this.setEase(GetValue$d(o, 'ease', 'Linear'));
-            this.setRepeat(GetValue$d(o, 'repeat', 0));
+            this.setEase(GetValue$c(o, 'ease', 'Linear'));
+            this.setRepeat(GetValue$c(o, 'repeat', 0));
 
             return this;
         }
@@ -3863,7 +3863,7 @@
         }
     }
 
-    const GetValue$c = phaser.Utils.Objects.GetValue;
+    const GetValue$b = phaser.Utils.Objects.GetValue;
     const Linear$2 = phaser.Math.Linear;
 
     class EaseValueTask extends EaseValueTaskBase {
@@ -3882,16 +3882,16 @@
             }
 
             var target = this.target;
-            this.propertyKey = GetValue$c(config, 'key', 'value');
+            this.propertyKey = GetValue$b(config, 'key', 'value');
             var currentValue = target[this.propertyKey];
-            this.fromValue = GetValue$c(config, 'from', currentValue);
-            this.toValue = GetValue$c(config, 'to', currentValue);
+            this.fromValue = GetValue$b(config, 'from', currentValue);
+            this.toValue = GetValue$b(config, 'to', currentValue);
 
-            this.setEase(GetValue$c(config, 'ease', this.ease));
-            this.setDuration(GetValue$c(config, 'duration', this.duration));
-            this.setRepeat(GetValue$c(config, 'repeat', 0));
-            this.setDelay(GetValue$c(config, 'delay', 0));
-            this.setRepeatDelay(GetValue$c(config, 'repeatDelay', 0));
+            this.setEase(GetValue$b(config, 'ease', this.ease));
+            this.setDuration(GetValue$b(config, 'duration', this.duration));
+            this.setRepeat(GetValue$b(config, 'repeat', 0));
+            this.setDelay(GetValue$b(config, 'delay', 0));
+            this.setRepeatDelay(GetValue$b(config, 'repeatDelay', 0));
 
             this.timer
                 .setDuration(this.duration)
@@ -4075,7 +4075,7 @@
     };
 
     const IsPlainObject$5 = phaser.Utils.Objects.IsPlainObject;
-    const GetValue$b = phaser.Utils.Objects.GetValue;
+    const GetValue$a = phaser.Utils.Objects.GetValue;
     const GetRandomItem = phaser.Utils.Array.GetRandom;
 
     var DirMode = {
@@ -4138,10 +4138,10 @@
 
             if (IsPlainObject$5(texture)) {
                 var config = texture;
-                texture = GetValue$b(config, 'key', undefined);
-                frame = GetValue$b(config, 'frame', undefined);
+                texture = GetValue$a(config, 'key', undefined);
+                frame = GetValue$a(config, 'frame', undefined);
 
-                mode = GetValue$b(config, 'mode');
+                mode = GetValue$a(config, 'mode');
                 if (Array.isArray(mode)) {
                     mode = GetRandomItem(mode);
                 }
@@ -4403,7 +4403,7 @@
         contains: Contains,
     };
 
-    const GetValue$a = phaser.Utils.Objects.GetValue;
+    const GetValue$9 = phaser.Utils.Objects.GetValue;
 
     var GetBoundsConfig$1 = function (config, out) {
         if (config === undefined) {
@@ -4419,10 +4419,10 @@
             out.top = config;
             out.bottom = config;
         } else {
-            out.left = GetValue$a(config, 'left', 0);
-            out.right = GetValue$a(config, 'right', 0);
-            out.top = GetValue$a(config, 'top', 0);
-            out.bottom = GetValue$a(config, 'bottom', 0);
+            out.left = GetValue$9(config, 'left', 0);
+            out.right = GetValue$9(config, 'right', 0);
+            out.top = GetValue$9(config, 'top', 0);
+            out.bottom = GetValue$9(config, 'bottom', 0);
         }
         return out;
     };
@@ -4819,7 +4819,7 @@
         }
     };
 
-    const GetValue$9 = phaser.Utils.Objects.GetValue;
+    const GetValue$8 = phaser.Utils.Objects.GetValue;
     const DefaultImageClass = phaser.GameObjects.Image;
     const IsPlainObject$4 = phaser.Utils.Objects.IsPlainObject;
     const RotateAround$1 = phaser.Math.RotateAround;
@@ -4827,26 +4827,26 @@
     var GridCutImage = function (gameObject, columns, rows, config) {
         if (IsPlainObject$4(columns)) {
             config = columns;
-            columns = GetValue$9(config, 'columns', 1);
-            rows = GetValue$9(config, 'rows', 1);
+            columns = GetValue$8(config, 'columns', 1);
+            rows = GetValue$8(config, 'rows', 1);
         }
 
-        var createImageCallback = GetValue$9(config, 'createImageCallback');
+        var createImageCallback = GetValue$8(config, 'createImageCallback');
         if (!createImageCallback) {
-            var ImageClass = GetValue$9(config, 'ImageClass', DefaultImageClass);
+            var ImageClass = GetValue$8(config, 'ImageClass', DefaultImageClass);
             createImageCallback = function (scene, key, frame) {
                 return new ImageClass(scene, 0, 0, key, frame);
             };
         }
 
-        var originX = GetValue$9(config, 'originX', 0.5);
-        var originY = GetValue$9(config, 'originY', 0.5);
+        var originX = GetValue$8(config, 'originX', 0.5);
+        var originY = GetValue$8(config, 'originY', 0.5);
 
-        var addToScene = GetValue$9(config, 'add', true);
+        var addToScene = GetValue$8(config, 'add', true);
 
-        var align = GetValue$9(config, 'align', addToScene);
+        var align = GetValue$8(config, 'align', addToScene);
 
-        var imageObjectPool = GetValue$9(config, 'objectPool', undefined);
+        var imageObjectPool = GetValue$8(config, 'objectPool', undefined);
 
         var scene = gameObject.scene;
         var texture = gameObject.texture;
@@ -5018,24 +5018,24 @@
     };
 
     const IsPlainObject$3 = phaser.Utils.Objects.IsPlainObject;
-    const GetValue$8 = phaser.Utils.Objects.GetValue;
-    const Clamp$3 = phaser.Math.Clamp;
+    const GetValue$7 = phaser.Utils.Objects.GetValue;
+    const Clamp$2 = phaser.Math.Clamp;
 
     class TransitionImage extends ContainerLite {
         constructor(scene, x, y, texture, frame, config) {
             if (IsPlainObject$3(x)) {
                 config = x;
-                x = GetValue$8(config, 'x', 0);
-                y = GetValue$8(config, 'y', 0);
-                texture = GetValue$8(config, 'key', undefined);
-                frame = GetValue$8(config, 'frame', undefined);
+                x = GetValue$7(config, 'x', 0);
+                y = GetValue$7(config, 'y', 0);
+                texture = GetValue$7(config, 'key', undefined);
+                frame = GetValue$7(config, 'frame', undefined);
             } else if (IsPlainObject$3(frame)) {
                 config = frame;
                 frame = undefined;
             }
 
-            var backImage = GetValue$8(config, 'back', undefined);
-            var frontImage = GetValue$8(config, 'front', undefined);
+            var backImage = GetValue$7(config, 'back', undefined);
+            var frontImage = GetValue$7(config, 'front', undefined);
             if (!backImage) {
                 backImage = scene.add.image(x, y, texture, frame);
             }
@@ -5043,8 +5043,8 @@
                 frontImage = scene.add.image(x, y, texture, frame);
             }
 
-            var width = GetValue$8(config, 'width', undefined);
-            var height = GetValue$8(config, 'height', undefined);
+            var width = GetValue$7(config, 'width', undefined);
+            var height = GetValue$7(config, 'height', undefined);
             var scaleMode = ((width !== undefined) && (height !== undefined)) ? 1 : 0;
 
             if (width === undefined) {
@@ -5059,7 +5059,7 @@
             this._flipX = false;
             this._flipY = false;
 
-            scaleMode = GetValue$8(config, 'scaleMode', scaleMode);
+            scaleMode = GetValue$7(config, 'scaleMode', scaleMode);
             if (typeof (scaleMode) === 'string') {
                 scaleMode = ScaleModeMap[scaleMode];
             }
@@ -5078,10 +5078,10 @@
             this.currentTransitionMode = undefined;
 
             // Transition parameters
-            var onStart = GetValue$8(config, 'onStart', undefined);
-            var onProgress = GetValue$8(config, 'onProgress', undefined);
-            var onComplete = GetValue$8(config, 'onComplete', undefined);
-            var dir = GetValue$8(config, 'dir', 0);
+            var onStart = GetValue$7(config, 'onStart', undefined);
+            var onProgress = GetValue$7(config, 'onProgress', undefined);
+            var onComplete = GetValue$7(config, 'onComplete', undefined);
+            var dir = GetValue$7(config, 'dir', 0);
             if ((onStart === undefined) && (onProgress === undefined) && (onComplete === undefined)) {
                 onStart = OnStart;
                 onProgress = OnProgress;
@@ -5092,21 +5092,21 @@
             this
                 .setTransitionStartCallback(
                     onStart,
-                    GetValue$8(config, 'onStartScope', undefined)
+                    GetValue$7(config, 'onStartScope', undefined)
                 )
                 .setTransitionProgressCallback(
                     onProgress,
-                    GetValue$8(config, 'onProgressScope', undefined)
+                    GetValue$7(config, 'onProgressScope', undefined)
                 )
                 .setTransitionCompleteCallback(
                     onComplete,
-                    GetValue$8(config, 'onCompleteScope', undefined)
+                    GetValue$7(config, 'onCompleteScope', undefined)
                 )
                 .setTransitionDirection(dir)
-                .setDuration(GetValue$8(config, 'duration', 1000))
-                .setEaseFunction(GetValue$8(config, 'ease', 'Linear'));
+                .setDuration(GetValue$7(config, 'duration', 1000))
+                .setEaseFunction(GetValue$7(config, 'ease', 'Linear'));
 
-            var maskGameObject = GetValue$8(config, 'mask', undefined);
+            var maskGameObject = GetValue$7(config, 'mask', undefined);
             if (maskGameObject) {
                 this.setMaskGameObject(maskGameObject);
             }
@@ -5235,7 +5235,7 @@
         }
 
         set t(value) {
-            value = Clamp$3(value, 0, 1);
+            value = Clamp$2(value, 0, 1);
             if (this._t === value) {
                 return;
             }
@@ -6061,7 +6061,7 @@
         lineStyle: LineStyle
     };
 
-    var GetValue$7 = function (source, key, defaultValue, altSource) {
+    var GetValue$6 = function (source, key, defaultValue, altSource) {
         var isValidSource = source && (typeof source === 'object' || typeof source === 'function');
         var isValidAltSource = altSource && (typeof altSource === 'object' || typeof altSource === 'function');
 
@@ -6161,7 +6161,7 @@
 
         getData(key, defaultValue) {
             this.enableData();
-            return (key === undefined) ? this.data : GetValue$7(this.data, key, defaultValue);
+            return (key === undefined) ? this.data : GetValue$6(this.data, key, defaultValue);
         },
 
         incData(key, inc, defaultValue) {
@@ -8237,7 +8237,7 @@
         Methods,
     );
 
-    const GetValue$6 = phaser.Utils.Objects.GetValue;
+    const GetValue$5 = phaser.Utils.Objects.GetValue;
 
     class RoundRectangle extends PathBase {
         constructor(x, y, width, height, radius, iterations) {
@@ -8383,10 +8383,10 @@
                 this.radiusBL = value;
                 this.radiusBR = value;
             } else {
-                this.radiusTL = GetValue$6(value, 'tl', 0);
-                this.radiusTR = GetValue$6(value, 'tr', 0);
-                this.radiusBL = GetValue$6(value, 'bl', 0);
-                this.radiusBR = GetValue$6(value, 'br', 0);
+                this.radiusTL = GetValue$5(value, 'tl', 0);
+                this.radiusTR = GetValue$5(value, 'tr', 0);
+                this.radiusBL = GetValue$5(value, 'bl', 0);
+                this.radiusBR = GetValue$5(value, 'br', 0);
             }
         }
 
@@ -8646,7 +8646,7 @@
         triangle: Triangle
     };
 
-    const GetValue$5 = phaser.Utils.Objects.GetValue;
+    const GetValue$4 = phaser.Utils.Objects.GetValue;
     const IsPlainObject$2 = phaser.Utils.Objects.IsPlainObject;
 
     const ClearAll = function () {
@@ -8667,7 +8667,7 @@
         },
 
         buildShapes(config) {
-            var createCallback = GetValue$5(config, 'create', undefined);
+            var createCallback = GetValue$4(config, 'create', undefined);
 
             if (IsPlainObject$2(createCallback)) {
                 var shapes = createCallback;
@@ -8704,7 +8704,7 @@
 
             }
 
-            this.setUpdateShapesCallback(GetValue$5(config, 'update'));
+            this.setUpdateShapesCallback(GetValue$4(config, 'update'));
         },
 
         setUpdateShapesCallback(callback) {
@@ -8761,21 +8761,21 @@
     var tempMatrix, parentMatrix;
     var globOut = {};
 
-    const GetValue$4 = phaser.Utils.Objects.GetValue;
+    const GetValue$3 = phaser.Utils.Objects.GetValue;
     const IsPlainObject$1 = phaser.Utils.Objects.IsPlainObject;
 
     class CustomShapes extends BaseShapes {
         constructor(scene, x, y, width, height, config) {
             if (IsPlainObject$1(x)) {
                 config = x;
-                x = GetValue$4(config, 'x', 0);
-                y = GetValue$4(config, 'y', 0);
-                width = GetValue$4(config, 'width', 2);
-                height = GetValue$4(config, 'height', 2);
+                x = GetValue$3(config, 'x', 0);
+                y = GetValue$3(config, 'y', 0);
+                width = GetValue$3(config, 'width', 2);
+                height = GetValue$3(config, 'height', 2);
             }
 
             super(scene, x, y, width, height);
-            this.type = GetValue$4(config, 'type', 'rexCustomShapes');
+            this.type = GetValue$3(config, 'type', 'rexCustomShapes');
             this.buildShapes(config);
         }
 
@@ -8907,24 +8907,24 @@
         },
     };
 
-    const GetValue$3 = phaser.Utils.Objects.GetValue;
-    const Clamp$2 = phaser.Math.Clamp;
+    const GetValue$2 = phaser.Utils.Objects.GetValue;
+    const Clamp$1 = phaser.Math.Clamp;
 
     function ProgressBase (BaseClass) {
         class ProgressBase extends BaseClass {
             bootProgressBase(config) {
-                this.eventEmitter = GetValue$3(config, 'eventEmitter', this);
+                this.eventEmitter = GetValue$2(config, 'eventEmitter', this);
 
-                var callback = GetValue$3(config, 'valuechangeCallback', null);
+                var callback = GetValue$2(config, 'valuechangeCallback', null);
                 if (callback !== null) {
-                    var scope = GetValue$3(config, 'valuechangeCallbackScope', undefined);
+                    var scope = GetValue$2(config, 'valuechangeCallbackScope', undefined);
                     this.eventEmitter.on('valuechange', callback, scope);
                 }
 
                 this
                     .setEaseValuePropName('value')
-                    .setEaseValueDuration(GetValue$3(config, 'easeValue.duration', 0))
-                    .setEaseValueFunction(GetValue$3(config, 'easeValue.ease', 'Linear'));
+                    .setEaseValueDuration(GetValue$2(config, 'easeValue.duration', 0))
+                    .setEaseValueFunction(GetValue$2(config, 'easeValue.ease', 'Linear'));
 
                 return this;
             }
@@ -8934,7 +8934,7 @@
             }
 
             set value(value) {
-                value = Clamp$2(value, 0, 1);
+                value = Clamp$1(value, 0, 1);
 
                 var oldValue = this._value;
                 var valueChanged = (oldValue != value);
@@ -8956,17 +8956,17 @@
         return ProgressBase;
     }
 
-    const GetValue$2 = phaser.Utils.Objects.GetValue;
+    const GetValue$1 = phaser.Utils.Objects.GetValue;
     const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
 
     class CustomProgress extends ProgressBase(CustomShapes) {
         constructor(scene, x, y, width, height, config) {
             if (IsPlainObject(x)) {
                 config = x;
-                x = GetValue$2(config, 'x', 0);
-                y = GetValue$2(config, 'y', 0);
-                width = GetValue$2(config, 'width', 2);
-                height = GetValue$2(config, 'height', 2);
+                x = GetValue$1(config, 'x', 0);
+                y = GetValue$1(config, 'y', 0);
+                width = GetValue$1(config, 'width', 2);
+                height = GetValue$1(config, 'height', 2);
             }
             if (config === undefined) {
                 config = {};
@@ -8979,7 +8979,7 @@
 
             this.bootProgressBase(config);
 
-            this.setValue(GetValue$2(config, 'value', 0));
+            this.setValue(GetValue$1(config, 'value', 0));
         }
 
         get centerX() {
@@ -9603,10 +9603,10 @@
 
     };
 
-    const FilterName$1 = 'rexFilterDissolve';
+    const FilterName = 'rexFilterDissolve';
 
     // Reference: https://medium.com/neosavvy-labs/webgl-with-perlin-noise-part-1-a87b56bbc9fb
-    const frag$2 = `\
+    const frag$1 = `\
 vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
 vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
 vec4 permute(vec4 x) { return mod289(((x*34.0)+1.0)*x); }
@@ -9645,7 +9645,7 @@ float Perlin(vec2 P) { return Perlin(vec3(P, 0.0)); }
     // https://github.com/ykob/glsl-dissolve/blob/master/src/glsl/dissolve.fs
 
 
-    const frag$1 = `\
+    const frag = `\
 #pragma phaserTemplate(shaderName)
 
 #ifdef GL_FRAGMENT_PRECISION_HIGH
@@ -9672,7 +9672,7 @@ uniform float fromEdgeWidth;
 uniform float toEdgeStart;
 uniform float toEdgeWidth;
 
-${frag$2}
+${frag$1}
 
 vec4 getFromColor (vec2 uv) {
   return texture2D(uMainSampler, uv);
@@ -9712,10 +9712,10 @@ void main () {
 `;
 
     class DissolveFilter extends phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
-        static FilterName = FilterName$1;
+        static FilterName = FilterName;
 
         constructor(manager) {
-            super(FilterName$1, manager, null, frag$1);
+            super(FilterName, manager, null, frag);
         }
 
         setupTextures(controller, textures, drawingContext) {
@@ -9744,14 +9744,14 @@ void main () {
         }
     }
 
-    const GetValue$1 = phaser.Utils.Objects.GetValue;
-    const Clamp$1 = phaser.Math.Clamp;
+    const GetValue = phaser.Utils.Objects.GetValue;
+    const Clamp = phaser.Math.Clamp;
 
     class DissolveController extends phaser.Filters.Controller {
-        static FilterName = FilterName$1;
+        static FilterName = FilterName;
 
         constructor(camera, config) {
-            super(camera, FilterName$1);
+            super(camera, FilterName);
 
             this._progress = 0;
             this.resizeMode = 1;
@@ -9775,11 +9775,11 @@ void main () {
         }
 
         resetFromJSON(o) {
-            this.setProgress(GetValue$1(o, 'progress', 0));
-            this.setTransitionTargetTexture(GetValue$1(o, 'toTexture', '__DEFAULT'), GetValue$1(o, 'toFrame', undefined), GetValue$1(o, 'resizeMode', 1));
-            this.setNoise(GetValue$1(o, 'noiseX', undefined), GetValue$1(o, 'noiseY', undefined), GetValue$1(o, 'noiseZ', undefined));
-            this.setFromEdge(GetValue$1(o, 'fromEdgeStart', 0.01), GetValue$1(o, 'fromEdgeWidth', 0.05));
-            this.setToEdge(GetValue$1(o, 'toEdgeStart', 0.01), GetValue$1(o, 'toEdgeWidth', 0.05));
+            this.setProgress(GetValue(o, 'progress', 0));
+            this.setTransitionTargetTexture(GetValue(o, 'toTexture', '__DEFAULT'), GetValue(o, 'toFrame', undefined), GetValue(o, 'resizeMode', 1));
+            this.setNoise(GetValue(o, 'noiseX', undefined), GetValue(o, 'noiseY', undefined), GetValue(o, 'noiseZ', undefined));
+            this.setFromEdge(GetValue(o, 'fromEdgeStart', 0.01), GetValue(o, 'fromEdgeWidth', 0.05));
+            this.setToEdge(GetValue(o, 'toEdgeStart', 0.01), GetValue(o, 'toEdgeWidth', 0.05));
             return this;
         }
 
@@ -9788,7 +9788,7 @@ void main () {
         }
 
         set progress(value) {
-            this._progress = Clamp$1(value, 0, 1);
+            this._progress = Clamp(value, 0, 1);
         }
 
         setProgress(value) {
@@ -9946,189 +9946,27 @@ void main () {
             });
     };
 
-    const FilterName = 'FilterP3Wipe';
-
-    // Built-in fx in phaser3
-
-    const frag = `\
-#pragma phaserTemplate(shaderName)
-
-#ifdef GL_FRAGMENT_PRECISION_HIGH
-#define highmedp highp
-#else
-#define highmedp mediump
-#endif
-precision highmedp float;
-
-// Scene buffer
-uniform sampler2D uMainSampler; 
-varying vec2 outTexCoord;
-
-// Effect parameters
-uniform vec4 config;
-uniform bool reveal;
-
-#pragma phaserTemplate(fragmentHeader)
-
-void main (void) {
-    vec2 uv = outTexCoord;
-
-    vec4 color0;
-    vec4 color1;
-
-    if (reveal) {
-        color0 = vec4(0);
-        color1 = texture2D(uMainSampler, uv);
-    } else {
-        color0 = texture2D(uMainSampler, uv);
-        color1 = vec4(0);
-    }
-
-    float distance = config.x;
-    float width = config.y;
-    float direction = config.z;
-    float axis = uv.x;
-
-    if (config.w == 1.0) {
-        axis = uv.y;
-    }
-
-    float adjust = mix(width, -width, distance);
-    float value = smoothstep(distance - width, distance + width, abs(direction - axis) + adjust);
-    gl_FragColor = mix(color1, color0, value);
-}
-`;
-
-    class WarpFilter extends phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
-        static FilterName = FilterName;
-
-        constructor(manager) {
-            super(FilterName, manager, null, frag);
-        }
-
-        // This method sets up the uniforms for the shader.
-        setupUniforms(controller, drawingContext) {
-            const programManager = this.programManager;
-
-            programManager.setUniform('config', [controller.progress, controller.wipeWidth, controller.direction, controller.axis]);
-            programManager.setUniform('reveal', controller.reveal);
-        }
-
-    }
-
-    const GetValue = phaser.Utils.Objects.GetValue;
-    const Clamp = phaser.Math.Clamp;
-
-    class WipeController extends phaser.Filters.Controller {
-        static FilterName = FilterName;
-
-        constructor(camera, config) {
-            super(camera, FilterName);
-
-            this.progress = 0;
-            this.wipeWidth = 0.1;
-            this.direction = 0;
-            this.axis = 0;
-            this.reveal = false;
-
-            this.resetFromJSON(config);
-        }
-
-        resetFromJSON(o) {
-            this.setProgress(GetValue(o, 'progress', 0));
-            this.setWipeWidth(GetValue(o, 'wipeWidth', 0.1));
-            this.setDirection(GetValue(o, 'direction', 0));
-            this.setAxis(GetValue(o, 'axis', 0));
-
-            var reveal = GetValue(o, 'reveal', undefined);
-            if (reveal === undefined) {
-                reveal = !GetValue(o, 'wipe', true);
-            }
-            if (reveal) {
-                this.enableRevealMode();
-            } else {
-                this.enableWipeMode();
-            }
-
-            return this;
-        }
-
-        get progress() {
-            return this._progress;
-        }
-
-        set progress(value) {
-            this._progress = Clamp(value, 0, 1);
-        }
-
-        setProgress(value) {
-            this.progress = value;
-            return this;
-        }
-
-        get wipeWidth() {
-            return this._wipeWidth;
-        }
-
-        set wipeWidth(value) {
-            this._wipeWidth = Clamp(value, 0, 1);
-        }
-
-        setWipeWidth(wipeWidth) {
-            this.wipeWidth = wipeWidth;
-            return this;
-        }
-
-        setDirection(direction) {
-            this.direction = direction;
-            return this;
-        }
-
-        setAxis(axis) {
-            this.axis = axis;
-            return this;
-        }
-
-        enableWipeMode() {
-            this.reveal = false;
-            return this;
-        }
-
-        enableRevealMode() {
-            this.reveal = true;
-            return this;
-        }
-
-    }
-
     const WipeWidth = 0.1;
     const DirLeftToRight = 0;
-    const DirTopToBottom = 0;
+    const DirTopToBottom = 1;
     const DirRightToLeft = 1;
-    const DirBottomToTop = 1;
+    const DirBottomToTop = 0;
     const AxisX = 0;
     const AxisY = 1;
 
     var AddRevealModes = function (image) {
-        RegisterFilter(image.scene.game, WarpFilter);
-
         image
             .addTransitionMode(RevealRight, {
                 ease: 'Linear', dir: 'in', mask: false,
 
                 onStart: function (parent, currentImage, nextImage, t) {
-                    nextImage.effect = AddController(nextImage, WipeController, {
-                        wipeWidth: WipeWidth,
-                        direction: DirLeftToRight,
-                        axis: AxisX,
-                        reveal: true,
-                    });
+                    nextImage.effect = GetFilterList(nextImage).addWipe(WipeWidth, DirLeftToRight, AxisX, 1);
                 },
                 onProgress: function (parent, currentImage, nextImage, t) {
                     nextImage.effect.progress = t;
                 },
                 onComplete: function (parent, currentImage, nextImage, t) {
-                    RemoveController(nextImage, WipeController);
+                    GetFilterList(nextImage).remove(nextImage.effect);
                     delete nextImage.effect;
                 },
             })
@@ -10136,18 +9974,13 @@ void main (void) {
                 ease: 'Linear', dir: 'in', mask: false,
 
                 onStart: function (parent, currentImage, nextImage, t) {
-                    nextImage.effect = AddController(nextImage, WipeController, {
-                        wipeWidth: WipeWidth,
-                        direction: DirRightToLeft,
-                        axis: AxisX,
-                        reveal: true,
-                    });
+                    nextImage.effect = GetFilterList(nextImage).addWipe(WipeWidth, DirRightToLeft, AxisX, 1);
                 },
                 onProgress: function (parent, currentImage, nextImage, t) {
                     nextImage.effect.progress = t;
                 },
                 onComplete: function (parent, currentImage, nextImage, t) {
-                    RemoveController(nextImage, WipeController);
+                    GetFilterList(nextImage).remove(nextImage.effect);
                     delete nextImage.effect;
                 },
             })
@@ -10155,18 +9988,13 @@ void main (void) {
                 ease: 'Linear', dir: 'in', mask: false,
 
                 onStart: function (parent, currentImage, nextImage, t) {
-                    nextImage.effect = AddController(nextImage, WipeController, {
-                        wipeWidth: WipeWidth,
-                        direction: DirTopToBottom,
-                        axis: AxisY,
-                        reveal: true,
-                    });
+                    nextImage.effect = GetFilterList(nextImage).addWipe(WipeWidth, DirTopToBottom, AxisY, 1);
                 },
                 onProgress: function (parent, currentImage, nextImage, t) {
                     nextImage.effect.progress = t;
                 },
                 onComplete: function (parent, currentImage, nextImage, t) {
-                    RemoveController(nextImage, WipeController);
+                    GetFilterList(nextImage).remove(nextImage.effect);
                     delete nextImage.effect;
                 },
             })
@@ -10174,18 +10002,13 @@ void main (void) {
                 ease: 'Linear', dir: 'in', mask: false,
 
                 onStart: function (parent, currentImage, nextImage, t) {
-                    nextImage.effect = AddController(nextImage, WipeController, {
-                        wipeWidth: WipeWidth,
-                        direction: DirBottomToTop,
-                        axis: AxisY,
-                        reveal: true,
-                    });
+                    nextImage.effect = GetFilterList(nextImage).addWipe(WipeWidth, DirBottomToTop, AxisY, 1);
                 },
                 onProgress: function (parent, currentImage, nextImage, t) {
                     nextImage.effect.progress = t;
                 },
                 onComplete: function (parent, currentImage, nextImage, t) {
-                    RemoveController(nextImage, WipeController);
+                    GetFilterList(nextImage).remove(nextImage.effect);
                     delete nextImage.effect;
                 },
             });

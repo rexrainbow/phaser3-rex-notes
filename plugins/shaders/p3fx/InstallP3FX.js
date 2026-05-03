@@ -1,7 +1,6 @@
 import InstallCircleFX from './InstallCircleFX.js';
 import InstallGradientFX from './InstallGradientFX.js';
 import InstallShineFX from './InstallShineFX.js';
-import { BloomController } from './InstallBloomFX.js';
 import { CircleController } from './InstallCircleFX.js';
 import { GradientController } from './InstallGradientFX.js';
 import { ShineController } from './InstallShineFX.js';

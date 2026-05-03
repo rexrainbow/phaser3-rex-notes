@@ -1,4 +1,4 @@
-import { Game, Scene, GameObjects, Renderer, Utils, Filters, Math, Plugins } from 'phaser';
+import { Actions, Game, Scene, GameObjects, Renderer, Utils, Filters, Plugins } from 'phaser';
 
 var HasProperty = function (obj, prop) {
     if (!obj) {
@@ -224,345 +224,11 @@ var AddBlockyProperties = function (gameObject) {
     return gameObject;
 };
 
-const GameClass = Game;
-var IsGame = function (object) {
-    return (object instanceof GameClass);
-};
-
-const SceneClass = Scene;
-var IsSceneObject = function (object) {
-    return (object instanceof SceneClass);
-};
-
-var GetGame = function (object) {
-    if ((object == null) || (typeof (object) !== 'object')) {
-        return null;
-    } else if (IsGame(object)) {
-        return object;
-    } else if (IsGame(object.game)) {
-        return object.game;
-    } else if (IsSceneObject(object)) { // object = scene object
-        return object.sys.game;
-    } else if (IsSceneObject(object.scene)) { // object = game object
-        return object.scene.sys.game;
-    }
-};
-
-var RegisterFilter = function (game, FilterClass) {
-    var filterName = FilterClass.FilterName;
-    var renderNodes = GetGame(game).renderer.renderNodes;
-    if (renderNodes.hasNode(filterName)) {
-        return false;
-    }
-
-    renderNodes.addNodeConstructor(filterName, FilterClass);
-    return true;
-};
-
-var AddFilterListMethod = function (name, callback) {
-    var FilterListComponent = GameObjects.Components.FilterList.prototype;
-    if (FilterListComponent[name]) {
-        return;
-    }
-
-    FilterListComponent[name] = callback;
-};
-
-const StepFilterName = 'FilterP3BloomStep';
-
-// Built-in fx in phaser3
-
-const frag$5 = `\
-#pragma phaserTemplate(shaderName)
-
-#ifdef GL_FRAGMENT_PRECISION_HIGH
-#define highmedp highp
-#else
-#define highmedp mediump
-#endif
-precision highmedp float;
-
-// Scene buffer
-uniform sampler2D uMainSampler; 
-varying vec2 outTexCoord;
-
-// Effect parameters
-uniform vec2 offset;
-uniform float strength;
-uniform vec3 color;
-
-#pragma phaserTemplate(fragmentHeader)
-
-void main (void) {
-    vec4 sum = texture2D(uMainSampler, outTexCoord) * 0.204164 * strength;
-
-    sum = sum + texture2D(uMainSampler, outTexCoord + offset * 1.407333) * 0.304005;
-    sum = sum + texture2D(uMainSampler, outTexCoord - offset * 1.407333) * 0.304005;
-    sum = sum + texture2D(uMainSampler, outTexCoord + offset * 3.294215) * 0.093913;
-    sum = sum + texture2D(uMainSampler, outTexCoord - offset * 3.294215) * 0.093913;
-
-    gl_FragColor = sum * vec4(color, 1);
-}
-`;
-
-class BloomStepFilter extends Renderer.WebGL.RenderNodes.BaseFilterShader {
-    static FilterName = StepFilterName;
-
-    constructor(manager) {
-        super(StepFilterName, manager, null, frag$5);
-    }
-
-    // This method sets up the uniforms for the shader.
-    setupUniforms(controller, drawingContext) {
-        const programManager = this.programManager;
-
-        var x = (2 / drawingContext.width) * controller.offsetX;
-        var y = (2 / drawingContext.height) * controller.offsetY;
-        programManager.setUniform('offset', [x, y]);
-
-        programManager.setUniform('strength', controller.strength);
-        programManager.setUniform('color', controller.glcolor);
-
-    }
-
-}
-
-const GetValue$6 = Utils.Objects.GetValue;
-
-class BloomStepController extends Filters.Controller {
-    static FilterName = StepFilterName;
-
-    constructor(camera, config) {
-        super(camera, StepFilterName);
-
-        this.offsetX = 1;
-        this.offsetY = 1;
-        this.strength = 1;
-        this.glcolor = [1, 1, 1];
-
-        this.resetFromJSON(config);
-    }
-
-    resetFromJSON(o) {
-        this.setOffset(GetValue$6(o, 'offsetX', 1), GetValue$6(o, 'offsetY', 1));
-        this.setStrength(GetValue$6(o, 'strength', 1));
-        this.setColor(GetValue$6(o, 'color', 0xFFFFFF));
-
-        return this;
-    }
-
-    get color() {
-        var color = this.glcolor;
-
-        return (((color[0] * 255) << 16) + ((color[1] * 255) << 8) + (color[2] * 255 | 0));
-    }
-
-    set color(value) {
-        var color = this.glcolor;
-
-        color[0] = ((value >> 16) & 0xFF) / 255;
-        color[1] = ((value >> 8) & 0xFF) / 255;
-        color[2] = (value & 0xFF) / 255;
-    }
-
-    setOffset(x, y) {
-        this.offsetX = x;
-        this.offsetY = y;
-        return this;
-    }
-
-    setStrength(strength) {
-        this.strength = strength;
-        return this;
-    }
-
-    setColor(color) {
-        this.color = color;
-        return this;
-    }
-
-}
-
-const GetValue$5 = Utils.Objects.GetValue;
-
-let BloomController$1 = class BloomController extends Filters.ParallelFilters {
-    constructor(camera, config) {
-        super(camera);
-
-        this.steps = 0;
-        this.offsetX = 1;
-        this.offsetY = 1;
-        this.blurStrength = 1;
-        this.color = 0xffffff;
-        this.strength = 1;
-
-        this.resetFromJSON(config);
-    }
-
-    resetFromJSON(o) {
-        this.setOffset(GetValue$5(o, 'offsetX', 1), GetValue$5(o, 'offsetY', 1));
-        this.setBlurStrength(GetValue$5(o, 'blurStrength', 1));
-        this.setColor(GetValue$5(o, 'color', 0xFFFFFF));
-        this.setStrength(GetValue$5(o, 'strength', 1));
-        this.setSteps(GetValue$5(o, 'steps', 4));
-
-        return this;
-    }
-
-    forEachController(callback, scope) {
-        this.top.list.forEach(callback, scope);
-    }
-
-    get steps() {
-        return this._steps;
-    }
-
-    set steps(value) {
-        if (this._steps === value) {
-            return;
-        }
-
-        var camera = this.camera;
-        if (this.steps < value) {
-            var filters = this.top;
-            var startIndex = this.steps * 2;
-            var stopIndex = value * 2;
-            for (var i = startIndex; i < stopIndex; i++) {
-                filters.add(new BloomStepController(camera));
-            }
-        } else { // this.steps > value
-            var filtersList = this.top.list;
-            var startIndex = this.steps * 2;
-            var stopIndex = value * 2;
-            for (var i = startIndex - 1; i >= stopIndex; i--) {
-                filtersList[i].destroy();
-            }
-            filtersList.length = stopIndex;
-        }
-
-        this._steps = value;
-
-        this.setOffset(this.offsetX, this.offsetY);
-        this.setBlurStrength(this.strength);
-        this.setColor(this.color);
-    }
-
-    setSteps(steps) {
-        this.steps = steps;
-        return this;
-    }
-
-    get offsetX() {
-        return this._offsetX;
-    }
-
-    set offsetX(value) {
-        this._offsetX = value;
-        this.forEachController(function (bloomStepController, i) {
-            bloomStepController.offsetX = (i % 2 === 0) ? value : 0;
-        });
-    }
-
-    get offsetY() {
-        return this._offsetY;
-    }
-
-    set offsetY(value) {
-        this._offsetY = value;
-        this.forEachController(function (bloomStepController, i) {
-            bloomStepController.offsetY = (i % 2 === 1) ? value : 0;
-        });
-    }
-
-    setOffset(x, y) {
-        this.offsetX = x;
-        this.offsetY = y;
-        return this;
-    }
-
-    get blurStrength() {
-        return this._blurStrength;
-    }
-
-    set blurStrength(value) {
-        this._blurStrength = value;
-        this.forEachController(function (bloomStepController) {
-            bloomStepController.strength = value;
-        });
-    }
-
-    setBlurStrength(blurStrength) {
-        this.blurStrength = blurStrength;
-        return this;
-    }
-
-    get color() {
-        return this._color;
-    }
-
-    set color(value) {
-        this._color = value;
-        this.forEachController(function (bloomStepController) {
-            bloomStepController.color = value;
-        });
-    }
-
-    setColor(color) {
-        this.color = color;
-        return this;
-    }
-
-    get strength() {
-        return this._strength;
-    }
-
-    set strength(value) {
-        this._strength = value;
-        this.blend.amount = value;
-    }
-
-    setStrength(strength) {
-        this.strength = strength;
-        return this;
-    }
-
-};
-
-var InstallBloomFX = function (game) {
-    game = GetGame(game);
-
-    var success = RegisterFilter(game, BloomStepFilter);
-    if (!success) {
-        return false;
-    }
-
-    AddFilterListMethod(
-        'addP3Bloom',
-        function (color, offsetX, offsetY, blurStrength, strength, steps) {
-            if (color === undefined) { color = 0xFFFFFF; }
-            if (offsetX === undefined) { offsetX = 1; }
-            if (offsetY === undefined) { offsetY = 1; }
-            if (blurStrength === undefined) { blurStrength = 1; }
-            if (strength === undefined) { strength = 1; }
-            if (steps === undefined) { steps = 4; }
-
-            return this.add(new BloomController$1(
-                this.camera,
-                { color, offsetX, offsetY, blurStrength, strength, steps }
-            ));
-        }
-    );
-
-    return true;
-};
-
 var AddBloomProperties = function (gameObject) {
     // Don't attach properties again
     if (HasProperty(gameObject, 'bloomColor')) {
         return gameObject;
     }
-
-    InstallBloomFX(gameObject);
 
     var filterList = GetFilterList(gameObject);
 
@@ -572,6 +238,29 @@ var AddBloomProperties = function (gameObject) {
         bloomBlurStrength = 1,
         bloomStrength = 1,
         bloomSteps = 4;
+
+    var AddBloomEffect = function () {
+        gameObject._bloom = Actions.AddEffectBloom(gameObject, {
+            useInternal: true,
+            blurRadius: Math.max(bloomOffsetX, bloomOffsetY),
+            blurSteps: bloomSteps,
+            blendAmount: bloomStrength
+        })[0];
+
+        gameObject._bloom.threshold.active = false;
+        gameObject._bloom.blur.x = bloomOffsetX;
+        gameObject._bloom.blur.y = bloomOffsetY;
+        gameObject._bloom.blur.strength = bloomBlurStrength;
+        gameObject._bloom.blur.color = bloomColor;
+    };
+
+    var RemoveBloomEffect = function () {
+        if (gameObject._bloom) {
+            filterList.remove(gameObject._bloom.parallelFilters);
+            gameObject._bloom = undefined;
+        }
+    };
+
     Object.defineProperty(gameObject, 'bloomColor', {
         get: function () {
             return bloomColor;
@@ -584,16 +273,13 @@ var AddBloomProperties = function (gameObject) {
             bloomColor = value;
 
             if ((bloomColor === null) || (bloomColor === false)) {
-                if (gameObject._bloom) {
-                    filterList.remove(gameObject._bloom);
-                    gameObject._bloom = undefined;
-                }
+                RemoveBloomEffect();
             } else {
                 if (!gameObject._bloom) {
-                    gameObject._bloom = filterList.addBloom(bloomColor, bloomOffsetX, bloomOffsetY, bloomBlurStrength, bloomStrength, bloomSteps);
+                    AddBloomEffect();
                 }
 
-                gameObject._bloom.color = bloomColor;
+                gameObject._bloom.blur.color = bloomColor;
             }
 
         },
@@ -611,7 +297,7 @@ var AddBloomProperties = function (gameObject) {
             bloomOffsetX = value;
 
             if (gameObject._bloom) {
-                gameObject._bloom.offsetX = bloomOffsetX;
+                gameObject._bloom.blur.x = bloomOffsetX;
             }
         },
     });
@@ -628,7 +314,7 @@ var AddBloomProperties = function (gameObject) {
             bloomOffsetY = value;
 
             if (gameObject._bloom) {
-                gameObject._bloom.offsetY = bloomOffsetY;
+                gameObject._bloom.blur.y = bloomOffsetY;
             }
         },
     });
@@ -645,7 +331,7 @@ var AddBloomProperties = function (gameObject) {
             bloomBlurStrength = value;
 
             if (gameObject._bloom) {
-                gameObject._bloom.blurStrength = bloomBlurStrength;
+                gameObject._bloom.blur.strength = bloomBlurStrength;
             }
         },
     });
@@ -662,7 +348,7 @@ var AddBloomProperties = function (gameObject) {
             bloomStrength = value;
 
             if (gameObject._bloom) {
-                gameObject._bloom.strength = bloomStrength;
+                gameObject._bloom.parallelFilters.blend.amount = bloomStrength;
             }
         },
     });
@@ -679,7 +365,7 @@ var AddBloomProperties = function (gameObject) {
             bloomSteps = value;
 
             if (gameObject._bloom) {
-                gameObject._bloom.steps = bloomSteps;
+                gameObject._bloom.blur.steps = bloomSteps;
             }
         },
     });
@@ -914,11 +600,55 @@ var AddBrownProperties = function (gameObject) {
     return gameObject;
 };
 
-const FilterName$4 = 'FilterP3Circle';
+const GameClass = Game;
+var IsGame = function (object) {
+    return (object instanceof GameClass);
+};
+
+const SceneClass = Scene;
+var IsSceneObject = function (object) {
+    return (object instanceof SceneClass);
+};
+
+var GetGame = function (object) {
+    if ((object == null) || (typeof (object) !== 'object')) {
+        return null;
+    } else if (IsGame(object)) {
+        return object;
+    } else if (IsGame(object.game)) {
+        return object.game;
+    } else if (IsSceneObject(object)) { // object = scene object
+        return object.sys.game;
+    } else if (IsSceneObject(object.scene)) { // object = game object
+        return object.scene.sys.game;
+    }
+};
+
+var RegisterFilter = function (game, FilterClass) {
+    var filterName = FilterClass.FilterName;
+    var renderNodes = GetGame(game).renderer.renderNodes;
+    if (renderNodes.hasNode(filterName)) {
+        return false;
+    }
+
+    renderNodes.addNodeConstructor(filterName, FilterClass);
+    return true;
+};
+
+var AddFilterListMethod = function (name, callback) {
+    var FilterListComponent = GameObjects.Components.FilterList.prototype;
+    if (FilterListComponent[name]) {
+        return;
+    }
+
+    FilterListComponent[name] = callback;
+};
+
+const FilterName$2 = 'FilterP3Circle';
 
 // Built-in fx in phaser3
 
-const frag$4 = `\
+const frag$2 = `\
 #pragma phaserTemplate(shaderName)
 
 #ifdef GL_FRAGMENT_PRECISION_HIGH
@@ -983,10 +713,10 @@ void main (void) {
 `;
 
 class CircleFilter extends Renderer.WebGL.RenderNodes.BaseFilterShader {
-    static FilterName = FilterName$4;
+    static FilterName = FilterName$2;
 
     constructor(manager) {
-        super(FilterName$4, manager, null, frag$4);
+        super(FilterName$2, manager, null, frag$2);
     }
 
     // This method sets up the uniforms for the shader.
@@ -1001,13 +731,13 @@ class CircleFilter extends Renderer.WebGL.RenderNodes.BaseFilterShader {
 
 }
 
-const GetValue$4 = Utils.Objects.GetValue;
+const GetValue$2 = Utils.Objects.GetValue;
 
 class CircleController extends Filters.Controller {
-    static FilterName = FilterName$4;
+    static FilterName = FilterName$2;
 
     constructor(camera, config) {
-        super(camera, FilterName$4);
+        super(camera, FilterName$2);
 
         this.thickness = 8;
         this.scale = 1;
@@ -1019,12 +749,12 @@ class CircleController extends Filters.Controller {
     }
 
     resetFromJSON(o) {
-        this.setThickness(GetValue$4(o, 'thickness', 8));
-        this.setScale(GetValue$4(o, 'scale', 1));
-        this.setFeather(GetValue$4(o, 'feather', 0.005));
-        this.setColor(GetValue$4(o, 'color', 0xFF33B2));
-        this.setBackgroundColor(GetValue$4(o, 'backgroundColor', 0xFF0000));
-        this.setBackgroundAlpha(GetValue$4(o, 'backgroundAlpha', 0.4));
+        this.setThickness(GetValue$2(o, 'thickness', 8));
+        this.setScale(GetValue$2(o, 'scale', 1));
+        this.setFeather(GetValue$2(o, 'feather', 0.005));
+        this.setColor(GetValue$2(o, 'color', 0xFF33B2));
+        this.setBackgroundColor(GetValue$2(o, 'backgroundColor', 0xFF0000));
+        this.setBackgroundAlpha(GetValue$2(o, 'backgroundAlpha', 0.4));
 
         return this;
     }
@@ -1456,11 +1186,11 @@ var AddGlowProperties = function (gameObject) {
     return gameObject;
 };
 
-const FilterName$3 = 'FilterP3Gradient';
+const FilterName$1 = 'FilterP3Gradient';
 
 // Built-in fx in phaser3
 
-const frag$3 = `\
+const frag$1 = `\
 #pragma phaserTemplate(shaderName)
 
 #ifdef GL_FRAGMENT_PRECISION_HIGH
@@ -1522,10 +1252,10 @@ void main ()
 `;
 
 class GradientFilter extends Renderer.WebGL.RenderNodes.BaseFilterShader {
-    static FilterName = FilterName$3;
+    static FilterName = FilterName$1;
 
     constructor(manager) {
-        super(FilterName$3, manager, null, frag$3);
+        super(FilterName$1, manager, null, frag$1);
     }
 
     // This method sets up the uniforms for the shader.
@@ -1543,13 +1273,13 @@ class GradientFilter extends Renderer.WebGL.RenderNodes.BaseFilterShader {
 
 }
 
-const GetValue$3 = Utils.Objects.GetValue;
+const GetValue$1 = Utils.Objects.GetValue;
 
 class GradientController extends Filters.Controller {
-    static FilterName = FilterName$3;
+    static FilterName = FilterName$1;
 
     constructor(camera, config) {
-        super(camera, FilterName$3);
+        super(camera, FilterName$1);
 
         this.alpha = 0.2;
         this.fromX = 0;
@@ -1564,12 +1294,12 @@ class GradientController extends Filters.Controller {
     }
 
     resetFromJSON(o) {
-        this.setAlpha(GetValue$3(o, 'alpha', 0.2));
-        this.setFromPosition(GetValue$3(o, 'fromX', 0), GetValue$3(o, 'fromY', 0));
-        this.setToPosition(GetValue$3(o, 'toX', 0), GetValue$3(o, 'toY', 1));
-        this.setColor1(GetValue$3(o, 'color1', 0xff0000));
-        this.setColor2(GetValue$3(o, 'color2', 0x00ff00));
-        this.setSize(GetValue$3(o, 'size', 0));
+        this.setAlpha(GetValue$1(o, 'alpha', 0.2));
+        this.setFromPosition(GetValue$1(o, 'fromX', 0), GetValue$1(o, 'fromY', 0));
+        this.setToPosition(GetValue$1(o, 'toX', 0), GetValue$1(o, 'toY', 1));
+        this.setColor1(GetValue$1(o, 'color1', 0xff0000));
+        this.setColor2(GetValue$1(o, 'color2', 0x00ff00));
+        this.setSize(GetValue$1(o, 'size', 0));
 
         return this;
     }
@@ -1944,198 +1674,27 @@ var AddPolaroidProperties = function (gameObject) {
     return gameObject;
 };
 
-const FilterName$2 = 'FilterP3Wipe';
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2019 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
 
-// Built-in fx in phaser3
-
-const frag$2 = `\
-#pragma phaserTemplate(shaderName)
-
-#ifdef GL_FRAGMENT_PRECISION_HIGH
-#define highmedp highp
-#else
-#define highmedp mediump
-#endif
-precision highmedp float;
-
-// Scene buffer
-uniform sampler2D uMainSampler; 
-varying vec2 outTexCoord;
-
-// Effect parameters
-uniform vec4 config;
-uniform bool reveal;
-
-#pragma phaserTemplate(fragmentHeader)
-
-void main (void) {
-    vec2 uv = outTexCoord;
-
-    vec4 color0;
-    vec4 color1;
-
-    if (reveal) {
-        color0 = vec4(0);
-        color1 = texture2D(uMainSampler, uv);
-    } else {
-        color0 = texture2D(uMainSampler, uv);
-        color1 = vec4(0);
-    }
-
-    float distance = config.x;
-    float width = config.y;
-    float direction = config.z;
-    float axis = uv.x;
-
-    if (config.w == 1.0) {
-        axis = uv.y;
-    }
-
-    float adjust = mix(width, -width, distance);
-    float value = smoothstep(distance - width, distance + width, abs(direction - axis) + adjust);
-    gl_FragColor = mix(color1, color0, value);
-}
-`;
-
-class WarpFilter extends Renderer.WebGL.RenderNodes.BaseFilterShader {
-    static FilterName = FilterName$2;
-
-    constructor(manager) {
-        super(FilterName$2, manager, null, frag$2);
-    }
-
-    // This method sets up the uniforms for the shader.
-    setupUniforms(controller, drawingContext) {
-        const programManager = this.programManager;
-
-        programManager.setUniform('config', [controller.progress, controller.wipeWidth, controller.direction, controller.axis]);
-        programManager.setUniform('reveal', controller.reveal);
-    }
-
-}
-
-const GetValue$2 = Utils.Objects.GetValue;
-const Clamp = Math.Clamp;
-
-class WipeController extends Filters.Controller {
-    static FilterName = FilterName$2;
-
-    constructor(camera, config) {
-        super(camera, FilterName$2);
-
-        this.progress = 0;
-        this.wipeWidth = 0.1;
-        this.direction = 0;
-        this.axis = 0;
-        this.reveal = false;
-
-        this.resetFromJSON(config);
-    }
-
-    resetFromJSON(o) {
-        this.setProgress(GetValue$2(o, 'progress', 0));
-        this.setWipeWidth(GetValue$2(o, 'wipeWidth', 0.1));
-        this.setDirection(GetValue$2(o, 'direction', 0));
-        this.setAxis(GetValue$2(o, 'axis', 0));
-
-        var reveal = GetValue$2(o, 'reveal', undefined);
-        if (reveal === undefined) {
-            reveal = !GetValue$2(o, 'wipe', true);
-        }
-        if (reveal) {
-            this.enableRevealMode();
-        } else {
-            this.enableWipeMode();
-        }
-
-        return this;
-    }
-
-    get progress() {
-        return this._progress;
-    }
-
-    set progress(value) {
-        this._progress = Clamp(value, 0, 1);
-    }
-
-    setProgress(value) {
-        this.progress = value;
-        return this;
-    }
-
-    get wipeWidth() {
-        return this._wipeWidth;
-    }
-
-    set wipeWidth(value) {
-        this._wipeWidth = Clamp(value, 0, 1);
-    }
-
-    setWipeWidth(wipeWidth) {
-        this.wipeWidth = wipeWidth;
-        return this;
-    }
-
-    setDirection(direction) {
-        this.direction = direction;
-        return this;
-    }
-
-    setAxis(axis) {
-        this.axis = axis;
-        return this;
-    }
-
-    enableWipeMode() {
-        this.reveal = false;
-        return this;
-    }
-
-    enableRevealMode() {
-        this.reveal = true;
-        return this;
-    }
-
-}
-
-var InstallWipeFX = function (game) {
-    game = GetGame(game);
-
-    var success = RegisterFilter(game, WarpFilter);
-    if (!success) {
-        return false;
-    }
-
-    AddFilterListMethod(
-        'addP3Wipe',
-        function (wipeWidth, direction, axis) {
-            if (wipeWidth === undefined) { wipeWidth = 0.1; }
-            if (direction === undefined) { direction = 0; }
-            if (axis === undefined) { axis = 0; }
-
-            return this.add(new WipeController(
-                this.camera,
-                { wipeWidth, direction, axis }
-            ));
-        }
-    );
-
-    AddFilterListMethod(
-        'addP3Reveal',
-        function (wipeWidth, direction, axis) {
-            if (wipeWidth === undefined) { wipeWidth = 0.1; }
-            if (direction === undefined) { direction = 0; }
-            if (axis === undefined) { axis = 0; }
-
-            return this.add(new WipeController(
-                this.camera,
-                { wipeWidth, direction, axis, reveal: true }
-            ));
-        }
-    );
-
-    return true;
+/**
+ * Force a value within the boundaries by clamping it to the range `min`, `max`.
+ *
+ * @function Phaser.Math.Clamp
+ * @since 3.0.0
+ *
+ * @param {number} value - The value to be clamped.
+ * @param {number} min - The minimum bounds.
+ * @param {number} max - The maximum bounds.
+ *
+ * @return {number} The clamped value.
+ */
+var Clamp = function (value, min, max)
+{
+    return Math.max(min, Math.min(max, value));
 };
 
 var AddRevealProperties = function (gameObject) {
@@ -2143,8 +1702,6 @@ var AddRevealProperties = function (gameObject) {
     if (HasProperty(gameObject, 'revealLeft')) {
         return gameObject;
     }
-
-    InstallWipeFX(gameObject);
 
     var filterList = GetFilterList(gameObject);
 
@@ -2184,8 +1741,10 @@ var AddRevealProperties = function (gameObject) {
             if ((revealLeft === null) || (revealLeft === false)) {
                 RemoveEffect(gameObject);
             } else {
+                revealLeft = Clamp(revealLeft, 0, 1);
+
                 if (!gameObject._revealEffect) {
-                    gameObject._revealEffect = filterList.addP3Reveal(revealWidth, 0, 0);
+                    gameObject._revealEffect = filterList.addWipe(revealWidth, 0, 0, 1);
                 }
 
                 gameObject._revealEffect.direction = 1;
@@ -2212,8 +1771,10 @@ var AddRevealProperties = function (gameObject) {
             if ((revealRight === null) || (revealRight === false)) {
                 RemoveEffect(gameObject);
             } else {
+                revealRight = Clamp(revealRight, 0, 1);
+
                 if (!gameObject._revealEffect) {
-                    gameObject._revealEffect = filterList.addP3Reveal(revealWidth, 0, 0);
+                    gameObject._revealEffect = filterList.addWipe(revealWidth, 0, 0, 1);
                 }
                 gameObject._revealEffect.direction = 0;
                 gameObject._revealEffect.axis = 0;
@@ -2239,8 +1800,10 @@ var AddRevealProperties = function (gameObject) {
             if ((revealUp === null) || (revealUp === false)) {
                 RemoveEffect(gameObject);
             } else {
+                revealUp = Clamp(revealUp, 0, 1);
+
                 if (!gameObject._revealEffect) {
-                    gameObject._revealEffect = filterList.addP3Reveal(revealWidth, 0, 0);
+                    gameObject._revealEffect = filterList.addWipe(revealWidth, 0, 0, 1);
                 }
                 gameObject._revealEffect.direction = 1;
                 gameObject._revealEffect.axis = 1;
@@ -2266,8 +1829,10 @@ var AddRevealProperties = function (gameObject) {
             if ((revealDown === null) || (revealDown === false)) {
                 RemoveEffect(gameObject);
             } else {
+                revealDown = Clamp(revealDown, 0, 1);
+
                 if (!gameObject._revealEffect) {
-                    gameObject._revealEffect = filterList.addP3Reveal(revealWidth, 0, 0);
+                    gameObject._revealEffect = filterList.addWipe(revealWidth, 0, 0, 1);
                 }
                 gameObject._revealEffect.direction = 0;
                 gameObject._revealEffect.axis = 1;
@@ -2286,7 +1851,7 @@ var AddRevealProperties = function (gameObject) {
                 return;
             }
 
-            revealWidth = value;
+            revealWidth = Clamp(value, 0, 1);
 
             if (gameObject._revealEffect) {
                 gameObject._revealEffect.wipeWidth = revealWidth;
@@ -2472,11 +2037,11 @@ var AddShiftToBGRProperties = function (gameObject) {
     return gameObject;
 };
 
-const FilterName$1 = 'FilterP3Shine';
+const FilterName = 'FilterP3Shine';
 
 // Built-in fx in phaser3
 
-const frag$1 = `\
+const frag = `\
 #pragma phaserTemplate(shaderName)
 
 #ifdef GL_FRAGMENT_PRECISION_HIGH
@@ -2542,10 +2107,10 @@ var GetCurrentTime = function (scene, prevTime) {
 };
 
 class ShineFilter extends Renderer.WebGL.RenderNodes.BaseFilterShader {
-    static FilterName = FilterName$1;
+    static FilterName = FilterName;
 
     constructor(manager) {
-        super(FilterName$1, manager, null, frag$1);
+        super(FilterName, manager, null, frag);
     }
 
     // This method sets up the uniforms for the shader.
@@ -2560,13 +2125,13 @@ class ShineFilter extends Renderer.WebGL.RenderNodes.BaseFilterShader {
 
 }
 
-const GetValue$1 = Utils.Objects.GetValue;
+const GetValue = Utils.Objects.GetValue;
 
 class ShineController extends Filters.Controller {
-    static FilterName = FilterName$1;
+    static FilterName = FilterName;
 
     constructor(camera, config) {
-        super(camera, FilterName$1);
+        super(camera, FilterName);
 
         this.now = 0;
 
@@ -2579,10 +2144,10 @@ class ShineController extends Filters.Controller {
     }
 
     resetFromJSON(o) {
-        this.setSpeed(GetValue$1(o, 'speed', 0.5));
-        this.setLineWidth(GetValue$1(o, 'lineWidth', 0.5));
-        this.setGradient(GetValue$1(o, 'gradient', 3));
-        this.setReveal(GetValue$1(o, 'reveal', false));
+        this.setSpeed(GetValue(o, 'speed', 0.5));
+        this.setLineWidth(GetValue(o, 'lineWidth', 0.5));
+        this.setGradient(GetValue(o, 'gradient', 3));
+        this.setReveal(GetValue(o, 'reveal', false));
 
         return this;
     }
@@ -2853,142 +2418,11 @@ var AddTiltShiftProperties = function (gameObject) {
     return gameObject;
 };
 
-const FilterName = 'FilterP3Vignette';
-
-// Built-in fx in phaser3
-
-const frag = `\
-#pragma phaserTemplate(shaderName)
-
-#ifdef GL_FRAGMENT_PRECISION_HIGH
-#define highmedp highp
-#else
-#define highmedp mediump
-#endif
-precision highmedp float;
-
-// Scene buffer
-uniform sampler2D uMainSampler; 
-varying vec2 outTexCoord;
-
-// Effect parameters
-uniform vec2 config;
-uniform vec2 position;
-
-#pragma phaserTemplate(fragmentHeader)
-
-void main (void) {
-    float radius = config.x;
-    float strength = config.y;
-
-    vec4 col = vec4(1.0);
-
-    float d = length(outTexCoord - position);
-
-    if (d <= radius)
-    {
-        float g = d / radius;
-        g = sin(g * 3.14 * strength);
-    	col = vec4(g * g * g);
-    }
-
-    vec4 texture = texture2D(uMainSampler, outTexCoord);
-
-    gl_FragColor = texture * (1.0 - col);
-}
-`;
-
-class VignetteFilter extends Renderer.WebGL.RenderNodes.BaseFilterShader {
-    static FilterName = FilterName;
-
-    constructor(manager) {
-        super(FilterName, manager, null, frag);
-    }
-
-    // This method sets up the uniforms for the shader.
-    setupUniforms(controller, drawingContext) {
-        const programManager = this.programManager;
-
-        programManager.setUniform('config', [controller.radius, controller.strength]);
-        programManager.setUniform('position', [controller.x, controller.y]);
-    }
-
-}
-
-const GetValue = Utils.Objects.GetValue;
-
-class VignetteController extends Filters.Controller {
-    static FilterName = FilterName;
-
-    constructor(camera, config) {
-        super(camera, FilterName);
-
-        this.x = 0.5;
-        this.y = 0.5;
-        this.radius = 0.5;
-        this.strength = 0.5;
-
-        this.resetFromJSON(config);
-    }
-
-    resetFromJSON(o) {
-        this.setPosition(GetValue(o, 'x', 0.5), GetValue(o, 'y', 0.5));
-        this.setRadius(GetValue(o, 'radius', 0.5));
-        this.setStrength(GetValue(o, 'strength', 0.5));
-
-        return this;
-    }
-
-    setPosition(x, y) {
-        this.x = x;
-        this.y = y;
-        return this;
-    }
-
-    setRadius(radius) {
-        this.radius = radius;
-        return this;
-    }
-
-    setStrength(strength) {
-        this.strength = strength;
-        return this;
-    }
-}
-
-var InstallVignetteFX = function (game) {
-    game = GetGame(game);
-
-    var success = RegisterFilter(game, VignetteFilter);
-    if (!success) {
-        return false;
-    }
-
-    AddFilterListMethod(
-        'addP3Vignette',
-        function (x, y, radius, strength) {
-            if (x === undefined) { x = 0.5; }
-            if (y === undefined) { y = 0.5; }
-            if (radius === undefined) { radius = 0.5; }
-            if (strength === undefined) { strength = 0.5; }
-
-            return this.add(new VignetteController(
-                this.camera,
-                { x, y, radius, strength }
-            ));
-        }
-    );
-
-    return true;
-};
-
 var AddVignetteProperties = function (gameObject) {
     // Don't attach properties again
     if (HasProperty(gameObject, 'vignetteRadius')) {
         return gameObject;
     }
-
-    InstallVignetteFX(gameObject);
 
     var filterList = GetFilterList(gameObject);
 
@@ -3014,7 +2448,7 @@ var AddVignetteProperties = function (gameObject) {
                 }
             } else {
                 if (!gameObject._vignette) {
-                    gameObject._vignette = filterList.addP3Vignette(vignetteX, vignetteY, vignetteRadius, vignetteStrength);
+                    gameObject._vignette = filterList.addVignette(vignetteX, 1 - vignetteY, vignetteRadius, vignetteStrength);
                 }
 
                 gameObject._vignette.radius = vignetteRadius;
@@ -3052,7 +2486,7 @@ var AddVignetteProperties = function (gameObject) {
             vignetteY = value;
 
             if (gameObject._vignette) {
-                gameObject._vignette.y = vignetteY;
+                gameObject._vignette.y = 1 - vignetteY;
             }
         },
     });
@@ -3081,6 +2515,11 @@ var AddVignetteProperties = function (gameObject) {
     return gameObject;
 };
 
+/*
+Phaser 4's built-in Vignette filter uses a different falloff curve 
+from the Phaser 3 built-in FX shader.
+*/
+
 var AddVintagePinholeProperties = function (gameObject) {
     AddColorMatrixEffectPropertiesBase(gameObject, 'vintagePinhole');
     return gameObject;
@@ -3091,8 +2530,6 @@ var AddWipeProperties = function (gameObject) {
     if (HasProperty(gameObject, 'wipeLeft')) {
         return gameObject;
     }
-
-    InstallWipeFX(gameObject);
 
     var filterList = GetFilterList(gameObject);
 
@@ -3132,8 +2569,10 @@ var AddWipeProperties = function (gameObject) {
             if ((wipeLeft === null) || (wipeLeft === false)) {
                 RemoveEffect(gameObject);
             } else {
+                wipeLeft = Clamp(wipeLeft, 0, 1);
+
                 if (!gameObject._wipeEffect) {
-                    gameObject._wipeEffect = filterList.addP3Wipe(wipeWidth, 0, 0);
+                    gameObject._wipeEffect = filterList.addWipe(wipeWidth, 0, 0, 0);
                 }
 
                 gameObject._wipeEffect.direction = 1;
@@ -3160,8 +2599,10 @@ var AddWipeProperties = function (gameObject) {
             if ((wipeRight === null) || (wipeRight === false)) {
                 RemoveEffect(gameObject);
             } else {
+                wipeRight = Clamp(wipeRight, 0, 1);
+
                 if (!gameObject._wipeEffect) {
-                    gameObject._wipeEffect = filterList.addP3Wipe(wipeWidth, 0, 0);
+                    gameObject._wipeEffect = filterList.addWipe(wipeWidth, 0, 0, 0);
                 }
                 gameObject._wipeEffect.direction = 0;
                 gameObject._wipeEffect.axis = 0;
@@ -3187,8 +2628,10 @@ var AddWipeProperties = function (gameObject) {
             if ((wipeUp === null) || (wipeUp === false)) {
                 RemoveEffect(gameObject);
             } else {
+                wipeUp = Clamp(wipeUp, 0, 1);
+
                 if (!gameObject._wipeEffect) {
-                    gameObject._wipeEffect = filterList.addP3Wipe(wipeWidth, 0, 0);
+                    gameObject._wipeEffect = filterList.addWipe(wipeWidth, 0, 0, 0);
                 }
                 gameObject._wipeEffect.direction = 1;
                 gameObject._wipeEffect.axis = 1;
@@ -3214,8 +2657,10 @@ var AddWipeProperties = function (gameObject) {
             if ((wipeDown === null) || (wipeDown === false)) {
                 RemoveEffect(gameObject);
             } else {
+                wipeDown = Clamp(wipeDown, 0, 1);
+
                 if (!gameObject._wipeEffect) {
-                    gameObject._wipeEffect = filterList.addP3Wipe(wipeWidth, 0, 0);
+                    gameObject._wipeEffect = filterList.addWipe(wipeWidth, 0, 0, 0);
                 }
                 gameObject._wipeEffect.direction = 0;
                 gameObject._wipeEffect.axis = 1;
@@ -3234,7 +2679,7 @@ var AddWipeProperties = function (gameObject) {
                 return;
             }
 
-            wipeWidth = value;
+            wipeWidth = Clamp(value, 0, 1);
 
             if (gameObject._wipeEffect) {
                 gameObject._wipeEffect.wipeWidth = wipeWidth;

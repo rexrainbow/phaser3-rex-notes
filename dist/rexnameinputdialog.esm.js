@@ -1,4 +1,4 @@
-import { VERSION, BlendModes, Structs, Utils as Utils$3, GameObjects, Scenes, Math as Math$1, Class, Geom, Cameras, Display, Events, Scene, Game, Tweens, Filters, Renderer as Renderer$1, CANVAS, TintModes as TintModes$3, DOM } from 'phaser';
+import { VERSION, BlendModes, Structs, Utils as Utils$3, GameObjects, Scenes, Math as Math$1, Class, Geom, Cameras, Display, Events, Scene, Game, Tweens, Filters, Renderer as Renderer$1, CANVAS, TintModes as TintModes$3, Actions, DOM } from 'phaser';
 
 const MainVersionNumber = 4;
 const SubVersionNumber = 0;
@@ -644,7 +644,7 @@ var Parent = {
     }
 };
 
-const GetValue$1L = Utils$3.Objects.GetValue;
+const GetValue$1H = Utils$3.Objects.GetValue;
 const BaseAdd = Base$2.prototype.add;
 
 var Add$7 = function (gameObject, config) {
@@ -716,13 +716,13 @@ var SetupSyncFlags = function (state, config) {
         state.syncCameraFilter = config;
         state.syncDisplayList = config;
     } else {
-        state.syncPosition = GetValue$1L(config, 'syncPosition', true);
-        state.syncRotation = GetValue$1L(config, 'syncRotation', true);
-        state.syncScale = GetValue$1L(config, 'syncScale', true);
-        state.syncAlpha = GetValue$1L(config, 'syncAlpha', true);
-        state.syncScrollFactor = GetValue$1L(config, 'syncScrollFactor', true);
-        state.syncCameraFilter = GetValue$1L(config, 'syncCameraFilter', true);
-        state.syncDisplayList = GetValue$1L(config, 'syncDisplayList', true);
+        state.syncPosition = GetValue$1H(config, 'syncPosition', true);
+        state.syncRotation = GetValue$1H(config, 'syncRotation', true);
+        state.syncScale = GetValue$1H(config, 'syncScale', true);
+        state.syncAlpha = GetValue$1H(config, 'syncAlpha', true);
+        state.syncScrollFactor = GetValue$1H(config, 'syncScrollFactor', true);
+        state.syncCameraFilter = GetValue$1H(config, 'syncCameraFilter', true);
+        state.syncDisplayList = GetValue$1H(config, 'syncDisplayList', true);
     }
 
 };
@@ -2552,7 +2552,7 @@ var IsGameObject = function (object) {
     return (object instanceof GameObjectClass) || (object instanceof LayerClass);
 };
 
-var GetValue$1K = Utils$3.Objects.GetValue;
+var GetValue$1G = Utils$3.Objects.GetValue;
 
 var Snapshot = function (config) {
     if (!config) {
@@ -2565,13 +2565,13 @@ var Snapshot = function (config) {
     }
     var renderTexture = config.renderTexture;  // renderTexture, or dynamicTexture
     var saveTexture = config.saveTexture;
-    var x = GetValue$1K(config, 'x', undefined);
-    var y = GetValue$1K(config, 'y', undefined);
-    var width = GetValue$1K(config, 'width', undefined);
-    var height = GetValue$1K(config, 'height', undefined);
-    var originX = GetValue$1K(config, 'originX', 0);
-    var originY = GetValue$1K(config, 'originY', 0);
-    var padding = GetValue$1K(config, 'padding', 0);
+    var x = GetValue$1G(config, 'x', undefined);
+    var y = GetValue$1G(config, 'y', undefined);
+    var width = GetValue$1G(config, 'width', undefined);
+    var height = GetValue$1G(config, 'height', undefined);
+    var originX = GetValue$1G(config, 'originX', 0);
+    var originY = GetValue$1G(config, 'originY', 0);
+    var padding = GetValue$1G(config, 'padding', 0);
 
     var scrollX, scrollY;
     if ((width === undefined) || (height === undefined) || (x === undefined) || (y === undefined)) {
@@ -2681,19 +2681,19 @@ var RenderTexture$1 = {
     }
 };
 
-const GetValue$1J = Utils$3.Objects.GetValue;
+const GetValue$1F = Utils$3.Objects.GetValue;
 
 var DrawBounds$2 = function (gameObjects, graphics, config) {
     var strokeColor, lineWidth, fillColor, fillAlpha, padding, includeParent;
     if (typeof (config) === 'number') {
         strokeColor = config;
     } else {
-        strokeColor = GetValue$1J(config, 'color');
-        lineWidth = GetValue$1J(config, 'lineWidth');
-        fillColor = GetValue$1J(config, 'fillColor');
-        fillAlpha = GetValue$1J(config, 'fillAlpha');
-        padding = GetValue$1J(config, 'padding');
-        includeParent = GetValue$1J(config, 'includeParent');
+        strokeColor = GetValue$1F(config, 'color');
+        lineWidth = GetValue$1F(config, 'lineWidth');
+        fillColor = GetValue$1F(config, 'fillColor');
+        fillAlpha = GetValue$1F(config, 'fillAlpha');
+        padding = GetValue$1F(config, 'padding');
+        includeParent = GetValue$1F(config, 'includeParent');
     }
 
     if (strokeColor === undefined) { strokeColor = 0xffffff; }
@@ -2748,12 +2748,12 @@ var Draw = function (gameObject, graphics, strokeColor, lineWidth, fillColor, fi
 
 var Points = [{ x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }];
 
-const GetValue$1I = Utils$3.Objects.GetValue;
+const GetValue$1E = Utils$3.Objects.GetValue;
 
 var DrawBounds$1 = function (graphics, config) {
-    var drawContainer = GetValue$1I(config, 'drawContainer', true);
+    var drawContainer = GetValue$1E(config, 'drawContainer', true);
 
-    var gameObjects = GetValue$1I(config, 'children');
+    var gameObjects = GetValue$1E(config, 'children');
     if (gameObjects === undefined) {
         gameObjects = this.getAllVisibleChildren([this]);
     }
@@ -3525,7 +3525,7 @@ var AlignIn = function (child, x, y, width, height, align) {
     QuickSet(child, globZone, align);
 };
 
-const GetValue$1H = Utils$3.Objects.GetValue;
+const GetValue$1D = Utils$3.Objects.GetValue;
 const Group = GameObjects.Group;
 const P3Container = GameObjects.Container;
 
@@ -3537,13 +3537,13 @@ var DrawBounds = function (graphics, config) {
     if (typeof (config) === 'number') {
         color = config;
     } else {
-        color = GetValue$1H(config, 'color');
-        lineWidth = GetValue$1H(config, 'lineWidth');
-        var nameTextConfig = GetValue$1H(config, 'name', false);
+        color = GetValue$1D(config, 'color');
+        lineWidth = GetValue$1D(config, 'lineWidth');
+        var nameTextConfig = GetValue$1D(config, 'name', false);
         if (nameTextConfig) {
-            createTextCallback = GetValue$1H(nameTextConfig, 'createTextCallback', DefaultCreateTextCallback);
-            createTextCallbackScope = GetValue$1H(nameTextConfig, 'createTextCallbackScope', undefined);
-            textAlign = GetValue$1H(nameTextConfig, 'align', 'left-top');
+            createTextCallback = GetValue$1D(nameTextConfig, 'createTextCallback', DefaultCreateTextCallback);
+            createTextCallbackScope = GetValue$1D(nameTextConfig, 'createTextCallbackScope', undefined);
+            textAlign = GetValue$1D(nameTextConfig, 'align', 'left-top');
             if (typeof (textAlign) === 'string') {
                 textAlign = AlignConst[textAlign];
             }
@@ -3633,7 +3633,7 @@ var GetP3ContainerChildren = function (gameObjects, output) {
 
 var GlobRect = undefined;
 
-const GetValue$1G = Utils$3.Objects.GetValue;
+const GetValue$1C = Utils$3.Objects.GetValue;
 
 var GetBoundsConfig$1 = function (config, out) {
     if (config === undefined) {
@@ -3649,10 +3649,10 @@ var GetBoundsConfig$1 = function (config, out) {
         out.top = config;
         out.bottom = config;
     } else {
-        out.left = GetValue$1G(config, 'left', 0);
-        out.right = GetValue$1G(config, 'right', 0);
-        out.top = GetValue$1G(config, 'top', 0);
-        out.bottom = GetValue$1G(config, 'bottom', 0);
+        out.left = GetValue$1C(config, 'left', 0);
+        out.right = GetValue$1C(config, 'right', 0);
+        out.top = GetValue$1C(config, 'top', 0);
+        out.bottom = GetValue$1C(config, 'bottom', 0);
     }
     return out;
 };
@@ -3968,7 +3968,7 @@ var GetChildIndex = function (child) {
     }
 };
 
-const GetValue$1F = Utils$3.Objects.GetValue;
+const GetValue$1B = Utils$3.Objects.GetValue;
 
 var GetPadding$1 = function (padding, key) {
     if (key === undefined) {
@@ -3994,10 +3994,10 @@ var SetPadding$1 = function (padding, key, value) {
         padding.top = key;
         padding.bottom = key;
     } else {
-        padding.left = GetValue$1F(key, 'left', 0);
-        padding.right = GetValue$1F(key, 'right', 0);
-        padding.top = GetValue$1F(key, 'top', 0);
-        padding.bottom = GetValue$1F(key, 'bottom', 0);
+        padding.left = GetValue$1B(key, 'left', 0);
+        padding.right = GetValue$1B(key, 'right', 0);
+        padding.top = GetValue$1B(key, 'top', 0);
+        padding.bottom = GetValue$1B(key, 'bottom', 0);
     }
     return padding;
 };
@@ -4748,7 +4748,7 @@ var GetGame = function (object) {
     }
 };
 
-const GetValue$1E = Utils$3.Objects.GetValue;
+const GetValue$1A = Utils$3.Objects.GetValue;
 
 class ComponentBase {
     constructor(parent, config) {
@@ -4757,7 +4757,7 @@ class ComponentBase {
         this.isShutdown = false;
 
         // Event emitter, default is private event emitter
-        this.setEventEmitter(GetValue$1E(config, 'eventEmitter', true));
+        this.setEventEmitter(GetValue$1A(config, 'eventEmitter', true));
 
         // Register callback of parent destroy event, also see `shutdown` method
         if (this.parent) {
@@ -4838,7 +4838,7 @@ var DefaultResizeCallback = function (width, height, gameObject, anchor) {
     ResizeGameObject(gameObject, width, height);
 };
 
-const GetValue$1D = Utils$3.Objects.GetValue;
+const GetValue$1z = Utils$3.Objects.GetValue;
 
 class Anchor extends ComponentBase {
     constructor(gameObject, config) {
@@ -4949,12 +4949,12 @@ class Anchor extends ComponentBase {
         this.setSizePadding(paddingWidth, paddingHeight);
         this.setAspectRatio(aspectRatio);
 
-        var onResizeCallback = GetValue$1D(o, 'onResizeCallback', DefaultResizeCallback);
-        var onResizeCallbackScope = GetValue$1D(o, 'onResizeCallbackScope');
+        var onResizeCallback = GetValue$1z(o, 'onResizeCallback', DefaultResizeCallback);
+        var onResizeCallbackScope = GetValue$1z(o, 'onResizeCallbackScope');
         this.setResizeCallback(onResizeCallback, onResizeCallbackScope);
 
-        var onUpdateViewportCallback = GetValue$1D(o, 'onUpdateViewportCallback');
-        var onUpdateViewportCallbackScope = GetValue$1D(o, 'onUpdateViewportCallbackScope');
+        var onUpdateViewportCallback = GetValue$1z(o, 'onUpdateViewportCallback');
+        var onUpdateViewportCallbackScope = GetValue$1z(o, 'onUpdateViewportCallbackScope');
         this.setUpdateViewportCallback(onUpdateViewportCallback, onUpdateViewportCallbackScope);
 
         this.autoAnchor(o.enable);
@@ -5164,7 +5164,7 @@ var SetAnchor = function (config) {
     return this;
 };
 
-const GetValue$1C = Utils$3.Objects.GetValue;
+const GetValue$1y = Utils$3.Objects.GetValue;
 
 class TickTask extends ComponentBase {
     constructor(parent, config) {
@@ -5173,7 +5173,7 @@ class TickTask extends ComponentBase {
         this._isRunning = false;
         this.isPaused = false;
         this.tickingState = false;
-        this.setTickingMode(GetValue$1C(config, 'tickingMode', 1));
+        this.setTickingMode(GetValue$1y(config, 'tickingMode', 1));
         // boot() later
     }
 
@@ -5277,7 +5277,7 @@ const TICKINGMODE = {
     'always': 2
 };
 
-const GetValue$1B = Utils$3.Objects.GetValue;
+const GetValue$1x = Utils$3.Objects.GetValue;
 
 class SceneUpdateTickTask extends TickTask {
     constructor(parent, config) {
@@ -5288,7 +5288,7 @@ class SceneUpdateTickTask extends TickTask {
 
         // If this.scene is not available, use game's 'step' event
         var defaultEventName = (this.scene) ? 'update' : 'step';
-        this.tickEventName = GetValue$1B(config, 'tickEventName', defaultEventName);
+        this.tickEventName = GetValue$1x(config, 'tickEventName', defaultEventName);
         this.isSceneTicker = !IsGameUpdateEvent(this.tickEventName);
 
     }
@@ -5324,7 +5324,7 @@ var IsGameUpdateEvent = function (eventName) {
     return (eventName === 'step') || (eventName === 'poststep');
 };
 
-const GetValue$1A = Utils$3.Objects.GetValue;
+const GetValue$1w = Utils$3.Objects.GetValue;
 const Clamp$7 = Math$1.Clamp;
 
 class Timer {
@@ -5333,15 +5333,15 @@ class Timer {
     }
 
     resetFromJSON(o) {
-        this.state = GetValue$1A(o, 'state', IDLE$6);
-        this.timeScale = GetValue$1A(o, 'timeScale', 1);
-        this.delay = GetValue$1A(o, 'delay', 0);
-        this.repeat = GetValue$1A(o, 'repeat', 0);
-        this.repeatCounter = GetValue$1A(o, 'repeatCounter', 0);
-        this.repeatDelay = GetValue$1A(o, 'repeatDelay', 0);
-        this.duration = GetValue$1A(o, 'duration', 0);
-        this.nowTime = GetValue$1A(o, 'nowTime', 0);
-        this.justRestart = GetValue$1A(o, 'justRestart', false);
+        this.state = GetValue$1w(o, 'state', IDLE$6);
+        this.timeScale = GetValue$1w(o, 'timeScale', 1);
+        this.delay = GetValue$1w(o, 'delay', 0);
+        this.repeat = GetValue$1w(o, 'repeat', 0);
+        this.repeatCounter = GetValue$1w(o, 'repeatCounter', 0);
+        this.repeatDelay = GetValue$1w(o, 'repeatDelay', 0);
+        this.duration = GetValue$1w(o, 'duration', 0);
+        this.nowTime = GetValue$1w(o, 'nowTime', 0);
+        this.justRestart = GetValue$1w(o, 'justRestart', false);
     }
 
     toJSON() {
@@ -5549,19 +5549,19 @@ class TimerTickTask extends SceneUpdateTickTask {
 
 }
 
-const GetValue$1z = Utils$3.Objects.GetValue;
+const GetValue$1v = Utils$3.Objects.GetValue;
 const GetAdvancedValue$4 = Utils$3.Objects.GetAdvancedValue;
 const GetEaseFunction = Tweens.Builders.GetEaseFunction;
 
 class EaseValueTaskBase extends TimerTickTask {
     resetFromJSON(o) {
-        this.timer.resetFromJSON(GetValue$1z(o, 'timer'));
-        this.setEnable(GetValue$1z(o, 'enable', true));
-        this.setTarget(GetValue$1z(o, 'target', this.parent));
+        this.timer.resetFromJSON(GetValue$1v(o, 'timer'));
+        this.setEnable(GetValue$1v(o, 'enable', true));
+        this.setTarget(GetValue$1v(o, 'target', this.parent));
         this.setDelay(GetAdvancedValue$4(o, 'delay', 0));
         this.setDuration(GetAdvancedValue$4(o, 'duration', 1000));
-        this.setEase(GetValue$1z(o, 'ease', 'Linear'));
-        this.setRepeat(GetValue$1z(o, 'repeat', 0));
+        this.setEase(GetValue$1v(o, 'ease', 'Linear'));
+        this.setRepeat(GetValue$1v(o, 'repeat', 0));
 
         return this;
     }
@@ -5681,7 +5681,7 @@ class EaseValueTaskBase extends TimerTickTask {
     }
 }
 
-const GetValue$1y = Utils$3.Objects.GetValue;
+const GetValue$1u = Utils$3.Objects.GetValue;
 const GetAdvancedValue$3 = Utils$3.Objects.GetAdvancedValue;
 const Linear$6 = Math$1.Linear;
 
@@ -5701,7 +5701,7 @@ let Scale$1 = class Scale extends EaseValueTaskBase {
     resetFromJSON(o) {
         super.resetFromJSON(o);
 
-        this.setMode(GetValue$1y(o, 'mode', 0));
+        this.setMode(GetValue$1u(o, 'mode', 0));
         this.setScaleRange(
             GetAdvancedValue$3(o, 'start', undefined),
             GetAdvancedValue$3(o, 'end', 0)
@@ -6092,7 +6092,7 @@ methods$h.onInitScale = function () {
     });
 };
 
-const GetValue$1x = Utils$3.Objects.GetValue;
+const GetValue$1t = Utils$3.Objects.GetValue;
 const GetAdvancedValue$2 = Utils$3.Objects.GetAdvancedValue;
 const Linear$5 = Math$1.Linear;
 
@@ -6109,7 +6109,7 @@ class Fade extends EaseValueTaskBase {
     resetFromJSON(o) {
         super.resetFromJSON(o);
 
-        this.setMode(GetValue$1x(o, 'mode', 0));
+        this.setMode(GetValue$1t(o, 'mode', 0));
         this.setAlphaRange(
             GetAdvancedValue$2(o, 'start', this.parent.alpha),
             GetAdvancedValue$2(o, 'end', 0)
@@ -6341,7 +6341,7 @@ methods$g.onInitFade = function () {
     });
 };
 
-const GetValue$1w = Utils$3.Objects.GetValue;
+const GetValue$1s = Utils$3.Objects.GetValue;
 const GetAdvancedValue$1 = Utils$3.Objects.GetAdvancedValue;
 const Linear$4 = Math$1.Linear;
 
@@ -6358,7 +6358,7 @@ class EaseMove extends EaseValueTaskBase {
     resetFromJSON(o) {
         super.resetFromJSON(o);
 
-        this.setMode(GetValue$1w(o, 'mode', 0));
+        this.setMode(GetValue$1s(o, 'mode', 0));
 
         if (o && (o.hasOwnProperty('x') || o.hasOwnProperty('y'))) {
             var endX = GetAdvancedValue$1(o, 'x', undefined);
@@ -6675,7 +6675,7 @@ methods$f.onInitEaseMove = function () {
     });
 };
 
-const GetValue$1v = Utils$3.Objects.GetValue;
+const GetValue$1r = Utils$3.Objects.GetValue;
 
 class ShakePosition extends TickTask {
     constructor(gameObject, config) {
@@ -6688,16 +6688,16 @@ class ShakePosition extends TickTask {
     }
 
     resetFromJSON(o) {
-        this.timer.resetFromJSON(GetValue$1v(o, 'timer'));
-        this.setEnable(GetValue$1v(o, 'enable', true));
-        this.setMode(GetValue$1v(o, 'mode', 1));
-        this.isRunning = GetValue$1v(o, 'isRunning', false);
-        this.setMagnitudeMode(GetValue$1v(o, 'magnitudeMode', 1));
-        this.setAxisMode(GetValue$1v(o, "axis", 0));
-        this.setDuration(GetValue$1v(o, 'duration', 500));
-        this.setMagnitude(GetValue$1v(o, 'magnitude', 10));
-        this.ox = GetValue$1v(o, 'ox', undefined);
-        this.oy = GetValue$1v(o, 'oy', undefined);
+        this.timer.resetFromJSON(GetValue$1r(o, 'timer'));
+        this.setEnable(GetValue$1r(o, 'enable', true));
+        this.setMode(GetValue$1r(o, 'mode', 1));
+        this.isRunning = GetValue$1r(o, 'isRunning', false);
+        this.setMagnitudeMode(GetValue$1r(o, 'magnitudeMode', 1));
+        this.setAxisMode(GetValue$1r(o, "axis", 0));
+        this.setDuration(GetValue$1r(o, 'duration', 500));
+        this.setMagnitude(GetValue$1r(o, 'magnitude', 10));
+        this.ox = GetValue$1r(o, 'ox', undefined);
+        this.oy = GetValue$1r(o, 'oy', undefined);
         return this;
     }
 
@@ -6798,8 +6798,8 @@ class ShakePosition extends TickTask {
     start(duration, magnitude) {
         if (typeof (duration) !== 'number') {
             var config = duration;
-            magnitude = GetValue$1v(config, 'magnitude', undefined);
-            duration = GetValue$1v(config, 'duration', undefined);
+            magnitude = GetValue$1r(config, 'magnitude', undefined);
+            duration = GetValue$1r(config, 'duration', undefined);
         }
         if (magnitude !== undefined) {
             this.setMagnitude(magnitude);
@@ -6974,7 +6974,7 @@ var ShakeMethods = {
     },
 };
 
-const GetValue$1u = Utils$3.Objects.GetValue;
+const GetValue$1q = Utils$3.Objects.GetValue;
 const Linear$3 = Math$1.Linear;
 
 class EaseValueTask extends EaseValueTaskBase {
@@ -6993,16 +6993,16 @@ class EaseValueTask extends EaseValueTaskBase {
         }
 
         var target = this.target;
-        this.propertyKey = GetValue$1u(config, 'key', 'value');
+        this.propertyKey = GetValue$1q(config, 'key', 'value');
         var currentValue = target[this.propertyKey];
-        this.fromValue = GetValue$1u(config, 'from', currentValue);
-        this.toValue = GetValue$1u(config, 'to', currentValue);
+        this.fromValue = GetValue$1q(config, 'from', currentValue);
+        this.toValue = GetValue$1q(config, 'to', currentValue);
 
-        this.setEase(GetValue$1u(config, 'ease', this.ease));
-        this.setDuration(GetValue$1u(config, 'duration', this.duration));
-        this.setRepeat(GetValue$1u(config, 'repeat', 0));
-        this.setDelay(GetValue$1u(config, 'delay', 0));
-        this.setRepeatDelay(GetValue$1u(config, 'repeatDelay', 0));
+        this.setEase(GetValue$1q(config, 'ease', this.ease));
+        this.setDuration(GetValue$1q(config, 'duration', this.duration));
+        this.setRepeat(GetValue$1q(config, 'repeat', 0));
+        this.setDelay(GetValue$1q(config, 'delay', 0));
+        this.setRepeatDelay(GetValue$1q(config, 'repeatDelay', 0));
 
         this.timer
             .setDuration(this.duration)
@@ -7729,7 +7729,7 @@ var EventEmitterMethods = {
     },
 };
 
-var GetValue$1t = function (source, key, defaultValue, altSource) {
+var GetValue$1p = function (source, key, defaultValue, altSource) {
     var isValidSource = source && (typeof source === 'object' || typeof source === 'function');
     var isValidAltSource = altSource && (typeof altSource === 'object' || typeof altSource === 'function');
 
@@ -7832,13 +7832,13 @@ let FSM$1 = class FSM {
     */
     constructor(config) {
         // Attach get-next-state function
-        var states = GetValue$1t(config, 'states', undefined);
+        var states = GetValue$1p(config, 'states', undefined);
         if (states) {
             this.addStates(states);
         }
 
         // Attach extend members
-        var extend = GetValue$1t(config, 'extend', undefined);
+        var extend = GetValue$1p(config, 'extend', undefined);
         if (extend) {
             for (var name in extend) {
                 if (!this.hasOwnProperty(name) || this[name] === undefined) {
@@ -7848,8 +7848,8 @@ let FSM$1 = class FSM {
         }
 
         // Event emitter
-        var eventEmitter = GetValue$1t(config, 'eventEmitter', undefined);
-        var EventEmitterClass = GetValue$1t(config, 'EventEmitterClass', undefined);
+        var eventEmitter = GetValue$1p(config, 'eventEmitter', undefined);
+        var EventEmitterClass = GetValue$1p(config, 'EventEmitterClass', undefined);
         this.setEventEmitter(eventEmitter, EventEmitterClass);
 
         this._stateLock = false;
@@ -7865,9 +7865,9 @@ let FSM$1 = class FSM {
     }
 
     resetFromJSON(o) {
-        this.setEnable(GetValue$1t(o, 'enable', true));
-        this.start(GetValue$1t(o, 'start', undefined));
-        var init = GetValue$1t(o, 'init', undefined);
+        this.setEnable(GetValue$1p(o, 'enable', true));
+        this.start(GetValue$1p(o, 'start', undefined));
+        var init = GetValue$1p(o, 'init', undefined);
         if (init) {
             init.call(this);
         }
@@ -8097,7 +8097,7 @@ class FSM extends FSM$1 {
 
     resetFromJSON(o) {
         super.resetFromJSON(o);
-        this._scene = GetValue$1t(o, 'scene', undefined);
+        this._scene = GetValue$1p(o, 'scene', undefined);
         return this;
     }
 
@@ -8430,7 +8430,7 @@ Object.assign(
     CloseMethods,
 );
 
-const GetValue$1s = Utils$3.Objects.GetValue;
+const GetValue$1o = Utils$3.Objects.GetValue;
 
 class OpenCloseTransition extends ComponentBase {
     constructor(gameObject, config) {
@@ -8438,17 +8438,17 @@ class OpenCloseTransition extends ComponentBase {
         // this.parent = gameObject;
         // this.scene
 
-        this.setTransitInTime(GetValue$1s(config, 'duration.in', 200));
-        this.setTransitOutTime(GetValue$1s(config, 'duration.out', 200));
-        this.setTransitInCallback(GetValue$1s(config, 'transitIn'));
-        this.setTransitOutCallback(GetValue$1s(config, 'transitOut'));
+        this.setTransitInTime(GetValue$1o(config, 'duration.in', 200));
+        this.setTransitOutTime(GetValue$1o(config, 'duration.out', 200));
+        this.setTransitInCallback(GetValue$1o(config, 'transitIn'));
+        this.setTransitOutCallback(GetValue$1o(config, 'transitOut'));
 
-        this.oneShotMode = GetValue$1s(config, 'destroy', false);
+        this.oneShotMode = GetValue$1o(config, 'destroy', false);
 
         this.delayCallTimer = undefined;
         this._state = new State$1(this, {
             eventEmitter: false,
-            initState: GetValue$1s(config, 'initState', 'IDLE')
+            initState: GetValue$1o(config, 'initState', 'IDLE')
         });
         this.openEventData = undefined;
         this.closeEventData = undefined;
@@ -8601,7 +8601,7 @@ let FullWindowRectangle$1 = class FullWindowRectangle extends Rectangle$3 {
     }
 };
 
-const GetValue$1r = Utils$3.Objects.GetValue;
+const GetValue$1n = Utils$3.Objects.GetValue;
 
 class TouchEventStop extends ComponentBase {
     constructor(gameObject, config) {
@@ -8614,9 +8614,9 @@ class TouchEventStop extends ComponentBase {
     }
 
     resetFromJSON(o) {
-        this.setHitAreaMode(GetValue$1r(o, 'hitAreaMode', 0));
-        this.setEnable(GetValue$1r(o, 'enable', true));
-        this.setStopMode(GetValue$1r(o, 'stopAllLevels', true));
+        this.setHitAreaMode(GetValue$1n(o, 'hitAreaMode', 0));
+        this.setEnable(GetValue$1n(o, 'enable', true));
+        this.setStopMode(GetValue$1n(o, 'stopAllLevels', true));
         return this;
     }
 
@@ -8705,12 +8705,12 @@ var HitAreaMode = {
     fullWindow: 1
 };
 
-const GetValue$1q = Utils$3.Objects.GetValue;
+const GetValue$1m = Utils$3.Objects.GetValue;
 
 class Cover extends FullWindowRectangle$1 {
     constructor(scene, config) {
-        var fillColor = GetValue$1q(config, 'color', 0x0);
-        var fillAlpha = GetValue$1q(config, 'alpha', 0.8);
+        var fillColor = GetValue$1m(config, 'color', 0x0);
+        var fillAlpha = GetValue$1m(config, 'alpha', 0.8);
         super(scene, fillColor, fillAlpha);
 
         this.touchEventStop = new TouchEventStop(this, { hitAreaMode: 1 });
@@ -8807,7 +8807,7 @@ var IsPointInBounds = function (gameObject, x, y, preTest, postTest) {
     return true;
 };
 
-const GetValue$1p = Utils$3.Objects.GetValue;
+const GetValue$1l = Utils$3.Objects.GetValue;
 
 let Modal$2 = class Modal extends OpenCloseTransition {
     constructor(gameObject, config) {
@@ -8821,26 +8821,26 @@ let Modal$2 = class Modal extends OpenCloseTransition {
             config.transitOut = TransitionMode.scaleDown;
         }
 
-        config.destroy = GetValue$1p(config, 'destroy', true);
+        config.destroy = GetValue$1l(config, 'destroy', true);
 
         super(gameObject, config);
         // this.parent = gameObject;
         // this.scene
 
         // Cover : key of modal, to block touch input        
-        var coverConfig = GetValue$1p(config, 'cover');
+        var coverConfig = GetValue$1l(config, 'cover');
         this.cover = (coverConfig !== false) ? CreateCover(gameObject, coverConfig) : undefined;
         if (this.cover) {
-            this.setCoverTransitInCallback(GetValue$1p(coverConfig, 'transitIn', DefaultCoverTransitInCallback));
-            this.setCoverTransitOutCallback(GetValue$1p(coverConfig, 'transitOut', DefaultCoverTransitOutCallback));
+            this.setCoverTransitInCallback(GetValue$1l(coverConfig, 'transitIn', DefaultCoverTransitInCallback));
+            this.setCoverTransitOutCallback(GetValue$1l(coverConfig, 'transitOut', DefaultCoverTransitOutCallback));
         }
 
         // Close conditions:
-        var touchOutsideClose = GetValue$1p(config, 'touchOutsideClose', false);
-        var timeOutDuration = GetValue$1p(config, 'duration.hold', -1);
-        var timeOutClose = GetValue$1p(config, 'timeOutClose', (timeOutDuration >= 0));
-        var anyTouchClose = GetValue$1p(config, 'anyTouchClose', false);
-        var manualClose = GetValue$1p(config, 'manualClose', false);
+        var touchOutsideClose = GetValue$1l(config, 'touchOutsideClose', false);
+        var timeOutDuration = GetValue$1l(config, 'duration.hold', -1);
+        var timeOutClose = GetValue$1l(config, 'timeOutClose', (timeOutDuration >= 0));
+        var anyTouchClose = GetValue$1l(config, 'anyTouchClose', false);
+        var manualClose = GetValue$1l(config, 'manualClose', false);
 
         if (manualClose) {
             touchOutsideClose = false;
@@ -8865,7 +8865,7 @@ let Modal$2 = class Modal extends OpenCloseTransition {
             this.once('open', this.touchOutsideClose, this);
         }
 
-        if (GetValue$1p(config, 'openOnStart', true)) {
+        if (GetValue$1l(config, 'openOnStart', true)) {
             // Run this.requestOpen() next tick
             // User can register events before this.requestOpen()
             this.delayCall(0, this.requestOpen, this);
@@ -9491,7 +9491,7 @@ var SetDraggable = function (sensor, draggable, dragTarget) {
     return this;
 };
 
-const GetValue$1o = Utils$3.Objects.GetValue;
+const GetValue$1k = Utils$3.Objects.GetValue;
 
 class Button extends ComponentBase {
     constructor(gameObject, config) {
@@ -9499,7 +9499,7 @@ class Button extends ComponentBase {
         // this.parent = gameObject;
 
         this._enable = undefined;
-        gameObject.setInteractive(GetValue$1o(config, "inputConfig", undefined));
+        gameObject.setInteractive(GetValue$1k(config, "inputConfig", undefined));
         this.resetFromJSON(config);
         this.boot();
     }
@@ -9509,10 +9509,10 @@ class Button extends ComponentBase {
         this.lastClickTime = undefined;
         this.isDown = false;
         this.isOver = false;
-        this.setEnable(GetValue$1o(o, "enable", true));
-        this.setMode(GetValue$1o(o, "mode", 1));
-        this.setClickInterval(GetValue$1o(o, "clickInterval", 100));
-        this.setDragThreshold(GetValue$1o(o, 'threshold', undefined));
+        this.setEnable(GetValue$1k(o, "enable", true));
+        this.setMode(GetValue$1k(o, "mode", 1));
+        this.setClickInterval(GetValue$1k(o, "clickInterval", 100));
+        this.setDragThreshold(GetValue$1k(o, 'threshold', undefined));
         return this;
     }
 
@@ -9854,7 +9854,7 @@ var HitTest = function (gameObject, pointer) {
 
 var HitTestResult = [];
 
-const GetValue$1n = Utils$3.Objects.GetValue;
+const GetValue$1j = Utils$3.Objects.GetValue;
 
 class ClickOutside extends ComponentBase {
     constructor(gameObject, config) {
@@ -9863,7 +9863,7 @@ class ClickOutside extends ComponentBase {
 
         this._enable = undefined;
 
-        var inputConfig = GetValue$1n(config, "inputConfig", undefined);
+        var inputConfig = GetValue$1j(config, "inputConfig", undefined);
         if (inputConfig) {
             gameObject.setInteractive(inputConfig);
         }
@@ -9875,10 +9875,10 @@ class ClickOutside extends ComponentBase {
     resetFromJSON(o) {
         this.pointer = undefined;
         this.lastClickTime = undefined;
-        this.setEnable(GetValue$1n(o, "enable", true));
-        this.setMode(GetValue$1n(o, "mode", 1));
-        this.setClickInterval(GetValue$1n(o, "clickInterval", 100));
-        this.setDragThreshold(GetValue$1n(o, 'threshold', undefined));
+        this.setEnable(GetValue$1j(o, "enable", true));
+        this.setMode(GetValue$1j(o, "mode", 1));
+        this.setClickInterval(GetValue$1j(o, "clickInterval", 100));
+        this.setDragThreshold(GetValue$1j(o, 'threshold', undefined));
         return this;
     }
 
@@ -10188,7 +10188,7 @@ class Cooldown extends FSM {
 
 }
 
-const GetValue$1m = Utils$3.Objects.GetValue;
+const GetValue$1i = Utils$3.Objects.GetValue;
 
 class InTouching extends ComponentBase {
     constructor(gameObject, config) {
@@ -10197,7 +10197,7 @@ class InTouching extends ComponentBase {
 
         this._enable = undefined;
         this.cooldown = new Cooldown();
-        this.parent.setInteractive(GetValue$1m(config, 'inputConfig', undefined));
+        this.parent.setInteractive(GetValue$1i(config, 'inputConfig', undefined));
         this.resetFromJSON(config);
         this.boot();
     }
@@ -10206,8 +10206,8 @@ class InTouching extends ComponentBase {
         this.pointer = undefined;
         this.prevIsInTouch = false;
         this.isInTouching = false;
-        this.setEnable(GetValue$1m(o, 'enable', true));
-        this.setCooldown(GetValue$1m(o, 'cooldown', undefined));
+        this.setEnable(GetValue$1i(o, 'enable', true));
+        this.setCooldown(GetValue$1i(o, 'cooldown', undefined));
         return this;
     }
 
@@ -10526,10 +10526,10 @@ var EmitChildEvent = function (eventEmitter, eventName, targets, targetMode, wor
     eventEmitter.emit(eventName, child, pointer, event);
 };
 
-const GetValue$1l = Utils$3.Objects.GetValue;
+const GetValue$1h = Utils$3.Objects.GetValue;
 
 var DownChild = function (config) {
-    var downConfig = GetValue$1l(config, 'down', undefined);
+    var downConfig = GetValue$1h(config, 'down', undefined);
     if (downConfig === false) {
         return;
     } else if (downConfig === true) {
@@ -10553,10 +10553,10 @@ var OnDown = function (pointer, localX, localY, event) {
     );
 };
 
-const GetValue$1k = Utils$3.Objects.GetValue;
+const GetValue$1g = Utils$3.Objects.GetValue;
 
 var UpChild = function (config) {
-    var upConfig = GetValue$1k(config, 'up', undefined);
+    var upConfig = GetValue$1g(config, 'up', undefined);
     if (upConfig === false) {
         return;
     } else if (upConfig === true) {
@@ -10580,10 +10580,10 @@ var OnUp = function (pointer, localX, localY, event) {
     );
 };
 
-const GetValue$1j = Utils$3.Objects.GetValue;
+const GetValue$1f = Utils$3.Objects.GetValue;
 
 var OverChild = function (config) {
-    var overConfig = GetValue$1j(config, 'over', undefined);
+    var overConfig = GetValue$1f(config, 'over', undefined);
     if (overConfig === false) {
         return;
     } else if (overConfig === true) {
@@ -10646,10 +10646,10 @@ var OnOut = function (pointer, event) {
     );
 };
 
-const GetValue$1i = Utils$3.Objects.GetValue;
+const GetValue$1e = Utils$3.Objects.GetValue;
 
 var ClickChild = function (config) {
-    var clickConfig = GetValue$1i(config, 'click', undefined);
+    var clickConfig = GetValue$1e(config, 'click', undefined);
     if (clickConfig === false) {
         return;
     } else if (clickConfig === true) {
@@ -10677,7 +10677,7 @@ var ClickChild = function (config) {
     }, this);
 };
 
-const GetValue$1h = Utils$3.Objects.GetValue;
+const GetValue$1d = Utils$3.Objects.GetValue;
 
 class OnePointerTracer extends TickTask {
     constructor(gameObject, config) {
@@ -10689,7 +10689,7 @@ class OnePointerTracer extends TickTask {
 
         this.gameObject = gameObject;
         if (gameObject) {
-            gameObject.setInteractive(GetValue$1h(config, 'inputConfig', undefined));
+            gameObject.setInteractive(GetValue$1d(config, 'inputConfig', undefined));
         }
         this._enable = undefined;
         this.resetFromJSON(config);
@@ -10697,11 +10697,11 @@ class OnePointerTracer extends TickTask {
     }
 
     resetFromJSON(o) {
-        this.setEnable(GetValue$1h(o, 'enable', true));
+        this.setEnable(GetValue$1d(o, 'enable', true));
 
         this.setDetectBounds();
         if (this.gameObject === undefined) {
-            this.setDetectBounds(GetValue$1h(o, 'bounds', undefined));
+            this.setDetectBounds(GetValue$1d(o, 'bounds', undefined));
         } else {
             this.setDetectBounds();
         }
@@ -10933,7 +10933,7 @@ const TOUCH1$1 = 1;
 
 const IDLE$5 = 'IDLE';
 
-const GetValue$1g = Utils$3.Objects.GetValue;
+const GetValue$1c = Utils$3.Objects.GetValue;
 const DistanceBetween$5 = Math$1.Distance.Between;
 
 class Tap extends OnePointerTracer {
@@ -10986,17 +10986,17 @@ class Tap extends OnePointerTracer {
 
     resetFromJSON(o) {
         super.resetFromJSON(o);
-        this.setHoldTime(GetValue$1g(o, 'time', 250)); // min-hold-time of Press is 251
-        this.setTapInterval(GetValue$1g(o, 'tapInterval', 200));
-        this.setDragThreshold(GetValue$1g(o, 'threshold', 9));
-        this.setTapOffset(GetValue$1g(o, 'tapOffset', 10));
+        this.setHoldTime(GetValue$1c(o, 'time', 250)); // min-hold-time of Press is 251
+        this.setTapInterval(GetValue$1c(o, 'tapInterval', 200));
+        this.setDragThreshold(GetValue$1c(o, 'threshold', 9));
+        this.setTapOffset(GetValue$1c(o, 'tapOffset', 10));
 
-        var taps = GetValue$1g(o, 'taps', undefined);
+        var taps = GetValue$1c(o, 'taps', undefined);
         if (taps !== undefined) {
             this.setTaps(taps);
         } else {
-            this.setMaxTaps(GetValue$1g(o, 'maxTaps', undefined));
-            this.setMinTaps(GetValue$1g(o, 'minTaps', undefined));
+            this.setMaxTaps(GetValue$1c(o, 'maxTaps', undefined));
+            this.setMinTaps(GetValue$1c(o, 'minTaps', undefined));
         }
         return this;
     }
@@ -11133,7 +11133,7 @@ const IDLE$4 = 'IDLE';
 const BEGIN$3 = 'BEGIN';
 const RECOGNIZED$3 = 'RECOGNIZED';
 
-const GetValue$1f = Utils$3.Objects.GetValue;
+const GetValue$1b = Utils$3.Objects.GetValue;
 
 class Press extends OnePointerTracer {
     constructor(gameObject, config) {
@@ -11185,8 +11185,8 @@ class Press extends OnePointerTracer {
 
     resetFromJSON(o) {
         super.resetFromJSON(o);
-        this.setDragThreshold(GetValue$1f(o, 'threshold', 9));
-        this.setHoldTime(GetValue$1f(o, 'time', 251));
+        this.setDragThreshold(GetValue$1b(o, 'threshold', 9));
+        this.setHoldTime(GetValue$1b(o, 'time', 251));
         return this;
     }
 
@@ -11373,7 +11373,7 @@ var AngleToDirections = function (angle, dirMode, out) {
 
 var globOut$2 = {};
 
-const GetValue$1e = Utils$3.Objects.GetValue;
+const GetValue$1a = Utils$3.Objects.GetValue;
 const RadToDeg$2 = Math$1.RadToDeg;
 
 class Swipe extends OnePointerTracer {
@@ -11427,9 +11427,9 @@ class Swipe extends OnePointerTracer {
 
     resetFromJSON(o) {
         super.resetFromJSON(o);
-        this.setDragThreshold(GetValue$1e(o, 'threshold', 10));
-        this.setVelocityThreshold(GetValue$1e(o, 'velocityThreshold', 1000));
-        this.setDirectionMode(GetValue$1e(o, 'dir', '8dir'));
+        this.setDragThreshold(GetValue$1a(o, 'threshold', 10));
+        this.setVelocityThreshold(GetValue$1a(o, 'velocityThreshold', 1000));
+        this.setDirectionMode(GetValue$1a(o, 'dir', '8dir'));
         return this;
     }
 
@@ -11523,7 +11523,7 @@ const IDLE$2 = 'IDLE';
 const BEGIN$1 = 'BEGIN';
 const RECOGNIZED$1 = 'RECOGNIZED';
 
-const GetValue$1d = Utils$3.Objects.GetValue;
+const GetValue$19 = Utils$3.Objects.GetValue;
 const SpliceOne = Utils$3.Array.SpliceOne;
 const DistanceBetween$3 = Math$1.Distance.Between;
 const AngleBetween = Math$1.Angle.Between;
@@ -11543,11 +11543,11 @@ class TwoPointersTracer {
         this.scene = scene;
         this.gameObject = gameObject;
         if (gameObject) {
-            gameObject.setInteractive(GetValue$1d(config, 'inputConfig', undefined));
+            gameObject.setInteractive(GetValue$19(config, 'inputConfig', undefined));
         }
 
         // Event emitter
-        this.setEventEmitter(GetValue$1d(config, 'eventEmitter', undefined));
+        this.setEventEmitter(GetValue$19(config, 'eventEmitter', undefined));
 
         this._enable = undefined;
         this.pointers = [];
@@ -11557,8 +11557,8 @@ class TwoPointersTracer {
     }
 
     resetFromJSON(o) {
-        this.setEnable(GetValue$1d(o, "enable", true));
-        this.bounds = GetValue$1d(o, 'bounds', undefined);
+        this.setEnable(GetValue$19(o, "enable", true));
+        this.bounds = GetValue$19(o, 'bounds', undefined);
 
         this.tracerState = TOUCH0;
         this.pointers.length = 0;
@@ -11946,7 +11946,7 @@ var SpinObject = function (gameObject, camera) {
     return this;
 };
 
-const GetValue$1c = Utils$3.Objects.GetValue;
+const GetValue$18 = Utils$3.Objects.GetValue;
 const WrapDegrees = Math$1.Angle.WrapDegrees; // Wrap degrees: -180 to 180 
 const ShortestBetween = Math$1.Angle.ShortestBetween;
 const RadToDeg$1 = Math$1.RadToDeg;
@@ -11986,7 +11986,7 @@ class Rotate extends TwoPointersTracer {
 
     resetFromJSON(o) {
         super.resetFromJSON(o);
-        this.setDragThreshold(GetValue$1c(o, 'threshold', 0));
+        this.setDragThreshold(GetValue$18(o, 'threshold', 0));
         return this;
     }
 
@@ -12055,10 +12055,10 @@ const IDLE = 'IDLE';
 const BEGIN = 'BEGIN';
 const RECOGNIZED = 'RECOGNIZED';
 
-const GetValue$1b = Utils$3.Objects.GetValue;
+const GetValue$17 = Utils$3.Objects.GetValue;
 
 var TapChild = function (config) {
-    var tapConfig = GetValue$1b(config, 'tap', undefined);
+    var tapConfig = GetValue$17(config, 'tap', undefined);
     if (tapConfig === false) {
         return;
     } else if (tapConfig === true) {
@@ -12089,10 +12089,10 @@ var TapChild = function (config) {
         }, this);
 };
 
-const GetValue$1a = Utils$3.Objects.GetValue;
+const GetValue$16 = Utils$3.Objects.GetValue;
 
 var PressChild = function (config) {
-    var pressConfig = GetValue$1a(config, 'press', undefined);
+    var pressConfig = GetValue$16(config, 'press', undefined);
     if (pressConfig === false) {
         return;
     } else if (pressConfig === true) {
@@ -12124,10 +12124,10 @@ var PressChild = function (config) {
         }, this);
 };
 
-const GetValue$19 = Utils$3.Objects.GetValue;
+const GetValue$15 = Utils$3.Objects.GetValue;
 
 var SwipeChild = function (config) {
-    var swipeConfig = GetValue$19(config, 'swipe', undefined);
+    var swipeConfig = GetValue$15(config, 'swipe', undefined);
     if (swipeConfig === false) {
         return;
     } else if (swipeConfig === true) {
@@ -12170,20 +12170,20 @@ var SwipeChild = function (config) {
         }, this);
 };
 
-const GetValue$18 = Utils$3.Objects.GetValue;
+const GetValue$14 = Utils$3.Objects.GetValue;
 
 var SetChildrenInteractive$1 = function (gameObject, config) {
     gameObject.setInteractive();
 
-    if (GetValue$18(config, 'dropZone', false)) {
+    if (GetValue$14(config, 'dropZone', false)) {
         gameObject.input.dropZone = true;
     }
 
     gameObject._childrenInteractive = {
-        targetSizers: GetValue$18(config, 'targets', [gameObject]),
-        targetMode: GetValue$18(config, 'targetMode', 'parent'),
-        eventEmitter: GetValue$18(config, 'eventEmitter', gameObject),
-        eventNamePrefix: GetValue$18(config, 'inputEventPrefix', 'child.')
+        targetSizers: GetValue$14(config, 'targets', [gameObject]),
+        targetMode: GetValue$14(config, 'targetMode', 'parent'),
+        eventEmitter: GetValue$14(config, 'eventEmitter', gameObject),
+        eventNamePrefix: GetValue$14(config, 'inputEventPrefix', 'child.')
     };
 
     DownChild.call(gameObject, config);
@@ -12277,20 +12277,20 @@ Object.assign(
     BindEventMethods,
 );
 
-const GetValue$17 = Utils$3.Objects.GetValue;
+const GetValue$13 = Utils$3.Objects.GetValue;
 
 let Base$1 = class Base extends ContainerLite {
     constructor(scene, x, y, minWidth, minHeight, config) {
         super(scene, x, y, 1, 1);
         this.isRexSizer = true;
 
-        var origin = GetValue$17(config, 'origin', 0.5);
-        var originX = GetValue$17(config, 'originX', origin);
-        var originY = GetValue$17(config, 'originY', origin);
+        var origin = GetValue$13(config, 'origin', 0.5);
+        var originX = GetValue$13(config, 'originX', origin);
+        var originY = GetValue$13(config, 'originY', origin);
         this.setOrigin(originX, originY);
 
         this.setMinSize(minWidth, minHeight);
-        this.setName(GetValue$17(config, 'name', ''));
+        this.setName(GetValue$13(config, 'name', ''));
         this.rexSizer = {};
         this.space = {};
         this.backgroundChildren = undefined;
@@ -12303,22 +12303,22 @@ let Base$1 = class Base extends ContainerLite {
 
         this.enableLayoutWarn(false);
 
-        var anchorConfig = GetValue$17(config, 'anchor', undefined);
+        var anchorConfig = GetValue$13(config, 'anchor', undefined);
         if (anchorConfig) {
             this.setAnchor(anchorConfig);
         }
 
-        this.setInnerPadding(GetValue$17(config, 'space', 0));
+        this.setInnerPadding(GetValue$13(config, 'space', 0));
 
-        var draggable = GetValue$17(config, 'draggable', false);
+        var draggable = GetValue$13(config, 'draggable', false);
         if (draggable) {
             this.setDraggable(draggable);
         }
 
-        this.setSizerEventsEnable(GetValue$17(config, 'sizerEvents', false));
+        this.setSizerEventsEnable(GetValue$13(config, 'sizerEvents', false));
         this.setDirty(true);
 
-        if (GetValue$17(config, 'enableLayer', false)) {
+        if (GetValue$13(config, 'enableLayer', false)) {
             this.enableLayer();
         }
     }
@@ -13104,7 +13104,7 @@ var GetNearestChildIndex$1 = function (x, y) {
 };
 
 const IsPlainObject$h = Utils$3.Objects.IsPlainObject;
-const GetValue$16 = Utils$3.Objects.GetValue;
+const GetValue$12 = Utils$3.Objects.GetValue;
 const ALIGN_CENTER$3 = Display.Align.CENTER;
 const PROPORTIONMODE = {
     min: 0,
@@ -13131,24 +13131,24 @@ var Add$6 = function (
         proportion = PROPORTIONMODE[proportion];
     } else if (IsPlainObject$h(proportion)) {
         var config = proportion;
-        proportion = GetValue$16(config, 'proportion', undefined);
-        align = GetValue$16(config, 'align', ALIGN_CENTER$3);
-        paddingConfig = GetValue$16(config, 'padding', 0);
-        expand = GetValue$16(config, 'expand', false);
-        childKey = GetValue$16(config, 'key', undefined);
-        index = GetValue$16(config, 'index', undefined);
+        proportion = GetValue$12(config, 'proportion', undefined);
+        align = GetValue$12(config, 'align', ALIGN_CENTER$3);
+        paddingConfig = GetValue$12(config, 'padding', 0);
+        expand = GetValue$12(config, 'expand', false);
+        childKey = GetValue$12(config, 'key', undefined);
+        index = GetValue$12(config, 'index', undefined);
 
         if (!gameObject.isRexSizer) {
-            minWidth = GetValue$16(config, 'minWidth', undefined);
-            minHeight = GetValue$16(config, 'minHeight', undefined);
+            minWidth = GetValue$12(config, 'minWidth', undefined);
+            minHeight = GetValue$12(config, 'minHeight', undefined);
         }
 
-        fitRatio = GetValue$16(config, 'fitRatio', 0);  // width/height
+        fitRatio = GetValue$12(config, 'fitRatio', 0);  // width/height
 
-        offsetX = GetValue$16(config, 'offsetX', 0);
-        offsetY = GetValue$16(config, 'offsetY', 0);
-        offsetOriginX = GetValue$16(config, 'offsetOriginX', 0);
-        offsetOriginY = GetValue$16(config, 'offsetOriginY', 0);
+        offsetX = GetValue$12(config, 'offsetX', 0);
+        offsetY = GetValue$12(config, 'offsetY', 0);
+        offsetOriginX = GetValue$12(config, 'offsetOriginX', 0);
+        offsetOriginY = GetValue$12(config, 'offsetOriginY', 0);
     }
 
     if (typeof (align) === 'string') {
@@ -13546,25 +13546,25 @@ var GetOrientationMode = function (orientation) {
 };
 
 const IsPlainObject$g = Utils$3.Objects.IsPlainObject;
-const GetValue$15 = Utils$3.Objects.GetValue;
+const GetValue$11 = Utils$3.Objects.GetValue;
 
 class Sizer extends Base$1 {
     constructor(scene, x, y, minWidth, minHeight, orientation, config) {
         if (IsPlainObject$g(x)) {
             config = x;
-            x = GetValue$15(config, 'x', 0);
-            y = GetValue$15(config, 'y', 0);
-            minWidth = GetValue$15(config, 'width', undefined);
-            minHeight = GetValue$15(config, 'height', undefined);
-            orientation = GetValue$15(config, 'orientation', 0);
+            x = GetValue$11(config, 'x', 0);
+            y = GetValue$11(config, 'y', 0);
+            minWidth = GetValue$11(config, 'width', undefined);
+            minHeight = GetValue$11(config, 'height', undefined);
+            orientation = GetValue$11(config, 'orientation', 0);
         } else if (IsPlainObject$g(minWidth)) {
             config = minWidth;
-            minWidth = GetValue$15(config, 'width', undefined);
-            minHeight = GetValue$15(config, 'height', undefined);
-            orientation = GetValue$15(config, 'orientation', 0);
+            minWidth = GetValue$11(config, 'width', undefined);
+            minHeight = GetValue$11(config, 'height', undefined);
+            orientation = GetValue$11(config, 'orientation', 0);
         } else if (IsPlainObject$g(orientation)) {
             config = orientation;
-            orientation = GetValue$15(config, 'orientation', 0);
+            orientation = GetValue$11(config, 'orientation', 0);
         }
 
         if (orientation === undefined) {
@@ -13575,9 +13575,9 @@ class Sizer extends Base$1 {
         this.type = 'rexSizer';
         this.sizerChildren = [];
         this.setOrientation(orientation);
-        this.setItemSpacing(GetValue$15(config, 'space.item', 0));
-        this.setStartChildIndex(GetValue$15(config, 'startChildIndex', 0));
-        this.setRTL(GetValue$15(config, 'rtl', false));
+        this.setItemSpacing(GetValue$11(config, 'space.item', 0));
+        this.setStartChildIndex(GetValue$11(config, 'startChildIndex', 0));
+        this.setRTL(GetValue$11(config, 'rtl', false));
 
         this.addChildrenMap('items', this.sizerChildren);
     }
@@ -13847,7 +13847,7 @@ var sourceSize = {};
 var targetSize = {};
 
 const IsPlainObject$f = Utils$3.Objects.IsPlainObject;
-const GetValue$14 = Utils$3.Objects.GetValue;
+const GetValue$10 = Utils$3.Objects.GetValue;
 const ALIGN_CENTER$2 = Display.Align.CENTER;
 const UUID$2 = Utils$3.String.UUID;
 
@@ -13871,23 +13871,23 @@ var Add$5 = function (gameObject, childKey, align, padding, expand, minWidth, mi
 
     if (IsPlainObject$f(childKey)) {
         var config = childKey;
-        childKey = GetValue$14(config, 'key', undefined);
-        align = GetValue$14(config, 'align', ALIGN_CENTER$2);
-        padding = GetValue$14(config, 'padding', 0);
-        expand = GetValue$14(config, 'expand', true);
+        childKey = GetValue$10(config, 'key', undefined);
+        align = GetValue$10(config, 'align', ALIGN_CENTER$2);
+        padding = GetValue$10(config, 'padding', 0);
+        expand = GetValue$10(config, 'expand', true);
 
         if (!gameObject.isRexSizer) {
             // Get minWidth,minHeight from config
-            minWidth = GetValue$14(config, 'minWidth', gameObject._minWidth);
-            minHeight = GetValue$14(config, 'minHeight', gameObject._minHeighted);
+            minWidth = GetValue$10(config, 'minWidth', gameObject._minWidth);
+            minHeight = GetValue$10(config, 'minHeight', gameObject._minHeighted);
         }
 
-        offsetX = GetValue$14(config, 'offsetX', 0);
-        offsetY = GetValue$14(config, 'offsetY', 0);
-        offsetOriginX = GetValue$14(config, 'offsetOriginX', 0);
-        offsetOriginY = GetValue$14(config, 'offsetOriginY', 0);
+        offsetX = GetValue$10(config, 'offsetX', 0);
+        offsetY = GetValue$10(config, 'offsetY', 0);
+        offsetOriginX = GetValue$10(config, 'offsetOriginX', 0);
+        offsetOriginY = GetValue$10(config, 'offsetOriginY', 0);
 
-        aspectRatio = GetValue$14(config, 'aspectRatio', 0);
+        aspectRatio = GetValue$10(config, 'aspectRatio', 0);
     }
 
     var hasValidKey = (childKey !== undefined);
@@ -13954,8 +13954,8 @@ var Add$5 = function (gameObject, childKey, align, padding, expand, minWidth, mi
     config.padding = GetBoundsConfig$1(padding);
 
     if (IsPlainObject$f(expand)) {
-        config.expandWidth = NormalizeExpand(GetValue$14(expand, 'width', false));
-        config.expandHeight = NormalizeExpand(GetValue$14(expand, 'height', false));
+        config.expandWidth = NormalizeExpand(GetValue$10(expand, 'width', false));
+        config.expandHeight = NormalizeExpand(GetValue$10(expand, 'height', false));
     } else {
         expand = NormalizeExpand(expand);
         config.expandWidth = expand;
@@ -14068,20 +14068,20 @@ var IndexOf = function (obj, child) {
 };
 
 const IsPlainObject$e = Utils$3.Objects.IsPlainObject;
-const GetValue$13 = Utils$3.Objects.GetValue;
+const GetValue$$ = Utils$3.Objects.GetValue;
 
 class OverlapSizer extends Base$1 {
     constructor(scene, x, y, minWidth, minHeight, config) {
         if (IsPlainObject$e(x)) {
             config = x;
-            x = GetValue$13(config, 'x', 0);
-            y = GetValue$13(config, 'y', 0);
-            minWidth = GetValue$13(config, 'width', undefined);
-            minHeight = GetValue$13(config, 'height', undefined);
+            x = GetValue$$(config, 'x', 0);
+            y = GetValue$$(config, 'y', 0);
+            minWidth = GetValue$$(config, 'width', undefined);
+            minHeight = GetValue$$(config, 'height', undefined);
         } else if (IsPlainObject$e(minWidth)) {
             config = minWidth;
-            minWidth = GetValue$13(config, 'width', undefined);
-            minHeight = GetValue$13(config, 'height', undefined);
+            minWidth = GetValue$$(config, 'width', undefined);
+            minHeight = GetValue$$(config, 'height', undefined);
         }
 
         super(scene, x, y, minWidth, minHeight, config);
@@ -14407,7 +14407,7 @@ var FireEvent$1 = function (eventName, button, ...args) {
     }
 };
 
-const GetValue$12 = Utils$3.Objects.GetValue;
+const GetValue$_ = Utils$3.Objects.GetValue;
 
 var ButtonsTypeMethods = {
     setButtonsType(config) {
@@ -14415,7 +14415,7 @@ var ButtonsTypeMethods = {
             config = {};
         }
 
-        var buttonsType = GetValue$12(config, 'buttonsType', config.type);
+        var buttonsType = GetValue$_(config, 'buttonsType', config.type);
         this.buttonsType = buttonsType;
 
         if (!this.buttonsType) {
@@ -14424,11 +14424,11 @@ var ButtonsTypeMethods = {
 
         // Assign this.setValueCallback, this.setValueCallbackScope
         var setValueCallback, setValueCallbackScope;
-        setValueCallback = GetValue$12(config, 'setValueCallback', undefined);
-        setValueCallbackScope = GetValue$12(config, 'setValueCallbackScope', undefined);
+        setValueCallback = GetValue$_(config, 'setValueCallback', undefined);
+        setValueCallbackScope = GetValue$_(config, 'setValueCallbackScope', undefined);
         if (setValueCallback === undefined) {
-            setValueCallback = GetValue$12(config, 'setButtonStateCallback', undefined);
-            setValueCallbackScope = GetValue$12(config, 'setButtonStateCallbackScope', undefined);
+            setValueCallback = GetValue$_(config, 'setButtonStateCallback', undefined);
+            setValueCallbackScope = GetValue$_(config, 'setButtonStateCallbackScope', undefined);
         }
         this.setValueCallback = setValueCallback;
         this.setValueCallbackScope = setValueCallbackScope;
@@ -14806,7 +14806,7 @@ var ButtonStateMethods = {
     }
 };
 
-const GetValue$11 = Utils$3.Objects.GetValue;
+const GetValue$Z = Utils$3.Objects.GetValue;
 
 let Buttons$1 = class Buttons extends Sizer {
     constructor(scene, config) {
@@ -14824,19 +14824,19 @@ let Buttons$1 = class Buttons extends Sizer {
         this.type = 'rexButtons';
         this.buttonGroup = new ButtonGroup({
             parent: this,
-            eventEmitter: GetValue$11(config, 'eventEmitter', this),
-            groupName: GetValue$11(config, 'groupName', undefined),
-            clickConfig: GetValue$11(config, 'click', undefined)
+            eventEmitter: GetValue$Z(config, 'eventEmitter', this),
+            groupName: GetValue$Z(config, 'groupName', undefined),
+            clickConfig: GetValue$Z(config, 'click', undefined)
         })
             .setButtonsType(config);
 
         // Add elements
-        var background = GetValue$11(config, 'background', undefined);
-        var buttons = GetValue$11(config, 'buttons', undefined);
+        var background = GetValue$Z(config, 'background', undefined);
+        var buttons = GetValue$Z(config, 'buttons', undefined);
 
         // Buttons properties
-        this.buttonsExpand = GetValue$11(config, 'expand', false);
-        this.buttonsAlign = GetValue$11(config, 'align', undefined); // undefined/left/top: no space                
+        this.buttonsExpand = GetValue$Z(config, 'expand', false);
+        this.buttonsAlign = GetValue$Z(config, 'align', undefined); // undefined/left/top: no space                
 
         if (background) {
             this.addBackground(background);
@@ -15343,7 +15343,7 @@ var GetNearestChildIndex = function (x, y) {
 };
 
 const IsPlainObject$d = Utils$3.Objects.IsPlainObject;
-const GetValue$10 = Utils$3.Objects.GetValue;
+const GetValue$Y = Utils$3.Objects.GetValue;
 const ALIGN_CENTER$1 = Display.Align.CENTER;
 
 var Add$3 = function (gameObject, paddingConfig, childKey, index) {
@@ -15359,14 +15359,14 @@ var Add$3 = function (gameObject, paddingConfig, childKey, index) {
 
     if (IsPlainObject$d(paddingConfig)) {
         var config = paddingConfig;
-        paddingConfig = GetValue$10(config, 'padding', 0);
-        childKey = GetValue$10(config, 'key', undefined);
-        index = GetValue$10(config, 'index', undefined);
+        paddingConfig = GetValue$Y(config, 'padding', 0);
+        childKey = GetValue$Y(config, 'key', undefined);
+        index = GetValue$Y(config, 'index', undefined);
 
-        offsetX = GetValue$10(config, 'offsetX', 0);
-        offsetY = GetValue$10(config, 'offsetY', 0);
-        offsetOriginX = GetValue$10(config, 'offsetOriginX', 0);
-        offsetOriginY = GetValue$10(config, 'offsetOriginY', 0);
+        offsetX = GetValue$Y(config, 'offsetX', 0);
+        offsetY = GetValue$Y(config, 'offsetY', 0);
+        offsetOriginX = GetValue$Y(config, 'offsetOriginX', 0);
+        offsetOriginY = GetValue$Y(config, 'offsetOriginY', 0);
     }
     if (paddingConfig === undefined) {
         paddingConfig = 0;
@@ -15553,20 +15553,20 @@ var GetMaxChildHeight = function (children) {
 };
 
 const IsPlainObject$c = Utils$3.Objects.IsPlainObject;
-const GetValue$$ = Utils$3.Objects.GetValue;
+const GetValue$X = Utils$3.Objects.GetValue;
 
 class FixWidthSizer extends Base$1 {
     constructor(scene, x, y, minWidth, minHeight, config) {
         if (IsPlainObject$c(x)) {
             config = x;
-            x = GetValue$$(config, 'x', 0);
-            y = GetValue$$(config, 'y', 0);
-            minWidth = GetValue$$(config, 'width', undefined);
-            minHeight = GetValue$$(config, 'height', undefined);
+            x = GetValue$X(config, 'x', 0);
+            y = GetValue$X(config, 'y', 0);
+            minWidth = GetValue$X(config, 'width', undefined);
+            minHeight = GetValue$X(config, 'height', undefined);
         } else if (IsPlainObject$c(minWidth)) {
             config = minWidth;
-            minWidth = GetValue$$(config, 'width', undefined);
-            minHeight = GetValue$$(config, 'height', undefined);
+            minWidth = GetValue$X(config, 'width', undefined);
+            minHeight = GetValue$X(config, 'height', undefined);
         }
 
         super(scene, x, y, minWidth, minHeight, config);
@@ -15575,20 +15575,20 @@ class FixWidthSizer extends Base$1 {
 
         this.runChildrenWrapFlag = true;
 
-        this.setOrientation(GetValue$$(config, 'orientation', 0));
-        this.setItemSpacing(GetValue$$(config, 'space.item', 0));
-        this.setLineSpacing(GetValue$$(config, 'space.line', 0));
+        this.setOrientation(GetValue$X(config, 'orientation', 0));
+        this.setItemSpacing(GetValue$X(config, 'space.item', 0));
+        this.setLineSpacing(GetValue$X(config, 'space.line', 0));
         this.setIntentLeft(
-            GetValue$$(config, 'space.indentLeftOdd', 0),
-            GetValue$$(config, 'space.indentLeftEven', 0)
+            GetValue$X(config, 'space.indentLeftOdd', 0),
+            GetValue$X(config, 'space.indentLeftEven', 0)
         );
         this.setIntentTop(
-            GetValue$$(config, 'space.indentTopOdd', 0),
-            GetValue$$(config, 'space.indentTopEven', 0)
+            GetValue$X(config, 'space.indentTopOdd', 0),
+            GetValue$X(config, 'space.indentTopEven', 0)
         );
-        this.setAlign(GetValue$$(config, 'align', 0));
-        this.setJustifyPercentage(GetValue$$(config, 'justifyPercentage', 0.25));
-        this.setRTL(GetValue$$(config, 'rtl', false));
+        this.setAlign(GetValue$X(config, 'align', 0));
+        this.setJustifyPercentage(GetValue$X(config, 'justifyPercentage', 0.25));
+        this.setRTL(GetValue$X(config, 'rtl', false));
 
         this.wrapResult = undefined;  // {lines, width, height}
 
@@ -15765,7 +15765,7 @@ var RemoveChildMethods$2 = {
     }
 };
 
-const GetValue$_ = Utils$3.Objects.GetValue;
+const GetValue$W = Utils$3.Objects.GetValue;
 
 class Buttons extends FixWidthSizer {
     constructor(scene, config) {
@@ -15783,18 +15783,18 @@ class Buttons extends FixWidthSizer {
         this.type = 'rexFixWidthButtons';
         this.buttonGroup = new ButtonGroup({
             parent: this,
-            eventEmitter: GetValue$_(config, 'eventEmitter', this),
-            groupName: GetValue$_(config, 'groupName', undefined),
-            clickConfig: GetValue$_(config, 'click', undefined)
+            eventEmitter: GetValue$W(config, 'eventEmitter', this),
+            groupName: GetValue$W(config, 'groupName', undefined),
+            clickConfig: GetValue$W(config, 'click', undefined)
         })
             .setButtonsType(config);
 
         // Add elements
-        var background = GetValue$_(config, 'background', undefined);
-        var buttons = GetValue$_(config, 'buttons', undefined);
+        var background = GetValue$W(config, 'background', undefined);
+        var buttons = GetValue$W(config, 'buttons', undefined);
 
         // Buttons properties
-        this.buttonsAlign = GetValue$_(config, 'align', undefined);
+        this.buttonsAlign = GetValue$W(config, 'align', undefined);
 
         if (background) {
             this.addBackground(background);
@@ -16233,7 +16233,7 @@ var RunHeightWrap = function (height) {
 };
 
 const IsPlainObject$b = Utils$3.Objects.IsPlainObject;
-const GetValue$Z = Utils$3.Objects.GetValue;
+const GetValue$V = Utils$3.Objects.GetValue;
 const ALIGN_CENTER = Display.Align.CENTER;
 
 
@@ -16289,17 +16289,17 @@ var Add = function (gameObject, columnIndex, rowIndex, align, paddingConfig, exp
     AddChild$2.call(this, gameObject);
     if (IsPlainObject$b(columnIndex)) {
         var config = columnIndex;
-        columnIndex = GetValue$Z(config, 'column', undefined);
-        rowIndex = GetValue$Z(config, 'row', undefined);
-        align = GetValue$Z(config, 'align', ALIGN_CENTER);
-        paddingConfig = GetValue$Z(config, 'padding', 0);
-        expand = GetValue$Z(config, 'expand', false);
-        childKey = GetValue$Z(config, 'key', undefined);
+        columnIndex = GetValue$V(config, 'column', undefined);
+        rowIndex = GetValue$V(config, 'row', undefined);
+        align = GetValue$V(config, 'align', ALIGN_CENTER);
+        paddingConfig = GetValue$V(config, 'padding', 0);
+        expand = GetValue$V(config, 'expand', false);
+        childKey = GetValue$V(config, 'key', undefined);
 
-        offsetX = GetValue$Z(config, 'offsetX', 0);
-        offsetY = GetValue$Z(config, 'offsetY', 0);
-        offsetOriginX = GetValue$Z(config, 'offsetOriginX', 0);
-        offsetOriginY = GetValue$Z(config, 'offsetOriginY', 0);
+        offsetX = GetValue$V(config, 'offsetX', 0);
+        offsetY = GetValue$V(config, 'offsetY', 0);
+        offsetOriginX = GetValue$V(config, 'offsetOriginX', 0);
+        offsetOriginY = GetValue$V(config, 'offsetOriginY', 0);
     }
 
     // Get insert index
@@ -16351,8 +16351,8 @@ var Add = function (gameObject, columnIndex, rowIndex, align, paddingConfig, exp
     config.padding = GetBoundsConfig$1(paddingConfig);
 
     if (IsPlainObject$b(expand)) {
-        config.expandWidth = GetValue$Z(expand, 'width', false);
-        config.expandHeight = GetValue$Z(expand, 'height', false);
+        config.expandWidth = GetValue$V(expand, 'width', false);
+        config.expandHeight = GetValue$V(expand, 'height', false);
     } else {
         config.expandWidth = expand;
         config.expandHeight = expand;
@@ -16481,7 +16481,7 @@ var SetSpaceMethods = {
     }
 };
 
-const GetValue$Y = Utils$3.Objects.GetValue;
+const GetValue$U = Utils$3.Objects.GetValue;
 
 var ResetGrid = function (
     columnCount, rowCount,
@@ -16529,8 +16529,8 @@ var ResetGrid = function (
     this.rowHeight.length = rowCount;
 
     // space
-    this.setColumnSpace(GetValue$Y(space, 'column', 0));
-    this.setRowSpace(GetValue$Y(space, 'row', 0));
+    this.setColumnSpace(GetValue$U(space, 'column', 0));
+    this.setRowSpace(GetValue$U(space, 'row', 0));
 
     var scene = this.scene;
     var createCellContainerCallback = this.createCellContainerCallback;
@@ -16669,59 +16669,59 @@ var GetTotalRowProportions = function () {
 };
 
 const IsPlainObject$a = Utils$3.Objects.IsPlainObject;
-const GetValue$X = Utils$3.Objects.GetValue;
+const GetValue$T = Utils$3.Objects.GetValue;
 
 class GridSizer extends Base$1 {
     constructor(scene, x, y, minWidth, minHeight, columnCount, rowCount, columnProportions, rowProportions, config) {
         if (IsPlainObject$a(x)) {
             config = x;
-            x = GetValue$X(config, 'x', 0);
-            y = GetValue$X(config, 'y', 0);
-            minWidth = GetValue$X(config, 'width', undefined);
-            minHeight = GetValue$X(config, 'height', undefined);
-            columnCount = GetValue$X(config, 'column', (config.col || 0));
-            rowCount = GetValue$X(config, 'row', 0);
-            columnProportions = GetValue$X(config, 'columnProportions', 0);
-            rowProportions = GetValue$X(config, 'rowProportions', 0);
+            x = GetValue$T(config, 'x', 0);
+            y = GetValue$T(config, 'y', 0);
+            minWidth = GetValue$T(config, 'width', undefined);
+            minHeight = GetValue$T(config, 'height', undefined);
+            columnCount = GetValue$T(config, 'column', (config.col || 0));
+            rowCount = GetValue$T(config, 'row', 0);
+            columnProportions = GetValue$T(config, 'columnProportions', 0);
+            rowProportions = GetValue$T(config, 'rowProportions', 0);
         } else if (IsPlainObject$a(minWidth)) {
             config = minWidth;
-            minWidth = GetValue$X(config, 'width', undefined);
-            minHeight = GetValue$X(config, 'height', undefined);
-            columnCount = GetValue$X(config, 'column', (config.col || 0));
-            rowCount = GetValue$X(config, 'row', 0);
-            columnProportions = GetValue$X(config, 'columnProportions', 0);
-            rowProportions = GetValue$X(config, 'rowProportions', 0);
+            minWidth = GetValue$T(config, 'width', undefined);
+            minHeight = GetValue$T(config, 'height', undefined);
+            columnCount = GetValue$T(config, 'column', (config.col || 0));
+            rowCount = GetValue$T(config, 'row', 0);
+            columnProportions = GetValue$T(config, 'columnProportions', 0);
+            rowProportions = GetValue$T(config, 'rowProportions', 0);
         } else if (IsPlainObject$a(columnCount)) {
             config = columnCount;
-            columnCount = GetValue$X(config, 'column', (config.col || 0));
-            rowCount = GetValue$X(config, 'row', 0);
-            columnProportions = GetValue$X(config, 'columnProportions', 0);
-            rowProportions = GetValue$X(config, 'rowProportions', 0);
+            columnCount = GetValue$T(config, 'column', (config.col || 0));
+            rowCount = GetValue$T(config, 'row', 0);
+            columnProportions = GetValue$T(config, 'columnProportions', 0);
+            rowProportions = GetValue$T(config, 'rowProportions', 0);
         } else if (IsPlainObject$a(columnProportions)) {
             config = columnProportions;
-            columnProportions = GetValue$X(config, 'columnProportions', 0);
-            rowProportions = GetValue$X(config, 'rowProportions', 0);
+            columnProportions = GetValue$T(config, 'columnProportions', 0);
+            rowProportions = GetValue$T(config, 'rowProportions', 0);
         }
         super(scene, x, y, minWidth, minHeight, config);
 
         this.type = 'rexGridSizer';
         this.sizerChildren = [];
         this.addChildrenMap('items', this.sizerChildren);
-        this.setCreateCellContainerCallback(GetValue$X(config, 'createCellContainerCallback'));
+        this.setCreateCellContainerCallback(GetValue$T(config, 'createCellContainerCallback'));
 
         this.setIndentLeft(
-            GetValue$X(config, 'space.indentLeftOdd', 0),
-            GetValue$X(config, 'space.indentLeftEven', 0)
+            GetValue$T(config, 'space.indentLeftOdd', 0),
+            GetValue$T(config, 'space.indentLeftEven', 0)
         );
         this.setIndentTop(
-            GetValue$X(config, 'space.indentTopOdd', 0),
-            GetValue$X(config, 'space.indentTopEven', 0)
+            GetValue$T(config, 'space.indentTopOdd', 0),
+            GetValue$T(config, 'space.indentTopEven', 0)
         );
 
         this.resetGrid(
             columnCount, rowCount,
             columnProportions, rowProportions,
-            GetValue$X(config, 'space', undefined)
+            GetValue$T(config, 'space', undefined)
         );
 
     }
@@ -16882,18 +16882,18 @@ var RemoveChildMethods = {
     }
 };
 
-const GetValue$W = Utils$3.Objects.GetValue;
+const GetValue$S = Utils$3.Objects.GetValue;
 
 class GridButtons extends GridSizer {
     constructor(scene, config) {
         if (config === undefined) {
             config = {};
         }
-        var rowCount = GetValue$W(config, 'row', 0);
-        var columnCount = GetValue$W(config, 'column', (config.col || 0));
-        var createCellContainerCallback = GetValue$W(config, 'createCellContainerCallback');
-        var buttons = GetValue$W(config, 'buttons', undefined);
-        var buttonsExpand = GetValue$W(config, 'expand', true);
+        var rowCount = GetValue$S(config, 'row', 0);
+        var columnCount = GetValue$S(config, 'column', (config.col || 0));
+        var createCellContainerCallback = GetValue$S(config, 'createCellContainerCallback');
+        var buttons = GetValue$S(config, 'buttons', undefined);
+        var buttonsExpand = GetValue$S(config, 'expand', true);
         var buttonProportion = (buttonsExpand) ? 1 : 0;
 
         if (createCellContainerCallback) {
@@ -16916,18 +16916,18 @@ class GridButtons extends GridSizer {
         this.type = 'rexGridButtons';
         this.buttonGroup = new ButtonGroup({
             parent: this,
-            eventEmitter: GetValue$W(config, 'eventEmitter', this),
-            groupName: GetValue$W(config, 'groupName', undefined),
-            clickConfig: GetValue$W(config, 'click', undefined)
+            eventEmitter: GetValue$S(config, 'eventEmitter', this),
+            groupName: GetValue$S(config, 'groupName', undefined),
+            clickConfig: GetValue$S(config, 'click', undefined)
         })
             .setButtonsType(config);
 
         // Add elements
-        var background = GetValue$W(config, 'background', undefined);
+        var background = GetValue$S(config, 'background', undefined);
 
         // Buttons properties
         this.buttonsExpand = buttonsExpand;
-        GetValue$W(config, 'space', undefined);
+        GetValue$S(config, 'space', undefined);
 
         if (background) {
             this.addBackground(background);
@@ -17424,7 +17424,7 @@ Object.assign(
     ModalMethods,
 );
 
-const GetValue$V = Utils$3.Objects.GetValue;
+const GetValue$R = Utils$3.Objects.GetValue;
 
 class Dialog extends Sizer {
     constructor(scene, config) {
@@ -17435,24 +17435,24 @@ class Dialog extends Sizer {
         config.orientation = 1; // Top to bottom
         super(scene, config);
         this.type = 'rexDialog';
-        this.eventEmitter = GetValue$V(config, 'eventEmitter', this);
+        this.eventEmitter = GetValue$R(config, 'eventEmitter', this);
 
         // Add elements
-        var background = GetValue$V(config, 'background', undefined);
-        var title = GetValue$V(config, 'title', undefined);
-        var toolbar = GetValue$V(config, 'toolbar', undefined);
-        var toolbarBackground = GetValue$V(config, 'toolbarBackground', undefined);
-        var leftToolbar = GetValue$V(config, 'leftToolbar', undefined);
-        var leftToolbarBackground = GetValue$V(config, 'leftToolbarBackground', undefined);
-        var content = GetValue$V(config, 'content', undefined);
-        var description = GetValue$V(config, 'description', undefined);
+        var background = GetValue$R(config, 'background', undefined);
+        var title = GetValue$R(config, 'title', undefined);
+        var toolbar = GetValue$R(config, 'toolbar', undefined);
+        var toolbarBackground = GetValue$R(config, 'toolbarBackground', undefined);
+        var leftToolbar = GetValue$R(config, 'leftToolbar', undefined);
+        var leftToolbarBackground = GetValue$R(config, 'leftToolbarBackground', undefined);
+        var content = GetValue$R(config, 'content', undefined);
+        var description = GetValue$R(config, 'description', undefined);
         var choicesSizer;
-        var choices = GetValue$V(config, 'choices', undefined);
-        var choicesBackground = GetValue$V(config, 'choicesBackground', undefined);
+        var choices = GetValue$R(config, 'choices', undefined);
+        var choicesBackground = GetValue$R(config, 'choicesBackground', undefined);
         var actionsSizer;
-        var actions = GetValue$V(config, 'actions', undefined);
-        var actionsBackground = GetValue$V(config, 'actionsBackground', undefined);
-        var clickConfig = GetValue$V(config, 'click', undefined);
+        var actions = GetValue$R(config, 'actions', undefined);
+        var actionsBackground = GetValue$R(config, 'actionsBackground', undefined);
+        var clickConfig = GetValue$R(config, 'click', undefined);
 
         if (background) {
             this.addBackground(background);
@@ -17465,7 +17465,7 @@ class Dialog extends Sizer {
                 background: toolbarBackground,
                 buttons: toolbar,
                 orientation: 0, // Left-right
-                space: { item: GetValue$V(config, 'space.toolbarItem', 0) },
+                space: { item: GetValue$R(config, 'space.toolbarItem', 0) },
                 click: clickConfig,
                 eventEmitter: this.eventEmitter,
             });
@@ -17479,7 +17479,7 @@ class Dialog extends Sizer {
                 background: leftToolbarBackground,
                 buttons: leftToolbar,
                 orientation: 0, // Left-right
-                space: { item: GetValue$V(config, 'space.leftToolbarItem', 0) },
+                space: { item: GetValue$R(config, 'space.leftToolbarItem', 0) },
                 click: clickConfig,
                 eventEmitter: this.eventEmitter,
             });
@@ -17488,8 +17488,8 @@ class Dialog extends Sizer {
 
         // title or toolbar or leftToolbar
         if (title || toolbar || leftToolbar) {
-            var titleExpandWidth = !!title && GetValue$V(config, 'expand.title', true);
-            var titleAlign = GetValue$V(config, 'align.title', 'center');
+            var titleExpandWidth = !!title && GetValue$R(config, 'expand.title', true);
+            var titleAlign = GetValue$R(config, 'align.title', 'center');
             var useOverlapSizer =
                 // Has title, title is not exapnd-width, title align to center
                 (title && !titleExpandWidth && (titleAlign === 'center')) ||
@@ -17523,8 +17523,8 @@ class Dialog extends Sizer {
                 }
 
                 var padding = {
-                    left: GetValue$V(config, 'space.titleLeft', 0),
-                    right: GetValue$V(config, 'space.titleRight', 0)
+                    left: GetValue$R(config, 'space.titleLeft', 0),
+                    right: GetValue$R(config, 'space.titleRight', 0)
                 };
                 var proportion = (titleExpandWidth) ? 1 : 0;
                 titleSizer.add(
@@ -17554,11 +17554,11 @@ class Dialog extends Sizer {
             var padding;
             if (content || description || choices || actions) {
                 padding = {
-                    bottom: GetValue$V(config, 'space.title', 0),
-                    top: GetValue$V(config, 'space.titleTop', 0)
+                    bottom: GetValue$R(config, 'space.title', 0),
+                    top: GetValue$R(config, 'space.titleTop', 0)
                 };
             }
-            var proportion = GetValue$V(config, 'proportion.title', 0);
+            var proportion = GetValue$R(config, 'proportion.title', 0);
             this.add(
                 titleSizer,
                 { padding: padding, proportion: proportion, expand: true }
@@ -17566,15 +17566,15 @@ class Dialog extends Sizer {
         }
 
         if (content) {
-            var align = GetValue$V(config, 'align.content', 'center');
-            var contentSpace = GetValue$V(config, 'space.content', 0);
+            var align = GetValue$R(config, 'align.content', 'center');
+            var contentSpace = GetValue$R(config, 'space.content', 0);
             var padding = {
-                left: GetValue$V(config, 'space.contentLeft', 0),
-                right: GetValue$V(config, 'space.contentRight', 0),
+                left: GetValue$R(config, 'space.contentLeft', 0),
+                right: GetValue$R(config, 'space.contentRight', 0),
                 bottom: ((description || choices || actions) ? contentSpace : 0)
             };
-            var proportion = GetValue$V(config, 'proportion.content', 0);
-            var expand = GetValue$V(config, 'expand.content', true);
+            var proportion = GetValue$R(config, 'proportion.content', 0);
+            var expand = GetValue$R(config, 'expand.content', true);
             this.add(
                 content,
                 { align: align, padding: padding, proportion: proportion, expand: expand }
@@ -17582,15 +17582,15 @@ class Dialog extends Sizer {
         }
 
         if (description) {
-            var align = GetValue$V(config, 'align.description', 'center');
-            var descriptionSpace = GetValue$V(config, 'space.description', 0);
+            var align = GetValue$R(config, 'align.description', 'center');
+            var descriptionSpace = GetValue$R(config, 'space.description', 0);
             var padding = {
-                left: GetValue$V(config, 'space.descriptionLeft', 0),
-                right: GetValue$V(config, 'space.descriptionRight', 0),
+                left: GetValue$R(config, 'space.descriptionLeft', 0),
+                right: GetValue$R(config, 'space.descriptionRight', 0),
                 bottom: ((choices || actions) ? descriptionSpace : 0)
             };
-            var proportion = GetValue$V(config, 'proportion.description', 0);
-            var expand = GetValue$V(config, 'expand.description', true);
+            var proportion = GetValue$R(config, 'proportion.description', 0);
+            var expand = GetValue$R(config, 'expand.description', true);
             this.add(
                 description,
                 { align: align, padding: padding, proportion: proportion, expand: expand }
@@ -17598,7 +17598,7 @@ class Dialog extends Sizer {
         }
 
         if (choices) {
-            var choicesType = GetValue$V(config, 'choicesType', '').split('-');
+            var choicesType = GetValue$R(config, 'choicesType', '').split('-');
             var ButtonsClass = Contains$2(choicesType, 'wrap') ? Buttons :
                 Contains$2(choicesType, 'grid') ? GridButtons :
                     Buttons$1;
@@ -17606,25 +17606,25 @@ class Dialog extends Sizer {
                 Contains$2(choicesType, 'checkboxes') ? 'checkboxes' : undefined;
 
             var space = {
-                left: GetValue$V(config, 'space.choicesBackgroundLeft', 0),
-                right: GetValue$V(config, 'space.choicesBackgroundRight', 0),
-                top: GetValue$V(config, 'space.choicesBackgroundTop', 0),
-                bottom: GetValue$V(config, 'space.choicesBackgroundBottom', 0),
+                left: GetValue$R(config, 'space.choicesBackgroundLeft', 0),
+                right: GetValue$R(config, 'space.choicesBackgroundRight', 0),
+                top: GetValue$R(config, 'space.choicesBackgroundTop', 0),
+                bottom: GetValue$R(config, 'space.choicesBackgroundBottom', 0),
             };
-            var itemSpace = GetValue$V(config, 'space.choice', 0);
+            var itemSpace = GetValue$R(config, 'space.choice', 0);
             if (ButtonsClass === Buttons$1) {
                 space.item = itemSpace;
             } else if (ButtonsClass === Buttons) {
                 space.item = itemSpace;
-                space.line = GetValue$V(config, 'space.choiceLine', itemSpace);
+                space.line = GetValue$R(config, 'space.choiceLine', itemSpace);
             } else {  // GridButtons
-                space.column = GetValue$V(config, 'space.choiceColumn', itemSpace);
-                space.row = GetValue$V(config, 'space.choiceRow', itemSpace);
+                space.column = GetValue$R(config, 'space.choiceColumn', itemSpace);
+                space.row = GetValue$R(config, 'space.choiceRow', itemSpace);
             }
 
             var choicesConfig = {
-                width: GetValue$V(config, 'choicesWidth', undefined),
-                height: GetValue$V(config, 'choicesHeight', undefined),
+                width: GetValue$R(config, 'choicesWidth', undefined),
+                height: GetValue$R(config, 'choicesHeight', undefined),
                 groupName: 'choices',
                 buttonsType: buttonsType,
                 background: choicesBackground,
@@ -17632,8 +17632,8 @@ class Dialog extends Sizer {
                 space: space,
                 click: clickConfig,
                 eventEmitter: this.eventEmitter,
-                setValueCallback: GetValue$V(config, 'choicesSetValueCallback', undefined),
-                setValueCallbackScope: GetValue$V(config, 'choicesSetValueCallbackScope', undefined)
+                setValueCallback: GetValue$R(config, 'choicesSetValueCallback', undefined),
+                setValueCallbackScope: GetValue$R(config, 'choicesSetValueCallbackScope', undefined)
             };
 
             if (ButtonsClass === Buttons$1) {
@@ -17642,15 +17642,15 @@ class Dialog extends Sizer {
 
             choicesSizer = new ButtonsClass(scene, choicesConfig);
             scene.add.existing(choicesSizer);
-            var choicesSpace = GetValue$V(config, 'space.choices', 0);
+            var choicesSpace = GetValue$R(config, 'space.choices', 0);
             var padding = {
-                left: GetValue$V(config, 'space.choicesLeft', 0),
-                right: GetValue$V(config, 'space.choicesRight', 0),
+                left: GetValue$R(config, 'space.choicesLeft', 0),
+                right: GetValue$R(config, 'space.choicesRight', 0),
                 bottom: ((actions) ? choicesSpace : 0)
             };
-            var align = GetValue$V(config, 'align.choices', 'center');
-            var proportion = GetValue$V(config, 'proportion.choices', 0);
-            var expand = GetValue$V(config, 'expand.choices', true);
+            var align = GetValue$R(config, 'align.choices', 'center');
+            var proportion = GetValue$R(config, 'proportion.choices', 0);
+            var expand = GetValue$R(config, 'expand.choices', true);
             this.add(
                 choicesSizer,
                 { align: align, padding: padding, proportion: proportion, expand: expand }
@@ -17665,19 +17665,19 @@ class Dialog extends Sizer {
                 background: actionsBackground,
                 buttons: actions,
                 orientation: 0, // Left-right
-                space: { item: GetValue$V(config, 'space.action', 0) },
-                expand: GetValue$V(config, 'expand.actions', false),
-                align: GetValue$V(config, 'align.actions', 'center'),
+                space: { item: GetValue$R(config, 'space.action', 0) },
+                expand: GetValue$R(config, 'expand.actions', false),
+                align: GetValue$R(config, 'align.actions', 'center'),
                 click: clickConfig,
                 eventEmitter: this.eventEmitter,
             });
             scene.add.existing(actionsSizer);
             var padding = {
-                left: GetValue$V(config, 'space.actionsLeft', 0),
-                right: GetValue$V(config, 'space.actionsRight', 0),
-                bottom: GetValue$V(config, 'space.actionsBottom', 0),
+                left: GetValue$R(config, 'space.actionsLeft', 0),
+                right: GetValue$R(config, 'space.actionsRight', 0),
+                bottom: GetValue$R(config, 'space.actionsBottom', 0),
             };
-            var proportion = GetValue$V(config, 'proportion.action', 0);
+            var proportion = GetValue$R(config, 'proportion.action', 0);
             this.add(
                 actionsSizer,
                 { align: 'center', padding: padding, proportion: proportion, expand: true }
@@ -18545,11 +18545,11 @@ var RegisterFilter = function (game, FilterClass) {
     return true;
 };
 
-const FilterName$4 = 'FilterP3Circle';
+const FilterName$2 = 'FilterP3Circle';
 
 // Built-in fx in phaser3
 
-const frag$5 = `\
+const frag$2 = `\
 #pragma phaserTemplate(shaderName)
 
 #ifdef GL_FRAGMENT_PRECISION_HIGH
@@ -18614,10 +18614,10 @@ void main (void) {
 `;
 
 class CircleFilter extends Renderer$1.WebGL.RenderNodes.BaseFilterShader {
-    static FilterName = FilterName$4;
+    static FilterName = FilterName$2;
 
     constructor(manager) {
-        super(FilterName$4, manager, null, frag$5);
+        super(FilterName$2, manager, null, frag$2);
     }
 
     // This method sets up the uniforms for the shader.
@@ -18632,13 +18632,13 @@ class CircleFilter extends Renderer$1.WebGL.RenderNodes.BaseFilterShader {
 
 }
 
-const GetValue$U = Utils$3.Objects.GetValue;
+const GetValue$Q = Utils$3.Objects.GetValue;
 
 class CircleController extends Filters.Controller {
-    static FilterName = FilterName$4;
+    static FilterName = FilterName$2;
 
     constructor(camera, config) {
-        super(camera, FilterName$4);
+        super(camera, FilterName$2);
 
         this.thickness = 8;
         this.scale = 1;
@@ -18650,12 +18650,12 @@ class CircleController extends Filters.Controller {
     }
 
     resetFromJSON(o) {
-        this.setThickness(GetValue$U(o, 'thickness', 8));
-        this.setScale(GetValue$U(o, 'scale', 1));
-        this.setFeather(GetValue$U(o, 'feather', 0.005));
-        this.setColor(GetValue$U(o, 'color', 0xFF33B2));
-        this.setBackgroundColor(GetValue$U(o, 'backgroundColor', 0xFF0000));
-        this.setBackgroundAlpha(GetValue$U(o, 'backgroundAlpha', 0.4));
+        this.setThickness(GetValue$Q(o, 'thickness', 8));
+        this.setScale(GetValue$Q(o, 'scale', 1));
+        this.setFeather(GetValue$Q(o, 'feather', 0.005));
+        this.setColor(GetValue$Q(o, 'color', 0xFF33B2));
+        this.setBackgroundColor(GetValue$Q(o, 'backgroundColor', 0xFF0000));
+        this.setBackgroundAlpha(GetValue$Q(o, 'backgroundAlpha', 0.4));
 
         return this;
     }
@@ -19426,7 +19426,7 @@ var DataMethods = {
 
     getData(key, defaultValue) {
         this.enableData();
-        return (key === undefined) ? this.data : GetValue$1t(this.data, key, defaultValue);
+        return (key === undefined) ? this.data : GetValue$1p(this.data, key, defaultValue);
     },
 
     incData(key, inc, defaultValue) {
@@ -19721,7 +19721,7 @@ Object.assign(
 
 const DegToRad$3 = Math$1.DegToRad;
 const RadToDeg = Math$1.RadToDeg;
-const GetValue$T = Utils$3.Objects.GetValue;
+const GetValue$P = Utils$3.Objects.GetValue;
 
 class RenderBase extends Base {
     constructor(parent, type) {
@@ -19975,10 +19975,10 @@ class RenderBase extends Base {
         }
 
         // ScaleX, ScaleY
-        var width = GetValue$T(o, 'width', undefined);
-        var height = GetValue$T(o, 'height', undefined);
-        var scaleX = GetValue$T(o, 'scaleX', undefined);
-        var scaleY = GetValue$T(o, 'scaleY', undefined);
+        var width = GetValue$P(o, 'width', undefined);
+        var height = GetValue$P(o, 'height', undefined);
+        var scaleX = GetValue$P(o, 'scaleX', undefined);
+        var scaleY = GetValue$P(o, 'scaleY', undefined);
 
         if (width !== undefined) {
             if ((height === undefined) && (scaleY === undefined)) {
@@ -20113,7 +20113,7 @@ var GetProperty = function (name, config, defaultConfig) {
     }
 };
 
-const GetValue$S = Utils$3.Objects.GetValue;
+const GetValue$O = Utils$3.Objects.GetValue;
 
 let RoundRectangle$1 = class RoundRectangle {
     constructor(x, y, width, height, radiusConfig) {
@@ -20204,15 +20204,15 @@ let RoundRectangle$1 = class RoundRectangle {
             defaultRadiusX = value;
             defaultRadiusY = value;
         } else {
-            defaultRadiusX = GetValue$S(value, 'x', 0);
-            defaultRadiusY = GetValue$S(value, 'y', 0);
+            defaultRadiusX = GetValue$O(value, 'x', 0);
+            defaultRadiusY = GetValue$O(value, 'y', 0);
         }
 
         var radius = this.cornerRadius;
-        radius.tl = GetRadius(GetValue$S(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
-        radius.tr = GetRadius(GetValue$S(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
-        radius.bl = GetRadius(GetValue$S(value, 'bl', undefined), defaultRadiusX, defaultRadiusY);
-        radius.br = GetRadius(GetValue$S(value, 'br', undefined), defaultRadiusX, defaultRadiusY);
+        radius.tl = GetRadius(GetValue$O(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.tr = GetRadius(GetValue$O(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
+        radius.bl = GetRadius(GetValue$O(value, 'bl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.br = GetRadius(GetValue$O(value, 'br', undefined), defaultRadiusX, defaultRadiusY);
     }
 
     get radiusTL() {
@@ -20275,8 +20275,8 @@ var SetRadius = function (radius, value) {
         radius.x = value;
         radius.y = value;
     } else {
-        radius.x = GetValue$S(value, 'x', 0);
-        radius.y = GetValue$S(value, 'y', 0);
+        radius.x = GetValue$O(value, 'x', 0);
+        radius.y = GetValue$O(value, 'y', 0);
     }
 
     SetConvex(radius);
@@ -20500,7 +20500,7 @@ var DrawRoundRectangleBackground = function (
     );
 };
 
-const GetValue$R = Utils$3.Objects.GetValue;
+const GetValue$N = Utils$3.Objects.GetValue;
 
 class Background extends RenderBase {
     constructor(parent, config) {
@@ -20509,19 +20509,19 @@ class Background extends RenderBase {
         this.setScrollFactor(0);
 
         this.setColor(
-            GetValue$R(config, 'color', null),
-            GetValue$R(config, 'color2', null),
-            GetValue$R(config, 'horizontalGradient', true)
+            GetValue$N(config, 'color', null),
+            GetValue$N(config, 'color2', null),
+            GetValue$N(config, 'horizontalGradient', true)
         );
 
         this.setStroke(
-            GetValue$R(config, 'stroke', null),
-            GetValue$R(config, 'strokeThickness', 2)
+            GetValue$N(config, 'stroke', null),
+            GetValue$N(config, 'strokeThickness', 2)
         );
 
         this.setCornerRadius(
-            GetValue$R(config, 'cornerRadius', 0),
-            GetValue$R(config, 'cornerIteration', null)
+            GetValue$N(config, 'cornerRadius', 0),
+            GetValue$N(config, 'cornerIteration', null)
         );
     }
 
@@ -20665,7 +20665,7 @@ class Background extends RenderBase {
     }
 }
 
-const GetValue$Q = Utils$3.Objects.GetValue;
+const GetValue$M = Utils$3.Objects.GetValue;
 
 class InnerBounds extends RenderBase {
     constructor(parent, config) {
@@ -20674,14 +20674,14 @@ class InnerBounds extends RenderBase {
         this.setScrollFactor(0);
 
         this.setColor(
-            GetValue$Q(config, 'color', null),
-            GetValue$Q(config, 'color2', null),
-            GetValue$Q(config, 'horizontalGradient', true)
+            GetValue$M(config, 'color', null),
+            GetValue$M(config, 'color2', null),
+            GetValue$M(config, 'horizontalGradient', true)
         );
 
         this.setStroke(
-            GetValue$Q(config, 'stroke', null),
-            GetValue$Q(config, 'strokeThickness', 2)
+            GetValue$M(config, 'stroke', null),
+            GetValue$M(config, 'strokeThickness', 2)
         );
     }
 
@@ -20761,14 +20761,14 @@ class InnerBounds extends RenderBase {
         if (o.hasOwnProperty('color')) {
             this.setColor(
                 o.color,
-                GetValue$Q(o, 'color2', null),
-                GetValue$Q(o, 'horizontalGradient', true)
+                GetValue$M(o, 'color2', null),
+                GetValue$M(o, 'horizontalGradient', true)
             );
         }
         if (o.hasOwnProperty('stroke')) {
             this.setStroke(
                 o.stroke,
-                GetValue$Q(o, 'strokeThickness', 2)
+                GetValue$M(o, 'strokeThickness', 2)
             );
         }
     }
@@ -20808,7 +20808,7 @@ class InnerBounds extends RenderBase {
     }
 }
 
-const GetValue$P = Utils$3.Objects.GetValue;
+const GetValue$L = Utils$3.Objects.GetValue;
 
 let TextStyle$1 = class TextStyle {
     constructor(parent, config) {
@@ -20840,35 +20840,35 @@ let TextStyle$1 = class TextStyle {
     }
 
     set(o) {
-        this.setBold(GetValue$P(o, 'bold', false));
-        this.setItalic(GetValue$P(o, 'italic', false));
-        this.setFontSize(GetValue$P(o, 'fontSize', '16px'));
-        this.setFontFamily(GetValue$P(o, 'fontFamily', 'Courier'));
-        this.setColor(GetValue$P(o, 'color', '#fff'));
+        this.setBold(GetValue$L(o, 'bold', false));
+        this.setItalic(GetValue$L(o, 'italic', false));
+        this.setFontSize(GetValue$L(o, 'fontSize', '16px'));
+        this.setFontFamily(GetValue$L(o, 'fontFamily', 'Courier'));
+        this.setColor(GetValue$L(o, 'color', '#fff'));
         this.setStrokeStyle(
-            GetValue$P(o, 'stroke', null),
-            GetValue$P(o, 'strokeThickness', 0)
+            GetValue$L(o, 'stroke', null),
+            GetValue$L(o, 'strokeThickness', 0)
         );
         this.setShadow(
-            GetValue$P(o, 'shadowColor', null),
-            GetValue$P(o, 'shadowOffsetX', 0),
-            GetValue$P(o, 'shadowOffsetY', 0),
-            GetValue$P(o, 'shadowBlur', 0)
+            GetValue$L(o, 'shadowColor', null),
+            GetValue$L(o, 'shadowOffsetX', 0),
+            GetValue$L(o, 'shadowOffsetY', 0),
+            GetValue$L(o, 'shadowBlur', 0)
         );
         this.setOffset(
-            GetValue$P(o, 'offsetX', 0),
-            GetValue$P(o, 'offsetY', 0)
+            GetValue$L(o, 'offsetX', 0),
+            GetValue$L(o, 'offsetY', 0)
         );
         this.setSpace(
-            GetValue$P(o, 'leftSpace', 0),
-            GetValue$P(o, 'rightSpace', 0)
+            GetValue$L(o, 'leftSpace', 0),
+            GetValue$L(o, 'rightSpace', 0)
         );
-        this.setAlign(GetValue$P(o, 'align', undefined));
-        this.setBackgroundColor(GetValue$P(o, 'backgroundColor', null));
-        this.setBackgroundHeight(GetValue$P(o, 'backgroundHeight', undefined));
-        this.setBackgroundBottomY(GetValue$P(o, 'backgroundBottomY', undefined));
-        this.setBackgroundLeftX(GetValue$P(o, 'backgroundLeftX', 0));
-        this.setBackgroundRightX(GetValue$P(o, 'backgroundRightX', 0));
+        this.setAlign(GetValue$L(o, 'align', undefined));
+        this.setBackgroundColor(GetValue$L(o, 'backgroundColor', null));
+        this.setBackgroundHeight(GetValue$L(o, 'backgroundHeight', undefined));
+        this.setBackgroundBottomY(GetValue$L(o, 'backgroundBottomY', undefined));
+        this.setBackgroundLeftX(GetValue$L(o, 'backgroundLeftX', 0));
+        this.setBackgroundRightX(GetValue$L(o, 'backgroundRightX', 0));
 
         return this;
     }
@@ -22534,24 +22534,24 @@ var GetDefaultTextHeight = function () {
 
 var Result = {};
 
-const GetValue$O = Utils$3.Objects.GetValue;
+const GetValue$K = Utils$3.Objects.GetValue;
 
 var RunWordWrap$1 = function (config) {
     // Parse parameters
-    var startIndex = GetValue$O(config, 'start', 0);
+    var startIndex = GetValue$K(config, 'start', 0);
 
-    SetPadding$1(this.wrapPadding, GetValue$O(config, 'padding', 0));
+    SetPadding$1(this.wrapPadding, GetValue$K(config, 'padding', 0));
     var paddingVertical = this.padding.top + this.padding.bottom + this.wrapPadding.top + this.wrapPadding.bottom;
     var paddingHorizontal = this.padding.left + this.padding.right + this.wrapPadding.left + this.wrapPadding.right;
 
     // Get lineHeight, maxLines
-    var lineHeight = GetValue$O(config, 'lineHeight');
-    var ascent = GetValue$O(config, 'ascent', lineHeight);
+    var lineHeight = GetValue$K(config, 'lineHeight');
+    var ascent = GetValue$K(config, 'ascent', lineHeight);
     var maxLines;
     if (lineHeight === undefined) {
         // Calculate lineHeight
-        var useDefaultTextHeight = GetValue$O(config, 'useDefaultTextHeight', false);
-        maxLines = GetValue$O(config, 'maxLines', 0);
+        var useDefaultTextHeight = GetValue$K(config, 'useDefaultTextHeight', false);
+        maxLines = GetValue$K(config, 'maxLines', 0);
         if ((this.fixedHeight > 0) && (!useDefaultTextHeight)) {
             var innerHeight = this.fixedHeight - paddingVertical;
             if (maxLines > 0) {
@@ -22574,13 +22574,13 @@ var RunWordWrap$1 = function (config) {
         // Calculate maxLines
         if (this.fixedHeight > 0) {
             // Calculate maxLines via lineHeight, in fixedHeight mode
-            maxLines = GetValue$O(config, 'maxLines');
+            maxLines = GetValue$K(config, 'maxLines');
             if (maxLines === undefined) {
                 var innerHeight = this.fixedHeight - paddingVertical;
                 maxLines = Math.floor(innerHeight / lineHeight);
             }
         } else {
-            maxLines = GetValue$O(config, 'maxLines', 0); // Default is show all lines
+            maxLines = GetValue$K(config, 'maxLines', 0); // Default is show all lines
         }
 
     }
@@ -22592,9 +22592,9 @@ var RunWordWrap$1 = function (config) {
 
     var showAllLines = (maxLines === 0);
 
-    var wrapMode = GetValue$O(config, 'wrapMode');
+    var wrapMode = GetValue$K(config, 'wrapMode');
     if (wrapMode === undefined) {
-        var charWrap = GetValue$O(config, 'charWrap', false);
+        var charWrap = GetValue$K(config, 'charWrap', false);
         wrapMode = (charWrap) ? 'char' : 'word';
     }
     if (typeof (wrapMode) === 'string') {
@@ -22602,7 +22602,7 @@ var RunWordWrap$1 = function (config) {
     }
 
     // Get wrapWidth
-    var wrapWidth = GetValue$O(config, 'wrapWidth', undefined);
+    var wrapWidth = GetValue$K(config, 'wrapWidth', undefined);
     if (wrapWidth === undefined) {
         if (this.fixedWidth > 0) {
             wrapWidth = this.fixedWidth - paddingHorizontal;
@@ -22612,11 +22612,11 @@ var RunWordWrap$1 = function (config) {
         }
     }
 
-    var letterSpacing = GetValue$O(config, 'letterSpacing', 0);
+    var letterSpacing = GetValue$K(config, 'letterSpacing', 0);
 
-    var hAlign = GetValue$O(config, 'hAlign', 0);
-    var vAlign = GetValue$O(config, 'vAlign', 0);
-    var justifyPercentage = GetValue$O(config, 'justifyPercentage', 0.25);
+    var hAlign = GetValue$K(config, 'hAlign', 0);
+    var vAlign = GetValue$K(config, 'vAlign', 0);
+    var justifyPercentage = GetValue$K(config, 'justifyPercentage', 0.25);
 
     var result = CreateWrapResultData({
         // Override properties
@@ -22816,21 +22816,21 @@ var AlignLines = function (result, width, height) {
     }
 };
 
-const GetValue$N = Utils$3.Objects.GetValue;
+const GetValue$J = Utils$3.Objects.GetValue;
 
 var RunVerticalWrap$1 = function (config) {
     // Parse parameters
-    var startIndex = GetValue$N(config, 'start', 0);
+    var startIndex = GetValue$J(config, 'start', 0);
 
-    SetPadding$1(this.wrapPadding, GetValue$N(config, 'padding', 0));
+    SetPadding$1(this.wrapPadding, GetValue$J(config, 'padding', 0));
     var paddingVertical = this.padding.top + this.padding.bottom + this.wrapPadding.top + this.wrapPadding.bottom;
     var paddingHorizontal = this.padding.left + this.padding.right + this.wrapPadding.left + this.wrapPadding.right;
 
-    var lineWidth = GetValue$N(config, 'lineWidth', undefined);
+    var lineWidth = GetValue$J(config, 'lineWidth', undefined);
     var maxLines;
     if (lineWidth === undefined) {
         // Calculate lineWidth via maxLines, in fixedWidth mode
-        maxLines = GetValue$N(config, 'maxLines', 0);
+        maxLines = GetValue$J(config, 'maxLines', 0);
         if (this.fixedWidth > 0) {
             var innerWidth = this.fixedWidth - paddingHorizontal;
             lineWidth = innerWidth / maxLines;
@@ -22840,22 +22840,22 @@ var RunVerticalWrap$1 = function (config) {
     } else {
         if (this.fixedWidth > 0) {
             // Calculate maxLines via lineWidth, in fixedWidth mode
-            maxLines = GetValue$N(config, 'maxLines', undefined);
+            maxLines = GetValue$J(config, 'maxLines', undefined);
             if (maxLines === undefined) {
                 var innerWidth = this.fixedWidth - paddingHorizontal;
                 maxLines = Math.floor(innerWidth / lineWidth) + 1;
             }
         } else {
-            maxLines = GetValue$N(config, 'maxLines', 0); // Default is show all lines
+            maxLines = GetValue$J(config, 'maxLines', 0); // Default is show all lines
         }
 
     }
     var showAllLines = (maxLines === 0);
 
     // Get fixedCharacterHeight
-    var fixedCharacterHeight = GetValue$N(config, 'fixedCharacterHeight', undefined);
+    var fixedCharacterHeight = GetValue$J(config, 'fixedCharacterHeight', undefined);
     if (fixedCharacterHeight === undefined) {
-        var charPerLine = GetValue$N(config, 'charPerLine', undefined);
+        var charPerLine = GetValue$J(config, 'charPerLine', undefined);
         if (charPerLine !== undefined) {
             var innerHeight = this.fixedHeight - paddingVertical;
             fixedCharacterHeight = Math.floor(innerHeight / charPerLine);
@@ -22863,7 +22863,7 @@ var RunVerticalWrap$1 = function (config) {
     }
 
     // Get wrapHeight
-    var wrapHeight = GetValue$N(config, 'wrapHeight', undefined);
+    var wrapHeight = GetValue$J(config, 'wrapHeight', undefined);
     if (wrapHeight === undefined) {
         if (this.fixedHeight > 0) {
             wrapHeight = this.fixedHeight - paddingVertical;
@@ -22872,11 +22872,11 @@ var RunVerticalWrap$1 = function (config) {
         }
     }
 
-    var letterSpacing = GetValue$N(config, 'letterSpacing', 0);
+    var letterSpacing = GetValue$J(config, 'letterSpacing', 0);
 
-    var rtl = GetValue$N(config, 'rtl', true);
-    var hAlign = GetValue$N(config, 'hAlign', rtl ? 2 : 0);
-    var vAlign = GetValue$N(config, 'vAlign', 0);
+    var rtl = GetValue$J(config, 'rtl', true);
+    var hAlign = GetValue$J(config, 'hAlign', rtl ? 2 : 0);
+    var vAlign = GetValue$J(config, 'vAlign', 0);
 
     var result = CreateWrapResultData({
         // Override properties
@@ -23009,12 +23009,12 @@ var RunVerticalWrap = function (config) {
     return RunVerticalWrap$1.call(this, Merge(config, this.wrapConfig));
 };
 
-const GetValue$M = Utils$3.Objects.GetValue;
+const GetValue$I = Utils$3.Objects.GetValue;
 
 var RunWrap = function (config) {
-    var wrapCallback = GetValue$M(this.wrapConfig, 'callback');
+    var wrapCallback = GetValue$I(this.wrapConfig, 'callback');
     if (!wrapCallback) {
-        wrapCallback = GetValue$M(config, 'callback', this.runWordWrap);
+        wrapCallback = GetValue$I(config, 'callback', this.runWordWrap);
     }
     if (typeof (wrapCallback) === 'string') {
         wrapCallback = this[wrapCallback];
@@ -23691,25 +23691,25 @@ class PoolManager {
 }
 
 const IsPlainObject$9 = Utils$3.Objects.IsPlainObject;
-const GetValue$L = Utils$3.Objects.GetValue;
+const GetValue$H = Utils$3.Objects.GetValue;
 
 class DynamicText extends Canvas {
     constructor(scene, x, y, fixedWidth, fixedHeight, resolution, config) {
         if (IsPlainObject$9(x)) {
             config = x;
-            x = GetValue$L(config, 'x', 0);
-            y = GetValue$L(config, 'y', 0);
-            fixedWidth = GetValue$L(config, 'width', 0);
-            fixedHeight = GetValue$L(config, 'height', 0);
-            resolution = GetValue$L(config, 'resolution', 1);
+            x = GetValue$H(config, 'x', 0);
+            y = GetValue$H(config, 'y', 0);
+            fixedWidth = GetValue$H(config, 'width', 0);
+            fixedHeight = GetValue$H(config, 'height', 0);
+            resolution = GetValue$H(config, 'resolution', 1);
         } else if (IsPlainObject$9(fixedWidth)) {
             config = fixedWidth;
-            fixedWidth = GetValue$L(config, 'width', 0);
-            fixedHeight = GetValue$L(config, 'height', 0);
-            resolution = GetValue$L(config, 'resolution', 1);
+            fixedWidth = GetValue$H(config, 'width', 0);
+            fixedHeight = GetValue$H(config, 'height', 0);
+            resolution = GetValue$H(config, 'resolution', 1);
         } else if (IsPlainObject$9(resolution)) {
             config = resolution;
-            resolution = GetValue$L(config, 'resolution', 1);
+            resolution = GetValue$H(config, 'resolution', 1);
         }
 
         var width = (fixedWidth === 0) ? 1 : fixedWidth;
@@ -23720,26 +23720,26 @@ class DynamicText extends Canvas {
         this.padding = SetPadding$1();
         this.wrapPadding = SetPadding$1();
 
-        var textStyleConfig = GetValue$L(config, 'style', undefined);
+        var textStyleConfig = GetValue$H(config, 'style', undefined);
         this.defaultTextStyle = new TextStyle$1(null, textStyleConfig);
         this.textStyle = this.defaultTextStyle.clone();
-        this.setTestString(GetValue$L(config, 'testString', '|MÉqgy'));
+        this.setTestString(GetValue$H(config, 'testString', '|MÉqgy'));
 
         this._textOX = 0;
         this._textOY = 0;
-        this.background = new Background(this, GetValue$L(config, 'background', undefined));
-        this.innerBounds = new InnerBounds(this, GetValue$L(config, 'innerBounds', undefined));
+        this.background = new Background(this, GetValue$H(config, 'background', undefined));
+        this.innerBounds = new InnerBounds(this, GetValue$H(config, 'innerBounds', undefined));
         this.children = [];
         this.lastAppendedChildren = [];
         this.lastOverChild = null;
         this.poolManager = new PoolManager(config);
 
         this.setFixedSize(fixedWidth, fixedHeight);
-        this.setPadding(GetValue$L(config, 'padding', 0));
-        this.setWrapConfig(GetValue$L(config, 'wrap', undefined));
-        this.setChildrenInteractiveEnable(GetValue$L(config, 'childrenInteractive', false));
+        this.setPadding(GetValue$H(config, 'padding', 0));
+        this.setWrapConfig(GetValue$H(config, 'wrap', undefined));
+        this.setChildrenInteractiveEnable(GetValue$H(config, 'childrenInteractive', false));
 
-        var text = GetValue$L(config, 'text', undefined);
+        var text = GetValue$H(config, 'text', undefined);
         if (text) {
             this.setText(text);
         }
@@ -23980,7 +23980,7 @@ var SetTextWidth = function (textObject, width, height) {
     style.update(false);
 };
 
-const GetValue$K = Utils$3.Objects.GetValue;
+const GetValue$G = Utils$3.Objects.GetValue;
 
 var FontSizeExpandText = function (textObject, config) {
     if (typeof (config) === 'number') {
@@ -23989,9 +23989,9 @@ var FontSizeExpandText = function (textObject, config) {
         };
     }
 
-    var minWidth = GetValue$K(config, 'minWidth', 0);
-    var minHeight = GetValue$K(config, 'minHeight', 0);
-    var fitHeight = GetValue$K(config, 'fitHeight', false);
+    var minWidth = GetValue$G(config, 'minWidth', 0);
+    var minHeight = GetValue$G(config, 'minHeight', 0);
+    var fitHeight = GetValue$G(config, 'fitHeight', false);
 
     textObject._minWidth = minWidth;
 
@@ -24038,7 +24038,7 @@ var FontSizeExpandText = function (textObject, config) {
     return textObject;
 };
 
-const GetValue$J = Utils$3.Objects.GetValue;
+const GetValue$F = Utils$3.Objects.GetValue;
 
 class Label extends LabelBase {
     constructor(scene, config) {
@@ -24051,14 +24051,14 @@ class Label extends LabelBase {
         this.type = 'rexLabel';
 
         // Add elements
-        var background = GetValue$J(config, 'background', undefined);
-        var icon = GetValue$J(config, 'icon', undefined);
-        var iconMask = GetValue$J(config, 'iconMask', undefined);
-        var text = GetValue$J(config, 'text', undefined);
-        var action = GetValue$J(config, 'action', undefined);
-        var actionMask = GetValue$J(config, 'actionMask', undefined);
+        var background = GetValue$F(config, 'background', undefined);
+        var icon = GetValue$F(config, 'icon', undefined);
+        var iconMask = GetValue$F(config, 'iconMask', undefined);
+        var text = GetValue$F(config, 'text', undefined);
+        var action = GetValue$F(config, 'action', undefined);
+        var actionMask = GetValue$F(config, 'actionMask', undefined);
         // Align
-        var align = GetValue$J(config, 'align', undefined); // undefined/left/top: no space
+        var align = GetValue$F(config, 'align', undefined); // undefined/left/top: no space
 
 
         if (background) {
@@ -24070,23 +24070,23 @@ class Label extends LabelBase {
             if (this.orientation === 0) {
                 if (text || action) {
                     padding = {
-                        right: GetValue$J(config, 'space.icon', 0),
-                        top: GetValue$J(config, 'space.iconTop', 0),
-                        bottom: GetValue$J(config, 'space.iconBottom', 0),
-                        left: GetValue$J(config, 'space.iconLeft', 0),
+                        right: GetValue$F(config, 'space.icon', 0),
+                        top: GetValue$F(config, 'space.iconTop', 0),
+                        bottom: GetValue$F(config, 'space.iconBottom', 0),
+                        left: GetValue$F(config, 'space.iconLeft', 0),
                     };
                 }
             } else {
                 if (text || action) {
                     padding = {
-                        bottom: GetValue$J(config, 'space.icon', 0),
-                        left: GetValue$J(config, 'space.iconLeft', 0),
-                        right: GetValue$J(config, 'space.iconRight', 0),
-                        top: GetValue$J(config, 'space.iconTop', 0),
+                        bottom: GetValue$F(config, 'space.icon', 0),
+                        left: GetValue$F(config, 'space.iconLeft', 0),
+                        right: GetValue$F(config, 'space.iconRight', 0),
+                        top: GetValue$F(config, 'space.iconTop', 0),
                     };
                 }
             }
-            var fitRatio = GetValue$J(config, 'squareFitIcon', false) ? 1 : 0;
+            var fitRatio = GetValue$F(config, 'squareFitIcon', false) ? 1 : 0;
 
             this.add(
                 icon,
@@ -24098,18 +24098,18 @@ class Label extends LabelBase {
             }
 
             if (!fitRatio) {
-                var iconSize = GetValue$J(config, 'iconSize', undefined);
+                var iconSize = GetValue$F(config, 'iconSize', undefined);
                 this.setIconSize(
-                    GetValue$J(config, 'iconWidth', iconSize),
-                    GetValue$J(config, 'iconHeight', iconSize)
+                    GetValue$F(config, 'iconWidth', iconSize),
+                    GetValue$F(config, 'iconHeight', iconSize)
                 );
             }
         }
 
 
         if (text) {
-            var wrapText = GetValue$J(config, 'wrapText', false);
-            var adjustTextFontSize = GetValue$J(config, 'adjustTextFontSize', false);
+            var wrapText = GetValue$F(config, 'wrapText', false);
+            var adjustTextFontSize = GetValue$F(config, 'adjustTextFontSize', false);
             if (wrapText) {
                 if (wrapText === true) {
                     wrapText = 'word';
@@ -24125,9 +24125,9 @@ class Label extends LabelBase {
 
             }
 
-            var textSpace = GetValue$J(config, 'space.text', 0);
-            var expandTextWidth = GetValue$J(config, 'expandTextWidth', false);
-            var expandTextHeight = GetValue$J(config, 'expandTextHeight', false);
+            var textSpace = GetValue$F(config, 'space.text', 0);
+            var expandTextWidth = GetValue$F(config, 'expandTextWidth', false);
+            var expandTextHeight = GetValue$F(config, 'expandTextHeight', false);
             var proportion, padding, expand, textAlign;
             var textAlign = (wrapText && IsBitmapTextGameObject(text)) ? 'left' : undefined;
             if (this.orientation === 0) {
@@ -24157,18 +24157,18 @@ class Label extends LabelBase {
             var padding;
             if (this.orientation === 0) {
                 padding = {
-                    top: GetValue$J(config, 'space.actionTop', 0),
-                    bottom: GetValue$J(config, 'space.actionBottom', 0),
-                    right: GetValue$J(config, 'space.actionRight', 0),
+                    top: GetValue$F(config, 'space.actionTop', 0),
+                    bottom: GetValue$F(config, 'space.actionBottom', 0),
+                    right: GetValue$F(config, 'space.actionRight', 0),
                 };
             } else {
                 padding = {
-                    left: GetValue$J(config, 'space.actionLeft', 0),
-                    right: GetValue$J(config, 'space.actionRight', 0),
-                    bottom: GetValue$J(config, 'space.actionBottom', 0),
+                    left: GetValue$F(config, 'space.actionLeft', 0),
+                    right: GetValue$F(config, 'space.actionRight', 0),
+                    bottom: GetValue$F(config, 'space.actionBottom', 0),
                 };
             }
-            var fitRatio = GetValue$J(config, 'squareFitAction', false) ? 1 : 0;
+            var fitRatio = GetValue$F(config, 'squareFitAction', false) ? 1 : 0;
             this.add(
                 action,
                 { proportion: 0, padding: padding, fitRatio: fitRatio }
@@ -24179,10 +24179,10 @@ class Label extends LabelBase {
             }
 
             if (!fitRatio) {
-                var actionSize = GetValue$J(config, 'actionSize');
+                var actionSize = GetValue$F(config, 'actionSize');
                 this.setActionSize(
-                    GetValue$J(config, 'actionWidth', actionSize),
-                    GetValue$J(config, 'actionHeight', actionSize)
+                    GetValue$F(config, 'actionWidth', actionSize),
+                    GetValue$F(config, 'actionHeight', actionSize)
                 );
             }
         }
@@ -25023,7 +25023,7 @@ var ArcTo = function (centerX, centerY, radiusX, radiusY, startAngle, endAngle, 
 };
 
 const IsPlainObject$8 = Utils$3.Objects.IsPlainObject;
-const GetValue$I = Utils$3.Objects.GetValue;
+const GetValue$E = Utils$3.Objects.GetValue;
 const Earcut$2 = Geom.Polygon.Earcut;
 
 class RoundRectangle extends PolygnBase {
@@ -25065,14 +25065,14 @@ class RoundRectangle extends PolygnBase {
         this.setShapeType(shapeType);
 
         if (this.shapeType === 0) {
-            var radius = GetValue$I(radiusConfig, 'radius', radiusConfig);
+            var radius = GetValue$E(radiusConfig, 'radius', radiusConfig);
             geom.setTo(0, 0, width, height, radius);
         } else {
             var radius = { x: (width / 2), y: (height / 2) };
             geom.setTo(0, 0, width, height, radius);
         }
 
-        this.setIteration(GetValue$I(radiusConfig, 'iteration', undefined));
+        this.setIteration(GetValue$E(radiusConfig, 'iteration', undefined));
         this.setPosition(x, y);
 
         this.setFillStyle(fillColor, fillAlpha);
@@ -25387,21 +25387,21 @@ var GetPartialData = function (obj, keys, out) {
     return out;
 };
 
-const GetValue$H = Utils$3.Objects.GetValue;
+const GetValue$D = Utils$3.Objects.GetValue;
 
 class StyleManager extends ComponentBase {
     constructor(gameObject, config) {
         super(gameObject, config);
         // this.parent = gameObject;
 
-        this.style = GetValue$H(config, 'style', this);
+        this.style = GetValue$D(config, 'style', this);
 
-        var propertiesMap = GetValue$H(config, 'propertiesMap');
+        var propertiesMap = GetValue$D(config, 'propertiesMap');
         this.activeStyle = ExtractStyle(config, 'active', propertiesMap);
         this.hoverStyle = ExtractStyle(config, 'hover', propertiesMap);
         this.disableStyle = ExtractStyle(config, 'disable', propertiesMap);
 
-        this.onModifyStyle = GetValue$H(config, 'onModifyStyle');
+        this.onModifyStyle = GetValue$D(config, 'onModifyStyle');
     }
 
     getStyle(keys) {
@@ -25916,24 +25916,24 @@ var EaseValueMethods = {
     },
 };
 
-const GetValue$G = Utils$3.Objects.GetValue;
+const GetValue$C = Utils$3.Objects.GetValue;
 const Clamp$6 = Math$1.Clamp;
 
 function ProgressBase (BaseClass) {
     class ProgressBase extends BaseClass {
         bootProgressBase(config) {
-            this.eventEmitter = GetValue$G(config, 'eventEmitter', this);
+            this.eventEmitter = GetValue$C(config, 'eventEmitter', this);
 
-            var callback = GetValue$G(config, 'valuechangeCallback', null);
+            var callback = GetValue$C(config, 'valuechangeCallback', null);
             if (callback !== null) {
-                var scope = GetValue$G(config, 'valuechangeCallbackScope', undefined);
+                var scope = GetValue$C(config, 'valuechangeCallbackScope', undefined);
                 this.eventEmitter.on('valuechange', callback, scope);
             }
 
             this
                 .setEaseValuePropName('value')
-                .setEaseValueDuration(GetValue$G(config, 'easeValue.duration', 0))
-                .setEaseValueFunction(GetValue$G(config, 'easeValue.ease', 'Linear'));
+                .setEaseValueDuration(GetValue$C(config, 'easeValue.duration', 0))
+                .setEaseValueFunction(GetValue$C(config, 'easeValue.ease', 'Linear'));
 
             return this;
         }
@@ -27325,7 +27325,7 @@ var BuildRectangle = function (lines, x0, y0, x1, y1, skewX) {
     return lines;
 };
 
-const GetValue$F = Utils$3.Objects.GetValue;
+const GetValue$B = Utils$3.Objects.GetValue;
 const IsPlainObject$7 = Utils$3.Objects.IsPlainObject;
 
 class LineProgress extends ProgressBase(BaseShapes) {
@@ -27369,13 +27369,13 @@ class LineProgress extends ProgressBase(BaseShapes) {
             .addShape((new Lines()).setName('bar'))
             .addShape((new Lines()).setName('trackStroke'));
 
-        this.setTrackColor(GetValue$F(config, 'trackColor', undefined));
+        this.setTrackColor(GetValue$B(config, 'trackColor', undefined));
         this.setBarColor(barColor);
-        this.setTrackStroke(GetValue$F(config, 'trackStrokeThickness', 2), GetValue$F(config, 'trackStrokeColor', undefined));
+        this.setTrackStroke(GetValue$B(config, 'trackStrokeThickness', 2), GetValue$B(config, 'trackStrokeColor', undefined));
 
-        this.setSkewX(GetValue$F(config, 'skewX', 0));
+        this.setSkewX(GetValue$B(config, 'skewX', 0));
 
-        this.setRTL(GetValue$F(config, 'rtl', false));
+        this.setRTL(GetValue$B(config, 'rtl', false));
 
         this.setValue(value);
     }
@@ -27840,310 +27840,11 @@ var AddBlockyProperties = function (gameObject) {
     return gameObject;
 };
 
-var AddFilterListMethod = function (name, callback) {
-    var FilterListComponent = GameObjects.Components.FilterList.prototype;
-    if (FilterListComponent[name]) {
-        return;
-    }
-
-    FilterListComponent[name] = callback;
-};
-
-const StepFilterName = 'FilterP3BloomStep';
-
-// Built-in fx in phaser3
-
-const frag$4 = `\
-#pragma phaserTemplate(shaderName)
-
-#ifdef GL_FRAGMENT_PRECISION_HIGH
-#define highmedp highp
-#else
-#define highmedp mediump
-#endif
-precision highmedp float;
-
-// Scene buffer
-uniform sampler2D uMainSampler; 
-varying vec2 outTexCoord;
-
-// Effect parameters
-uniform vec2 offset;
-uniform float strength;
-uniform vec3 color;
-
-#pragma phaserTemplate(fragmentHeader)
-
-void main (void) {
-    vec4 sum = texture2D(uMainSampler, outTexCoord) * 0.204164 * strength;
-
-    sum = sum + texture2D(uMainSampler, outTexCoord + offset * 1.407333) * 0.304005;
-    sum = sum + texture2D(uMainSampler, outTexCoord - offset * 1.407333) * 0.304005;
-    sum = sum + texture2D(uMainSampler, outTexCoord + offset * 3.294215) * 0.093913;
-    sum = sum + texture2D(uMainSampler, outTexCoord - offset * 3.294215) * 0.093913;
-
-    gl_FragColor = sum * vec4(color, 1);
-}
-`;
-
-class BloomStepFilter extends Renderer$1.WebGL.RenderNodes.BaseFilterShader {
-    static FilterName = StepFilterName;
-
-    constructor(manager) {
-        super(StepFilterName, manager, null, frag$4);
-    }
-
-    // This method sets up the uniforms for the shader.
-    setupUniforms(controller, drawingContext) {
-        const programManager = this.programManager;
-
-        var x = (2 / drawingContext.width) * controller.offsetX;
-        var y = (2 / drawingContext.height) * controller.offsetY;
-        programManager.setUniform('offset', [x, y]);
-
-        programManager.setUniform('strength', controller.strength);
-        programManager.setUniform('color', controller.glcolor);
-
-    }
-
-}
-
-const GetValue$E = Utils$3.Objects.GetValue;
-
-class BloomStepController extends Filters.Controller {
-    static FilterName = StepFilterName;
-
-    constructor(camera, config) {
-        super(camera, StepFilterName);
-
-        this.offsetX = 1;
-        this.offsetY = 1;
-        this.strength = 1;
-        this.glcolor = [1, 1, 1];
-
-        this.resetFromJSON(config);
-    }
-
-    resetFromJSON(o) {
-        this.setOffset(GetValue$E(o, 'offsetX', 1), GetValue$E(o, 'offsetY', 1));
-        this.setStrength(GetValue$E(o, 'strength', 1));
-        this.setColor(GetValue$E(o, 'color', 0xFFFFFF));
-
-        return this;
-    }
-
-    get color() {
-        var color = this.glcolor;
-
-        return (((color[0] * 255) << 16) + ((color[1] * 255) << 8) + (color[2] * 255 | 0));
-    }
-
-    set color(value) {
-        var color = this.glcolor;
-
-        color[0] = ((value >> 16) & 0xFF) / 255;
-        color[1] = ((value >> 8) & 0xFF) / 255;
-        color[2] = (value & 0xFF) / 255;
-    }
-
-    setOffset(x, y) {
-        this.offsetX = x;
-        this.offsetY = y;
-        return this;
-    }
-
-    setStrength(strength) {
-        this.strength = strength;
-        return this;
-    }
-
-    setColor(color) {
-        this.color = color;
-        return this;
-    }
-
-}
-
-const GetValue$D = Utils$3.Objects.GetValue;
-
-let BloomController$1 = class BloomController extends Filters.ParallelFilters {
-    constructor(camera, config) {
-        super(camera);
-
-        this.steps = 0;
-        this.offsetX = 1;
-        this.offsetY = 1;
-        this.blurStrength = 1;
-        this.color = 0xffffff;
-        this.strength = 1;
-
-        this.resetFromJSON(config);
-    }
-
-    resetFromJSON(o) {
-        this.setOffset(GetValue$D(o, 'offsetX', 1), GetValue$D(o, 'offsetY', 1));
-        this.setBlurStrength(GetValue$D(o, 'blurStrength', 1));
-        this.setColor(GetValue$D(o, 'color', 0xFFFFFF));
-        this.setStrength(GetValue$D(o, 'strength', 1));
-        this.setSteps(GetValue$D(o, 'steps', 4));
-
-        return this;
-    }
-
-    forEachController(callback, scope) {
-        this.top.list.forEach(callback, scope);
-    }
-
-    get steps() {
-        return this._steps;
-    }
-
-    set steps(value) {
-        if (this._steps === value) {
-            return;
-        }
-
-        var camera = this.camera;
-        if (this.steps < value) {
-            var filters = this.top;
-            var startIndex = this.steps * 2;
-            var stopIndex = value * 2;
-            for (var i = startIndex; i < stopIndex; i++) {
-                filters.add(new BloomStepController(camera));
-            }
-        } else { // this.steps > value
-            var filtersList = this.top.list;
-            var startIndex = this.steps * 2;
-            var stopIndex = value * 2;
-            for (var i = startIndex - 1; i >= stopIndex; i--) {
-                filtersList[i].destroy();
-            }
-            filtersList.length = stopIndex;
-        }
-
-        this._steps = value;
-
-        this.setOffset(this.offsetX, this.offsetY);
-        this.setBlurStrength(this.strength);
-        this.setColor(this.color);
-    }
-
-    setSteps(steps) {
-        this.steps = steps;
-        return this;
-    }
-
-    get offsetX() {
-        return this._offsetX;
-    }
-
-    set offsetX(value) {
-        this._offsetX = value;
-        this.forEachController(function (bloomStepController, i) {
-            bloomStepController.offsetX = (i % 2 === 0) ? value : 0;
-        });
-    }
-
-    get offsetY() {
-        return this._offsetY;
-    }
-
-    set offsetY(value) {
-        this._offsetY = value;
-        this.forEachController(function (bloomStepController, i) {
-            bloomStepController.offsetY = (i % 2 === 1) ? value : 0;
-        });
-    }
-
-    setOffset(x, y) {
-        this.offsetX = x;
-        this.offsetY = y;
-        return this;
-    }
-
-    get blurStrength() {
-        return this._blurStrength;
-    }
-
-    set blurStrength(value) {
-        this._blurStrength = value;
-        this.forEachController(function (bloomStepController) {
-            bloomStepController.strength = value;
-        });
-    }
-
-    setBlurStrength(blurStrength) {
-        this.blurStrength = blurStrength;
-        return this;
-    }
-
-    get color() {
-        return this._color;
-    }
-
-    set color(value) {
-        this._color = value;
-        this.forEachController(function (bloomStepController) {
-            bloomStepController.color = value;
-        });
-    }
-
-    setColor(color) {
-        this.color = color;
-        return this;
-    }
-
-    get strength() {
-        return this._strength;
-    }
-
-    set strength(value) {
-        this._strength = value;
-        this.blend.amount = value;
-    }
-
-    setStrength(strength) {
-        this.strength = strength;
-        return this;
-    }
-
-};
-
-var InstallBloomFX = function (game) {
-    game = GetGame(game);
-
-    var success = RegisterFilter(game, BloomStepFilter);
-    if (!success) {
-        return false;
-    }
-
-    AddFilterListMethod(
-        'addP3Bloom',
-        function (color, offsetX, offsetY, blurStrength, strength, steps) {
-            if (color === undefined) { color = 0xFFFFFF; }
-            if (offsetX === undefined) { offsetX = 1; }
-            if (offsetY === undefined) { offsetY = 1; }
-            if (blurStrength === undefined) { blurStrength = 1; }
-            if (strength === undefined) { strength = 1; }
-            if (steps === undefined) { steps = 4; }
-
-            return this.add(new BloomController$1(
-                this.camera,
-                { color, offsetX, offsetY, blurStrength, strength, steps }
-            ));
-        }
-    );
-
-    return true;
-};
-
 var AddBloomProperties = function (gameObject) {
     // Don't attach properties again
     if (HasProperty(gameObject, 'bloomColor')) {
         return gameObject;
     }
-
-    InstallBloomFX(gameObject);
 
     var filterList = GetFilterList(gameObject);
 
@@ -28153,6 +27854,29 @@ var AddBloomProperties = function (gameObject) {
         bloomBlurStrength = 1,
         bloomStrength = 1,
         bloomSteps = 4;
+
+    var AddBloomEffect = function () {
+        gameObject._bloom = Actions.AddEffectBloom(gameObject, {
+            useInternal: true,
+            blurRadius: Math.max(bloomOffsetX, bloomOffsetY),
+            blurSteps: bloomSteps,
+            blendAmount: bloomStrength
+        })[0];
+
+        gameObject._bloom.threshold.active = false;
+        gameObject._bloom.blur.x = bloomOffsetX;
+        gameObject._bloom.blur.y = bloomOffsetY;
+        gameObject._bloom.blur.strength = bloomBlurStrength;
+        gameObject._bloom.blur.color = bloomColor;
+    };
+
+    var RemoveBloomEffect = function () {
+        if (gameObject._bloom) {
+            filterList.remove(gameObject._bloom.parallelFilters);
+            gameObject._bloom = undefined;
+        }
+    };
+
     Object.defineProperty(gameObject, 'bloomColor', {
         get: function () {
             return bloomColor;
@@ -28165,16 +27889,13 @@ var AddBloomProperties = function (gameObject) {
             bloomColor = value;
 
             if ((bloomColor === null) || (bloomColor === false)) {
-                if (gameObject._bloom) {
-                    filterList.remove(gameObject._bloom);
-                    gameObject._bloom = undefined;
-                }
+                RemoveBloomEffect();
             } else {
                 if (!gameObject._bloom) {
-                    gameObject._bloom = filterList.addBloom(bloomColor, bloomOffsetX, bloomOffsetY, bloomBlurStrength, bloomStrength, bloomSteps);
+                    AddBloomEffect();
                 }
 
-                gameObject._bloom.color = bloomColor;
+                gameObject._bloom.blur.color = bloomColor;
             }
 
         },
@@ -28192,7 +27913,7 @@ var AddBloomProperties = function (gameObject) {
             bloomOffsetX = value;
 
             if (gameObject._bloom) {
-                gameObject._bloom.offsetX = bloomOffsetX;
+                gameObject._bloom.blur.x = bloomOffsetX;
             }
         },
     });
@@ -28209,7 +27930,7 @@ var AddBloomProperties = function (gameObject) {
             bloomOffsetY = value;
 
             if (gameObject._bloom) {
-                gameObject._bloom.offsetY = bloomOffsetY;
+                gameObject._bloom.blur.y = bloomOffsetY;
             }
         },
     });
@@ -28226,7 +27947,7 @@ var AddBloomProperties = function (gameObject) {
             bloomBlurStrength = value;
 
             if (gameObject._bloom) {
-                gameObject._bloom.blurStrength = bloomBlurStrength;
+                gameObject._bloom.blur.strength = bloomBlurStrength;
             }
         },
     });
@@ -28243,7 +27964,7 @@ var AddBloomProperties = function (gameObject) {
             bloomStrength = value;
 
             if (gameObject._bloom) {
-                gameObject._bloom.strength = bloomStrength;
+                gameObject._bloom.parallelFilters.blend.amount = bloomStrength;
             }
         },
     });
@@ -28260,7 +27981,7 @@ var AddBloomProperties = function (gameObject) {
             bloomSteps = value;
 
             if (gameObject._bloom) {
-                gameObject._bloom.steps = bloomSteps;
+                gameObject._bloom.blur.steps = bloomSteps;
             }
         },
     });
@@ -28493,6 +28214,15 @@ var AddBrightnessProperties = function (gameObject) {
 var AddBrownProperties = function (gameObject) {
     AddColorMatrixEffectPropertiesBase(gameObject, 'brown');
     return gameObject;
+};
+
+var AddFilterListMethod = function (name, callback) {
+    var FilterListComponent = GameObjects.Components.FilterList.prototype;
+    if (FilterListComponent[name]) {
+        return;
+    }
+
+    FilterListComponent[name] = callback;
 };
 
 var InstallCircleFX = function (game) {
@@ -28851,11 +28581,11 @@ var AddGlowProperties = function (gameObject) {
     return gameObject;
 };
 
-const FilterName$3 = 'FilterP3Gradient';
+const FilterName$1 = 'FilterP3Gradient';
 
 // Built-in fx in phaser3
 
-const frag$3 = `\
+const frag$1 = `\
 #pragma phaserTemplate(shaderName)
 
 #ifdef GL_FRAGMENT_PRECISION_HIGH
@@ -28917,10 +28647,10 @@ void main ()
 `;
 
 class GradientFilter extends Renderer$1.WebGL.RenderNodes.BaseFilterShader {
-    static FilterName = FilterName$3;
+    static FilterName = FilterName$1;
 
     constructor(manager) {
-        super(FilterName$3, manager, null, frag$3);
+        super(FilterName$1, manager, null, frag$1);
     }
 
     // This method sets up the uniforms for the shader.
@@ -28938,13 +28668,13 @@ class GradientFilter extends Renderer$1.WebGL.RenderNodes.BaseFilterShader {
 
 }
 
-const GetValue$C = Utils$3.Objects.GetValue;
+const GetValue$A = Utils$3.Objects.GetValue;
 
 class GradientController extends Filters.Controller {
-    static FilterName = FilterName$3;
+    static FilterName = FilterName$1;
 
     constructor(camera, config) {
-        super(camera, FilterName$3);
+        super(camera, FilterName$1);
 
         this.alpha = 0.2;
         this.fromX = 0;
@@ -28959,12 +28689,12 @@ class GradientController extends Filters.Controller {
     }
 
     resetFromJSON(o) {
-        this.setAlpha(GetValue$C(o, 'alpha', 0.2));
-        this.setFromPosition(GetValue$C(o, 'fromX', 0), GetValue$C(o, 'fromY', 0));
-        this.setToPosition(GetValue$C(o, 'toX', 0), GetValue$C(o, 'toY', 1));
-        this.setColor1(GetValue$C(o, 'color1', 0xff0000));
-        this.setColor2(GetValue$C(o, 'color2', 0x00ff00));
-        this.setSize(GetValue$C(o, 'size', 0));
+        this.setAlpha(GetValue$A(o, 'alpha', 0.2));
+        this.setFromPosition(GetValue$A(o, 'fromX', 0), GetValue$A(o, 'fromY', 0));
+        this.setToPosition(GetValue$A(o, 'toX', 0), GetValue$A(o, 'toY', 1));
+        this.setColor1(GetValue$A(o, 'color1', 0xff0000));
+        this.setColor2(GetValue$A(o, 'color2', 0x00ff00));
+        this.setSize(GetValue$A(o, 'size', 0));
 
         return this;
     }
@@ -29339,198 +29069,27 @@ var AddPolaroidProperties = function (gameObject) {
     return gameObject;
 };
 
-const FilterName$2 = 'FilterP3Wipe';
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2019 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
 
-// Built-in fx in phaser3
-
-const frag$2 = `\
-#pragma phaserTemplate(shaderName)
-
-#ifdef GL_FRAGMENT_PRECISION_HIGH
-#define highmedp highp
-#else
-#define highmedp mediump
-#endif
-precision highmedp float;
-
-// Scene buffer
-uniform sampler2D uMainSampler; 
-varying vec2 outTexCoord;
-
-// Effect parameters
-uniform vec4 config;
-uniform bool reveal;
-
-#pragma phaserTemplate(fragmentHeader)
-
-void main (void) {
-    vec2 uv = outTexCoord;
-
-    vec4 color0;
-    vec4 color1;
-
-    if (reveal) {
-        color0 = vec4(0);
-        color1 = texture2D(uMainSampler, uv);
-    } else {
-        color0 = texture2D(uMainSampler, uv);
-        color1 = vec4(0);
-    }
-
-    float distance = config.x;
-    float width = config.y;
-    float direction = config.z;
-    float axis = uv.x;
-
-    if (config.w == 1.0) {
-        axis = uv.y;
-    }
-
-    float adjust = mix(width, -width, distance);
-    float value = smoothstep(distance - width, distance + width, abs(direction - axis) + adjust);
-    gl_FragColor = mix(color1, color0, value);
-}
-`;
-
-class WarpFilter extends Renderer$1.WebGL.RenderNodes.BaseFilterShader {
-    static FilterName = FilterName$2;
-
-    constructor(manager) {
-        super(FilterName$2, manager, null, frag$2);
-    }
-
-    // This method sets up the uniforms for the shader.
-    setupUniforms(controller, drawingContext) {
-        const programManager = this.programManager;
-
-        programManager.setUniform('config', [controller.progress, controller.wipeWidth, controller.direction, controller.axis]);
-        programManager.setUniform('reveal', controller.reveal);
-    }
-
-}
-
-const GetValue$B = Utils$3.Objects.GetValue;
-const Clamp$5 = Math$1.Clamp;
-
-class WipeController extends Filters.Controller {
-    static FilterName = FilterName$2;
-
-    constructor(camera, config) {
-        super(camera, FilterName$2);
-
-        this.progress = 0;
-        this.wipeWidth = 0.1;
-        this.direction = 0;
-        this.axis = 0;
-        this.reveal = false;
-
-        this.resetFromJSON(config);
-    }
-
-    resetFromJSON(o) {
-        this.setProgress(GetValue$B(o, 'progress', 0));
-        this.setWipeWidth(GetValue$B(o, 'wipeWidth', 0.1));
-        this.setDirection(GetValue$B(o, 'direction', 0));
-        this.setAxis(GetValue$B(o, 'axis', 0));
-
-        var reveal = GetValue$B(o, 'reveal', undefined);
-        if (reveal === undefined) {
-            reveal = !GetValue$B(o, 'wipe', true);
-        }
-        if (reveal) {
-            this.enableRevealMode();
-        } else {
-            this.enableWipeMode();
-        }
-
-        return this;
-    }
-
-    get progress() {
-        return this._progress;
-    }
-
-    set progress(value) {
-        this._progress = Clamp$5(value, 0, 1);
-    }
-
-    setProgress(value) {
-        this.progress = value;
-        return this;
-    }
-
-    get wipeWidth() {
-        return this._wipeWidth;
-    }
-
-    set wipeWidth(value) {
-        this._wipeWidth = Clamp$5(value, 0, 1);
-    }
-
-    setWipeWidth(wipeWidth) {
-        this.wipeWidth = wipeWidth;
-        return this;
-    }
-
-    setDirection(direction) {
-        this.direction = direction;
-        return this;
-    }
-
-    setAxis(axis) {
-        this.axis = axis;
-        return this;
-    }
-
-    enableWipeMode() {
-        this.reveal = false;
-        return this;
-    }
-
-    enableRevealMode() {
-        this.reveal = true;
-        return this;
-    }
-
-}
-
-var InstallWipeFX = function (game) {
-    game = GetGame(game);
-
-    var success = RegisterFilter(game, WarpFilter);
-    if (!success) {
-        return false;
-    }
-
-    AddFilterListMethod(
-        'addP3Wipe',
-        function (wipeWidth, direction, axis) {
-            if (wipeWidth === undefined) { wipeWidth = 0.1; }
-            if (direction === undefined) { direction = 0; }
-            if (axis === undefined) { axis = 0; }
-
-            return this.add(new WipeController(
-                this.camera,
-                { wipeWidth, direction, axis }
-            ));
-        }
-    );
-
-    AddFilterListMethod(
-        'addP3Reveal',
-        function (wipeWidth, direction, axis) {
-            if (wipeWidth === undefined) { wipeWidth = 0.1; }
-            if (direction === undefined) { direction = 0; }
-            if (axis === undefined) { axis = 0; }
-
-            return this.add(new WipeController(
-                this.camera,
-                { wipeWidth, direction, axis, reveal: true }
-            ));
-        }
-    );
-
-    return true;
+/**
+ * Force a value within the boundaries by clamping it to the range `min`, `max`.
+ *
+ * @function Phaser.Math.Clamp
+ * @since 3.0.0
+ *
+ * @param {number} value - The value to be clamped.
+ * @param {number} min - The minimum bounds.
+ * @param {number} max - The maximum bounds.
+ *
+ * @return {number} The clamped value.
+ */
+var Clamp$5 = function (value, min, max)
+{
+    return Math.max(min, Math.min(max, value));
 };
 
 var AddRevealProperties = function (gameObject) {
@@ -29538,8 +29097,6 @@ var AddRevealProperties = function (gameObject) {
     if (HasProperty(gameObject, 'revealLeft')) {
         return gameObject;
     }
-
-    InstallWipeFX(gameObject);
 
     var filterList = GetFilterList(gameObject);
 
@@ -29579,8 +29136,10 @@ var AddRevealProperties = function (gameObject) {
             if ((revealLeft === null) || (revealLeft === false)) {
                 RemoveEffect(gameObject);
             } else {
+                revealLeft = Clamp$5(revealLeft, 0, 1);
+
                 if (!gameObject._revealEffect) {
-                    gameObject._revealEffect = filterList.addP3Reveal(revealWidth, 0, 0);
+                    gameObject._revealEffect = filterList.addWipe(revealWidth, 0, 0, 1);
                 }
 
                 gameObject._revealEffect.direction = 1;
@@ -29607,8 +29166,10 @@ var AddRevealProperties = function (gameObject) {
             if ((revealRight === null) || (revealRight === false)) {
                 RemoveEffect(gameObject);
             } else {
+                revealRight = Clamp$5(revealRight, 0, 1);
+
                 if (!gameObject._revealEffect) {
-                    gameObject._revealEffect = filterList.addP3Reveal(revealWidth, 0, 0);
+                    gameObject._revealEffect = filterList.addWipe(revealWidth, 0, 0, 1);
                 }
                 gameObject._revealEffect.direction = 0;
                 gameObject._revealEffect.axis = 0;
@@ -29634,8 +29195,10 @@ var AddRevealProperties = function (gameObject) {
             if ((revealUp === null) || (revealUp === false)) {
                 RemoveEffect(gameObject);
             } else {
+                revealUp = Clamp$5(revealUp, 0, 1);
+
                 if (!gameObject._revealEffect) {
-                    gameObject._revealEffect = filterList.addP3Reveal(revealWidth, 0, 0);
+                    gameObject._revealEffect = filterList.addWipe(revealWidth, 0, 0, 1);
                 }
                 gameObject._revealEffect.direction = 1;
                 gameObject._revealEffect.axis = 1;
@@ -29661,8 +29224,10 @@ var AddRevealProperties = function (gameObject) {
             if ((revealDown === null) || (revealDown === false)) {
                 RemoveEffect(gameObject);
             } else {
+                revealDown = Clamp$5(revealDown, 0, 1);
+
                 if (!gameObject._revealEffect) {
-                    gameObject._revealEffect = filterList.addP3Reveal(revealWidth, 0, 0);
+                    gameObject._revealEffect = filterList.addWipe(revealWidth, 0, 0, 1);
                 }
                 gameObject._revealEffect.direction = 0;
                 gameObject._revealEffect.axis = 1;
@@ -29681,7 +29246,7 @@ var AddRevealProperties = function (gameObject) {
                 return;
             }
 
-            revealWidth = value;
+            revealWidth = Clamp$5(value, 0, 1);
 
             if (gameObject._revealEffect) {
                 gameObject._revealEffect.wipeWidth = revealWidth;
@@ -29867,11 +29432,11 @@ var AddShiftToBGRProperties = function (gameObject) {
     return gameObject;
 };
 
-const FilterName$1 = 'FilterP3Shine';
+const FilterName = 'FilterP3Shine';
 
 // Built-in fx in phaser3
 
-const frag$1 = `\
+const frag = `\
 #pragma phaserTemplate(shaderName)
 
 #ifdef GL_FRAGMENT_PRECISION_HIGH
@@ -29933,10 +29498,10 @@ var GetCurrentTime = function (scene, prevTime) {
 };
 
 class ShineFilter extends Renderer$1.WebGL.RenderNodes.BaseFilterShader {
-    static FilterName = FilterName$1;
+    static FilterName = FilterName;
 
     constructor(manager) {
-        super(FilterName$1, manager, null, frag$1);
+        super(FilterName, manager, null, frag);
     }
 
     // This method sets up the uniforms for the shader.
@@ -29951,13 +29516,13 @@ class ShineFilter extends Renderer$1.WebGL.RenderNodes.BaseFilterShader {
 
 }
 
-const GetValue$A = Utils$3.Objects.GetValue;
+const GetValue$z = Utils$3.Objects.GetValue;
 
 class ShineController extends Filters.Controller {
-    static FilterName = FilterName$1;
+    static FilterName = FilterName;
 
     constructor(camera, config) {
-        super(camera, FilterName$1);
+        super(camera, FilterName);
 
         this.now = 0;
 
@@ -29970,10 +29535,10 @@ class ShineController extends Filters.Controller {
     }
 
     resetFromJSON(o) {
-        this.setSpeed(GetValue$A(o, 'speed', 0.5));
-        this.setLineWidth(GetValue$A(o, 'lineWidth', 0.5));
-        this.setGradient(GetValue$A(o, 'gradient', 3));
-        this.setReveal(GetValue$A(o, 'reveal', false));
+        this.setSpeed(GetValue$z(o, 'speed', 0.5));
+        this.setLineWidth(GetValue$z(o, 'lineWidth', 0.5));
+        this.setGradient(GetValue$z(o, 'gradient', 3));
+        this.setReveal(GetValue$z(o, 'reveal', false));
 
         return this;
     }
@@ -30244,142 +29809,11 @@ var AddTiltShiftProperties = function (gameObject) {
     return gameObject;
 };
 
-const FilterName = 'FilterP3Vignette';
-
-// Built-in fx in phaser3
-
-const frag = `\
-#pragma phaserTemplate(shaderName)
-
-#ifdef GL_FRAGMENT_PRECISION_HIGH
-#define highmedp highp
-#else
-#define highmedp mediump
-#endif
-precision highmedp float;
-
-// Scene buffer
-uniform sampler2D uMainSampler; 
-varying vec2 outTexCoord;
-
-// Effect parameters
-uniform vec2 config;
-uniform vec2 position;
-
-#pragma phaserTemplate(fragmentHeader)
-
-void main (void) {
-    float radius = config.x;
-    float strength = config.y;
-
-    vec4 col = vec4(1.0);
-
-    float d = length(outTexCoord - position);
-
-    if (d <= radius)
-    {
-        float g = d / radius;
-        g = sin(g * 3.14 * strength);
-    	col = vec4(g * g * g);
-    }
-
-    vec4 texture = texture2D(uMainSampler, outTexCoord);
-
-    gl_FragColor = texture * (1.0 - col);
-}
-`;
-
-class VignetteFilter extends Renderer$1.WebGL.RenderNodes.BaseFilterShader {
-    static FilterName = FilterName;
-
-    constructor(manager) {
-        super(FilterName, manager, null, frag);
-    }
-
-    // This method sets up the uniforms for the shader.
-    setupUniforms(controller, drawingContext) {
-        const programManager = this.programManager;
-
-        programManager.setUniform('config', [controller.radius, controller.strength]);
-        programManager.setUniform('position', [controller.x, controller.y]);
-    }
-
-}
-
-const GetValue$z = Utils$3.Objects.GetValue;
-
-class VignetteController extends Filters.Controller {
-    static FilterName = FilterName;
-
-    constructor(camera, config) {
-        super(camera, FilterName);
-
-        this.x = 0.5;
-        this.y = 0.5;
-        this.radius = 0.5;
-        this.strength = 0.5;
-
-        this.resetFromJSON(config);
-    }
-
-    resetFromJSON(o) {
-        this.setPosition(GetValue$z(o, 'x', 0.5), GetValue$z(o, 'y', 0.5));
-        this.setRadius(GetValue$z(o, 'radius', 0.5));
-        this.setStrength(GetValue$z(o, 'strength', 0.5));
-
-        return this;
-    }
-
-    setPosition(x, y) {
-        this.x = x;
-        this.y = y;
-        return this;
-    }
-
-    setRadius(radius) {
-        this.radius = radius;
-        return this;
-    }
-
-    setStrength(strength) {
-        this.strength = strength;
-        return this;
-    }
-}
-
-var InstallVignetteFX = function (game) {
-    game = GetGame(game);
-
-    var success = RegisterFilter(game, VignetteFilter);
-    if (!success) {
-        return false;
-    }
-
-    AddFilterListMethod(
-        'addP3Vignette',
-        function (x, y, radius, strength) {
-            if (x === undefined) { x = 0.5; }
-            if (y === undefined) { y = 0.5; }
-            if (radius === undefined) { radius = 0.5; }
-            if (strength === undefined) { strength = 0.5; }
-
-            return this.add(new VignetteController(
-                this.camera,
-                { x, y, radius, strength }
-            ));
-        }
-    );
-
-    return true;
-};
-
 var AddVignetteProperties = function (gameObject) {
     // Don't attach properties again
     if (HasProperty(gameObject, 'vignetteRadius')) {
         return gameObject;
     }
-
-    InstallVignetteFX(gameObject);
 
     var filterList = GetFilterList(gameObject);
 
@@ -30405,7 +29839,7 @@ var AddVignetteProperties = function (gameObject) {
                 }
             } else {
                 if (!gameObject._vignette) {
-                    gameObject._vignette = filterList.addP3Vignette(vignetteX, vignetteY, vignetteRadius, vignetteStrength);
+                    gameObject._vignette = filterList.addVignette(vignetteX, 1 - vignetteY, vignetteRadius, vignetteStrength);
                 }
 
                 gameObject._vignette.radius = vignetteRadius;
@@ -30443,7 +29877,7 @@ var AddVignetteProperties = function (gameObject) {
             vignetteY = value;
 
             if (gameObject._vignette) {
-                gameObject._vignette.y = vignetteY;
+                gameObject._vignette.y = 1 - vignetteY;
             }
         },
     });
@@ -30472,6 +29906,11 @@ var AddVignetteProperties = function (gameObject) {
     return gameObject;
 };
 
+/*
+Phaser 4's built-in Vignette filter uses a different falloff curve 
+from the Phaser 3 built-in FX shader.
+*/
+
 var AddVintagePinholeProperties = function (gameObject) {
     AddColorMatrixEffectPropertiesBase(gameObject, 'vintagePinhole');
     return gameObject;
@@ -30482,8 +29921,6 @@ var AddWipeProperties = function (gameObject) {
     if (HasProperty(gameObject, 'wipeLeft')) {
         return gameObject;
     }
-
-    InstallWipeFX(gameObject);
 
     var filterList = GetFilterList(gameObject);
 
@@ -30523,8 +29960,10 @@ var AddWipeProperties = function (gameObject) {
             if ((wipeLeft === null) || (wipeLeft === false)) {
                 RemoveEffect(gameObject);
             } else {
+                wipeLeft = Clamp$5(wipeLeft, 0, 1);
+
                 if (!gameObject._wipeEffect) {
-                    gameObject._wipeEffect = filterList.addP3Wipe(wipeWidth, 0, 0);
+                    gameObject._wipeEffect = filterList.addWipe(wipeWidth, 0, 0, 0);
                 }
 
                 gameObject._wipeEffect.direction = 1;
@@ -30551,8 +29990,10 @@ var AddWipeProperties = function (gameObject) {
             if ((wipeRight === null) || (wipeRight === false)) {
                 RemoveEffect(gameObject);
             } else {
+                wipeRight = Clamp$5(wipeRight, 0, 1);
+
                 if (!gameObject._wipeEffect) {
-                    gameObject._wipeEffect = filterList.addP3Wipe(wipeWidth, 0, 0);
+                    gameObject._wipeEffect = filterList.addWipe(wipeWidth, 0, 0, 0);
                 }
                 gameObject._wipeEffect.direction = 0;
                 gameObject._wipeEffect.axis = 0;
@@ -30578,8 +30019,10 @@ var AddWipeProperties = function (gameObject) {
             if ((wipeUp === null) || (wipeUp === false)) {
                 RemoveEffect(gameObject);
             } else {
+                wipeUp = Clamp$5(wipeUp, 0, 1);
+
                 if (!gameObject._wipeEffect) {
-                    gameObject._wipeEffect = filterList.addP3Wipe(wipeWidth, 0, 0);
+                    gameObject._wipeEffect = filterList.addWipe(wipeWidth, 0, 0, 0);
                 }
                 gameObject._wipeEffect.direction = 1;
                 gameObject._wipeEffect.axis = 1;
@@ -30605,8 +30048,10 @@ var AddWipeProperties = function (gameObject) {
             if ((wipeDown === null) || (wipeDown === false)) {
                 RemoveEffect(gameObject);
             } else {
+                wipeDown = Clamp$5(wipeDown, 0, 1);
+
                 if (!gameObject._wipeEffect) {
-                    gameObject._wipeEffect = filterList.addP3Wipe(wipeWidth, 0, 0);
+                    gameObject._wipeEffect = filterList.addWipe(wipeWidth, 0, 0, 0);
                 }
                 gameObject._wipeEffect.direction = 0;
                 gameObject._wipeEffect.axis = 1;
@@ -30625,7 +30070,7 @@ var AddWipeProperties = function (gameObject) {
                 return;
             }
 
-            wipeWidth = value;
+            wipeWidth = Clamp$5(value, 0, 1);
 
             if (gameObject._wipeEffect) {
                 gameObject._wipeEffect.wipeWidth = wipeWidth;

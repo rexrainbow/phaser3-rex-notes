@@ -1,40 +1,29 @@
 import {
     RevealLeft, RevealRight, RevealUp, RevealDown,
 } from './Const.js';
-
-import { WipeFilter, WipeController } from '../../../plugins/wipefilter.js';
-import RegisterFilter from '../../../plugins/utils/renderer/filterpluginbase/RegisterFilter.js';
-import AddController from '../../../plugins/utils/renderer/filterpluginbase/AddController.js';
-import RemoveController from '../../../plugins/utils/renderer/filterpluginbase/RemoveController.js';
+import GetFilterList from '../../../plugins/utils/renderer/filterpluginbase/GetFilterList.js';
 
 const WipeWidth = 0.1;
 const DirLeftToRight = 0;
-const DirTopToBottom = 0;
+const DirTopToBottom = 1;
 const DirRightToLeft = 1;
-const DirBottomToTop = 1;
+const DirBottomToTop = 0;
 const AxisX = 0;
 const AxisY = 1;
 
 var AddRevealModes = function (image) {
-    RegisterFilter(image.scene.game, WipeFilter);
-
     image
         .addTransitionMode(RevealRight, {
             ease: 'Linear', dir: 'in', mask: false,
 
             onStart: function (parent, currentImage, nextImage, t) {
-                nextImage.effect = AddController(nextImage, WipeController, {
-                    wipeWidth: WipeWidth,
-                    direction: DirLeftToRight,
-                    axis: AxisX,
-                    reveal: true,
-                });
+                nextImage.effect = GetFilterList(nextImage).addWipe(WipeWidth, DirLeftToRight, AxisX, 1);
             },
             onProgress: function (parent, currentImage, nextImage, t) {
                 nextImage.effect.progress = t;
             },
             onComplete: function (parent, currentImage, nextImage, t) {
-                RemoveController(nextImage, WipeController);
+                GetFilterList(nextImage).remove(nextImage.effect);
                 delete nextImage.effect;
             },
         })
@@ -42,18 +31,13 @@ var AddRevealModes = function (image) {
             ease: 'Linear', dir: 'in', mask: false,
 
             onStart: function (parent, currentImage, nextImage, t) {
-                nextImage.effect = AddController(nextImage, WipeController, {
-                    wipeWidth: WipeWidth,
-                    direction: DirRightToLeft,
-                    axis: AxisX,
-                    reveal: true,
-                });
+                nextImage.effect = GetFilterList(nextImage).addWipe(WipeWidth, DirRightToLeft, AxisX, 1);
             },
             onProgress: function (parent, currentImage, nextImage, t) {
                 nextImage.effect.progress = t;
             },
             onComplete: function (parent, currentImage, nextImage, t) {
-                RemoveController(nextImage, WipeController);
+                GetFilterList(nextImage).remove(nextImage.effect);
                 delete nextImage.effect;
             },
         })
@@ -61,18 +45,13 @@ var AddRevealModes = function (image) {
             ease: 'Linear', dir: 'in', mask: false,
 
             onStart: function (parent, currentImage, nextImage, t) {
-                nextImage.effect = AddController(nextImage, WipeController, {
-                    wipeWidth: WipeWidth,
-                    direction: DirTopToBottom,
-                    axis: AxisY,
-                    reveal: true,
-                });
+                nextImage.effect = GetFilterList(nextImage).addWipe(WipeWidth, DirTopToBottom, AxisY, 1);
             },
             onProgress: function (parent, currentImage, nextImage, t) {
                 nextImage.effect.progress = t;
             },
             onComplete: function (parent, currentImage, nextImage, t) {
-                RemoveController(nextImage, WipeController);
+                GetFilterList(nextImage).remove(nextImage.effect);
                 delete nextImage.effect;
             },
         })
@@ -80,18 +59,13 @@ var AddRevealModes = function (image) {
             ease: 'Linear', dir: 'in', mask: false,
 
             onStart: function (parent, currentImage, nextImage, t) {
-                nextImage.effect = AddController(nextImage, WipeController, {
-                    wipeWidth: WipeWidth,
-                    direction: DirBottomToTop,
-                    axis: AxisY,
-                    reveal: true,
-                });
+                nextImage.effect = GetFilterList(nextImage).addWipe(WipeWidth, DirBottomToTop, AxisY, 1);
             },
             onProgress: function (parent, currentImage, nextImage, t) {
                 nextImage.effect.progress = t;
             },
             onComplete: function (parent, currentImage, nextImage, t) {
-                RemoveController(nextImage, WipeController);
+                GetFilterList(nextImage).remove(nextImage.effect);
                 delete nextImage.effect;
             },
         })
