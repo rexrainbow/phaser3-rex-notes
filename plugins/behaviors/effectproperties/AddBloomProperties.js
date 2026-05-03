@@ -1,15 +1,13 @@
+import { Actions as PhaserActions } from 'phaser';
 import HasProperty from '../../utils/object/HasProperty.js';
 import GetFilterList from '../../utils/renderer/filterpluginbase/GetFilterList.js';
 import AddClearEffectCallback from './AddClearEffectCallback.js';
-import InstallBloomFX from '../../shaders/p3fx/InstallBloomFX.js';
 
 var AddBloomProperties = function (gameObject) {
     // Don't attach properties again
     if (HasProperty(gameObject, 'bloomColor')) {
         return gameObject;
     }
-
-    InstallBloomFX(gameObject);
 
     var filterList = GetFilterList(gameObject);
 
@@ -19,6 +17,29 @@ var AddBloomProperties = function (gameObject) {
         bloomBlurStrength = 1,
         bloomStrength = 1,
         bloomSteps = 4;
+
+    var AddBloomEffect = function () {
+        gameObject._bloom = PhaserActions.AddEffectBloom(gameObject, {
+            useInternal: true,
+            blurRadius: Math.max(bloomOffsetX, bloomOffsetY),
+            blurSteps: bloomSteps,
+            blendAmount: bloomStrength
+        })[0];
+
+        gameObject._bloom.threshold.active = false;
+        gameObject._bloom.blur.x = bloomOffsetX;
+        gameObject._bloom.blur.y = bloomOffsetY;
+        gameObject._bloom.blur.strength = bloomBlurStrength;
+        gameObject._bloom.blur.color = bloomColor;
+    }
+
+    var RemoveBloomEffect = function () {
+        if (gameObject._bloom) {
+            filterList.remove(gameObject._bloom.parallelFilters);
+            gameObject._bloom = undefined;
+        }
+    }
+
     Object.defineProperty(gameObject, 'bloomColor', {
         get: function () {
             return bloomColor;
@@ -31,16 +52,13 @@ var AddBloomProperties = function (gameObject) {
             bloomColor = value;
 
             if ((bloomColor === null) || (bloomColor === false)) {
-                if (gameObject._bloom) {
-                    filterList.remove(gameObject._bloom);
-                    gameObject._bloom = undefined;
-                }
+                RemoveBloomEffect();
             } else {
                 if (!gameObject._bloom) {
-                    gameObject._bloom = filterList.addBloom(bloomColor, bloomOffsetX, bloomOffsetY, bloomBlurStrength, bloomStrength, bloomSteps);
+                    AddBloomEffect();
                 }
 
-                gameObject._bloom.color = bloomColor;
+                gameObject._bloom.blur.color = bloomColor;
             }
 
         },
@@ -58,8 +76,7 @@ var AddBloomProperties = function (gameObject) {
             bloomOffsetX = value;
 
             if (gameObject._bloom) {
-                var offset = Math.max(bloomOffsetX, bloomOffsetY);                
-                gameObject._bloom.offsetX = bloomOffsetX;
+                gameObject._bloom.blur.x = bloomOffsetX;
             }
         },
     })
@@ -76,8 +93,7 @@ var AddBloomProperties = function (gameObject) {
             bloomOffsetY = value;
 
             if (gameObject._bloom) {
-                var offset = Math.max(bloomOffsetX, bloomOffsetY);
-                gameObject._bloom.offsetY = bloomOffsetY;
+                gameObject._bloom.blur.y = bloomOffsetY;
             }
         },
     })
@@ -94,7 +110,7 @@ var AddBloomProperties = function (gameObject) {
             bloomBlurStrength = value;
 
             if (gameObject._bloom) {
-                gameObject._bloom.blurStrength = bloomBlurStrength;
+                gameObject._bloom.blur.strength = bloomBlurStrength;
             }
         },
     })
@@ -111,7 +127,7 @@ var AddBloomProperties = function (gameObject) {
             bloomStrength = value;
 
             if (gameObject._bloom) {
-                gameObject._bloom.strength = bloomStrength;
+                gameObject._bloom.parallelFilters.blend.amount = bloomStrength;
             }
         },
     })
@@ -128,7 +144,7 @@ var AddBloomProperties = function (gameObject) {
             bloomSteps = value;
 
             if (gameObject._bloom) {
-                gameObject._bloom.steps = bloomSteps;
+                gameObject._bloom.blur.steps = bloomSteps;
             }
         },
     })
@@ -140,4 +156,7 @@ var AddBloomProperties = function (gameObject) {
     return gameObject;
 }
 
+// phaser3 vs phaser4
+// Phaser 4's AddEffectBloom uses Threshold + Blur + ParallelFilters. The threshold
+// is disabled here to better match the Phaser 3 built-in FX bloom behavior.
 export default AddBloomProperties;

@@ -1,4 +1,3 @@
-import { BloomController } from './InstallBloomFX';
 import { CircleController } from './InstallCircleFX';
 import { GradientController } from './InstallGradientFX';
 import { ShineController } from './InstallShineFX';
@@ -14,5 +13,5 @@ declare function InstallP3FX(scene: Phaser.Scene | Phaser.Game): boolean;
 export default InstallP3FX;
 
 export {
-    BloomController, CircleController, GradientController, ShineController,
+    CircleController, GradientController, ShineController,
 }

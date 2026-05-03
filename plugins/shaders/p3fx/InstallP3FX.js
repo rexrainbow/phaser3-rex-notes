@@ -1,4 +1,3 @@
-import InstallBloomFX from './InstallBloomFX.js';
 import InstallCircleFX from './InstallCircleFX.js';
 import InstallGradientFX from './InstallGradientFX.js';
 import InstallShineFX from './InstallShineFX.js';
@@ -9,7 +8,6 @@ import { ShineController } from './InstallShineFX.js';
 
 
 var InstallCallbacks = [
-    InstallBloomFX,
     InstallCircleFX,
     InstallGradientFX,
     InstallShineFX,
@@ -26,5 +24,5 @@ var InstallP3FX = function (game) {
 export default InstallP3FX;
 
 export {
-    BloomController, CircleController, GradientController, ShineController, 
+    CircleController, GradientController, ShineController, 
 }
