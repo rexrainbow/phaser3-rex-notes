@@ -1,6 +1,6 @@
 ## Introduction
 
-Apply mask on game object.
+Apply mask on game object or camera.
 
 - Author: Phaser Team
 
