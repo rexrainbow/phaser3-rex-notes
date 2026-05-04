@@ -30,11 +30,11 @@ Rectangle shape covered full window.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import FullWindowRectanglePlugin from 'phaser3-rex-plugins/plugins/fullwindowrectangle-plugin.js';
+    import FullWindowRectanglePlugin from 'phaser4-rex-plugins/plugins/fullwindowrectangle-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Rectangle shape covered full window.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import FullWindowRectangle from 'phaser3-rex-plugins/plugins/fullwindowrectangle.js';
+    import FullWindowRectangle from 'phaser4-rex-plugins/plugins/fullwindowrectangle.js';
     ```
 - Add shape object
     ```javascript    

@@ -30,7 +30,7 @@ Drop down game object below another target game object.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Add drop-down behavior
     ```javascript
@@ -41,11 +41,11 @@ Drop down game object below another target game object.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import DropDownBehavior from 'phaser3-rex-plugins/plugins/dropdown.js';
+    import DropDownBehavior from 'phaser4-rex-plugins/plugins/dropdown.js';
     ```
 - Add drop-down behavior
     ```javascript

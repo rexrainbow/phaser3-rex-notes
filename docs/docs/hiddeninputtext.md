@@ -37,11 +37,11 @@ Inspirited from [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canv
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import HiddenInputTextPlugin from 'phaser3-rex-plugins/plugins/hiddeninputtext-plugin.js';
+    import HiddenInputTextPlugin from 'phaser4-rex-plugins/plugins/hiddeninputtext-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -66,11 +66,11 @@ Inspirited from [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canv
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import HiddenInputText from 'phaser3-rex-plugins/plugins/hiddeninputtext.js';
+    import HiddenInputText from 'phaser4-rex-plugins/plugins/hiddeninputtext.js';
     ```
 - Add text-edit behavior
     ```javascript    

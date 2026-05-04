@@ -30,11 +30,11 @@ Restorable data manager, extends from [built-in data manager](datamanager.md).
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import RestorableDataPlugin from 'phaser3-rex-plugins/plugins/restorabledata-plugin.js';
+    import RestorableDataPlugin from 'phaser4-rex-plugins/plugins/restorabledata-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Restorable data manager, extends from [built-in data manager](datamanager.md).
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import RestorableData from 'phaser3-rex-plugins/plugins/restorabledata.js';
+    import RestorableData from 'phaser4-rex-plugins/plugins/restorabledata.js';
     ```
 - Add restorable data object
     ```javascript

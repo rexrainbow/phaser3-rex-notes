@@ -31,11 +31,11 @@ Circular progress bar shape.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import CircularProgressPlugin from 'phaser3-rex-plugins/plugins/circularprogress-plugin.js';
+    import CircularProgressPlugin from 'phaser4-rex-plugins/plugins/circularprogress-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -60,11 +60,11 @@ Circular progress bar shape.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import CircularProgress from 'phaser3-rex-plugins/plugins/circularprogress.js';
+    import CircularProgress from 'phaser4-rex-plugins/plugins/circularprogress.js';
     ```
 - Add circular-progress object
     ```javascript

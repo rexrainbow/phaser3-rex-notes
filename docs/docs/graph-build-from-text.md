@@ -34,11 +34,11 @@ Create node and edge game objects from text.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import GraphPlugin from 'phaser3-rex-plugins/plugins/graph-plugin.js';
+    import GraphPlugin from 'phaser4-rex-plugins/plugins/graph-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -67,11 +67,11 @@ Create node and edge game objects from text.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import { Graph, BuildGraphFromText } from 'phaser3-rex-plugins/plugins/graph-components.js';
+    import { Graph, BuildGraphFromText } from 'phaser4-rex-plugins/plugins/graph-components.js';
     ```
 - Add graph object
     ```javascript

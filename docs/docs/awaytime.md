@@ -26,11 +26,11 @@ Get time from previous closing application to now.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import AwayTimePlugin from 'phaser3-rex-plugins/plugins/awaytime-plugin.js';
+    import AwayTimePlugin from 'phaser4-rex-plugins/plugins/awaytime-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -55,11 +55,11 @@ Get time from previous closing application to now.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import AwayTime from 'phaser3-rex-plugins/plugins/awaytime.js';
+    import AwayTime from 'phaser4-rex-plugins/plugins/awaytime.js';
     ```
 - Get away-time
     ```javascript

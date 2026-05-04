@@ -35,11 +35,11 @@ Viewer of grid table, to manipulate game object of each visible cell.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import GridTablePlugin from 'phaser3-rex-plugins/plugins/gridtable-plugin.js';
+    import GridTablePlugin from 'phaser4-rex-plugins/plugins/gridtable-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -64,11 +64,11 @@ Viewer of grid table, to manipulate game object of each visible cell.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import GridTable from 'phaser3-rex-plugins/plugins/gridtable.js';
+    import GridTable from 'phaser4-rex-plugins/plugins/gridtable.js';
     ```
 - Add table object
     ```javascript    

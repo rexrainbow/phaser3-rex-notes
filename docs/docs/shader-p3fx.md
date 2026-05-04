@@ -43,11 +43,11 @@ Reintroduce unsupported fx effects from phaser3.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import P3FXPlugin from 'phaser3-rex-plugins/plugins/p3fx-plugin.js';
+    import P3FXPlugin from 'phaser4-rex-plugins/plugins/p3fx-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -80,11 +80,11 @@ Reintroduce unsupported fx effects from phaser3.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import filter and controller class
     ```javascript
-    import InstallP3Fx from 'phaser3-rex-plugins/plugins/p3fx.js';
+    import InstallP3Fx from 'phaser4-rex-plugins/plugins/p3fx.js';
 - Register effects
     ```js
     InstallP3Fx(scene);

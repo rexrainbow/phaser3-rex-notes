@@ -30,11 +30,11 @@ Map level value from experience value, by callback or a number array.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import LevelCounterPlugin from 'phaser3-rex-plugins/plugins/levelcounter-plugin.js';
+    import LevelCounterPlugin from 'phaser4-rex-plugins/plugins/levelcounter-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Map level value from experience value, by callback or a number array.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import LevelCounter from 'phaser3-rex-plugins/plugins/levelcounter.js';
+    import LevelCounter from 'phaser4-rex-plugins/plugins/levelcounter.js';
     ```
 - Add level-counter object
     ```javascript

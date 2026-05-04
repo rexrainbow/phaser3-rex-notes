@@ -31,11 +31,11 @@ Flipping game object to another face by scaling width/height.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import FlipPlugin from 'phaser3-rex-plugins/plugins/flip-plugin.js';
+    import FlipPlugin from 'phaser4-rex-plugins/plugins/flip-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -60,11 +60,11 @@ Flipping game object to another face by scaling width/height.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import Flip from 'phaser3-rex-plugins/plugins/flip.js';
+    import Flip from 'phaser4-rex-plugins/plugins/flip.js';
     ```
 - Add flip behavior
     ```javascript

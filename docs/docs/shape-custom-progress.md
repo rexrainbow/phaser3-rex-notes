@@ -36,11 +36,11 @@ Custom progress bar based on [custom-shapes](shape-custom-shapes.md).
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import CustomProgressPlugin from 'phaser3-rex-plugins/plugins/customprogress-plugin.js';
+    import CustomProgressPlugin from 'phaser4-rex-plugins/plugins/customprogress-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -65,11 +65,11 @@ Custom progress bar based on [custom-shapes](shape-custom-shapes.md).
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import CustomProgress from 'phaser3-rex-plugins/plugins/bbcodetext.js';
+    import CustomProgress from 'phaser4-rex-plugins/plugins/bbcodetext.js';
     ```
 - Add custom shapes object
     ```javascript

@@ -31,11 +31,11 @@ Get matched chess in lines, or neighbors grouping.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import BoardPlugin from 'phaser3-rex-plugins/plugins/board-plugin.js';
+    import BoardPlugin from 'phaser4-rex-plugins/plugins/board-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -60,11 +60,11 @@ Get matched chess in lines, or neighbors grouping.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import { Match } from 'phaser3-rex-plugins/plugins/board-components.js';
+    import { Match } from 'phaser4-rex-plugins/plugins/board-components.js';
     ```
 - Add match object
     ```javascript

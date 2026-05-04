@@ -50,11 +50,11 @@ Dissolve transition effect. ([Reference](https://github.com/ykob/glsl-dissolve/)
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import DissolveFilterPlugin from 'phaser3-rex-plugins/plugins/dissolvefilter-plugin.js';
+    import DissolveFilterPlugin from 'phaser4-rex-plugins/plugins/dissolvefilter-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -95,11 +95,11 @@ Dissolve transition effect. ([Reference](https://github.com/ykob/glsl-dissolve/)
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import filter and controller class
     ```javascript
-    import { DissolveFilter, DissolveController } from 'phaser3-rex-plugins/plugins/dissolvefilter.js';
+    import { DissolveFilter, DissolveController } from 'phaser4-rex-plugins/plugins/dissolvefilter.js';
     ```
 - Register effect
     ```js

@@ -42,11 +42,11 @@ Transit texture to another one. A [containerLite game object](containerlite.md) 
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import TransitionImagePlugin from 'phaser3-rex-plugins/plugins/transitionimage-plugin.js';
+    import TransitionImagePlugin from 'phaser4-rex-plugins/plugins/transitionimage-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -71,11 +71,11 @@ Transit texture to another one. A [containerLite game object](containerlite.md) 
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import TransitionImage from 'phaser3-rex-plugins/plugins/transitionimage.js';
+    import TransitionImage from 'phaser4-rex-plugins/plugins/transitionimage.js';
     ```
 - Add image object
     ```javascript    

@@ -30,11 +30,11 @@ Load a texture, then apply an alpha mask from another texture. Extended from [ca
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import AlphaMaskImagePlugin from 'phaser3-rex-plugins/plugins/alphamaskimage-plugin.js';
+    import AlphaMaskImagePlugin from 'phaser4-rex-plugins/plugins/alphamaskimage-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Load a texture, then apply an alpha mask from another texture. Extended from [ca
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import AlphaMaskImage from 'phaser3-rex-plugins/plugins/alphamaskimage.js';
+    import AlphaMaskImage from 'phaser4-rex-plugins/plugins/alphamaskimage.js';
     ```
 - Add alpha-mask-image object
     ```javascript    

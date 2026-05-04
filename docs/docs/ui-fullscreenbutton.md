@@ -30,11 +30,11 @@ A behavior attached to a game object that toggles fullscreen mode when the objec
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
+    import UIPlugin from 'phaser4-rex-plugins/templates/ui/ui-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ A behavior attached to a game object that toggles fullscreen mode when the objec
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import { FullscreenButton } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
+    import { FullscreenButton } from 'phaser4-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add fullscreen-button behavior
     ```javascript    

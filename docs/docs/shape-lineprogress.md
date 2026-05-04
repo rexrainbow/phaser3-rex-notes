@@ -30,11 +30,11 @@ Horizontal line progress bar shape.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import LineProgressPlugin from 'phaser3-rex-plugins/plugins/lineprogress-plugin.js';
+    import LineProgressPlugin from 'phaser4-rex-plugins/plugins/lineprogress-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Horizontal line progress bar shape.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import LineProgress from 'phaser3-rex-plugins/plugins/lineprogress.js';
+    import LineProgress from 'phaser4-rex-plugins/plugins/lineprogress.js';
     ```
 - Add line-progress object
     ```javascript

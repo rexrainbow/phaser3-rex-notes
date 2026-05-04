@@ -30,11 +30,11 @@
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import CoverPlugin from 'phaser3-rex-plugins/plugins/cover-plugin.js';
+    import CoverPlugin from 'phaser4-rex-plugins/plugins/cover-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import Cover from 'phaser3-rex-plugins/plugins/cover.js';
+    import Cover from 'phaser4-rex-plugins/plugins/cover.js';
     ```
 - Add cover object
     ```javascript    

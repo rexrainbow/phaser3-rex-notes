@@ -36,12 +36,12 @@ Flow control of [question manager](quest.md) with a [dialog](ui-dialog.md).
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
-    import DialogQuest from 'phaser3-rex-plugins/templates/dialog-quest/DialogQuest.js';
+    import UIPlugin from 'phaser4-rex-plugins/templates/ui/ui-plugin.js';
+    import DialogQuest from 'phaser4-rex-plugins/templates/dialog-quest/DialogQuest.js';
     var config = {
         // ...
         plugins: {
@@ -70,12 +70,12 @@ Flow control of [question manager](quest.md) with a [dialog](ui-dialog.md).
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import { Dialog } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
-    import DialogQuest from 'phaser3-rex-plugins/templates/dialog-quest/DialogQuest.js';
+    import { Dialog } from 'phaser4-rex-plugins/templates/ui/ui-components.js';
+    import DialogQuest from 'phaser4-rex-plugins/templates/dialog-quest/DialogQuest.js';
     ```
 - Add dialog object
     ```javascript    

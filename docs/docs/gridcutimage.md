@@ -31,11 +31,11 @@ Grid cut image texture to frames, then create image game objects from these fram
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import GridCutImagePlugin from 'phaser3-rex-plugins/plugins/gridcutimage-plugin.js';
+    import GridCutImagePlugin from 'phaser4-rex-plugins/plugins/gridcutimage-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -60,11 +60,11 @@ Grid cut image texture to frames, then create image game objects from these fram
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import method
     ```javascript
-    import GridCutImage from 'phaser3-rex-plugins/plugins/gridcutimage.js';
+    import GridCutImage from 'phaser4-rex-plugins/plugins/gridcutimage.js';
     ```
 - Create images
     ```javascript

@@ -51,11 +51,11 @@ Built-in [image loader](loader.md#image) dosen't support loading local image uri
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import ImageURILoaderPlugin from 'phaser3-rex-plugins/plugins/imageuriloader-plugin.js';
+    import ImageURILoaderPlugin from 'phaser4-rex-plugins/plugins/imageuriloader-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -80,11 +80,11 @@ Built-in [image loader](loader.md#image) dosen't support loading local image uri
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import ImageURILoader from 'phaser3-rex-plugins/plugins/imageuriloader.js';
+    import ImageURILoader from 'phaser4-rex-plugins/plugins/imageuriloader.js';
     ```
 - Start loading task
     ```javascript

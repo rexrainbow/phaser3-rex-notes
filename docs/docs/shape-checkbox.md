@@ -34,11 +34,11 @@ Checkbox [input](button.md) with drawing checker path animation.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import CheckboxPlugin from 'phaser3-rex-plugins/plugins/checkbox-plugin.js';
+    import CheckboxPlugin from 'phaser4-rex-plugins/plugins/checkbox-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -67,11 +67,11 @@ Checkbox [input](button.md) with drawing checker path animation.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import Checkbox from 'phaser3-rex-plugins/plugins/checkbox.js';
+    import Checkbox from 'phaser4-rex-plugins/plugins/checkbox.js';
     ```
 - Add checkbox input
     ```javascript    
@@ -80,7 +80,7 @@ Checkbox [input](button.md) with drawing checker path animation.
     ```
 - Add checkbox shape (without [click input](button.md))
     ```javascript
-    // import CheckboxShape from 'phaser3-rex-plugins/plugins/checkboxshape.js';
+    // import CheckboxShape from 'phaser4-rex-plugins/plugins/checkboxshape.js';
     var checkbox = new CheckboxShape(scene, x, y, width, height, color, config);
     scene.add.existing(checkbox);
     ```

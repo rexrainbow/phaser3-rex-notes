@@ -33,11 +33,11 @@ Attach `polarOX`, `polarOY`, `polarRotation`, `polarAngle`, and `polarRadius` pr
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import PolarCoordinatePlugin from 'phaser3-rex-plugins/plugins/polarcoordinate-plugin.js';
+    import PolarCoordinatePlugin from 'phaser4-rex-plugins/plugins/polarcoordinate-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -64,11 +64,11 @@ Attach `polarOX`, `polarOY`, `polarRotation`, `polarAngle`, and `polarRadius` pr
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import method
     ```javascript
-    import AddPolarCoordinateProperties from 'phaser3-rex-plugins/plugins/polarcoordinate.js';
+    import AddPolarCoordinateProperties from 'phaser4-rex-plugins/plugins/polarcoordinate.js';
     ```
 - Attach `polarOX`, `polarOY`, `polarRotation`, `polarAngle`, and `polarRadius` properties.
     ```javascript

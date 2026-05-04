@@ -30,11 +30,11 @@ Round rectangle on canvas.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import RoundRectanglePlugin from 'phaser3-rex-plugins/plugins/roundrectanglecanvas-plugin.js';
+    import RoundRectanglePlugin from 'phaser4-rex-plugins/plugins/roundrectanglecanvas-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Round rectangle on canvas.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import RoundRectangleCanvas from 'phaser3-rex-plugins/plugins/roundrectanglecanvas.js';
+    import RoundRectangleCanvas from 'phaser4-rex-plugins/plugins/roundrectanglecanvas.js';
     ```
 - Add shape object
     ```javascript    

@@ -31,11 +31,11 @@ Spiral curve.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import SpiralCurvePlugin from 'phaser3-rex-plugins/plugins/spiralcurve-plugin.js';
+    import SpiralCurvePlugin from 'phaser4-rex-plugins/plugins/spiralcurve-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -60,11 +60,11 @@ Spiral curve.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import SpiralCurve from 'phaser3-rex-plugins/plugins/spiralcurve.js';
+    import SpiralCurve from 'phaser4-rex-plugins/plugins/spiralcurve.js';
     ```
 - Add spiral curve object
     ```javascript

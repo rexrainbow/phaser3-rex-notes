@@ -26,11 +26,11 @@ Pick random item from box.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import GashaponPlugin from 'phaser3-rex-plugins/plugins/gashapon-plugin.js';
+    import GashaponPlugin from 'phaser4-rex-plugins/plugins/gashapon-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -55,11 +55,11 @@ Pick random item from box.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import Gashapon from 'phaser3-rex-plugins/plugins/gashapon.js';
+    import Gashapon from 'phaser4-rex-plugins/plugins/gashapon.js';
     ```
 - Add gashapon object
     ```javascript

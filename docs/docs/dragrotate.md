@@ -31,11 +31,11 @@ Get dragging angle around a specific point.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import DragRotatePlugin from 'phaser3-rex-plugins/plugins/dragrotate-plugin.js';
+    import DragRotatePlugin from 'phaser4-rex-plugins/plugins/dragrotate-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -60,11 +60,11 @@ Get dragging angle around a specific point.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import DragRotate from 'phaser3-rex-plugins/plugins/dragrotate.js';
+    import DragRotate from 'phaser4-rex-plugins/plugins/dragrotate.js';
     ```
 - Add drag-rotate input
     ```javascript

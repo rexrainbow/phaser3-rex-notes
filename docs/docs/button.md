@@ -26,11 +26,11 @@ Fires 'click' event when touch releasd after pressed.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import ButtonPlugin from 'phaser3-rex-plugins/plugins/button-plugin.js';
+    import ButtonPlugin from 'phaser4-rex-plugins/plugins/button-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -55,11 +55,11 @@ Fires 'click' event when touch releasd after pressed.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import Button from 'phaser3-rex-plugins/plugins/button.js';
+    import Button from 'phaser4-rex-plugins/plugins/button.js';
     ```
 - Add button behavior
     ```javascript

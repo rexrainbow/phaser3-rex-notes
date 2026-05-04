@@ -30,11 +30,11 @@ A container with left(top) panel, right(bottom) panel, splitter, and background.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
+    import UIPlugin from 'phaser4-rex-plugins/templates/ui/ui-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ A container with left(top) panel, right(bottom) panel, splitter, and background.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import { SplitPanels } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
+    import { SplitPanels } from 'phaser4-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add split-panels object
     ```javascript    

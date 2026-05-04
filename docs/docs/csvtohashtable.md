@@ -26,11 +26,11 @@ Hash table indexed by (col-key, row-key) from csv string.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import CsvToHashTablePlugin from 'phaser3-rex-plugins/plugins/csvtohashtable-plugin.js';
+    import CsvToHashTablePlugin from 'phaser4-rex-plugins/plugins/csvtohashtable-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -55,11 +55,11 @@ Hash table indexed by (col-key, row-key) from csv string.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import CsvToHashTable from 'phaser3-rex-plugins/plugins/csvtohashtable.js';
+    import CsvToHashTable from 'phaser4-rex-plugins/plugins/csvtohashtable.js';
     ```
 - Add hash-table object
     ```javascript

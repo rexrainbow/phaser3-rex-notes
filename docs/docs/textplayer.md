@@ -40,11 +40,11 @@ Typing characters on [dynamic text](textplayer.md), waiting click or key enter, 
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import TextPlayerPlugin from 'phaser3-rex-plugins/plugins/textplayer-plugin.js';
+    import TextPlayerPlugin from 'phaser4-rex-plugins/plugins/textplayer-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -69,11 +69,11 @@ Typing characters on [dynamic text](textplayer.md), waiting click or key enter, 
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import TextPlayer from 'phaser3-rex-plugins/plugins/textplayer.js';
+    import TextPlayer from 'phaser4-rex-plugins/plugins/textplayer.js';
     ```
 - Add text-player object
     ```javascript

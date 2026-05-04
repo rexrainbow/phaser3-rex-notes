@@ -35,11 +35,11 @@ Attach `tintR`, `tintG`, `tintB`, and `tintGray` properties to a game object.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import TintRGBPlugin from 'phaser3-rex-plugins/plugins/tintrgb-plugin.js';
+    import TintRGBPlugin from 'phaser4-rex-plugins/plugins/tintrgb-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -65,11 +65,11 @@ Attach `tintR`, `tintG`, `tintB`, and `tintGray` properties to a game object.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import method
     ```javascript
-    import AddTintRGBProperties from 'phaser3-rex-plugins/plugins/tintrgb.js';
+    import AddTintRGBProperties from 'phaser4-rex-plugins/plugins/tintrgb.js';
     ```
 - Attach `tintR`, `tintG`, `tintB`, and `tintGray` properties.
     ```javascript

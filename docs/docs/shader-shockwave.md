@@ -49,11 +49,11 @@ Shockwave post processing filter. [Reference](https://www.geeks3d.com/20091116/s
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import ShockwaveFilterPlugin from 'phaser3-rex-plugins/plugins/shockwavefilter-plugin.js';
+    import ShockwaveFilterPlugin from 'phaser4-rex-plugins/plugins/shockwavefilter-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -94,11 +94,11 @@ Shockwave post processing filter. [Reference](https://www.geeks3d.com/20091116/s
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import filter and controller class
     ```javascript
-    import { ShockwaveFilter, ShockwaveController } from 'phaser3-rex-plugins/plugins/shockwavefilter.js';
+    import { ShockwaveFilter, ShockwaveController } from 'phaser4-rex-plugins/plugins/shockwavefilter.js';
     ```
 - Register effect
     ```js

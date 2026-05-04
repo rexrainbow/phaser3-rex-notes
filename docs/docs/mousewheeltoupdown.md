@@ -26,11 +26,11 @@ Map mouse-wheeling to (up/down) cursor key state.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import MouseWheelToUpDownPlugin from 'phaser3-rex-plugins/plugins/mousewheeltoupdown-plugin.js';
+    import MouseWheelToUpDownPlugin from 'phaser4-rex-plugins/plugins/mousewheeltoupdown-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -55,11 +55,11 @@ Map mouse-wheeling to (up/down) cursor key state.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import MouseWheelToUpDown from 'phaser3-rex-plugins/plugins/mousewheeltoupdown.js';
+    import MouseWheelToUpDown from 'phaser4-rex-plugins/plugins/mousewheeltoupdown.js';
     ```
 - Add mouse-wheeling-to-cursor-key object
     ```javascript

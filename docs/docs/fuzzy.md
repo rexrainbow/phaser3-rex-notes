@@ -30,11 +30,11 @@ A wrap of [fuzzy logic](https://github.com/Mugen87/yuka/tree/master/src/fuzzy) (
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import GashaponPlugin from 'phaser3-rex-plugins/plugins/fuzzy-plugin.js';
+    import GashaponPlugin from 'phaser4-rex-plugins/plugins/fuzzy-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ A wrap of [fuzzy logic](https://github.com/Mugen87/yuka/tree/master/src/fuzzy) (
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import BuildFuzzyModule from 'phaser3-rex-plugins/plugins/fuzzy.js';
+    import BuildFuzzyModule from 'phaser4-rex-plugins/plugins/fuzzy.js';
     ```
 - Add fuzzy module object
     ```javascript

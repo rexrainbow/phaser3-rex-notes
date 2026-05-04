@@ -35,11 +35,11 @@ A container with an icon, ([typing](texttyping.md) and [paging](textpage.md)) te
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
+    import UIPlugin from 'phaser4-rex-plugins/templates/ui/ui-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -64,11 +64,11 @@ A container with an icon, ([typing](texttyping.md) and [paging](textpage.md)) te
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import { TextBox } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
+    import { TextBox } from 'phaser4-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add text-box object
     ```javascript    

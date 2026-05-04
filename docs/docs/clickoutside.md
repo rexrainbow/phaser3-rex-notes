@@ -30,11 +30,11 @@ Fires 'clickoutside' event when pointer-down or pointer-up outside of game objec
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import ClickOutsidePlugin from 'phaser3-rex-plugins/plugins/clickoutside-plugin.js';
+    import ClickOutsidePlugin from 'phaser4-rex-plugins/plugins/clickoutside-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Fires 'clickoutside' event when pointer-down or pointer-up outside of game objec
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import ClickOutside from 'phaser3-rex-plugins/plugins/clickoutside.js';
+    import ClickOutside from 'phaser4-rex-plugins/plugins/clickoutside.js';
     ```
 - Add clickoutside behavior
     ```javascript

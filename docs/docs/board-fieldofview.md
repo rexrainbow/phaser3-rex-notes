@@ -33,11 +33,11 @@ Visible testing, to find field of view, chess behavior of Board system.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import BoardPlugin from 'phaser3-rex-plugins/plugins/board-plugin.js';
+    import BoardPlugin from 'phaser4-rex-plugins/plugins/board-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -62,11 +62,11 @@ Visible testing, to find field of view, chess behavior of Board system.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import { FieldOfView } from 'phaser3-rex-plugins/plugins/board-components.js';
+    import { FieldOfView } from 'phaser4-rex-plugins/plugins/board-components.js';
     ```
 - Add field-of-view object
     ```javascript

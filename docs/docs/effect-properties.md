@@ -40,11 +40,11 @@ Attach properties to a game object or camera, to add/remove/control [builtin pre
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import EffectPropertiesPlugin from 'phaser3-rex-plugins/plugins/effectproperties-plugin.js';
+    import EffectPropertiesPlugin from 'phaser4-rex-plugins/plugins/effectproperties-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -72,11 +72,11 @@ Attach properties to a game object or camera, to add/remove/control [builtin pre
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import method
     ```javascript
-    import AddEffectPropertiesProperties from 'phaser3-rex-plugins/plugins/effectproperties.js';
+    import AddEffectPropertiesProperties from 'phaser4-rex-plugins/plugins/effectproperties.js';
     ```
 - Attach properties to a game object/camera.
     ```javascript

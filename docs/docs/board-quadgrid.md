@@ -25,7 +25,7 @@ var grid = scene.rexBoard.add.quadGrid({
 or
 
 ```javascript
-// import { QuadGrid } from 'phaser3-rex-plugins/plugins/board-components.js';
+// import { QuadGrid } from 'phaser4-rex-plugins/plugins/board-components.js';
 var grid = new QuadGrid(config);
 ```
 

@@ -31,11 +31,11 @@ Generate bitmapfont from [text game object](text.md), or [bbcode text game objec
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import CharacterCachePlugin from 'phaser3-rex-plugins/plugins/charactercache-plugin.js';
+    import CharacterCachePlugin from 'phaser4-rex-plugins/plugins/charactercache-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -60,11 +60,11 @@ Generate bitmapfont from [text game object](text.md), or [bbcode text game objec
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import CharacterCache from 'phaser3-rex-plugins/plugins/charactercache.js';
+    import CharacterCache from 'phaser4-rex-plugins/plugins/charactercache.js';
     ```
 - Add character-cache object
     ```javascript

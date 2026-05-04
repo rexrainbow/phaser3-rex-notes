@@ -30,11 +30,11 @@ Displays text with multi-color, font face, or font size with tags.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import TagTextPlugin from 'phaser3-rex-plugins/plugins/tagtext-plugin.js';
+    import TagTextPlugin from 'phaser4-rex-plugins/plugins/tagtext-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Displays text with multi-color, font face, or font size with tags.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import TagText from 'phaser3-rex-plugins/plugins/tagtext.js';
+    import TagText from 'phaser4-rex-plugins/plugins/tagtext.js';
     ```
 - Add text object
     ```javascript    

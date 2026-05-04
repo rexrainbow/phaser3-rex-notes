@@ -27,11 +27,11 @@ Fade-in/fade-out volume of sound.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import SoundFadePlugin from 'phaser3-rex-plugins/plugins/soundfade-plugin.js';
+    import SoundFadePlugin from 'phaser4-rex-plugins/plugins/soundfade-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -57,11 +57,11 @@ Fade-in/fade-out volume of sound.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import method
     ```javascript
-    import SoundFade from 'phaser3-rex-plugins/plugins/soundfade.js';
+    import SoundFade from 'phaser4-rex-plugins/plugins/soundfade.js';
     ```
 - Sound fade-in/fade-out
     ```javascript

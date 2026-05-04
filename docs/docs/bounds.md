@@ -32,11 +32,11 @@ Clamp or wrap position of game object inside target bounds.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import BoundsPlugin from 'phaser3-rex-plugins/plugins/bounds-plugin.js';
+    import BoundsPlugin from 'phaser4-rex-plugins/plugins/bounds-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -61,11 +61,11 @@ Clamp or wrap position of game object inside target bounds.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import Bounds from 'phaser3-rex-plugins/plugins/bounds.js';
+    import Bounds from 'phaser4-rex-plugins/plugins/bounds.js';
     ```
 - Add bounds behavior
     ```javascript

@@ -30,11 +30,11 @@ Store the image pasted from the clipboard into the texture manager.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import ClickboardToTexturePlugin from 'phaser3-rex-plugins/plugins/clickboardtotexture-plugin.js';
+    import ClickboardToTexturePlugin from 'phaser4-rex-plugins/plugins/clickboardtotexture-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Store the image pasted from the clipboard into the texture manager.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import ClickboardToTexture from 'phaser3-rex-plugins/plugins/clickboardtotexture.js';
+    import ClickboardToTexture from 'phaser4-rex-plugins/plugins/clickboardtotexture.js';
     ```
 - Add clickboard-to-texture object
     ```javascript

@@ -26,11 +26,11 @@ Store current touch input properties.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import TouchStatePlugin from 'phaser3-rex-plugins/plugins/touchstate-plugin.js';
+    import TouchStatePlugin from 'phaser4-rex-plugins/plugins/touchstate-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -55,11 +55,11 @@ Store current touch input properties.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import TouchState from 'phaser3-rex-plugins/plugins/touchstate.js';
+    import TouchState from 'phaser4-rex-plugins/plugins/touchstate.js';
     ```
 - Add touch-state behavior
     ```javascript

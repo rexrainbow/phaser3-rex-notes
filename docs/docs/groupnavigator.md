@@ -31,11 +31,11 @@ Navigate between existing game objects, focus on next/previous/next-row/previous
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import GroupNavigatorPlugin from 'phaser3-rex-plugins/plugins/groupnavigator-plugin.js';
+    import GroupNavigatorPlugin from 'phaser4-rex-plugins/plugins/groupnavigator-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -60,11 +60,11 @@ Navigate between existing game objects, focus on next/previous/next-row/previous
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import GroupNavigator from 'phaser3-rex-plugins/plugins/groupnavigator.js';
+    import GroupNavigator from 'phaser4-rex-plugins/plugins/groupnavigator.js';
     ```
 - Create navigator
     ```javascript

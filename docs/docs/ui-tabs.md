@@ -32,11 +32,11 @@ A container with 4 groups of buttons around a center panel.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
+    import UIPlugin from 'phaser4-rex-plugins/templates/ui/ui-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -61,11 +61,11 @@ A container with 4 groups of buttons around a center panel.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import { Tabs } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
+    import { Tabs } from 'phaser4-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add tabs object
     ```javascript    

@@ -35,11 +35,11 @@ Reference: [Delaunay Triangulation](https://github.com/darkskyapp/delaunay-fast)
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import ShatterImagePlugin from 'phaser3-rex-plugins/plugins/shatterimage-plugin.js';
+    import ShatterImagePlugin from 'phaser4-rex-plugins/plugins/shatterimage-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -64,11 +64,11 @@ Reference: [Delaunay Triangulation](https://github.com/darkskyapp/delaunay-fast)
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import { ShatterImage } from 'phaser3-rex-plugins/plugins/shatterimage.js';
+    import { ShatterImage } from 'phaser4-rex-plugins/plugins/shatterimage.js';
     ```
 - Add image object
     ```javascript    

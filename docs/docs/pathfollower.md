@@ -31,11 +31,11 @@ Set position of game object on a [path](path.md).
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import PathFollowerPlugin from 'phaser3-rex-plugins/plugins/pathfollower-plugin.js';
+    import PathFollowerPlugin from 'phaser4-rex-plugins/plugins/pathfollower-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -60,11 +60,11 @@ Set position of game object on a [path](path.md).
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import PathFollower from 'phaser3-rex-plugins/plugins/pathfollower.js';
+    import PathFollower from 'phaser4-rex-plugins/plugins/pathfollower.js';
     ```
 - Add path-follower behavior
     ```javascript

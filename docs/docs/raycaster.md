@@ -30,11 +30,11 @@ Raycaster between obstacles.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import RaycasterPlugin from 'phaser3-rex-plugins/plugins/raycaster-plugin.js';
+    import RaycasterPlugin from 'phaser4-rex-plugins/plugins/raycaster-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Raycaster between obstacles.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import Raycaster from 'phaser3-rex-plugins/plugins/raycaster.js';
+    import Raycaster from 'phaser4-rex-plugins/plugins/raycaster.js';
     ```
 - Add raycaster object
     ```javascript

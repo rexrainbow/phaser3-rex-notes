@@ -53,11 +53,11 @@ Barrel post processing filter. [Reference](http://www.geeks3d.com/20140213/glsl-
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import BarrelFilterPlugin from 'phaser3-rex-plugins/plugins/barrelfilter-plugin.js';
+    import BarrelFilterPlugin from 'phaser4-rex-plugins/plugins/barrelfilter-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -98,11 +98,11 @@ Barrel post processing filter. [Reference](http://www.geeks3d.com/20140213/glsl-
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import filter and controller class
     ```javascript
-    import { BarrelFilter, BarrelController } from 'phaser3-rex-plugins/plugins/barrelfilter.js';
+    import { BarrelFilter, BarrelController } from 'phaser4-rex-plugins/plugins/barrelfilter.js';
 - Register effect
     ```js
     if (!scene.renderer.renderNodes.hasNode(BarrelFilter.FilterName)) {

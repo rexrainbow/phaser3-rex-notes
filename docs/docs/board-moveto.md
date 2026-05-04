@@ -31,11 +31,11 @@ Move chess towards target position with a steady speed, chess behavior of Board 
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import BoardPlugin from 'phaser3-rex-plugins/plugins/board-plugin.js';
+    import BoardPlugin from 'phaser4-rex-plugins/plugins/board-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -60,11 +60,11 @@ Move chess towards target position with a steady speed, chess behavior of Board 
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import { MoveTo } from 'phaser3-rex-plugins/plugins/board-components.js';
+    import { MoveTo } from 'phaser4-rex-plugins/plugins/board-components.js';
     ```
 - Add move-to behavior
     ```javascript

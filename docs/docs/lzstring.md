@@ -26,11 +26,11 @@ Compress string using LZ-based compression algorithm. [Reference](https://github
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import LZStringPlugin from 'phaser3-rex-plugins/plugins/lzstring-plugin.js';
+    import LZStringPlugin from 'phaser4-rex-plugins/plugins/lzstring-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -55,11 +55,11 @@ Compress string using LZ-based compression algorithm. [Reference](https://github
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import LZString from 'phaser3-rex-plugins/plugins/lzstring.js';
+    import LZString from 'phaser4-rex-plugins/plugins/lzstring.js';
     ```
 - Add lz-string object
     ```javascript

@@ -30,11 +30,11 @@ Emit scroll event when mouse-wheeling.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import MouseWheelScrollerPlugin from 'phaser3-rex-plugins/plugins/mousewheelscroller-plugin.js';
+    import MouseWheelScrollerPlugin from 'phaser4-rex-plugins/plugins/mousewheelscroller-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Emit scroll event when mouse-wheeling.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import MouseWheelScroller from 'phaser3-rex-plugins/plugins/mousewheelscroller.js';
+    import MouseWheelScroller from 'phaser4-rex-plugins/plugins/mousewheelscroller.js';
     ```
 - Add mouse-wheeling-to-cursor-key object
     ```javascript

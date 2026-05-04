@@ -49,11 +49,11 @@ Warp post processing filter.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import WarpFilterPlugin from 'phaser3-rex-plugins/plugins/warpfilter-plugin.js';
+    import WarpFilterPlugin from 'phaser4-rex-plugins/plugins/warpfilter-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -94,11 +94,11 @@ Warp post processing filter.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import filter and controller class
     ```javascript
-    import { WarpFilter, WarpController } from 'phaser3-rex-plugins/plugins/warpfilter.js';
+    import { WarpFilter, WarpController } from 'phaser4-rex-plugins/plugins/warpfilter.js';
     ```
 - Register effect
     ```js

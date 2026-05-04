@@ -31,11 +31,11 @@ A container with name text, value text in a row, with a [horizontal line progres
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
+    import UIPlugin from 'phaser4-rex-plugins/templates/ui/ui-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -60,11 +60,11 @@ A container with name text, value text in a row, with a [horizontal line progres
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import { NameValueLabel } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
+    import { NameValueLabel } from 'phaser4-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add label object
     ```javascript    

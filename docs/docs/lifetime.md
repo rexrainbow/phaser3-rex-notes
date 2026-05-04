@@ -26,11 +26,11 @@ Destroy game object when time-out.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import LifeTimePlugin from 'phaser3-rex-plugins/plugins/lifetime-plugin.js';
+    import LifeTimePlugin from 'phaser4-rex-plugins/plugins/lifetime-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -55,11 +55,11 @@ Destroy game object when time-out.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import LifeTime from 'phaser3-rex-plugins/plugins/lifetime.js';
+    import LifeTime from 'phaser4-rex-plugins/plugins/lifetime.js';
     ```
 - Add life-time behavior
     ```javascript

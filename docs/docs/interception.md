@@ -26,11 +26,11 @@ Predict the intersection position of two game objects with constant moving speed
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import InterceptionPlugin from 'phaser3-rex-plugins/plugins/interception-plugin.js';
+    import InterceptionPlugin from 'phaser4-rex-plugins/plugins/interception-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -55,11 +55,11 @@ Predict the intersection position of two game objects with constant moving speed
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import Interception from 'phaser3-rex-plugins/plugins/interception.js';
+    import Interception from 'phaser4-rex-plugins/plugins/interception.js';
     ```
 - Add interception behavior
     ```javascript

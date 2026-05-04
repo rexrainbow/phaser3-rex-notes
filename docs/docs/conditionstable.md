@@ -26,11 +26,11 @@ Check conditions to find passed tests listed in a csv table.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import ConditionsTablePlugin from 'phaser3-rex-plugins/plugins/conditionstable-plugin.js';
+    import ConditionsTablePlugin from 'phaser4-rex-plugins/plugins/conditionstable-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -55,11 +55,11 @@ Check conditions to find passed tests listed in a csv table.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import ConditionsTable from 'phaser3-rex-plugins/plugins/conditionstable.js';
+    import ConditionsTable from 'phaser4-rex-plugins/plugins/conditionstable.js';
     ```
 - Add conditions-table object
     ```javascript

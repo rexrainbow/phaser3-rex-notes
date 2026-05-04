@@ -39,11 +39,11 @@ Move game object toward current angle of game object, with a constant speed.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Enable [arcade physics engine](arcade-world.md) and install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import BulletPlugin from 'phaser3-rex-plugins/plugins/bullet-plugin.js';
+    import BulletPlugin from 'phaser4-rex-plugins/plugins/bullet-plugin.js';
     var config = {
         physics: {
             default: 'arcade',
@@ -74,7 +74,7 @@ Move game object toward current angle of game object, with a constant speed.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Enable [arcade physics engine](arcade-world.md) in [configuration of game](game.md#configuration)
     ```javascript
@@ -91,7 +91,7 @@ Move game object toward current angle of game object, with a constant speed.
     ```
 - Import class
     ```javascript
-    import Bullet from 'phaser3-rex-plugins/plugins/bullet.js';
+    import Bullet from 'phaser4-rex-plugins/plugins/bullet.js';
     ```
 - Add bullet behavior
     ```javascript

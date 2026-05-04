@@ -15629,10 +15629,10 @@
 <h3 id="install-from-npm-package">Install from npm package<a class="headerlink" href="#install-from-npm-package" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Install rex plugins
-    <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
+    <div class="highlight"><pre><span></span><code>npm i phaser4-rex-plugins
 </code></pre></div></li>
 <li>Install ui plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">RexUIPlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">RexUIPlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser4-rex-plugins/templates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
 
 <span class="kd">var</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// ...</span>
@@ -15652,7 +15652,7 @@
 </ol>
 <h4 id="using-typescript-declaration-file">Using typescript declaration file<a class="headerlink" href="#using-typescript-declaration-file" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="s1">&#39;phaser&#39;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="nx">RexUIPlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">RexUIPlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser4-rex-plugins/templates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
 <span class="kr">declare</span><span class="w"> </span><span class="nx">module</span><span class="w"> </span><span class="s1">&#39;phaser&#39;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">interface</span><span class="w"> </span><span class="nx">Scene</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">rexUI</span><span class="o">:</span><span class="w"> </span><span class="kt">RexUIPlugin</span><span class="p">;</span>
@@ -15660,7 +15660,7 @@
 <span class="p">}</span>
 </code></pre></div>
 <p>or</p>
-<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">RexUIPlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">RexUIPlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser4-rex-plugins/templates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
 
 <span class="kd">class</span><span class="w"> </span><span class="nx">Game</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scene</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">rexUI</span><span class="o">:</span><span class="w"> </span><span class="kt">RexUIPlugin</span><span class="p">;</span><span class="w">  </span><span class="c1">// Declare scene property &#39;rexUI&#39; as RexUIPlugin type</span>
@@ -15688,9 +15688,9 @@
 <span class="p">});</span>
 </code></pre></div>
 <ul>
-<li><code>'phaser3-rex-plugins/templates/ui/ui-plugin'</code> : Factories of rexUI components.</li>
-<li><code>'phaser3-rex-plugins/templates/ui/ui-components'</code> : Class of rexUI components.
-    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Sizer</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-components&#39;</span><span class="p">;</span>
+<li><code>'phaser4-rex-plugins/templates/ui/ui-plugin'</code> : Factories of rexUI components.</li>
+<li><code>'phaser4-rex-plugins/templates/ui/ui-components'</code> : Class of rexUI components.
+    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Sizer</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser4-rex-plugins/templates/ui/ui-components&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
 <p>See this <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/ui-wrap-expand-text/speech-bubble-background-ts.ts">example</a></p>

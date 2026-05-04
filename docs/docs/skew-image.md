@@ -33,11 +33,11 @@ Skewable Image.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import QuadImagePlugin from 'phaser3-rex-plugins/plugins/quadimage-plugin.js';
+    import QuadImagePlugin from 'phaser4-rex-plugins/plugins/quadimage-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -62,11 +62,11 @@ Skewable Image.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import { SkewImage } from 'phaser3-rex-plugins/plugins/quadimage.js';
+    import { SkewImage } from 'phaser4-rex-plugins/plugins/quadimage.js';
     ```
 - Add image object
     ```javascript    

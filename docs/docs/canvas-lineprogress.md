@@ -30,11 +30,11 @@ Horizontal line progress bar filled with gradient color on canvas.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import LineProgressCanvasPlugin from 'phaser3-rex-plugins/plugins/lineprogresscanvas-plugin.js';
+    import LineProgressCanvasPlugin from 'phaser4-rex-plugins/plugins/lineprogresscanvas-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Horizontal line progress bar filled with gradient color on canvas.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import LineProgressCanvas from 'phaser3-rex-plugins/plugins/lineprogresscanvas.js';
+    import LineProgressCanvas from 'phaser4-rex-plugins/plugins/lineprogresscanvas.js';
     ```
 - Add line-progress object
     ```javascript

@@ -38,11 +38,11 @@ Control position, angle of each character drawn on a [canvas](canvas.md).
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import DynamicTextPlugin from 'phaser3-rex-plugins/plugins/dynamictext-plugin.js';
+    import DynamicTextPlugin from 'phaser4-rex-plugins/plugins/dynamictext-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -67,11 +67,11 @@ Control position, angle of each character drawn on a [canvas](canvas.md).
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import DynamicText from 'phaser3-rex-plugins/plugins/dynamictext.js';
+    import DynamicText from 'phaser4-rex-plugins/plugins/dynamictext.js';
     ```
 - Add dynamic-text object
     ```javascript

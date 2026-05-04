@@ -37,11 +37,11 @@ Fine-tuning properties of target object. [Reference](https://cocopon.github.io/t
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
+    import UIPlugin from 'phaser4-rex-plugins/templates/ui/ui-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -66,11 +66,11 @@ Fine-tuning properties of target object. [Reference](https://cocopon.github.io/t
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import { Tweaker } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
+    import { Tweaker } from 'phaser4-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add tweaker object
     ```javascript    

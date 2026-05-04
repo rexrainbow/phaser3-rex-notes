@@ -40,11 +40,11 @@ It is inspired from [Ziao/phaser3-interim-containers](https://github.com/Ziao/ph
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import ContainerLitePlugin from 'phaser3-rex-plugins/plugins/containerlite-plugin.js';
+    import ContainerLitePlugin from 'phaser4-rex-plugins/plugins/containerlite-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -69,11 +69,11 @@ It is inspired from [Ziao/phaser3-interim-containers](https://github.com/Ziao/ph
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import ContainerLite from 'phaser3-rex-plugins/plugins/containerlite.js';
+    import ContainerLite from 'phaser4-rex-plugins/plugins/containerlite.js';
     ```
 - Add container object
     ```javascript    

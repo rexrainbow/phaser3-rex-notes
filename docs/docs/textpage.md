@@ -30,11 +30,11 @@ Display text page by page on [text object](text.md), [bbcode text object](bbcode
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import TextPagePlugin from 'phaser3-rex-plugins/plugins/textpage-plugin.js';
+    import TextPagePlugin from 'phaser4-rex-plugins/plugins/textpage-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Display text page by page on [text object](text.md), [bbcode text object](bbcode
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import TextPage from 'phaser3-rex-plugins/plugins/textpage.js';
+    import TextPage from 'phaser4-rex-plugins/plugins/textpage.js';
     ```
 - Add page behavior
     ```javascript

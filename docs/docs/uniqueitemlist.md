@@ -26,11 +26,11 @@ List of unique items. Support array and set methods.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import UniqueItemListPlugin from 'phaser3-rex-plugins/plugins/uniqueitemlist-plugin.js';
+    import UniqueItemListPlugin from 'phaser4-rex-plugins/plugins/uniqueitemlist-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -55,11 +55,11 @@ List of unique items. Support array and set methods.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import UniqueItemList from 'phaser3-rex-plugins/plugins/uniqueitemlist.js';
+    import UniqueItemList from 'phaser4-rex-plugins/plugins/uniqueitemlist.js';
     ```
 - Add list object
     ```javascript

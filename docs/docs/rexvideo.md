@@ -32,11 +32,11 @@ Play video on [DOM](https://www.w3schools.com/html/html5_video.asp), or on canva
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import VideoPlugin from 'phaser3-rex-plugins/plugins/video-plugin.js';
+    import VideoPlugin from 'phaser4-rex-plugins/plugins/video-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -62,12 +62,12 @@ Play video on [DOM](https://www.w3schools.com/html/html5_video.asp), or on canva
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import VideoCanvas from 'phaser3-rex-plugins/plugins/videocanvas/VideoCanvas.js';
-    // import VideoDOM from 'phaser3-rex-plugins/plugins/videodom/VideoDOM.js';
+    import VideoCanvas from 'phaser4-rex-plugins/plugins/videocanvas/VideoCanvas.js';
+    // import VideoDOM from 'phaser4-rex-plugins/plugins/videodom/VideoDOM.js';
     ```
 - Add text object
     ```javascript    

@@ -39,11 +39,11 @@ Create arcade body, and inject arcade object methods.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Enable [arcade physics engine](arcade-world.md) and install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import BuildArcadeObjectPlugin from 'phaser3-rex-plugins/plugins/buildarcadeobject-plugin.js';
+    import BuildArcadeObjectPlugin from 'phaser4-rex-plugins/plugins/buildarcadeobject-plugin.js';
     var config = {
         physics: {
             default: 'arcade',
@@ -74,7 +74,7 @@ Create arcade body, and inject arcade object methods.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Enable [arcade physics engine](arcade-world.md) in [configuration of game](game.md#configuration)
     ```javascript
@@ -91,7 +91,7 @@ Create arcade body, and inject arcade object methods.
     ```
 - Import class
     ```javascript
-    import BuildArcadeObject from 'phaser3-rex-plugins/plugins/buildarcadeobject.js';
+    import BuildArcadeObject from 'phaser4-rex-plugins/plugins/buildarcadeobject.js';
     ```
 - Inject arcade object methods
     ```javascript

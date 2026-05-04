@@ -41,11 +41,11 @@ The example Live2D models, Haru and Hiyori, are redistributed under Live2D's [Fr
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import Live2dPlugin from 'phaser3-rex-plugins/plugins/live2d-plugin.js';
+    import Live2dPlugin from 'phaser4-rex-plugins/plugins/live2d-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -78,7 +78,7 @@ The example Live2D models, Haru and Hiyori, are redistributed under Live2D's [Fr
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
@@ -86,7 +86,7 @@ The example Live2D models, Haru and Hiyori, are redistributed under Live2D's [Fr
         Live2dCoreScriptFileCallback,
         Live2dFileCallback,
         Live2dGameObject
-    } from 'phaser3-rex-plugins/plugins/live2d.js';
+    } from 'phaser4-rex-plugins/plugins/live2d.js';
     ```
 - Load live2d core script, in preload stage
     ```javascript

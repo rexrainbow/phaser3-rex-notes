@@ -27,11 +27,11 @@ Ease-move game object.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import EaseMovePlugin from 'phaser3-rex-plugins/plugins/easemove-plugin.js';
+    import EaseMovePlugin from 'phaser4-rex-plugins/plugins/easemove-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -57,11 +57,11 @@ Ease-move game object.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import method
     ```javascript
-    import { EaseMoveTo, EaseMoveFrom } from 'phaser3-rex-plugins/plugins/easemove.js';
+    import { EaseMoveTo, EaseMoveFrom } from 'phaser4-rex-plugins/plugins/easemove.js';
     ```
 - EaseMove-out-destroy
     ```javascript

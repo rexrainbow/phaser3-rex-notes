@@ -30,11 +30,11 @@ Drag content. Slow down when dragging released, pull back when out of bounds.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import ScrollerPlugin from 'phaser3-rex-plugins/plugins/scroller-plugin.js';
+    import ScrollerPlugin from 'phaser4-rex-plugins/plugins/scroller-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Drag content. Slow down when dragging released, pull back when out of bounds.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import Scroller from 'phaser3-rex-plugins/plugins/scroller.js';
+    import Scroller from 'phaser4-rex-plugins/plugins/scroller.js';
     ```
 - Add scroller behavior
     ```javascript

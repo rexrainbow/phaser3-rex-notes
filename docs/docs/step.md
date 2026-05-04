@@ -30,11 +30,11 @@ Interpolate points between previous position and current position with fixed ste
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import StepPlugin from 'phaser3-rex-plugins/plugins/step-plugin.js';
+    import StepPlugin from 'phaser4-rex-plugins/plugins/step-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Interpolate points between previous position and current position with fixed ste
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import Step from 'phaser3-rex-plugins/plugins/step.js';
+    import Step from 'phaser4-rex-plugins/plugins/step.js';
     ```
 - Add move-to behavior
     ```javascript

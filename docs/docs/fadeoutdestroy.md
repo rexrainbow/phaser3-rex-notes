@@ -26,11 +26,11 @@ Fade out game object then destroy it.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import FadePlugin from 'phaser3-rex-plugins/plugins/fade-plugin.js';
+    import FadePlugin from 'phaser4-rex-plugins/plugins/fade-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -55,11 +55,11 @@ Fade out game object then destroy it.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import method
     ```javascript
-    import FadeOutDestroy from 'phaser3-rex-plugins/plugins/fade-out-destroy.js';
+    import FadeOutDestroy from 'phaser4-rex-plugins/plugins/fade-out-destroy.js';
     ```
 - Fade-out-destroy
     ```javascript

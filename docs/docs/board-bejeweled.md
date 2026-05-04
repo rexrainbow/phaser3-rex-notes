@@ -34,12 +34,12 @@ Match3-like gameplay template.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install rexBoard plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import BoardPlugin from 'phaser3-rex-plugins/plugins/board-plugin.js';
-    import Bejeweled from 'phaser3-rex-plugins/templates/bejeweled/Bejeweled.js';
+    import BoardPlugin from 'phaser4-rex-plugins/plugins/board-plugin.js';
+    import Bejeweled from 'phaser4-rex-plugins/templates/bejeweled/Bejeweled.js';
 
     var config = {
         // ...

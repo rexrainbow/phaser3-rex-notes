@@ -39,11 +39,11 @@ Move game object as a [space ship](https://labs.phaser.io/view.html?src=src\phys
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Enable [arcade physics engine](arcade-world.md) and install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import ShipPlugin from 'phaser3-rex-plugins/plugins/ship-plugin.js';
+    import ShipPlugin from 'phaser4-rex-plugins/plugins/ship-plugin.js';
     var config = {
         physics: {
             default: 'arcade',
@@ -74,7 +74,7 @@ Move game object as a [space ship](https://labs.phaser.io/view.html?src=src\phys
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Enable [arcade physics engine](arcade-world.md) in [configuration of game](game.md#configuration)
     ```javascript
@@ -91,7 +91,7 @@ Move game object as a [space ship](https://labs.phaser.io/view.html?src=src\phys
     ```
 - Import class
     ```javascript
-    import Ship from 'phaser3-rex-plugins/plugins/ship.js';
+    import Ship from 'phaser4-rex-plugins/plugins/ship.js';
     ```
 - Add ship behavior
     ```javascript

@@ -31,11 +31,11 @@ Shake position of game object.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import ShakePositionPlugin from 'phaser3-rex-plugins/plugins/shakeposition-plugin.js';
+    import ShakePositionPlugin from 'phaser4-rex-plugins/plugins/shakeposition-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -60,11 +60,11 @@ Shake position of game object.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import ShakePosition from 'phaser3-rex-plugins/plugins/shakeposition.js';
+    import ShakePosition from 'phaser4-rex-plugins/plugins/shakeposition.js';
     ```
 - Add shake-position behavior
     ```javascript

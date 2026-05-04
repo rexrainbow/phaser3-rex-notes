@@ -30,11 +30,11 @@ Move game object towards target position with a steady speed.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin.js';
+    import MoveToPlugin from 'phaser4-rex-plugins/plugins/moveto-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Move game object towards target position with a steady speed.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import MoveTo from 'phaser3-rex-plugins/plugins/moveto.js';
+    import MoveTo from 'phaser4-rex-plugins/plugins/moveto.js';
     ```
 - Add move-to behavior
     ```javascript

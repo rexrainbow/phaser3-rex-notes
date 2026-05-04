@@ -46,11 +46,11 @@ var game = new Phaser.Game(config);
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install scene plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import ScaleOuterPlugin from 'phaser3-rex-plugins/plugins/scaleouter-plugin.js';
+    import ScaleOuterPlugin from 'phaser4-rex-plugins/plugins/scaleouter-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -73,11 +73,11 @@ var game = new Phaser.Game(config);
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import ScaleOuter from 'phaser3-rex-plugins/plugins/scaleouter.js';
+    import ScaleOuter from 'phaser4-rex-plugins/plugins/scaleouter.js';
     ```
 - Add scaleouter object
     ```javascript

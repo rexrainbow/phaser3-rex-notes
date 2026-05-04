@@ -26,11 +26,11 @@ Achievements in a [YAML](https://en.wikipedia.org/wiki/YAML) table.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import AchievementsPlugin from 'phaser3-rex-plugins/plugins/ymlachievements-plugin.js';
+    import AchievementsPlugin from 'phaser4-rex-plugins/plugins/ymlachievements-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -55,11 +55,11 @@ Achievements in a [YAML](https://en.wikipedia.org/wiki/YAML) table.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import Achievements from 'phaser3-rex-plugins/plugins/ymlachievements.js';
+    import Achievements from 'phaser4-rex-plugins/plugins/ymlachievements.js';
     ```
 - Add conditions-table object
     ```javascript

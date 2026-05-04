@@ -33,11 +33,11 @@ Layout elements in [Holy grail](https://en.wikipedia.org/wiki/Holy_grail_(web_de
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
+    import UIPlugin from 'phaser4-rex-plugins/templates/ui/ui-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -62,11 +62,11 @@ Layout elements in [Holy grail](https://en.wikipedia.org/wiki/Holy_grail_(web_de
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import { HolyGrail } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
+    import { HolyGrail } from 'phaser4-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add holy-grail object
     ```javascript    

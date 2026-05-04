@@ -26,11 +26,11 @@ Rhombus shape and methods, extends from [Polygon geometry object](geom-polygon.m
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import RhombusPlugin from 'phaser3-rex-plugins/plugins/rhombus-plugin.js';
+    import RhombusPlugin from 'phaser4-rex-plugins/plugins/rhombus-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -55,11 +55,11 @@ Rhombus shape and methods, extends from [Polygon geometry object](geom-polygon.m
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import Rhombus from 'phaser3-rex-plugins/plugins/rhombus.js';
+    import Rhombus from 'phaser4-rex-plugins/plugins/rhombus.js';
     ```
 - Add rhombus geometry object
     ```javascript

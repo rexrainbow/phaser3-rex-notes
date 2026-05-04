@@ -26,11 +26,11 @@ Flashing (set invisible then visible) game object.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import FlashPlugin from 'phaser3-rex-plugins/plugins/flash-plugin.js';
+    import FlashPlugin from 'phaser4-rex-plugins/plugins/flash-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -55,11 +55,11 @@ Flashing (set invisible then visible) game object.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import Flash from 'phaser3-rex-plugins/plugins/flash.js';
+    import Flash from 'phaser4-rex-plugins/plugins/flash.js';
     ```
 - Add flash behavior
     ```javascript

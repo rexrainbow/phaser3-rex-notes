@@ -49,11 +49,11 @@ Split image into 4 parts.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import SplitFilterPlugin from 'phaser3-rex-plugins/plugins/splitfilter-plugin.js';
+    import SplitFilterPlugin from 'phaser4-rex-plugins/plugins/splitfilter-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -94,11 +94,11 @@ Split image into 4 parts.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import filter and controller class
     ```javascript
-    import { SplitFilter, SplitController } from 'phaser3-rex-plugins/plugins/splitfilter.js';
+    import { SplitFilter, SplitController } from 'phaser4-rex-plugins/plugins/splitfilter.js';
     ```
 - Register effect
     ```js

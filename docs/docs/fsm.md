@@ -26,11 +26,11 @@
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import FSMPlugin from 'phaser3-rex-plugins/plugins/fsm-plugin.js';
+    import FSMPlugin from 'phaser4-rex-plugins/plugins/fsm-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -55,11 +55,11 @@
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import FSM from 'phaser3-rex-plugins/plugins/fsm.js';
+    import FSM from 'phaser4-rex-plugins/plugins/fsm.js';
     ```
 - Add FSM object
     ```javascript

@@ -26,11 +26,11 @@ Easing data value of game object's data-manager.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import EaseDataPlugin from 'phaser3-rex-plugins/plugins/easedata-plugin.js';
+    import EaseDataPlugin from 'phaser4-rex-plugins/plugins/easedata-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -55,11 +55,11 @@ Easing data value of game object's data-manager.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import method
     ```javascript
-    import { EaseData } from 'phaser3-rex-plugins/plugins/easedata.js';
+    import { EaseData } from 'phaser4-rex-plugins/plugins/easedata.js';
     ```
 - EaseData-out-destroy
     ```javascript

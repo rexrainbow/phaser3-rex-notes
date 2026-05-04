@@ -26,11 +26,11 @@ Data manager with buffs, extends from [built-in data manager](datamanager.md).
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import BuffDataPlugin from 'phaser3-rex-plugins/plugins/buffdata-plugin.js';
+    import BuffDataPlugin from 'phaser4-rex-plugins/plugins/buffdata-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -55,11 +55,11 @@ Data manager with buffs, extends from [built-in data manager](datamanager.md).
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import BuffData from 'phaser3-rex-plugins/plugins/buffdata.js';
+    import BuffData from 'phaser4-rex-plugins/plugins/buffdata.js';
     ```
 - Add buff data manager object
     ```javascript

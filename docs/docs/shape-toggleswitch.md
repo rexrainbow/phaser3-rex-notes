@@ -34,11 +34,11 @@ Toggle-switch [input](button.md).
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import ToggleSwitchPlugin from 'phaser3-rex-plugins/plugins/toggleswitch-plugin.js';
+    import ToggleSwitchPlugin from 'phaser4-rex-plugins/plugins/toggleswitch-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -67,11 +67,11 @@ Toggle-switch [input](button.md).
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import ToggleSwitch from 'phaser3-rex-plugins/plugins/toggleswitch.js';
+    import ToggleSwitch from 'phaser4-rex-plugins/plugins/toggleswitch.js';
     ```
 - Add toggle-switch input
     ```javascript    
@@ -80,7 +80,7 @@ Toggle-switch [input](button.md).
     ```
 - Add toggle-switch shape (without [click input](button.md))
     ```javascript
-    // import ToggleSwitchShape from 'phaser3-rex-plugins/plugins/toggleswitchshape.js';
+    // import ToggleSwitchShape from 'phaser4-rex-plugins/plugins/toggleswitchshape.js';
     var toggleSwitch = new ToggleSwitchShape(scene, x, y, width, height, color, config);
     scene.add.existing(toggleSwitch);
     ```

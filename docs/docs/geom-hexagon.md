@@ -26,11 +26,11 @@
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import HexagonPlugin from 'phaser3-rex-plugins/plugins/hexagon-plugin.js';
+    import HexagonPlugin from 'phaser4-rex-plugins/plugins/hexagon-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -55,11 +55,11 @@
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import Hexagon from 'phaser3-rex-plugins/plugins/hexagon.js';
+    import Hexagon from 'phaser4-rex-plugins/plugins/hexagon.js';
     ```
 - Add hexagon geometry object
     ```javascript

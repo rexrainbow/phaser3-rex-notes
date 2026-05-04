@@ -31,11 +31,11 @@ Append user data below tail of PNG data, or extract this user data from PNG data
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import PNGAppenderPlugin from 'phaser3-rex-plugins/plugins/pngappender-plugin.js';
+    import PNGAppenderPlugin from 'phaser4-rex-plugins/plugins/pngappender-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -61,11 +61,11 @@ Append user data below tail of PNG data, or extract this user data from PNG data
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import PNGAppender from 'phaser3-rex-plugins/plugins/pngappender.js';
+    import PNGAppender from 'phaser4-rex-plugins/plugins/pngappender.js';
     ```
 - Append, or extract data
     ```javascript

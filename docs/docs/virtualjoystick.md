@@ -34,11 +34,11 @@ Simulate cursor keys according to touch events.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import VirtualJoystickPlugin from 'phaser3-rex-plugins/plugins/virtualjoystick-plugin.js';
+    import VirtualJoystickPlugin from 'phaser4-rex-plugins/plugins/virtualjoystick-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -63,11 +63,11 @@ Simulate cursor keys according to touch events.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import VirtualJoystick from 'phaser3-rex-plugins/plugins/virtualjoystick.js';
+    import VirtualJoystick from 'phaser4-rex-plugins/plugins/virtualjoystick.js';
     ```
 - Create instance
     ```javascript
@@ -259,7 +259,7 @@ or
 
 
 ```javascript
-// import VirtualJoystick from 'phaser3-rex-plugins/plugins/vectortocursorkeys.js';
+// import VirtualJoystick from 'phaser4-rex-plugins/plugins/vectortocursorkeys.js';
 var controller = new VirtualJoystick(undefined, config);
 ```
 

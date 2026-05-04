@@ -54,11 +54,11 @@ Create a div element for dropping file(s).
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import FileDropZonePlugin from 'phaser3-rex-plugins/plugins/filedropzone-plugin.js';
+    import FileDropZonePlugin from 'phaser4-rex-plugins/plugins/filedropzone-plugin.js';
     var config = {    
         parent: divId,
         // fullscreenTarget: divId, // For fullscreen
@@ -96,7 +96,7 @@ Create a div element for dropping file(s).
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Enable dom element in [configuration of game](game.md#configuration)
     ```javascript
@@ -122,7 +122,7 @@ Create a div element for dropping file(s).
     - Set `dom.createContainer` to `true`.
 - Import class
     ```javascript
-    import { FileDropZone } from 'phaser3-rex-plugins/plugins/filedropzone.js';
+    import { FileDropZone } from 'phaser4-rex-plugins/plugins/filedropzone.js';
     ```
 - Add file-drop-zone object
     ```javascript

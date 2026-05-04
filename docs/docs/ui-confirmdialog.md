@@ -35,11 +35,11 @@ Using json style to create confirm [dialog](ui-dialog.md), composed of [simple-l
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
+    import UIPlugin from 'phaser4-rex-plugins/templates/ui/ui-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -65,11 +65,11 @@ Using json style to create confirm [dialog](ui-dialog.md), composed of [simple-l
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import { ConfirmDialog } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
+    import { ConfirmDialog } from 'phaser4-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add dialog object
     ```javascript    

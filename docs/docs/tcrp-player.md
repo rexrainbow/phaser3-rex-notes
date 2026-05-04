@@ -30,11 +30,11 @@ Player of **T** ime-**C** ommand-**R** ecorder-**P** layer, to run commands on t
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import TCRPPlugin from 'phaser3-rex-plugins/plugins/tcrp-plugin.js';
+    import TCRPPlugin from 'phaser4-rex-plugins/plugins/tcrp-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Player of **T** ime-**C** ommand-**R** ecorder-**P** layer, to run commands on t
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import TCRP from 'phaser3-rex-plugins/plugins/tcrp.js';
+    import TCRP from 'phaser4-rex-plugins/plugins/tcrp.js';
     ```
 - Create instance
     ```javascript

@@ -15483,10 +15483,10 @@
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Install rex plugins from npm
-    <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
+    <div class="highlight"><pre><span></span><code>npm i phaser4-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">TextTranslationPlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/texttranslation-plugin.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">TextTranslationPlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser4-rex-plugins/plugins/texttranslation-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// ...</span>
 <span class="w">    </span><span class="nx">plugins</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
@@ -15532,15 +15532,15 @@
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Install rex plugins, i18next, i18next-http-backend from npm
-    <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
+    <div class="highlight"><pre><span></span><code>npm i phaser4-rex-plugins
 npm i i18next
 npm i i18next-http-backend
 </code></pre></div></li>
 <li>Import class
-    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">TextTranslationBehavior</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/texttranslation.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">TextTranslationBehavior</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser4-rex-plugins/plugins/texttranslation.js&#39;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="nx">i18next</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;i18next&#39;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="nx">Backend</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;i18next-http-backend&#39;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="nx">Awaitloader</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/awaitloader.js&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">Awaitloader</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser4-rex-plugins/plugins/awaitloader.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Initialize i18next during preload stage
     <div class="highlight"><pre><span></span><code><span class="nx">Awaitloader</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">successCallback</span><span class="p">,</span><span class="w"> </span><span class="nx">failureCallback</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>

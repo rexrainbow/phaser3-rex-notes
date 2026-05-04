@@ -39,11 +39,11 @@ Sync data from [data manager](datamanager.md) to [local-storage](https://develop
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import LocalStorageDataPlugin from 'phaser3-rex-plugins/plugins/localstoragedata-plugin.js';
+    import LocalStorageDataPlugin from 'phaser4-rex-plugins/plugins/localstoragedata-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -73,11 +73,11 @@ Sync data from [data manager](datamanager.md) to [local-storage](https://develop
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import LocalStorageData from 'phaser3-rex-plugins/plugins/localstoragedata.js';
+    import LocalStorageData from 'phaser4-rex-plugins/plugins/localstoragedata.js';
     ```
 - New local storage data manager
     ```javascript

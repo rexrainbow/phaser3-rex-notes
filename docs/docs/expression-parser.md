@@ -38,11 +38,11 @@ Parser is generated from [jison](https://github.com/zaach/jison)
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import ExpressionParserPlugin from 'phaser3-rex-plugins/plugins/expressionparser-plugin.js';
+    import ExpressionParserPlugin from 'phaser4-rex-plugins/plugins/expressionparser-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -72,11 +72,11 @@ Parser is generated from [jison](https://github.com/zaach/jison)
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import ExpressionParser from 'phaser3-rex-plugins/plugins/expressionparser.js';
+    import ExpressionParser from 'phaser4-rex-plugins/plugins/expressionparser.js';
     ```
 - Add parser
     ```javascript

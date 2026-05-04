@@ -35,11 +35,11 @@ A [container](containerlite.md) with two [perspective-images](perspective-image.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import PerspectiveImagePlugin from 'phaser3-rex-plugins/plugins/perspectiveimage-plugin.js';
+    import PerspectiveImagePlugin from 'phaser4-rex-plugins/plugins/perspectiveimage-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -64,11 +64,11 @@ A [container](containerlite.md) with two [perspective-images](perspective-image.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import { PerspectiveCard } from 'phaser3-rex-plugins/plugins/perspectiveimage.js';
+    import { PerspectiveCard } from 'phaser4-rex-plugins/plugins/perspectiveimage.js';
     ```
 - Add card object
     ```javascript    

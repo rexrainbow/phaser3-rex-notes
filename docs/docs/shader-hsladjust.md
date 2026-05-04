@@ -52,11 +52,11 @@ Adjust color in HSL domain, post processing filter.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import HSLAdjustFilterPlugin from 'phaser3-rex-plugins/plugins/hsladjustfilter-plugin.js';
+    import HSLAdjustFilterPlugin from 'phaser4-rex-plugins/plugins/hsladjustfilter-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -97,11 +97,11 @@ Adjust color in HSL domain, post processing filter.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import filter and controller class
     ```javascript
-    import { HSLAdjustFilter, HSLAdjustController } from 'phaser3-rex-plugins/plugins/hsladjustfilter.js';
+    import { HSLAdjustFilter, HSLAdjustController } from 'phaser4-rex-plugins/plugins/hsladjustfilter.js';
     ```
 - Register effect
     ```js

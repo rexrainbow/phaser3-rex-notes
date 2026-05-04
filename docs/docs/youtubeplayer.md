@@ -52,11 +52,11 @@ Play youtube video on iframe.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import YoutubePlayerPlugin from 'phaser3-rex-plugins/plugins/youtubeplayer-plugin.js';
+    import YoutubePlayerPlugin from 'phaser4-rex-plugins/plugins/youtubeplayer-plugin.js';
     var config = {
         parent: divId,
         // fullscreenTarget: divId, // For fullscreen
@@ -96,7 +96,7 @@ Play youtube video on iframe.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Enable dom element in [configuration of game](game.md#configuration)
     ```javascript
@@ -122,7 +122,7 @@ Play youtube video on iframe.
     - Set `dom.createContainer` to `true`.
 - Import class
     ```javascript
-    import YoutubePlayer from 'phaser3-rex-plugins/plugins/youtubeplayer.js';
+    import YoutubePlayer from 'phaser4-rex-plugins/plugins/youtubeplayer.js';
     ```
 - Add youtube player object
     ```javascript    

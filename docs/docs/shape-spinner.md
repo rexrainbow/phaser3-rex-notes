@@ -67,11 +67,11 @@ Loading animations on shape.
 
 - Install rex plugins from npm
   ```
-  npm i phaser3-rex-plugins
+  npm i phaser4-rex-plugins
   ```
 - Install plugin in [configuration of game](game.md#configuration)
   ```javascript
-  import SpinnerPlugin from "phaser3-rex-plugins/templates/spinner/spinner-plugin.js";
+  import SpinnerPlugin from "phaser4-rex-plugins/templates/spinner/spinner-plugin.js";
   var config = {
     // ...
     plugins: {
@@ -120,14 +120,14 @@ Loading animations on shape.
 
 - Install rex plugins from npm
   ```
-  npm i phaser3-rex-plugins
+  npm i phaser4-rex-plugins
   ```
 - Import class
   ```javascript
   import { 
     AIO, Arrow, Audio, Ball, Bars, Box, Clock, Cube, Custom, Dots, 
     Facebook, Grid, Hearts, Ios, Orbit, Oval, Puff, Radio, Rings, Spinner
-  } from "phaser3-rex-plugins/templates/spinner/spinner-components.js";
+  } from "phaser4-rex-plugins/templates/spinner/spinner-components.js";
   ```
 - Add spinner object
   ```javascript

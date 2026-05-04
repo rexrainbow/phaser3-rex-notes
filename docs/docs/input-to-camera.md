@@ -30,11 +30,11 @@ Control camera's scroll by [pan](gesture-pan.md)/[cursor-at-bounds(scroll)](curs
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import CameraControllerPlugin from 'phaser3-rex-plugins/plugins/cameracontroller-plugin.js';
+    import CameraControllerPlugin from 'phaser4-rex-plugins/plugins/cameracontroller-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Control camera's scroll by [pan](gesture-pan.md)/[cursor-at-bounds(scroll)](curs
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import CameraController from 'phaser3-rex-plugins/plugins/cameracontroller.js';
+    import CameraController from 'phaser4-rex-plugins/plugins/cameracontroller.js';
     ```
 - Add camera-controller object
     ```javascript

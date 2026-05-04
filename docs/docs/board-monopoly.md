@@ -30,11 +30,11 @@ Move through path tiles, used in monopoly-like application, chess behavior of Bo
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import BoardPlugin from 'phaser3-rex-plugins/plugins/board-plugin.js';
+    import BoardPlugin from 'phaser4-rex-plugins/plugins/board-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Move through path tiles, used in monopoly-like application, chess behavior of Bo
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import { Monopoly } from 'phaser3-rex-plugins/plugins/board-components.js';
+    import { Monopoly } from 'phaser4-rex-plugins/plugins/board-components.js';
     ```
 - Add monopoly behavior
     ```javascript

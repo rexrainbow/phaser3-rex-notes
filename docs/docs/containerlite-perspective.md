@@ -31,11 +31,11 @@ Snapshot children of [containerlite](containerlite.md), to a [perspective render
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import PerspectiveImagePlugin from 'phaser3-rex-plugins/plugins/perspectiveimage-plugin.js';
+    import PerspectiveImagePlugin from 'phaser4-rex-plugins/plugins/perspectiveimage-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -61,11 +61,11 @@ Snapshot children of [containerlite](containerlite.md), to a [perspective render
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import { ContainerPerspective } from 'phaser3-rex-plugins/plugins/perspectiveimage.js';
+    import { ContainerPerspective } from 'phaser4-rex-plugins/plugins/perspectiveimage.js';
     ```
 - Add perspective behavior
     ```javascript

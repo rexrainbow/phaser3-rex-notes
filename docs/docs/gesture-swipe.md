@@ -31,11 +31,11 @@ Get swipe events of a game object.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import GesturesPlugin from 'phaser3-rex-plugins/plugins/gestures-plugin.js';
+    import GesturesPlugin from 'phaser4-rex-plugins/plugins/gestures-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -61,11 +61,11 @@ Get swipe events of a game object.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import { Swipe } from 'phaser3-rex-plugins/plugins/gestures.js';
+    import { Swipe } from 'phaser4-rex-plugins/plugins/gestures.js';
     ```
 - Add swipe input
     ```javascript

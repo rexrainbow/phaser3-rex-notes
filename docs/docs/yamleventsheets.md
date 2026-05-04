@@ -31,11 +31,11 @@ Event sheets contains main condition(s) and actions, in YAML format.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import YAMLEventSheetsPlugin from 'phaser3-rex-plugins/plugins/yamleventsheets-plugin.js';
+    import YAMLEventSheetsPlugin from 'phaser4-rex-plugins/plugins/yamleventsheets-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -60,11 +60,11 @@ Event sheets contains main condition(s) and actions, in YAML format.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import YAMLEventSheets from 'phaser3-rex-plugins/plugins/yamleventsheets.js';
+    import YAMLEventSheets from 'phaser4-rex-plugins/plugins/yamleventsheets.js';
     ```
 - Add event-sheet-manager object
     ```javascript
@@ -798,8 +798,8 @@ var commandExecutor = scene.plugins.get('rexYAMLEventSheets').addCommandExecutor
 or
 
 ```javascript
-// import YAMLEventSheets from 'phaser3-rex-plugins/plugins/yamleventsheets.js';
-// import CommandExecutor from 'phaser3-rex-plugins/plugins/commandexecutor.js';
+// import YAMLEventSheets from 'phaser4-rex-plugins/plugins/yamleventsheets.js';
+// import CommandExecutor from 'phaser4-rex-plugins/plugins/commandexecutor.js';
 
 var commandExecutor = new CommandExecutor(scene, config);
 

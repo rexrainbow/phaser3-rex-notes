@@ -31,7 +31,7 @@ Pop-up dialog for loading-progress, then scale-down this dialog.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Add loading-progress behavior
     ```javascript
@@ -42,11 +42,11 @@ Pop-up dialog for loading-progress, then scale-down this dialog.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import LoadingProgress from 'phaser3-rex-plugins/plugins/loadingprogress.js';
+    import LoadingProgress from 'phaser4-rex-plugins/plugins/loadingprogress.js';
     ```
 - Add loadingprogress behavior
     ```javascript

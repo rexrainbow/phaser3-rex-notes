@@ -30,11 +30,11 @@ A line shape, composed of 4 points
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import LineShapePlugin from 'phaser3-rex-plugins/plugins/line-plugin.js';
+    import LineShapePlugin from 'phaser4-rex-plugins/plugins/line-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ A line shape, composed of 4 points
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import LineShape from 'phaser3-rex-plugins/plugins/lineshape.js';
+    import LineShape from 'phaser4-rex-plugins/plugins/lineshape.js';
     ```
 - Add line object
     ```javascript

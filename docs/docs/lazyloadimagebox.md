@@ -30,11 +30,11 @@ Lazy-load image with spinner, then show scaled image, based on [image-box](image
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import LazyLoadimageboxPlugin from 'phaser3-rex-plugins/templates/lazyloadimagebox/lazyloadimagebox-plugin.js';
+    import LazyLoadimageboxPlugin from 'phaser4-rex-plugins/templates/lazyloadimagebox/lazyloadimagebox-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Lazy-load image with spinner, then show scaled image, based on [image-box](image
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import LazyLoadimagebox from 'phaser3-rex-plugins/templates/lazyloadimagebox/lazyloadimagebox.js';
+    import LazyLoadimagebox from 'phaser4-rex-plugins/templates/lazyloadimagebox/lazyloadimagebox.js';
     ```
 - Add image object
     ```javascript    

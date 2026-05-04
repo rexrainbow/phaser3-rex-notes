@@ -31,11 +31,11 @@ Perlin2/Perlin3 noise and simplex2/simplex3 noise. ([Reference](https://github.c
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import PerlinPlugin from 'phaser3-rex-plugins/plugins/perlin-plugin.js';
+    import PerlinPlugin from 'phaser4-rex-plugins/plugins/perlin-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -60,11 +60,11 @@ Perlin2/Perlin3 noise and simplex2/simplex3 noise. ([Reference](https://github.c
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import Perlin from 'phaser3-rex-plugins/plugins/perlin.js';
+    import Perlin from 'phaser4-rex-plugins/plugins/perlin.js';
     ```
 - Add perlin noise object
     ```javascript

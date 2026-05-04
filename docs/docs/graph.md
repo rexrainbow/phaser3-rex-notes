@@ -30,11 +30,11 @@ Core object of Graph system.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import GraphPlugin from 'phaser3-rex-plugins/plugins/graph-plugin.js';
+    import GraphPlugin from 'phaser4-rex-plugins/plugins/graph-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Core object of Graph system.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import { Graph } from 'phaser3-rex-plugins/plugins/graph-components.js';
+    import { Graph } from 'phaser4-rex-plugins/plugins/graph-components.js';
     ```
 - Add graph object
     ```javascript

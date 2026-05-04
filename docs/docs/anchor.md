@@ -35,11 +35,11 @@ Set size and position based on visible window.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import AnchorPlugin from 'phaser3-rex-plugins/plugins/anchor-plugin.js';
+    import AnchorPlugin from 'phaser4-rex-plugins/plugins/anchor-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -64,11 +64,11 @@ Set size and position based on visible window.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import Anchor from 'phaser3-rex-plugins/plugins/anchor.js';
+    import Anchor from 'phaser4-rex-plugins/plugins/anchor.js';
     ```
 - Add anchor behavior
     ```javascript

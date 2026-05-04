@@ -31,11 +31,11 @@ Start loading animation scene, stop this scene when loading complete.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import LoadingAnimationScenePlugin from 'phaser3-rex-plugins/plugins/loadinganimationscene-plugin.js';
+    import LoadingAnimationScenePlugin from 'phaser4-rex-plugins/plugins/loadinganimationscene-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -61,11 +61,11 @@ Start loading animation scene, stop this scene when loading complete.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import StartLoadingAnimationScene from 'phaser3-rex-plugins/plugins/loadinganimationscene.js';
+    import StartLoadingAnimationScene from 'phaser4-rex-plugins/plugins/loadinganimationscene.js';
     ```
 - In mainScene, start loading animation scene, or in animation scene, monitor loading status of mainScene.
     ```javascript

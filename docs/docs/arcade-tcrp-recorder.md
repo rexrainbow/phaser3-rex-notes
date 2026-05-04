@@ -34,11 +34,11 @@ This Arcade-TCRP has better result of replaying, which store step count via WORL
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import TCRPPlugin from 'phaser3-rex-plugins/plugins/arcadetcrp-plugin.js';
+    import TCRPPlugin from 'phaser4-rex-plugins/plugins/arcadetcrp-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -63,11 +63,11 @@ This Arcade-TCRP has better result of replaying, which store step count via WORL
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import TCRP from 'phaser3-rex-plugins/plugins/arcadetcrp.js';
+    import TCRP from 'phaser4-rex-plugins/plugins/arcadetcrp.js';
     ```
 - Create instance
     ```javascript

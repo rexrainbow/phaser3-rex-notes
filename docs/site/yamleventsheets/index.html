@@ -16645,10 +16645,10 @@
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Install rex plugins from npm
-    <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
+    <div class="highlight"><pre><span></span><code>npm i phaser4-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">YAMLEventSheetsPlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/yamleventsheets-plugin.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">YAMLEventSheetsPlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser4-rex-plugins/plugins/yamleventsheets-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// ...</span>
 <span class="w">    </span><span class="nx">plugins</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
@@ -16671,10 +16671,10 @@
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Install rex plugins from npm
-    <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
+    <div class="highlight"><pre><span></span><code>npm i phaser4-rex-plugins
 </code></pre></div></li>
 <li>Import class
-    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">YAMLEventSheets</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/yamleventsheets.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">YAMLEventSheets</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser4-rex-plugins/plugins/yamleventsheets.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Add event-sheet-manager object
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">YAMLEventSheets</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
@@ -17279,8 +17279,8 @@ And game objects with <code>'autoClear'</code> will be destroyed.</p>
 <span class="c1">// });</span>
 </code></pre></div>
 <p>or</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// import YAMLEventSheets from &#39;phaser3-rex-plugins/plugins/yamleventsheets.js&#39;;</span>
-<span class="c1">// import CommandExecutor from &#39;phaser3-rex-plugins/plugins/commandexecutor.js&#39;;</span>
+<div class="highlight"><pre><span></span><code><span class="c1">// import YAMLEventSheets from &#39;phaser4-rex-plugins/plugins/yamleventsheets.js&#39;;</span>
+<span class="c1">// import CommandExecutor from &#39;phaser4-rex-plugins/plugins/commandexecutor.js&#39;;</span>
 
 <span class="kd">var</span><span class="w"> </span><span class="nx">commandExecutor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">CommandExecutor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
 

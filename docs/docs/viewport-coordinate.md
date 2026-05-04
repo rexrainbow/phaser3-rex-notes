@@ -32,11 +32,11 @@ Attach `vpx`, `vpy` properties to a game object, to set position according to pr
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import ViewportCoordinatePlugin from 'phaser3-rex-plugins/plugins/viewportcoordinate-plugin.js';
+    import ViewportCoordinatePlugin from 'phaser4-rex-plugins/plugins/viewportcoordinate-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -65,11 +65,11 @@ Attach `vpx`, `vpy` properties to a game object, to set position according to pr
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import method
     ```javascript
-    import AddViewportCoordinateProperties from 'phaser3-rex-plugins/plugins/viewportcoordinate.js';
+    import AddViewportCoordinateProperties from 'phaser4-rex-plugins/plugins/viewportcoordinate.js';
     ```
 - Attach `vpx`, `vpy`, `vpxOffset`, `vpyOffset` properties.
     ```javascript

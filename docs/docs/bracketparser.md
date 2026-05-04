@@ -31,11 +31,11 @@ A lite-weight delimiter parser.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import BracketParserPlugin from 'phaser3-rex-plugins/plugins/bracketparser-plugin.js';
+    import BracketParserPlugin from 'phaser4-rex-plugins/plugins/bracketparser-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -60,11 +60,11 @@ A lite-weight delimiter parser.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import BracketParser from 'phaser3-rex-plugins/plugins/bracketparser.js';
+    import BracketParser from 'phaser4-rex-plugins/plugins/bracketparser.js';
     ```
 - Add parser object
     ```javascript

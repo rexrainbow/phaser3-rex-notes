@@ -43,11 +43,11 @@ Move game object by cursor keys, with a constant speed.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Enable [arcade physics engine](arcade-world.md) and install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import EightDirectionPlugin from 'phaser3-rex-plugins/plugins/eightdirection-plugin.js';
+    import EightDirectionPlugin from 'phaser4-rex-plugins/plugins/eightdirection-plugin.js';
     var config = {
         physics: {
             default: 'arcade',
@@ -78,7 +78,7 @@ Move game object by cursor keys, with a constant speed.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Enable [arcade physics engine](arcade-world.md) in [configuration of game](game.md#configuration)
     ```javascript
@@ -95,7 +95,7 @@ Move game object by cursor keys, with a constant speed.
     ```
 - Import class
     ```javascript
-    import EightDirection from 'phaser3-rex-plugins/plugins/eightdirection.js';
+    import EightDirection from 'phaser4-rex-plugins/plugins/eightdirection.js';
     ```
 - Add eight-direction behavior
     ```javascript

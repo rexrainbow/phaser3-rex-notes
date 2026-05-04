@@ -26,11 +26,11 @@ A clock to count elapsed time.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import ClockPlugin from 'phaser3-rex-plugins/plugins/clock-plugin.js';
+    import ClockPlugin from 'phaser4-rex-plugins/plugins/clock-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -55,11 +55,11 @@ A clock to count elapsed time.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import Clock from 'phaser3-rex-plugins/plugins/clock.js';
+    import Clock from 'phaser4-rex-plugins/plugins/clock.js';
     ```
 - Add clock object
     ```javascript

@@ -26,11 +26,11 @@ Scale up from `0` to *current scale* of game object.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import ScalePlugin from 'phaser3-rex-plugins/plugins/scale-plugin.js';
+    import ScalePlugin from 'phaser4-rex-plugins/plugins/scale-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -55,11 +55,11 @@ Scale up from `0` to *current scale* of game object.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import PopUp from 'phaser3-rex-plugins/plugins/popup.js';
+    import PopUp from 'phaser4-rex-plugins/plugins/popup.js';
     ```
 - Pop-up object
     ```javascript

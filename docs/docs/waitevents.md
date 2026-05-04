@@ -25,11 +25,11 @@ Wait fired events or callbacks.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import WaitEventsPlugin from 'phaser3-rex-plugins/plugins/waitevents-plugin.js';
+    import WaitEventsPlugin from 'phaser4-rex-plugins/plugins/waitevents-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -54,11 +54,11 @@ Wait fired events or callbacks.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import WaitEvents from 'phaser3-rex-plugins/plugins/waitevents.js';
+    import WaitEvents from 'phaser4-rex-plugins/plugins/waitevents.js';
     ```
 - Create instance
     ```javascript

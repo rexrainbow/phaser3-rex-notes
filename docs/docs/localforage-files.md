@@ -28,11 +28,11 @@ Each file contains header and content indexed by fileID.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import FilesPlugin from 'phaser3-rex-plugins/plugins/localforagefiles-plugin.js';
+    import FilesPlugin from 'phaser4-rex-plugins/plugins/localforagefiles-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -57,11 +57,11 @@ Each file contains header and content indexed by fileID.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import Files from 'phaser3-rex-plugins/plugins/localforagefiles.js';
+    import Files from 'phaser4-rex-plugins/plugins/localforagefiles.js';
     ```
 - Add localforage-files object
     ```javascript

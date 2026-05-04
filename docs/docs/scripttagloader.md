@@ -46,11 +46,11 @@ Load script tag in preload stage.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import ScriptTagLoaderPlugin from 'phaser3-rex-plugins/plugins/scripttagloader-plugin.js';
+    import ScriptTagLoaderPlugin from 'phaser4-rex-plugins/plugins/scripttagloader-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -75,11 +75,11 @@ Load script tag in preload stage.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import ScriptTagLoader from 'phaser3-rex-plugins/plugins/scripttagloader.js';
+    import ScriptTagLoader from 'phaser4-rex-plugins/plugins/scripttagloader.js';
     ```
 - Start loading task
     ```javascript

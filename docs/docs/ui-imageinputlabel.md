@@ -52,11 +52,11 @@ A container with a [canvas](canvas.md) icon, text, and background. Click icon to
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin, enable dom element in [configuration of game](game.md#configuration)
     ```javascript
-    import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
+    import UIPlugin from 'phaser4-rex-plugins/templates/ui/ui-plugin.js';
     var config = {
         parent: divId,
         dom: {
@@ -95,7 +95,7 @@ A container with a [canvas](canvas.md) icon, text, and background. Click icon to
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Enable dom element in [configuration of game](game.md#configuration)
     ```javascript
@@ -120,7 +120,7 @@ A container with a [canvas](canvas.md) icon, text, and background. Click icon to
     - Set `dom.createContainer` to `true`.
 - Import class
     ```javascript
-    import { ImageInputLabel } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
+    import { ImageInputLabel } from 'phaser4-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add image-input label object
     ```javascript    

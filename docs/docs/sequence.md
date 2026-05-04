@@ -30,11 +30,11 @@ Run sequence commands in array.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import SequencePlugin from 'phaser3-rex-plugins/plugins/sequence-plugin.js';
+    import SequencePlugin from 'phaser4-rex-plugins/plugins/sequence-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Run sequence commands in array.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import Sequence from 'phaser3-rex-plugins/plugins/sequence.js';
+    import Sequence from 'phaser4-rex-plugins/plugins/sequence.js';
     ```
 - Create sequence instance
     ```javascript

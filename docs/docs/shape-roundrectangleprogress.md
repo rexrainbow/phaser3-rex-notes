@@ -30,11 +30,11 @@ Horizontal or vertical round rectangle progress bar shape.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import RoundRectangleProgressPlugin from 'phaser3-rex-plugins/plugins/roundrectangleprogress-plugin.js';
+    import RoundRectangleProgressPlugin from 'phaser4-rex-plugins/plugins/roundrectangleprogress-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Horizontal or vertical round rectangle progress bar shape.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import RoundRectangleProgress from 'phaser3-rex-plugins/plugins/roundrectangleprogress.js';
+    import RoundRectangleProgress from 'phaser4-rex-plugins/plugins/roundrectangleprogress.js';
     ```
 - Add roundrectangle-progress object
     ```javascript

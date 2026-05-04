@@ -30,11 +30,11 @@ Emit [particles](particles.md) along bounds of game object.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import DragPlugin from 'phaser3-rex-plugins/plugins/particlesalongbounds-plugin.js';
+    import DragPlugin from 'phaser4-rex-plugins/plugins/particlesalongbounds-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Emit [particles](particles.md) along bounds of game object.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import ParticlesAlongBounds from 'phaser3-rex-plugins/plugins/particlesalongbounds.js';
+    import ParticlesAlongBounds from 'phaser4-rex-plugins/plugins/particlesalongbounds.js';
     ```
 - Start emit particles along bounds of game object
     ```javascript

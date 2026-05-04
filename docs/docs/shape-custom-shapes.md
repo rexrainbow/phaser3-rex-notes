@@ -33,11 +33,11 @@ Custom shapes on shape.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import CustomShapesPlugin from 'phaser3-rex-plugins/plugins/customshapes-plugin.js';
+    import CustomShapesPlugin from 'phaser4-rex-plugins/plugins/customshapes-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -62,11 +62,11 @@ Custom shapes on shape.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import CustomShapes from 'phaser3-rex-plugins/plugins/bbcodetext.js';
+    import CustomShapes from 'phaser4-rex-plugins/plugins/bbcodetext.js';
     ```
 - Add custom shapes object
     ```javascript    

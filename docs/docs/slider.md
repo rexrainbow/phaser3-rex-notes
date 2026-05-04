@@ -31,11 +31,11 @@ Drag thumb on a slider bar.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import SliderPlugin from 'phaser3-rex-plugins/plugins/slider-plugin.js';
+    import SliderPlugin from 'phaser4-rex-plugins/plugins/slider-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -60,11 +60,11 @@ Drag thumb on a slider bar.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import Slider from 'phaser3-rex-plugins/plugins/slider.js';
+    import Slider from 'phaser4-rex-plugins/plugins/slider.js';
     ```
 - Add slider behavior
     ```javascript

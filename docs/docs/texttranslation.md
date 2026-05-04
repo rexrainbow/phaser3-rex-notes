@@ -72,11 +72,11 @@ Apply translated string ([i18next](https://www.i18next.com/)) to [text object](t
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import TextTranslationPlugin from 'phaser3-rex-plugins/plugins/texttranslation-plugin.js';
+    import TextTranslationPlugin from 'phaser4-rex-plugins/plugins/texttranslation-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -125,16 +125,16 @@ Apply translated string ([i18next](https://www.i18next.com/)) to [text object](t
 
 - Install rex plugins, i18next, i18next-http-backend from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     npm i i18next
     npm i i18next-http-backend
     ```
 - Import class
     ```javascript
-    import TextTranslationBehavior from 'phaser3-rex-plugins/plugins/texttranslation.js';
+    import TextTranslationBehavior from 'phaser4-rex-plugins/plugins/texttranslation.js';
     import i18next from 'i18next';
     import Backend from 'i18next-http-backend';
-    import Awaitloader from 'phaser3-rex-plugins/plugins/awaitloader.js';
+    import Awaitloader from 'phaser4-rex-plugins/plugins/awaitloader.js';
     ```
 - Initialize i18next during preload stage
     ```javascript

@@ -61,11 +61,11 @@ Create an [input text object](inputtext.md) above a text object to edit string c
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import TextEditPlugin from 'phaser3-rex-plugins/plugins/textedit-plugin.js';
+    import TextEditPlugin from 'phaser4-rex-plugins/plugins/textedit-plugin.js';
     var config = {
         parent: divId,
         // fullscreenTarget: divId, // For fullscreen
@@ -108,7 +108,7 @@ Create an [input text object](inputtext.md) above a text object to edit string c
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Enable dom element in [configuration of game](game.md#configuration)
     ```javascript
@@ -134,7 +134,7 @@ Create an [input text object](inputtext.md) above a text object to edit string c
     - Set `dom.createContainer` to `true`.
 - Import class
     ```javascript
-    import { TextEdit, Edit } from 'phaser3-rex-plugins/plugins/textedit.js';
+    import { TextEdit, Edit } from 'phaser4-rex-plugins/plugins/textedit.js';
     ```
 - Open editor
     - Add text-edit behavior, will open editor under `'pointerdown'` event.

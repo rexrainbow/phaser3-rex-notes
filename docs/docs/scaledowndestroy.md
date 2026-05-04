@@ -26,11 +26,11 @@ Scale down (i.e. ease scaleX, scaleY to `0`) game object then destroy it.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import ScalePlugin from 'phaser3-rex-plugins/plugins/scale-plugin.js';
+    import ScalePlugin from 'phaser4-rex-plugins/plugins/scale-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -55,11 +55,11 @@ Scale down (i.e. ease scaleX, scaleY to `0`) game object then destroy it.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import ScaleDownDestroy from 'phaser3-rex-plugins/plugins/scale-down-destroy.js';
+    import ScaleDownDestroy from 'phaser4-rex-plugins/plugins/scale-down-destroy.js';
     ```
 - Scale down, then destroy object
     ```javascript

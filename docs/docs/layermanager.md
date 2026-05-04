@@ -86,11 +86,11 @@ graph RL
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import LayerManagerPlugin from 'phaser3-rex-plugins/plugins/layermanager-plugin.js';
+    import LayerManagerPlugin from 'phaser4-rex-plugins/plugins/layermanager-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -115,11 +115,11 @@ graph RL
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import LayerManager from 'phaser3-rex-plugins/plugins/layermanager.js';
+    import LayerManager from 'phaser4-rex-plugins/plugins/layermanager.js';
     ```
 - Add move-to behavior
     ```javascript

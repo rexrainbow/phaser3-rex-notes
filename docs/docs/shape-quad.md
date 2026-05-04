@@ -31,11 +31,11 @@ Quad shape, offsets can be given on four vertices, and additional points can be 
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import QuadShapePlugin from 'phaser3-rex-plugins/plugins/quadshape-plugin.js';
+    import QuadShapePlugin from 'phaser4-rex-plugins/plugins/quadshape-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -60,11 +60,11 @@ Quad shape, offsets can be given on four vertices, and additional points can be 
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import QuadShape from 'phaser3-rex-plugins/plugins/quadshape.js';
+    import QuadShape from 'phaser4-rex-plugins/plugins/quadshape.js';
     ```
 - Add shape object
     ```javascript    

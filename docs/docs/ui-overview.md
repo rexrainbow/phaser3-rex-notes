@@ -17,11 +17,11 @@
 
 1. Install rex plugins
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 1. Install ui plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
+    import RexUIPlugin from 'phaser4-rex-plugins/templates/ui/ui-plugin.js';
     
     var config = {
         // ...
@@ -43,7 +43,7 @@
 
 ```typescript
 import 'phaser';
-import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
+import RexUIPlugin from 'phaser4-rex-plugins/templates/ui/ui-plugin.js';
 declare module 'phaser' {
   interface Scene {
     rexUI: RexUIPlugin;
@@ -54,7 +54,7 @@ declare module 'phaser' {
 or
 
 ```typescript
-import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
+import RexUIPlugin from 'phaser4-rex-plugins/templates/ui/ui-plugin.js';
 
 class Game extends Phaser.Scene {
     rexUI: RexUIPlugin;  // Declare scene property 'rexUI' as RexUIPlugin type
@@ -82,10 +82,10 @@ var game = new Phaser.Game({
 });
 ```
 
-- `'phaser3-rex-plugins/templates/ui/ui-plugin'` : Factories of rexUI components.
-- `'phaser3-rex-plugins/templates/ui/ui-components'` : Class of rexUI components.
+- `'phaser4-rex-plugins/templates/ui/ui-plugin'` : Factories of rexUI components.
+- `'phaser4-rex-plugins/templates/ui/ui-components'` : Class of rexUI components.
     ```typescript
-    import { Sizer } from 'phaser3-rex-plugins/templates/ui/ui-components';
+    import { Sizer } from 'phaser4-rex-plugins/templates/ui/ui-components';
     ```
 
 See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/ui-wrap-expand-text/speech-bubble-background-ts.ts)

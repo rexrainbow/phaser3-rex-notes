@@ -52,11 +52,11 @@ Await custom task in preload stage.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import AwaitLoaderPlugin from 'phaser3-rex-plugins/plugins/awaitloader-plugin.js';
+    import AwaitLoaderPlugin from 'phaser4-rex-plugins/plugins/awaitloader-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -83,11 +83,11 @@ Await custom task in preload stage.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import AwaitLoader from 'phaser3-rex-plugins/plugins/awaitloader.js';
+    import AwaitLoader from 'phaser4-rex-plugins/plugins/awaitloader.js';
     ```
 - Start loading task
     ```javascript

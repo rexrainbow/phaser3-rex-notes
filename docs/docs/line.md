@@ -30,11 +30,11 @@ Draw a line with start/end/body textures, extended from [RenderTexture game obje
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import LinePlugin from 'phaser3-rex-plugins/plugins/line-plugin.js';
+    import LinePlugin from 'phaser4-rex-plugins/plugins/line-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Draw a line with start/end/body textures, extended from [RenderTexture game obje
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import Line from 'phaser3-rex-plugins/plugins/line.js';
+    import Line from 'phaser4-rex-plugins/plugins/line.js';
     ```
 - Add line object
     ```javascript

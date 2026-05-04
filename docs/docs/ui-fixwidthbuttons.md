@@ -32,11 +32,11 @@ A container with a group of fix-width buttons.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
+    import UIPlugin from 'phaser4-rex-plugins/templates/ui/ui-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -61,11 +61,11 @@ A container with a group of fix-width buttons.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import { FixWidthButtons } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
+    import { FixWidthButtons } from 'phaser4-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add fix-Width buttons object
     ```javascript

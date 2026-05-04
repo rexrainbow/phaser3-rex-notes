@@ -31,11 +31,11 @@ Fires 'intouch' event every tick when pressing on a game object.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import InTouchingPlugin from 'phaser3-rex-plugins/plugins/intouching-plugin.js';
+    import InTouchingPlugin from 'phaser4-rex-plugins/plugins/intouching-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -60,11 +60,11 @@ Fires 'intouch' event every tick when pressing on a game object.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import InTouching from 'phaser3-rex-plugins/plugins/intouching.js';
+    import InTouching from 'phaser4-rex-plugins/plugins/intouching.js';
     ```
 - Add intouching behavior
     ```javascript

@@ -29,11 +29,11 @@ See also [built-in grid-align](groupactions.md#grid-align).
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import GridAlignPlugin from 'phaser3-rex-plugins/plugins/gridalign-plugin.js';
+    import GridAlignPlugin from 'phaser4-rex-plugins/plugins/gridalign-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ See also [built-in grid-align](groupactions.md#grid-align).
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import { QuadGridAlign, HexagonGridAlign } from 'phaser3-rex-plugins/plugins/gridalign.js';
+    import { QuadGridAlign, HexagonGridAlign } from 'phaser4-rex-plugins/plugins/gridalign.js';
     ```
 - Grid-align objects
     ```javascript

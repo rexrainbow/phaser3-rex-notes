@@ -31,11 +31,11 @@ Particles' emitter zone from canvas bitmap of text/canvas game object.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import BitmapZonePlugin from 'phaser3-rex-plugins/plugins/bitmapzone-plugin.js';
+    import BitmapZonePlugin from 'phaser4-rex-plugins/plugins/bitmapzone-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -60,11 +60,11 @@ Particles' emitter zone from canvas bitmap of text/canvas game object.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import BitmapZone from 'phaser3-rex-plugins/plugins/bitmapzone.js';
+    import BitmapZone from 'phaser4-rex-plugins/plugins/bitmapzone.js';
     ```
 - Add bitmap-zone object
     ```javascript

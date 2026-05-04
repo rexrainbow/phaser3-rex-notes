@@ -30,11 +30,11 @@ Load a texture, then apply a circle mask. Extended from [canvas plugin](canvas.m
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import CircleMaskImagePlugin from 'phaser3-rex-plugins/plugins/circlemaskimage-plugin.js';
+    import CircleMaskImagePlugin from 'phaser4-rex-plugins/plugins/circlemaskimage-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Load a texture, then apply a circle mask. Extended from [canvas plugin](canvas.m
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import CircleMaskImage from 'phaser3-rex-plugins/plugins/circlemaskimage.js';
+    import CircleMaskImage from 'phaser4-rex-plugins/plugins/circlemaskimage.js';
     ```
 - Add circle-mask-image object
     ```javascript    

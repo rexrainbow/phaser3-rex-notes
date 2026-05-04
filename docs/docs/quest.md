@@ -32,11 +32,11 @@ Question manager.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import QuestPlugin from 'phaser3-rex-plugins/plugins/quest-plugin.js';
+    import QuestPlugin from 'phaser4-rex-plugins/plugins/quest-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -61,11 +61,11 @@ Question manager.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import Quest from 'phaser3-rex-plugins/plugins/quest.js';
+    import Quest from 'phaser4-rex-plugins/plugins/quest.js';
     ```
 - Add quest-manager object
     ```javascript

@@ -32,11 +32,11 @@ Text commands to control sprites, texts, sound effect or backgroun music.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import TagPlayerPlugin from 'phaser3-rex-plugins/plugins/tagplayer-plugin.js';
+    import TagPlayerPlugin from 'phaser4-rex-plugins/plugins/tagplayer-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -61,11 +61,11 @@ Text commands to control sprites, texts, sound effect or backgroun music.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import TagPlayer from 'phaser3-rex-plugins/plugins/tagplayer.js';
+    import TagPlayer from 'phaser4-rex-plugins/plugins/tagplayer.js';
     ```
 - Add tag-player object
     ```javascript

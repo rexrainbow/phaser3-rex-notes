@@ -49,11 +49,11 @@ CRT effect. [Reference](https://www.shadertoy.com/view/WsVSzV)
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import CrtFilterPlugin from 'phaser3-rex-plugins/plugins/crtfilter-plugin.js';
+    import CrtFilterPlugin from 'phaser4-rex-plugins/plugins/crtfilter-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -94,11 +94,11 @@ CRT effect. [Reference](https://www.shadertoy.com/view/WsVSzV)
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import filter and controller class
     ```javascript
-    import { CrtFilter, CrtController } from 'phaser3-rex-plugins/plugins/crtfilter.js';
+    import { CrtFilter, CrtController } from 'phaser4-rex-plugins/plugins/crtfilter.js';
     ```
 - Register effect
     ```js

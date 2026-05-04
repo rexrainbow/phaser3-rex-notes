@@ -32,11 +32,11 @@ It has better rendering result when the texture size is not power of 2, in `WebG
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import RepeatImagePlugin from 'phaser3-rex-plugins/plugins/repeatimage-plugin.js';
+    import RepeatImagePlugin from 'phaser4-rex-plugins/plugins/repeatimage-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -61,11 +61,11 @@ It has better rendering result when the texture size is not power of 2, in `WebG
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import RepeatImage from 'phaser3-rex-plugins/plugins/repeatimage.js';
+    import RepeatImage from 'phaser4-rex-plugins/plugins/repeatimage.js';
     ```
 - Add repeat-image object
     ```javascript    

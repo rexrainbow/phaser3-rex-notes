@@ -26,11 +26,11 @@ Run commands in array.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import RunCommandsPlugin from 'phaser3-rex-plugins/plugins/runcommands-plugin.js';
+    import RunCommandsPlugin from 'phaser4-rex-plugins/plugins/runcommands-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -55,11 +55,11 @@ Run commands in array.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import RunCommands from 'phaser3-rex-plugins/plugins/runcommands.js';
+    import RunCommands from 'phaser4-rex-plugins/plugins/runcommands.js';
     ```
 - Run commands
     ```javascript

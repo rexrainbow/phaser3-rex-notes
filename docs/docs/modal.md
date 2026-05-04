@@ -33,7 +33,7 @@ Pop-up modal dialog, then scale-down this dialog.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Add modal behavior
     ```javascript
@@ -44,11 +44,11 @@ Pop-up modal dialog, then scale-down this dialog.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import { ModalBehavoir } from 'phaser3-rex-plugins/plugins/modal.js';
+    import { ModalBehavoir } from 'phaser4-rex-plugins/plugins/modal.js';
     ```
 - Add modal behavior
     ```javascript

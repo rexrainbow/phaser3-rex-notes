@@ -33,11 +33,11 @@ Start and counting timer by real-time timestamp.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import RealTimeTimersPlugin from 'phaser3-rex-plugins/plugins/realtimetimers-plugin.js';
+    import RealTimeTimersPlugin from 'phaser4-rex-plugins/plugins/realtimetimers-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -62,11 +62,11 @@ Start and counting timer by real-time timestamp.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import RealTimeTimers from 'phaser3-rex-plugins/plugins/realtimetimers.js';
+    import RealTimeTimers from 'phaser4-rex-plugins/plugins/realtimetimers.js';
     ```
 - Add real-time timers object
     ```javascript

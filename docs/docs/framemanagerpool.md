@@ -30,11 +30,11 @@ Draw frames on [canvas texture](canvas-texture.md), or [dynamic texture](dynamic
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import FrameManagerPlugin from 'phaser3-rex-plugins/plugins/framemanager-plugin.js';
+    import FrameManagerPlugin from 'phaser4-rex-plugins/plugins/framemanager-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Draw frames on [canvas texture](canvas-texture.md), or [dynamic texture](dynamic
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import { FrameManagerPool } from 'phaser3-rex-plugins/plugins/framemanager.js';
+    import { FrameManagerPool } from 'phaser4-rex-plugins/plugins/framemanager.js';
     ```
 - Add frame-manager object
     ```javascript

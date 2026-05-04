@@ -31,11 +31,11 @@ Trangle shape inside a rectangle bounds.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import TrianglePlugin from 'phaser3-rex-plugins/plugins/triangle-plugin.js';
+    import TrianglePlugin from 'phaser4-rex-plugins/plugins/triangle-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -60,11 +60,11 @@ Trangle shape inside a rectangle bounds.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import Triangle from 'phaser3-rex-plugins/plugins/triangle.js';
+    import Triangle from 'phaser4-rex-plugins/plugins/triangle.js';
     ```
 - Add triangle object
     ```javascript

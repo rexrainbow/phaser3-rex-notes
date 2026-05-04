@@ -32,11 +32,11 @@ Chess [Container](containerlite.md), to rotate/mirror/drag chess together.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import BoardPlugin from 'phaser3-rex-plugins/plugins/board-plugin.js';
+    import BoardPlugin from 'phaser4-rex-plugins/plugins/board-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -61,11 +61,11 @@ Chess [Container](containerlite.md), to rotate/mirror/drag chess together.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import { MiniBoard } from 'phaser3-rex-plugins/plugins/board-components.js';
+    import { MiniBoard } from 'phaser4-rex-plugins/plugins/board-components.js';
     ```
 - Add match object
     ```javascript

@@ -32,11 +32,11 @@ Key object interface mapping from multiple source of key objects.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import KeysHubPlugin from 'phaser3-rex-plugins/plugins/keyshub-plugin.js';
+    import KeysHubPlugin from 'phaser4-rex-plugins/plugins/keyshub-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -61,11 +61,11 @@ Key object interface mapping from multiple source of key objects.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import KeysHub from 'phaser3-rex-plugins/plugins/keyshub.js';
+    import KeysHub from 'phaser4-rex-plugins/plugins/keyshub.js';
     ```
 - Add keys-hub object
     ```javascript

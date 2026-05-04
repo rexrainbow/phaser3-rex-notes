@@ -49,11 +49,11 @@ Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filte
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import OutlineFilterPlugin from 'phaser3-rex-plugins/plugins/outlinepipeline-plugin.js';
+    import OutlineFilterPlugin from 'phaser4-rex-plugins/plugins/outlinepipeline-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -94,11 +94,11 @@ Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filte
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import filter and controller class
     ```javascript
-    import { OutlineFilter, OutlineController } from 'phaser3-rex-plugins/plugins/outlinepipeline.js';
+    import { OutlineFilter, OutlineController } from 'phaser4-rex-plugins/plugins/outlinepipeline.js';
     ```
 - Register effect
     ```js

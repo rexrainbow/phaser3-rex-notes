@@ -49,11 +49,11 @@ Draw outlines and quantize color in HSV domain. [Reference](https://www.geeks3d.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import ToonifyFilterPlugin from 'phaser3-rex-plugins/plugins/toonifyfilter-plugin.js';
+    import ToonifyFilterPlugin from 'phaser4-rex-plugins/plugins/toonifyfilter-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -94,11 +94,11 @@ Draw outlines and quantize color in HSV domain. [Reference](https://www.geeks3d.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import filter and controller class
     ```javascript
-    import { ToonifyFilter, ToonifyController } from 'phaser3-rex-plugins/plugins/toonifyfilter.js';
+    import { ToonifyFilter, ToonifyController } from 'phaser4-rex-plugins/plugins/toonifyfilter.js';
     ```
 - Register effect
     ```js

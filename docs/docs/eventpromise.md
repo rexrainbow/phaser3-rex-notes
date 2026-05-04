@@ -31,11 +31,11 @@ Return a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import EventPromisePlugin from 'phaser3-rex-plugins/plugins/eventpromise-plugin.js';
+    import EventPromisePlugin from 'phaser4-rex-plugins/plugins/eventpromise-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -61,11 +61,11 @@ Return a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import { WaitEvent, WaitComplete } from 'phaser3-rex-plugins/plugins/eventpromise.js';
+    import { WaitEvent, WaitComplete } from 'phaser4-rex-plugins/plugins/eventpromise.js';
     ```
 - Get event promise
     ```javascript

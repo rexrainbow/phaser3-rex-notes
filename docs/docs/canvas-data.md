@@ -32,11 +32,11 @@ Get image data from texture, or text object.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import CanvasDataPlugin from 'phaser3-rex-plugins/plugins/canvasdata-plugin.js';
+    import CanvasDataPlugin from 'phaser4-rex-plugins/plugins/canvasdata-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -62,11 +62,11 @@ Get image data from texture, or text object.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import CanvasData from 'phaser3-rex-plugins/plugins/canvasdata.js';
+    import CanvasData from 'phaser4-rex-plugins/plugins/canvasdata.js';
     ```
 - Add canvas-data object
     ```javascript

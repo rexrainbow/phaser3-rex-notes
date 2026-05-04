@@ -29,11 +29,11 @@ Skewable render texture.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import QuadImagePlugin from 'phaser3-rex-plugins/plugins/quadimage-plugin.js';
+    import QuadImagePlugin from 'phaser4-rex-plugins/plugins/quadimage-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -58,11 +58,11 @@ Skewable render texture.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import { SkewRenderTexture } from 'phaser3-rex-plugins/plugins/quadimage.js';
+    import { SkewRenderTexture } from 'phaser4-rex-plugins/plugins/quadimage.js';
     ```
 - Add render texture object
     ```javascript

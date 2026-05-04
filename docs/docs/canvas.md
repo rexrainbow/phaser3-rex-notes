@@ -32,11 +32,11 @@ Drawing on [canvas](https://www.w3schools.com/html/html5_canvas.asp).
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import CanvasPlugin from 'phaser3-rex-plugins/plugins/canvas-plugin.js';
+    import CanvasPlugin from 'phaser4-rex-plugins/plugins/canvas-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -61,11 +61,11 @@ Drawing on [canvas](https://www.w3schools.com/html/html5_canvas.asp).
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import Canvas from 'phaser3-rex-plugins/plugins/canvas.js';
+    import Canvas from 'phaser4-rex-plugins/plugins/canvas.js';
     ```
 - Add canvas object
     ```javascript    

@@ -43,11 +43,11 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import BBCodeTextPlugin from 'phaser3-rex-plugins/plugins/bbcodetext-plugin.js';
+    import BBCodeTextPlugin from 'phaser4-rex-plugins/plugins/bbcodetext-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -72,11 +72,11 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import BBCodeText from 'phaser3-rex-plugins/plugins/bbcodetext.js';
+    import BBCodeText from 'phaser4-rex-plugins/plugins/bbcodetext.js';
     ```
 - Add text object
     ```javascript    

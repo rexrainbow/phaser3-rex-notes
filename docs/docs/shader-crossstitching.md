@@ -49,11 +49,11 @@ Cross-stitching post processing filter. [Reference](https://www.geeks3d.com/2011
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import CrossStitchingFilterPlugin from 'phaser3-rex-plugins/plugins/crossstitchingfilter-plugin.js';
+    import CrossStitchingFilterPlugin from 'phaser4-rex-plugins/plugins/crossstitchingfilter-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -94,11 +94,11 @@ Cross-stitching post processing filter. [Reference](https://www.geeks3d.com/2011
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import filter and controller class
     ```javascript
-    import { CrossStitchingFilter, CrossStitchingController } from 'phaser3-rex-plugins/plugins/crossstitchingfilter.js';
+    import { CrossStitchingFilter, CrossStitchingController } from 'phaser4-rex-plugins/plugins/crossstitchingfilter.js';
     ```
 - Register effect
     ```js

@@ -38,11 +38,11 @@ Inspirited from [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canv
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import CanvasInputPlugin from 'phaser3-rex-plugins/plugins/canvasinput-plugin.js';
+    import CanvasInputPlugin from 'phaser4-rex-plugins/plugins/canvasinput-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -67,11 +67,11 @@ Inspirited from [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canv
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import CanvasInput from 'phaser3-rex-plugins/plugins/canvasinput.js';
+    import CanvasInput from 'phaser4-rex-plugins/plugins/canvasinput.js';
     ```
 - Add canvas-input object
     ```javascript    

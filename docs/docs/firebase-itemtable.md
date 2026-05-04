@@ -46,7 +46,7 @@
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - [Add Firebase SDKs](https://firebase.google.com/docs/web/setup)
     ```html
@@ -60,7 +60,7 @@
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import FirebasePlugin from 'phaser3-rex-plugins/plugins/firebase-plugin.js';
+    import FirebasePlugin from 'phaser4-rex-plugins/plugins/firebase-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -94,7 +94,7 @@
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - [Add Firebase SDKs](https://firebase.google.com/docs/web/setup)
     ```html
@@ -119,7 +119,7 @@
     ```
 - Import class
     ```javascript
-    import { ItemTable } from 'phaser3-rex-plugins/plugins/firebase-components.js';
+    import { ItemTable } from 'phaser4-rex-plugins/plugins/firebase-components.js';
     ```
 - Add table object
     ```javascript

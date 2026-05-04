@@ -33,11 +33,11 @@ Typing text on [text object](text.md), [bbcode text object](bbcodetext.md), or [
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import TextTypingPlugin from 'phaser3-rex-plugins/plugins/texttyping-plugin.js';
+    import TextTypingPlugin from 'phaser4-rex-plugins/plugins/texttyping-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -62,11 +62,11 @@ Typing text on [text object](text.md), [bbcode text object](bbcodetext.md), or [
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import TextTyping from 'phaser3-rex-plugins/plugins/texttyping.js';
+    import TextTyping from 'phaser4-rex-plugins/plugins/texttyping.js';
     ```
 - Add typing behavior
     ```javascript

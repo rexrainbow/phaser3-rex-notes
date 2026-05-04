@@ -30,11 +30,11 @@ Draw outline of target game objects.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import OutlineEffectLayerPlugin from 'phaser3-rex-plugins/plugins/outlineeffectlayer-plugin.js';
+    import OutlineEffectLayerPlugin from 'phaser4-rex-plugins/plugins/outlineeffectlayer-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Draw outline of target game objects.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import OutlineEffectLayer from 'phaser3-rex-plugins/plugins/outlineeffectlayer.js';
+    import OutlineEffectLayer from 'phaser4-rex-plugins/plugins/outlineeffectlayer.js';
     ```
 - Add outline effect layer object
     ```javascript

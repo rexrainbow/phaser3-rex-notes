@@ -31,11 +31,11 @@ Constraints text game object size by truncating text with padding symbol on [tex
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import TextTruncatorPlugin from 'phaser3-rex-plugins/plugins/texttruncator-plugin.js';
+    import TextTruncatorPlugin from 'phaser4-rex-plugins/plugins/texttruncator-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -60,11 +60,11 @@ Constraints text game object size by truncating text with padding symbol on [tex
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import TextTruncator from 'phaser3-rex-plugins/plugins/texttruncator.js';
+    import TextTruncator from 'phaser4-rex-plugins/plugins/texttruncator.js';
     ```
 - Add text-truncator behavior
     ```javascript

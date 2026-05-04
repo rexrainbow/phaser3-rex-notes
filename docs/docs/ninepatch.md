@@ -35,11 +35,11 @@ Stretchable image, extended from [RenderTexture game object](rendertexture.md).
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import NinePatchPlugin from 'phaser3-rex-plugins/plugins/ninepatch-plugin.js';
+    import NinePatchPlugin from 'phaser4-rex-plugins/plugins/ninepatch-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -64,11 +64,11 @@ Stretchable image, extended from [RenderTexture game object](rendertexture.md).
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import NinePatch from 'phaser3-rex-plugins/plugins/ninepatch.js';
+    import NinePatch from 'phaser4-rex-plugins/plugins/ninepatch.js';
     ```
 - Add nine-patch object
     ```javascript    

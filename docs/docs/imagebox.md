@@ -31,11 +31,11 @@ A [containerLite game object ](containerlite.md) with 1 [image game object](imag
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import ImageBoxPlugin from 'phaser3-rex-plugins/plugins/imagebox-plugin.js';
+    import ImageBoxPlugin from 'phaser4-rex-plugins/plugins/imagebox-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -60,11 +60,11 @@ A [containerLite game object ](containerlite.md) with 1 [image game object](imag
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import ImageBox from 'phaser3-rex-plugins/plugins/imagebox.js';
+    import ImageBox from 'phaser4-rex-plugins/plugins/imagebox.js';
     ```
 - Add image object
     ```javascript    

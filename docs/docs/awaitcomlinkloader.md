@@ -92,11 +92,11 @@ Plugin will load Comlink API if Comlink API is not ready.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import AwaitComlinkLoaderPlugin from 'phaser3-rex-plugins/plugins/awaitcomlinkloader-plugin.js';
+    import AwaitComlinkLoaderPlugin from 'phaser4-rex-plugins/plugins/awaitcomlinkloader-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -123,11 +123,11 @@ Plugin will load Comlink API if Comlink API is not ready.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import AwaitComLinkLoader from 'phaser3-rex-plugins/plugins/awaitcomlinkloader.js';
+    import AwaitComLinkLoader from 'phaser4-rex-plugins/plugins/awaitcomlinkloader.js';
     ```
 - In preload stage, start web-worker task
     ```javascript

@@ -59,11 +59,11 @@ Reference : [Horri-fi shader effect](https://gizmo199.itch.io/horri-fi)
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import HorrifiFilterPlugin from 'phaser3-rex-plugins/plugins/horrifipipeline-plugin.js';
+    import HorrifiFilterPlugin from 'phaser4-rex-plugins/plugins/horrifipipeline-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -104,11 +104,11 @@ Reference : [Horri-fi shader effect](https://gizmo199.itch.io/horri-fi)
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import filter and controller class
     ```javascript
-    import { HorrifiFilter, HorrifiController } from 'phaser3-rex-plugins/plugins/horrifipipeline.js';
+    import { HorrifiFilter, HorrifiController } from 'phaser4-rex-plugins/plugins/horrifipipeline.js';
     ```
 - Register effect
     ```js

@@ -34,11 +34,11 @@ Transit texture to another one, with some pre-build effects, extended from [Tran
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import TransitionImagePackPlugin from 'phaser3-rex-plugins/templates/transitionimagepack/transitionimagepack-plugin.js';
+    import TransitionImagePackPlugin from 'phaser4-rex-plugins/templates/transitionimagepack/transitionimagepack-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -63,11 +63,11 @@ Transit texture to another one, with some pre-build effects, extended from [Tran
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import TransitionImagePack from 'phaser3-rex-plugins/templates/transitionimagepack/TransitionImagePack.js';
+    import TransitionImagePack from 'phaser4-rex-plugins/templates/transitionimagepack/TransitionImagePack.js';
     ```
 - Add image object
     ```javascript    

@@ -26,7 +26,7 @@ var grid = scene.rexBoard.add.hexagonGrid({
 or
 
 ```javascript
-// import { HexagonGrid } from 'phaser3-rex-plugins/plugins/board-components.js';
+// import { HexagonGrid } from 'phaser4-rex-plugins/plugins/board-components.js';
 var grid = new HexagonGrid(config);
 ```
 

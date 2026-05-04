@@ -31,11 +31,11 @@ Map cursor-at-(left/right/top/botttom-)bound to (left/right/up/down) cursor key 
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import CursorAtBoundsPlugin from 'phaser3-rex-plugins/plugins/cursoratboundss-plugin.js';
+    import CursorAtBoundsPlugin from 'phaser4-rex-plugins/plugins/cursoratboundss-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -60,11 +60,11 @@ Map cursor-at-(left/right/top/botttom-)bound to (left/right/up/down) cursor key 
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import CursorAtBounds from 'phaser3-rex-plugins/plugins/cursoratboundss.js';
+    import CursorAtBounds from 'phaser4-rex-plugins/plugins/cursoratboundss.js';
     ```
 - Add cursor-at-bound object
     ```javascript

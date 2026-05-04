@@ -32,11 +32,11 @@ Cut image into pieces for jigsaw application.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import CutJigsawImagePlugin from 'phaser3-rex-plugins/plugins/cutjigsawimage-plugin.js';
+    import CutJigsawImagePlugin from 'phaser4-rex-plugins/plugins/cutjigsawimage-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -61,11 +61,11 @@ Cut image into pieces for jigsaw application.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import method
     ```javascript
-    import CutJigsawImage from 'phaser3-rex-plugins/plugins/cutjigsawimage.js';
+    import CutJigsawImage from 'phaser4-rex-plugins/plugins/cutjigsawimage.js';
     ```
 - Cut image into pieces
     ```javascript

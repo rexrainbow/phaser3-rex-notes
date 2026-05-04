@@ -26,11 +26,11 @@ Rotate game object towards target position with a steady speed.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import RotateToPlugin from 'phaser3-rex-plugins/plugins/rotateto-plugin.js';
+    import RotateToPlugin from 'phaser4-rex-plugins/plugins/rotateto-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -55,11 +55,11 @@ Rotate game object towards target position with a steady speed.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import RotateTo from 'phaser3-rex-plugins/plugins/rotateto.js';
+    import RotateTo from 'phaser4-rex-plugins/plugins/rotateto.js';
     ```
 - Add rotate-to behavior
     ```javascript

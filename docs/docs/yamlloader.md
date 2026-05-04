@@ -51,11 +51,11 @@ Load a YAML text file, parse its contents, and store the result in a JSON cache.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import YAMLLoaderPlugin from 'phaser3-rex-plugins/plugins/yamlloader-plugin.js';
+    import YAMLLoaderPlugin from 'phaser4-rex-plugins/plugins/yamlloader-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -81,11 +81,11 @@ Load a YAML text file, parse its contents, and store the result in a JSON cache.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import YAMLLoader from 'phaser3-rex-plugins/plugins/yamlloader.js';
+    import YAMLLoader from 'phaser4-rex-plugins/plugins/yamlloader.js';
     ```
 - Start loading task
     ```javascript

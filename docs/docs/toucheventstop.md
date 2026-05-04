@@ -30,11 +30,11 @@ Stop touch events propagation.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import TouchEventStopPlugin from 'phaser3-rex-plugins/plugins/toucheventstop-plugin.js';
+    import TouchEventStopPlugin from 'phaser4-rex-plugins/plugins/toucheventstop-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Stop touch events propagation.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import method
     ```javascript
-    import TouchEventStop from 'phaser3-rex-plugins/plugins/toucheventstop.js';
+    import TouchEventStop from 'phaser4-rex-plugins/plugins/toucheventstop.js';
     ```
 - Add touch-event-stop behavior
     ```javascript

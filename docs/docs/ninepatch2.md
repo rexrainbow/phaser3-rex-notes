@@ -32,11 +32,11 @@ Stretchable image. Has better performance than [nine-patch](ninepatch.md).
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import NinePatch2Plugin from 'phaser3-rex-plugins/plugins/ninepatch2-plugin.js';
+    import NinePatch2Plugin from 'phaser4-rex-plugins/plugins/ninepatch2-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -61,11 +61,11 @@ Stretchable image. Has better performance than [nine-patch](ninepatch.md).
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import NinePatch2 from 'phaser3-rex-plugins/plugins/ninepatch2.js';
+    import NinePatch2 from 'phaser4-rex-plugins/plugins/ninepatch2.js';
     ```
 - Add nine-patch object
     ```javascript    

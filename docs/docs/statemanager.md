@@ -26,11 +26,11 @@ Another version of [Finite state machine](https://en.wikipedia.org/wiki/Finite-s
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import StateManagerPlugin from 'phaser3-rex-plugins/plugins/statemanager-plugin.js';
+    import StateManagerPlugin from 'phaser4-rex-plugins/plugins/statemanager-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -55,11 +55,11 @@ Another version of [Finite state machine](https://en.wikipedia.org/wiki/Finite-s
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import StateManager from 'phaser3-rex-plugins/plugins/statemanager.js';
+    import StateManager from 'phaser4-rex-plugins/plugins/statemanager.js';
     ```
 - Add StateManager object
     ```javascript

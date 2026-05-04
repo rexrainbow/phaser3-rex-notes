@@ -16,11 +16,11 @@
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import BoardPlugin from 'phaser3-rex-plugins/plugins/board-plugin.js';
+    import BoardPlugin from 'phaser4-rex-plugins/plugins/board-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -44,7 +44,7 @@
 #### Using typescript declaration file
 
 ```typescript
-import BoardPlugin from 'phaser3-rex-plugins/plugins/board-plugin.js';
+import BoardPlugin from 'phaser4-rex-plugins/plugins/board-plugin.js';
 
 class Game extends Phaser.Scene {
     rexBoard: BoardPlugin;  // Declare scene property 'rexBoard' as BoardPlugin type
@@ -72,10 +72,10 @@ var game = new Phaser.Game({
 });
 ```
 
-- `'phaser3-rex-plugins/plugins/board-plugin'` : Factories of board components.
-- `'phaser3-rex-plugins/plugins/board-components'` : Class of board components.
+- `'phaser4-rex-plugins/plugins/board-plugin'` : Factories of board components.
+- `'phaser4-rex-plugins/plugins/board-components'` : Class of board components.
     ```typescript
-    import { Board } from 'phaser3-rex-plugins/plugins/board-components';
+    import { Board } from 'phaser4-rex-plugins/plugins/board-components';
     ```
 
 See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/board/touch-event-ts.ts)

@@ -31,11 +31,11 @@ Run script in csv format. Csv could be edited by excel or google document.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import CsvScenarioPlugin from 'phaser3-rex-plugins/plugins/csvscenario-plugin.js';
+    import CsvScenarioPlugin from 'phaser4-rex-plugins/plugins/csvscenario-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -60,11 +60,11 @@ Run script in csv format. Csv could be edited by excel or google document.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import CsvScenario from 'phaser3-rex-plugins/plugins/csvscenario.js';
+    import CsvScenario from 'phaser4-rex-plugins/plugins/csvscenario.js';
     ```
 - Add csv-scenario object
     ```javascript

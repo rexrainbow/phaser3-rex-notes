@@ -49,11 +49,11 @@ Fish-eye post processing filter. [Reference](https://www.geeks3d.com/20140213/gl
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import FishEyeFilterPlugin from 'phaser3-rex-plugins/plugins/fisheyefilter-plugin.js';
+    import FishEyeFilterPlugin from 'phaser4-rex-plugins/plugins/fisheyefilter-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -94,11 +94,11 @@ Fish-eye post processing filter. [Reference](https://www.geeks3d.com/20140213/gl
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import filter and controller class
     ```javascript
-    import { FishEyeFilter, FishEyeController } from 'phaser3-rex-plugins/plugins/fisheyefilter.js';
+    import { FishEyeFilter, FishEyeController } from 'phaser4-rex-plugins/plugins/fisheyefilter.js';
     ```
 - Register effect
     ```js

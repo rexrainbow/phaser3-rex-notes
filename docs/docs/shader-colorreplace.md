@@ -50,11 +50,11 @@ Replace color post processing filter. [Reference](https://github.com/pixijs/filt
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import ColorReplaceFilterPlugin from 'phaser3-rex-plugins/plugins/colorreplacefilter-plugin.js';
+    import ColorReplaceFilterPlugin from 'phaser4-rex-plugins/plugins/colorreplacefilter-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -95,11 +95,11 @@ Replace color post processing filter. [Reference](https://github.com/pixijs/filt
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import filter and controller class
     ```javascript
-    import { ColorReplaceFilter, ColorReplaceController } from 'phaser3-rex-plugins/plugins/colorreplacefilter.js';
+    import { ColorReplaceFilter, ColorReplaceController } from 'phaser4-rex-plugins/plugins/colorreplacefilter.js';
     ```
 - Register effect
     ```js

@@ -31,11 +31,11 @@ Event sheets contains main condition(s) and actions, in simple markdown format (
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import MarkedEventSheetsPlugin from 'phaser3-rex-plugins/plugins/markedeventsheets-plugin.js';
+    import MarkedEventSheetsPlugin from 'phaser4-rex-plugins/plugins/markedeventsheets-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -60,11 +60,11 @@ Event sheets contains main condition(s) and actions, in simple markdown format (
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import MarkedEventSheets from 'phaser3-rex-plugins/plugins/markedeventsheets.js';
+    import MarkedEventSheets from 'phaser4-rex-plugins/plugins/markedeventsheets.js';
     ```
 - Add event-sheet-manager object
     ```javascript
@@ -753,8 +753,8 @@ var commandExecutor = scene.plugins.get('rexMarkedEventSheets').addCommandExecut
 or
 
 ```javascript
-// import MarkedEventSheets from 'phaser3-rex-plugins/plugins/markedeventsheets.js';
-// import CommandExecutor from 'phaser3-rex-plugins/plugins/commandexecutor.js';
+// import MarkedEventSheets from 'phaser4-rex-plugins/plugins/markedeventsheets.js';
+// import CommandExecutor from 'phaser4-rex-plugins/plugins/commandexecutor.js';
 
 var commandExecutor = new CommandExecutor(scene, config);
 

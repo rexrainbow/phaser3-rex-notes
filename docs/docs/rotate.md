@@ -30,11 +30,11 @@ Rotate game object continually with a steady speed.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import RotatePlugin from 'phaser3-rex-plugins/plugins/rotate-plugin.js';
+    import RotatePlugin from 'phaser4-rex-plugins/plugins/rotate-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -59,11 +59,11 @@ Rotate game object continually with a steady speed.
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import Rotate from 'phaser3-rex-plugins/plugins/rotate.js';
+    import Rotate from 'phaser4-rex-plugins/plugins/rotate.js';
     ```
 - Add rotate behavior
     ```javascript

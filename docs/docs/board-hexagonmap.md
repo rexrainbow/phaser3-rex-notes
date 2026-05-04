@@ -32,11 +32,11 @@ Create tile positions in hexagon/triangle/parallelogram geometry in hexagon grid
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import BoardPlugin from 'phaser3-rex-plugins/plugins/board-plugin.js';
+    import BoardPlugin from 'phaser4-rex-plugins/plugins/board-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -63,11 +63,11 @@ Create tile positions in hexagon/triangle/parallelogram geometry in hexagon grid
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import class
     ```javascript
-    import { HexagonMap } from 'phaser3-rex-plugins/plugins/board-components.js';
+    import { HexagonMap } from 'phaser4-rex-plugins/plugins/board-components.js';
     ```
 - Create tile positions
     ```javascript

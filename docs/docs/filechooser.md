@@ -53,11 +53,11 @@ Create a transparent file chooser button (`<input type="file">`).
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import FileChooserPlugin from 'phaser3-rex-plugins/plugins/filechooser-plugin.js';
+    import FileChooserPlugin from 'phaser4-rex-plugins/plugins/filechooser-plugin.js';
     var config = {    
         parent: divId,
         // fullscreenTarget: divId, // For fullscreen
@@ -95,7 +95,7 @@ Create a transparent file chooser button (`<input type="file">`).
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Enable dom element in [configuration of game](game.md#configuration)
     ```javascript
@@ -121,7 +121,7 @@ Create a transparent file chooser button (`<input type="file">`).
     - Set `dom.createContainer` to `true`.
 - Import class
     ```javascript
-    import { FileChooser } from 'phaser3-rex-plugins/plugins/filechooser.js';
+    import { FileChooser } from 'phaser4-rex-plugins/plugins/filechooser.js';
     ```
 - Add file chooser object
     ```javascript

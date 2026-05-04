@@ -49,11 +49,11 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import SwirlFilterPlugin from 'phaser3-rex-plugins/plugins/swirlfilter-plugin.js';
+    import SwirlFilterPlugin from 'phaser4-rex-plugins/plugins/swirlfilter-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -94,11 +94,11 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Import filter and controller class
     ```javascript
-    import { SwirlFilter, SwirlController } from 'phaser3-rex-plugins/plugins/swirlfilter.js';
+    import { SwirlFilter, SwirlController } from 'phaser4-rex-plugins/plugins/swirlfilter.js';
     ```
 - Register effect
     ```js

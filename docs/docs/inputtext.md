@@ -54,11 +54,11 @@
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import InputTextPlugin from 'phaser3-rex-plugins/plugins/inputtext-plugin.js';
+    import InputTextPlugin from 'phaser4-rex-plugins/plugins/inputtext-plugin.js';
     var config = {
         parent: divId,
         // fullscreenTarget: divId, // For fullscreen
@@ -96,7 +96,7 @@
 
 - Install rex plugins from npm
     ```
-    npm i phaser3-rex-plugins
+    npm i phaser4-rex-plugins
     ```
 - Enable dom element in [configuration of game](game.md#configuration)
     ```javascript
@@ -122,7 +122,7 @@
     - Set `dom.createContainer` to `true`.
 - Import class
     ```javascript
-    import InputText from 'phaser3-rex-plugins/plugins/inputtext.js';
+    import InputText from 'phaser4-rex-plugins/plugins/inputtext.js';
     ```
 - Add input-text object
     ```javascript    
