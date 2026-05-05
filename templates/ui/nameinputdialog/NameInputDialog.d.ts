@@ -260,7 +260,7 @@ declare class NameInputDialog extends Dialog {
      * @param value - Last name string.
      * @returns This dialog instance.
      */
-    setlastName(value: string): this;
+    setLastName(value: string): this;
     /**
      * Current last name value.
      */
