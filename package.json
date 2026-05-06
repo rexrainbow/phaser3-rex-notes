@@ -6,7 +6,9 @@
     "files": [
         "plugins",
         "templates",
-        "dist"
+        "dist",
+        "examples",
+        "skills"
     ],
     "scripts": {
         "dev": "webpack serve --config webpack.config.js",
