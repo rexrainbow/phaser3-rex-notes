@@ -4836,7 +4836,7 @@ Object.assign(
     PointMethods$1,
 );
 
-ObjectFactory.register('QuadShape', function (x, y, width, height, fillColor, fillAlpha) {
+ObjectFactory.register('quadShape', function (x, y, width, height, fillColor, fillAlpha) {
     var gameObject = new Quad(this.scene, x, y, width, height, fillColor, fillAlpha);
     this.scene.add.existing(gameObject);
     return gameObject;
@@ -33349,7 +33349,7 @@ Object.assign(
     Methods$f,
 );
 
-ObjectFactory.register('roundRectanleProgress', function (x, y, width, height, radiusConfig, barColor, value, config) {
+ObjectFactory.register('roundRectangleProgress', function (x, y, width, height, radiusConfig, barColor, value, config) {
     var gameObject = new RoundRectangleProgress(this.scene, x, y, width, height, radiusConfig, barColor, value, config);
     this.scene.add.existing(gameObject);
     return gameObject;
@@ -33713,7 +33713,7 @@ class LineProgress extends ProgressBase(Canvas$1) {
     }
 }
 
-ObjectFactory.register('circularProgressCanvas', function (x, y, width, height, barColor, value, config) {
+ObjectFactory.register('lineProgressCanvas', function (x, y, width, height, barColor, value, config) {
     var gameObject = new LineProgress(this.scene, x, y, width, height, barColor, value, config);
     this.scene.add.existing(gameObject);
     return gameObject;
