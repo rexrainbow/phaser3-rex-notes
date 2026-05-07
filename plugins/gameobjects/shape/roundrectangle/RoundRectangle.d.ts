@@ -177,11 +177,11 @@ declare class RoundRectangle extends PolygnBase {
     resize(width: number, height: number): this;
 
     /**
-     * Set corner iteration.
+     * Set corner iteration. Leave undefined to use dynamic iteration.
      * @param iteration - Iteration value.
      * @returns This instance.
      */
-    setIteration(iteration: number): this;
+    setIteration(iteration?: number): this;
     /**
      * Corner iteration value.
      */
