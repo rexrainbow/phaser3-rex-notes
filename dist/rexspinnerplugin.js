@@ -1553,7 +1553,8 @@
             drawingContext,
             pathIndexes,
             vertices,
-            colors
+            colors,
+            gameObject.lighting
         );
     };
 
@@ -1592,10 +1593,9 @@
                 lineWidth,
                 pathIsOpen,
                 calcMatrix,
-                strokeTintColor,
-                strokeTintColor,
-                strokeTintColor,
-                strokeTintColor
+                strokeTintColor, strokeTintColor, strokeTintColor, strokeTintColor,
+                undefined,
+                gameObject.lighting
             );
         };
 

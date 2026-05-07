@@ -13664,7 +13664,8 @@ var FillPathWebGL = function (drawingContext, submitter, calcMatrix, gameObject,
         drawingContext,
         pathIndexes,
         vertices,
-        colors
+        colors,
+        gameObject.lighting
     );
 };
 
@@ -13703,10 +13704,9 @@ var StrokePathWebGL = function (drawingContext, submitter, calcMatrix, gameObjec
             lineWidth,
             pathIsOpen,
             calcMatrix,
-            strokeTintColor,
-            strokeTintColor,
-            strokeTintColor,
-            strokeTintColor
+            strokeTintColor, strokeTintColor, strokeTintColor, strokeTintColor,
+            undefined,
+            gameObject.lighting
         );
     };
 
@@ -14622,6 +14622,10 @@ const IsPlainObject$4 = Utils$3.Objects.IsPlainObject;
 const GetValue$e = Utils$3.Objects.GetValue;
 const Earcut$2 = Geom.Polygon.Earcut;
 
+const GetDefaultIteration = function (radius) {
+    return Math.max(6, Math.min(16, Math.ceil(radius / 2)));
+};
+
 class RoundRectangle extends PolygnBase {
     constructor(scene, x, y, width, height, radiusConfig, fillColor, fillAlpha) {
         var strokeColor, strokeAlpha, strokeWidth, shapeType;
@@ -14899,29 +14903,34 @@ class RoundRectangle extends PolygnBase {
     }
 
     get iteration() {
+        if (this._useDynamicIteration) {
+            return GetDefaultIteration(this.radius);
+        }
+
         return this._iteration;
     }
 
     set iteration(value) {
+        var useDynamicIteration = (value === undefined);
+
         // Set iteration first time
-        if (this._iteration === undefined) {
+        if (this._useDynamicIteration === undefined) {
+            this._useDynamicIteration = useDynamicIteration;
             this._iteration = value;
             return;
         }
 
         // Change iteration value
-        if (this._iteration === value) {
+        if ((this._iteration === value) && (this._useDynamicIteration === useDynamicIteration)) {
             return;
         }
 
+        this._useDynamicIteration = useDynamicIteration;
         this._iteration = value;
         this.dirty = true;
     }
 
     setIteration(iteration) {
-        if (iteration === undefined) {
-            iteration = 6;
-        }
         this.iteration = iteration;
         return this;
     }

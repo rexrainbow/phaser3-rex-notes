@@ -1529,7 +1529,8 @@ var FillPathWebGL = function (drawingContext, submitter, calcMatrix, gameObject,
         drawingContext,
         pathIndexes,
         vertices,
-        colors
+        colors,
+        gameObject.lighting
     );
 };
 
@@ -1568,10 +1569,9 @@ var StrokePathWebGL = function (drawingContext, submitter, calcMatrix, gameObjec
             lineWidth,
             pathIsOpen,
             calcMatrix,
-            strokeTintColor,
-            strokeTintColor,
-            strokeTintColor,
-            strokeTintColor
+            strokeTintColor, strokeTintColor, strokeTintColor, strokeTintColor,
+            undefined,
+            gameObject.lighting
         );
     };
 
