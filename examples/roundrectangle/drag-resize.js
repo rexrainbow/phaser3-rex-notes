@@ -15,11 +15,15 @@ class Demo extends Phaser.Scene {
             .setStrokeStyle(2, 0x00ff00, 1)
             .setOrigin(0)
 
+        var print = this.add.text(0,0, '');
+
         var UpdatePointerPosition = function (gameObject, topLeftDragPointer, bottomRightDragPointer) {
             var tlx = gameObject.x, tly = gameObject.y,
                 brx = tlx + gameObject.width, bry = tly + gameObject.height;
             topLeftDragPointer.setPosition(tlx, tly);
             bottomRightDragPointer.setPosition(brx, bry);
+
+            print.text = `${gameObject.width}, ${gameObject.height}`
         }
 
         var topLeftDragPointer = this.add.rectangle(0, 0, 20, 20, 0x880000)
