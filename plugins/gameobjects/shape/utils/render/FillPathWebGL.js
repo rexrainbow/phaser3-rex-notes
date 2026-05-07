@@ -45,7 +45,8 @@ var FillPathWebGL = function (drawingContext, submitter, calcMatrix, gameObject,
         drawingContext,
         pathIndexes,
         vertices,
-        colors
+        colors,
+        gameObject.lighting
     );
 };
 

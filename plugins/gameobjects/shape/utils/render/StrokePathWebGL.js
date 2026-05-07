@@ -34,10 +34,9 @@ var StrokePathWebGL = function (drawingContext, submitter, calcMatrix, gameObjec
             lineWidth,
             pathIsOpen,
             calcMatrix,
-            strokeTintColor,
-            strokeTintColor,
-            strokeTintColor,
-            strokeTintColor
+            strokeTintColor, strokeTintColor, strokeTintColor, strokeTintColor,
+            undefined,
+            gameObject.lighting
         );
     };
 
