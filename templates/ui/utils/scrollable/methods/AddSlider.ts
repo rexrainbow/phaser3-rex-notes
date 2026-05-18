@@ -1,0 +1,310 @@
+import CreateScrollbar from './CreateScrollbar';
+import Scroller from '../../../../../plugins/scroller';
+import MouseWheelScroller from '../../../../../plugins/input/mousewheelscroller/MouseWheelScroller';
+
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const SnapTo = PhaserMath.Snap.To;
+
+var AddSlider = function(topPatent?: any, sliderParent?: any, axis?: any, config?: any) {
+    axis = axis.toUpperCase();
+    var isAxisY = (axis === 'Y');
+    var isScrollXYMode = (topPatent.scrollMode === 2);
+    var child = topPatent.childrenMap.child;
+
+    var snapStep;
+    var snapStepKey = `snapStep${axis}`;
+    if (isScrollXYMode?: any) {
+        snapStep = GetValue(config, snapStepKey, undefined);
+    } else {
+        var snapStep = GetValue(config, 'snapStep', undefined);
+        if (snapStep === undefined) {
+            snapStep = GetValue(config, snapStepKey, undefined);
+        }
+    }
+    topPatent[snapStepKey] = snapStep;
+
+    var sliderConfig, slider;
+    var sliderConfigKey = `slider${axis}`;
+    if (isScrollXYMode?: any) {
+        sliderConfig = GetValue(config, sliderConfigKey, undefined)
+    } else {
+        if (config.hasOwnProperty(sliderConfigKey)) {
+            sliderConfig = GetValue(config, sliderConfigKey, undefined)
+        } else {
+            sliderConfig = GetValue(config, 'slider', undefined);
+        }
+    }
+
+    if (sliderConfig?: any) {
+        if (sliderConfig === true) {
+            sliderConfig = {};
+        }
+
+        sliderConfig.orientation = (isAxisY) ? 1 : 0;
+        slider = CreateScrollbar(topPatent.scene, sliderConfig);
+
+        var column, row, padding;
+
+        var sliderPosition = GetValue(sliderConfig, 'position', 0);
+        if (typeof (sliderPosition) === 'string') {
+            sliderPosition = SLIDER_POSITION_MAP[sliderPosition];
+        }
+
+        /*
+        1. space.sliderX, space.sliderY
+        2. space.slider
+        3. space.child
+        */
+        var sliderPadding = GetValue(config, `space.slider${axis}`, undefined);
+        var childPadding;  // Legacy
+        if (sliderPadding === undefined) {
+            sliderPadding = GetValue(config, 'space.slider', undefined);
+            if (sliderPadding === undefined) {
+                if (isScrollXYMode?: any) {
+                    sliderPadding = 0;
+                } else {
+                    childPadding = GetValue(config, 'space.child', 0);
+                }
+            }
+        }
+
+        var isNumberSliderPadding;
+        var isNumberChildPadding;
+        if (childPadding === undefined) {
+            isNumberSliderPadding = (typeof (sliderPadding) === 'number');
+            isNumberChildPadding = false;
+        } else {
+            isNumberSliderPadding = (typeof (childPadding) === 'number');
+            isNumberChildPadding = isNumberSliderPadding;
+        }
+
+        if (isAxisY?: any) {
+            if (sliderPosition === 0) { // right
+                column = 2;
+                row = 1;
+
+                if (childPadding === undefined) {
+                    padding = (isNumberSliderPadding) ? { left: sliderPadding } : sliderPadding;
+                } else {
+                    if (isNumberChildPadding?: any) {
+                        padding = { left: childPadding };
+                    } else {
+                        padding = { left: GetValue(childPadding, 'right', 0) };
+                    }
+                }
+
+            } else { // left
+                column = 0;
+                row = 1;
+
+                if (childPadding === undefined) {
+                    padding = (isNumberSliderPadding) ? { right: sliderPadding } : sliderPadding;
+                } else {
+                    if (isNumberChildPadding?: any) {
+                        padding = { right: childPadding };
+                    } else {
+                        padding = { right: GetValue(childPadding, 'left', 0) };
+                    }
+                }
+            }
+
+        } else {
+            if (sliderPosition === 0) { // bottom
+                column = 1;
+                row = 2;
+
+                if (childPadding === undefined) {
+                    padding = (isNumberSliderPadding) ? { top: sliderPadding } : sliderPadding;
+                } else {
+                    if (isNumberChildPadding?: any) {
+                        padding = { top: childPadding };
+                    } else {
+                        padding = { top: GetValue(childPadding, 'bottom', 0) };
+                    }
+                }
+
+            } else { // top
+                column = 1;
+                row = 0;
+
+                if (childPadding === undefined) {
+                    padding = (isNumberSliderPadding) ? { bottom: sliderPadding } : sliderPadding;
+                } else {
+                    if (isNumberChildPadding?: any) {
+                        padding = { bottom: childPadding };
+                    } else {
+                        padding = { bottom: GetValue(childPadding, 'top', 0) };
+                    }
+                }
+            }
+        }
+
+        sliderParent.add(slider,
+            {
+                column: column,
+                row: row,
+                align: 'center',
+                padding: padding,
+                expand: true,
+            }
+        );
+
+        topPatent[`hideUnscrollableSlider${axis}`] = GetValue(sliderConfig, 'hideUnscrollableSlider', false);
+        topPatent[`disableUnscrollableDrag${axis}`] = GetValue(sliderConfig, 'disableUnscrollableDrag', false);
+        topPatent[`adaptThumb${axis}SizeMode`] = GetValue(sliderConfig, 'adaptThumbSize', false);
+        topPatent[`minThumb${axis}Size`] = GetValue(sliderConfig, 'minThumbSize', undefined);
+
+    } else {
+        topPatent[`hideUnscrollableSlider${axis}`] = false;
+        topPatent[`disableUnscrollableDrag${axis}`] = false;
+        topPatent[`adaptThumb${axis}SizeMode`] = false;
+        topPatent[`minThumb${axis}Size`] = undefined;
+    }
+
+    // 0=gameObject, 1=rectBounds
+    var scrollDetectionMode = GetValue(config, 'scrollDetectionMode');
+    if (typeof (scrollDetectionMode) === 'string') {
+        scrollDetectionMode = SCROLLDECTIONMODE_MAP[scrollDetectionMode];
+    }
+
+    var scrollerConfig, scroller;
+    var scrollerConfigKey = `scroller${axis}`;
+    if (isScrollXYMode?: any) {
+        scrollerConfig = GetValue(config, scrollerConfigKey, true);
+    } else {
+        if (config.hasOwnProperty(scrollerConfigKey)) {
+            scrollerConfig = GetValue(config, scrollerConfigKey, true);
+        } else {
+            scrollerConfig = GetValue(config, 'scroller', true);
+        }
+    }
+
+    if (scrollerConfig && child) {
+        if (scrollerConfig === true) {
+            scrollerConfig = {};
+        }
+
+        scrollerConfig.orientation = (isAxisY) ? 0 : 1;
+
+        if (scrollDetectionMode !== undefined) {
+            scrollerConfig.rectBoundsInteractive = (scrollDetectionMode === 1);
+        }
+
+        scrollerConfig.snapStep = snapStep;
+
+        scroller = new Scroller(child, scrollerConfig);
+
+        if (child.isRexContainerLite) {
+            // Send touch detection sensor to back
+            if (!child.layerRendererEnable) {
+                // Normal mode
+                child.sendChildToBack(child);
+            }
+        }
+    }
+
+    var mouseWheelScrollerConfig = GetValue(config, ((isScrollXYMode) ? `mouseWheelScroller${axis}` : 'mouseWheelScroller'), false),
+        mouseWheelScroller;
+    if (mouseWheelScrollerConfig && child) {
+        if (scrollDetectionMode !== undefined) {
+            mouseWheelScrollerConfig.focus = (scrollDetectionMode === 1) ? 2 : 0;
+        }
+
+        mouseWheelScroller = new MouseWheelScroller(child, mouseWheelScrollerConfig);
+    }
+
+    topPatent.addChildrenMap(`slider${axis}`, slider);
+    topPatent.addChildrenMap(`scroller${axis}`, scroller);
+    topPatent.addChildrenMap(`mouseWheelScroller${axis}`, mouseWheelScroller);
+
+    if ((!isScrollXYMode) || (isAxisY)) {
+        topPatent['hideUnscrollableSlider'] = topPatent[`hideUnscrollableSlider${axis}`];
+        topPatent['disableUnscrollableDrag'] = topPatent[`disableUnscrollableDrag${axis}`];
+        topPatent['adaptThumbSizeMode'] = topPatent[`adaptThumb${axis}SizeMode`];
+        topPatent['minThumbSize'] = topPatent[`minThumb${axis}Size`];
+
+        topPatent.addChildrenMap('slider', slider);
+        topPatent.addChildrenMap('scroller', scroller);
+        topPatent.addChildrenMap('mouseWheelScroller', mouseWheelScroller);
+    }
+
+
+    // Control
+    if (slider?: any) {
+        var keyST, eventName;
+        if (isScrollXYMode?: any) {
+            keyST = (isAxisY) ? 't' : 's';
+            eventName = `scroll${axis}`;
+        } else {
+            keyST = 't';
+            eventName = 'scroll';
+        }
+        slider
+            .on('valuechange', function(newValue?: any) {
+                topPatent[keyST] = newValue;
+                topPatent.emit(eventName, topPatent);
+            })
+            .on('inputend', function() {
+                var snapStep = topPatent[`snapStep${axis}`];
+                if (snapStep?: any) {
+                    var min = topPatent[(isAxisY) ? `topChildOY` : `leftChildOX`];
+                    var max = topPatent[(isAxisY) ? `bottomChildOY` : `rightChildOX`];
+                    var valueEnd = topPatent[`childO${axis}`];
+                    var valueTo = SnapTo(valueEnd, snapStep, min);
+                    var easeDuration = 500 * (Math.abs(valueTo - valueEnd) / snapStep);
+                    slider
+                        .setEaseValueDuration(easeDuration)
+                        .easeValueTo(valueTo, min, max);
+                }
+            })
+
+    }
+
+    if (scroller?: any) {
+        var keyChildOXY, eventName;
+        if (isScrollXYMode?: any) {
+            keyChildOXY = `childO${axis}`;
+            eventName = `scroll${axis}`;
+        } else {
+            keyChildOXY = 'childOY';
+            eventName = 'scroll';
+        }
+        scroller
+            .on('valuechange', function(newValue?: any) {
+                topPatent[keyChildOXY] = newValue;
+                topPatent.emit(eventName, topPatent);
+            })
+    }
+
+    if (mouseWheelScroller?: any) {
+        var methodAddChildOXY;
+        if (isScrollXYMode?: any) {
+            methodAddChildOXY = `addChildO${axis}`;
+        } else {
+            methodAddChildOXY = 'addChildOY';
+        }
+        mouseWheelScroller
+            .on('scroll', function(incValue?: any) {
+                var snapStep = topPatent[snapStepKey];
+                if (snapStep?: any) {
+                    incValue = snapStep;
+                }
+                topPatent[methodAddChildOXY](-incValue, true);
+            });
+    }
+}
+
+const SLIDER_POSITION_MAP = {
+    right: 0,
+    left: 1,
+    bottom: 0,
+    top: 1,
+}
+
+const SCROLLDECTIONMODE_MAP = {
+    gameObject: 0,
+    rectBounds: 1,
+}
+
+export default AddSlider;

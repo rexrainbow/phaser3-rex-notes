@@ -1,4 +1,4 @@
-import ComponentBase from '../../utils/componentbase/ComponentBase.js';
+import ComponentBase from '../../utils/componentbase/ComponentBase';
 import { TileXYType } from '../types/Position';
 import Board from '../board/Board';
 

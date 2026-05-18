@@ -13,6 +13,8 @@ import { csmString } from '../type/csmstring';
  * パラメータ名・パーツ名・Drawable名を保持するクラス。
  */
 export class CubismId {
+    _id: any;
+
   /**
    * ID名を取得する
    */

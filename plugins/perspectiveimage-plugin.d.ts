@@ -7,7 +7,7 @@ import PerspectiveRenderTextureCreator from './gameobjects/mesh/perspective/rend
 import PerspectiveCardFactory from './gameobjects/mesh/perspective/card/Factory';
 import PerspectiveCardCreator from './gameobjects/mesh/perspective/card/Creator';
 
-import ContainerPerspective from './behaviors/containerperspective/ContainerPerspective.js';
+import ContainerPerspective from './behaviors/containerperspective/ContainerPerspective';
 import ContainerLite from './gameobjects/container/containerlite/ContainerLite';
 
 export default class extends Phaser.Plugins.BasePlugin {

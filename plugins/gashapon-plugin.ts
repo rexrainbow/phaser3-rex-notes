@@ -1,0 +1,23 @@
+import Gashapon from './gashapon';
+
+import { Plugins as PhaserPlugins } from 'phaser';
+class GashaponPlugin extends PhaserPlugins.BasePlugin {
+    destroy: any;
+    game: any;
+
+
+    constructor(pluginManager?: any) {
+        super(pluginManager);
+    }
+
+    start() {
+        var eventEmitter = this.game.events;
+        eventEmitter.on('destroy', this.destroy, this);
+    }
+
+    add(config?: any) {
+        return new Gashapon(config);
+    }
+}
+
+export default GashaponPlugin;

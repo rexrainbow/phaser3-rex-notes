@@ -1,4 +1,4 @@
-import Tree from '../behaviortree/BehaviorTree.js';
+import Tree from '../behaviortree/BehaviorTree';
 import Blackboard from '../blackboard/Base';
 import BaseExpression from '../nodes/expressions/BaseExpression';
 

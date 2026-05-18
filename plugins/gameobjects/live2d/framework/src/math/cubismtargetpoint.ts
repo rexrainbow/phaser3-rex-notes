@@ -16,6 +16,15 @@ const Epsilon = 0.01;
  * 顔の向きの制御機能を提供するクラス。
  */
 export class CubismTargetPoint {
+    _faceTargetX: any;
+    _faceTargetY: any;
+    _faceVX: any;
+    _faceVY: any;
+    _faceX: any;
+    _faceY: any;
+    _lastTimeSeconds: any;
+    _userTimeSeconds: any;
+
   /**
    * コンストラクタ
    */

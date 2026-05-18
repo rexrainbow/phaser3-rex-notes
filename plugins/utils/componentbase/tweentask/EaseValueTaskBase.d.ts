@@ -1,4 +1,4 @@
-import TimerTask from '../timerticktask/TimerTask.js';
+import TimerTask from '../timerticktask/TimerTask';
 
 export default EaseValueTaskBase;
 

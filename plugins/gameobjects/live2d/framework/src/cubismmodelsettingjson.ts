@@ -82,6 +82,23 @@ enum FrequestNode {
  * model3.jsonファイルをパースして値を取得する
  */
 export class CubismModelSettingJson extends ICubismModelSetting {
+    _json: any;
+    _jsonValue: any;
+    isExistExpressionFile: any;
+    isExistEyeBlinkParameters: any;
+    isExistHitAreas: any;
+    isExistLipSyncParameters: any;
+    isExistModelFile: any;
+    isExistMotionFadeIn: any;
+    isExistMotionFadeOut: any;
+    isExistMotionGroupName: any;
+    isExistMotionGroups: any;
+    isExistMotionSoundFile: any;
+    isExistPhysicsFile: any;
+    isExistPoseFile: any;
+    isExistTextureFiles: any;
+    isExistUserDataFile: any;
+
   /**
    * 引数付きコンストラクタ
    *

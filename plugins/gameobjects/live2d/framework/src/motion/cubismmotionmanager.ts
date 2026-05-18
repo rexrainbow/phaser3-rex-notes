@@ -18,6 +18,9 @@ import {
  * モーションの管理を行うクラス
  */
 export class CubismMotionManager extends CubismMotionQueueManager {
+    _userTimeSeconds: any;
+    isFinished: any;
+
   /**
    * コンストラクタ
    */

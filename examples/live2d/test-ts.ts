@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-import Live2dPlugin from '../../plugins/live2d-plugin.js';
+import Live2dPlugin from '../../plugins/live2d-plugin';
 
 class Demo extends Phaser.Scene {
     constructor() {

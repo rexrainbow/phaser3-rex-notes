@@ -1,0 +1,96 @@
+import ComponentBase from '../ComponentBase';
+
+class TweenTask extends ComponentBase {
+    emit: any;
+    getEventEmitter: any;
+    isShutdown: any;
+    scene: any;
+    setEventEmitter: any;
+    tween: any;
+
+    constructor(parent?: any, config?: any) {
+        if (config === undefined) {
+            config = {};
+        }
+        /*
+        eventEmitter:
+        - false(default value): Use tween's event emitter.
+        - true: Create a private event emitter.
+        */
+        if (!config.hasOwnProperty('eventEmitter')) {
+            config.eventEmitter = false;
+        }
+        super(parent, config);
+    }
+
+    shutdown(fromScene?: any) {
+        // Already shutdown
+        if (this.isShutdown) {
+            return;
+        }
+
+        this.stop();
+        super.shutdown(fromScene);
+    }
+
+    start(tweenConfig?: any) {
+        if (this.isRunning) {
+            return this;
+        }
+
+        this.tween = this.scene.tweens.add(tweenConfig)
+            .on('complete', this.complete, this);
+        if (this.getEventEmitter() === false) {
+            this.setEventEmitter(this.tween);
+        }
+        return this;
+    }
+
+    restart(tweenConfig?: any) {
+        this.stop().start(tweenConfig);
+        return this;
+    }
+
+    stop() {
+        if (!this.tween) {
+            return this;
+        }
+
+        if (this.getEventEmitter() === this.tween) {
+            this.setEventEmitter(false);
+        }
+        this.tween.remove();
+        this.tween = undefined;
+        return this;
+    }
+
+    pause() {
+        if (!this.tween) {
+            return this;
+        }
+        this.tween.pause();
+        return this;
+    }
+
+    resume() {
+        if (!this.tween) {
+            return this;
+        }
+        this.tween.resume();
+        return this;
+    }
+
+    complete() {
+        this.stop();
+        if (this.getEventEmitter()) {
+            this.emit('complete');
+        }
+        return this;
+    }
+
+    get isRunning() {
+        return (!!this.tween);
+    }
+}
+
+export default TweenTask;

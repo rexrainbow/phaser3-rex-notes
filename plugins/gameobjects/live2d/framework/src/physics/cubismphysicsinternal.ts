@@ -31,6 +31,13 @@ export enum CubismPhysicsSource {
  * 物理演算で使用する外部の力。
  */
 export class PhysicsJsonEffectiveForces {
+    destination: any;
+    fps: any;
+    inputs: any;
+    outputs: any;
+    settings: any;
+    translationScale: any;
+
   constructor() {
     this.gravity = new CubismVector2(0, 0);
     this.wind = new CubismVector2(0, 0);

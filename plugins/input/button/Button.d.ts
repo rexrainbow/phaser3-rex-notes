@@ -1,4 +1,4 @@
-import ComponentBase from '../../utils/componentbase/ComponentBase.js';
+import ComponentBase from '../../utils/componentbase/ComponentBase';
 
 export default Button;
 

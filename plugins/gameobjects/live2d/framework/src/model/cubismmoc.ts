@@ -14,6 +14,8 @@ import { CubismModel } from './cubismmodel';
  * Mocデータの管理を行うクラス。
  */
 export class CubismMoc {
+    hasMocConsistency: any;
+
   /**
    * Mocデータの作成
    */
@@ -23,7 +25,7 @@ export class CubismMoc {
   ): CubismMoc {
     let cubismMoc: CubismMoc = null;
 
-    if (shouldCheckMocConsistency) {
+    if (shouldCheckMocConsistency?: any) {
       // .moc3の整合性を確認
       const consistency = this.hasMocConsistency(mocBytes);
 
@@ -37,7 +39,7 @@ export class CubismMoc {
     const moc: Live2DCubismCore.Moc =
       Live2DCubismCore.Moc.fromArrayBuffer(mocBytes);
 
-    if (moc) {
+    if (moc?: any) {
       cubismMoc = new CubismMoc(moc);
       cubismMoc._mocVersion = Live2DCubismCore.Version.csmGetMocVersion(
         moc,
@@ -71,7 +73,7 @@ export class CubismMoc {
       this._moc
     );
 
-    if (model) {
+    if (model?: any) {
       cubismModel = new CubismModel(model);
       cubismModel.initialize();
 

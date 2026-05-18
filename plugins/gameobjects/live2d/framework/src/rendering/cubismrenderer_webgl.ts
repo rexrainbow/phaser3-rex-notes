@@ -31,6 +31,86 @@ let s_fbo: WebGLFramebuffer;
  * クリッピングマスクの処理を実行するクラス
  */
 export class CubismClippingManager_WebGL {
+    _allClippedDrawRect: any;
+    _bufferData: any;
+    _bufferIndex: any;
+    _clippedDrawableIndexList: any;
+    _clippingContextBufferForDraw: any;
+    _clippingContextBufferForMask: any;
+    _clippingIdCount: any;
+    _clippingIdList: any;
+    _clippingManager: any;
+    _extension: any;
+    _lastActiveTexture: any;
+    _lastArrayBufferBinding: any;
+    _lastBlend: any;
+    _lastBlending: any;
+    _lastColorMask: any;
+    _lastCullFace: any;
+    _lastDepthTest: any;
+    _lastElementArrayBufferBinding: any;
+    _lastFBO: any;
+    _lastFrontFace: any;
+    _lastProgram: any;
+    _lastScissorTest: any;
+    _lastStencilTest: any;
+    _lastTexture0Binding2D: any;
+    _lastTexture1Binding2D: any;
+    _lastVertexAttribArrayEnabled: any;
+    _lastViewport: any;
+    _layoutBounds: any;
+    _matrixForDraw: any;
+    _matrixForMask: any;
+    _model: any;
+    _owner: any;
+    _rendererProfile: any;
+    _shaderSets: any;
+    _sortedDrawableIndexList: any;
+    _textures: any;
+    compileShaderSource: any;
+    drawMesh: any;
+    firstDraw: any;
+    frameNo: any;
+    generateShaders: any;
+    getAnisotropy: any;
+    getClippingContextBufferForMask: any;
+    getModel: any;
+    getModelColor: any;
+    getMvpMatrix: any;
+    gl: any;
+    isCulling: any;
+    isPremultipliedAlpha: any;
+    isUsingHighPrecisionMask: any;
+    loadShaderProgram: any;
+    preDraw: any;
+    releaseShaderProgram: any;
+    setClippingContextBufferForDraw: any;
+    setClippingContextBufferForMask: any;
+    setGlEnable: any;
+    setGlEnableVertexAttribArray: any;
+    setIsCulling: any;
+    textures: any;
+
+    _channelColors: any;
+    _clearedFrameBufferflags: any;
+    _clippingContextListForDraw: any;
+    _clippingContextListForMask: any;
+    _clippingMaskBufferSize: any;
+    _currentFrameNo: any;
+    _currentMaskRenderTexture: any;
+    _maskColorBuffers: any;
+    _maskRenderTextures: any;
+    _maskTexture: any;
+    _renderTextureCount: any;
+    _tmpBoundsOnModel: any;
+    _tmpMatrix: any;
+    _tmpMatrixForDraw: any;
+    _tmpMatrixForMask: any;
+    calcClippedDrawTotalBounds: any;
+    findSameClip: any;
+    getMaskRenderTexture: any;
+    setupLayoutBounds: any;
+
   /**
    * カラーチャンネル（RGBA）のフラグを取得する
    * @param channelNo カラーチャンネル（RGBA）の番号（0:R, 1:G, 2:B, 3:A）
@@ -965,6 +1045,9 @@ export class CubismClippingManager_WebGL {
  * クリッピングマスクで使用する
  */
 export class CubismRenderTextureResource {
+    frameNo: any;
+    textures: any;
+
   /**
    * 引数付きコンストラクタ
    * @param frameNo レンダラーのフレーム番号
@@ -983,6 +1066,16 @@ export class CubismRenderTextureResource {
  * クリッピングマスクのコンテキスト
  */
 export class CubismClippingContext {
+    _allClippedDrawRect: any;
+    _bufferIndex: any;
+    _clippedDrawableIndexList: any;
+    _clippingIdCount: any;
+    _clippingIdList: any;
+    _layoutBounds: any;
+    _matrixForDraw: any;
+    _matrixForMask: any;
+    _owner: any;
+
   /**
    * 引数付きコンストラクタ
    */
@@ -1063,6 +1156,26 @@ export class CubismClippingContext {
 }
 
 export class CubismRendererProfile_WebGL {
+    _lastActiveTexture: any;
+    _lastArrayBufferBinding: any;
+    _lastBlend: any;
+    _lastBlending: any;
+    _lastColorMask: any;
+    _lastCullFace: any;
+    _lastDepthTest: any;
+    _lastElementArrayBufferBinding: any;
+    _lastFBO: any;
+    _lastFrontFace: any;
+    _lastProgram: any;
+    _lastScissorTest: any;
+    _lastStencilTest: any;
+    _lastTexture0Binding2D: any;
+    _lastTexture1Binding2D: any;
+    _lastVertexAttribArrayEnabled: any;
+    _lastViewport: any;
+    setGlEnable: any;
+    setGlEnableVertexAttribArray: any;
+
   private setGlEnable(index: GLenum, enabled: GLboolean): void {
     if (enabled) this.gl.enable(index);
     else this.gl.disable(index);
@@ -1229,6 +1342,11 @@ export class CubismRendererProfile_WebGL {
  * シングルトンなクラスであり、CubismShader_WebGL.getInstanceからアクセスする。
  */
 export class CubismShader_WebGL {
+    compileShaderSource: any;
+    generateShaders: any;
+    loadShaderProgram: any;
+    releaseShaderProgram: any;
+
   /**
    * インスタンスを取得する（シングルトン）
    * @return インスタンス
@@ -1246,7 +1364,7 @@ export class CubismShader_WebGL {
    * インスタンスを開放する（シングルトン）
    */
   public static deleteInstance(): void {
-    if (s_instance) {
+    if (s_instance?: any) {
       s_instance.release();
       s_instance = null;
     }
@@ -1424,7 +1542,7 @@ export class CubismShader_WebGL {
 
       let shaderSet: CubismShaderSet = new CubismShaderSet();
 
-      switch (colorBlendMode) {
+      switch (colorBlendMode?: any) {
         case CubismBlendMode.CubismBlendMode_Normal:
         default:
           shaderSet = this._shaderSets.at(
@@ -1495,7 +1613,7 @@ export class CubismShader_WebGL {
         0
       );
 
-      if (masked) {
+      if (masked?: any) {
         this.gl.activeTexture(this.gl.TEXTURE1);
         const tex: WebGLTexture = renderer
           .getClippingContextBufferForDraw()
@@ -2124,7 +2242,7 @@ export class CubismShader_WebGL {
       this.gl.deleteShader(fragShader);
       fragShader = 0;
 
-      if (shaderProgram) {
+      if (shaderProgram?: any) {
         this.gl.deleteProgram(shaderProgram);
         shaderProgram = 0;
       }
@@ -2346,6 +2464,21 @@ export const fragmentShaderSrcMaskInvertedPremultipliedAlpha =
  * WebGL用の描画命令を実装したクラス
  */
 export class CubismRenderer_WebGL extends CubismRenderer {
+    _model: any;
+    drawMesh: any;
+    getAnisotropy: any;
+    getClippingContextBufferForMask: any;
+    getModel: any;
+    getModelColor: any;
+    getMvpMatrix: any;
+    isCulling: any;
+    isPremultipliedAlpha: any;
+    isUsingHighPrecisionMask: any;
+    preDraw: any;
+    setClippingContextBufferForDraw: any;
+    setClippingContextBufferForMask: any;
+    setIsCulling: any;
+
   /**
    * レンダラの初期化処理を実行する
    * 引数に渡したモデルからレンダラの初期化処理に必要な情報を取り出すことができる

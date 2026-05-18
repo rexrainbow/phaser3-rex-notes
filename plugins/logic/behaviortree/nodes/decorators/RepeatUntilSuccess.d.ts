@@ -1,5 +1,5 @@
 import Decorator from '../Decorator';
-import BaseNode from '../BaseNode.js';
+import BaseNode from '../BaseNode';
 
 export default RepeatUntilSuccess;
 

@@ -8,8 +8,8 @@ import terser from '@rollup/plugin-terser'; // Uglify for ES6
 
 import pluginList from './plugin-list.js';
 // const pluginList = {};
-// {name: path}           // pure javascript
-// {name: [path, true]}   // javascript + typescript
+// {name: path}
+// {name: [path, true]}   // force TypeScript transform for non-.ts inputs
 
 let prefix = 'rex';
 let outputs = [];
@@ -22,10 +22,10 @@ for (var key in pluginList) {
     let inputFile, useTypescript;
     if (typeof (inputConfig) === 'string') {
         inputFile = inputConfig;
-        useTypescript = false;
+        useTypescript = inputFile.endsWith('.ts');
     } else {
         inputFile = inputConfig[0];
-        useTypescript = inputConfig[1];
+        useTypescript = inputFile.endsWith('.ts') || inputConfig[1];
     }
 
     // Export no-uglify files

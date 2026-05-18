@@ -14,6 +14,25 @@ import { CubismMatrix44 } from './cubismmatrix44';
  * モデル座標設定用の4x4行列クラス
  */
 export class CubismModelMatrix extends CubismMatrix44 {
+    _height: any;
+    _width: any;
+    bottom: any;
+    centerX: any;
+    centerY: any;
+    getScaleX: any;
+    getScaleY: any;
+    left: any;
+    right: any;
+    scale: any;
+    setHeight: any;
+    setWidth: any;
+    setX: any;
+    setY: any;
+    top: any;
+    translate: any;
+    translateX: any;
+    translateY: any;
+
   /**
    * コンストラクタ
    *

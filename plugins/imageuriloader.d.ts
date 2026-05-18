@@ -1,3 +1,3 @@
 
-import LoaderCallback from './loader/imageuri/ImageURILoaderCallback.js';
+import LoaderCallback from './loader/imageuri/ImageURILoaderCallback';
 export default LoaderCallback;

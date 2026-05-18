@@ -1,0 +1,21 @@
+import FrameManager from '../../framemanager/FrameManager';
+
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+
+var CreateFrameManager = function(scene?: any, config?: any) {
+    var key = GetValue(config, 'key');
+    var cellWidth = GetValue(config, 'cellWidth', 32);
+    var cellHeight = GetValue(config, 'cellHeight', 32);
+    var maxCharacterCount = GetValue(config, 'maxCharacterCount', 4096);
+
+    var colCount = Math.ceil(Math.sqrt(maxCharacterCount));
+    var rowCount = colCount;
+    var width = cellWidth * colCount;
+    var height = cellHeight * rowCount;
+
+    var frameManager = new FrameManager(scene, key, width, height, cellWidth, cellHeight);
+    return frameManager;
+}
+
+export default CreateFrameManager;

@@ -13,6 +13,21 @@ import { CubismMatrix44 } from './cubismmatrix44';
  * カメラの位置変更に使うと便利な4x4行列のクラス。
  */
 export class CubismViewMatrix extends CubismMatrix44 {
+    _maxBottom: any;
+    _maxLeft: any;
+    _maxRight: any;
+    _maxScale: any;
+    _maxTop: any;
+    _minScale: any;
+    _screenBottom: any;
+    _screenLeft: any;
+    _screenRight: any;
+    _screenTop: any;
+    _tr: any;
+    getMaxScale: any;
+    getMinScale: any;
+    getScaleX: any;
+
   /**
    * コンストラクタ
    */

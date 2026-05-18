@@ -1,0 +1,62 @@
+import RemoveFromParent from '../../../../utils/RemoveFromParent';
+import LayoutMode0 from './LayoutMode0';
+import LayoutMode1 from './LayoutMode1';
+
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const LayoutCallbacks = [LayoutMode0, LayoutMode1];
+
+var Build = function(config?: any) {
+    if (config === undefined) {
+        config = {};
+    }
+
+    var background = config.background;
+    var indexLabel = config.indexLabel;
+    var displayNameLabel = config.displayNameLabel;
+    var deleteButton = config.deleteButton;
+    var moveUpButton = config.moveUpButton;
+    var moveDownButton = config.moveDownButton;
+
+    // Remove from parent
+    RemoveFromParent(background);
+    RemoveFromParent(indexLabel);
+    RemoveFromParent(displayNameLabel);
+    RemoveFromParent(deleteButton);
+    RemoveFromParent(moveUpButton);
+    RemoveFromParent(moveDownButton);
+
+    this.clear(true);
+
+    // Add Background
+    if (background?: any) {
+        this.addBackground(background);
+    }
+
+    var layoutMode = GetValue(config, 'layoutMode', 0);
+    var layoutCallback = LayoutCallbacks[layoutMode] || LayoutCallbacks[0];
+    layoutCallback.call(this, config);
+
+    this.addChildrenMap('background', background);
+    this.addChildrenMap('index', indexLabel);
+    this.addChildrenMap('displayName', displayNameLabel);
+    this.addChildrenMap('delete', deleteButton);
+    this.addChildrenMap('moveUp', moveUpButton);
+    this.addChildrenMap('moveDown', moveDownButton);
+
+    deleteButton
+        .offClick(this.onClickDeleteButton, this)
+        .onClick(this.onClickDeleteButton, this)
+
+    moveUpButton
+        .offClick(this.onClickMoveUpButton, this)
+        .onClick(this.onClickMoveUpButton, this)
+
+    moveDownButton
+        .offClick(this.onClickMoveDownButton, this)
+        .onClick(this.onClickMoveDownButton, this)
+
+    return this;
+}
+
+export default Build;

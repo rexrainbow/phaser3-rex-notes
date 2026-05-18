@@ -1,0 +1,72 @@
+import Phaser from 'phaser';
+import QuadImagePlugin from '../../plugins/quadimage-plugin';
+import Dat from '../../plugins/utils/dat.gui/dat.gui.min';
+
+class Demo extends Phaser.Scene {
+    constructor() {
+        super({
+            key: 'examples'
+        })
+    }
+
+    preload() {
+        this.load.spritesheet('mummy', 'assets/animations/mummy37x45.png', { frameWidth: 37, frameHeight: 45 });
+    }
+
+    create() {
+        this.anims.create({
+            key: 'walk',
+            frames: this.anims.generateFrameNumbers('mummy'),
+            frameRate: 16,
+            repeat: -1
+        });
+
+        this.add.sprite(400, 400)
+            .setScale(4)
+            .setAlpha(0.3)
+            .setOrigin(0.5, 1)
+            .play('walk')
+
+        this.gameObject = this.add.rexSkewImage(400, 400)
+            .setScale(4)
+            .setAlpha(0.7)
+            .setOrigin(0.5, 1)
+            .play('walk')
+
+        var gui = new Dat.GUI();
+        gui.add(this.gameObject, 'skewXDeg', -90, 90);
+        gui.add(this.gameObject, 'skewYDeg', -90, 90);
+
+        this.debugGraphics = this.add.graphics();
+        this.gameObject.setDebug(this.debugGraphics);
+    }
+
+    update() {
+        this.debugGraphics
+            .clear()
+            .lineStyle(2, 0xff0000)
+            .fillStyle(0x00ff00)
+    }
+}
+
+var config = {
+    type: Phaser.AUTO,
+    parent: 'phaser-example',
+    width: 800,
+    height: 600,
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+    },
+    scene: Demo,
+    backgroundColor: 0x33333,
+    plugins: {
+        global: [{
+            key: 'rexQuadImage',
+            plugin: QuadImagePlugin,
+            start: true
+        }]
+    }
+};
+
+var game = new Phaser.Game(config);

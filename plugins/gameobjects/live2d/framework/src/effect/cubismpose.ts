@@ -26,6 +26,19 @@ const Id = 'Id';
  * パーツの不透明度の管理と設定を行う。
  */
 export class CubismPose {
+    _fadeTimeSeconds: any;
+    _lastModel: any;
+    _partGroupCounts: any;
+    _partGroups: any;
+    link: any;
+    parameterIndex: any;
+    partId: any;
+    partIndex: any;
+
+    copyPartOpacities: any;
+    doFade: any;
+    reset: any;
+
   /**
    * インスタンスの作成
    * @param pose3json pose3.jsonのデータ

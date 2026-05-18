@@ -1,4 +1,4 @@
-import ColorInput from '../../colorinput/colorinput/ColorInput.js';
+import ColorInput from '../../colorinput/colorinput/ColorInput';
 
 /**
  * Create a color input game object with optional configuration cloning.

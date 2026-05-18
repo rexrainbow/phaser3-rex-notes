@@ -1,4 +1,4 @@
-import SimpleLabel from '../../simplelabel/SimpleLabel.js';
+import SimpleLabel from '../../simplelabel/SimpleLabel';
 
 export default CreateLabel;
 

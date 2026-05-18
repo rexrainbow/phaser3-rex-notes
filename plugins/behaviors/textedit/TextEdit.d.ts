@@ -1,4 +1,4 @@
-import ComponentBase from '../../utils/componentbase/ComponentBase.js';
+import ComponentBase from '../../utils/componentbase/ComponentBase';
 import InputText from '../../inputtext';
 
 export default TextEdit;

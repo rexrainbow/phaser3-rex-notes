@@ -1,0 +1,18 @@
+{
+    "extends": "./tsconfig.json",
+    "include": [
+        "types/**/*.d.ts",
+        "plugins/**/*.ts",
+        "templates/**/*.ts",
+        "projects/**/*.ts",
+        "scripts/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist",
+        "dev-dist",
+        "docs",
+        "examples",
+        "projects/ui-dragdrop/app/js"
+    ]
+}

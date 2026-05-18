@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import BoardPlugin from '../../plugins/board-plugin.js';
+import BoardPlugin from '../../plugins/board-plugin';
 
 class Demo extends Phaser.Scene {
     declare rexBoard: BoardPlugin;

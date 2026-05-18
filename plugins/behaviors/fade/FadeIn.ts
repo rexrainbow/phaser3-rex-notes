@@ -1,0 +1,38 @@
+import { Utils as PhaserUtils } from 'phaser';
+import Fade from './Fade';
+
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+
+var FadeIn = function(gameObject?: any, duration?: any, alpha?: any, fade?: any) {
+    var startAlpha, endAlpha;
+    if (IsPlainObject(alpha)) {
+        startAlpha = alpha.start;
+        endAlpha = alpha.end;
+    } else {
+        endAlpha = alpha;
+    }
+    if (startAlpha === undefined) {
+        startAlpha = 0
+    }
+    if (endAlpha === undefined) {
+        endAlpha = 1;
+    }
+
+    var config = {
+        mode: 0,
+        start: startAlpha,
+        end: endAlpha,
+        duration: duration,
+    }
+
+    if (fade === undefined) {
+        fade = new Fade(gameObject, config);
+    } else {
+        fade.resetFromJSON(config);
+    }
+    fade.restart();
+
+    return fade;
+};
+
+export default FadeIn;

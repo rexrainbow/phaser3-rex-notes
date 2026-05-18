@@ -20,6 +20,8 @@ import { CSM_ASSERT } from '../utils/cubismdebug';
  * その色を保持する構造体
  */
 export class DrawableColorData {
+    Color: any;
+
   constructor(
     isOverwritten = false,
     color: CubismTextureColor = new CubismTextureColor()
@@ -35,6 +37,8 @@ export class DrawableColorData {
  * @brief テクスチャの色をRGBAで扱うための構造体
  */
 export class PartColorData {
+    Color: any;
+
   constructor(
     isOverwritten = false,
     color: CubismTextureColor = new CubismTextureColor()
@@ -51,6 +55,9 @@ export class PartColorData {
  * テクスチャのカリング設定を管理するための構造体
  */
 export class DrawableCullingData {
+    isCulling: any;
+    isOverwritten: any;
+
   /**
    * コンストラクタ
    *
@@ -72,6 +79,57 @@ export class DrawableCullingData {
  * Mocデータから生成されるモデルのクラス。
  */
 export class CubismModel {
+    _drawableIds: any;
+    _isOverwrittenCullings: any;
+    _isOverwrittenModelMultiplyColors: any;
+    _isOverwrittenModelScreenColors: any;
+    _model: any;
+    _modelOpacity: any;
+    _notExistParameterId: any;
+    _notExistParameterValues: any;
+    _notExistPartId: any;
+    _notExistPartOpacities: any;
+    _parameterIds: any;
+    _parameterMaximumValues: any;
+    _parameterMinimumValues: any;
+    _parameterValues: any;
+    _partChildDrawables: any;
+    _partIds: any;
+    _partOpacities: any;
+    _savedParameters: any;
+    _userCullings: any;
+    _userMultiplyColors: any;
+    _userPartMultiplyColors: any;
+    _userPartScreenColors: any;
+    _userScreenColors: any;
+    addParameterValueByIndex: any;
+    getDrawableMultiplyColor: any;
+    getDrawableParentPartIndex: any;
+    getDrawableScreenColor: any;
+    getDrawableTextureIndex: any;
+    getDrawableVertexPositions: any;
+    getOverwriteFlagForDrawableCullings: any;
+    getOverwriteFlagForDrawableMultiplyColors: any;
+    getOverwriteFlagForDrawableScreenColors: any;
+    getOverwriteFlagForModelCullings: any;
+    getOverwriteFlagForModelMultiplyColors: any;
+    getOverwriteFlagForModelScreenColors: any;
+    getParameterCount: any;
+    getParameterIndex: any;
+    getParameterValueByIndex: any;
+    getPartCount: any;
+    getPartIndex: any;
+    getPartOpacityByIndex: any;
+    multiplyParameterValueByIndex: any;
+    setMultiplyColorByRGBA: any;
+    setOverwriteColorForPartColors: any;
+    setParameterValueByIndex: any;
+    setPartColor: any;
+    setPartMultiplyColorByRGBA: any;
+    setPartOpacityByIndex: any;
+    setPartScreenColorByRGBA: any;
+    setScreenColorByRGBA: any;
+
   /**
    * モデルのパラメータの更新
    */
@@ -504,7 +562,7 @@ export class CubismModel {
       const drawableIndex = this._partChildDrawables.at(partIndex).at(i);
       drawableColors.at(drawableIndex).isOverwritten = value;
 
-      if (value) {
+      if (value?: any) {
         drawableColors.at(drawableIndex).Color.R =
           partColors.at(partIndex).Color.R;
         drawableColors.at(drawableIndex).Color.G =

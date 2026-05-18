@@ -1,0 +1,41 @@
+import CreateFolder from '../builders/CreateFolder';
+
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+
+var AddFolder = function(config?: any) {
+    if (config === undefined) {
+        config = {};
+    }
+
+    // Create folder
+    var folderStyle = GetValue(this.styles, 'folder') || {};
+    var folder = CreateFolder(this, config, folderStyle);
+
+    // Add folder
+    this.add(
+        folder,
+        {
+            proportion: (folder.minWidth === 0) ? 1 : 0,
+            expand: true
+        }
+    );
+
+    // Set content
+    folder.setTitle(config);
+
+    var expanded = GetValue(config, 'expanded', true);
+    if (expanded !== undefined) {
+        folder.setExpandedState(expanded);
+    }
+
+    var childTweaker = folder.childrenMap.child;
+
+    if (config.key) {
+        this.root.addChildrenMap(config.key, childTweaker);
+    }
+
+    return childTweaker;
+}
+
+export default AddFolder;

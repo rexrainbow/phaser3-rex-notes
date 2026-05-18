@@ -16,6 +16,18 @@ import { csmVector } from '../type/csmvector';
  * 自動まばたき機能を提供する。
  */
 export class CubismEyeBlink {
+    _blinkingIntervalSeconds: any;
+    _blinkingState: any;
+    _closedSeconds: any;
+    _closingSeconds: any;
+    _nextBlinkingTime: any;
+    _openingSeconds: any;
+    _parameterIds: any;
+    _stateStartTimeSeconds: any;
+    _userTimeSeconds: any;
+
+    determinNextBlinkingTiming: any;
+
   /**
    * インスタンスを作成する
    * @param modelSetting モデルの設定情報

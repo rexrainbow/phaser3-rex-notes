@@ -10,7 +10,7 @@ import SkewImageCreator from './gameobjects/mesh/quad/skewimage/Creator';
 import SkewRenderTextureFactory from './gameobjects/mesh/quad/skewrendertexture/Factory';
 import SkewRenderTextureCreator from './gameobjects/mesh/quad/skewrendertexture/Creator';
 
-import ContainerSkew from './behaviors/containerskew/ContainerSkew.js';
+import ContainerSkew from './behaviors/containerskew/ContainerSkew';
 import ContainerLite from './gameobjects/container/containerlite/ContainerLite';
 
 export default class extends Phaser.Plugins.BasePlugin {

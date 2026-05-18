@@ -1,5 +1,5 @@
-import Factory from './gameobjects/canvas/canvas/Factory.js';
-import Creator from './gameobjects/canvas/canvas/Creator.js';
+import Factory from './gameobjects/canvas/canvas/Factory';
+import Creator from './gameobjects/canvas/canvas/Creator';
 
 export default class extends Phaser.Plugins.BasePlugin { }
 

@@ -1,4 +1,4 @@
-import CanvasInput from '../../canvasinput/CanvasInput.js';
+import CanvasInput from '../../canvasinput/CanvasInput';
 
 /**
  * Create a `CanvasInput` from configuration.

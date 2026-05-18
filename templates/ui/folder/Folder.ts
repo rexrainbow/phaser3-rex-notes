@@ -1,0 +1,163 @@
+import Sizer from '../sizer/Sizer';
+import ChildTransition from './methods/ChildTransition';
+import ExpandMethods from './methods/ExpandMethods';
+import { OnClick } from '../basesizer/ClickMethods';
+import ConfigurationMethods from './methods/ConfigurationMethods';
+
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+
+class Folder extends Sizer {
+    add: any;
+    addBackground: any;
+    addChildrenMap: any;
+    childTransition: any;
+    expandDirection: any;
+    expanded: any;
+    on: any;
+    orientation: any;
+    reLayoutEnable: any;
+    reLayoutTarget: any;
+    rtl: any;
+    setCollapseCallback: any;
+    setExpandCallback: any;
+    setExpandedState: any;
+    setTransitionDuration: any;
+    toggle: any;
+    type: any;
+
+    constructor(scene?: any, config?: any) {
+        if (config === undefined) {
+            config = {};
+        }
+
+        if (!config.hasOwnProperty('orientation')) {
+            config.orientation = 1;
+        }
+
+        super(scene, config);
+        this.type = 'rexFolder';
+
+        this.reLayoutEnable = true;
+        this.expanded = undefined;
+        this.expandDirection = (this.orientation === 1) ? 'y' : 'x';
+
+        var background = config.background;
+        var title = config.title;
+        var child = config.child;
+
+        // background
+        if (background?: any) {
+            this.addBackground(background);
+        }
+
+        var spaceConfig = GetValue(config, 'space');
+
+        // title
+        var defaultAlign = (this.orientation === 1) ? 'left' : 'top';
+        var align = GetValue(config, 'align.title', defaultAlign);
+        var expand = GetValue(config, 'expand.title', true);
+        this.add(
+            title,
+            {
+                proportion: 0,
+                align: align,
+                expand: expand,
+                padding: {
+                    left: GetValue(spaceConfig, 'titleLeft', 0),
+                    right: GetValue(spaceConfig, 'titleRight', 0),
+                    top: GetValue(spaceConfig, 'titleTop', 0),
+                    bottom: GetValue(spaceConfig, 'titleBottom', 0)
+                }
+            }
+        );
+
+        var toggleByTarget = GetValue(config, 'toggleByTarget', undefined);
+        var toggleClickConfig = GetValue(config, 'toggleClickConfig');
+
+        if (toggleByTarget === undefined) {
+            toggleByTarget = title;
+        }
+        if (toggleByTarget?: any) {
+            OnClick(
+                toggleByTarget,
+                function() {
+                    this.toggle();
+                },
+                this,
+                toggleClickConfig
+            );
+        }
+
+        // child
+        this.childTransition = new ChildTransition(child);
+
+        var customOrigin = GetValue(config, 'customChildOrigin', false);
+        if (!customOrigin) {
+            var origin = (!this.rtl) ? 0 : 1;
+            child.setOrigin(origin);
+        }
+
+        var align = GetValue(config, 'align.child', 'left');
+        var expand = GetValue(config, 'expand.child', true);
+        var proportion = (expand) ? 1 : 0;
+        this.add(
+            child,
+            {
+                proportion: proportion,
+                align: align,
+                expand: expand,
+                padding: {
+                    left: GetValue(spaceConfig, 'childLeft', 0),
+                    right: GetValue(spaceConfig, 'childRight', 0),
+                    top: GetValue(spaceConfig, 'childTop', 0),
+                    bottom: GetValue(spaceConfig, 'childBottom', 0)
+                }
+            }
+        );
+
+        this.addChildrenMap('title', title);
+        this.addChildrenMap('child', child);
+        this.addChildrenMap('background', background);
+
+        var transitionConfig = config.transition;
+        this.setTransitionDuration(GetValue(transitionConfig, 'duration', 200));
+        this.setExpandCallback(GetValue(transitionConfig, 'expandCallback', undefined));
+        this.setCollapseCallback(GetValue(transitionConfig, 'collapseCallback', undefined));
+
+        this.reLayoutTarget = GetValue(config, 'reLayoutTarget', undefined);
+
+        var onExpandStart = config.onExpandStart;
+        if (onExpandStart?: any) {
+            this.on('expand.start', onExpandStart);
+        }
+
+        var onExpandComplete = config.onExpandComplete;
+        if (onExpandComplete?: any) {
+            this.on('expand.complete', onExpandComplete);
+        }
+
+        var onCollapseStart = config.onCollapseStart;
+        if (onCollapseStart?: any) {
+            this.on('collapse.start', onCollapseStart);
+        }
+
+        var onCollapseComplete = config.onCollapseComplete;
+        if (onCollapseComplete?: any) {
+            this.on('collapse.complete', onCollapseComplete);
+        }
+
+        var expanded = GetValue(config, 'expanded', undefined);
+        if (expanded !== undefined) {
+            this.setExpandedState(expanded);
+        }
+    }
+}
+
+Object.assign(
+    Folder.prototype,
+    ExpandMethods,
+    ConfigurationMethods,
+)
+
+export default Folder;

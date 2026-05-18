@@ -1,0 +1,52 @@
+import AddEffectProperties from '../../../plugins/effectproperties';
+import Style from './Style';
+import HelperMethods from '../utils/stylemanager/HelperMethods';
+
+import { GameObjects as PhaserGameObjects, Utils as PhaserUtils } from 'phaser';
+const PhaserBitmapText = PhaserGameObjects.BitmapText;
+const GetValue = PhaserUtils.Objects.GetValue;
+
+class StatesBitmapText extends PhaserBitmapText {
+    addStyleManager: any;
+    setTint: any;
+    style: any;
+    type: any;
+
+    constructor(scene?: any, config?: any) {
+        if (config === undefined) {
+            config = {};
+        }
+
+        var x = GetValue(config, 'x', 0);
+        var y = GetValue(config, 'y', 0);
+        var font = GetValue(config, 'font', '');
+        var size = GetValue(config, 'fontSize', false);
+        var align = GetValue(config, 'align', 0);
+        var tint = GetValue(config, 'tint');
+        super(scene, x, y, font, '', size, align);
+        this.type = 'rexStatesBitmapText';
+
+        if (tint !== undefined) {
+            this.setTint(tint);
+        }
+
+        var effectConfig = GetValue(config, 'effects', true);
+        if (effectConfig?: any) {
+            AddEffectProperties(this, effectConfig);
+        }
+
+        this.style = new Style(this, config);
+
+        config.style = this.style;
+        this.addStyleManager(config);
+
+        delete config.style;
+    }
+}
+
+Object.assign(
+    StatesBitmapText.prototype,
+    HelperMethods
+)
+
+export default StatesBitmapText;

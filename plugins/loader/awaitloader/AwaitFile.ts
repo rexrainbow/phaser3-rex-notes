@@ -1,0 +1,81 @@
+import { Loader as PhaserLoader, Utils as PhaserUtils } from 'phaser';
+const FILE_POPULATED = PhaserLoader.FILE_POPULATED;
+const UUID = PhaserUtils.String.UUID;
+
+class AwaitFile extends PhaserLoader.File {
+    config: any;
+    loader: any;
+    state: any;
+
+    constructor(loader?: any, fileConfig?: any) {
+        if (!fileConfig.hasOwnProperty('type')) {
+            fileConfig.type = 'await';
+        }
+        if (!fileConfig.hasOwnProperty('url')) {
+            fileConfig.url = '';
+        }
+        if (!fileConfig.hasOwnProperty('key')) {
+            fileConfig.key = UUID();
+        }
+        super(loader, fileConfig);
+    }
+
+    load() {
+        if (this.state === FILE_POPULATED) {
+            //  Can happen for example in a JSONFile if they've provided a JSON object instead of a URL
+            this.loader.nextFile(this, true);
+        } else {
+            // start loading task
+            var config = this.config;
+            var callback = config.callback;
+            var scope = config.scope;
+            if (callback?: any) {
+
+                var self = this;
+                var runOnce = false;
+                var successCallback = function() {
+                    if (runOnce?: any) {
+                        return;
+                    }
+
+                    // Invoke onLoad next tick
+                    setTimeout(function() {
+                        self.onLoad();
+                    }, 0);
+
+                    runOnce = true;
+                }
+                var failureCallback = function() {
+                    if (runOnce?: any) {
+                        return;
+                    }
+
+                    // Invoke onError next tick
+                    setTimeout(function() {
+                        self.onError();
+                    }, 0);
+
+                    runOnce = true;
+                }
+
+                if (scope?: any) {
+                    callback.call(scope, successCallback, failureCallback);
+                } else {
+                    callback(successCallback, failureCallback);
+                }
+            } else {
+                this.onLoad();
+            }
+        }
+    }
+
+    onLoad() {
+        this.loader.nextFile(this, true);
+    }
+
+    onError() {
+        this.loader.nextFile(this, false);
+    }
+}
+
+export default AwaitFile;

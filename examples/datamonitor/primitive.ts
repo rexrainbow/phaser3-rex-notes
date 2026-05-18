@@ -27,7 +27,7 @@ console.log('----')
 data.a += 30;
 data.b += ' world';
 data.c = !data.c;
-// data.e = 100;
-// data.e -= 30;
+data.e = 100;
+data.e -= 30;
 
 console.log(JSON.stringify(data));

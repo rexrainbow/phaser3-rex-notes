@@ -1,0 +1,376 @@
+import Canvas from '../canvasbase/Canvas';
+import ProgressBase from '../../../utils/progressbase/ProgressBase';
+import GetStyle from '../../../utils/canvas/GetStyle';
+import DrawContent from './DrawContent';
+
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const Clamp = PhaserMath.Clamp;
+
+const DefaultStartAngle = PhaserMath.DegToRad(270);
+const PI2 = Math.PI * 2;
+
+class CircularProgress extends ProgressBase(Canvas) {
+    value: any;
+    width: any;
+
+    _anticlockwise: any;
+    _barColor: any;
+    _barColor2: any;
+    _centerColor: any;
+    _centerColor2: any;
+    _deltaAngle: any;
+    _endAngle: any;
+    _radius: any;
+    _startAngle: any;
+    _textColor: any;
+    _textFont: any;
+    _textStrokeColor: any;
+    _textStrokeThickness: any;
+    _thickness: any;
+    _trackColor: any;
+    bootProgressBase: any;
+    canvas: any;
+    clear: any;
+    context: any;
+    dirty: any;
+    setValue: any;
+    textFormatCallback: any;
+    textFormatCallbackScope: any;
+    type: any;
+
+    constructor(scene?: any, x?: any, y?: any, radius?: any, barColor?: any, value?: any, config?: any) {
+        if (IsPlainObject(x)) {
+            config = x;
+            x = GetValue(config, 'x', 0);
+            y = GetValue(config, 'y', 0);
+            radius = GetValue(config, 'radius', 1);
+            barColor = GetValue(config, 'barColor', undefined);
+            value = GetValue(config, 'value', 0);
+        }
+
+        var width = radius * 2;
+        var resolution = GetValue(config, 'resolution', 1);
+
+        super(scene, x, y, width, width, resolution);
+        this.type = 'rexCircularProgressCanvas';
+
+        this.bootProgressBase(config);
+
+        this.setRadius(radius);
+        this.setTrackColor(GetValue(config, 'trackColor', undefined));
+        this.setBarColor(barColor);
+        this.setBarColor2(GetValue(config, 'barColor2', undefined));
+        this.setCenterColor(GetValue(config, 'centerColor', undefined));
+
+        this.setThickness(GetValue(config, 'thickness', 0.2));
+
+        this.setAnticlockwise(GetValue(config, 'anticlockwise', false));
+
+        this.setStartAngle(GetValue(config, 'startAngle', DefaultStartAngle));
+
+        var endAngle = GetValue(config, 'endAngle');
+        if (endAngle === undefined) {
+            if (this.anticlockwise) {
+                endAngle = this.startAngle - PI2;
+            } else {
+                endAngle = this.startAngle + PI2;
+            }
+        }
+        this.setEndAngle(GetValue(config, 'endAngle', endAngle))
+
+        this.setTextColor(GetValue(config, 'textColor', undefined));
+        this.setTextStrokeColor(
+            GetValue(config, 'textStrokeColor', undefined),
+            GetValue(config, 'textStrokeThickness', undefined)
+        );
+
+        var textFont = GetValue(config, 'textFont', undefined);
+        if (textFont?: any) {
+            this.setTextFont(textFont);
+        } else {
+            this.setTextFont(
+                GetValue(config, 'textSize', '16px'),
+                GetValue(config, 'textFamily', 'Courier'),
+                GetValue(config, 'textStyle', '')
+            );
+        }
+        this.setTextFormatCallback(
+            GetValue(config, 'textFormatCallback', undefined),
+            GetValue(config, 'textFormatCallbackScope', undefined)
+        );
+
+        this.setValue(value);
+    }
+
+    resize(width?: any, height?: any) {
+        width = Math.floor(Math.min(width, height));
+        if (width === this.width) {
+            return this;
+        }
+
+        super.resize(width, width);
+        this.setRadius(width / 2);
+        return this;
+    }
+
+    get radius() {
+        return this._radius;
+    }
+
+    set radius(value) {
+        this.dirty = this.dirty || (this._radius != value);
+        this._radius = value;
+        var width = value * 2;
+        this.resize(width, width);
+    }
+
+    setRadius(radius?: any) {
+        this.radius = radius;
+        return this;
+    }
+
+    get trackColor() {
+        return this._trackColor;
+    }
+
+    set trackColor(value) {
+        value = GetStyle(value, this.canvas, this.context);
+        this.dirty = this.dirty || (this._trackColor != value);
+        this._trackColor = value;
+    }
+
+    setTrackColor(color?: any) {
+        this.trackColor = color;
+        return this;
+    }
+
+    get barColor() {
+        return this._barColor;
+    }
+
+    set barColor(value) {
+        value = GetStyle(value, this.canvas, this.context);
+        this.dirty = this.dirty || (this._barColor != value);
+        this._barColor = value;
+    }
+
+    setBarColor(color?: any) {
+        this.barColor = color;
+        return this;
+    }
+
+    get barColor2() {
+        return this._barColor2;
+    }
+
+    set barColor2(value) {
+        value = GetStyle(value, this.canvas, this.context);
+        this.dirty = this.dirty || (this._barColor2 != value);
+        this._barColor2 = value;
+    }
+
+    setBarColor2(color?: any) {
+        this.barColor2 = color;
+        return this;
+    }
+
+    get startAngle() {
+        return this._startAngle;
+    }
+
+    set startAngle(value) {
+        this.dirty = this.dirty || (this._startAngle != value);
+        this._startAngle = value;
+        this._deltaAngle = GetDeltaAngle(this._startAngle, this._endAngle, this._anticlockwise);
+    }
+
+    setStartAngle(angle?: any) {
+        this.startAngle = angle;
+        return this;
+    }
+
+    get endAngle() {
+        return this._endAngle;
+    }
+
+    set endAngle(value) {
+        this.dirty = this.dirty || (this._endAngle != value);
+        this._endAngle = value;
+        this._deltaAngle = GetDeltaAngle(this._startAngle, this._endAngle, this._anticlockwise);
+    }
+
+    setEndAngle(angle?: any) {
+        this.endAngle = angle;
+        return this;
+    }
+
+    get anticlockwise() {
+        return this._anticlockwise;
+    }
+
+    set anticlockwise(value) {
+        this.dirty = this.dirty || (this._anticlockwise != value);
+        this._anticlockwise = value;
+        this._deltaAngle = GetDeltaAngle(this._startAngle, this._endAngle, this._anticlockwise);
+    }
+
+    setAnticlockwise(anticlockwise?: any) {
+        if (anticlockwise === undefined) {
+            anticlockwise = true;
+        }
+        this.anticlockwise = anticlockwise;
+        return this;
+    }
+
+    get thickness() {
+        return this._thickness;
+    }
+
+    set thickness(value) {
+        value = Clamp(value, 0, 1);
+        this.dirty = this.dirty || (this._thickness != value);
+        this._thickness = value;
+    }
+
+    setThickness(thickness?: any) {
+        this.thickness = thickness;
+        return this;
+    }
+
+    get centerColor() {
+        return this._centerColor;
+    }
+
+    set centerColor(value) {
+        value = GetStyle(value, this.canvas, this.context);
+        this.dirty = this.dirty || (this._centerColor != value);
+        this._centerColor = value;
+    }
+
+    get centerColor2() {
+        return this._centerColor2;
+    }
+
+    set centerColor2(value) {
+        value = GetStyle(value, this.canvas, this.context);
+        this.dirty = this.dirty || (this._centerColor2 != value);
+        this._centerColor2 = value;
+    }
+
+    setCenterColor(color?: any, color2?: any) {
+        this.centerColor = color;
+        this.centerColor2 = color2;
+        return this;
+    }
+
+    get textColor() {
+        return this._textColor;
+    }
+
+    set textColor(value) {
+        value = GetStyle(value, this.canvas, this.context);
+        this.dirty = this.dirty || (this._textColor != value);
+        this._textColor = value;
+    }
+
+    setTextColor(color?: any) {
+        this.textColor = color;
+        return this;
+    }
+
+    get textStrokeColor() {
+        return this._textStrokeColor;
+    }
+
+    set textStrokeColor(value) {
+        value = GetStyle(value, this.canvas, this.context);
+        this.dirty = this.dirty || (this._textStrokeColor != value);
+        this._textStrokeColor = value;
+    }
+
+    get textStrokeThickness() {
+        return this._textStrokeThickness;
+    }
+
+    set textStrokeThickness(value) {
+        this.dirty = this.dirty || (this._textStrokeThickness != value);
+        this._textStrokeThickness = value;
+    }
+
+    setTextStrokeColor(color?: any, thickness?: any) {
+        if (thickness === undefined) {
+            thickness = 2;
+        }
+        this.textStrokeColor = color;
+        this.textStrokeThickness = thickness;
+        return this;
+    }
+
+    get textFont() {
+        return this._textFont;
+    }
+
+    set textFont(value) {
+        this.dirty = this.dirty || (this._textFont != value);
+        this._textFont = value;
+    }
+
+    setTextFont(fontSize?: any, fontFamily?: any, fontStyle?: any) {
+        var font;
+        if (fontFamily === undefined) {
+            font = fontSize;
+        } else {
+            font = fontStyle + ' ' + fontSize + ' ' + fontFamily;
+        }
+        this.textFont = font;
+        return this;
+    }
+
+    setTextFormatCallback(callback?: any, scope?: any) {
+        this.textFormatCallback = callback;
+        this.textFormatCallbackScope = scope;
+        return this;
+    }
+
+    updateTexture() {
+        super.updateTexture(function() {
+            this.clear();
+            DrawContent.call(this);
+        }, this);
+        return this;
+    }
+
+    getFormatText(value?: any) {
+        if (value === undefined) {
+            value = this.value;
+        }
+
+        var text;
+        if (this.textFormatCallbackScope) {
+            text = this.textFormatCallback(value);
+        } else {
+            text = this.textFormatCallback.call(this.textFormatCallbackScope, value);
+        }
+        return text;
+    }
+}
+
+var GetDeltaAngle = function(startAngle?: any, endAngle?: any, anticlockwise?: any) {
+    if (anticlockwise?: any) {
+        if (startAngle <= endAngle) {
+            return (PI2 + startAngle) - endAngle;
+        } else {
+            return startAngle - endAngle;
+        }
+    } else {
+        if (startAngle >= endAngle) {
+            return (PI2 + endAngle) - startAngle;
+        } else {
+            return endAngle - startAngle;
+        }
+    }
+}
+
+export default CircularProgress;

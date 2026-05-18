@@ -1,4 +1,4 @@
-import LayerManager from './layermanager.js';
+import LayerManager from './layermanager';
 
 export default class LayerManagerPlugin extends Phaser.Plugins.BasePlugin {
     add(

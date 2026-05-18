@@ -1,0 +1,18 @@
+import { Scale as PhaserScale } from 'phaser';
+var WarnCounter = 0;
+
+var CheckScaleMode = function(scene?: any) {
+    var scaleManager = scene.sys.scale;
+    if (scaleManager.scaleMode === PhaserScale.RESIZE) {
+        return true;
+    }
+
+    // Not RESIZE mode
+    if (WarnCounter === 0) {
+        console.warn('Scale outer only works with RESIZE scale mode');
+    }
+    WarnCounter++;
+    return false;
+}
+
+export default CheckScaleMode;

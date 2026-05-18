@@ -1,0 +1,40 @@
+import GenerateInputFieldClass from '../gameobjects/inputfield/GenerateInputFieldClass';
+
+var CreateInputField = function(tweaker?: any, config?: any, inputRowStyle?: any, styles?: any) {
+    var scene = tweaker.scene;
+    var inputField;
+    var inputHandlers = tweaker.inputHandlers;
+    for (var i = 0, cnt = inputHandlers.length; i < cnt; i++) {
+        var handler = inputHandlers[i];
+        if (handler.accept(config)) {
+            var InputFieldClass = GenerateInputFieldClass(handler.baseClass);
+            inputField = new InputFieldClass(scene);
+            scene.add.existing(inputField);
+
+            // Decorate instance via installing callbacks
+            inputField
+                .setTweaker(tweaker)
+                .setSetupCallback(handler.setup)
+                .setFilterValueCallback(handler.filterValue)
+                .setDisplayValueCallback(handler.displayValue)
+                .setOnBindTargetCallback(handler.onBindTarget)
+                .setSetReadOnlyCallback(handler.setReadOnly)
+
+            handler.build(inputField, config, inputRowStyle, styles);
+
+            break;
+        }
+
+    }
+
+    if (inputField?: any) {
+        // Setup by config
+        inputField.setup(config, true);
+    } else {
+        // Can't create inputField
+    }
+
+    return inputField;
+}
+
+export default CreateInputField;

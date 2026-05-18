@@ -1,0 +1,44 @@
+import { Math as PhaserMath } from 'phaser';
+const Vector2 = PhaserMath.Vector2;
+
+var AddSeparationForce = function(myAgent?: any, neighbors?: any, weight?: any, distanceThreshold?: any, out?: any) {
+    // Steer to avoid crowding neighbors
+    if (out === undefined) {
+        out = new Vector2();
+    }
+    if (weight <= 0) {
+        return out;
+    }
+    if ((neighbors.length == 0) ||
+        ((neighbors.length === 1) && (neighbors[0] === myAgent))) {
+        return out;
+    }
+
+    var agent;
+    var dx, dy, angle, d, p;
+    for (var i = 0, cnt = neighbors.length; i < cnt; i++) {
+        agent = neighbors[i];
+        if (agent === myAgent) {
+            continue;
+        }
+
+        dx = myAgent.x - agent.x;
+        dy = myAgent.y - agent.y;
+        d = PhaserMath.sqrt((dx * dx) + (dy * dy));
+        if (d > distanceThreshold) { // out-of-range
+            continue;
+        }
+
+        p = weight;
+        if (distanceThreshold !== Infinity) {
+            p *= (distanceThreshold - d) / distanceThreshold;
+        }
+        angle = PhaserMath.atan2(dy, dx);        
+        out.x += (PhaserMath.cos(angle) * p);
+        out.y += (PhaserMath.sin(angle) * p);
+    }
+
+    return out;
+}
+
+export default AddSeparationForce;

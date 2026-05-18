@@ -1,9 +1,16 @@
-// import * as Phaser from 'phaser';
+import FullWindow from '../../../behaviors/fullwindow/FullWindow';
 
-export default FullWindowZone;
+import { GameObjects as PhaserGameObjects } from 'phaser';
+const Zone = PhaserGameObjects.Zone;
 
-declare class FullWindowZone extends Phaser.GameObjects.Zone {
-    constructor(
-        scene: Phaser.Scene,
-    );
+class FullWindowRectangle extends Zone {
+    fullWindow: any;
+
+    constructor(scene?: any) {
+        super(scene, 0, 0, 2, 2);
+
+        this.fullWindow = new FullWindow(this);
+    }
 }
+
+export default FullWindowRectangle;

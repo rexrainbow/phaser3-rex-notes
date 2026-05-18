@@ -1,0 +1,178 @@
+import HasProperty from '../../utils/object/HasProperty';
+import GetFilterList from '../../utils/renderer/filterpluginbase/GetFilterList';
+import Clamp from '../../utils/math/Clamp';
+import AddClearEffectCallback from './AddClearEffectCallback';
+
+var AddWipeProperties = function(gameObject?: any) {
+    // Don't attach properties again
+    if (HasProperty(gameObject, 'wipeLeft')) {
+        return gameObject;
+    }
+
+    var filterList = GetFilterList(gameObject);
+
+    var wipeLeft,
+        wipeRight,
+        wipeUp,
+        wipeDown,
+        wipeWidth = 0.1;
+
+    var ClearWipeFlags = function() {
+        wipeLeft = null;
+        wipeRight = null;
+        wipeUp = null;
+        wipeDown = null;
+    }
+
+    var RemoveEffect = function(gameObject?: any) {
+        if (gameObject._wipeEffect) {
+            filterList.remove(gameObject._wipeEffect);
+            gameObject._wipeEffect = undefined;
+        }
+    }
+
+    Object.defineProperty(gameObject, 'wipeLeft', {
+        get: function() {
+            return wipeLeft;
+        },
+        set: function(value?: any) {
+            if (wipeLeft === value) {
+                return;
+            }
+
+            ClearWipeFlags();
+
+            wipeLeft = value;
+
+            if ((wipeLeft === null) || (wipeLeft === false)) {
+                RemoveEffect(gameObject);
+            } else {
+                wipeLeft = Clamp(wipeLeft, 0, 1);
+
+                if (!gameObject._wipeEffect) {
+                    gameObject._wipeEffect = filterList.addWipe(wipeWidth, 0, 0, 0);
+                }
+
+                gameObject._wipeEffect.direction = 1;
+                gameObject._wipeEffect.axis = 0;
+                gameObject._wipeEffect.progress = wipeLeft;
+            }
+
+        },
+    })
+
+    Object.defineProperty(gameObject, 'wipeRight', {
+        get: function() {
+            return wipeRight;
+        },
+        set: function(value?: any) {
+            if (wipeRight === value) {
+                return;
+            }
+
+            ClearWipeFlags();
+
+            wipeRight = value;
+
+            if ((wipeRight === null) || (wipeRight === false)) {
+                RemoveEffect(gameObject);
+            } else {
+                wipeRight = Clamp(wipeRight, 0, 1);
+
+                if (!gameObject._wipeEffect) {
+                    gameObject._wipeEffect = filterList.addWipe(wipeWidth, 0, 0, 0);
+                }
+                gameObject._wipeEffect.direction = 0;
+                gameObject._wipeEffect.axis = 0;
+                gameObject._wipeEffect.progress = wipeRight;
+            }
+
+        },
+    })
+
+    Object.defineProperty(gameObject, 'wipeUp', {
+        get: function() {
+            return wipeUp;
+        },
+        set: function(value?: any) {
+            if (wipeUp === value) {
+                return;
+            }
+
+            ClearWipeFlags();
+
+            wipeUp = value;
+
+            if ((wipeUp === null) || (wipeUp === false)) {
+                RemoveEffect(gameObject);
+            } else {
+                wipeUp = Clamp(wipeUp, 0, 1);
+
+                if (!gameObject._wipeEffect) {
+                    gameObject._wipeEffect = filterList.addWipe(wipeWidth, 0, 0, 0);
+                }
+                gameObject._wipeEffect.direction = 1;
+                gameObject._wipeEffect.axis = 1;
+                gameObject._wipeEffect.progress = wipeUp;
+            }
+
+        },
+    })
+
+    Object.defineProperty(gameObject, 'wipeDown', {
+        get: function() {
+            return wipeDown;
+        },
+        set: function(value?: any) {
+            if (wipeDown === value) {
+                return;
+            }
+
+            ClearWipeFlags();
+
+            wipeDown = value;
+
+            if ((wipeDown === null) || (wipeDown === false)) {
+                RemoveEffect(gameObject);
+            } else {
+                wipeDown = Clamp(wipeDown, 0, 1);
+
+                if (!gameObject._wipeEffect) {
+                    gameObject._wipeEffect = filterList.addWipe(wipeWidth, 0, 0, 0);
+                }
+                gameObject._wipeEffect.direction = 0;
+                gameObject._wipeEffect.axis = 1;
+                gameObject._wipeEffect.progress = wipeDown;
+            }
+
+        },
+    })
+
+    Object.defineProperty(gameObject, 'wipeWidth', {
+        get: function() {
+            return wipeWidth;
+        },
+        set: function(value?: any) {
+            if (wipeWidth === value) {
+                return;
+            }
+
+            wipeWidth = Clamp(value, 0, 1);
+
+            if (gameObject._wipeEffect) {
+                gameObject._wipeEffect.wipeWidth = wipeWidth;
+            }
+        },
+    })
+
+    gameObject.wipeLeft = null;
+
+    AddClearEffectCallback(gameObject, 'wipeLeft');
+    AddClearEffectCallback(gameObject, 'wipeRight');
+    AddClearEffectCallback(gameObject, 'wipeUp');
+    AddClearEffectCallback(gameObject, 'wipeDown');
+
+    return gameObject;
+}
+
+export default AddWipeProperties;

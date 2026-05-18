@@ -1,0 +1,28 @@
+import ButtonStyleBase from './ButtonStyleBase';
+import DeepClone from '../../../../../plugins/utils/object/DeepClone';
+import CreateLabel from '../../../utils/build/CreateLabel';
+
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+
+var CreateDuplicateButton = function(scene?: any, config?: any, style?: any) {
+    var duplicateButtonStyle = GetValue(style, 'duplicateButton');
+    var duplicateLabel;
+
+    if (duplicateButtonStyle?: any) {
+        // If using dedicated duplicate-button style, keep its own display content config.
+        duplicateButtonStyle = Object.assign(DeepClone(ButtonStyleBase), duplicateButtonStyle);
+    } else {
+        duplicateButtonStyle = GetValue(style, 'tweaker.inputRow.button') || {};
+        duplicateLabel = GetValue(config, 'duplicateLabel', 'Duplicate');
+    }
+
+    var duplicateButton = CreateLabel(scene, duplicateButtonStyle);
+    if (duplicateLabel?: any) {
+        duplicateButton.resetDisplayContent(duplicateLabel);
+    }
+
+    return duplicateButton;
+}
+
+export default CreateDuplicateButton;

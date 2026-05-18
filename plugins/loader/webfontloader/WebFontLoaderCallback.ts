@@ -1,0 +1,33 @@
+import WebFont from './WebFont';
+
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+
+const loaderCallback = function(key?: any, config?: any) {
+    if (IsPlainObject(key)) {
+        config = key;
+        if (config.hasOwnProperty('config')) {
+            config.type = 'webfont';
+            config.url = '';
+        } else {
+            config = {
+                key: 'webfont',
+                type: 'webfont',
+                url: '',
+                config: config
+            };
+        }
+    } else {
+        config = {
+            type: 'webfont',
+            url: '',
+            key: key,
+            config: config
+        };
+    }
+    this.addFile(new WebFont(this, config));
+
+    return this;
+}
+
+export default loaderCallback;

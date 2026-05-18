@@ -21,6 +21,15 @@ export type FinishedMotionCallback = (self: ACubismMotion) => void;
  * モーションの抽象基底クラス。MotionQueueManagerによってモーションの再生を管理する。
  */
 export abstract class ACubismMotion {
+    _fadeInSeconds: any;
+    _fadeOutSeconds: any;
+    _firedEventValues: any;
+    _offsetSeconds: any;
+    _onFinishedMotion: any;
+    _weight: any;
+    doUpdateParameters: any;
+    getDuration: any;
+
   /**
    * インスタンスの破棄
    */

@@ -1,0 +1,30 @@
+import CreateBackground from './utils/CreateBackground';
+import DeepClone from '../../../../plugins/utils/object/DeepClone';
+
+var CreateSlider = function(scene?: any, config?: any, style?: any) {
+    if (!style && !config) {
+        return undefined;
+    }
+
+    if (!config) {
+        config = {};
+    }
+
+    var slider = (style) ? DeepClone(style) : {};
+
+    var trackStyle = style.track;
+    var trackConfig = config.track;
+    if (trackStyle || trackConfig) {
+        slider.track = CreateBackground(scene, (trackConfig || {}), (trackStyle || {}));
+    }
+
+    var thumbStyle = style.thumb;
+    var thumbConfig = config.thumb;
+    if (thumbStyle || thumbConfig) {
+        slider.thumb = CreateBackground(scene, (thumbConfig || {}), (thumbStyle || {}));
+    }
+
+    return slider;
+}
+
+export default CreateSlider;

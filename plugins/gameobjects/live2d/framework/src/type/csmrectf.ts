@@ -9,6 +9,11 @@
  * 矩形形状（座標・長さはfloat値）を定義するクラス
  */
 export class csmRect {
+    height: any;
+    width: any;
+    x: any;
+    y: any;
+
   /**
    * コンストラクタ
    * @param x 左端X座標

@@ -21,6 +21,11 @@ import { csmString } from '../type/csmstring';
  *       複数のモーションを同時に再生させる場合は、複数のCubismMotionQueueManagerインスタンスを使用する。
  */
 export class CubismMotionQueueManager {
+    _eventCallBack: any;
+    _eventCustomData: any;
+    _motions: any;
+    _userTimeSeconds: any;
+
   /**
    * コンストラクタ
    */

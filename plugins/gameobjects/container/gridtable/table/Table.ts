@@ -1,0 +1,392 @@
+import Cell from './Cell';
+import Pool from '../../../../pool';
+
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const SpliceOne = PhaserUtils.Array.SpliceOne;
+const DefaultCellSize = 60;
+
+class Table {
+    _totalRowsHeight: any;
+    cellPool: any;
+    cells: any;
+    colCount: any;
+    defaultCellHeight: any;
+    defaultCellWidth: any;
+    nonZeroDeltaHeightCount: any;
+    parent: any;
+
+    constructor(parent?: any, config?: any) {
+        this.parent = parent; // parent: GridTable game object (Container)
+        this.cells = [];
+        this.cellPool = new Pool();
+        this.resetFromJSON(config);
+    }
+
+    resetFromJSON(o?: any) {
+        if (o === undefined) {
+            o = {};
+        }
+        this.colCount = undefined;
+        this.nonZeroDeltaHeightCount = 0;
+        this.resetTotalRowsHeight();
+
+        var cellHeight = o.cellHeight;
+        if (cellHeight === undefined) {
+            cellHeight = DefaultCellSize;
+        }
+
+        var cellWidth = o.cellWidth;
+        if (cellWidth === undefined) {
+            cellWidth = DefaultCellSize;
+        }
+
+        this.setDefaultCellHeight(cellHeight);
+        this.setDefaultCellWidth(cellWidth);
+        this.initCells(GetValue(o, 'cellsCount', 0));
+        this.setColumnCount(GetValue(o, 'columns', 1));
+        return this;
+    }
+
+    destroy(fromScene?: any) {
+        // GridTable is destroyed, all cell containers will also be destroyed too
+        // Don't have to freeCell
+        this.cellPool.destroy();
+        this.cells = undefined;
+        this.parent = undefined;
+    }
+
+    get defaultCellHeightMode() {
+        return (this.nonZeroDeltaHeightCount === 0);
+    }
+
+    setDefaultCellHeight(height?: any) {
+        this.defaultCellHeight = height;
+        return this;
+    }
+
+    setDefaultCellWidth(width?: any) {
+        this.defaultCellWidth = width;
+        return this;
+    }
+
+    initCells(size?: any) {
+        var cells = this.cells;
+        cells.length = size;
+        for (var i = 0; i < size; i++) {
+            cells[i] = null;
+        }
+        return this;
+    }
+
+    insertNewCells(cellIdx?: any, count?: any) {
+        var cells = this.cells;
+        if (cellIdx === cells.length) {
+            // append at end of array
+            var endIdx = cellIdx + count;
+            cells.legth = endIdx;
+            for (var i = cellIdx; i < endIdx; i++) {
+                cells[i] = null;
+            }
+        } else {
+            var newCells = [];
+            newCells.length = count;
+            for (var i = 0; i < count; i++) {
+                newCells[i] = null;
+            }
+            this.cells.splice(cellIdx, 0, ...newCells);
+        }
+
+        this.resetTotalRowsHeight();
+        return this;
+    }
+
+    removeCells(cellIdx?: any, count?: any) {
+        var endIdx = cellIdx + count;
+        for (var i = cellIdx; i < endIdx; i++) {
+            this.freeCell(i);
+        }
+
+        if (endIdx === this.cells.length) {
+            // remove until end of array
+            this.cells.length = cellIdx;
+        } else {
+            if (count === 1) {
+                SpliceOne(this.cells, cellIdx);
+            } else {
+                this.cells.splice(cellIdx, count);
+            }
+            this.buildCellIndex(cellIdx);
+        }
+
+        this.resetTotalRowsHeight();
+        return this;
+    }
+
+    setColumnCount(columns?: any) {
+        this.colCount = columns;
+
+        this.resetTotalRowsHeight();
+
+        // Set cellWith according to parent width/height and columns
+        var parent = this.parent;
+        if (parent.expandCellSize) {
+            var width = (parent.scrollMode === 0) ? parent.width : parent.height;
+            var cellWidth = width / columns;
+            this.setDefaultCellWidth(cellWidth);
+        }
+
+        return this;
+    }
+
+    get rowCount() {
+        return Math.ceil(this.cells.length / this.colCount);
+    }
+
+    get cellsCount() {
+        return this.cells.length;
+    }
+
+    isValidCellIdx(idx?: any) {
+        return ((idx >= 0) && (idx < this.cells.length));
+    }
+
+    heightToRowIndex(height?: any, roundMode?: any) {
+        if (roundMode === undefined) {
+            roundMode = 0;
+        }
+        /*
+        roundMode:
+        - 0 : floor
+        - 1 : ceil
+        - 2 :             
+            - Default : floor
+            - Vary : plus one if rowIdx is an integer, else floor
+        */
+
+        if (height === 0) {
+            return 0;
+        }
+
+        // defaultCellHeightMode
+        if (this.defaultCellHeightMode) {
+            var rowIdx = height / this.defaultCellHeight;
+            switch (roundMode?: any) {
+                case 1:
+                    rowIdx = Math.ceil(rowIdx);
+                    break;
+
+                default: // 0, 2
+                    rowIdx = Math.floor(rowIdx);
+                    break;
+            }
+
+            return rowIdx;
+        }
+
+        // count cell height one by one
+        var rowCount = this.rowCount;
+        var remainder = height,
+            isValidIdx;
+        var cell, rowHeight, rowIdx = 0;
+
+        while (1) {
+            rowHeight = this.getRowHeight(rowIdx);
+            remainder -= rowHeight;
+
+            isValidIdx = (rowIdx >= 0) && (rowIdx < rowCount);
+            if ((remainder > 0) && isValidIdx) {
+                rowIdx += 1;
+            } else if (remainder === 0) {
+                if (roundMode === 2) {
+                    rowIdx += 1;
+                }
+                return rowIdx;
+            } else {
+                if (roundMode === 1) {
+                    var preRowIdx = rowIdx;
+                    rowIdx += 1;
+                    isValidIdx = (rowIdx >= 0) && (rowIdx < rowCount);
+
+                    if (!isValidIdx) {
+                        rowIdx = preRowIdx;
+                    }
+                }
+
+                return rowIdx;
+            }
+        }
+
+    }
+
+    widthToColIndex(width?: any, isCeil?: any) {
+        if (width === 0) {
+            return 0;
+        }
+
+        var colIdx = width / this.defaultCellWidth;
+        if (isCeil?: any) {
+            colIdx = Math.ceil(colIdx);
+        } else {
+            colIdx = Math.floor(colIdx);
+        }
+
+        return colIdx;
+    }
+
+    colRowToCellIndex(colIdx?: any, rowIdx?: any) {
+        // Return a number cell index, or null if (colIdx, rowIdx) is out of range
+        if (
+            (colIdx < 0) || (colIdx >= this.colCount) ||
+            (rowIdx < 0) || (rowIdx >= this.rowCount)
+        ) {
+            return null;
+        }
+        return (rowIdx * this.colCount) + colIdx;
+    }
+
+    rowIndexToHeight(start?: any, end?: any) {
+        // defaultCellHeightMode
+        if (this.defaultCellHeightMode) {
+            return (end - start + 1) * this.defaultCellHeight;
+        }
+
+        var h, sum = 0;
+        for (var i = start; i <= end; i++) {
+            h = this.getRowHeight(i);
+            sum += h;
+        }
+
+        return sum;
+    }
+
+    colIndexToWidth(start?: any, end?: any) {
+        return (end - start + 1) * this.defaultCellWidth;
+    };
+
+    getRowHeight(rowIdx?: any) {
+        var cnt = this.colCount;
+        // single column
+        if (cnt <= 1) {
+            return this.getCellHeight(this.colRowToCellIndex(0, rowIdx));
+        }
+
+        // multiple columns, get the maximum height
+        var maxHeight = 0,
+            cellHeight;
+        for (var i = 0; i < cnt; i++) {
+            cellHeight = this.getCellHeight(this.colRowToCellIndex(i, rowIdx));
+            if (maxHeight < cellHeight)
+                maxHeight = cellHeight;
+        }
+        return maxHeight;
+    }
+
+    getColWidth(idx?: any) {
+        return this.defaultCellWidth;
+    }
+
+    getCellHeight(cellIdx?: any) {
+        if (!this.isValidCellIdx(cellIdx)) {
+            return 0;
+        }
+
+        var cellHeight;
+        if (this.defaultCellHeightMode)
+            cellHeight = this.defaultCellHeight;
+        else {
+            var cell = this.getCell(cellIdx, false);
+            var deltaHeight = (cell) ? cell.deltaHeight : 0;
+            cellHeight = this.defaultCellHeight + deltaHeight;
+        }
+
+        return cellHeight;
+    }
+
+    resetTotalRowsHeight() {
+        this._totalRowsHeight = null;
+    }
+
+    get totalRowsHeight() {
+        if (this._totalRowsHeight === null) {
+            this._totalRowsHeight = this.rowIndexToHeight(0, this.rowCount - 1);
+        }
+
+        return this._totalRowsHeight;
+    }
+
+    get totalColumnWidth() {
+        return this.colCount * this.defaultCellWidth;
+    }
+
+    cellIndxeToColIndex(cellIdx?: any) {
+        return cellIdx % this.colCount;
+    }
+
+    cellIndxeToRowIndex(cellIdx?: any) {
+        return Math.floor(cellIdx / this.colCount);
+    }
+
+    getCell(cellIdx?: any, createNewCell?: any) {
+        if (!this.isValidCellIdx(cellIdx)) {
+            return null;
+        }
+
+        if (createNewCell === undefined) {
+            createNewCell = true;
+        }
+        if ((this.cells[cellIdx] === null) && createNewCell) {
+            var cell = this.newCell(cellIdx);
+            this.cells[cellIdx] = cell;
+        }
+
+        return this.cells[cellIdx];
+    }
+
+    newCell(cellIdx?: any) {
+        var cell = this.cellPool.pop();
+        if (cell === null) {
+            cell = new Cell(this);
+        } else {
+            cell.setParent(this);
+        }
+        cell.index = cellIdx;
+
+        return cell;
+    }
+
+    buildCellIndex(startIdx?: any) {
+        if (startIdx === undefined) {
+            startIdx = 0;
+        }
+        var cells = this.cells,
+            cell;
+        for (var i = startIdx, len = cells.length; i < len; i++) {
+            cell = cells[i];
+            if (cell?: any) {
+                cell.index = i;
+            }
+        }
+        return this;
+    }
+
+    getParentContainer() {
+        return this.parent;
+    }
+
+    freeCell(cell?: any) {
+        if (typeof (cell) === 'number') {
+            cell = this.cells[cell];
+        }
+
+        if (!cell) {
+            return this;
+        }
+
+        cell.destroy();
+        this.cellPool.push(cell);
+        return this;
+    }
+}
+
+export default Table;

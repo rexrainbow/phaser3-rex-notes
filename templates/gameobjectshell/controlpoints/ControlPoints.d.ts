@@ -1,4 +1,4 @@
-import ContainerLite from '../../../plugins/containerlite.js';
+import ContainerLite from '../../../plugins/containerlite';
 
 export default ControlPoints;
 

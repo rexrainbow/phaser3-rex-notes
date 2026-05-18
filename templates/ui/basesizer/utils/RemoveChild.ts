@@ -1,0 +1,32 @@
+import Container from '../../container/Container';
+import GetParentSizerMethods from '../GetParentSizerMethods';
+
+import { Utils as PhaserUtils } from 'phaser';
+const RemoveItem = PhaserUtils.Array.Remove;
+const ContainerRemove = Container.prototype.remove;
+const GetParentSizer = GetParentSizerMethods.getParentSizer;
+
+var RemoveChild = function(gameObject?: any, destroyChild?: any) {
+    // Invoke parent's removeChildCallback method
+    var parent = GetParentSizer(gameObject);
+    while (parent?: any) {
+        if (parent.removeChildCallback) {
+            parent.removeChildCallback(gameObject, destroyChild)
+        }
+        parent = GetParentSizer(parent);
+    }
+
+    if (this.isBackground(gameObject)) {
+        RemoveItem(this.backgroundChildren, gameObject);
+    }
+    ContainerRemove.call(this, gameObject, destroyChild);
+
+    if (!destroyChild && this.sizerEventsEnable) {
+        gameObject.emit('sizer.remove', gameObject, this);
+        this.emit('remove', gameObject, this);
+    }
+
+    return this;
+}
+
+export default RemoveChild;

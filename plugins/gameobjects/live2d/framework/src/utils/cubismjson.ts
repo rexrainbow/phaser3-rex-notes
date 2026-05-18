@@ -19,6 +19,26 @@ const CSM_JSON_ERROR_INDEX_OF_BOUNDS = 'Error: index out of bounds';
  * パースしたJSONエレメントの要素の基底クラス。
  */
 export abstract class Value {
+    _array: any;
+    _boolValue: any;
+    _error: any;
+    _isStatic: any;
+    _keys: any;
+    _lineCount: any;
+    _map: any;
+    _parseCallback: any;
+    _root: any;
+    _stringBuffer: any;
+    _value: any;
+    pad: any;
+    parseArray: any;
+    parseBytes: any;
+    parseObject: any;
+    parseString: any;
+    parseValue: any;
+
+    getString: any;
+
   /**
    * コンストラクタ
    */
@@ -228,6 +248,17 @@ export abstract class Value {
  * ・eによる指数表現
  */
 export class CubismJson {
+    _error: any;
+    _lineCount: any;
+    _parseCallback: any;
+    _root: any;
+    pad: any;
+    parseArray: any;
+    parseBytes: any;
+    parseObject: any;
+    parseString: any;
+    parseValue: any;
+
   /**
    * コンストラクタ
    */
@@ -379,7 +410,7 @@ export class CubismJson {
 
     for (; i < length; i++) {
       const c: string = buffer[i];
-      switch (c) {
+      switch (c?: any) {
         case '-':
         case '.':
         case '0':
@@ -477,7 +508,7 @@ export class CubismJson {
     for (; i < length; i++) {
       c = string[i];
 
-      switch (c) {
+      switch (c?: any) {
         case '"': {
           // 終端の”、エスケープ文字は別に処理されるのでここに来ない
           outEndPos[0] = i + 1; // ”の次の文字
@@ -496,7 +527,7 @@ export class CubismJson {
           if (i < length) {
             c2 = string[i];
 
-            switch (c2) {
+            switch (c2?: any) {
               case '\\':
                 ret.expansion(1, '\\');
                 break;
@@ -571,7 +602,7 @@ export class CubismJson {
       FOR_LOOP: for (; i < length; i++) {
         c = buffer[i];
 
-        switch (c) {
+        switch (c?: any) {
           case '"':
             key = this.parseString(buffer, length, i + 1, localRetEndPos2);
             if (this._error) {
@@ -604,7 +635,7 @@ export class CubismJson {
       FOR_LOOP2: for (; i < length; i++) {
         c = buffer[i];
 
-        switch (c) {
+        switch (c?: any) {
           case ':':
             ok = true;
             i++;
@@ -639,7 +670,7 @@ export class CubismJson {
       FOR_LOOP3: for (; i < length; i++) {
         c = buffer[i];
 
-        switch (c) {
+        switch (c?: any) {
           case ',':
             break FOR_LOOP3;
           case '}':
@@ -689,7 +720,7 @@ export class CubismJson {
       }
       i = localRetEndpos2[0];
 
-      if (value) {
+      if (value?: any) {
         ret.add(value);
       }
 
@@ -698,7 +729,7 @@ export class CubismJson {
       FOR_LOOP: for (; i < length; i++) {
         c = buffer[i];
 
-        switch (c) {
+        switch (c?: any) {
           case ',':
             // breakflag = true;
             // break; // 次のKEY, VAlUEへ
@@ -735,10 +766,13 @@ interface parseJsonObject {
  * パースしたJSONの要素をfloat値として扱う
  */
 export class JsonFloat extends Value {
+    _stringBuffer: any;
+    _value: any;
+
   /**
    * コンストラクタ
    */
-  constructor(v: number) {
+  constructor(v?: number) {
     super();
 
     this._value = v;
@@ -804,6 +838,9 @@ export class JsonFloat extends Value {
  * パースしたJSONの要素を真偽値として扱う
  */
 export class JsonBoolean extends Value {
+    _boolValue: any;
+    _stringBuffer: any;
+
   /**
    * Valueの種類が真偽値ならtrue
    */
@@ -867,6 +904,8 @@ export class JsonBoolean extends Value {
  * パースしたJSONの要素を文字列として扱う
  */
 export class JsonString extends Value {
+    _stringBuffer: any;
+
   /**
    * 引数付きコンストラクタ
    */
@@ -922,6 +961,9 @@ export class JsonString extends Value {
  * JSONパース時のエラー結果。文字列型のようにふるまう
  */
 export class JsonError extends JsonString {
+    _isStatic: any;
+    _stringBuffer: any;
+
   /**
    * Valueの値が静的ならtrue、静的なら解放しない
    */
@@ -963,6 +1005,8 @@ export class JsonError extends JsonString {
  * パースしたJSONの要素をNULL値として持つ
  */
 export class JsonNullvalue extends Value {
+    _stringBuffer: any;
+
   /**
    * Valueの種類がNULL値ならtrue
    */
@@ -1006,6 +1050,9 @@ export class JsonNullvalue extends Value {
  * パースしたJSONの要素を配列として持つ
  */
 export class JsonArray extends Value {
+    _array: any;
+    _stringBuffer: any;
+
   /**
    * コンストラクタ
    */
@@ -1116,6 +1163,10 @@ export class JsonArray extends Value {
  * パースしたJSONの要素をマップとして持つ
  */
 export class JsonMap extends Value {
+    _keys: any;
+    _map: any;
+    _stringBuffer: any;
+
   /**
    * コンストラクタ
    */

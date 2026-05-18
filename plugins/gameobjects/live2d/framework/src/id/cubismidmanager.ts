@@ -15,6 +15,11 @@ import { CubismId } from './cubismid';
  * ID名を管理する。
  */
 export class CubismIdManager {
+    _ids: any;
+    findId: any;
+    isExist: any;
+    registerId: any;
+
   /**
    * コンストラクタ
    */

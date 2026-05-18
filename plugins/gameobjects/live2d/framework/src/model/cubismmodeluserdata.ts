@@ -30,6 +30,9 @@ export class CubismModelUserDataNode {
  * ユーザデータをロード、管理、検索インターフェイス、解放までを行う。
  */
 export class CubismModelUserData {
+    _artMeshUserDataNode: any;
+    _userDataNodes: any;
+
   /**
    * インスタンスの作成
    *

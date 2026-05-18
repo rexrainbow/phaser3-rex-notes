@@ -122,7 +122,7 @@ export class csmVector<T> {
     if (curSize < newSize) {
       this.prepareCapacity(newSize); // capacity更新
 
-      if (callPlacementNew) {
+      if (callPlacementNew?: any) {
         for (let i: number = this._size; i < newSize; i++) {
           if (typeof value == 'function') {
             // new

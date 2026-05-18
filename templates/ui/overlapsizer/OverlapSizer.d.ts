@@ -1,6 +1,6 @@
 // import * as Phaser from 'phaser';
-import BaseSizer from '../basesizer/BaseSizer.js';
-import GetBoundsConfig from '../../../plugins/utils/bounds/GetBoundsConfig.js';
+import BaseSizer from '../basesizer/BaseSizer';
+import GetBoundsConfig from '../../../plugins/utils/bounds/GetBoundsConfig';
 
 export default OverlapSizer;
 

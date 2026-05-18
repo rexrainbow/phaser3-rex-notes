@@ -1,4 +1,4 @@
-import FileDropZone from './FileDropZone.js';
+import FileDropZone from './FileDropZone';
 
 export default function (
     config?: FileDropZone.IConfig

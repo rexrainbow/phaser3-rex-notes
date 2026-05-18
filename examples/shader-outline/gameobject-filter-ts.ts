@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import OutlineFilterPlugin from '../../plugins/outlinefilter-plugin.js';
+import OutlineFilterPlugin from '../../plugins/outlinefilter-plugin';
 
 class Demo extends Phaser.Scene {
     constructor() {

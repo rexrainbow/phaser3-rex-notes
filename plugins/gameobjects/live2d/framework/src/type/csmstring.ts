@@ -9,6 +9,8 @@
  * 文字列クラス。
  */
 export class csmString {
+    append: any;
+
   /**
    * 文字列を後方に追加する
    *

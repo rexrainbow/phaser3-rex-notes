@@ -20,12 +20,12 @@ declare class GesturesPlugin extends Phaser.Plugins.BasePlugin {
     add: Factories;
 }
 
-import TapClass from './input/gestures/tap/Tap.js';
-import PressClass from './input/gestures/press/Press.js';
-import PanClass from './input/gestures/pan/Pan.js';
-import SwipeClass from './input/gestures/swipe/Swipe.js';
-import PinchClass from './input/gestures/pinch/Pinch.js';
-import RotateClass from './input/gestures/rotate/Rotate.js';
+import TapClass from './input/gestures/tap/Tap';
+import PressClass from './input/gestures/press/Press';
+import PanClass from './input/gestures/pan/Pan';
+import SwipeClass from './input/gestures/swipe/Swipe';
+import PinchClass from './input/gestures/pinch/Pinch';
+import RotateClass from './input/gestures/rotate/Rotate';
 
 declare namespace GesturesPlugin {
     type Tap = TapClass;

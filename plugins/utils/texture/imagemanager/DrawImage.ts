@@ -1,0 +1,29 @@
+import DrawFrameToCanvas from '../DrawFrameToCanvas';
+
+var DrawImage = function(key?: any, context?: any, x?: any, y?: any, color?: any, autoRound?: any) {
+    var imgData = this.get(key);
+    if (!imgData) {
+        // Invalid key
+        return;
+    }
+
+    var frame = this.textureManager.getFrame(imgData.key, imgData.frame);
+
+    var width = imgData.width,
+        height = imgData.height;
+    x += imgData.left - (imgData.originX * width);
+    y += imgData.y - (imgData.originY * height);
+
+    var tintMode = imgData.tintMode;
+    if (tintMode === undefined) {
+        color = undefined;
+    }
+
+    DrawFrameToCanvas(
+        frame, context,
+        x, y, width, height,
+        color, autoRound, tintMode
+    );
+}
+
+export default DrawImage;

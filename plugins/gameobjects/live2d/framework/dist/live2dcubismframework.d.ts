@@ -5,7 +5,7 @@
  * that can be found at https://www.live2d.com/eula/live2d-open-software-license-agreement_en.html.
  */
 import { CubismIdManager } from './id/cubismidmanager';
-export declare function strtod(s: string, endPtr: string[]): number;
+export declare function strtod(s?: string, endPtr?: string[]): number;
 /**
  * Framework内で使う定数の宣言
  */

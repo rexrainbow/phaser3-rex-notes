@@ -1,0 +1,94 @@
+import { Utils as PhaserUtils } from 'phaser';
+import FadeIn from './FadeIn';
+import FadeOutDestroy from './FadeOutDestroy';
+import { WaitComplete } from '../../utils/promise/WaitEvent';
+
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+
+export default {
+    onInitFade() {
+        var gameObject = this;
+        var fade = this._fade;
+
+        // Route 'complete' of fade to gameObject
+        fade.completeEventName = undefined;
+        fade.on('complete', function() {
+            if (fade.completeEventName) {
+                gameObject.emit(fade.completeEventName, gameObject);
+                fade.completeEventName = undefined;
+            }
+        })
+    },
+
+    fadeIn(duration?: any, alpha?: any) {
+        if (IsPlainObject(duration)) {
+            var config = duration;
+            duration = config.duration;
+            alpha = config.alpha;
+        }
+
+        var isInit = (this._fade === undefined);
+
+        this._fade = FadeIn(this, duration, alpha, this._fade);
+
+        if (isInit?: any) {
+            this.onInitFade();
+        }
+
+        this._fade.completeEventName = 'fadein.complete';
+
+        return this;
+    },
+
+    fadeInPromise(duration?: any, alpha?: any) {
+        this.fadeIn(duration, alpha);
+        return WaitComplete(this._fade);
+    },
+
+    isRunningFadeIn() {
+        return this._fade && (this._fade.completeEventName === 'fadein.complete');
+    },
+
+    fadeOutDestroy(duration?: any, destroyMode?: any) {
+        if (IsPlainObject(duration)) {
+            var config = duration;
+            duration = config.duration;
+            destroyMode = config.destroy;
+        }
+
+        var isInit = (this._fade === undefined);
+
+        this._fade = FadeOutDestroy(this, duration, destroyMode, this._fade);
+
+        if (isInit?: any) {
+            this.onInitFade();
+        }
+
+        this._fade.completeEventName = 'fadeout.complete';
+
+        return this;
+    },
+
+    fadeOutDestroyPromise(duration?: any, destroyMode?: any) {
+        this.fadeOutDestroy(duration, destroyMode);
+        return WaitComplete(this._fade);
+    },
+
+    fadeOut(duration?: any) {
+        this.fadeOutDestroy(duration, false);
+        return this;
+    },
+
+    fadeOutPromise(duration?: any) {
+        this.fadeOut(duration);
+        return WaitComplete(this._fade);
+    },
+
+    isRunningFadeOut() {
+        return this._fade && (this._fade.completeEventName === 'fadeout.complete');
+    },
+
+    isRunningEaseFade() {
+        return this.isRunningFadeIn() || this.isRunningFadeOut();
+    }
+}

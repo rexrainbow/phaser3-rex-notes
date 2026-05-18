@@ -1,4 +1,4 @@
-import InputText from './InputText.js';
+import InputText from './InputText';
 
 export default function (
     config?: InputText.IConfig

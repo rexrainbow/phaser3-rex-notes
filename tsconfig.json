@@ -1,7 +1,25 @@
 {
     "compilerOptions": {
         "target": "esnext",
+        "module": "esnext",
         "moduleResolution": "node",
-        "esModuleInterop": true
-    }
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "strict": false,
+        "strictPropertyInitialization": false,
+        "skipLibCheck": true,
+        "noEmit": true,
+        "useDefineForClassFields": false
+    },
+    "include": [
+        "types/**/*.d.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist",
+        "dev-dist",
+        "docs",
+        "examples",
+        "projects/ui-dragdrop/app/js"
+    ]
 }

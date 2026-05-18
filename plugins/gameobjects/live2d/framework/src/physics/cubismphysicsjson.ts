@@ -59,6 +59,8 @@ const Acceleration = 'Acceleration';
  * physics3.jsonのコンテナ。
  */
 export class CubismPhysicsJson {
+    _json: any;
+
   /**
    * コンストラクタ
    * @param buffer physics3.jsonが読み込まれているバッファ

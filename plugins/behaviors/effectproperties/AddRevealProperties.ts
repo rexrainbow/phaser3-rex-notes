@@ -1,0 +1,178 @@
+import HasProperty from '../../utils/object/HasProperty';
+import GetFilterList from '../../utils/renderer/filterpluginbase/GetFilterList';
+import Clamp from '../../utils/math/Clamp';
+import AddClearEffectCallback from './AddClearEffectCallback';
+
+var AddRevealProperties = function(gameObject?: any) {
+    // Don't attach properties again
+    if (HasProperty(gameObject, 'revealLeft')) {
+        return gameObject;
+    }
+
+    var filterList = GetFilterList(gameObject);
+
+    var revealLeft,
+        revealRight,
+        revealUp,
+        revealDown,
+        revealWidth = 0.1;
+
+    var ClearRevealFlags = function() {
+        revealLeft = null;
+        revealRight = null;
+        revealUp = null;
+        revealDown = null;
+    }
+
+    var RemoveEffect = function(gameObject?: any) {
+        if (gameObject._revealEffect) {
+            filterList.remove(gameObject._revealEffect);
+            gameObject._revealEffect = undefined;
+        }
+    }
+
+    Object.defineProperty(gameObject, 'revealLeft', {
+        get: function() {
+            return revealLeft;
+        },
+        set: function(value?: any) {
+            if (revealLeft === value) {
+                return;
+            }
+
+            ClearRevealFlags();
+
+            revealLeft = value;
+
+            if ((revealLeft === null) || (revealLeft === false)) {
+                RemoveEffect(gameObject);
+            } else {
+                revealLeft = Clamp(revealLeft, 0, 1);
+
+                if (!gameObject._revealEffect) {
+                    gameObject._revealEffect = filterList.addWipe(revealWidth, 0, 0, 1);
+                }
+
+                gameObject._revealEffect.direction = 1;
+                gameObject._revealEffect.axis = 0;
+                gameObject._revealEffect.progress = revealLeft;
+            }
+
+        },
+    })
+
+    Object.defineProperty(gameObject, 'revealRight', {
+        get: function() {
+            return revealRight;
+        },
+        set: function(value?: any) {
+            if (revealRight === value) {
+                return;
+            }
+
+            ClearRevealFlags();
+
+            revealRight = value;
+
+            if ((revealRight === null) || (revealRight === false)) {
+                RemoveEffect(gameObject);
+            } else {
+                revealRight = Clamp(revealRight, 0, 1);
+
+                if (!gameObject._revealEffect) {
+                    gameObject._revealEffect = filterList.addWipe(revealWidth, 0, 0, 1);
+                }
+                gameObject._revealEffect.direction = 0;
+                gameObject._revealEffect.axis = 0;
+                gameObject._revealEffect.progress = revealRight;
+            }
+
+        },
+    })
+
+    Object.defineProperty(gameObject, 'revealUp', {
+        get: function() {
+            return revealUp;
+        },
+        set: function(value?: any) {
+            if (revealUp === value) {
+                return;
+            }
+
+            ClearRevealFlags();
+
+            revealUp = value;
+
+            if ((revealUp === null) || (revealUp === false)) {
+                RemoveEffect(gameObject);
+            } else {
+                revealUp = Clamp(revealUp, 0, 1);
+
+                if (!gameObject._revealEffect) {
+                    gameObject._revealEffect = filterList.addWipe(revealWidth, 0, 0, 1);
+                }
+                gameObject._revealEffect.direction = 1;
+                gameObject._revealEffect.axis = 1;
+                gameObject._revealEffect.progress = revealUp;
+            }
+
+        },
+    })
+
+    Object.defineProperty(gameObject, 'revealDown', {
+        get: function() {
+            return revealDown;
+        },
+        set: function(value?: any) {
+            if (revealDown === value) {
+                return;
+            }
+
+            ClearRevealFlags();
+
+            revealDown = value;
+
+            if ((revealDown === null) || (revealDown === false)) {
+                RemoveEffect(gameObject);
+            } else {
+                revealDown = Clamp(revealDown, 0, 1);
+
+                if (!gameObject._revealEffect) {
+                    gameObject._revealEffect = filterList.addWipe(revealWidth, 0, 0, 1);
+                }
+                gameObject._revealEffect.direction = 0;
+                gameObject._revealEffect.axis = 1;
+                gameObject._revealEffect.progress = revealDown;
+            }
+
+        },
+    })
+
+    Object.defineProperty(gameObject, 'revealWidth', {
+        get: function() {
+            return revealWidth;
+        },
+        set: function(value?: any) {
+            if (revealWidth === value) {
+                return;
+            }
+
+            revealWidth = Clamp(value, 0, 1);
+
+            if (gameObject._revealEffect) {
+                gameObject._revealEffect.wipeWidth = revealWidth;
+            }
+        },
+    })
+
+    gameObject.revealLeft = null;
+
+    AddClearEffectCallback(gameObject, 'revealLeft');
+    AddClearEffectCallback(gameObject, 'revealRight');
+    AddClearEffectCallback(gameObject, 'revealUp');
+    AddClearEffectCallback(gameObject, 'revealDown');
+
+    return gameObject;
+}
+
+export default AddRevealProperties;

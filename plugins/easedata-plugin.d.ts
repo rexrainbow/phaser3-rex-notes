@@ -1,4 +1,4 @@
-import { EaseData } from './easedata.js';
+import { EaseData } from './easedata';
 
 export default class ScalePlugin extends Phaser.Plugins.BasePlugin {
     add(

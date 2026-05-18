@@ -114,9 +114,9 @@ import Anchor from './anchor/Anchor';
 import TextTyping from './texttyping/TextTyping';
 import TextPage from './textpage/TextPage';
 import TextEdit from './textedit/TextEdit';
-import { Fade, FadeIn, FadeOutDestroy } from './fade/Fade.js';
+import { Fade, FadeIn, FadeOutDestroy } from './fade/Fade';
 import { EaseMove, EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove';
-import { Modal, ModalPromise, ModalClose } from './modal/Modal.js';
+import { Modal, ModalPromise, ModalClose } from './modal/Modal';
 import FullscreenButton from './fullscreenbutton/FullscreenButton';
 
 import { GetParentSizer, GetTopmostSizer } from './utils/GetParentSizer';

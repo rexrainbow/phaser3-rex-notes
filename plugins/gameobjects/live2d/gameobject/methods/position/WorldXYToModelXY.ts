@@ -1,0 +1,24 @@
+import WorldXYToGameObjectLocalXY from '../../../../../utils/position/WorldXYToGameObjectLocalXY';
+
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+
+var WorldXYToModelXY = function(worldX?: any, worldY?: any, camera?: any, out?: any) {
+    if ((camera === undefined) || (camera === true) || IsPlainObject(camera)) {
+        out = camera;
+        camera = this.scene.cameras.main;
+    }
+    if (out === undefined) {
+        out = {}
+    } else if (out === true) {
+        out = globOut;
+    }
+
+    out = WorldXYToGameObjectLocalXY(this, worldX, worldY, camera, out);
+
+    return this.model.localXYToModelMatrixXY(out.x, out.y, out);
+}
+
+var globOut = {};
+
+export default WorldXYToModelXY;

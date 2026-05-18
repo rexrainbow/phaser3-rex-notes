@@ -31,6 +31,32 @@ import { CubismModelUserData } from './cubismmodeluserdata';
  * ユーザーが実際に使用するモデルの基底クラス。これを継承してユーザーが実装する。
  */
 export class CubismUserModel {
+    _accelerationX: any;
+    _accelerationY: any;
+    _accelerationZ: any;
+    _breath: any;
+    _debugMode: any;
+    _dragManager: any;
+    _dragX: any;
+    _dragY: any;
+    _expressionManager: any;
+    _eyeBlink: any;
+    _initialized: any;
+    _lastLipSyncValue: any;
+    _lipsync: any;
+    _moc: any;
+    _mocConsistency: any;
+    _model: any;
+    _modelMatrix: any;
+    _modelUserData: any;
+    _motionManager: any;
+    _opacity: any;
+    _physics: any;
+    _pose: any;
+    _renderer: any;
+    _updating: any;
+    deleteRenderer: any;
+
   /**
    * 初期化状態の取得
    *

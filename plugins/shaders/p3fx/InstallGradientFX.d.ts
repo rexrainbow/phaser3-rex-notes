@@ -50,7 +50,7 @@ declare module 'phaser' {
  * @param scene - Scene or game instance used for installation.
  * @returns True if gradient FX was installed, false if already unavailable or not registered.
  */
-declare function InstallGradientFX(scene: Phaser.Scene | Phaser.Game): boolean;
+declare function InstallGradientFX(scene?: Phaser.Scene | Phaser.Game): boolean;
 
 export default InstallGradientFX;
 

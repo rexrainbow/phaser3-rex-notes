@@ -38,7 +38,7 @@ declare module 'phaser' {
  * @param scene - Scene or game instance used for installation.
  * @returns True if circle FX was installed, false if already unavailable or not registered.
  */
-declare function InstallCircleFX(scene: Phaser.Scene | Phaser.Game): boolean;
+declare function InstallCircleFX(scene?: Phaser.Scene | Phaser.Game): boolean;
 
 export default InstallCircleFX;
 

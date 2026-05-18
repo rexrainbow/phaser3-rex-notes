@@ -1,0 +1,115 @@
+import { Utils as PhaserUtils, Math as PhaserMath } from 'phaser';
+import HiddenTextEditBase from './HiddenTextEditBase';
+import NumberInputUpdateCallback from './defaultcallbacks/NumberInputUpdateCallback';
+import GetTickDelta from '../../utils/system/GetTickDelta';
+
+const GetValue = PhaserUtils.Objects.GetValue;
+const Wrap = PhaserMath.Wrap;
+
+class HiddenTextEdit extends HiddenTextEditBase {
+    text: any;
+
+    _cursor: any;
+    _isFocused: any;
+    cursorFlashDuration: any;
+    cursorFlashTimer: any;
+    cursorPosition: any;
+    emit: any;
+    hasCursor: any;
+    isOpened: any;
+    onUpdateCallback: any;
+    parent: any;
+    prevCursorPosition: any;
+    scene: any;
+    setCursorPosition: any;
+    setText: any;
+
+    constructor(gameObject?: any, config?: any) {
+        if (config === undefined) {
+            config = {};
+        }
+
+        if (config.onUpdate === 'number') {
+            config.onUpdate = NumberInputUpdateCallback;
+        }
+
+        super(gameObject, config);
+        // this.parent = gameObject;
+
+        this.setCursor(GetValue(config, 'cursor', '|'));
+        this.setCursorFlashDuration(GetValue(config, 'cursorFlashDuration', 1000));
+        this.cursorFlashTimer = 0;
+
+    }
+
+    initText() {
+        this.cursorFlashTimer = 0;
+        this.prevCursorPosition = undefined;
+        this.setText(this.parent.text);
+        this.setCursorPosition();
+
+        return this;
+    }
+
+    updateText() {
+        var textObject = this.parent;
+        var text = this.text;
+
+        if (this.onUpdateCallback) {
+            var newText = this.onUpdateCallback(text, textObject, this);
+            if (newText != null) {
+                text = newText;
+            }
+        }
+
+        if (this.isOpened && this.hasCursor) {
+            // Insert Cursor
+            var cursorPosition = this.cursorPosition;
+            text = text.substring(0, cursorPosition) + this.cursor + text.substring(cursorPosition);
+
+            if (this.prevCursorPosition !== cursorPosition) {
+                // console.log(cursorPosition);
+                this.prevCursorPosition = cursorPosition;
+            }
+        }
+
+        if (textObject.text !== text) {
+            textObject.setText(text);
+            this.emit('textchange', text, textObject, this);
+        }
+
+        return this;
+    }
+
+    setCursor(s?: any) {
+        this._cursor = s;
+        this.hasCursor = s && (s !== '');
+        return s;
+    }
+
+    setCursorFlashDuration(duration?: any) {
+        this.cursorFlashDuration = duration;
+        return this;
+    }
+
+    get cursor() {
+        if (!this._isFocused) {
+            return this._cursor;
+        }
+
+        // Flash Cursor
+        var cursor;
+        if (this.cursorFlashTimer < (this.cursorFlashDuration / 2)) {
+            cursor = this._cursor;
+        } else {
+            cursor = ' ';
+        }
+
+        var timerValue = this.cursorFlashTimer + GetTickDelta(this.scene);
+        this.cursorFlashTimer = Wrap(timerValue, 0, this.cursorFlashDuration);
+        return cursor;
+    }
+
+}
+
+export default HiddenTextEdit;

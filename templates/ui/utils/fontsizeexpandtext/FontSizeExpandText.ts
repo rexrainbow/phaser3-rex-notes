@@ -1,0 +1,62 @@
+import FontSizeFit from '../../../../plugins/utils/text/fontsizefit/FontSizeFit';
+
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+
+var FontSizeExpandText = function(textObject?: any, config?: any) {
+    if (typeof (config) === 'number') {
+        config = {
+            minWidth: config
+        }
+    }
+
+    var minWidth = GetValue(config, 'minWidth', 0);
+    var minHeight = GetValue(config, 'minHeight', 0);
+    var fitHeight = GetValue(config, 'fitHeight', false);
+
+    textObject._minWidth = minWidth;
+
+    if (!fitHeight) {
+        // Set font size to fit width only
+        textObject.runWidthWrap = function(width?: any) {
+            if (textObject.setFixedSize) {
+                textObject.setFixedSize(0, 0);
+            }
+            FontSizeFit(textObject, width, undefined);
+
+            textObject.minHeight = Math.max(minHeight, textObject.height);
+            return textObject;
+        }
+        textObject.resize = function(width?: any, height?: any) {
+            if ((textObject.width === width) && (textObject.height === height)) {
+                return textObject;
+            }
+
+            // Font size is set under runWidthWrap/FontSizeFit
+            textObject.setFixedSize(width, height);
+            return textObject;
+        }
+
+    } else {
+        // Set font size to fit width and height
+        textObject.runWidthWrap = function(width?: any) {
+            // Minimun text size
+            if (textObject.setFixedSize) {
+                textObject.setFixedSize(0, 0);
+            }
+
+            textObject.setFontSize(1);
+            textObject.minHeight = Math.max(minHeight, textObject.height);
+            return textObject;
+        }
+        textObject.resize = function(width?: any, height?: any) {
+            FontSizeFit(textObject, width, height);
+            textObject.minHeight = Math.max(minHeight, textObject.height);
+            return textObject;
+        }
+    }
+
+    return textObject;
+}
+
+export default FontSizeExpandText;

@@ -1,0 +1,35 @@
+import RotateTransfer from './transferfunctions/Rotate';
+import ResetChessTileXYZ from './ResetChessTileXYZ';
+
+var Rotate = function(direction?: any) {
+    if (direction === 0) {
+        return this;
+    }
+
+    var isOnMainBoard = (this.mainBoard != null);
+    if (isOnMainBoard?: any) {
+        this.pullOutFromMainBoard();
+    }
+
+    var newTileXYZMap = RotateTransfer.call(this, direction);
+
+    if (isOnMainBoard?: any) {
+        var mainBoard = this.lastMainBoardRef.mainBoard;
+        var tileX = this.lastMainBoardRef.tileX;
+        var tileY = this.lastMainBoardRef.tileY;
+        this.lastTransferResult = this.canPutOnMainBoard(mainBoard, tileX, tileY, newTileXYZMap);
+        if (this.lastTransferResult) {
+            ResetChessTileXYZ.call(this, newTileXYZMap);
+        }
+        this.putBack();
+    } else {
+        this.lastTransferResult = true;
+        ResetChessTileXYZ.call(this, newTileXYZMap);
+    }
+
+    if (this.lastTransferResult) {
+        this.setFace(this.face + direction);
+    }
+    return this;
+}
+export default Rotate;

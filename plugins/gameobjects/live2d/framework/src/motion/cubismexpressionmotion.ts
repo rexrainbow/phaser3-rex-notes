@@ -31,6 +31,11 @@ const DefaultFadeTime = 1.0;
  * 表情のモーションクラス。
  */
 export class CubismExpressionMotion extends ACubismMotion {
+    _parameters: any;
+
+    setFadeInTime: any;
+    setFadeOutTime: any;
+
   /**
    * インスタンスを作成する。
    * @param buffer expファイルが読み込まれているバッファ

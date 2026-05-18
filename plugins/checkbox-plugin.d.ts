@@ -1,7 +1,7 @@
 import Factory from './gameobjects/shape/checkbox/Factory';
 import Creator from './gameobjects/shape/checkbox/Creator';
-import CheckboxShapeFactory from './gameobjects/shape/checkbox/CheckboxShapeFactory.js';
-import CheckboxShapeCreator from './gameobjects/shape/checkbox/CheckboxShapeCreator.js';
+import CheckboxShapeFactory from './gameobjects/shape/checkbox/CheckboxShapeFactory';
+import CheckboxShapeCreator from './gameobjects/shape/checkbox/CheckboxShapeCreator';
 
 export default class extends Phaser.Plugins.BasePlugin { }
 

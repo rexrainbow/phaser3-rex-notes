@@ -1,0 +1,72 @@
+import SkewImage from '../skewimage/SkewImage';
+import CreateDynamicTexture from '../../../../utils/rendertexture/CreateDynamicTexture';
+import Snapshot from '../../../../utils/rendertexture/Snapshot';
+
+import { Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
+
+class SkewRenderTexture extends SkewImage {
+    ignoreDestroy: any;
+    resetFaceSize: any;
+    rt: any;
+    scene: any;
+    texture: any;
+    type: any;
+    updateDisplayOrigin: any;
+
+    constructor(scene?: any, x?: any, y?: any, width?: any, height?: any) {
+        if (IsPlainObject(x)) {
+            var config = x;
+            x = GetValue(config, 'x', 0);
+            y = GetValue(config, 'y', 0);
+            width = GetValue(config, 'width', 32);
+            height = GetValue(config, 'height', 32);
+        }
+
+        // dynamic-texture -> quad-image
+        var texture = CreateDynamicTexture(scene, width, height);
+
+        super(scene, x, y, texture, null);
+        this.type = 'rexSkewRenderTexture';
+        this.rt = this.texture;
+    }
+
+    destroy(fromScene?: any) {
+        //  This Game Object has already been destroyed
+        if (!this.scene || this.ignoreDestroy) {
+            return;
+        }
+
+        super.destroy(fromScene);
+
+        this.rt.destroy();
+        this.rt = null;
+    }
+
+    setSizeToFrame(frame?: any) {
+        super.setSizeToFrame(frame);
+
+        this.updateDisplayOrigin();
+
+        this.resetFaceSize();
+
+        return this;
+    }
+
+    snapshot(gameObjects?: any, config?: any) {
+        if (config === undefined) {
+            config = {};
+        }
+        config.gameObjects = gameObjects;
+        config.renderTexture = this.rt;
+
+        Snapshot(config);
+
+        this.setSizeToFrame();
+
+        return this;
+    }
+}
+
+export default SkewRenderTexture;

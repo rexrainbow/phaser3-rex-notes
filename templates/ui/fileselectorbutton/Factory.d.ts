@@ -1,4 +1,4 @@
-import FileSelectorButton from './FileSelectorButton.js';
+import FileSelectorButton from './FileSelectorButton';
 
 export default function (
     config?: FileSelectorButton.IConfig

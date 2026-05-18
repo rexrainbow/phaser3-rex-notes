@@ -1,4 +1,4 @@
-import BlitterBase from '../blitterbase/BlitterBase.js';
+import BlitterBase from '../blitterbase/BlitterBase';
 import ImageData from '../blitterbase/bob/image/ImageData';
 
 export default Blitter;

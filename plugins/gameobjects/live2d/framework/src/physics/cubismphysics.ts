@@ -42,6 +42,20 @@ const MaxDeltaTime = 5.0;
  * 物理演算クラス
  */
 export class CubismPhysics {
+    _currentRemainTime: any;
+    _currentRigOutputs: any;
+    _options: any;
+    _parameterCaches: any;
+    _parameterInputCaches: any;
+    _physicsRig: any;
+    _previousRigOutputs: any;
+    gravity: any;
+    outputs: any;
+    wind: any;
+
+    initialize: any;
+    interpolate: any;
+
   /**
    * インスタンスの作成
    * @param buffer    physics3.jsonが読み込まれているバッファ
@@ -891,7 +905,7 @@ export class PhysicsOutput {
  *
  * @return Sign of value.
  */
-function sign(value: number): number {
+function sign(value?: number): number {
   let ret = 0;
 
   if (value > 0.0) {
@@ -987,7 +1001,7 @@ function getOutputTranslationX(
 ): number {
   let outputValue: number = translation.x;
 
-  if (isInverted) {
+  if (isInverted?: any) {
     outputValue *= -1.0;
   }
 
@@ -1003,7 +1017,7 @@ function getOutputTranslationY(
 ): number {
   let outputValue: number = translation.y;
 
-  if (isInverted) {
+  if (isInverted?: any) {
     outputValue *= -1.0;
   }
   return outputValue;
@@ -1028,21 +1042,21 @@ function getOutputAngle(
 
   outputValue = CubismMath.directionToRadian(parentGravity, translation);
 
-  if (isInverted) {
+  if (isInverted?: any) {
     outputValue *= -1.0;
   }
 
   return outputValue;
 }
 
-function getRangeValue(min: number, max: number): number {
+function getRangeValue(min?: number, max?: number): number {
   const maxValue: number = CubismMath.max(min, max);
   const minValue: number = CubismMath.min(min, max);
 
   return CubismMath.abs(maxValue - minValue);
 }
 
-function getDefaultValue(min: number, max: number): number {
+function getDefaultValue(min?: number, max?: number): number {
   const minValue: number = CubismMath.min(min, max);
   return minValue + getRangeValue(min, max) / 2.0;
 }

@@ -1,0 +1,46 @@
+var HitTest = function(scene?: any, topOnly?: any, gameObjects?: any, pointers?: any, out?: any) {
+    var inputPlugin = scene.input;
+    var inputManager = inputPlugin.manager;
+
+    if (topOnly === undefined) {
+        topOnly = inputPlugin.topOnly;
+    }
+    if (out === undefined) {
+        out = [];
+    }
+    if (gameObjects === undefined) {
+        gameObjects = inputPlugin._list;
+    }
+
+    var pointersTotal, pointer;
+    if (pointers === undefined) {
+        pointers = inputManager.pointers;
+        pointersTotal = inputManager.pointersTotal;
+    }
+    if (pointersTotal === undefined) {
+        pointersTotal = pointers.length;
+    }
+
+    var cameras;
+    for (var pointerIdx = 0; pointerIdx < pointersTotal; pointerIdx++) {
+        pointer = pointers[pointerIdx];
+        cameras = inputPlugin.cameras.getCamerasBelowPointer(pointer);
+        for (var cameraIdx = 0, camerasTotal = cameras.length; cameraIdx < camerasTotal; cameraIdx++) {
+            out.push(...inputManager.hitTest(pointer, gameObjects, cameras[cameraIdx], HitTestResult));
+        }
+    }
+
+    inputPlugin.sortGameObjects(out);
+    if (topOnly?: any) {
+        if (out.length) {
+            out.splice(1);
+        }
+    }
+
+    HitTestResult.length = 0;
+    return out;
+}
+
+var HitTestResult = [];
+
+export default HitTest;

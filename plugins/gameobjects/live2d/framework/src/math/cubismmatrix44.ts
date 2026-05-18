@@ -11,6 +11,10 @@
  * 4x4行列の便利クラス。
  */
 export class CubismMatrix44 {
+    _tr: any;
+    loadIdentity: any;
+    setMatrix: any;
+
   /**
    * コンストラクタ
    */

@@ -100,6 +100,8 @@ if (CSM_LOG_LEVEL <= CSM_LOG_LEVEL_VERBOSE) {
  * ログの出力、バイトのダンプなど
  */
 export class CubismDebug {
+    print: any;
+
   /**
    * ログを出力する。第一引数にログレベルを設定する。
    * CubismFramework.initialize()時にオプションで設定されたログ出力レベルを下回る場合はログに出さない。

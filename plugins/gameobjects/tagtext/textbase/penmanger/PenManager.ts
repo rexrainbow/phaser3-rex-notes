@@ -1,0 +1,341 @@
+import Pen from './Pen';
+import Line from './Line';
+import CONST from '../../../textbase/const';
+import Clone from '../../../../utils/object/Clone';
+import NOOP from '../../../../utils/object/NOOP';
+
+import { Utils as PhaserUtils } from 'phaser';
+const GetFastValue = PhaserUtils.Objects.GetFastValue;
+const NO_NEWLINE = CONST.NO_NEWLINE;
+const WRAPPED_NEWLINE = CONST.WRAPPED_NEWLINE;
+
+class PenManager {
+    pens: any;
+
+    lines: any;
+    linesPool: any;
+    maxLinesWidth: any;
+    pensPool: any;
+    tagToText: any;
+    tagToTextScope: any;
+
+    constructor(config?: any) {
+        this.pens = []; // all pens
+        this.lines = []; // pens in lines [Line, Line, ...]
+        this.maxLinesWidth = undefined;
+
+        this.pensPool = config.pensPool;    // Required
+        this.linesPool = config.linesPool;  // Required
+        this.tagToText = GetFastValue(config, 'tagToText', NOOP);
+        this.tagToTextScope = GetFastValue(config, 'tagToTextScope', undefined);
+    }
+
+    destroy() {
+        this.clear();
+        this.tagToText = undefined;
+        this.tagToTextScope = undefined;
+    }
+
+    clear() {
+        for (var i = 0, len = this.lines.length; i < len; i++) {
+            var line = this.lines[i];
+            if (line && line.reset) {
+                line.reset();
+            } else if (line) {
+                line.length = 0;
+            }
+        }
+
+        this.pensPool.pushMultiple(this.pens);
+        this.linesPool.pushMultiple(this.lines);
+        this.maxLinesWidth = undefined;
+    }
+
+    addTextPen(text?: any, x?: any, y?: any, width?: any, prop?: any, newLineMode?: any, metrics?: any) {
+        var pen = this.pensPool.pop();
+        if (pen == null) {
+            pen = new Pen();
+        }
+        PEN_CONFIG.text = text;
+        PEN_CONFIG.x = x;
+        PEN_CONFIG.y = y;
+        PEN_CONFIG.width = width;
+        if (metrics?: any) {
+            var ascent = (metrics.ascent != null) ? metrics.ascent : 0;
+            var descent = (metrics.descent != null) ? metrics.descent : 0;
+            var height = (metrics.height != null) ? metrics.height : (ascent + descent);
+            PEN_CONFIG.ascent = ascent;
+            PEN_CONFIG.descent = descent;
+            PEN_CONFIG.height = height;
+        } else {
+            PEN_CONFIG.ascent = 0;
+            PEN_CONFIG.descent = 0;
+            PEN_CONFIG.height = 0;
+        }
+        PEN_CONFIG.prop = prop;
+        PEN_CONFIG.newLineMode = newLineMode;
+        pen.resetFromJSON(PEN_CONFIG);
+        this.addPen(pen);
+        return this;
+    }
+
+    addImagePen(x?: any, y?: any, width?: any, prop?: any, metrics?: any) {
+        this.addTextPen('', x, y, width, prop, NO_NEWLINE, metrics);
+        return this;
+    }
+
+    addNewLinePen() {
+        var previousPen = this.lastPen;
+        var x = (previousPen) ? previousPen.lastX : 0;
+        var y = (previousPen) ? previousPen.y : 0;
+        var prop = (previousPen) ? Clone(previousPen.prop) : null;
+        this.addTextPen('', x, y, 0, prop, WRAPPED_NEWLINE);
+        return this;
+    }
+
+    addPen(pen?: any) {
+        var previousPen = this.lastPen;
+        if (previousPen == null) {
+            pen.startIndex = 0;
+        } else {
+            pen.startIndex = previousPen.endIndex;
+        }
+        this.pens.push(pen);
+
+        // maintan lines
+        var line = this.lastLine;
+        if (line == null) {
+            line = this.newLine();
+            this.lines.push(line);
+        } else if (!line.pens) {
+            line = this.convertLine(line);
+            this.lines[this.lines.length - 1] = line;
+        }
+        if (line.addPen) {
+            line.addPen(pen);
+        } else {
+            line.push(pen);
+        }
+
+        // new line, add an empty line
+        if (pen.newLineMode !== NO_NEWLINE) {
+            line = this.newLine();
+            this.lines.push(line);
+        }
+        this.maxLinesWidth = undefined;
+    }
+
+    clone(targetPenManager?: any) {
+        if (targetPenManager == null)
+            targetPenManager = new PenManager();
+
+        targetPenManager.clear();
+
+        for (var li = 0, llen = this.lines.length; li < llen; li++) {
+            var line = this.lines[li];
+            var pens = (line && line.pens) ? line.pens : line;
+            for (var pi = 0, plen = pens.length; pi < plen; pi++) {
+                var pen = pens[pi];
+                targetPenManager.addPen(
+                    pen.text,
+                    pen.x,
+                    pen.y,
+                    pen.width,
+                    Clone(pen.prop),
+                    pen.newLineMode
+                );
+            }
+        }
+
+        return targetPenManager;
+    }
+
+    get lastPen() {
+        return this.pens[this.pens.length - 1];
+    }
+
+    get lastLine() {
+        return this.lines[this.lines.length - 1];
+    }
+
+    getLineStartIndex(i?: any) {
+        if (i >= this.lines.length) {
+            return this.getLineEndIndex(i);
+        } else {
+            var line = this.lines[i];
+            var pens = (line && line.pens) ? line.pens : line;
+            return (pens && pens[0]) ? pens[0].startIndex : 0;
+        }
+    }
+
+    getLineEndIndex(i?: any) {
+        if (i >= this.lines.length) {
+            i = this.lines.length - 1;
+        }
+        var li, hasLastPen = false,
+            line;
+        for (li = i; li >= 0; li--) {
+            line = this.lines[li];
+            var pens = (line && line.pens) ? line.pens : line;
+            hasLastPen = (pens != null) && (pens.length > 0);
+            if (hasLastPen?: any) {
+                break;
+            }
+        }
+        if (!hasLastPen) {
+            return 0;
+        }
+
+        var pens = (line && line.pens) ? line.pens : line;
+        var lastPen = pens[pens.length - 1];
+        return lastPen.endIndex;
+    }
+
+    getLineWidth(i?: any) {
+        var line = this.lines[i];
+        if (!line) {
+            return 0;
+        }
+
+        var pens = (line && line.pens) ? line.pens : line;
+        var lastPen = pens[pens.length - 1];
+        if (lastPen == null) {
+            return 0;
+        }
+
+        var lineWidth = lastPen.lastX; // start from 0
+        return lineWidth;
+    }
+
+    getMaxLineWidth() {
+        if (this.maxLinesWidth !== undefined) {
+            return this.maxLinesWidth;
+        }
+        var w, maxW = 0;
+        for (var i = 0, len = this.lines.length; i < len; i++) {
+            w = this.getLineWidth(i);
+            if (w > maxW) {
+                maxW = w;
+            }
+        }
+        this.maxLinesWidth = maxW;
+        return maxW;
+    }
+
+    getLineWidths() {
+        var result = [];
+        for (var i = 0, len = this.lines.length; i < len; i++) {
+            result.push(this.getLineWidth(i));
+        }
+        return result;
+    }
+
+    get linesCount() {
+        return this.lines.length;
+    }
+
+    newLine() {
+        return this.convertLine(this.linesPool.pop());
+    }
+
+    convertLine(line?: any) {
+        if (!line) {
+            return new Line();
+        }
+        if (line.pens) {
+            return line.reset();
+        }
+        if (Array.isArray(line)) {
+            return new Line(line).reset();
+        }
+        return new Line();
+    }
+
+    get plainText() {
+        var txt = "",
+            pens = this.pens;
+        for (var i = 0, len = pens.length; i < len; i++) {
+            txt += pens[i].plainText;
+        }
+
+        return txt;
+    }
+
+    get rawTextLength() {
+        var l = 0,
+            pens = this.pens;
+        for (var i = 0, len = this.pens.length; i < len; i++) {
+            l += pens[i].rawTextLength;
+        }
+
+        return l;
+    }
+
+    getSliceTagText(start?: any, end?: any, wrap?: any) {
+        var lastPen = this.lastPen;
+        if (lastPen == null) {
+            return '';
+        }
+        var lastPenEnd = lastPen.endIndex;
+
+        if ((start === undefined) || (start === 0)) {
+            // Image pen before first character
+            start = -1;
+        }
+
+        if ((end === undefined) || (end === lastPenEnd)) {
+            // Image pen after last character
+            end = lastPenEnd + 1;
+        }
+        if (wrap === undefined) {
+            wrap = false;
+        }
+
+        var txt = "",
+            formatTxt,
+            pen, penTxt, penStartIdx, penEndIdx, isInRange;
+        var currentProp, previousProp;
+        for (var i = 0, len = this.pens.length; i < len; i++) {
+            pen = this.pens[i];
+            penEndIdx = pen.endIndex;
+            if (penEndIdx <= start) {
+                continue;
+            }
+            pen = this.pens[i];
+            penTxt = (!wrap) ? pen.plainText : pen.wrapText;
+            currentProp = pen.prop;
+            penStartIdx = pen.startIndex;
+
+            isInRange = (penStartIdx >= start) && (penEndIdx <= end);
+            if (!isInRange) {
+                penTxt = penTxt.substring(start - penStartIdx, end - penStartIdx);
+            }
+
+            if (this.tagToTextScope) {
+                txt += this.tagToText.call(this.tagToTextScope, penTxt, currentProp, previousProp);
+            } else {
+                txt += this.tagToText(penTxt, currentProp, previousProp);
+            }
+
+            previousProp = currentProp;
+            if (penEndIdx >= end) {
+                break;
+            }
+        }
+
+        return txt;
+    }
+
+    get length() {
+        return this.lines.length;
+    }
+
+    set length(value) {
+        // Only for set length to 0 (clear)
+        this.clear();
+    }
+};
+
+var PEN_CONFIG = {};
+
+export default PenManager;

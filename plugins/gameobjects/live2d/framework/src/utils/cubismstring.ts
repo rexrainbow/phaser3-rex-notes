@@ -88,7 +88,7 @@ export class CubismString {
     }
 
     //小数部の確認
-    if (period) {
+    if (period?: any) {
       let mul = 0.1;
       for (; i < length; i++) {
         c = parseFloat(string[i]) & 0xff;

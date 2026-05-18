@@ -1,4 +1,4 @@
-import LoaderCallback from './loader/awaitloader/AwaitLoaderCallback.js';
+import LoaderCallback from './loader/awaitloader/AwaitLoaderCallback';
 
 export default LoaderCallback;
 

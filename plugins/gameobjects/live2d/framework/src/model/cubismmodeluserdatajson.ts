@@ -18,6 +18,8 @@ const Id = 'Id';
 const Value = 'Value';
 
 export class CubismModelUserDataJson {
+    _json: any;
+
   /**
    * コンストラクタ
    * @param buffer    userdata3.jsonが読み込まれているバッファ

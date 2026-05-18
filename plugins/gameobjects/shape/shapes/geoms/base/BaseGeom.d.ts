@@ -1,4 +1,4 @@
-import DataMethods from '../../../../../utils/data/DataMethods.js';
+import DataMethods from '../../../../../utils/data/DataMethods';
 
 /**
  * Base geometry for custom shapes.

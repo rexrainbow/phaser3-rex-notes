@@ -1,0 +1,100 @@
+import Phaser from 'phaser';
+import UIPlugin from '../../templates/ui/ui-plugin';
+
+const COLOR_MAIN = 0x4e342e;
+const COLOR_LIGHT = 0x7b5e57;
+const COLOR_DARK = 0x260e04;
+
+class Demo extends Phaser.Scene {
+    constructor() {
+        super({
+            key: 'examples'
+        })
+    }
+
+    preload() { }
+
+    create() {
+        var scrollablePanel = this.rexUI.add.scrollablePanel({
+            x: 400, y: 300,
+            width: 280, height: 320,
+
+            scrollMode: 'y',
+
+            background: this.rexUI.add.roundRectangle({
+                strokeColor: COLOR_LIGHT,
+                radius: 10
+            }),
+
+            panel: {
+                child: createPanel(this),
+
+                mask: { padding: 1, },
+            },
+
+            slider: {
+                track: this.rexUI.add.roundRectangle({ width: 20, radius: 10, color: COLOR_DARK }),
+                thumb: this.rexUI.add.roundRectangle({ radius: 13, color: COLOR_LIGHT })
+            },
+
+            space: {
+                left: 20, right: 20, top: 20, bottom: 20,
+                panel: 10
+            },
+
+            expand: {
+                panel: false
+            },
+
+            align: {
+                panel: 'right'
+            }
+        })
+            .layout()
+
+    }
+
+    update() { }
+}
+
+var createPanel = function (scene) {
+    var sizer = scene.rexUI.add.sizer({
+        orientation: 'y',
+        space: { item: 3 }
+    })
+
+    for (var i = 0; i < 30; i++) {
+        sizer.add(
+            scene.rexUI.add.label({
+                height: 60,
+                space: { left: 10, right: 10, top: 10, bottom: 10 },
+                background: scene.rexUI.add.roundRectangle({ color: COLOR_DARK, strokeColor: COLOR_LIGHT, radius: 10 }),
+                text: scene.add.text(0, 0, `Item ${i}`, { fontSize: 20 })
+            }),
+            { expand: true }
+        )
+    }
+
+    return sizer;
+}
+
+var config = {
+    type: Phaser.AUTO,
+    parent: 'phaser-example',
+    width: 800,
+    height: 600,
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+    },
+    scene: Demo,
+    plugins: {
+        scene: [{
+            key: 'rexUI',
+            plugin: UIPlugin,
+            mapping: 'rexUI'
+        }]
+    }
+};
+
+var game = new Phaser.Game(config);

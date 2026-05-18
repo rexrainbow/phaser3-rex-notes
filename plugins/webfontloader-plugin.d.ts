@@ -1,4 +1,4 @@
-import LoaderCallback from './loader/webfontloader/WebFontLoaderCallback.js';
+import LoaderCallback from './loader/webfontloader/WebFontLoaderCallback';
 
 export default class extends Phaser.Plugins.BasePlugin { }
 

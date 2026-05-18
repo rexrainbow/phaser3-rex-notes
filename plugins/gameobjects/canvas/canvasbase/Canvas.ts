@@ -1,0 +1,245 @@
+import Render from './render/Render';
+import CanvasMethods from './CanvasMethods';
+import TextureMethods from './TextureMethods';
+import { Class as PhaserClass, Display as PhaserDisplay, GameObjects as PhaserGameObjects, Renderer as PhaserRenderer, Utils as PhaserUtils } from 'phaser';
+
+import CheckP3Version from '../../../utils/system/CheckP3Version';
+CheckP3Version();
+
+const CanvasPool = PhaserDisplay.Canvas.CanvasPool;
+const GameObject = PhaserGameObjects.GameObject;
+const UUID = PhaserUtils.String.UUID;
+const DefaultImageNodes = PhaserRenderer.WebGL.RenderNodes.Defaults.DefaultImageNodes;
+
+class Canvas extends GameObject {
+    resolution: any;
+
+    _crop: any;
+    _height: any;
+    _textureKey: any;
+    _width: any;
+    canvas: any;
+    context: any;
+    dirty: any;
+    frame: any;
+    initRenderNodes: any;
+    renderer: any;
+    resetCropObject: any;
+    scaleX: any;
+    scaleY: any;
+    setOrigin: any;
+    setPosition: any;
+    texture: any;
+    updateDisplayOrigin: any;
+
+    constructor(scene?: any, x?: any, y?: any, width?: any, height?: any, resolution?: any) {
+        if (x === undefined) {
+            x = 0;
+        }
+        if (y === undefined) {
+            y = 0;
+        }
+        if (width === undefined) {
+            width = 1;
+        }
+        if (height === undefined) {
+            height = 1;
+        }
+        if (resolution === undefined) {
+            resolution = 1;
+        }
+
+        super(scene, 'rexCanvas');
+
+        this.renderer = scene.sys.game.renderer;
+
+        this._width = width;
+        this._height = height;
+        this.resolution = resolution;
+
+        width = Math.max(Math.ceil(width * this.resolution), 1);
+        height = Math.max(Math.ceil(height * this.resolution), 1);
+        this.canvas = CanvasPool.create(this, width, height);
+
+        this.dirty = false;
+
+        this.setPosition(x, y);
+        this.setOrigin(0.5, 0.5);
+        this.initRenderNodes(this._defaultRenderNodesMap);
+
+        this._crop = this.resetCropObject();
+
+        //  Create a Texture for this Text object
+        this._textureKey = UUID();
+
+        this.texture = scene.sys.textures.addCanvas(this._textureKey, this.canvas);
+
+        //  Set the context to be the CanvasTexture context
+        this.context = this.texture.context;
+
+        //  Get the frame
+        this.frame = this.texture.get();
+
+        //  Set the resolution
+        this.frame.source.resolution = this.resolution;
+
+        if (this.renderer && this.renderer.gl) {
+            //  Clear the default 1x1 glTexture, as we override it later
+            this.renderer.deleteTexture(this.frame.source.glTexture);
+            this.frame.source.glTexture = null;
+        }
+
+        this.dirty = true;
+    }
+
+    preDestroy() {
+        CanvasPool.remove(this.canvas);
+
+        this.canvas = null;
+        this.context = null;
+
+        var texture = this.texture;
+
+        if (texture?: any) {
+            texture.destroy();
+        }
+    }
+
+    get _defaultRenderNodesMap() {
+        return DefaultImageNodes;
+    }
+
+    setResolution(resolution?: any) {
+        if (this.resolution === resolution) {
+            return this;
+        }
+
+        this.resolution = resolution;
+
+        var width = Math.max(Math.ceil(this.width * resolution), 1);
+        var height = Math.max(Math.ceil(this.height * resolution), 1);
+        this.canvas.width = width;
+        this.canvas.height = height;
+
+        this.frame.source.resolution = resolution;
+        this.dirty = true;
+
+        return this;
+    }
+
+    get width() {
+        return this._width;
+    }
+
+    set width(value) {
+        this.setSize(value, this._height);
+    }
+
+    get height() {
+        return this._height;
+    }
+
+    set height(value) {
+        this.setSize(this._width, value);
+    }
+
+    setCanvasSize(width?: any, height?: any) {
+        if ((this._width === width) && (this._height === height)) {
+            return this;
+        }
+
+        this._width = width;
+        this._height = height;
+
+        this.updateDisplayOrigin();
+
+        width = Math.max(Math.ceil(width * this.resolution), 1);
+        height = Math.max(Math.ceil(height * this.resolution), 1);
+        this.canvas.width = width;
+        this.canvas.height = height;
+
+        this.frame.setSize(width, height);
+        this.frame.source.updateSize(width, height);
+        this.frame.updateUVs();
+
+        this.dirty = true;
+        return this;
+    }
+
+    // setSize might be override
+    setSize(width?: any, height?: any) {
+        this.setCanvasSize(width, height);
+        return this;
+    }
+
+    get displayWidth() {
+        return this.scaleX * this._width;
+    }
+
+    set displayWidth(value) {
+        this.scaleX = value / this._width;
+    }
+
+    get displayHeight() {
+        return this.scaleY * this._height;
+    }
+
+    set displayHeight(value) {
+        this.scaleY = value / this._height;
+    }
+
+    setDisplaySize(width?: any, height?: any) {
+        this.displayWidth = width;
+        this.displayHeight = height;
+        return this;
+    }
+
+    getCanvas(readOnly?: any) {
+        if (!readOnly) {
+            this.dirty = true;
+        }
+        return this.canvas;
+    }
+
+    getContext(readOnly?: any) {
+        if (!readOnly) {
+            this.dirty = true;
+        }
+        return this.context;
+    }
+
+    needRedraw() {
+        this.dirty = true;
+        return this;
+    }
+
+    resize(width?: any, height?: any) {
+        this.setSize(width, height);
+        return this;
+    }
+}
+
+const Components = PhaserGameObjects.Components;
+PhaserClass.mixin(Canvas,
+    [
+        Components.Alpha,
+        Components.BlendMode,
+        Components.Crop,
+        Components.Depth,
+        Components.Flip,
+        Components.GetBounds,
+        Components.Lighting,
+        Components.Mask,
+        Components.Origin,
+        Components.RenderNodes,
+        Components.ScrollFactor,
+        Components.Tint,
+        Components.Transform,
+        Components.Visible,
+        Render,
+        CanvasMethods,
+        TextureMethods,
+    ]
+);
+
+export default Canvas;

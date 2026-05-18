@@ -1,0 +1,138 @@
+import EaseValueTaskBase from '../../../../utils/componentbase/tweentask/EaseValueTaskBase';
+
+import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const Linear = PhaserMath.Linear;
+
+class Flip extends EaseValueTaskBase {
+    duration: any;
+
+    boot: any;
+    delay: any;
+    easeFn: any;
+    emit: any;
+    endAngle: any;
+    endAngleBF: any;
+    endAngleFB: any;
+    isRunning: any;
+    parent: any;
+    setEase: any;
+    startAngle: any;
+    timer: any;
+
+    constructor(gameObject?: any, config?: any) {
+        super(gameObject, config);
+        // this.parent = gameObject;
+        // this.timer
+
+        this.resetFromJSON(config);
+        this.boot();
+    }
+
+    resetFromJSON(o?: any) {
+        super.resetFromJSON(o);
+        this.setEase(GetValue(o, 'ease', 'Cubic'));
+
+        this.setFrontToBackDirection(GetValue(o, 'frontToBack', 0));
+        this.setBackToFrontDirection(GetValue(o, 'backToFront', 1));
+        return this;
+    }
+
+    setFrontToBackDirection(direction?: any) {
+        if (typeof (direction) === 'string') {
+            direction = DIRMODE[direction];
+        }
+        this.endAngleFB = (direction === 0) ? 180 : -180;
+        return this;
+    }
+
+    setBackToFrontDirection(direction?: any) {
+        if (typeof (direction) === 'string') {
+            direction = DIRMODE[direction];
+        }
+        this.endAngleBF = (direction === 0) ? -180 : 180;
+        return this;
+    }
+
+    start(duration?: any, repeat?: any) {
+        if (this.timer.isRunning) {
+            return this;
+        }
+
+        this.timer
+            .setDelay(this.delay)
+            .setDuration(duration);
+
+        var loop = repeat + 1;
+        var gameObject = this.parent;
+        if (gameObject.face === 0) {  // isFrontToBack
+            this.startAngle = 0;
+            this.endAngle = this.endAngleFB * loop;
+        } else {
+            this.startAngle = this.endAngleBF;
+            this.endAngle = this.startAngle - (this.endAngleBF * loop);
+        }
+
+        super.start();
+        return this;
+    }
+
+    flip(duration?: any, repeat?: any) {
+        if (this.isRunning) {
+            return this;
+        }
+        if (duration === undefined) {
+            duration = this.duration;
+        }
+        if (repeat === undefined) {
+            repeat = 0;
+        }
+
+        this.start(duration, repeat);
+        this.emit('start', this.parent, this);
+
+        // Set face index
+        this.parent.currentFaceIndex = (this.parent.currentFaceIndex + repeat + 1) % 2;
+        return this;
+    }
+
+    flipRight(duration?: any, repeat?: any) {
+        if (this.parent.currentFaceIndex === 0) { // Front to back
+            this.setFrontToBackDirection(0);
+        } else {  // Back to front
+            this.setBackToFrontDirection(0);
+        }
+        this.flip(duration, repeat);
+        return this;
+    }
+
+    flipLeft(duration?: any, repeat?: any) {
+        if (this.parent.currentFaceIndex === 0) { // Front to back
+            this.setFrontToBackDirection(1);
+        } else {  // Back to front
+            this.setBackToFrontDirection(1);
+        }
+        this.flip(duration, repeat);
+        return this;
+    }
+
+    updateTarget(gameObject?: any, timer?: any) {
+        var t = this.easeFn(timer.t);
+
+        var value = Linear(this.startAngle, this.endAngle, t);
+        if (gameObject.orientation === 0) {
+            gameObject.angleY = value;
+        } else {
+            gameObject.angleX = value;
+        }
+    }
+}
+
+const DIRMODE = {
+    'right': 0,
+    'left-to-right': 0,
+    'left': 1,
+    'right-to-left': 1
+}
+
+export default Flip;

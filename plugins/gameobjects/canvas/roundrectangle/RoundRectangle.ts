@@ -1,0 +1,150 @@
+import Canvas from '../canvasbase/Canvas';
+import GetStyle from '../../../utils/canvas/GetStyle';
+import DrawContent from './DrawContent';
+
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+
+class RoundRectangle extends Canvas {
+    _fillColor2: any;
+    _fillStyle: any;
+    _isHorizontalGradient: any;
+    _iteration: any;
+    _lineWidth: any;
+    _radius: any;
+    _strokeStyle: any;
+    canvas: any;
+    clear: any;
+    context: any;
+    dirty: any;
+    type: any;
+
+    constructor(
+        scene,
+        x, y, width, height,
+        radiusConfig,
+        fillStyle, strokeStyle, lineWidth,
+        fillColor2, isHorizontalGradient,
+        resolution
+    ) {
+
+        if (x === undefined) { x = 0; }
+        if (y === undefined) { y = 0; }
+        if (width === undefined) { width = 1; }
+        if (height === undefined) { height = width; }
+        if (radiusConfig === undefined) { radiusConfig = 0; }
+        if (resolution === undefined) { resolution = 1; }
+
+        super(scene, x, y, width, height, resolution);
+        this.type = 'rexRoundRectangleCanvas';
+
+        var radius = GetValue(radiusConfig, 'radius', radiusConfig);
+        var iteration = GetValue(radiusConfig, 'iteration', undefined);
+        this.setRadius(radius);
+        this.setIteration(iteration);
+        this.setFillStyle(fillStyle, fillColor2, isHorizontalGradient);
+        this.setStrokeStyle(strokeStyle, lineWidth);
+    }
+
+    get radius() {
+        return this._radius;
+    }
+
+    set radius(value) {
+        this.dirty |= (this._radius != value);
+        this._radius = value;
+    }
+
+    setRadius(radius?: any) {
+        this.radius = radius;
+        return this;
+    }
+
+    get iteration() {
+        return this._iteration;
+    }
+
+    set iteration(value) {
+        this.dirty |= (this._iteration != value);
+        this._iteration = value;
+    }
+
+    setIteration(iteration?: any) {
+        this.iteration = iteration;
+        return this;
+    }
+
+    get fillStyle() {
+        return this._fillStyle;
+    }
+
+    set fillStyle(value) {
+        value = GetStyle(value, this.canvas, this.context);
+        this.dirty |= (this._fillStyle != value);
+        this._fillStyle = value;
+    }
+
+    get fillColor2() {
+        return this._fillColor2;
+    }
+
+    set fillColor2(value) {
+        value = GetStyle(value, this.canvas, this.context);
+        this.dirty |= (this._fillColor2 != value);
+        this._fillColor2 = value;
+    }
+
+    get isHorizontalGradient() {
+        return this._isHorizontalGradient;
+    }
+
+    set isHorizontalGradient(value) {
+        this.dirty |= (this._isHorizontalGradient != value);
+        this._isHorizontalGradient = value;
+    }
+
+    setFillStyle(fillStyle?: any, fillColor2?: any, isHorizontalGradient?: any) {
+        if (isHorizontalGradient === undefined) {
+            isHorizontalGradient = true;
+        }
+        this.fillStyle = fillStyle;
+        this.fillColor2 = fillColor2;
+        this.isHorizontalGradient = isHorizontalGradient;
+        return this;
+    }
+
+    get strokeStyle() {
+        return this._strokeStyle;
+    }
+
+    set strokeStyle(value) {
+        value = GetStyle(value, this.canvas, this.context);
+        this.dirty |= (this._strokeStyle != value);
+        this._strokeStyle = value;
+    }
+
+    get lineWidth() {
+        return this._lineWidth;
+    }
+
+    set lineWidth(value) {
+        this.dirty |= (this._lineWidth != value);
+        this._lineWidth = value;
+    }
+
+    setStrokeStyle(strokeStyle?: any, lineWidth?: any) {
+        this.strokeStyle = strokeStyle;
+        this.lineWidth = lineWidth;
+        return this;
+    }
+
+    updateTexture() {
+        super.updateTexture(function() {
+            this.clear();
+            DrawContent.call(this);
+        }, this);
+        return this;
+    }
+}
+
+export default RoundRectangle;

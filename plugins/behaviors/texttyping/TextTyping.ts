@@ -1,0 +1,211 @@
+import ComponentBase from '../../utils/componentbase/ComponentBase';
+import Methods from './methods/Methods';
+import GetWrapText from '../../utils/text/GetWrapText';
+import SetNoWrapText from '../../utils/text/SetNoWrapText';
+import GetTypingString from './utils/GetTypingString';
+import GetPlainText from '../../utils/text/GetPlainText';
+import GetString from '../../utils/text/GetString';
+
+import { Utils as PhaserUtils } from 'phaser';
+const GetFastValue = PhaserUtils.Objects.GetFastValue;
+const GetValue = PhaserUtils.Objects.GetValue;
+
+class TextTyping extends ComponentBase {
+    _text: any;
+    emit: any;
+    insertChar: any;
+    insertIndex: any;
+    isShutdown: any;
+    parent: any;
+    scene: any;
+    setTextCallback: any;
+    setTextCallbackScope: any;
+    speed: any;
+    start: any;
+    textLength: any;
+    textWrapEnable: any;
+    timer: any;
+    typeMode: any;
+    typingIndex: any;
+
+    constructor(gameObject?: any, config?: any) {
+        super(gameObject, config);
+        // this.parent = gameObject;
+
+        this.timer = null;
+        this.resetFromJSON(config);
+    }
+
+    resetFromJSON(o?: any) {
+        this.setTextWrapEnable(GetValue(o, 'wrap', false));
+        this.setTypeMode(GetValue(o, 'typeMode', 0));
+        this.setTypingSpeed(GetValue(o, 'speed', 333));
+        this.setTextCallback = GetFastValue(o, 'setTextCallback', null);
+        this.setTextCallbackScope = GetFastValue(o, 'setTextCallbackScope', null);
+
+        this.setTypingContent(GetFastValue(o, 'text', ''));
+        this.typingIndex = GetFastValue(o, 'typingIndex', 0);
+        this.insertIndex = null;
+        this.insertChar = null;
+
+        var elapsed = GetFastValue(o, 'elapsed', null);
+        if (elapsed !== null) {
+            this.start(undefined, undefined, this.typingIndex, elapsed);
+        }
+
+        return this;
+    }
+
+    shutdown(fromScene?: any) {
+        // Already shutdown
+        if (this.isShutdown) {
+            return;
+        }
+
+        this.freeTimer();
+
+        super.shutdown(fromScene);
+    }
+
+    setTypeMode(m?: any) {
+        if (typeof (m) === 'string') {
+            m = TYPEMODE[m];
+        }
+        this.typeMode = m;
+        return this;
+    }
+
+    setTypeSpeed(speed?: any) {
+        this.speed = speed;
+        return this;
+    }
+
+    setTypingSpeed(speed?: any) {
+        this.speed = speed;
+        return this;
+    }
+
+    setTextWrapEnable(enable?: any) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.textWrapEnable = enable;
+        return this;
+    }
+
+    set text(value) {
+        var text = GetString(value);
+        if (this.textWrapEnable) {
+            text = GetWrapText(this.parent, text);
+        }
+
+        this._text = text;
+    }
+
+    get text() {
+        return this._text;
+    }
+
+    get isTyping() {
+        return (this.getTimer() !== null);
+    }
+
+    get isLastChar() {
+        return (this.typingIndex === this.textLength);
+    }
+
+    setTypingContent(text?: any) {
+        this.text = text;
+        this.textLength = GetPlainText(this.parent, this.text).length;
+        return this;
+    }
+
+    onTyping() {
+        var newText = GetTypingString.call(this, this.text, this.typingIndex, this.textLength, this.typeMode);
+
+        this.setText(newText);
+
+        this.emit('typechar', this.insertChar);
+        this.emit('type');
+
+        if (this.isLastChar) {
+            this.freeTimer();
+            // Fire 'complete' next tick, to render last character on screen
+            this.scene.sys.events.once('preupdate', function() {
+                this.emit('complete', this, this.parent);
+            }, this);
+        } else {
+            this.timer.delay = this.speed; // delay of next typing            
+            this.typingIndex++;
+        }
+    }
+
+    startTimer(timerStartAt?: any) {
+        if (this.timer) {
+            this.freeTimer();
+        }
+        var delay, startAt;
+        if (timerStartAt === undefined) {
+            delay = 0;
+            startAt = 0;
+        } else {
+            delay = this.speed;
+            startAt = timerStartAt;
+        }
+
+        this.timer = this.scene.time.addEvent({
+            delay: 0.0001,
+            startAt: startAt,
+            loop: true,
+            callback: this.onTyping,
+            callbackScope: this
+        });
+        // Note: Throw error message if delay is 0 with repeat/loop
+
+        return this;
+    }
+
+    getTimer() {
+        return this.timer;
+    }
+
+    freeTimer() {
+        if (this.timer) {
+            this.timer.remove();
+            this.timer = null;
+        }
+
+        return this;
+    }
+
+    setText(text?: any) {
+        if (this.setTextCallback) {
+            if (this.setTextCallbackScope) {
+                text = this.setTextCallback.call(this.setTextCallbackScope, text, this.isLastChar, this.insertIndex);
+            } else {
+                text = this.setTextCallback(text, this.isLastChar, this.insertIndex);
+            }
+        }
+
+        if (this.textWrapEnable) {
+            SetNoWrapText(this.parent, text);
+        } else {
+            this.parent.setText(text);
+        }
+    }
+}
+
+const TYPEMODE = {
+    'left-to-right': 0,
+    'right-to-left': 1,
+    'middle-to-sides': 2,
+    'sides-to-middle': 3
+};
+
+Object.assign(
+    TextTyping.prototype,
+    Methods
+)
+
+
+export default TextTyping;

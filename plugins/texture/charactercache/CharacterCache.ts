@@ -1,0 +1,99 @@
+import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods';
+import GetGame from '../../utils/system/GetGame';
+import CreateFrameManager from './methods/CreateFrameManager';
+import CreateCharacterCollection from './methods/CreateCharacterCollection';
+import Methods from './methods/Methods';
+import { CacheName } from './Const';
+import GetCharacterCache from './methods/GetCharacterCache';
+
+import { GameObjects as PhaserGameObjects, Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const TextGameObjectClass = PhaserGameObjects.Text;
+
+class CharacterCache {
+    textObject: any;
+
+    cellHeight: any;
+    cellWidth: any;
+    characterCollection: any;
+    destroyEventEmitter: any;
+    frameManager: any;
+    freqMode: any;
+    game: any;
+    inCacheCount: any;
+    key: any;
+    load: any;
+    setEventEmitter: any;
+
+    constructor(scene?: any, config?: any) {
+        // Event emitter
+        var eventEmitter = GetValue(config, 'eventEmitter', undefined);
+        var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
+        this.setEventEmitter(eventEmitter, EventEmitterClass);
+
+        this.game = GetGame(scene);
+        this.freqMode = GetValue(config, 'freqMode', true);
+
+        this.frameManager = CreateFrameManager(this.game, config);
+        this.frameManager.addToBitmapFont(); // Add to bitmapfont at beginning
+
+        this.key = this.frameManager.key;
+        this.cellWidth = this.frameManager.cellWidth;
+        this.cellHeight = this.frameManager.cellHeight;
+        this.inCacheCount = 0;
+
+        // Create ChacacterCollection
+        this.characterCollection = CreateCharacterCollection();
+
+        // Add this character cache into customCache
+        this.game.cache.addCustom(CacheName).add(this.key, this);
+
+        // Bind text object
+        var textObject = GetValue(config, 'textObject');
+        if (!textObject) {
+            var style = GetValue(config, 'style');
+            if (style?: any) {
+                textObject = new TextGameObjectClass(this.game.scene.systemScene, 0, 0, '', style);
+            }
+        }
+        if (textObject?: any) {
+            this.bindTextObject(textObject);
+        }
+
+        // Load content
+        this.load(GetValue(config, 'content', ''));
+    }
+
+    shutdown() {
+        this.destroyEventEmitter();
+
+        this.frameManager.destroy();
+        this.characterCollection = undefined;
+        if (this.textObject) {
+            this.textObject.destroy();
+        }
+
+        this.game = null;
+    }
+
+    destroy() {
+        this.shutdown();
+    }
+
+    bindTextObject(textObject?: any) {
+        this.textObject = textObject;
+        return this;
+    }
+
+    static getCache(scene?: any, key?: any) {
+        return GetCharacterCache(scene, key);
+    }
+}
+
+Object.assign(
+    CharacterCache.prototype,
+    EventEmitterMethods,
+    Methods
+);
+
+export default CharacterCache;

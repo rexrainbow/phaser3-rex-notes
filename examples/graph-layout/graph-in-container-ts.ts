@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
-import GraphPlugin from '../../plugins/graph-plugin.js';
-import UIPlugin from '../../templates/ui/ui-plugin.js';
+import GraphPlugin from '../../plugins/graph-plugin';
+import UIPlugin from '../../templates/ui/ui-plugin';
 
 class Demo extends Phaser.Scene {
     declare rexGraph: GraphPlugin;

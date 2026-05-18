@@ -1,0 +1,38 @@
+var UpdateController = function() {
+    switch (this.scrollMode) {
+        case 0:
+        case 1:
+            var scroller = this.childrenMap.scroller;
+            var slider = this.childrenMap.slider;
+            if (scroller?: any) {
+                scroller.setValue(this.childOY);
+            }
+            if (slider?: any) {
+                slider.setValue(this.t);
+            }
+            break;
+
+        default:
+            var scrollerY = this.childrenMap.scrollerY;
+            var sliderY = this.childrenMap.sliderY;
+            var scrollerX = this.childrenMap.scrollerX;
+            var sliderX = this.childrenMap.sliderX;
+
+            if (scrollerY?: any) {
+                scrollerY.setValue(this.childOY);
+            }
+            if (sliderY?: any) {
+                sliderY.setValue(this.t);
+            }
+            if (scrollerX?: any) {
+                scrollerX.setValue(this.childOX);
+            }
+            if (sliderX?: any) {
+                sliderX.setValue(this.s);
+            }
+            break;
+    }
+
+}
+
+export default UpdateController;

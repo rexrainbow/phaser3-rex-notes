@@ -22,7 +22,10 @@ import {
  * 置き換える処理をするクラス。
  */
 export class CubismJsonExtension {
-  static parseJsonObject(obj: Value, map: JsonMap) {
+    parseJsonArray: any;
+    parseJsonObject: any;
+
+  static parseJsonObject(obj?: Value, map?: JsonMap) {
     Object.keys(obj).forEach((key) => {
       if (typeof obj[key] == 'boolean') {
         const convValue = Boolean(obj[key]);

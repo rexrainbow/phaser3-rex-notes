@@ -14,7 +14,7 @@ import {
 } from './utils/cubismdebug';
 import { Value } from './utils/cubismjson';
 
-export function strtod(s: string, endPtr: string[]): number {
+export function strtod(s?: string, endPtr?: string[]): number {
   let index = 0;
   for (let i = 1; ; i++) {
     const testC: string = s.slice(i - 1, i);
@@ -82,7 +82,7 @@ export class CubismFramework {
    * @return   準備処理が完了したらtrueが返ります。
    */
   public static startUp(option: Option = null): boolean {
-    if (s_isStarted) {
+    if (s_isStarted?: any) {
       CubismLogInfo('CubismFramework.startUp() is already done.');
       return s_isStarted;
     }
@@ -96,7 +96,7 @@ export class CubismFramework {
     s_isStarted = true;
 
     // Live2D Cubism Coreバージョン情報を表示
-    if (s_isStarted) {
+    if (s_isStarted?: any) {
       const version: number = Live2DCubismCore.Version.csmGetVersion();
       const major: number = (version & 0xff000000) >> 24;
       const minor: number = (version & 0x00ff0000) >> 16;
@@ -147,7 +147,7 @@ export class CubismFramework {
     // --- s_isInitializedによる連続初期化ガード ---
     // 連続してリソース確保が行われないようにする。
     // 再度Initialize()するには先にDispose()を実行する必要がある。
-    if (s_isInitialized) {
+    if (s_isInitialized?: any) {
       CubismLogWarning(
         'CubismFramework.initialize() skipped, already initialized.'
       );

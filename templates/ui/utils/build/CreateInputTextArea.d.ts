@@ -1,4 +1,4 @@
-import TextAreaInput from '../../textareainput/TextAreaInput.js';
+import TextAreaInput from '../../textareainput/TextAreaInput';
 
 /**
  * Create a `TextAreaInput` from configuration.

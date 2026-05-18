@@ -56,7 +56,7 @@ function lerpPoints(
   return result;
 }
 
-function linearEvaluate(points: CubismMotionPoint[], time: number): number {
+function linearEvaluate(points?: CubismMotionPoint[], time?: number): number {
   let t: number = (time - points[0].time) / (points[1].time - points[0].time);
 
   if (t < 0.0) {
@@ -66,7 +66,7 @@ function linearEvaluate(points: CubismMotionPoint[], time: number): number {
   return points[0].value + (points[1].value - points[0].value) * t;
 }
 
-function bezierEvaluate(points: CubismMotionPoint[], time: number): number {
+function bezierEvaluate(points?: CubismMotionPoint[], time?: number): number {
   let t: number = (time - points[0].time) / (points[3].time - points[0].time);
 
   if (t < 0.0) {
@@ -186,7 +186,7 @@ function bezierEvaluateCardanoInterpretation(
   return lerpPoints(p012, p123, t).value;
 }
 
-function steppedEvaluate(points: CubismMotionPoint[], time: number): number {
+function steppedEvaluate(points?: CubismMotionPoint[], time?: number): number {
   return points[0].value;
 }
 
@@ -239,6 +239,26 @@ function evaluateCurve(
  * モーションのクラス。
  */
 export class CubismMotion extends ACubismMotion {
+    _eyeBlinkParameterIds: any;
+    _fadeInSeconds: any;
+    _fadeOutSeconds: any;
+    _firedEventValues: any;
+    _isLoop: any;
+    _isLoopFadeIn: any;
+    _lastWeight: any;
+    _lipSyncParameterIds: any;
+    _loopDurationSeconds: any;
+    _modelCurveIdEyeBlink: any;
+    _modelCurveIdLipSync: any;
+    _modelCurveIdOpacity: any;
+    _modelOpacity: any;
+    _motionData: any;
+    _onFinishedMotion: any;
+    _sourceFrameRate: any;
+    _weight: any;
+    getModelOpacityValue: any;
+    isExistModelOpacity: any;
+
   /**
    * インスタンスを作成する
    *
@@ -844,7 +864,7 @@ export class CubismMotion extends ACubismMotion {
           curveCount,
           segmentPosition
         );
-        switch (segment) {
+        switch (segment?: any) {
           case CubismMotionSegmentType.CubismMotionSegmentType_Linear: {
             this._motionData.segments.at(totalSegmentCount).segmentType =
               CubismMotionSegmentType.CubismMotionSegmentType_Linear;

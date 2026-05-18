@@ -11,6 +11,16 @@ import { CubismVector2 } from './cubismvector2';
  * 数値計算などに使用するユーティリティクラス
  */
 export class CubismMath {
+    abs: any;
+    cbrt: any;
+    cos: any;
+    directionToRadian: any;
+    quadraticEquation: any;
+    radianToDegrees: any;
+    range: any;
+    sin: any;
+    sqrt: any;
+
   static readonly Epsilon: number = 0.00001;
 
   /**
@@ -83,7 +93,7 @@ export class CubismMath {
     let cx: number = x;
     const isNegativeNumber: boolean = cx < 0;
 
-    if (isNegativeNumber) {
+    if (isNegativeNumber?: any) {
       cx = -cx;
     }
 

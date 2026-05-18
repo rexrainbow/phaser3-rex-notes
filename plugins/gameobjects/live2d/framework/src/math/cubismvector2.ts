@@ -11,6 +11,12 @@
  * 2次元ベクトル型の機能を提供する。
  */
 export class CubismVector2 {
+    division: any;
+    isEqual: any;
+    multiply: any;
+    x: any;
+    y: any;
+
   /**
    * コンストラクタ
    */

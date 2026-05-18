@@ -1,4 +1,4 @@
-import EventSheetManager from '../eventsheetmanager/EventSheetManager.js';
+import EventSheetManager from '../eventsheetmanager/EventSheetManager';
 
 export default MarkedEventSheets;
 

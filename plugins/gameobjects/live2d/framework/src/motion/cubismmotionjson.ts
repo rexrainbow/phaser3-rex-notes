@@ -35,6 +35,8 @@ const Value = 'Value';
  * motion3.jsonのコンテナ。
  */
 export class CubismMotionJson {
+    _json: any;
+
   /**
    * コンストラクタ
    * @param buffer motion3.jsonが読み込まれているバッファ

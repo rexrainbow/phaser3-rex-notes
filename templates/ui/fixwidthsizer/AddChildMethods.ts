@@ -1,0 +1,101 @@
+import AddChild from '../basesizer/utils/AddChild';
+import GetBoundsConfig from '../utils/GetBoundsConfig';
+import IsArray from '../../../plugins/utils/object/IsArray';
+import GetNearestChildIndex from './GetNearestChildIndex';
+
+import { Display as PhaserDisplay, Utils as PhaserUtils } from 'phaser';
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+const GetValue = PhaserUtils.Objects.GetValue;
+const ALIGN_CENTER = PhaserDisplay.Align.CENTER;
+
+var Add = function(gameObject?: any, paddingConfig?: any, childKey?: any, index?: any) {
+    if (gameObject === '\n') {
+        this.addNewLine();
+        return this;
+    }
+
+    var offsetX, offsetY;
+    var offsetOriginX, offsetOriginY;
+
+    AddChild.call(this, gameObject);
+
+    if (IsPlainObject(paddingConfig)) {
+        var config = paddingConfig;
+        paddingConfig = GetValue(config, 'padding', 0);
+        childKey = GetValue(config, 'key', undefined);
+        index = GetValue(config, 'index', undefined);
+
+        offsetX = GetValue(config, 'offsetX', 0);
+        offsetY = GetValue(config, 'offsetY', 0);
+        offsetOriginX = GetValue(config, 'offsetOriginX', 0);
+        offsetOriginY = GetValue(config, 'offsetOriginY', 0);
+    }
+    if (paddingConfig === undefined) {
+        paddingConfig = 0;
+    }
+
+    if (offsetX === undefined) {
+        offsetX = 0;
+    }
+    if (offsetY === undefined) {
+        offsetY = 0;
+    }
+    if (offsetOriginX === undefined) {
+        offsetOriginX = 0;
+    }
+    if (offsetOriginY === undefined) {
+        offsetOriginY = 0;
+    }
+
+    var config = this.getSizerConfig(gameObject);
+    config.align = ALIGN_CENTER;
+    config.padding = GetBoundsConfig(paddingConfig);
+    config.alignOffsetX = offsetX;
+    config.alignOffsetY = offsetY;
+    config.alignOffsetOriginX = offsetOriginX;
+    config.alignOffsetOriginY = offsetOriginY;
+
+    if ((index === undefined) || (index >= this.sizerChildren.length)) {
+        this.sizerChildren.push(gameObject);
+    } else {
+        this.sizerChildren.splice(index, 0, gameObject);
+    }
+
+    if (childKey !== undefined) {
+        this.addChildrenMap(childKey, gameObject)
+    }
+    return this;
+};
+
+export default {
+    add(gameObject?: any, paddingConfig?: any, childKey?: any) {
+        if (IsArray(gameObject)) {
+            var gameObjects = gameObject;
+            for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+                Add.call(this, gameObjects[i], paddingConfig);
+            }
+        } else {
+            Add.call(this, gameObject, paddingConfig, childKey);
+        }
+        return this;
+    },
+
+    addNewLine() {
+        this.sizerChildren.push('\n');
+        return this;
+    },
+
+    insert(index?: any, gameObject?: any, paddingConfig?: any, childKey?: any) {
+        Add.call(this, gameObject, paddingConfig, childKey, index);
+        return this;
+    },
+
+    insertAtPosition(x?: any, y?: any, gameObject?: any, paddingConfig?: any, childKey?: any) {
+        var index = GetNearestChildIndex.call(this, x, y);
+        if (index === -1) {
+            index = undefined;
+        }
+        this.insert(index, gameObject, paddingConfig, childKey);
+        return this;
+    }
+}

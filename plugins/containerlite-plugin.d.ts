@@ -1,5 +1,5 @@
-import Factory from './gameobjects/container/containerlite/Factory.js';
-import Creator from './gameobjects/container/containerlite/Creator.js';
+import Factory from './gameobjects/container/containerlite/Factory';
+import Creator from './gameobjects/container/containerlite/Creator';
 
 export default class extends Phaser.Plugins.BasePlugin { }
 

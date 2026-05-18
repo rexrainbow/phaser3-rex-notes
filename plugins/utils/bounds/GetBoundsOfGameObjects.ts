@@ -1,0 +1,42 @@
+import { GetBounds } from './GetBounds';
+
+import { Geom as PhaserGeom } from 'phaser';
+const Rectangle = PhaserGeom.Rectangle;
+const Union = PhaserGeom.Rectangle.Union;
+
+var GetBoundsOfGameObjects = function(gameObjects?: any, out?: any) {
+    if (out === undefined) {
+        out = new Rectangle();
+    } else if (out === true) {
+        if (GlobRect === undefined) {
+            GlobRect = new Rectangle();
+        }
+        out = GlobRect;
+    }
+
+    out.setTo(0, 0, 0, 0);
+
+    var gameObject;
+    var firstClone = true;
+    for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+        gameObject = gameObjects[i];
+        if (!gameObject.getBounds) {
+            continue;
+        }
+
+        var boundsRect = GetBounds(gameObject, true);
+
+        if (firstClone?: any) {
+            out.setTo(boundsRect.x, boundsRect.y, boundsRect.width, boundsRect.height);
+            firstClone = false;
+        } else {
+            Union(boundsRect, out, out);
+        }
+    }
+
+    return out;
+}
+
+var GlobRect;
+
+export default GetBoundsOfGameObjects;

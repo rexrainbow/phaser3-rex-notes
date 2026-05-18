@@ -14,6 +14,23 @@ import { CubismModel } from '../model/cubismmodel';
  * サブクラスに環境依存の描画命令を記述する。
  */
 export abstract class CubismRenderer {
+    A: any;
+    B: any;
+    G: any;
+    R: any;
+
+    _anisotropy: any;
+    _isCulling: any;
+    _isPremultipliedAlpha: any;
+    _model: any;
+    _modelColor: any;
+    _mvpMatrix4x4: any;
+    _useHighPrecisionMask: any;
+    doDrawModel: any;
+    getModel: any;
+    restoreProfile: any;
+    saveProfile: any;
+
   /**
    * レンダラのインスタンスを生成して取得する
    *

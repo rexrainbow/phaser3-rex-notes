@@ -9,7 +9,7 @@ export function SetSerialNumber(value?: number | null): void;
  *
  * @param prefix - The prefix string.
  */
-export function SetSerialNumberPrefix(prefix: string): void;
+export function SetSerialNumberPrefix(prefix?: string): void;
 /**
  * Get the current serial number.
  *

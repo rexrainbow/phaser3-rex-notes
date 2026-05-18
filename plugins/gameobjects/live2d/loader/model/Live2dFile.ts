@@ -1,0 +1,96 @@
+import CreateBinaryFile from './CreateBinaryFile';
+import { CubismModelSettingJson } from '../../framework/src/cubismmodelsettingjson';
+import LoadChildrenFiles from './LoadChildrenFiles';
+import SetValue from '../../../../utils/object/SetValue';
+
+import { Loader as PhaserLoader, Utils as PhaserUtils } from 'phaser';
+const GetFastValue = PhaserUtils.Objects.GetFastValue;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
+
+class Live2dFile extends PhaserLoader.MultiFile {
+    key: any;
+
+    cache: any;
+    complete: any;
+    files: any;
+    homeDir: any;
+    isReadyToProcess: any;
+    loader: any;
+    pending: any;
+
+    constructor(loader?: any, key?: any, url?: any, xhrSettings?: any) {
+        if (IsPlainObject(key)) {
+            var config = key;
+
+            key = GetFastValue(config, 'key');
+            url = GetFastValue(config, 'url');
+            xhrSettings = GetFastValue(config, 'xhrSettings');
+        }
+
+        var cache = loader.cacheManager.custom.live2d;
+
+        // Load setting
+        var settingFile = CreateBinaryFile(loader, key, url, xhrSettings, 'setting');
+        super(loader, 'live2d', key, [settingFile]);
+
+        this.cache = cache;
+        this.homeDir = url.substring(0, url.lastIndexOf('/') + 1);
+    }
+
+    onFileComplete(file?: any) {
+        var index = this.files.indexOf(file);
+        if (index === -1) {
+            return;
+        }
+
+        // console.log(`Load file '${file.key}' at '${file.url}'`)
+
+        this.pending--;
+
+        if (index === 0) {
+            var arrayBuffer = file.data;
+            var setting = new CubismModelSettingJson(arrayBuffer, arrayBuffer.byteLength);
+            file.data = setting;
+
+            // Load remainder files by setting
+            LoadChildrenFiles(this, setting);
+        }
+    }
+
+    addToCache() {
+        if (this.isReadyToProcess()) {
+            var textureManager = this.loader.textureManager;
+            var data = { key: this.key };
+            for (var i = 0, cnt = this.files.length; i < cnt; i++) {
+                var file = this.files[i];
+
+                var fileData = file.data;
+                // Process textures
+                if (file.dataKey.startsWith('textures')) {
+                    var key = file.key.replace(`${this.key}!`, '');
+                    var texture;
+                    // Add image to textureManager manually
+                    if (!textureManager.exists(key)) {
+                        texture = textureManager.addImage(key, file.data);
+                        texture.source[0].setFlipY(false); // Default is flipY, disable this behavior
+                    } else {
+                        texture = textureManager.get(key);
+                    }
+
+                    // Store glTexture (WebGLTextureWrapper) to live2d data cache
+                    fileData = texture.source[0].glTexture;
+                }
+
+                SetValue(data, file.dataKey, fileData, '!!!');
+
+                file.pendingDestroy();
+            }
+
+            this.cache.add(this.key, data);
+
+            this.complete = true;
+        }
+    }
+}
+
+export default Live2dFile;

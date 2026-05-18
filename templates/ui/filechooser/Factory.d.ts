@@ -1,4 +1,4 @@
-import { FileChooser } from './FileChooser.js';
+import { FileChooser } from './FileChooser';
 
 export default function (
     config?: FileChooser.IConfig

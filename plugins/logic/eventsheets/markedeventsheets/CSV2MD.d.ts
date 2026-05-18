@@ -6,7 +6,7 @@ export default CSV2MD;
  * @param csvString - CSV source string.
  * @returns Marked text string.
  */
-declare function CSV2MD(csvString: string): string;
+declare function CSV2MD(csvString?: string): string;
 
 /**
  * Convert CSV to marked text with a title.

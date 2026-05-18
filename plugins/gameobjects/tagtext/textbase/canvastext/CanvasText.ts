@@ -1,0 +1,477 @@
+import DrawMethods from './DrawMethods';
+import PenManager from '../penmanger/PenManager';
+import HitAreaManager from '../hitareamanager/HitAreaManager';
+import SetInteractive from './SetInteractive';
+import GetHitArea from './GetHitArea';
+import CONST from '../../../textbase/const';
+import WrapText from '../wraptext/WrapText';
+import Clone from '../../../../utils/object/Clone';
+import MeasureText from '../../../textbase/textstyle/MeasureText';
+
+import { Utils as PhaserUtils } from 'phaser';
+const GetValue = PhaserUtils.Objects.GetValue;
+const NO_WRAP = CONST.NO_WRAP;
+const NO_NEWLINE = CONST.NO_NEWLINE;
+const RAW_NEWLINE = CONST.RAW_NEWLINE;
+const WRAPPED_NEWLINE = CONST.WRAPPED_NEWLINE;
+
+class CanvasText {
+    linesPool: any;
+    penManager: any;
+    pensPool: any;
+    wrapTextLinesPool: any;
+
+    _tmpPenManager: any;
+    autoRound: any;
+    canvas: any;
+    context: any;
+    defaultStyle: any;
+    hitAreaManager: any;
+    lastHitAreaKey: any;
+    parent: any;
+    parser: any;
+    scene: any;
+    urlTagCursorStyle: any;
+
+    constructor(config?: any) {
+        this.parent = config.parent;
+        this.scene = this.parent.scene;
+        this.context = GetValue(config, 'context', null);
+        this.canvas = this.context.canvas;
+        this.parser = GetValue(config, 'parser', null);
+        this.defaultStyle = GetValue(config, 'style', null);
+        this.autoRound = true;
+
+        this.pensPool = config.pensPool;                     // Required
+        this.linesPool = config.linesPool;                   // Required
+        this.wrapTextLinesPool = config.wrapTextLinesPool;   // Required
+
+        this.penManager = this.newPenManager();
+        this._tmpPenManager = null;
+
+        this.hitAreaManager = new HitAreaManager();
+        this.lastHitAreaKey = null;
+        this.urlTagCursorStyle = null;
+    }
+
+    destroy() {
+        this.parent = undefined;
+        this.scene = undefined;
+        this.context = undefined;
+        this.canvas = undefined;
+        this.parser = undefined;
+        this.defaultStyle = undefined;
+
+        if (this.penManager) {
+            this.penManager.destroy();
+            this.penManager = undefined;
+        }
+        if (this._tmpPenManager) {
+            this._tmpPenManager.destroy();
+            this._tmpPenManager = undefined;
+        }
+        if (this.hitAreaManager) {
+            this.hitAreaManager.destroy();
+            this.hitAreaManager = undefined;
+        }
+
+        this.pensPool = undefined;
+        this.linesPool = undefined;
+        this.wrapTextLinesPool = undefined;
+    }
+
+    updatePenManager(text?: any, wrapMode?: any, wrapWidth?: any, lineHeight?: any, penManager?: any) {
+        if (penManager === undefined) {
+            penManager = this.penManager;
+        }
+        penManager.clear();
+        if (text === "") {
+            return penManager;
+        }
+
+        var textStyle = this.parent.style;
+        if (textStyle.isWrapFitMode) {
+            var padding = this.parent.padding;
+            wrapWidth = textStyle.fixedWidth - padding.left - padding.right;
+        }
+
+        var canvas = this.canvas;
+        var context = this.context;
+
+        var cursorX = 0,
+            cursorY = 0;
+
+        var customTextWrapCallback = textStyle.wrapCallback,
+            customTextWrapCallbackScope = textStyle.wrapCallbackScope;
+        var isBuiltInWrappingMode = (!customTextWrapCallback);
+        var reuseLines = true;
+
+        var plainText, curProp, curStyle;
+        var match = this.parser.splitText(text),
+            result, wrapLines,
+            wrapTextLinesPool = this.wrapTextLinesPool;
+        for (var i = 0, len = match.length; i < len; i++) {
+            result = this.parser.tagTextToProp(match[i], curProp);
+            plainText = result.plainText;
+            curProp = result.prop;
+
+            if (curProp.img) { // Image tag
+                var cursor = this.addImagePen(
+                    curProp,
+                    cursorX, cursorY,
+                    wrapWidth, wrapMode, lineHeight,
+                    penManager
+                );
+                cursorX = cursor.x;
+                cursorY = cursor.y;
+
+            } else if (plainText !== '') {
+                // wrap text to lines
+                // Save the current context.
+                context.save();
+                curStyle = this.parser.propToContextStyle(this.defaultStyle, curProp);
+                curStyle.buildFont();
+                curStyle.syncFont(canvas, context);
+                curStyle.syncStyle(canvas, context);
+
+                var metrics = MeasureText(curStyle);
+
+                if (isBuiltInWrappingMode?: any) {
+                    wrapLines = WrapText(
+                        plainText,
+                        context,
+                        wrapMode, wrapWidth, curStyle.letterSpacing,
+                        cursorX,
+                        wrapTextLinesPool
+                    );
+
+                } else {
+                    // customTextWrapCallback
+                    wrapLines = customTextWrapCallback.call(customTextWrapCallbackScope,
+                        plainText,
+                        context,
+                        wrapWidth, curStyle.letterSpacing,
+                        cursorX
+                    );
+
+                    if (typeof (wrapLines) === 'string') {
+                        wrapLines = wrapLines.split('\n');
+                    }
+
+                    var segment;
+                    for (var j = 0, jLen = wrapLines.length; j < jLen; j++) {
+                        segment = wrapLines[j];
+                        if (typeof (segment) === 'string') {
+                            wrapLines[j] = wrapTextLinesPool.getLine(
+                                segment,
+                                context.measureText(segment).width,
+                                (j < (jLen - 1)) ? WRAPPED_NEWLINE : NO_NEWLINE
+                            );
+                        } else {
+                            reuseLines = false;
+                        }
+                    }
+                }  // customTextWrapCallback
+
+                // add pens
+                var segment;
+                for (var j = 0, jLen = wrapLines.length; j < jLen; j++) {
+                    segment = wrapLines[j];
+
+                    penManager.addTextPen(
+                        segment.text,
+                        cursorX, cursorY,
+                        segment.width,
+                        Clone(curProp),
+                        segment.newLineMode,
+                        metrics
+                    );
+
+                    if (segment.newLineMode !== NO_NEWLINE) {
+                        cursorX = 0;
+                        cursorY += lineHeight;
+
+                    } else {
+                        cursorX += segment.width;
+
+                    }
+
+                }
+
+                if (reuseLines?: any) {
+                    wrapTextLinesPool.freeLines(wrapLines);
+                }
+                wrapLines = null;
+
+                context.restore();
+
+            }
+
+        }
+
+        // Process last pen of each line
+        var lines = penManager.lines;
+        for (var i = 0, len = lines.length; i < len; i++) {
+            // Last pen of a line
+            var line = lines[i];
+            var pens = line.pens;
+            var lastPen = pens[pens.length - 1];
+            if (lastPen?: any) {
+                // Add strokeThinkness
+                lastPen.width += this.parser.getStrokeThinkness(this.defaultStyle, lastPen.prop);
+                // Remove letterSpacing
+                lastPen.width -= this.parser.getLetterSpacing(this.defaultStyle, lastPen.prop);
+            }
+        }
+
+        this.updateLineOffsets(lines, textStyle);
+
+        return penManager;
+    }
+
+    addImagePen(prop?: any, cursorX?: any, cursorY?: any, wrapWidth?: any, wrapMode?: any, lineHeight?: any, penManager?: any) {
+        var imgWidth = this.imageManager.getOuterWidth(prop.img);
+        var imgHeight = this.imageManager.getOuterHeight(prop.img);
+        var imgMetrics;
+        if (imgHeight > 0) {
+            var ascent = this.defaultStyle.metrics.ascent;
+            var descent = imgHeight - ascent;
+            if (descent < 0) {
+                descent = 0;
+            }
+            imgMetrics = {
+                ascent: ascent,
+                descent: descent,
+                height: ascent + descent
+            };
+        }
+        if ((wrapWidth > 0) && (wrapMode !== NO_WRAP)) {  // Wrap mode
+            if (wrapWidth < (cursorX + imgWidth)) {
+                penManager.addNewLinePen();
+                cursorY += lineHeight;
+                cursorX = 0;
+            }
+        }
+        penManager.addImagePen(cursorX, cursorY, imgWidth, Clone(prop), imgMetrics);
+        cursorX += imgWidth;
+
+        return {
+            x: cursorX,
+            y: cursorY
+        };
+    }
+
+    updateLineOffsets(lines?: any, textStyle?: any) {
+        var lineSpacing = textStyle.lineSpacing;
+        var defaultMetrics = this.defaultStyle.metrics;
+        var defaultAscent = defaultMetrics.ascent;
+        var defaultDescent = defaultMetrics.descent;
+        var offsetY = 0;
+        var fixedLineHeightMode = textStyle.fixedLineHeightMode;
+        for (var i = 0, len = lines.length; i < len; i++) {
+            var line = lines[i];
+            var lineAscent = line.maxAscent;
+            var lineDescent = line.maxDescent;
+            if (fixedLineHeightMode || (lineAscent === 0 && lineDescent === 0)) {
+                lineAscent = defaultAscent;
+                lineDescent = defaultDescent;
+            }
+            line.maxAscent = lineAscent;
+            line.maxDescent = lineDescent;
+            line.lineHeight = lineAscent + lineDescent;
+            line.startOffset = offsetY;
+            line.endOffset = offsetY + line.lineHeight;
+            var baselineOffset = offsetY + lineAscent - defaultAscent;
+            var pens = line.pens;
+            for (var penIdx = 0, penCnt = pens.length; penIdx < penCnt; penIdx++) {
+                pens[penIdx].y = baselineOffset;
+            }
+            offsetY = line.endOffset + lineSpacing;
+        }
+    }
+
+    get startXOffset() {
+        return this.defaultStyle.xOffset;
+    }
+
+    get startYOffset() {
+        return this.defaultStyle.metrics.ascent;
+    }
+
+    get lines() {
+        return this.penManager.lines;
+    }
+
+    get displayLinesCount() {
+        var linesCount = this.penManager.linesCount,
+            maxLines = this.defaultStyle.maxLines;
+        if ((maxLines > 0) && (linesCount > maxLines)) {
+            linesCount = maxLines;
+        }
+        return linesCount;
+    }
+
+    get linesWidth() {
+        return Math.ceil(this.penManager.getMaxLineWidth());
+    }
+
+    get linesHeight() {
+        var linesCount = this.displayLinesCount;
+        return this.getLinesHeight(0, linesCount);
+    }
+
+    getLineHeight(line?: any) {
+        var lineHeight = (line) ? line.lineHeight : 0;
+        if (lineHeight > 0) {
+            return lineHeight;
+        }
+        var metrics = this.defaultStyle.metrics;
+        return metrics.ascent + metrics.descent;
+    }
+
+    getLinesHeight(start?: any, end?: any) {
+        var lines = this.penManager.lines;
+        var linesCount = lines.length;
+        if (start === undefined) {
+            start = 0;
+        }
+        if (end === undefined || end > linesCount) {
+            end = linesCount;
+        }
+        if (end <= start) {
+            return 0;
+        }
+        var height = 0;
+        for (var i = start; i < end; i++) {
+            height += this.getLineHeight(lines[i]);
+        }
+        var count = end - start;
+        if (count > 1) {
+            height += this.defaultStyle.lineSpacing * (count - 1);
+        }
+        return height;
+    }
+
+    get imageManager() {
+        return this.parent.imageManager;
+    }
+
+    get rtl() {
+        return this.parent.style.rtl;
+    }
+
+    newPenManager() {
+        return new PenManager({
+            pensPool: this.pensPool,
+            linesPool: this.linesPool,
+            tagToText: this.parser.propToTagText,
+            tagToTextScope: this.parser
+        });
+    }
+
+    get tmpPenManager() {
+        if (this._tmpPenManager === null) {
+            this._tmpPenManager = this.newPenManager();
+        }
+        return this._tmpPenManager;
+    }
+
+    getPlainText(text?: any, start?: any, end?: any) {
+        var plainText;
+        if (text == null) {
+            plainText = this.penManager.plainText;
+        } else {
+            var m, match = this.parser.splitText(text, 1); // PLAINTEXTONLY_MODE
+            plainText = "";
+            for (var i = 0, len = match.length; i < len; i++) {
+                plainText += match[i];
+            }
+        }
+
+        if ((start != null) || (end != null)) {
+            if (start == null) {
+                start = 0;
+            }
+            if (end == null) {
+                end = plainText.length;
+            }
+            plainText = plainText.substring(start, end);
+        }
+
+        return plainText;
+    }
+
+    getPenManager(text?: any, retPenManager?: any) {
+        if (text === undefined) {
+            return this.copyPenManager(retPenManager, this.penManager);
+        }
+
+        if (retPenManager === undefined) {
+            retPenManager = this.newPenManager();
+        }
+
+        var defaultStyle = this.defaultStyle;
+        this.updatePenManager(
+            text,
+            defaultStyle.wrapMode,
+            defaultStyle.wrapWidth,
+            defaultStyle.lineHeight,
+            retPenManager
+        );
+        return retPenManager;
+    }
+
+    getText(text?: any, start?: any, end?: any, wrap?: any) {
+        if (text == null) {
+            return this.penManager.getSliceTagText(start, end, wrap);
+        }
+
+        var penManager = this.tmpPenManager;
+        var defaultStyle = this.defaultStyle;
+        this.updatePenManager(
+            text,
+            defaultStyle.wrapMode,
+            defaultStyle.wrapWidth,
+            defaultStyle.lineHeight,
+            penManager
+        );
+
+        return penManager.getSliceTagText(start, end, wrap);
+    }
+
+    copyPenManager(ret?: any, src?: any) {
+        if (src === undefined) {
+            src = this.penManager;
+        }
+        return src.copy(ret);
+    }
+
+    getTextWidth(penManager?: any) {
+        if (penManager === undefined) {
+            penManager = this.penManager;
+        }
+
+        return penManager.getMaxLineWidth();
+    }
+
+    getLastPen(penManager?: any) {
+        if (penManager === undefined) {
+            penManager = this.penManager;
+        }
+
+        return penManager.lastPen;
+    }
+};
+
+var methods = {
+    setInteractive: SetInteractive,
+    getHitArea: GetHitArea,
+}
+
+Object.assign(
+    CanvasText.prototype,
+    DrawMethods,
+    methods
+);
+
+export default CanvasText;

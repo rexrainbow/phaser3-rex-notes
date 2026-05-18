@@ -1,0 +1,73 @@
+import { Events as PhaserEvents } from 'phaser';
+const EventEmitter = PhaserEvents.EventEmitter;
+
+var MonitorViewport = function(viewport?: any) {
+    // Don't monitor properties again
+    if (viewport.events) {
+        return viewport;
+    }
+
+    var events = new EventEmitter();
+
+    var x = viewport.x;
+    Object.defineProperty(viewport, 'x', {
+        get: function() {
+            return x;
+        },
+
+        set: function(value?: any) {
+            if (x !== value) {
+                x = value;
+                events.emit('update', viewport);
+            }
+        },
+    });
+
+    var y = viewport.y;
+    Object.defineProperty(viewport, 'y', {
+        get: function() {
+            return y;
+        },
+
+        set: function(value?: any) {
+            if (y !== value) {
+                y = value;
+                events.emit('update', viewport);
+            }
+        },
+    });
+
+    var width = viewport.width;
+    Object.defineProperty(viewport, 'width', {
+        get: function() {
+            return width;
+        },
+
+        set: function(value?: any) {
+            if (width !== value) {
+                width = value;
+                events.emit('update', viewport);
+            }
+        },
+    });
+
+    var height = viewport.height;
+    Object.defineProperty(viewport, 'height', {
+        get: function() {
+            return height;
+        },
+
+        set: function(value?: any) {
+            if (height !== value) {
+                height = value;
+                events.emit('update', viewport);
+            }
+        },
+    });
+
+    viewport.events = events;
+
+    return viewport;
+}
+
+export default MonitorViewport;

@@ -1,0 +1,69 @@
+import Phaser from 'phaser';
+import BBCodeTextPlugin from '../../plugins/bbcodetext-plugin';
+import TextEditPlugin from '../../plugins/textedit-plugin';
+
+class Demo extends Phaser.Scene {
+    constructor() {
+        super({
+            key: 'examples'
+        })
+    }
+
+    preload() { }
+
+    create() {
+        var printText = this.add.rexBBCodeText(400, 300, '0', {
+            color: 'yellow',
+            fontSize: '24px',
+            fixedWidth: 200,
+            fixedHeight: 50,
+            backgroundColor: '#333333',
+            halign: 'right',
+            valign: 'center'
+        })
+            .setOrigin(0.5)
+            .setInteractive()
+            .on('pointerdown', function () {
+                var config = {
+                    type: 'number',
+                    onTextChanged: function (textObject, text) {
+                        textObject.text = text;
+                    }
+                }
+                this.plugins.get('rexTextEdit').edit(printText, config);
+            }, this);
+    }
+
+    update() { }
+}
+
+var config = {
+    type: Phaser.AUTO,
+    parent: 'phaser-example',
+    width: 800,
+    height: 600,
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+    },
+    dom: {
+        createContainer: true
+    },
+    scene: Demo,
+    plugins: {
+        global: [
+            {
+                key: 'BBCodeTextPlugin',
+                plugin: BBCodeTextPlugin,
+                start: true
+            },
+            {
+                key: 'rexTextEdit',
+                plugin: TextEditPlugin,
+                start: true
+            }
+        ]
+    }
+};
+
+var game = new Phaser.Game(config);

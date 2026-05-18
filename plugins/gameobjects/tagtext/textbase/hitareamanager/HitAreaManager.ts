@@ -1,0 +1,92 @@
+import Pool from '../../../../pool';
+
+import { Geom as PhaserGeom } from 'phaser';
+const Rectangle = PhaserGeom.Rectangle;
+
+var RectanglePool = new Pool();
+class HitAreaManager {
+    hitAreas: any;
+
+    constructor() {
+        this.hitAreas = [];
+    }
+
+    destroy() {
+        this.clear();
+    }
+
+    clear() {
+        // Reuse hitArea(rectangle) later
+        for (var i = 0, cnt = this.hitAreas.length; i < cnt; i++) {
+            this.hitAreas[i].data = null;
+        }
+        RectanglePool.pushMultiple(this.hitAreas);
+        return this;
+    }
+
+    add(x?: any, y?: any, width?: any, height?: any, data?: any) {
+        if (data === undefined) {
+            data = {};
+        }
+
+        var rectangle = RectanglePool.pop();
+        if (rectangle === null) {
+            rectangle = new Rectangle(x, y, width, height);
+        } else {
+            rectangle.setTo(x, y, width, height);
+        }
+
+        rectangle.data = data;
+
+        this.hitAreas.push(rectangle);
+        return this;
+    }
+
+    getFirst(x?: any, y?: any) {
+        for (var i = 0, cnt = this.hitAreas.length; i < cnt; i++) {
+            var hitArea = this.hitAreas[i];
+            if (hitArea.contains(x, y)) {
+                return hitArea;
+            }
+        }
+        return null;
+    }
+
+    getByKey(key?: any) {
+        for (var i = 0, cnt = this.hitAreas.length; i < cnt; i++) {
+            var hitArea = this.hitAreas[i];
+            if (hitArea.data.key === key) {
+                return hitArea;
+            }
+        }
+        return null;
+    }
+
+    drawBounds(graphics?: any, color?: any, parent?: any) {
+        if (color === undefined) {
+            color = 0xffffff;
+        }
+
+        if (parent?: any) {
+            graphics
+                .save()
+                .translateCanvas(parent.x, parent.y)
+                .rotateCanvas(parent.rotation)
+                .scaleCanvas(parent.scaleX, parent.scaleY)
+        }
+
+        for (var i = 0, cnt = this.hitAreas.length; i < cnt; i++) {
+            var hitArea = this.hitAreas[i];
+            graphics
+                .lineStyle(1, color)
+                .strokeRect(hitArea.x, hitArea.y, hitArea.width, hitArea.height);
+        }
+
+        if (parent?: any) {
+            graphics
+                .restore()
+        }
+        return this;
+    }
+}
+export default HitAreaManager;

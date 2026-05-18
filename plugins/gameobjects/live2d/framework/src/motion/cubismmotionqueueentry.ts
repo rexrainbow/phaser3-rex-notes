@@ -12,6 +12,22 @@ import { CubismMotionQueueEntryHandle } from './cubismmotionqueuemanager';
  * CubismMotionQueueManagerで再生している各モーションの管理クラス。
  */
 export class CubismMotionQueueEntry {
+    _autoDelete: any;
+    _available: any;
+    _endTimeSeconds: any;
+    _fadeInStartTimeSeconds: any;
+    _finished: any;
+    _lastEventCheckSeconds: any;
+    _motion: any;
+    _motionQueueEntryHandle: any;
+    _started: any;
+    _startTimeSeconds: any;
+    _stateTimeSeconds: any;
+    _stateWeight: any;
+
+    _fadeOutSeconds: any;
+    _isTriggeredFadeOut: any;
+
   /**
    * コンストラクタ
    */
