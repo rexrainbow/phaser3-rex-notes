@@ -23,9 +23,9 @@ class Demo extends Phaser.Scene {
             return points;
         };
 
-        var round0 = 0, round1 = 0, round2=0;
-        var txt = this.add.text(0,0, '');
-        var OnRoundUpdate = function() {
+        var round0 = 0, round1 = 0, round2 = 0;
+        var txt = this.add.text(0, 0, '');
+        var OnRoundUpdate = function () {
             txt.text = `${round0} , ${round1} , ${round2}`
         }
         OnRoundUpdate();
@@ -54,7 +54,8 @@ class Demo extends Phaser.Scene {
         var dot1 = this.add.circle(points1[0].x, points1[0].y, 16, 0xffcc00);
         dot1.moveTo = this.plugins.get('rexMoveTo').add(dot1, {
             speed: 350,
-            appendMode: true
+            appendMode: true,
+            continueAfterComplete: true
         });
         var queueDot1 = function () {
             for (var i = 1; i <= points1.length; i++) {
@@ -83,7 +84,7 @@ class Demo extends Phaser.Scene {
             dot2.moveTo.moveTo(next2.x, next2.y);
 
             if (index2 === 0) {
-                round2 +=1;
+                round2 += 1;
                 OnRoundUpdate();
             }
         });
