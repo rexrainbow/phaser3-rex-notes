@@ -10009,6 +10009,40 @@ var Methods$5 = {
     moveCloser: MoveCloser,
 };
 
+var RemainderDistanceBudgetMethods = {
+    getCurrentFrame() {
+        return (this.game && this.game.loop) ? this.game.loop.frame : undefined;
+    },
+
+    saveRemainderDistanceBudget(remainingDistanceBudget) {
+        if ((!this.continueAfterComplete) || (remainingDistanceBudget <= 0)) {
+            return;
+        }
+
+        var currentFrame = this.getCurrentFrame();
+        this._remainderFrame = currentFrame;
+        if (currentFrame === undefined) {
+            this._remainderDistanceBudget = 0;
+        } else {
+            this._remainderDistanceBudget = remainingDistanceBudget;
+        }
+
+    },
+
+    getRemainderDistanceBudget() {
+        if (this._remainderFrame !== this.getCurrentFrame()) {
+            this._remainderDistanceBudget = 0;
+        }
+
+        return this._remainderDistanceBudget;
+    },
+
+    clearRemainderDistanceBudget() {
+        this._remainderFrame = undefined;
+        this._remainderDistanceBudget = 0;
+    },
+};
+
 const DistanceBetween = Math$1.Distance.Between;
 const Lerp = Math$1.Linear;
 const AngleBetween = Math$1.Angle.Between;
@@ -10016,7 +10050,6 @@ const AngleBetween = Math$1.Angle.Between;
 const ArriveEpsilon = 0.0001;
 
 var MoveMethods = {
-
     shouldContinueAfterComplete() {
         if (
             (!this.continueAfterComplete) ||
@@ -10037,8 +10070,15 @@ var MoveMethods = {
         return (DistanceBetween(gameObject.x, gameObject.y, this.targetX, this.targetY) > ArriveEpsilon);
     },
 
+    consumeRemainderDistanceBudget() {
+        var remainingDistanceBudget = this.getRemainderDistanceBudget();
+        if (remainingDistanceBudget > 0) {
+            this.clearRemainderDistanceBudget();
+            this.consumeDistanceBudget(remainingDistanceBudget);
+        }
+    },
 
-    update(time, delta) {
+    consumeDistanceBudget(remainingDistanceBudget) {
         if ((!this.isRunning) || (!this.enable)) {
             return this;
         }
@@ -10053,12 +10093,9 @@ var MoveMethods = {
             return this;
         }
 
-        if ((this.speed === 0) || (delta === 0) || (this.timeScale === 0)) {
+        if ((this.speed === 0) || (remainingDistanceBudget <= 0) || (this.timeScale === 0)) {
             return this;
         }
-
-        var deltaSeconds = (delta * this.timeScale) / 1000;
-        var remainingDistanceBudget = this.speed * deltaSeconds;
 
         // Consume remainingDistanceBudget across multiple targets in the same tick
         while (remainingDistanceBudget > 0) {
@@ -10083,6 +10120,7 @@ var MoveMethods = {
                 if (this.shouldContinueAfterComplete()) {
                     continue;
                 }
+                this.saveRemainderDistanceBudget(remainingDistanceBudget);
                 return this;
             }
 
@@ -10124,10 +10162,27 @@ var MoveMethods = {
                 if (this.shouldContinueAfterComplete()) {
                     continue;
                 }
+                this.saveRemainderDistanceBudget(remainingDistanceBudget);
                 return this;
             }
 
         }
+
+    },
+
+    update(time, delta) {
+        if ((!this.isRunning) || (!this.enable)) {
+            return this;
+        }
+
+        if ((this.speed === 0) || (delta === 0) || (this.timeScale === 0)) {
+            return this;
+        }
+
+        var deltaSeconds = (delta * this.timeScale) / 1000;
+        var remainingDistanceBudget = this.speed * deltaSeconds;
+
+        this.consumeDistanceBudget(remainingDistanceBudget);
 
         return this;
     },
@@ -10155,7 +10210,8 @@ let MoveTo$2 = class MoveTo extends SceneUpdateTickTask {
         this.targetY = GetValue$4(o, 'targetY', null);
         this.appendMode = GetValue$4(o, 'appendMode', false);
         this.targets = GetValue$4(o, 'targets', []); // {x,y}[]
-        this.continueAfterComplete = GetValue$4(o, 'continueAfterComplete', false);
+        this.continueAfterComplete = GetValue$4(o, 'continueAfterComplete', this.appendMode);
+        this.clearRemainderDistanceBudget();
 
         return this;
     }
@@ -10256,6 +10312,8 @@ let MoveTo$2 = class MoveTo extends SceneUpdateTickTask {
         if (isNewTask) {
             this.start();
             this.emit('start', this.parent, this);
+
+            this.consumeRemainderDistanceBudget();
         }
 
         return this;
@@ -10309,6 +10367,7 @@ let MoveTo$2 = class MoveTo extends SceneUpdateTickTask {
     stop() {
         super.stop();
         this.clearTargets();
+        this.clearRemainderDistanceBudget();
         this.isCompleted = true;
         return this;
     }
@@ -10322,6 +10381,7 @@ let MoveTo$2 = class MoveTo extends SceneUpdateTickTask {
 
 Object.assign(
     MoveTo$2.prototype,
+    RemainderDistanceBudgetMethods,
     MoveMethods,
 );
 

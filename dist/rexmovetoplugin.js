@@ -380,6 +380,40 @@
         return (eventName === 'step') || (eventName === 'poststep');
     };
 
+    var RemainderDistanceBudgetMethods = {
+        getCurrentFrame() {
+            return (this.game && this.game.loop) ? this.game.loop.frame : undefined;
+        },
+
+        saveRemainderDistanceBudget(remainingDistanceBudget) {
+            if ((!this.continueAfterComplete) || (remainingDistanceBudget <= 0)) {
+                return;
+            }
+
+            var currentFrame = this.getCurrentFrame();
+            this._remainderFrame = currentFrame;
+            if (currentFrame === undefined) {
+                this._remainderDistanceBudget = 0;
+            } else {
+                this._remainderDistanceBudget = remainingDistanceBudget;
+            }
+
+        },
+
+        getRemainderDistanceBudget() {
+            if (this._remainderFrame !== this.getCurrentFrame()) {
+                this._remainderDistanceBudget = 0;
+            }
+
+            return this._remainderDistanceBudget;
+        },
+
+        clearRemainderDistanceBudget() {
+            this._remainderFrame = undefined;
+            this._remainderDistanceBudget = 0;
+        },
+    };
+
     const DistanceBetween = phaser.Math.Distance.Between;
     const Lerp = phaser.Math.Linear;
     const AngleBetween = phaser.Math.Angle.Between;
@@ -387,7 +421,6 @@
     const ArriveEpsilon = 0.0001;
 
     var MoveMethods = {
-
         shouldContinueAfterComplete() {
             if (
                 (!this.continueAfterComplete) ||
@@ -408,8 +441,15 @@
             return (DistanceBetween(gameObject.x, gameObject.y, this.targetX, this.targetY) > ArriveEpsilon);
         },
 
+        consumeRemainderDistanceBudget() {
+            var remainingDistanceBudget = this.getRemainderDistanceBudget();
+            if (remainingDistanceBudget > 0) {
+                this.clearRemainderDistanceBudget();
+                this.consumeDistanceBudget(remainingDistanceBudget);
+            }
+        },
 
-        update(time, delta) {
+        consumeDistanceBudget(remainingDistanceBudget) {
             if ((!this.isRunning) || (!this.enable)) {
                 return this;
             }
@@ -424,12 +464,9 @@
                 return this;
             }
 
-            if ((this.speed === 0) || (delta === 0) || (this.timeScale === 0)) {
+            if ((this.speed === 0) || (remainingDistanceBudget <= 0) || (this.timeScale === 0)) {
                 return this;
             }
-
-            var deltaSeconds = (delta * this.timeScale) / 1000;
-            var remainingDistanceBudget = this.speed * deltaSeconds;
 
             // Consume remainingDistanceBudget across multiple targets in the same tick
             while (remainingDistanceBudget > 0) {
@@ -454,6 +491,7 @@
                     if (this.shouldContinueAfterComplete()) {
                         continue;
                     }
+                    this.saveRemainderDistanceBudget(remainingDistanceBudget);
                     return this;
                 }
 
@@ -495,10 +533,27 @@
                     if (this.shouldContinueAfterComplete()) {
                         continue;
                     }
+                    this.saveRemainderDistanceBudget(remainingDistanceBudget);
                     return this;
                 }
 
             }
+
+        },
+
+        update(time, delta) {
+            if ((!this.isRunning) || (!this.enable)) {
+                return this;
+            }
+
+            if ((this.speed === 0) || (delta === 0) || (this.timeScale === 0)) {
+                return this;
+            }
+
+            var deltaSeconds = (delta * this.timeScale) / 1000;
+            var remainingDistanceBudget = this.speed * deltaSeconds;
+
+            this.consumeDistanceBudget(remainingDistanceBudget);
 
             return this;
         },
@@ -526,7 +581,8 @@
             this.targetY = GetValue(o, 'targetY', null);
             this.appendMode = GetValue(o, 'appendMode', false);
             this.targets = GetValue(o, 'targets', []); // {x,y}[]
-            this.continueAfterComplete = GetValue(o, 'continueAfterComplete', false);
+            this.continueAfterComplete = GetValue(o, 'continueAfterComplete', this.appendMode);
+            this.clearRemainderDistanceBudget();
 
             return this;
         }
@@ -627,6 +683,8 @@
             if (isNewTask) {
                 this.start();
                 this.emit('start', this.parent, this);
+
+                this.consumeRemainderDistanceBudget();
             }
 
             return this;
@@ -680,6 +738,7 @@
         stop() {
             super.stop();
             this.clearTargets();
+            this.clearRemainderDistanceBudget();
             this.isCompleted = true;
             return this;
         }
@@ -693,6 +752,7 @@
 
     Object.assign(
         MoveTo.prototype,
+        RemainderDistanceBudgetMethods,
         MoveMethods,
     );
 
