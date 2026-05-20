@@ -55,7 +55,6 @@ class Demo extends Phaser.Scene {
         dot1.moveTo = this.plugins.get('rexMoveTo').add(dot1, {
             speed: 350,
             appendMode: true,
-            continueAfterComplete: true
         });
         var queueDot1 = function () {
             for (var i = 1; i <= points1.length; i++) {

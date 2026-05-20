@@ -1,7 +1,9 @@
 import { Utils as PhaserUtils } from 'phaser';
 
 import TickTask from '../../utils/componentbase/SceneUpdateTickTask.js';
+import RemainderDistanceBudgetMethods from './RemainderDistanceBudgetMethods.js';
 import MoveMethods from './MoveMethods.js';
+
 
 const GetValue = PhaserUtils.Objects.GetValue;
 
@@ -25,7 +27,8 @@ class MoveTo extends TickTask {
         this.targetY = GetValue(o, 'targetY', null);
         this.appendMode = GetValue(o, 'appendMode', false);
         this.targets = GetValue(o, 'targets', []); // {x,y}[]
-        this.continueAfterComplete = GetValue(o, 'continueAfterComplete', false);
+        this.continueAfterComplete = GetValue(o, 'continueAfterComplete', this.appendMode);
+        this.clearRemainderDistanceBudget();
 
         return this;
     }
@@ -128,6 +131,8 @@ class MoveTo extends TickTask {
         if (isNewTask) {
             this.start();
             this.emit('start', this.parent, this);
+
+            this.consumeRemainderDistanceBudget();
         }
 
         return this;
@@ -181,6 +186,7 @@ class MoveTo extends TickTask {
     stop() {
         super.stop();
         this.clearTargets();
+        this.clearRemainderDistanceBudget();
         this.isCompleted = true;
         return this;
     }
@@ -194,6 +200,7 @@ class MoveTo extends TickTask {
 
 Object.assign(
     MoveTo.prototype,
+    RemainderDistanceBudgetMethods,
     MoveMethods,
 )
 

@@ -27,7 +27,6 @@ module.exports = {
     },
     devServer: {
         host: process.env.IP || 'localhost',
-        port: process.env.PORT || 3000,
         static: [
             {
                 directory: path.resolve(__dirname, '.'),

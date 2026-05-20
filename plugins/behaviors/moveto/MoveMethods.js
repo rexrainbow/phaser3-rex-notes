@@ -7,7 +7,6 @@ const AngleBetween = PhaserMath.Angle.Between;
 const ArriveEpsilon = 0.0001;
 
 export default {
-
     shouldContinueAfterComplete() {
         if (
             (!this.continueAfterComplete) ||
@@ -28,8 +27,15 @@ export default {
         return (DistanceBetween(gameObject.x, gameObject.y, this.targetX, this.targetY) > ArriveEpsilon);
     },
 
+    consumeRemainderDistanceBudget() {
+        var remainingDistanceBudget = this.getRemainderDistanceBudget();
+        if (remainingDistanceBudget > 0) {
+            this.clearRemainderDistanceBudget();
+            this.consumeDistanceBudget(remainingDistanceBudget);
+        }
+    },
 
-    update(time, delta) {
+    consumeDistanceBudget(remainingDistanceBudget) {
         if ((!this.isRunning) || (!this.enable)) {
             return this;
         }
@@ -44,12 +50,9 @@ export default {
             return this;
         }
 
-        if ((this.speed === 0) || (delta === 0) || (this.timeScale === 0)) {
+        if ((this.speed === 0) || (remainingDistanceBudget <= 0) || (this.timeScale === 0)) {
             return this;
         }
-
-        var deltaSeconds = (delta * this.timeScale) / 1000;
-        var remainingDistanceBudget = this.speed * deltaSeconds;
 
         // Consume remainingDistanceBudget across multiple targets in the same tick
         while (remainingDistanceBudget > 0) {
@@ -74,6 +77,7 @@ export default {
                 if (this.shouldContinueAfterComplete()) {
                     continue;
                 }
+                this.saveRemainderDistanceBudget(remainingDistanceBudget);
                 return this;
             }
 
@@ -115,10 +119,27 @@ export default {
                 if (this.shouldContinueAfterComplete()) {
                     continue;
                 }
+                this.saveRemainderDistanceBudget(remainingDistanceBudget);
                 return this;
             }
 
         }
+
+    },
+
+    update(time, delta) {
+        if ((!this.isRunning) || (!this.enable)) {
+            return this;
+        }
+
+        if ((this.speed === 0) || (delta === 0) || (this.timeScale === 0)) {
+            return this;
+        }
+
+        var deltaSeconds = (delta * this.timeScale) / 1000;
+        var remainingDistanceBudget = this.speed * deltaSeconds;
+
+        this.consumeDistanceBudget(remainingDistanceBudget);
 
         return this;
     },
