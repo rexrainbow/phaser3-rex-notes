@@ -13,16 +13,40 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var text = this.add.rexBBCodeText(100, 30, `AB[img=close]CD`, {
+        var s = `\
+AA[img=iconA][img=iconB]BB
+CC[img=iconC][img=iconD]DD\
+`
+        var text = this.add.rexBBCodeText(100, 30, s, {
             backgroundColor: '#555',
             fontSize: 20,
-            padding: { left: 0, right: 0, top: 20, bottom: 0 },
+            padding: { left: 0, right: 0, top: 0, bottom: 0 },
             images: {
-                close: {
+                iconA: {
+                    key: 'icons',
+                    frame: 'add',
+                    width: 20,
+                    y: -1
+                },
+                iconB: {
+                    key: 'icons',
+                    frame: 'arrow-down',
+                    width: 20,
+                    y: -1
+                },
+                iconC: {
                     key: 'icons',
                     frame: 'close',
-                    y:-12
-                }
+                    width: 20,
+                    y: -1
+                },
+                iconD: {
+                    key: 'icons',
+                    frame: 'info',
+                    width: 20,
+                    y: -1
+                },
+
             }
         })
     }
