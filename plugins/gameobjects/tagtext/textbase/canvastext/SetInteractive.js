@@ -63,9 +63,15 @@ var OnAreaUp = function (pointer, localX, localY, event) {
 var OnAreaOverOut = function (pointer, localX, localY, event) {
     if (localX === null) {  // Case of pointerout
         if (this.lastHitAreaKey !== null) {
+            var area = this.hitAreaManager.getByKey(this.lastHitAreaKey);
+            var hasCursorStyle = area && area.data && this.hitAreaCursorStyle.has(area.data);
+
             FireEvent.call(this, 'areaout', this.lastHitAreaKey, pointer, localX, localY, event);
 
-            var area = this.hitAreaManager.getByKey(this.lastHitAreaKey);
+            if (hasCursorStyle) {
+                SetCursorStyle(this.scene, '');
+            }
+
             if (area && area.data) {
                 area.data.isDown = false;
             }
@@ -82,15 +88,16 @@ var OnAreaOverOut = function (pointer, localX, localY, event) {
     }
 
     if (this.lastHitAreaKey !== null) {
+        var prevHitArea = this.hitAreaManager.getByKey(this.lastHitAreaKey);
+        var prevHasCursorStyle = prevHitArea && prevHitArea.data && this.hitAreaCursorStyle.has(prevHitArea.data);
+
         FireEvent.call(this, 'areaout', this.lastHitAreaKey, pointer, localX, localY, event);
 
-        var prevHitArea = this.hitAreaManager.getByKey(this.lastHitAreaKey);
+        if (prevHasCursorStyle) {
+            SetCursorStyle(this.scene, '');
+        }
 
-        if (prevHitArea) {
-            if (this.urlTagCursorStyle) {
-                SetCursorStyle(this.scene, prevHitArea, '');
-            }
-
+        if (prevHitArea && prevHitArea.data) {
             prevHitArea.data.isDown = false;
         }
     }
@@ -98,8 +105,8 @@ var OnAreaOverOut = function (pointer, localX, localY, event) {
         FireEvent.call(this, 'areaover', key, pointer, localX, localY, event);
 
         if (area.data) {
-            if (this.urlTagCursorStyle) {
-                SetCursorStyle(this.scene, area, this.urlTagCursorStyle);
+            if (this.hitAreaCursorStyle.has(area.data)) {
+                SetCursorStyle(this.scene, this.hitAreaCursorStyle.get(area.data));
             }
         }
     }
@@ -112,11 +119,7 @@ var FireEvent = function (eventName, key, pointer, localX, localY, event) {
     this.parent.emit(eventName, key, pointer, localX, localY, event);
 }
 
-var SetCursorStyle = function (scene, area, cursorStyle) {
-    if (!area || !area.data || !area.data.url) {
-        return;
-    }
-
+var SetCursorStyle = function (scene, cursorStyle) {
     scene.input.manager.canvas.style.cursor = cursorStyle;
 }
 

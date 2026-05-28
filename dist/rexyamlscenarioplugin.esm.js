@@ -44507,6 +44507,63 @@ class HitAreaManager {
     }
 }
 
+const HasOwn = Object.prototype.hasOwnProperty;
+
+class HitAreaCursorStyle {
+    constructor() {
+        this.url = null;
+        this.tags = {};
+        this.default = null;
+    }
+
+    destroy() {
+        this.tags = undefined;
+    }
+
+    setURL(cursorStyle) {
+        this.url = cursorStyle;
+        return this;
+    }
+
+    setTag(key, cursorStyle) {
+        this.tags[key] = cursorStyle;
+        return this;
+    }
+
+    setDefault(cursorStyle) {
+        this.default = cursorStyle;
+        return this;
+    }
+
+    has(data) {
+        if (!data) {
+            return false;
+        }
+
+        return !!(
+            (this.url && data.url) ||
+            HasOwn.call(this.tags, data.key) ||
+            !!this.default
+        );
+    }
+
+    get(data) {
+        if (!data) {
+            return null;
+        }
+
+        if (this.url && data.url) {
+            return this.url;
+        } else if (HasOwn.call(this.tags, data.key)) {
+            return this.tags[data.key];
+        } else if (this.default) {
+            return this.default;
+        } else {
+            return null;
+        }
+    }
+}
+
 var SetInteractive = function () {
     this.parent
 
@@ -44572,9 +44629,15 @@ var OnAreaUp = function (pointer, localX, localY, event) {
 var OnAreaOverOut = function (pointer, localX, localY, event) {
     if (localX === null) {  // Case of pointerout
         if (this.lastHitAreaKey !== null) {
+            var area = this.hitAreaManager.getByKey(this.lastHitAreaKey);
+            var hasCursorStyle = area && area.data && this.hitAreaCursorStyle.has(area.data);
+
             FireEvent$1.call(this, 'areaout', this.lastHitAreaKey, pointer, localX, localY, event);
 
-            var area = this.hitAreaManager.getByKey(this.lastHitAreaKey);
+            if (hasCursorStyle) {
+                SetCursorStyle(this.scene, '');
+            }
+
             if (area && area.data) {
                 area.data.isDown = false;
             }
@@ -44591,15 +44654,16 @@ var OnAreaOverOut = function (pointer, localX, localY, event) {
     }
 
     if (this.lastHitAreaKey !== null) {
+        var prevHitArea = this.hitAreaManager.getByKey(this.lastHitAreaKey);
+        var prevHasCursorStyle = prevHitArea && prevHitArea.data && this.hitAreaCursorStyle.has(prevHitArea.data);
+
         FireEvent$1.call(this, 'areaout', this.lastHitAreaKey, pointer, localX, localY, event);
 
-        var prevHitArea = this.hitAreaManager.getByKey(this.lastHitAreaKey);
+        if (prevHasCursorStyle) {
+            SetCursorStyle(this.scene, '');
+        }
 
-        if (prevHitArea) {
-            if (this.urlTagCursorStyle) {
-                SetCursorStyle(this.scene, prevHitArea, '');
-            }
-
+        if (prevHitArea && prevHitArea.data) {
             prevHitArea.data.isDown = false;
         }
     }
@@ -44607,8 +44671,8 @@ var OnAreaOverOut = function (pointer, localX, localY, event) {
         FireEvent$1.call(this, 'areaover', key, pointer, localX, localY, event);
 
         if (area.data) {
-            if (this.urlTagCursorStyle) {
-                SetCursorStyle(this.scene, area, this.urlTagCursorStyle);
+            if (this.hitAreaCursorStyle.has(area.data)) {
+                SetCursorStyle(this.scene, this.hitAreaCursorStyle.get(area.data));
             }
         }
     }
@@ -44621,11 +44685,7 @@ var FireEvent$1 = function (eventName, key, pointer, localX, localY, event) {
     this.parent.emit(eventName, key, pointer, localX, localY, event);
 };
 
-var SetCursorStyle = function (scene, area, cursorStyle) {
-    if (!area || !area.data || !area.data.url) {
-        return;
-    }
-
+var SetCursorStyle = function (scene, cursorStyle) {
     scene.input.manager.canvas.style.cursor = cursorStyle;
 };
 
@@ -44890,8 +44950,8 @@ class CanvasText {
         this._tmpPenManager = null;
 
         this.hitAreaManager = new HitAreaManager();
+        this.hitAreaCursorStyle = new HitAreaCursorStyle();
         this.lastHitAreaKey = null;
-        this.urlTagCursorStyle = null;
     }
 
     destroy() {
@@ -44913,6 +44973,10 @@ class CanvasText {
         if (this.hitAreaManager) {
             this.hitAreaManager.destroy();
             this.hitAreaManager = undefined;
+        }
+        if (this.hitAreaCursorStyle) {
+            this.hitAreaCursorStyle.destroy();
+            this.hitAreaCursorStyle = undefined;
         }
 
         this.pensPool = undefined;
@@ -45301,6 +45365,30 @@ class CanvasText {
 
         return penManager.lastPen;
     }
+
+    get urlTagCursorStyle() {
+        return this.hitAreaCursorStyle.url;
+    }
+
+    set urlTagCursorStyle(value) {
+        this.hitAreaCursorStyle.setURL(value);
+    }
+
+    get hitAreaTagsCursorStyle() {
+        return this.hitAreaCursorStyle.tags;
+    }
+
+    set hitAreaTagsCursorStyle(value) {
+        this.hitAreaCursorStyle.tags = value;
+    }
+
+    get defaultHitAreaTagCursorStyle() {
+        return this.hitAreaCursorStyle.default;
+    }
+
+    set defaultHitAreaTagCursorStyle(value) {
+        this.hitAreaCursorStyle.setDefault(value);
+    }
 }
 var methods$o = {
     setInteractive: SetInteractive,
@@ -45657,7 +45745,7 @@ class Text extends TextBase {
 
         this.setText(text);
 
-        this.setUrlTagCursorStyle(GetValue$2l(style, 'urlTagCursorStyle', 'pointer'));
+        this.setUrlTagCursor(GetValue$2l(style, 'urlTagCursorStyle', 'pointer'));
 
         if (GetValue$2l(style, 'interactive', false)) {
             this.setInteractive();
@@ -46030,17 +46118,27 @@ class Text extends TextBase {
         return this;
     }
 
-    setUrlTagCursorStyle(cursor) {
-        this.urlTagCursorStyle = cursor;
+    setUrlTagCursor(cursorStyle) {
+        this.urlTagCursor = cursorStyle;
         return this;
     }
 
-    get urlTagCursorStyle() {
+    get urlTagCursor() {
         return this.canvasText.urlTagCursorStyle;
     }
 
-    set urlTagCursorStyle(value) {
-        this.canvasText.urlTagCursorStyle = value;
+    set urlTagCursor(value) {
+        this.canvasText.hitAreaCursorStyle.setURL(value);
+    }
+
+    setHitAreaCursor(key, cursorStyle) {
+        this.canvasText.hitAreaCursorStyle.setTag(key, cursorStyle);
+        return this;
+    }
+
+    setDefaultHitAreaCursor(cursorStyle) {
+        this.canvasText.hitAreaCursorStyle.setDefault(cursorStyle);
+        return this;
     }
 
     getWrappedText(text, start, end) {

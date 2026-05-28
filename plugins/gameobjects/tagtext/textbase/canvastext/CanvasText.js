@@ -1,6 +1,7 @@
 import DrawMethods from './DrawMethods.js';
 import PenManager from '../penmanger/PenManager.js';
 import HitAreaManager from '../hitareamanager/HitAreaManager.js';
+import HitAreaCursorStyle from './HitAreaCursorStyle.js';
 import SetInteractive from './SetInteractive.js';
 import GetHitArea from './GetHitArea.js';
 import CONST from '../../../textbase/const.js';
@@ -33,8 +34,8 @@ class CanvasText {
         this._tmpPenManager = null;
 
         this.hitAreaManager = new HitAreaManager();
+        this.hitAreaCursorStyle = new HitAreaCursorStyle();
         this.lastHitAreaKey = null;
-        this.urlTagCursorStyle = null;
     }
 
     destroy() {
@@ -56,6 +57,10 @@ class CanvasText {
         if (this.hitAreaManager) {
             this.hitAreaManager.destroy();
             this.hitAreaManager = undefined;
+        }
+        if (this.hitAreaCursorStyle) {
+            this.hitAreaCursorStyle.destroy();
+            this.hitAreaCursorStyle = undefined;
         }
 
         this.pensPool = undefined;
@@ -443,6 +448,30 @@ class CanvasText {
         }
 
         return penManager.lastPen;
+    }
+
+    get urlTagCursorStyle() {
+        return this.hitAreaCursorStyle.url;
+    }
+
+    set urlTagCursorStyle(value) {
+        this.hitAreaCursorStyle.setURL(value);
+    }
+
+    get hitAreaTagsCursorStyle() {
+        return this.hitAreaCursorStyle.tags;
+    }
+
+    set hitAreaTagsCursorStyle(value) {
+        this.hitAreaCursorStyle.tags = value;
+    }
+
+    get defaultHitAreaTagCursorStyle() {
+        return this.hitAreaCursorStyle.default;
+    }
+
+    set defaultHitAreaTagCursorStyle(value) {
+        this.hitAreaCursorStyle.setDefault(value);
     }
 };
 

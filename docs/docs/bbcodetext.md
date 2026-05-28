@@ -849,6 +849,20 @@ txt.setDelimiters(delimiterLeft, delimiterRight); // '<', '>'
     ```
     - Invoke `setRTL` method before setting new content.
 
+### Cursor style
+
+Set cursor of hit-area:
+
+- `txt.setUrlTagCursor(cursorStyle)`
+- `txt.setHitAreaCursor(key, cursorStyle)`
+- `txt.setDefaultHitAreaCursor(cursorStyle)`
+
+Priority:
+
+1. Check url cursor stle
+2. Check hit area cursor style by tag
+3. Use default cursor style
+
 ### Other properties
 
 See [game object](gameobject.md)

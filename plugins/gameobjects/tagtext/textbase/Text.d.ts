@@ -941,6 +941,21 @@ declare class Text extends CanvasGameObjectBase {
     urlTagCursor: string;
 
     /**
+     * Set cursor for a hit area tag.
+     * @param key - Hit area key.
+     * @param cursorStyle - Cursor style.
+     * @returns This instance.
+     */
+    setHitAreaCursor(key: string, cursorStyle?: string): this;
+
+    /**
+     * Set default cursor for hit area tags.
+     * @param cursorStyle - Cursor style.
+     * @returns This instance.
+     */
+    setDefaultHitAreaCursor(cursorStyle?: string): this;
+
+    /**
      * Get hit area key from world coordinates.
      * @param worldX - World x.
      * @param worldY - World y.

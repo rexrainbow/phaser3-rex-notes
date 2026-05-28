@@ -37,6 +37,8 @@ class Demo extends Phaser.Scene {
 
             interactive: true
         })
+            .setHitAreaCursor('KEY', 'help')
+            .setDefaultHitAreaCursor('wait')
             .drawAreaBounds(this.add.graphics(), 0xff0000)
 
         var scene = this;

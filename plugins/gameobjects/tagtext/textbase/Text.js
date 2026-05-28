@@ -167,7 +167,7 @@ class Text extends TextBase {
 
         this.setText(text);
 
-        this.setUrlTagCursorStyle(GetValue(style, 'urlTagCursorStyle', 'pointer'));
+        this.setUrlTagCursor(GetValue(style, 'urlTagCursorStyle', 'pointer'));
 
         if (GetValue(style, 'interactive', false)) {
             this.setInteractive();
@@ -540,17 +540,27 @@ class Text extends TextBase {
         return this;
     }
 
-    setUrlTagCursorStyle(cursor) {
-        this.urlTagCursorStyle = cursor;
+    setUrlTagCursor(cursorStyle) {
+        this.urlTagCursor = cursorStyle;
         return this;
     }
 
-    get urlTagCursorStyle() {
+    get urlTagCursor() {
         return this.canvasText.urlTagCursorStyle;
     }
 
-    set urlTagCursorStyle(value) {
-        this.canvasText.urlTagCursorStyle = value;
+    set urlTagCursor(value) {
+        this.canvasText.hitAreaCursorStyle.setURL(value);
+    }
+
+    setHitAreaCursor(key, cursorStyle) {
+        this.canvasText.hitAreaCursorStyle.setTag(key, cursorStyle);
+        return this;
+    }
+
+    setDefaultHitAreaCursor(cursorStyle) {
+        this.canvasText.hitAreaCursorStyle.setDefault(cursorStyle);
+        return this;
     }
 
     getWrappedText(text, start, end) {
