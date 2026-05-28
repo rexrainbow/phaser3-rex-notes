@@ -19,7 +19,9 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 - [Font family](https://codepen.io/rexrainbow/pen/wvVzydL)
 - [Measure margin of text](https://codepen.io/rexrainbow/pen/eYEOYzX)
 - [Generate texture](https://codepen.io/rexrainbow/pen/vYJQrrX)
-- [Image height](https://codepen.io/rexrainbow/pen/yLKNVaW)
+- Image
+    - [Image height](https://codepen.io/rexrainbow/pen/yLKNVaW)
+    - [Altas image](https://codepen.io/rexrainbow/pen/WboXExX)
 - [RTL](https://codepen.io/rexrainbow/pen/eYRvPbY)
 
 ## Usage
@@ -147,7 +149,6 @@ Default style
 {
     fontFamily: 'Courier',
     fontSize: '16px',
-    fontStyle: '',
     backgroundColor: null,  // null, css string, or number
     backgroundColor2: null,  // null, css string, or number
     backgroundHorizontalGradient: true,
@@ -406,7 +407,7 @@ var txt = scene.make.rexBBCodeText({
 
 ```javascript
 txt.setStyle(style);
-txt.setFont(font);  // font: {fontFamily, fontSize, fontStyle}
+txt.setFont(font);  // font: {fontFamily, fontSize}
 txt.setFontFamily(family);
 txt.setFontSize(size);
 txt.setFontStyle(style);
