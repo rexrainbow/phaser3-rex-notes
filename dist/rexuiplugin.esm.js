@@ -69496,6 +69496,7 @@ Class.mixin(Image$4,
         Components$1.BlendMode,
         Components$1.Depth,
         Components$1.Flip,
+        Components$1.Lighting,
         Components$1.Mask,
         Components$1.Origin,
         Components$1.RenderNodes,
@@ -69510,8 +69511,64 @@ Class.mixin(Image$4,
 const GetCalcMatrix = GameObjects.GetCalcMatrix;
 
 var renderOptions = {
-    multiTexturing: false,
+    multiTexturing: true,
+    lighting: null,
     smoothPixelArt: false
+};
+
+var lightingOptions = {
+    normalGLTexture: null,
+    normalMapRotation: 0,
+    selfShadow: {
+        enabled: false,
+        penumbra: 0,
+        diffuseFlatThreshold: 0
+    }
+};
+
+var SetRenderOptions = function (renderer, src) {
+    var srcTexture = src.texture;
+    var sourceIndex = src.frame.sourceIndex;
+
+    if (src.lighting) {
+        var normalMap = srcTexture.dataSource[sourceIndex];
+        if (!normalMap) {
+            normalMap = renderer.normalTexture;
+        } else {
+            normalMap = normalMap.glTexture;
+        }
+
+        var normalMapRotation = src.rotation;
+        if (src.parentContainer) {
+            normalMapRotation = src.getWorldTransformMatrix().rotationNormalized;
+        }
+
+        var selfShadow = src.selfShadow;
+        var selfShadowEnabled = selfShadow.enabled;
+        if (selfShadowEnabled === null) {
+            selfShadowEnabled = src.scene.sys.game.config.selfShadow;
+        }
+
+        lightingOptions.normalGLTexture = normalMap;
+        lightingOptions.normalMapRotation = normalMapRotation;
+        lightingOptions.selfShadow.enabled = selfShadowEnabled;
+        lightingOptions.selfShadow.penumbra = selfShadow.penumbra;
+        lightingOptions.selfShadow.diffuseFlatThreshold = selfShadow.diffuseFlatThreshold;
+
+        renderOptions.lighting = lightingOptions;
+    } else {
+        renderOptions.lighting = null;
+    }
+
+    // Get smooth pixel art option.
+    var smoothPixelArt;
+    if (srcTexture && srcTexture.smoothPixelArt !== null) {
+        smoothPixelArt = srcTexture.smoothPixelArt;
+    }
+    else {
+        smoothPixelArt = src.scene.sys.game.config.smoothPixelArt;
+    }
+    renderOptions.smoothPixelArt = smoothPixelArt;
 };
 
 var WebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
@@ -69528,22 +69585,13 @@ var WebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
         src.updateBuffers();
     }
 
-    // Get smooth pixel art option.
-    var smoothPixelArt;
-    var srcTexture = src.texture;
-    if (srcTexture && srcTexture.smoothPixelArt !== null) {
-        smoothPixelArt = srcTexture.smoothPixelArt;
-    }
-    else {
-        smoothPixelArt = src.scene.sys.game.config.smoothPixelArt;
-    }
-    renderOptions.smoothPixelArt = smoothPixelArt;
+    SetRenderOptions(renderer, src);
 
     (src.customRenderNodes.BatchHandler || src.defaultRenderNodes.BatchHandler).batchTriangles(
         drawingContext,
         src,
         calcMatrix,
-        src.texture.source[0].glTexture,
+        src.frame.source.glTexture,
         src.vertexBuffer,
         src.uvBuffer,
         src.colorBuffer,
@@ -70667,10 +70715,15 @@ Object.assign(
 const ShaderSourceFS = Renderer$1.WebGL.Shaders.MultiFrag;
 const ShaderSourceVS = Renderer$1.WebGL.Shaders.MultiVert;
 const ShaderAdditionMakers = Renderer$1.WebGL.ShaderAdditionMakers;
+const MakeApplyLighting = ShaderAdditionMakers.MakeApplyLighting;
 const MakeApplyTint = ShaderAdditionMakers.MakeApplyTint;
+const MakeDefineLights = ShaderAdditionMakers.MakeDefineLights;
 const MakeDefineTexCount = ShaderAdditionMakers.MakeDefineTexCount;
+const MakeGetNormalFromMap = ShaderAdditionMakers.MakeGetNormalFromMap;
 const MakeGetTexCoordOut = ShaderAdditionMakers.MakeGetTexCoordOut;
 const MakeGetTexRes = ShaderAdditionMakers.MakeGetTexRes;
+const MakeOutInverseRotation = ShaderAdditionMakers.MakeOutInverseRotation;
+const MakeRotationDatum = ShaderAdditionMakers.MakeRotationDatum;
 const MakeSmoothPixelArt = ShaderAdditionMakers.MakeSmoothPixelArt;
 const MakeGetTexture = ShaderAdditionMakers.MakeGetTexture;
 const Utils = Renderer$1.WebGL.Utils;
@@ -70680,7 +70733,7 @@ const getTint = Utils.getTintAppendFloatAlpha;
 class BatchHandlerTriangles extends BatchHandlerQuad {
     constructor(manager, config) {
         super(manager, config);
-        // We do not expect to use extra textures.
+        // Match the default render option used by rex mesh images.
         this.renderOptions.multiTexturing = true;
     }
 
@@ -70741,7 +70794,7 @@ class BatchHandlerTriangles extends BatchHandlerQuad {
         }
 
         // Process textures and get relevant data.
-        var textureDatum = this.batchTextures(glTexture);
+        var textureDatum = this.batchTextures(glTexture, renderOptions);
 
         // Update the vertex buffer.
         var vertexOffset32 = this.instanceCount * this.floatsPerInstance;
@@ -70819,7 +70872,12 @@ BatchHandlerTriangles.prototype.defaultConfig = {
         MakeSmoothPixelArt(true),
         MakeDefineTexCount(1),
         MakeGetTexture(),
-        MakeApplyTint()
+        MakeApplyTint(),
+        MakeDefineLights(true),
+        MakeRotationDatum(true),
+        MakeOutInverseRotation(true),
+        MakeGetNormalFromMap(true),
+        MakeApplyLighting(true)
     ],
     vertexBufferLayout: {
         usage: 'DYNAMIC_DRAW',
