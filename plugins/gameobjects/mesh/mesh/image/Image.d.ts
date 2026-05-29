@@ -289,4 +289,17 @@ declare class Mesh extends Phaser.GameObjects.GameObject {
     scrollFactorY: number;
     setScrollFactor(x: number, y?: number): this;
 
+    lighting: boolean;
+    selfShadow: {
+        enabled: boolean | null;
+        penumbra: number;
+        diffuseFlatThreshold: number;
+    };
+    setLighting(enable: boolean): this;
+    setSelfShadow(
+        enabled?: boolean | null,
+        penumbra?: number,
+        diffuseFlatThreshold?: number
+    ): this;
+
 }

@@ -2,10 +2,15 @@ import { Renderer as PhaserRenderer } from 'phaser';
 const ShaderSourceFS = PhaserRenderer.WebGL.Shaders.MultiFrag
 const ShaderSourceVS = PhaserRenderer.WebGL.Shaders.MultiVert;
 const ShaderAdditionMakers = PhaserRenderer.WebGL.ShaderAdditionMakers;
+const MakeApplyLighting = ShaderAdditionMakers.MakeApplyLighting;
 const MakeApplyTint = ShaderAdditionMakers.MakeApplyTint;
+const MakeDefineLights = ShaderAdditionMakers.MakeDefineLights;
 const MakeDefineTexCount = ShaderAdditionMakers.MakeDefineTexCount;
+const MakeGetNormalFromMap = ShaderAdditionMakers.MakeGetNormalFromMap;
 const MakeGetTexCoordOut = ShaderAdditionMakers.MakeGetTexCoordOut;
 const MakeGetTexRes = ShaderAdditionMakers.MakeGetTexRes;
+const MakeOutInverseRotation = ShaderAdditionMakers.MakeOutInverseRotation;
+const MakeRotationDatum = ShaderAdditionMakers.MakeRotationDatum;
 const MakeSmoothPixelArt = ShaderAdditionMakers.MakeSmoothPixelArt;
 const MakeGetTexture = ShaderAdditionMakers.MakeGetTexture;
 const Utils = PhaserRenderer.WebGL.Utils;
@@ -15,7 +20,7 @@ const getTint = Utils.getTintAppendFloatAlpha;
 class BatchHandlerTriangles extends BatchHandlerQuad {
     constructor(manager, config) {
         super(manager, config);
-        // We do not expect to use extra textures.
+        // Match the default render option used by rex mesh images.
         this.renderOptions.multiTexturing = true;
     }
 
@@ -76,7 +81,7 @@ class BatchHandlerTriangles extends BatchHandlerQuad {
         }
 
         // Process textures and get relevant data.
-        var textureDatum = this.batchTextures(glTexture);
+        var textureDatum = this.batchTextures(glTexture, renderOptions);
 
         // Update the vertex buffer.
         var vertexOffset32 = this.instanceCount * this.floatsPerInstance;
@@ -154,7 +159,12 @@ BatchHandlerTriangles.prototype.defaultConfig = {
         MakeSmoothPixelArt(true),
         MakeDefineTexCount(1),
         MakeGetTexture(),
-        MakeApplyTint()
+        MakeApplyTint(),
+        MakeDefineLights(true),
+        MakeRotationDatum(true),
+        MakeOutInverseRotation(true),
+        MakeGetNormalFromMap(true),
+        MakeApplyLighting(true)
     ],
     vertexBufferLayout: {
         usage: 'DYNAMIC_DRAW',
