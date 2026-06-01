@@ -12,10 +12,13 @@ class Demo extends Phaser.Scene {
 
     create() {
         // Solution 1:
-        var parser = this.plugins.get('rexExpressionParser').add();
-        parser.randomInt = function (a, b) {
-            return Math.floor(Math.random() * (b - a) + a);
-        };
+        var parser = this.plugins.get('rexExpressionParser').add({
+            functions: {
+                randomInt(a, b) {
+                    return Math.floor(Math.random() * (b - a) + a);
+                }
+            }
+        });
         var f = parser.compile("randomInt(a, b)");
         var context = { a: 10, b: 20 };
         console.log('Solution 1:');
@@ -24,20 +27,6 @@ class Demo extends Phaser.Scene {
         }
 
         // Solution 2:
-        class MyParser extends RexPlugins.ExpressionParser {
-            randomInt(a, b) {
-                return Math.floor(Math.random() * (b - a) + a);
-            }
-        }
-        var parser = new MyParser();
-        var f = parser.compile("randomInt(a, b)");
-        var context = { a: 10, b: 20 };
-        console.log('Solution 2:');
-        for (var i = 0; i < 5; i++) {
-            console.log(i, f(context));
-        }
-
-        // Solution 3:
         var parser = this.plugins.get('rexExpressionParser').add();
         var f = parser.compile("randomInt(a, b)");
         var context = {
@@ -47,7 +36,7 @@ class Demo extends Phaser.Scene {
             a: 10,
             b: 20
         }
-        console.log('Solution 3:');
+        console.log('Solution 2:');
         for (var i = 0; i < 5; i++) {
             console.log(i, f(context));
         }

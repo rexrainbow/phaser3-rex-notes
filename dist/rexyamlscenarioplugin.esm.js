@@ -723,7 +723,7 @@ var parser$3 = {};
 	  }
 	*/
 	var parser = (function(){
-	var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,11],$V1=[1,3],$V2=[1,4],$V3=[1,5],$V4=[1,6],$V5=[1,8],$V6=[1,9],$V7=[1,10],$V8=[1,13],$V9=[1,14],$Va=[1,15],$Vb=[1,16],$Vc=[1,17],$Vd=[1,18],$Ve=[1,19],$Vf=[1,20],$Vg=[1,21],$Vh=[1,22],$Vi=[1,23],$Vj=[1,24],$Vk=[1,25],$Vl=[1,26],$Vm=[5,7,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,28,30],$Vn=[5,7,9,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,30],$Vo=[5,7,12,13,14,19,20,21,22,23,24,25,26,28,30],$Vp=[5,7,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,30],$Vq=[5,7,12,19,20,21,22,23,24,25,26,28,30],$Vr=[5,7,12,25,26,28,30],$Vs=[7,28];
+	var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,11],$V1=[1,3],$V2=[1,4],$V3=[1,5],$V4=[1,6],$V5=[1,8],$V6=[1,9],$V7=[1,10],$V8=[1,13],$V9=[1,14],$Va=[1,15],$Vb=[1,16],$Vc=[1,17],$Vd=[1,18],$Ve=[1,19],$Vf=[1,20],$Vg=[1,21],$Vh=[1,22],$Vi=[1,23],$Vj=[1,24],$Vk=[1,25],$Vl=[1,26],$Vm=[5,7,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,28,30],$Vn=[5,7,9,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,30],$Vo=[5,7,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,30],$Vp=[5,7,12,13,14,19,20,21,22,23,24,25,26,28,30],$Vq=[5,7,12,19,20,21,22,23,24,25,26,28,30],$Vr=[7,28];
 	var parser = {trace: function trace () { },
 	yy: {},
 	symbols_: {"error":2,"expressions":3,"e":4,"EOF":5,"expression_list":6,",":7,"dot_name":8,".":9,"NAME":10,"[":11,"]":12,"+":13,"-":14,"*":15,"/":16,"%":17,"^":18,">":19,"<":20,"==":21,"!=":22,">=":23,"<=":24,"||":25,"&&":26,"(":27,")":28,"?":29,":":30,"true":31,"false":32,"QUOTED_STRING":33,"NUMBER":34,"HEXNUMBER":35,"$accept":0,"$end":1},
@@ -813,12 +813,24 @@ var parser$3 = {};
 	break;
 	case 19:
 
-	            this.$ = function(ctx) { return runBuildInMethod(yy.parser, ctx, '_or', [$$[$0-2], $$[$0]]) == true; };
+	            this.$ = function(ctx) {
+	                var left = runFn($$[$0-2], ctx);
+	                if (left) {
+	                    return true;
+	                }
+	                return runBuildInMethod(yy.parser, ctx, '_or', [left, $$[$0]]) == true;
+	            };
 	        
 	break;
 	case 20:
 
-	            this.$ = function(ctx) { return runBuildInMethod(yy.parser, ctx, '_and', [$$[$0-2], $$[$0]]) == true; };
+	            this.$ = function(ctx) {
+	                var left = runFn($$[$0-2], ctx);
+	                if (!left) {
+	                    return false;
+	                }
+	                return runBuildInMethod(yy.parser, ctx, '_and', [left, $$[$0]]) == true;
+	            };
 	        
 	break;
 	case 21:
@@ -864,7 +876,7 @@ var parser$3 = {};
 	        
 	break;
 	case 29:
-	 this.$ = yytext.slice(1,-1); 
+	 this.$ = parseQuotedString(yytext); 
 	break;
 	case 30:
 	 this.$ = Number(yytext); 
@@ -874,7 +886,7 @@ var parser$3 = {};
 	break;
 	}
 	},
-	table: [{3:1,4:2,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{1:[3]},{5:[1,12],13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,24:$Vj,25:$Vk,26:$Vl},{4:27,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{4:28,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},o($Vm,[2,24]),o($Vm,[2,25]),o($Vm,[2,26],{9:[1,30],11:[1,31],27:[1,29]}),o($Vm,[2,29]),o($Vm,[2,30]),o($Vm,[2,31]),o($Vn,[2,6]),{1:[2,1]},{4:32,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{4:33,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{4:34,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{4:35,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{4:36,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{4:37,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{4:38,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{4:39,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{4:40,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{4:41,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{4:42,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{4:43,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{4:44,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{4:45,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},o($Vm,[2,21]),{13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,24:$Vj,25:$Vk,26:$Vl,28:[1,46]},{4:49,6:48,8:7,10:$V0,14:$V1,27:$V2,28:[1,47],31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{10:[1,50]},{4:51,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},o($Vo,[2,7],{15:$Va,16:$Vb,17:$Vc,18:$Vd}),o($Vo,[2,8],{15:$Va,16:$Vb,17:$Vc,18:$Vd}),o($Vp,[2,9],{18:$Vd}),o($Vp,[2,10],{18:$Vd}),o([5,7,12,13,14,17,19,20,21,22,23,24,25,26,28,30],[2,11],{15:$Va,16:$Vb,18:$Vd}),o($Vm,[2,12]),o($Vq,[2,13],{13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd}),o($Vq,[2,14],{13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd}),o($Vq,[2,15],{13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd}),o($Vq,[2,16],{13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd}),o($Vq,[2,17],{13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd}),o($Vq,[2,18],{13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd}),o($Vr,[2,19],{13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,24:$Vj}),o($Vr,[2,20],{13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,24:$Vj}),o($Vm,[2,22],{29:[1,52]}),o($Vm,[2,27]),{7:[1,54],28:[1,53]},o($Vs,[2,3],{13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,24:$Vj,25:$Vk,26:$Vl}),o($Vn,[2,4]),{12:[1,55],13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,24:$Vj,25:$Vk,26:$Vl},{4:56,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},o($Vm,[2,28]),{4:57,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},o($Vn,[2,5]),{13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,24:$Vj,25:$Vk,26:$Vl,30:[1,58]},o($Vs,[2,2],{13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,24:$Vj,25:$Vk,26:$Vl}),{4:59,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},o([5,7,12,28,30],[2,23],{13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,24:$Vj,25:$Vk,26:$Vl})],
+	table: [{3:1,4:2,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{1:[3]},{5:[1,12],13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,24:$Vj,25:$Vk,26:$Vl},{4:27,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{4:28,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},o($Vm,[2,24]),o($Vm,[2,25]),o($Vm,[2,26],{9:[1,30],11:[1,31],27:[1,29]}),o($Vm,[2,29]),o($Vm,[2,30]),o($Vm,[2,31]),o($Vn,[2,6]),{1:[2,1]},{4:32,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{4:33,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{4:34,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{4:35,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{4:36,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{4:37,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{4:38,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{4:39,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{4:40,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{4:41,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{4:42,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{4:43,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{4:44,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{4:45,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},o($Vo,[2,21],{18:$Vd}),{13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,24:$Vj,25:$Vk,26:$Vl,28:[1,46]},{4:49,6:48,8:7,10:$V0,14:$V1,27:$V2,28:[1,47],31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},{10:[1,50]},{4:51,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},o($Vp,[2,7],{15:$Va,16:$Vb,17:$Vc,18:$Vd}),o($Vp,[2,8],{15:$Va,16:$Vb,17:$Vc,18:$Vd}),o($Vo,[2,9],{18:$Vd}),o($Vo,[2,10],{18:$Vd}),o($Vo,[2,11],{18:$Vd}),o($Vo,[2,12],{18:$Vd}),o($Vq,[2,13],{13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd}),o($Vq,[2,14],{13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd}),o($Vq,[2,15],{13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd}),o($Vq,[2,16],{13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd}),o($Vq,[2,17],{13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd}),o($Vq,[2,18],{13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd}),o([5,7,12,25,28,30],[2,19],{13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,24:$Vj,26:$Vl}),o([5,7,12,25,26,28,30],[2,20],{13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,24:$Vj}),o($Vm,[2,22],{29:[1,52]}),o($Vm,[2,27]),{7:[1,54],28:[1,53]},o($Vr,[2,3],{13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,24:$Vj,25:$Vk,26:$Vl}),o($Vn,[2,4]),{12:[1,55],13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,24:$Vj,25:$Vk,26:$Vl},{4:56,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},o($Vm,[2,28]),{4:57,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},o($Vn,[2,5]),{13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,24:$Vj,25:$Vk,26:$Vl,30:[1,58]},o($Vr,[2,2],{13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,24:$Vj,25:$Vk,26:$Vl}),{4:59,8:7,10:$V0,14:$V1,27:$V2,31:$V3,32:$V4,33:$V5,34:$V6,35:$V7},o([5,7,12,28,30],[2,23],{13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,24:$Vj,25:$Vk,26:$Vl})],
 	defaultActions: {12:[2,1]},
 	parseError: function parseError (str, hash) {
 	    if (hash.recoverable) {
@@ -1022,9 +1034,122 @@ var parser$3 = {};
 	        return args;
 	    }
 
+	    function isHex(value) {
+	        return /^[0-9A-Fa-f]+$/.test(value);
+	    }
+
+	    function parseQuotedString(text) {
+	        var result = '';
+	        var end = text.length - 1;
+	        for (var i = 1; i < end; i++) {
+	            var char = text.charAt(i);
+	            if (char !== '\\') {
+	                result += char;
+	                continue;
+	            }
+
+	            i++;
+	            if (i >= end) {
+	                result += '\\';
+	                break;
+	            }
+
+	            var escaped = text.charAt(i);
+	            switch (escaped) {
+	                case 'n':
+	                    result += '\n';
+	                    break;
+	                case 'r':
+	                    result += '\r';
+	                    break;
+	                case 't':
+	                    result += '\t';
+	                    break;
+	                case 'b':
+	                    result += '\b';
+	                    break;
+	                case 'f':
+	                    result += '\f';
+	                    break;
+	                case 'v':
+	                    result += '\v';
+	                    break;
+	                case '0':
+	                    result += '\0';
+	                    break;
+	                case 'x':
+	                    var hex = text.substr(i + 1, 2);
+	                    if ((hex.length === 2) && isHex(hex)) {
+	                        result += String.fromCharCode(parseInt(hex, 16));
+	                        i += 2;
+	                    } else {
+	                        result += escaped;
+	                    }
+	                    break;
+	                case 'u':
+	                    if (text.charAt(i + 1) === '{') {
+	                        var closeIndex = text.indexOf('}', i + 2);
+	                        if ((closeIndex !== -1) && (closeIndex < end)) {
+	                            var codePoint = text.substring(i + 2, closeIndex);
+	                            if ((codePoint !== '') && isHex(codePoint)) {
+	                                var codePointValue = parseInt(codePoint, 16);
+	                                if (codePointValue <= 0x10ffff) {
+	                                    result += String.fromCodePoint(codePointValue);
+	                                    i = closeIndex;
+	                                    break;
+	                                }
+	                            }
+	                        }
+	                    }
+
+	                    var unicode = text.substr(i + 1, 4);
+	                    if ((unicode.length === 4) && isHex(unicode)) {
+	                        result += String.fromCharCode(parseInt(unicode, 16));
+	                        i += 4;
+	                    } else {
+	                        result += escaped;
+	                    }
+	                    break;
+	                default:
+	                    result += escaped;
+	                    break;
+	            }
+	        }
+
+	        return result;
+	    }
+
 	    function runBuildInMethod(self, ctx, name, args) {
 	        var callback = self[name];
 	        return callback.apply(self, mapArgs(args, ctx));
+	    }
+
+	    function getDefaultHandler(self, ctx) {
+	        var callback, scope;
+	        if (
+	            (ctx != null) &&
+	            ((typeof(ctx) === 'object') || (typeof(ctx) === 'function')) &&
+	            (
+	                self.safeMode ?
+	                Object.prototype.hasOwnProperty.call(ctx, 'defaultHandler') :
+	                ('defaultHandler' in ctx)
+	            )
+	        ) {
+	            callback = ctx.defaultHandler;
+	            if (callback != null) {
+	                scope = ctx;
+	            }
+	        }
+
+	        if (callback == null) {
+	            callback = self.defaultHandler;
+	            scope = self;
+	        }
+
+	        return {
+	            callback: callback,
+	            scope: scope
+	        };
 	    }
 
 	    function runMethod(self, ctx, name, args, dotMode) {
@@ -1039,22 +1164,39 @@ var parser$3 = {};
 	            names = name;
 	        }
 
+	        var methodName = names.join('.');
+	        var methodArgs = mapArgs(args, ctx) || [];
 	        var callback, scope;
 	        if (names.length > 1) {
-	            var callbackName = names.pop();
-	            scope = self.getDotProperty(ctx, names);
-	            callback = scope[callbackName];
+	            var callbackName = names[names.length - 1];
+	            if (self.safeMode) {
+	                scope = self.getContextDotProperty(ctx, names.slice(0, -1));
+	            } else {
+	                scope = self.getDotProperty(ctx, names.slice(0, -1));
+	            }
+	            callback = self.getMethodProperty(scope, callbackName);
 	        } else {
-	            callback = self.getProperty(ctx, name);
+	            callback = self.getProperty(ctx, names[0]);
 	            scope = self;
 	        }
 
 	        if (callback == null) {
-	            callback = self.getProperty(ctx, 'defaultHandler');
+	            callback = self.getFunction(methodName);
 	            scope = self;
 	        }
 
-	        return callback.apply(scope, mapArgs(args, ctx));
+	        if (callback == null) {
+	            var defaultHandler = getDefaultHandler(self, ctx);
+	            callback = defaultHandler.callback;
+	            scope = defaultHandler.scope;
+	            return callback.call(scope, methodName, methodArgs, ctx);
+	        }
+
+	        if (self.safeMode && (typeof(callback) !== 'function')) {
+	            throw new Error('Invalid method: ' + methodName);
+	        }
+
+	        return callback.apply(scope, methodArgs);
 	    }
 	/* generated by jison-lex 0.3.4 */
 	var lexer = (function(){
@@ -1440,24 +1582,60 @@ var parser$3 = {};
 
 var parser$2 = /*@__PURE__*/getDefaultExportFromCjs(parser$3);
 
-var GetProperty$1 = function (context, key, defaultValue, dotMode) {
+const UnsafePropertyNames = {
+    __proto__: true,
+    prototype: true,
+    constructor: true
+};
+
+var IsUnsafePropertyName = function (key) {
+    return (typeof (key) === 'string') && UnsafePropertyNames[key];
+};
+
+var IsObjectLike$1 = function (value) {
+    var valueType = typeof (value);
+    return value !== null && (valueType === 'object' || valueType === 'function');
+};
+
+var HasOwn$1 = function (context, key) {
+    return Object.prototype.hasOwnProperty.call(context, key);
+};
+
+var HasProperty$1 = function (context, key, safeMode) {
+    if (safeMode) {
+        if (IsUnsafePropertyName(key)) {
+            throw new Error('Unsafe property access: ' + key);
+        }
+        return HasOwn$1(context, key);
+    } else {
+        return key in context;
+    }
+};
+
+var GetProperty$1 = function (context, key, defaultValue, dotMode, safeMode) {
     if (dotMode === undefined) {
         dotMode = true;
     }
+    if (safeMode === undefined) {
+        safeMode = false;
+    }
 
-    if (!context || typeof (context) === 'number' || typeof (context) === 'string') {
+    if (!IsObjectLike$1(context)) {
         return defaultValue;
-    } else if (key in context) {
+    } else if (!Array.isArray(key) && HasProperty$1(context, key, safeMode)) {
         return context[key];
     } else if (dotMode &&
-        ((Array.isArray(key) || (key.indexOf('.') !== -1)))
+        (Array.isArray(key) || ((typeof (key) === 'string') && (key.indexOf('.') !== -1)))
     ) {
         var keys = (Array.isArray(key)) ? key : key.split('.');
         var value = context;
         //  Use for loop here so we can break early
         for (var i = 0; i < keys.length; i++) {
             var key = keys[i];
-            if (key in value) {
+            if (!IsObjectLike$1(value)) {
+                value = defaultValue;
+                break;
+            } else if (HasProperty$1(value, key, safeMode)) {
                 value = value[key];
             }
             else {
@@ -1472,25 +1650,286 @@ var GetProperty$1 = function (context, key, defaultValue, dotMode) {
     }
 };
 
+const MISSING = {};
+
 class FormulaParser extends parser$2.Parser {
+    constructor(config) {
+        super();
+
+        this.functions = Object.create(null);
+        this.values = Object.create(null);
+        this.cacheExpressions = false;
+        this.expressionCache = Object.create(null);
+        this.safeMode = false;
+
+        if (typeof (config) === 'boolean') {
+            config = {
+                safeMode: config
+            };
+        }
+
+        this.setSafeMode(GetProperty$1(config, 'safeMode', false));
+
+        var functions = GetProperty$1(config, 'functions', undefined);
+        if (functions) {
+            this.setFunctions(functions);
+        }
+
+        var values = GetProperty$1(config, 'values', undefined);
+        if (values) {
+            this.setValues(values);
+        }
+
+        var defaultHandler = GetProperty$1(config, 'defaultHandler', undefined);
+        if (defaultHandler !== undefined) {
+            this.defaultHandler = defaultHandler;
+        }
+
+        var defaultValueHandler = GetProperty$1(config, 'defaultValueHandler', undefined);
+        if (defaultValueHandler !== undefined) {
+            this.defaultValueHandler = defaultValueHandler;
+        }
+
+        this.setCacheEnable(GetProperty$1(config, 'cache', false));
+
+    }
+
     getProperty(context, name, defaultValue) {
-        var value = GetProperty$1(context, name, undefined, false);
-        if (value !== undefined) {
+        var value = GetProperty$1(context, name, MISSING, false, this.safeMode);
+        if (value !== MISSING) {
             return value;
         }
-        return GetProperty$1(this, name, defaultValue, false);
+
+        value = this.getValue(name, MISSING);
+        if (value !== MISSING) {
+            return value;
+        }
+
+        if (!this.safeMode) {
+            value = GetProperty$1(this, name, MISSING, false);
+            if (value !== MISSING) {
+                return value;
+            }
+        }
+
+        return defaultValue;
     }
 
     getDotProperty(context, name, defaultValue) {
-        var value = GetProperty$1(context, name, undefined, true);
-        if (value !== undefined) {
+        var value = GetProperty$1(context, name, MISSING, true, this.safeMode);
+        if (value !== MISSING) {
             return value;
         }
-        return GetProperty$1(this, name, defaultValue, true);
+
+        value = this.getValue(name, MISSING);
+        if (value !== MISSING) {
+            return value;
+        }
+
+        if (!this.safeMode) {
+            value = GetProperty$1(this, name, MISSING, true);
+            if (value !== MISSING) {
+                return value;
+            }
+        }
+
+        return this.runDefaultValueHandler(context, name, defaultValue);
     }
 
-    static GetProperty(context, key, defaultValue, dotMode) {
-        return GetProperty$1(context, key, defaultValue, dotMode);
+    getContextDotProperty(context, name, defaultValue) {
+        return GetProperty$1(context, name, defaultValue, true, this.safeMode);
+    }
+
+    static GetProperty(context, key, defaultValue, dotMode, safeMode) {
+        return GetProperty$1(context, key, defaultValue, dotMode, safeMode);
+    }
+
+    getPath(name) {
+        return Array.isArray(name) ? name.slice() : ((typeof (name) === 'string') ? name.split('.') : [name]);
+    }
+
+    getPathName(name) {
+        return this.getPath(name).join('.');
+    }
+
+    setSafeMode(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.safeMode = enable;
+        return this;
+    }
+
+    isUnsafePropertyName(name) {
+        return IsUnsafePropertyName(name);
+    }
+
+    checkSafeName(name) {
+        if (this.safeMode && IsUnsafePropertyName(name)) {
+            throw new Error('Unsafe property access: ' + name);
+        }
+    }
+
+    checkSafePath(path) {
+        if (!this.safeMode) {
+            return;
+        }
+
+        if (Array.isArray(path)) {
+            for (var i = 0; i < path.length; i++) {
+                this.checkSafeName(path[i]);
+            }
+        } else if (typeof (path) === 'string') {
+            var names = path.split('.');
+            for (var j = 0; j < names.length; j++) {
+                this.checkSafeName(names[j]);
+            }
+        } else {
+            this.checkSafeName(path);
+        }
+    }
+
+    getMethodProperty(scope, name) {
+        if (scope == null) {
+            return undefined;
+        }
+
+        this.checkSafeName(name);
+
+        if (this.safeMode &&
+            !Object.prototype.hasOwnProperty.call(scope, name)
+        ) {
+            return undefined;
+        } else if (!this.safeMode && !(name in scope)) {
+            return undefined;
+        }
+
+        return scope[name];
+    }
+
+    setFunction(name, callback) {
+        this.checkSafePath(name);
+        if (typeof (callback) !== 'function') {
+            throw new Error('Invalid function: ' + name);
+        }
+        this.functions[name] = callback;
+        return this;
+    }
+
+    setFunctions(functions) {
+        for (var name in functions) {
+            if (Object.prototype.hasOwnProperty.call(functions, name)) {
+                this.setFunction(name, functions[name]);
+            }
+        }
+        return this;
+    }
+
+    getFunction(name) {
+        this.checkSafePath(name);
+        return this.functions[name];
+    }
+
+    removeFunction(name) {
+        this.checkSafePath(name);
+        delete this.functions[name];
+        return this;
+    }
+
+    clearFunctions() {
+        this.functions = Object.create(null);
+        return this;
+    }
+
+    setValue(name, value) {
+        this.checkSafePath(name);
+        this.values[name] = value;
+        return this;
+    }
+
+    setValues(values) {
+        for (var name in values) {
+            if (Object.prototype.hasOwnProperty.call(values, name)) {
+                this.setValue(name, values[name]);
+            }
+        }
+        return this;
+    }
+
+    getValue(name, defaultValue) {
+        this.checkSafePath(name);
+
+        var nameString = this.getPathName(name);
+        if (Object.prototype.hasOwnProperty.call(this.values, nameString)) {
+            return this.values[nameString];
+        }
+
+        var value = GetProperty$1(this.values, this.getPath(name), MISSING, true, this.safeMode);
+        return (value === MISSING) ? defaultValue : value;
+    }
+
+    removeValue(name) {
+        this.checkSafePath(name);
+        delete this.values[this.getPathName(name)];
+        return this;
+    }
+
+    clearValues() {
+        this.values = Object.create(null);
+        return this;
+    }
+
+    setCacheEnable(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.cacheExpressions = enable;
+        return this;
+    }
+
+    clearCache() {
+        this.expressionCache = Object.create(null);
+        return this;
+    }
+
+    getDefaultValueHandler(context) {
+        var callback, scope;
+        if (
+            (context != null) &&
+            ((typeof (context) === 'object') || (typeof (context) === 'function')) &&
+            (
+                this.safeMode ?
+                    Object.prototype.hasOwnProperty.call(context, 'defaultValueHandler') :
+                    ('defaultValueHandler' in context)
+            )
+        ) {
+            callback = context.defaultValueHandler;
+            if (callback != null) {
+                scope = context;
+            }
+        }
+
+        if (callback == null) {
+            callback = this.defaultValueHandler;
+            scope = this;
+        }
+
+        return {
+            callback: callback,
+            scope: scope
+        };
+    }
+
+    runDefaultValueHandler(context, name, defaultValue) {
+        var defaultValueHandler = this.getDefaultValueHandler(context);
+        var path = Array.isArray(name) ? name.slice() : ((typeof (name) === 'string') ? name.split('.') : [name]);
+        var nameString = path.join('.');
+
+        if (defaultValueHandler.callback == null) {
+            return defaultValue;
+        }
+
+        return defaultValueHandler.callback.call(defaultValueHandler.scope, nameString, context, path);
     }
 
     _add(a, b) {
@@ -1537,17 +1976,33 @@ class FormulaParser extends parser$2.Parser {
         return a && b;
     }
 
-    defaultHandler(name, args) {
+    defaultHandler(name, args, context) {
         return 0;
     }
 
-    compile(input) {
-        return this.parse(input);
+    defaultValueHandler(name, context, path) {
+        return 0;
     }
 
-    exec(input, data) {
+    compile(input, config) {
+        var cache = this.cacheExpressions;
+        if (config && (config.cache !== undefined)) {
+            cache = config.cache;
+        }
+
+        if (!cache) {
+            return this.parse(input);
+        }
+
+        if (!Object.prototype.hasOwnProperty.call(this.expressionCache, input)) {
+            this.expressionCache[input] = this.parse(input);
+        }
+        return this.expressionCache[input];
+    }
+
+    exec(input, data, config) {
         if (typeof (input) === 'string') {
-            input = this.compile(input);
+            input = this.compile(input, config);
         }
         return input(data);
     }
