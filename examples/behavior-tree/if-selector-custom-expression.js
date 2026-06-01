@@ -117,14 +117,17 @@ class Demo extends Phaser.Scene {
                 var state = tree.tick(blackboard, target, {
                     getEvalContext(tick) {
                         var context = {
+                            tick: tick,
                             world: tick.target.world,
                             time: tick.currentTime / 1000,
                             blackboard: tick.blackboard,
-                            evaluateExpression(value) {
-                                return tick.evalExpressionValue(value, this);
-                            }
                         }
-                        context.evalExpressionObject = function (expression) {
+
+                        context.evaluateExpression = function (value) {
+                            return tick.evalExpressionValue(value, this);
+                        }
+
+                        context.evalExpressionObject = function (expressionObject) {
                             return tick.target.world.evaluateCondition(expression, context);
                         }
 

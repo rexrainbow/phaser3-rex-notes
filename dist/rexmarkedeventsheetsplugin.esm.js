@@ -1735,6 +1735,38 @@ class StringTemplateExpression extends BaseExpression {
     }
 }
 
+var StringExpressionCache = new Map();
+
+var GetCompiledStringExpression = function (expression) {
+    var callback = StringExpressionCache.get(expression);
+    if (!callback) {
+        callback = Compile$1(expression);
+        StringExpressionCache.set(expression, callback);
+    }
+    return callback;
+};
+
+var EvaluateExpressionValue = function (value, context) {
+    switch (typeof (value)) {
+        case 'function':
+            return value(context);
+
+        case 'string':
+            return GetCompiledStringExpression(value)(context);
+
+        default:
+            if (
+                value &&
+                context &&
+                (typeof (value) === 'object') &&
+                (typeof (context.evalExpressionObject) === 'function')
+            ) {
+                return context.evalExpressionObject(value);
+            }
+            return value;
+    }
+};
+
 class BaseNode {
 
     constructor(
@@ -4000,6 +4032,7 @@ var Nodes = /*#__PURE__*/Object.freeze({
 	Cooldown: Cooldown,
 	Decorator: Decorator,
 	Error: Error$1,
+	EvaluateExpressionValue: EvaluateExpressionValue,
 	Failer: Failer,
 	ForceFailure: ForceFailure,
 	ForceSuccess: ForceSuccess,
@@ -4177,8 +4210,18 @@ class Tick {
         return this.blackboard.getGlobalMemory();
     }
 
-    evalExpression(expression) {
-        return expression.eval(this.getEvalContext());
+    evalExpression(expressionObject, context) {
+        if (context === undefined) {
+            context = this.getEvalContext();
+        }
+        return expressionObject.eval(this.getEvalContext());
+    }
+
+    evalExpressionValue(expressionString, context) {
+        if (context === undefined) {
+            context = this.getEvalContext();
+        }
+        return EvaluateExpressionValue(expressionString, context);
     }
 
     _enterNode(node) {
