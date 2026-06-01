@@ -30,7 +30,7 @@ class Demo extends Phaser.Scene {
         console.log(f(context));
 
         // dot-notation
-        var expression = "蘋果.個數*蘋果.價錢";
+        var expression = "蘋果.個數* 蘋果.價錢";
         var f = parser.compile(expression);
         console.log(f(context));
     }

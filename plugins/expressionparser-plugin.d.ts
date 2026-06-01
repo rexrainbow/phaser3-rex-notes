@@ -3,7 +3,9 @@ import Compile from './math/expressionparser/utils/Compile';
 import CreateProxyContext from './math/expressionparser/utils/CreateProxyContext';
 
 export default class ExpressionParserPlugin extends Phaser.Plugins.BasePlugin {
-    add(): ExpressionParser;
+    add(
+        config?: boolean | ExpressionParser.IConfig
+    ): ExpressionParser;
 
     compile: typeof Compile;
 

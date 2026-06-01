@@ -1,39 +1,134 @@
 import parser from './parser/parser.js';
 import GetProperty from './GetProperty.js';
+import IsUnsafePropertyName from './IsUnsafePropertyName.js';
 
 const MISSING = {};
 
 class FormulaParser extends parser.Parser {
+    constructor(config) {
+        super();
+
+        this.functions = Object.create(null);
+        this.safeMode = false;
+
+        this.setSafeMode(GetProperty(config, 'safeMode', false));
+    }
+
     getProperty(context, name, defaultValue) {
-        var value = GetProperty(context, name, MISSING, false);
+        var value = GetProperty(context, name, MISSING, false, this.safeMode);
         if (value !== MISSING) {
             return value;
         }
 
-        value = GetProperty(this, name, MISSING, false);
-        if (value !== MISSING) {
-            return value;
+        if (!this.safeMode) {
+            value = GetProperty(this, name, MISSING, false);
+            if (value !== MISSING) {
+                return value;
+            }
         }
 
         return defaultValue;
     }
 
     getDotProperty(context, name, defaultValue) {
-        var value = GetProperty(context, name, MISSING, true);
+        var value = GetProperty(context, name, MISSING, true, this.safeMode);
         if (value !== MISSING) {
             return value;
         }
 
-        value = GetProperty(this, name, MISSING, true);
-        if (value !== MISSING) {
-            return value;
+        if (!this.safeMode) {
+            value = GetProperty(this, name, MISSING, true);
+            if (value !== MISSING) {
+                return value;
+            }
         }
 
         return this.runDefaultValueHandler(context, name, defaultValue);
     }
 
-    static GetProperty(context, key, defaultValue, dotMode) {
-        return GetProperty(context, key, defaultValue, dotMode);
+    getContextDotProperty(context, name, defaultValue) {
+        return GetProperty(context, name, defaultValue, true, this.safeMode);
+    }
+
+    static GetProperty(context, key, defaultValue, dotMode, safeMode) {
+        return GetProperty(context, key, defaultValue, dotMode, safeMode);
+    }
+
+    setSafeMode(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.safeMode = enable;
+        return this;
+    }
+
+    isUnsafePropertyName(name) {
+        return IsUnsafePropertyName(name);
+    }
+
+    checkSafeName(name) {
+        if (this.safeMode && IsUnsafePropertyName(name)) {
+            throw new Error('Unsafe property access: ' + name);
+        }
+    }
+
+    checkSafePath(path) {
+        if (!this.safeMode) {
+            return;
+        }
+
+        if (Array.isArray(path)) {
+            for (var i = 0; i < path.length; i++) {
+                this.checkSafeName(path[i]);
+            }
+        } else if (typeof (path) === 'string') {
+            var names = path.split('.');
+            for (var j = 0; j < names.length; j++) {
+                this.checkSafeName(names[j]);
+            }
+        } else {
+            this.checkSafeName(path);
+        }
+    }
+
+    getMethodProperty(scope, name) {
+        if (scope == null) {
+            return undefined;
+        }
+
+        this.checkSafeName(name);
+
+        if (this.safeMode &&
+            !Object.prototype.hasOwnProperty.call(scope, name)
+        ) {
+            return undefined;
+        } else if (!this.safeMode && !(name in scope)) {
+            return undefined;
+        }
+
+        return scope[name];
+    }
+
+    setFunction(name, callback) {
+        this.checkSafePath(name);
+        this.functions[name] = callback;
+        return this;
+    }
+
+    getFunction(name) {
+        this.checkSafePath(name);
+        return this.functions[name];
+    }
+
+    removeFunction(name) {
+        this.checkSafePath(name);
+        delete this.functions[name];
+        return this;
+    }
+
+    clearFunctions() {
+        this.functions = Object.create(null);
+        return this;
     }
 
     getDefaultValueHandler(context) {
@@ -41,7 +136,11 @@ class FormulaParser extends parser.Parser {
         if (
             (context != null) &&
             ((typeof (context) === 'object') || (typeof (context) === 'function')) &&
-            ('defaultValueHandler' in context)
+            (
+                this.safeMode ?
+                    Object.prototype.hasOwnProperty.call(context, 'defaultValueHandler') :
+                    ('defaultValueHandler' in context)
+            )
         ) {
             callback = context.defaultValueHandler;
             if (callback != null) {

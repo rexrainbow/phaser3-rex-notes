@@ -1,16 +1,36 @@
+import IsUnsafePropertyName from './IsUnsafePropertyName.js';
+
 var IsObjectLike = function (value) {
     var valueType = typeof (value);
     return value !== null && (valueType === 'object' || valueType === 'function');
 }
 
-var GetProperty = function (context, key, defaultValue, dotMode) {
+var HasOwn = function (context, key) {
+    return Object.prototype.hasOwnProperty.call(context, key);
+}
+
+var HasProperty = function (context, key, safeMode) {
+    if (safeMode) {
+        if (IsUnsafePropertyName(key)) {
+            throw new Error('Unsafe property access: ' + key);
+        }
+        return HasOwn(context, key);
+    } else {
+        return key in context;
+    }
+}
+
+var GetProperty = function (context, key, defaultValue, dotMode, safeMode) {
     if (dotMode === undefined) {
         dotMode = true;
+    }
+    if (safeMode === undefined) {
+        safeMode = false;
     }
 
     if (!IsObjectLike(context)) {
         return defaultValue;
-    } else if (key in context) {
+    } else if (!Array.isArray(key) && HasProperty(context, key, safeMode)) {
         return context[key];
     } else if (dotMode &&
         (Array.isArray(key) || ((typeof (key) === 'string') && (key.indexOf('.') !== -1)))
@@ -23,7 +43,7 @@ var GetProperty = function (context, key, defaultValue, dotMode) {
             if (!IsObjectLike(value)) {
                 value = defaultValue;
                 break;
-            } else if (key in value) {
+            } else if (HasProperty(value, key, safeMode)) {
                 value = value[key];
             }
             else {

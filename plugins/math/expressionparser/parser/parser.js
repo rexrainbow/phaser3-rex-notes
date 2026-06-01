@@ -492,7 +492,11 @@ parse: function parse(input) {
         if (
             (ctx != null) &&
             ((typeof(ctx) === 'object') || (typeof(ctx) === 'function')) &&
-            ('defaultHandler' in ctx)
+            (
+                self.safeMode ?
+                Object.prototype.hasOwnProperty.call(ctx, 'defaultHandler') :
+                ('defaultHandler' in ctx)
+            )
         ) {
             callback = ctx.defaultHandler;
             if (callback != null) {
@@ -528,10 +532,19 @@ parse: function parse(input) {
         var callback, scope;
         if (names.length > 1) {
             var callbackName = names[names.length - 1];
-            scope = self.getDotProperty(ctx, names.slice(0, -1));
-            callback = (scope != null) ? scope[callbackName] : undefined;
+            if (self.safeMode) {
+                scope = self.getContextDotProperty(ctx, names.slice(0, -1));
+            } else {
+                scope = self.getDotProperty(ctx, names.slice(0, -1));
+            }
+            callback = self.getMethodProperty(scope, callbackName);
         } else {
-            callback = self.getProperty(ctx, name);
+            callback = self.getProperty(ctx, names[0]);
+            scope = self;
+        }
+
+        if (callback == null) {
+            callback = self.getFunction(methodName);
             scope = self;
         }
 
@@ -540,6 +553,10 @@ parse: function parse(input) {
             callback = defaultHandler.callback;
             scope = defaultHandler.scope;
             return callback.call(scope, methodName, methodArgs, ctx);
+        }
+
+        if (self.safeMode && (typeof(callback) !== 'function')) {
+            throw new Error('Invalid method: ' + methodName);
         }
 
         return callback.apply(scope, methodArgs);

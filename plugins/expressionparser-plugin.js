@@ -15,8 +15,8 @@ class ExpressionParserPlugin extends PhaserPlugins.BasePlugin {
         eventEmitter.on('destroy', this.destroy, this);
     }
 
-    add() {
-        return new ExpressionParser();
+    add(config) {
+        return new ExpressionParser(config);
     }
 
     compile(expression) {

@@ -89,6 +89,16 @@ Parser is generated from [jison](https://github.com/zaach/jison)
 var parser = scene.plugins.get('rexExpressionParserPlugin').add();
 ```
 
+or
+
+```javascript
+var parser = scene.plugins.get('rexExpressionParserPlugin').add({
+    safeMode: false
+});
+```
+
+- `safeMode` : Restrict expression access when expression strings come from external data. Default value is `false`.
+
 ### Execute
 
 #### Compile then execute
@@ -141,6 +151,14 @@ var value = parser.exec(f, context);
 
 ### Custom method
 
+- Register method into parser instance
+    ```javascript
+    var parser = scene.plugins.get('rexExpressionParserPlugin').add();
+    parser.setFunction('randomInt', function(a, b) {
+        return Math.floor(Math.random()*(b-a)+a);
+    });
+    // var value = parser.exec('randomInt(a, b)', {a:10, b:20});
+    ```
 - Add method into parser instance
     ```javascript
     var parser = scene.plugins.get('rexExpressionParserPlugin').add();
@@ -219,6 +237,36 @@ var context = {
         throw new Error(`Unknown variable: ${name}`);
     }
 }
+```
+
+### Safe mode
+
+Restrict expression access when expression strings come from external data.
+
+```javascript
+var parser = new ExpressionParser({
+    safeMode: true
+});
+```
+
+or
+
+```javascript
+parser.setSafeMode(true);
+```
+
+In safe mode :
+
+- Property lookup only reads own properties, not prototype properties.
+- Unsafe property names are blocked : `__proto__`, `prototype`, `constructor`.
+- Method calls can only invoke context methods or functions registered by `setFunction()`.
+- Parser instance or prototype methods are not callable from expressions.
+- Unsafe property access throws an error and does not call `defaultValueHandler` or `defaultHandler`.
+
+```javascript
+parser.setFunction('randomInt', function(a, b) {
+    return Math.floor(Math.random()*(b-a)+a);
+});
 ```
 
 ### Proxy as context

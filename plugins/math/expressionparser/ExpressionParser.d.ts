@@ -1,6 +1,10 @@
 export default ExpressionParser;
 
 declare namespace ExpressionParser {
+    interface IConfig {
+        safeMode?: boolean;
+    }
+
     /**
      * Callback produced by compiled expressions.
      *
@@ -16,6 +20,31 @@ declare namespace ExpressionParser {
  * Parser and evaluator for simple expressions.
  */
 declare class ExpressionParser {
+
+    constructor(
+        config?: boolean | ExpressionParser.IConfig
+    );
+
+    safeMode: boolean;
+
+    setSafeMode(
+        enable?: boolean
+    ): this;
+
+    setFunction(
+        name: string,
+        callback: Function
+    ): this;
+
+    getFunction(
+        name: string
+    ): Function | undefined;
+
+    removeFunction(
+        name: string
+    ): this;
+
+    clearFunctions(): this;
 
     /**
      * Compile an expression into a callback.
@@ -92,7 +121,8 @@ declare class ExpressionParser {
         context: Object,
         key: string | string[],
         defaultValue: any,
-        dotMode?: boolean
+        dotMode?: boolean,
+        safeMode?: boolean
     ): any;
 
 }
