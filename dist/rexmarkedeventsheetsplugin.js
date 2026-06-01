@@ -634,7 +634,16 @@
 	    }
 
 	    eval(context) {
-	        return this.expressionHandler(context);
+	        if (typeof (this.expressionHandler) === 'function') {
+	            return this.expressionHandler(context, this);
+	        }
+
+	        var evalCallback = (context) ? context.evalExpressionObject : null;
+	        if (evalCallback) {
+	            return evalCallback(this.expressionHandler, this);
+	        }
+
+	        return this.expressionHandler;
 	    }
 	}
 
@@ -1560,12 +1569,21 @@
 	        super();
 
 	        var callback;
-	        if (typeof (expression) === 'number') {
-	            callback = function () {
-	                return expression;
-	            };
-	        } else {
-	            callback = Compile$1(expression);
+	        var expressionType = typeof (expression);
+	        switch (expressionType) {
+	            case 'number':
+	                callback = function () {
+	                    return expression;
+	                };
+	                break;
+
+	            case 'string':
+	                callback = Compile$1(expression);
+	                break;
+
+	            default: // 'function',  or 'object'
+	                callback = expression;
+	                break;
 	        }
 
 	        this.setExpressionHandler(callback);
@@ -4082,6 +4100,8 @@
 
 	        this.target = null;
 
+	        this.evalContextGetter = undefined;
+
 	        // updated during the tick signal
 
 	        this._openNodes = [];  // Open nodes of current tick
@@ -4097,6 +4117,7 @@
 	        this.tree = null;
 	        this.blackboard = null;
 	        this.target = null;
+	        this.evalContextGetter = undefined;
 	        this._openNodes.length = 0;
 	    }
 
@@ -4113,6 +4134,11 @@
 
 	    setTarget(target) {
 	        this.target = target;
+	        return this;
+	    }
+
+	    setEvalContextGetter(callback) {
+	        this.evalContextGetter = callback;
 	        return this;
 	    }
 
@@ -4147,8 +4173,16 @@
 	        }
 	    }
 
+	    getEvalContext() {
+	        if (this.evalContextGetter) {
+	            return this.evalContextGetter(this);
+	        }
+
+	        return this.blackboard.getGlobalMemory();
+	    }
+
 	    evalExpression(expression) {
-	        return expression.eval(this.blackboard.getGlobalMemory());
+	        return expression.eval(this.getEvalContext());
 	    }
 
 	    _enterNode(node) {
@@ -4286,15 +4320,20 @@
 	        return out;
 	    }
 
-	    tick(blackboard, target) {
+	    tick(blackboard, target, options) {
 	        if (!blackboard) {
 	            throw 'The blackboard parameter is obligatory and must be an instance of Blackboard';
+	        }
+
+	        if (options === undefined) {
+	            options = {};
 	        }
 
 	        var ticker = this.ticker;
 	        ticker
 	            .setBlackBoard(blackboard)
 	            .setTarget(target)
+	            .setEvalContextGetter(options.getEvalContext)
 	            .reset();
 
 	        /* TICK NODE */
@@ -4308,15 +4347,20 @@
 	        return state;
 	    }
 
-	    abort(blackboard, target) {
+	    abort(blackboard, target, options) {
 	        if (!blackboard) {
 	            throw 'The blackboard parameter is obligatory and must be an instance of Blackboard';
+	        }
+
+	        if (options === undefined) {
+	            options = {};
 	        }
 
 	        var ticker = this.ticker;
 	        ticker
 	            .setBlackBoard(blackboard)
 	            .setTarget(target)
+	            .setEvalContextGetter(options.getEvalContext)
 	            .reset();
 
 	        /* ABORT NODE */
