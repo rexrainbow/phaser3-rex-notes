@@ -93,11 +93,31 @@ or
 
 ```javascript
 var parser = scene.plugins.get('rexExpressionParserPlugin').add({
-    safeMode: false
+    safeMode: false,
+    cache: false,
+    functions: {
+        randomInt(a, b) {
+            return Math.floor(Math.random()*(b-a)+a);
+        }
+    },
+    values: {
+        PI: Math.PI
+    },
+    defaultHandler(name, args, context) {
+        return 0;
+    },
+    defaultValueHandler(name, context, path) {
+        return 0;
+    }
 });
 ```
 
 - `safeMode` : Restrict expression access when expression strings come from external data. Default value is `false`.
+- `cache` : Cache compiled expressions. Default value is `false`.
+- `functions` : Methods registered into parser.
+- `values` : Values registered into parser.
+- `defaultHandler` : Fallback callback for missing custom methods.
+- `defaultValueHandler` : Fallback callback for missing variables or properties.
 
 ### Execute
 
@@ -189,6 +209,26 @@ var value = parser.exec(f, context);
     var value = parser.exec('randomInt(a, b)', context);
     ```
 
+### Custom value
+
+Register shared values into parser instance.
+
+```javascript
+var parser = scene.plugins.get('rexExpressionParserPlugin').add();
+parser.setValue('PI', Math.PI);
+parser.setValue('math.E', Math.E);
+```
+
+```javascript
+var value = parser.exec('r * r * PI', { r: 10 });
+```
+
+- `setValue(name, value)` : Register a value.
+- `setValues(values)` : Register multiple values.
+- `getValue(name, defaultValue)` : Get a registered value.
+- `removeValue(name)` : Remove a registered value.
+- `clearValues()` : Remove all registered values.
+
 ### Default handler
 
 Fallback callback for missing custom methods.
@@ -266,6 +306,35 @@ In safe mode :
 ```javascript
 parser.setFunction('randomInt', function(a, b) {
     return Math.floor(Math.random()*(b-a)+a);
+});
+```
+
+### Cache
+
+Cache compiled expressions.
+
+```javascript
+var parser = new ExpressionParser({
+    cache: true
+});
+```
+
+or
+
+```javascript
+parser.setCacheEnable(true);
+```
+
+```javascript
+var value = parser.exec('a + b', { a: 10, b: 20 });
+parser.clearCache();
+```
+
+`compile()` also accepts a cache option.
+
+```javascript
+var f = parser.compile('a + b', {
+    cache: true
 });
 ```
 

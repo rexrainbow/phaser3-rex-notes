@@ -1,19 +1,36 @@
 export default ExpressionParser;
 
 declare namespace ExpressionParser {
-    interface IConfig {
+    interface IConfig<TContext = object> {
         safeMode?: boolean;
+        cache?: boolean;
+        functions?: Record<string, Function>;
+        values?: Record<string, any>;
+        defaultHandler?: (
+            name: string,
+            args: any[],
+            context: TContext
+        ) => any;
+        defaultValueHandler?: (
+            name: string,
+            context: TContext,
+            path: any[]
+        ) => any;
+    }
+
+    interface ICompileConfig {
+        cache?: boolean;
     }
 
     /**
      * Callback produced by compiled expressions.
      *
      * @param context - Evaluation context.
-     * @returns The evaluated number.
+     * @returns The evaluated value.
      */
-    type ExpressionCallbackType = (
-        context: object
-    ) => number
+    type ExpressionCallbackType<TResult = any, TContext = object> = (
+        context: TContext
+    ) => TResult
 }
 
 /**
@@ -26,6 +43,7 @@ declare class ExpressionParser {
     );
 
     safeMode: boolean;
+    cacheExpressions: boolean;
 
     setSafeMode(
         enable?: boolean
@@ -34,6 +52,10 @@ declare class ExpressionParser {
     setFunction(
         name: string,
         callback: Function
+    ): this;
+
+    setFunctions(
+        functions: Record<string, Function>
     ): this;
 
     getFunction(
@@ -46,39 +68,67 @@ declare class ExpressionParser {
 
     clearFunctions(): this;
 
+    setValue(
+        name: string,
+        value: any
+    ): this;
+
+    setValues(
+        values: Record<string, any>
+    ): this;
+
+    getValue(
+        name: string | any[],
+        defaultValue?: any
+    ): any;
+
+    removeValue(
+        name: string | any[]
+    ): this;
+
+    clearValues(): this;
+
+    setCacheEnable(
+        enable?: boolean
+    ): this;
+
+    clearCache(): this;
+
     /**
      * Compile an expression into a callback.
      *
      * @param expression - Expression string.
      * @returns The compiled callback.
      */
-    compile(
-        expression: string
-    ): ExpressionParser.ExpressionCallbackType;
+    compile<TResult = any, TContext = object>(
+        expression: string,
+        config?: ExpressionParser.ICompileConfig
+    ): ExpressionParser.ExpressionCallbackType<TResult, TContext>;
 
     /**
      * Execute an expression string.
      *
      * @param expression - Expression string.
      * @param context - Evaluation context.
-     * @returns The evaluated number.
+     * @returns The evaluated value.
      */
-    exec(
+    exec<TResult = any, TContext = object>(
         expression: string,
-        context: object
-    ): number;
+        context: TContext,
+        config?: ExpressionParser.ICompileConfig
+    ): TResult;
 
     /**
      * Execute a compiled expression callback.
      *
      * @param expressionCallback - Compiled callback.
      * @param context - Evaluation context.
-     * @returns The evaluated number.
+     * @returns The evaluated value.
      */
-    exec(
-        expressionCallback: ExpressionParser.ExpressionCallbackType,
-        context: object
-    ): number;
+    exec<TResult = any, TContext = object>(
+        expressionCallback: ExpressionParser.ExpressionCallbackType<TResult, TContext>,
+        context: TContext
+    ): TResult;
 
     /**
      * Fallback for missing custom methods.

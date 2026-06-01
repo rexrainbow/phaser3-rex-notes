@@ -9,13 +9,50 @@ class FormulaParser extends parser.Parser {
         super();
 
         this.functions = Object.create(null);
+        this.values = Object.create(null);
+        this.cacheExpressions = false;
+        this.expressionCache = Object.create(null);
         this.safeMode = false;
 
+        if (typeof (config) === 'boolean') {
+            config = {
+                safeMode: config
+            }
+        }
+
         this.setSafeMode(GetProperty(config, 'safeMode', false));
+
+        var functions = GetProperty(config, 'functions', undefined);
+        if (functions) {
+            this.setFunctions(functions);
+        }
+
+        var values = GetProperty(config, 'values', undefined);
+        if (values) {
+            this.setValues(values);
+        }
+
+        var defaultHandler = GetProperty(config, 'defaultHandler', undefined);
+        if (defaultHandler !== undefined) {
+            this.defaultHandler = defaultHandler;
+        }
+
+        var defaultValueHandler = GetProperty(config, 'defaultValueHandler', undefined);
+        if (defaultValueHandler !== undefined) {
+            this.defaultValueHandler = defaultValueHandler;
+        }
+
+        this.setCacheEnable(GetProperty(config, 'cache', false));
+
     }
 
     getProperty(context, name, defaultValue) {
         var value = GetProperty(context, name, MISSING, false, this.safeMode);
+        if (value !== MISSING) {
+            return value;
+        }
+
+        value = this.getValue(name, MISSING);
         if (value !== MISSING) {
             return value;
         }
@@ -36,6 +73,11 @@ class FormulaParser extends parser.Parser {
             return value;
         }
 
+        value = this.getValue(name, MISSING);
+        if (value !== MISSING) {
+            return value;
+        }
+
         if (!this.safeMode) {
             value = GetProperty(this, name, MISSING, true);
             if (value !== MISSING) {
@@ -52,6 +94,14 @@ class FormulaParser extends parser.Parser {
 
     static GetProperty(context, key, defaultValue, dotMode, safeMode) {
         return GetProperty(context, key, defaultValue, dotMode, safeMode);
+    }
+
+    getPath(name) {
+        return Array.isArray(name) ? name.slice() : ((typeof (name) === 'string') ? name.split('.') : [name]);
+    }
+
+    getPathName(name) {
+        return this.getPath(name).join('.');
     }
 
     setSafeMode(enable) {
@@ -111,7 +161,19 @@ class FormulaParser extends parser.Parser {
 
     setFunction(name, callback) {
         this.checkSafePath(name);
+        if (typeof (callback) !== 'function') {
+            throw new Error('Invalid function: ' + name);
+        }
         this.functions[name] = callback;
+        return this;
+    }
+
+    setFunctions(functions) {
+        for (var name in functions) {
+            if (Object.prototype.hasOwnProperty.call(functions, name)) {
+                this.setFunction(name, functions[name]);
+            }
+        }
         return this;
     }
 
@@ -128,6 +190,57 @@ class FormulaParser extends parser.Parser {
 
     clearFunctions() {
         this.functions = Object.create(null);
+        return this;
+    }
+
+    setValue(name, value) {
+        this.checkSafePath(name);
+        this.values[name] = value;
+        return this;
+    }
+
+    setValues(values) {
+        for (var name in values) {
+            if (Object.prototype.hasOwnProperty.call(values, name)) {
+                this.setValue(name, values[name]);
+            }
+        }
+        return this;
+    }
+
+    getValue(name, defaultValue) {
+        this.checkSafePath(name);
+
+        var nameString = this.getPathName(name);
+        if (Object.prototype.hasOwnProperty.call(this.values, nameString)) {
+            return this.values[nameString];
+        }
+
+        var value = GetProperty(this.values, this.getPath(name), MISSING, true, this.safeMode);
+        return (value === MISSING) ? defaultValue : value;
+    }
+
+    removeValue(name) {
+        this.checkSafePath(name);
+        delete this.values[this.getPathName(name)];
+        return this;
+    }
+
+    clearValues() {
+        this.values = Object.create(null);
+        return this;
+    }
+
+    setCacheEnable(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.cacheExpressions = enable;
+        return this;
+    }
+
+    clearCache() {
+        this.expressionCache = Object.create(null);
         return this;
     }
 
@@ -223,13 +336,25 @@ class FormulaParser extends parser.Parser {
         return 0;
     }
 
-    compile(input) {
-        return this.parse(input);
+    compile(input, config) {
+        var cache = this.cacheExpressions;
+        if (config && (config.cache !== undefined)) {
+            cache = config.cache;
+        }
+
+        if (!cache) {
+            return this.parse(input);
+        }
+
+        if (!Object.prototype.hasOwnProperty.call(this.expressionCache, input)) {
+            this.expressionCache[input] = this.parse(input);
+        }
+        return this.expressionCache[input];
     }
 
-    exec(input, data) {
+    exec(input, data, config) {
         if (typeof (input) === 'string') {
-            input = this.compile(input);
+            input = this.compile(input, config);
         }
         return input(data);
     }
