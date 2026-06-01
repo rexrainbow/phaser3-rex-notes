@@ -1,4 +1,5 @@
-import RemoveItem from "../../../utils/array/Remove.js";
+import RemoveItem from '../../../utils/array/Remove.js';
+import EvaluateExpressionValue from '../nodes/expressions/EvaluateExpressionValue.js';
 
 class Tick {
 
@@ -92,8 +93,18 @@ class Tick {
         return this.blackboard.getGlobalMemory();
     }
 
-    evalExpression(expression) {
-        return expression.eval(this.getEvalContext());
+    evalExpression(expressionObject, context) {
+        if (context === undefined) {
+            context = this.getEvalContext();
+        }
+        return expressionObject.eval(this.getEvalContext());
+    }
+
+    evalExpressionValue(expressionString, context) {
+        if (context === undefined) {
+            context = this.getEvalContext();
+        }
+        return EvaluateExpressionValue(expressionString, context);
     }
 
     _enterNode(node) {

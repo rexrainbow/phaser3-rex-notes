@@ -35,6 +35,7 @@ import If from './decorators/If.js';
 import ContinueIf from './decorators/ContinueIf.js';
 import AbortIf from './decorators/AbortIf.js';
 import BreakDecorator from './decorators/BreakDecorator.js';
+import EvaluateExpressionValue from './expressions/EvaluateExpressionValue.js';
 
 export {
     BaseNode,
@@ -74,4 +75,5 @@ export {
     ContinueIf,
     AbortIf,
     BreakDecorator,
+    EvaluateExpressionValue,
 }

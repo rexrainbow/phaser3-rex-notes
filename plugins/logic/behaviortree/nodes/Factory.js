@@ -35,6 +35,7 @@ import If from './decorators/If.js';
 import ContinueIf from './decorators/ContinueIf.js';
 import AbortIf from './decorators/AbortIf.js';
 import BreakDecorator from './decorators/BreakDecorator.js';
+import EvaluateExpressionValue from './expressions/EvaluateExpressionValue.js';
 
 import ObjectFactory from '../ObjectFactory.js';
 import SetValue from '../../../utils/object/SetValue.js';
@@ -169,6 +170,7 @@ SetValue(window, 'RexPlugins.BehaviorTree.If', If);
 SetValue(window, 'RexPlugins.BehaviorTree.ContinueIf', ContinueIf);
 SetValue(window, 'RexPlugins.BehaviorTree.AbortIf', AbortIf);
 SetValue(window, 'RexPlugins.BehaviorTree.BreakDecorator', BreakDecorator);
+SetValue(window, 'RexPlugins.BehaviorTree.EvaluateExpressionValue', EvaluateExpressionValue);
 
 
 export {
@@ -208,4 +210,5 @@ export {
     ContinueIf,
     AbortIf,
     BreakDecorator,
+    EvaluateExpressionValue,
 };

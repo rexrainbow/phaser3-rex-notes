@@ -38,6 +38,7 @@ import {
     ContinueIf,
     AbortIf,
     BreakDecorator,
+    EvaluateExpressionValue,
 } from './nodes/Factory.js';
 
 export {
@@ -84,4 +85,5 @@ export {
     Wait,
     Abort,
     BreakAction,
+    EvaluateExpressionValue,
 };

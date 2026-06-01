@@ -114,11 +114,42 @@ declare class Tick<T = object> {
     getEvalContext(): BaseExpression.ContextType;
 
     /**
-     * Evaluate an expression.
+     * Evaluate a behavior-tree expression instance.
      *
-     * @param expression - Expression instance.
+     * This is used by built-in nodes such as `If`, `ContinueIf`, `Wait`, and
+     * `Cooldown`. When `context` is omitted, the current tick evaluation
+     * context from `getEvalContext()` is used. The expression instance decides
+     * how to evaluate itself against that context.
+     *
+     * @param expressionObject - Expression instance created by a behavior-tree node.
+     * @param context - Optional explicit evaluation context.
      * @returns Evaluation result.
      */
-    evalExpression(expression: BaseExpression): any;
+    evalExpression(
+        expressionObject: BaseExpression,
+        context?: BaseExpression.ContextType
+    ): any;
+
+    /**
+     * Evaluate a raw expression value.
+     *
+     * This helper is intended for custom expression handlers that need to
+     * evaluate nested values, for example a condition parameter like
+     * `{ value: "time * 10" }`. String values are evaluated through the
+     * behavior-tree expression compiler, function values are called with the
+     * context, and object values can be delegated to
+     * `context.evalExpressionObject()` when provided.
+     *
+     * When `context` is omitted, the current tick evaluation context from
+     * `getEvalContext()` is used.
+     *
+     * @param expressionString - Raw expression value to evaluate.
+     * @param context - Optional explicit evaluation context.
+     * @returns Evaluation result.
+     */
+    evalExpressionValue(
+        expressionString: string,
+        context?: BaseExpression.ContextType
+    ): any;
 
 }

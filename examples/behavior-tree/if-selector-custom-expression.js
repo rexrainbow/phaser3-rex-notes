@@ -43,7 +43,7 @@ class World {
 
     evaluatePlayerCoinCondition(condition, context) {
         var coin = this.player.coin;
-        var value = condition.parameters.value;
+        var value = context.evaluateExpression(condition.parameters.value);
         switch (condition.parameters.operator) {
             case '>':
                 return coin > value;
@@ -94,7 +94,7 @@ class Demo extends Phaser.Scene {
                         conditionType: 'playerCoin',
                         parameters: {
                             operator: '>',
-                            value: 100
+                            value: 'time * 10'
                         }
                     },
                     children: [
@@ -116,16 +116,19 @@ class Demo extends Phaser.Scene {
                 blackboard.setCurrentTime(time);
                 var state = tree.tick(blackboard, target, {
                     getEvalContext(tick) {
-                        return {
+                        var context = {
                             world: tick.target.world,
-                            evalExpressionObject(expression) {
-                                return tick.target.world.evaluateCondition(expression, {
-                                    world: tick.target.world,
-                                    blackboard: tick.blackboard,
-                                    tick: tick
-                                });
+                            time: tick.currentTime / 1000,
+                            blackboard: tick.blackboard,
+                            evaluateExpression(value) {
+                                return tick.evalExpressionValue(value, this);
                             }
-                        };
+                        }
+                        context.evalExpressionObject = function (expression) {
+                            return tick.target.world.evaluateCondition(expression, context);
+                        }
+
+                        return context;
                     }
                 });
                 console.log(`Run tick ${state}`);
