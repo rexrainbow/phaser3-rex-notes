@@ -66,7 +66,7 @@ class FormulaParser extends parser.Parser {
         return a && b;
     }
 
-    defaultHandler(name, args) {
+    defaultHandler(name, args, context) {
         return 0;
     }
 

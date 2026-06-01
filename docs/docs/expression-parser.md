@@ -109,6 +109,7 @@ var parser = scene.plugins.get('rexExpressionParserPlugin').add();
         - Condition : `(cond)? v0:v1`, ex`'(a > b.c)? a:b.c'`.
         - [Custom method](expression-parser.md#custom-method) : `randomInt(a, b.c)`.
         - String concat : `'Hello ' + name`.
+            - Escape sequence : `\n`, `\r`, `\t`, `\b`, `\f`, `\v`, `\0`, `\\`, `\'`, `\"`, `\xHH`, `\uHHHH`, `\u{H...}`.
 1. Invoke function
     ```javascript
     var value = f(context);
@@ -169,6 +170,32 @@ var value = parser.exec(f, context);
     }
     var value = parser.exec('randomInt(a, b)', context);
     ```
+
+### Default handler
+
+Fallback callback for missing custom methods.
+
+```javascript
+parser.defaultHandler = function(name, args, context) {
+    return 0;
+}
+```
+
+- `name` : Missing method name, for example `'randomInt'` or `'math.randomInt'`.
+- `args` : Evaluated arguments.
+- `context` : Evaluation context.
+
+Default handler could also be declared in context, which has higher priority than parser's default handler.
+
+```javascript
+var context = {
+    a: 10,
+    b: 20,
+    defaultHandler(name, args, context) {
+        return 0;
+    }
+}
+```
 
 ### Proxy as context
 

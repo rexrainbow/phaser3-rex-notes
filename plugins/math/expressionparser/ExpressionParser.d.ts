@@ -52,6 +52,20 @@ declare class ExpressionParser {
     ): number;
 
     /**
+     * Fallback for missing custom methods.
+     *
+     * @param name - Missing method name.
+     * @param args - Evaluated method arguments.
+     * @param context - Evaluation context.
+     * @returns Fallback value.
+     */
+    defaultHandler(
+        name: string,
+        args: any[],
+        context: object
+    ): any;
+
+    /**
      * Get a property from a context object.
      *
      * @param context - Source object.

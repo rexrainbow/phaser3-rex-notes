@@ -227,7 +227,7 @@ case 28:
         
 break;
 case 29:
- this.$ = yytext.slice(1,-1); 
+ this.$ = parseQuotedString(yytext); 
 break;
 case 30:
  this.$ = Number(yytext); 
@@ -397,9 +397,118 @@ parse: function parse(input) {
         return args;
     }
 
+    function isHex(value) {
+        return /^[0-9A-Fa-f]+$/.test(value);
+    }
+
+    function parseQuotedString(text) {
+        var result = '';
+        var end = text.length - 1;
+        for (var i = 1; i < end; i++) {
+            var char = text.charAt(i);
+            if (char !== '\\') {
+                result += char;
+                continue;
+            }
+
+            i++;
+            if (i >= end) {
+                result += '\\';
+                break;
+            }
+
+            var escaped = text.charAt(i);
+            switch (escaped) {
+                case 'n':
+                    result += '\n';
+                    break;
+                case 'r':
+                    result += '\r';
+                    break;
+                case 't':
+                    result += '\t';
+                    break;
+                case 'b':
+                    result += '\b';
+                    break;
+                case 'f':
+                    result += '\f';
+                    break;
+                case 'v':
+                    result += '\v';
+                    break;
+                case '0':
+                    result += '\0';
+                    break;
+                case 'x':
+                    var hex = text.substr(i + 1, 2);
+                    if ((hex.length === 2) && isHex(hex)) {
+                        result += String.fromCharCode(parseInt(hex, 16));
+                        i += 2;
+                    } else {
+                        result += escaped;
+                    }
+                    break;
+                case 'u':
+                    if (text.charAt(i + 1) === '{') {
+                        var closeIndex = text.indexOf('}', i + 2);
+                        if ((closeIndex !== -1) && (closeIndex < end)) {
+                            var codePoint = text.substring(i + 2, closeIndex);
+                            if ((codePoint !== '') && isHex(codePoint)) {
+                                var codePointValue = parseInt(codePoint, 16);
+                                if (codePointValue <= 0x10ffff) {
+                                    result += String.fromCodePoint(codePointValue);
+                                    i = closeIndex;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    var unicode = text.substr(i + 1, 4);
+                    if ((unicode.length === 4) && isHex(unicode)) {
+                        result += String.fromCharCode(parseInt(unicode, 16));
+                        i += 4;
+                    } else {
+                        result += escaped;
+                    }
+                    break;
+                default:
+                    result += escaped;
+                    break;
+            }
+        }
+
+        return result;
+    }
+
     function runBuildInMethod(self, ctx, name, args) {
         var callback = self[name];
         return callback.apply(self, mapArgs(args, ctx));
+    }
+
+    function getDefaultHandler(self, ctx) {
+        var callback, scope;
+        if (
+            (ctx != null) &&
+            ((typeof(ctx) === 'object') || (typeof(ctx) === 'function')) &&
+            ('defaultHandler' in ctx)
+        ) {
+            callback = ctx.defaultHandler;
+            if (callback != null) {
+                scope = ctx;
+            }
+        }
+
+        if (callback == null) {
+            callback = self.defaultHandler;
+            scope = self;
+        }
+
+        return {
+            callback: callback,
+            scope: scope
+        };
     }
 
     function runMethod(self, ctx, name, args, dotMode) {
@@ -414,10 +523,12 @@ parse: function parse(input) {
             names = name;
         }
 
+        var methodName = names.join('.');
+        var methodArgs = mapArgs(args, ctx) || [];
         var callback, scope;
         if (names.length > 1) {
-            var callbackName = names.pop();
-            scope = self.getDotProperty(ctx, names);
+            var callbackName = names[names.length - 1];
+            scope = self.getDotProperty(ctx, names.slice(0, -1));
             callback = (scope != null) ? scope[callbackName] : undefined;
         } else {
             callback = self.getProperty(ctx, name);
@@ -425,11 +536,13 @@ parse: function parse(input) {
         }
 
         if (callback == null) {
-            callback = self.getProperty(ctx, 'defaultHandler');
-            scope = self;
+            var defaultHandler = getDefaultHandler(self, ctx);
+            callback = defaultHandler.callback;
+            scope = defaultHandler.scope;
+            return callback.call(scope, methodName, methodArgs, ctx);
         }
 
-        return callback.apply(scope, mapArgs(args, ctx));
+        return callback.apply(scope, methodArgs);
     }
 /* generated by jison-lex 0.3.4 */
 var lexer = (function(){
