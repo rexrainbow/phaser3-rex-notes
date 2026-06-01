@@ -66,6 +66,20 @@ declare class ExpressionParser {
     ): any;
 
     /**
+     * Fallback for missing variables or properties.
+     *
+     * @param name - Missing variable or property path.
+     * @param context - Evaluation context.
+     * @param path - Evaluated property path segments.
+     * @returns Fallback value.
+     */
+    defaultValueHandler(
+        name: string,
+        context: object,
+        path: any[]
+    ): any;
+
+    /**
      * Get a property from a context object.
      *
      * @param context - Source object.

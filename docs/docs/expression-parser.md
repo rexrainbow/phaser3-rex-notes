@@ -197,6 +197,30 @@ var context = {
 }
 ```
 
+### Default value handler
+
+Fallback callback for missing variables or properties.
+
+```javascript
+parser.defaultValueHandler = function(name, context, path) {
+    return 0;
+}
+```
+
+- `name` : Missing variable or property path, for example `'a'` or `'player.hp'`.
+- `context` : Evaluation context.
+- `path` : Evaluated property path segments, for example `['player', 'hp']`.
+
+Default value handler could also be declared in context, which has higher priority than parser's default value handler.
+
+```javascript
+var context = {
+    defaultValueHandler(name, context, path) {
+        throw new Error(`Unknown variable: ${name}`);
+    }
+}
+```
+
 ### Proxy as context
 
 [Proxy](https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Proxy) 
