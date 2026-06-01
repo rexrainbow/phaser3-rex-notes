@@ -71,7 +71,7 @@
         if (names.length > 1) {
             var callbackName = names.pop();
             scope = self.getDotProperty(ctx, names);
-            callback = scope[callbackName];
+            callback = (scope != null) ? scope[callbackName] : undefined;
         } else {
             callback = self.getProperty(ctx, name);
             scope = self;
@@ -89,13 +89,13 @@
 /* operator associations and precedence */
 
 %left '?' ':'
-%left '||' '&&'
+%left '||'
+%left '&&'
 %left '>' '<' '==' '!=' '>=' '<='
 %left '+' '-'
-%left '%'
-%left '*' '/'
-%left '^'
+%left '*' '/' '%'
 %left UMINUS
+%right '^'
 
 %start expressions
 
@@ -180,11 +180,23 @@ e
         }
     | e '||' e
         {
-            $$ = function(ctx) { return runBuildInMethod(yy.parser, ctx, '_or', [$1, $3]) == true; };
+            $$ = function(ctx) {
+                var left = runFn($1, ctx);
+                if (left) {
+                    return true;
+                }
+                return runBuildInMethod(yy.parser, ctx, '_or', [left, $3]) == true;
+            };
         }
     | e '&&' e
         {
-            $$ = function(ctx) { return runBuildInMethod(yy.parser, ctx, '_and', [$1, $3]) == true; };
+            $$ = function(ctx) {
+                var left = runFn($1, ctx);
+                if (!left) {
+                    return false;
+                }
+                return runBuildInMethod(yy.parser, ctx, '_and', [left, $3]) == true;
+            };
         }        
     | '-' e %prec UMINUS
         {
