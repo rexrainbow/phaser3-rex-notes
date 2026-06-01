@@ -5,7 +5,7 @@ import BaseExpression from '../nodes/expressions/BaseExpression';
 export default Tick;
 
 declare namespace Tick {
-
+    type EvalContextGetter<T = object> = (tick: Tick<T>) => BaseExpression.ContextType;
 }
 
 /**
@@ -30,6 +30,10 @@ declare class Tick<T = object> {
      * Target object.
      */
     target: T;
+    /**
+     * Optional expression evaluation context getter.
+     */
+    evalContextGetter?: Tick.EvalContextGetter<T>;
 
     /**
      * Destroy the tick context.
@@ -59,6 +63,14 @@ declare class Tick<T = object> {
      * @returns This Tick instance.
      */
     setTarget(target: T): this;
+
+    /**
+     * Set the expression evaluation context getter.
+     *
+     * @param callback - Context getter, or undefined to use global blackboard memory.
+     * @returns This Tick instance.
+     */
+    setEvalContextGetter(callback?: Tick.EvalContextGetter<T>): this;
 
     /**
      * Reset tick state.
@@ -93,6 +105,13 @@ declare class Tick<T = object> {
      * Current time value.
      */
     readonly currentTime: number;
+
+    /**
+     * Get the context passed to expression evaluation.
+     *
+     * @returns Evaluation context.
+     */
+    getEvalContext(): BaseExpression.ContextType;
 
     /**
      * Evaluate an expression.

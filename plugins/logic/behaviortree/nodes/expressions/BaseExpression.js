@@ -5,7 +5,16 @@ class BaseExpression {
     }
 
     eval(context) {
-        return this.expressionHandler(context);
+        if (typeof (this.expressionHandler) === 'function') {
+            return this.expressionHandler(context, this);
+        }
+
+        var evalCallback = (context) ? context.evalExpressionObject : null;
+        if (evalCallback) {
+            return evalCallback(this.expressionHandler, this);
+        }
+
+        return this.expressionHandler;
     }
 }
 

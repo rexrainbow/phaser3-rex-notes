@@ -6,12 +6,21 @@ class Expression extends BaseExpression {
         super();
 
         var callback;
-        if (typeof (expression) === 'number') {
-            callback = function () {
-                return expression;
-            }
-        } else {
-            callback = Compile(expression);
+        var expressionType = typeof (expression);
+        switch (expressionType) {
+            case 'number':
+                callback = function () {
+                    return expression;
+                }
+                break;
+
+            case 'string':
+                callback = Compile(expression);
+                break;
+
+            default: // 'function',  or 'object'
+                callback = expression;
+                break;
         }
 
         this.setExpressionHandler(callback);

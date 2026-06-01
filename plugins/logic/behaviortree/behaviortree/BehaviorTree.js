@@ -117,15 +117,20 @@ class BehaviorTree {
         return out;
     }
 
-    tick(blackboard, target) {
+    tick(blackboard, target, options) {
         if (!blackboard) {
             throw 'The blackboard parameter is obligatory and must be an instance of Blackboard';
+        }
+
+        if (options === undefined) {
+            options = {};
         }
 
         var ticker = this.ticker;
         ticker
             .setBlackBoard(blackboard)
             .setTarget(target)
+            .setEvalContextGetter(options.getEvalContext)
             .reset();
 
         /* TICK NODE */
@@ -139,15 +144,20 @@ class BehaviorTree {
         return state;
     }
 
-    abort(blackboard, target) {
+    abort(blackboard, target, options) {
         if (!blackboard) {
             throw 'The blackboard parameter is obligatory and must be an instance of Blackboard';
+        }
+
+        if (options === undefined) {
+            options = {};
         }
 
         var ticker = this.ticker;
         ticker
             .setBlackBoard(blackboard)
             .setTarget(target)
+            .setEvalContextGetter(options.getEvalContext)
             .reset();
 
         /* ABORT NODE */

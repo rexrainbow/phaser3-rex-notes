@@ -102,6 +102,10 @@ declare namespace BehaviorTree {
          */
         services?: string[];
     }
+
+    interface TickOptions<T = object> {
+        getEvalContext?: (tick: Tick<T>) => Record<string, any>;
+    }
 }
 
 
@@ -236,7 +240,8 @@ declare class BehaviorTree {
      */
     tick(
         blackboard: Blackboard,
-        target?: object
+        target?: object,
+        options?: BehaviorTree.TickOptions
     ): number;
 
     /**
@@ -248,7 +253,8 @@ declare class BehaviorTree {
      */
     abort(
         blackboard: Blackboard,
-        target?: object
+        target?: object,
+        options?: BehaviorTree.TickOptions
     ): number;
 
     /**

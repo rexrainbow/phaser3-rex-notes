@@ -11,6 +11,8 @@ class Tick {
 
         this.target = null;
 
+        this.evalContextGetter = undefined;
+
         // updated during the tick signal
 
         this._openNodes = [];  // Open nodes of current tick
@@ -26,6 +28,7 @@ class Tick {
         this.tree = null;
         this.blackboard = null;
         this.target = null;
+        this.evalContextGetter = undefined;
         this._openNodes.length = 0;
     }
 
@@ -42,6 +45,11 @@ class Tick {
 
     setTarget(target) {
         this.target = target;
+        return this;
+    }
+
+    setEvalContextGetter(callback) {
+        this.evalContextGetter = callback;
         return this;
     }
 
@@ -76,8 +84,16 @@ class Tick {
         }
     }
 
+    getEvalContext() {
+        if (this.evalContextGetter) {
+            return this.evalContextGetter(this);
+        }
+
+        return this.blackboard.getGlobalMemory();
+    }
+
     evalExpression(expression) {
-        return expression.eval(this.blackboard.getGlobalMemory());
+        return expression.eval(this.getEvalContext());
     }
 
     _enterNode(node) {
