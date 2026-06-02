@@ -6,6 +6,8 @@ export default Tick;
 
 declare namespace Tick {
     type EvalContextGetter<T = object> = (tick: Tick<T>) => BaseExpression.ContextType;
+    type ExpressionTransformHandler = (source: unknown) => unknown;
+    type CompileExpressionHandler = (expression: string) => (context: BaseExpression.ContextType) => any;
 }
 
 /**
@@ -71,6 +73,12 @@ declare class Tick<T = object> {
      * @returns This Tick instance.
      */
     setEvalContextGetter(callback?: Tick.EvalContextGetter<T>): this;
+
+    setExpressionTransformHandler(callback?: Tick.ExpressionTransformHandler): this;
+
+    setCompileExpressionHandler(callback?: Tick.CompileExpressionHandler): this;
+
+    setCompileStringTemplateHandler(callback?: Tick.CompileExpressionHandler): this;
 
     /**
      * Reset tick state.

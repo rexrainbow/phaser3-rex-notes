@@ -130,7 +130,13 @@ class BehaviorTree {
         ticker
             .setBlackBoard(blackboard)
             .setTarget(target)
+
+            // Settings for evaluating expressions
             .setEvalContextGetter(options.getEvalContext)
+            .setExpressionTransformHandler(options.expressionTransformHandler)
+            .setCompileExpressionHandler(options.compileExpressionHandler)
+            .setCompileStringTemplateHandler(options.compileStringTemplateHandler)
+
             .reset();
 
         /* TICK NODE */

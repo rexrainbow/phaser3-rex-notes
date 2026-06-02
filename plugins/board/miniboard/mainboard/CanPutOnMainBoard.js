@@ -20,8 +20,8 @@ var CanPutOnMainBoard = function (mainBoard, tileX, tileY, chessTileXYMap) {
             targetTileXY.y = mappedTileXY.y;
             targetTileXY.z = chessTileXYZ.z;
             var chess = this.board.uidToChess(uid);
-            if (this.putTestCallbackScpe) {
-                isOccupied = this.putTestCallback.call(this.putTestCallbackScpe, targetTileXY, mainBoard, chess);
+            if (this.putTestCallbackScope) {
+                isOccupied = this.putTestCallback.call(this.putTestCallbackScope, targetTileXY, mainBoard, chess);
             } else {
                 isOccupied = this.putTestCallback(targetTileXY, mainBoard, chess);
             }

@@ -105,6 +105,9 @@ declare namespace BehaviorTree {
 
     interface TickOptions<T = object> {
         getEvalContext?: (tick: Tick<T>) => Record<string, any>;
+        expressionTransformHandler?: Tick.ExpressionTransformHandler;
+        compileExpressionHandler?: Tick.CompileExpressionHandler;
+        compileStringTemplateHandler?: Tick.CompileExpressionHandler;
     }
 }
 

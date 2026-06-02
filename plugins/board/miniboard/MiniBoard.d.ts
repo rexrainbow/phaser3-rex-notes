@@ -52,7 +52,7 @@ declare namespace MiniBoard {
         /**
          * Callback scope for put test.
          */
-        putTestCallbackScpe?: unknown,
+        putTestCallbackScope?: unknown,
     }
 
     /**

@@ -27,7 +27,7 @@ class MiniBoard extends Container {
         if (dragEnable !== undefined) {
             this.setDraggable(dragEnable);
         }
-        this.setPutTestCallback(GetValue(o, 'putTestCallback', undefined), GetValue(o, 'putTestCallbackScpe', undefined));       
+        this.setPutTestCallback(GetValue(o, 'putTestCallback', undefined), GetValue(o, 'putTestCallbackScope', undefined));       
         this.lastTransferResult = GetValue(o, 'lastTransferResult', undefined);
         return this;
     }
@@ -72,7 +72,7 @@ class MiniBoard extends Container {
 
     setPutTestCallback(callback, scope) {
         this.putTestCallback = callback;
-        this.putTestCallbackScpe = scope;
+        this.putTestCallbackScope = scope;
         return this;
     }
 }
