@@ -15548,10 +15548,10 @@ Object.assign(
 BehaviorTree.setStartIDValue(0);
 
 class EventSheetManager extends EventEmitter$2 {
-    constructor(scene, config) {
-        if (IsPlainObject$B(scene) && (config === undefined)) {
-            config = scene;
-            scene = undefined;
+    constructor(owner, config) {
+        if (IsPlainObject$B(owner) && (config === undefined)) {
+            config = owner;
+            owner = undefined;
         }
 
         if (config === undefined) {
@@ -15561,7 +15561,7 @@ class EventSheetManager extends EventEmitter$2 {
         super();
 
         this.isShutdown = false;
-        this.scene = scene;
+        this.owner = owner;
 
         var {
             commandExecutor,
@@ -15582,19 +15582,15 @@ class EventSheetManager extends EventEmitter$2 {
 
         this.setRoundCounter(0);
 
-        this.boot();
     }
 
-    boot() {
-    }
-
-    shutdown(fromScene) {
+    shutdown(destroyConfig) {
         if (this.isShutdown) {
             return;
         }
 
         if (this.commandExecutor && this.commandExecutor.destroy) {
-            this.commandExecutor.destroy(fromScene);
+            this.commandExecutor.destroy(destroyConfig);
         }
 
         for (var name in this.treeGroups) {
@@ -15605,7 +15601,7 @@ class EventSheetManager extends EventEmitter$2 {
 
         super.shutdown();
 
-        this.scene = undefined;
+        this.owner = undefined;
         this.commandExecutor = undefined;
         this.blackboard = undefined;
         this.isShutdown = true;
@@ -15613,12 +15609,12 @@ class EventSheetManager extends EventEmitter$2 {
         return this;
     }
 
-    destroy(fromScene) {
+    destroy(destroyConfig) {
         if (this.isShutdown) {
             return;
         }
-        this.emit('destroy', this, fromScene);
-        this.shutdown(fromScene);
+        this.emit('destroy', this, destroyConfig);
+        this.shutdown(destroyConfig);
     }
 
 
@@ -15645,6 +15641,39 @@ Object.assign(
     EventSheetManager.prototype,
     Methods$f
 );
+
+class EventSheets extends EventSheetManager {
+    constructor(scene, config) {
+        super(scene, config);
+
+        this.scene = this.owner;
+
+        this.boot();
+    }
+
+    boot() {
+        if (this.scene) {
+            this.scene.sys.events.once('shutdown', this.destroy, this);
+        }
+    }
+
+    shutdown(fromScene) {
+        if (this.isShutdown) {
+            return;
+        }
+
+        if (this.scene) {
+            this.scene.sys.events.off('shutdown', this.destroy, this);
+        }
+
+        super.shutdown(fromScene);
+
+        this.scene = undefined;
+
+        return this;
+    }
+
+}
 
 const RoundIdle = 0;
 const RoundRun = 1;
@@ -16313,29 +16342,7 @@ var BuildTree = function (
     return eventsheet;
 };
 
-class JSONEventSheets extends EventSheetManager {
-    boot() {
-        super.boot();
-
-        if (this.scene) {
-            this.scene.sys.events.once('shutdown', this.destroy, this);
-        }
-    }
-
-    shutdown(fromScene) {
-        if (this.isShutdown) {
-            return;
-        }
-
-        if (this.scene) {
-            this.scene.sys.events.off('shutdown', this.destroy, this);
-        }
-
-        super.shutdown(fromScene);
-
-        return this;
-    }
-
+class JSONEventSheets extends EventSheets {
     addEventSheet(jsonData, groupName, config) {
         if (typeof (groupName) !== 'string') {
             config = groupName;
