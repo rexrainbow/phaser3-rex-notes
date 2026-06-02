@@ -16,6 +16,10 @@ declare namespace StringTemplate {
      */
     type CompileResultType<TView = object> = (view: TView) => string
 
+    type FilterCallbackType = (value: any, ...args: any[]) => any
+
+    type ExpressionTransformType = (expression: string) => string
+
     /**
      * Configuration options for creating a StringTemplate instance.
      */
@@ -27,7 +31,15 @@ declare namespace StringTemplate {
         /**
          * Expression parser instance.
          */
-        expressionParser?: ExpressionParser
+        expressionParser?: ExpressionParser,
+        /**
+         * Filter functions used by pipe expressions.
+         */
+        filters?: Record<string, FilterCallbackType>,
+        /**
+         * Transform expression before compiling.
+         */
+        expressionTransform?: ExpressionTransformType
     }
 
     /**
@@ -49,7 +61,11 @@ declare namespace StringTemplate {
         /**
          * Options passed to expression parser compile.
          */
-        expressionCompileConfig?: ExpressionParser.ICompileConfig
+        expressionCompileConfig?: ExpressionParser.ICompileConfig,
+        /**
+         * Transform expression before compiling.
+         */
+        expressionTransform?: ExpressionTransformType
     }
 }
 
@@ -89,6 +105,57 @@ declare class StringTemplate {
      * @returns This StringTemplate instance.
      */
     setExpressionParser(expressionParser: ExpressionParser): this;
+
+    /**
+     * Register current filters into expression parser.
+     *
+     * @param expressionParser - Expression parser instance.
+     * @returns This StringTemplate instance.
+     */
+    registerFilters(expressionParser: ExpressionParser): this;
+
+    /**
+     * Set expression transform callback.
+     *
+     * @param callback - Transform callback.
+     * @returns This StringTemplate instance.
+     */
+    setExpressionTransform(callback?: StringTemplate.ExpressionTransformType): this;
+
+    /**
+     * Register a filter function.
+     *
+     * @param name - Filter name.
+     * @param callback - Filter callback.
+     * @returns This StringTemplate instance.
+     */
+    setFilter(
+        name: string,
+        callback: StringTemplate.FilterCallbackType
+    ): this;
+
+    /**
+     * Register multiple filter functions.
+     *
+     * @param filters - Filter callbacks.
+     * @returns This StringTemplate instance.
+     */
+    setFilters(filters: Record<string, StringTemplate.FilterCallbackType>): this;
+
+    /**
+     * Remove a filter function.
+     *
+     * @param name - Filter name.
+     * @returns This StringTemplate instance.
+     */
+    removeFilter(name: string): this;
+
+    /**
+     * Remove all filter functions.
+     *
+     * @returns This StringTemplate instance.
+     */
+    clearFilters(): this;
 
     /**
      * Enable or disable template cache.

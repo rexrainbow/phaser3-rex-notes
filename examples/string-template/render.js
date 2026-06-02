@@ -19,6 +19,19 @@ class Demo extends Phaser.Scene {
         }
 
         var stringTemplate = this.plugins.get('rexStringTemplate')
+        var filterTemplate = stringTemplate.add({
+            filters: {
+                upper(value) {
+                    return String(value).toUpperCase();
+                },
+                fixed(value, digits) {
+                    return Number(value).toFixed(digits);
+                },
+                wrap(value, left, right) {
+                    return `${left}${value}${right}`;
+                }
+            }
+        });
 
         var s = 'xxx {{ a.b.c + 10 }} xxx {{ name }} xxx';
         var f = stringTemplate.compile(s)
@@ -47,6 +60,12 @@ class Demo extends Phaser.Scene {
 
         result = stringTemplate.render('Escaped delimiter: \\{{name}}', data);
         log('Escaped delimiter', result);
+
+        result = filterTemplate.render(`{{ name | upper | wrap('[', ']') }}: {{ hp | fixed(1) }}`, {
+            name: 'rex',
+            hp: 12.345
+        });
+        log('Pipe filters', result);
 
         var cachedTemplate = stringTemplate.compile('Cached {{ name }}', {
             cache: true,

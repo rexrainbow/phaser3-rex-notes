@@ -1,5 +1,6 @@
 import ExpressionParser from '../../math/expressionparser/ExpressionParser.js';
 import CompileContent from './CompileContent.js';
+import TransformExpression from './TransformExpression.js';
 
 
 class StringTemplate {
@@ -9,6 +10,8 @@ class StringTemplate {
         }
         this.cacheTemplates = false;
         this.templateCache = Object.create(null);
+        this.filters = Object.create(null);
+        this.expressionTransform = TransformExpression;
 
         // Brackets and generate regex
         var delimiters = config.delimiters;
@@ -25,6 +28,14 @@ class StringTemplate {
 
         if (config.cache !== undefined) {
             this.setCacheEnable(config.cache);
+        }
+
+        if (config.expressionTransform !== undefined) {
+            this.setExpressionTransform(config.expressionTransform);
+        }
+
+        if (config.filters) {
+            this.setFilters(config.filters);
         }
     }
 
@@ -43,6 +54,16 @@ class StringTemplate {
 
     setExpressionParser(expressionParser) {
         this.expressionParser = expressionParser;
+        this.registerFilters(expressionParser);
+        return this;
+    }
+
+    registerFilters(expressionParser) {
+        for (var name in this.filters) {
+            if (Object.prototype.hasOwnProperty.call(this.filters, name)) {
+                expressionParser.setFunction(name, this.filters[name]);
+            }
+        }
         return this;
     }
 
@@ -59,9 +80,49 @@ class StringTemplate {
         return this;
     }
 
-    getCacheKey(content, delimiterLeft, delimiterRight, expressionCompileConfig) {
+    setExpressionTransform(callback) {
+        if (callback === undefined) {
+            callback = TransformExpression;
+        }
+        this.expressionTransform = callback;
+        return this;
+    }
+
+    setFilter(name, callback) {
+        this.filters[name] = callback;
+        this.expressionParser.setFunction(name, callback);
+        return this;
+    }
+
+    setFilters(filters) {
+        for (var name in filters) {
+            if (Object.prototype.hasOwnProperty.call(filters, name)) {
+                this.setFilter(name, filters[name]);
+            }
+        }
+        return this;
+    }
+
+    removeFilter(name) {
+        delete this.filters[name];
+        this.expressionParser.removeFunction(name);
+        return this;
+    }
+
+    clearFilters() {
+        for (var name in this.filters) {
+            if (Object.prototype.hasOwnProperty.call(this.filters, name)) {
+                this.expressionParser.removeFunction(name);
+            }
+        }
+        this.filters = Object.create(null);
+        return this;
+    }
+
+    getCacheKey(content, delimiterLeft, delimiterRight, expressionCompileConfig, expressionTransform) {
         var expressionCompileConfigKey = expressionCompileConfig ? JSON.stringify(expressionCompileConfig) : '';
-        return `${delimiterLeft}\n${delimiterRight}\n${expressionCompileConfigKey}\n${content}`;
+        var expressionTransformKey = expressionTransform ? expressionTransform.toString() : '';
+        return `${delimiterLeft}\n${delimiterRight}\n${expressionCompileConfigKey}\n${expressionTransformKey}\n${content}`;
     }
 
     compile(content, config) {
@@ -69,6 +130,7 @@ class StringTemplate {
         var delimiterRight = this.delimiterRight;
         var expressionParser = this.expressionParser;
         var expressionCompileConfig;
+        var expressionTransform = this.expressionTransform;
         var cache = this.cacheTemplates;
         var hasCustomExpressionParser = false;
 
@@ -93,11 +155,15 @@ class StringTemplate {
                 }
 
                 expressionCompileConfig = config.expressionCompileConfig;
+                if (config.expressionTransform !== undefined) {
+                    expressionTransform = config.expressionTransform;
+                }
             }
         }
 
         if (hasCustomExpressionParser) {
             cache = false;
+            this.registerFilters(expressionParser);
         }
 
         if (!delimiterLeft || !delimiterRight) {
@@ -105,13 +171,20 @@ class StringTemplate {
         }
 
         if (cache) {
-            var cacheKey = this.getCacheKey(content, delimiterLeft, delimiterRight, expressionCompileConfig);
+            var cacheKey = this.getCacheKey(content, delimiterLeft, delimiterRight, expressionCompileConfig, expressionTransform);
             if (Object.prototype.hasOwnProperty.call(this.templateCache, cacheKey)) {
                 return this.templateCache[cacheKey];
             }
         }
 
-        var result = CompileContent(content, delimiterLeft, delimiterRight, expressionParser, expressionCompileConfig);
+        var result = CompileContent(
+            content,
+            delimiterLeft,
+            delimiterRight,
+            expressionParser,
+            expressionCompileConfig,
+            expressionTransform
+        );
 
         // Return render callback
         var renderCallback = function (view) {

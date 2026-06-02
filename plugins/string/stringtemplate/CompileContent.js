@@ -27,7 +27,14 @@ var FindExpressionEnd = function (content, startIndex, delimiterRight) {
     return -1;
 }
 
-var CompileContent = function (content, delimiterLeft, delimiterRight, expressionParser, expressionCompileConfig) {
+var CompileContent = function (
+    content,
+    delimiterLeft,
+    delimiterRight,
+    expressionParser,
+    expressionCompileConfig,
+    expressionTransform
+) {
     var result = [];
     var charIdx = 0;
     var delimiterLeftLength = delimiterLeft.length;
@@ -56,7 +63,11 @@ var CompileContent = function (content, delimiterLeft, delimiterRight, expressio
             result.push(content.substring(charIdx, matchStart));
         }
 
-        result.push(expressionParser.compile(content.substring(expressionStart, matchEnd), expressionCompileConfig));
+        var expression = content.substring(expressionStart, matchEnd);
+        if (expressionTransform) {
+            expression = expressionTransform(expression);
+        }
+        result.push(expressionParser.compile(expression, expressionCompileConfig));
 
         charIdx = matchEnd + delimiterRightLength;
     }
