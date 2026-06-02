@@ -1,6 +1,7 @@
 import ExpressionParser from '../../math/expressionparser/ExpressionParser.js';
 import CompileContent from './CompileContent.js';
 import TransformExpression from './TransformExpression.js';
+import DefaultFilters from './filters/index.js';
 
 
 class StringTemplate {
@@ -33,6 +34,8 @@ class StringTemplate {
         if (config.expressionTransform !== undefined) {
             this.setExpressionTransform(config.expressionTransform);
         }
+
+        this.setFilters(DefaultFilters);
 
         if (config.filters) {
             this.setFilters(config.filters);

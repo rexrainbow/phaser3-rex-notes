@@ -21,12 +21,6 @@ class Demo extends Phaser.Scene {
         var stringTemplate = this.plugins.get('rexStringTemplate')
         var filterTemplate = stringTemplate.add({
             filters: {
-                upper(value) {
-                    return String(value).toUpperCase();
-                },
-                fixed(value, digits) {
-                    return Number(value).toFixed(digits);
-                },
                 wrap(value, left, right) {
                     return `${left}${value}${right}`;
                 }
@@ -66,6 +60,13 @@ class Demo extends Phaser.Scene {
             hp: 12.345
         });
         log('Pipe filters', result);
+
+        result = filterTemplate.render(`{{ name | capitalize }} {{ ratio | percent(1) }} {{ price | currency('USD', 'en-US') }}`, {
+            name: 'rex',
+            ratio: 0.1234,
+            price: 1234.5
+        });
+        log('Default filters', result);
 
         var cachedTemplate = stringTemplate.compile('Cached {{ name }}', {
             cache: true,
