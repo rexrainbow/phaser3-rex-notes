@@ -4,12 +4,7 @@ declare namespace BaseExpression {
     /**
      * Evaluation context type.
      */
-    interface ContextType extends Record<string, any> {
-        evalExpressionObject?: (
-            expression: unknown,
-            expressionInstance: BaseExpression
-        ) => any;
-    }
+    type ContextType = Record<string, any>;
 }
 /**
  * Base class for expressions.
@@ -22,7 +17,7 @@ declare class BaseExpression {
      * @returns This BaseExpression instance.
      */
     setExpressionHandler(
-        callback: ((context: BaseExpression.ContextType) => any) | unknown
+        callback: (context: BaseExpression.ContextType) => any
     ): this;
 
     /**

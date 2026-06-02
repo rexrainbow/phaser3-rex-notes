@@ -46,7 +46,6 @@ import {
     ContinueIf,
     AbortIf,
     BreakDecorator,
-    EvaluateExpressionValue,
 } from './nodes';
 
 export {
@@ -107,5 +106,4 @@ export {
     ContinueIf,
     AbortIf,
     BreakDecorator,
-    EvaluateExpressionValue,
 };

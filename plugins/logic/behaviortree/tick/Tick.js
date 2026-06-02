@@ -1,9 +1,4 @@
-import ExpressionParser from '../../../math/expressionparser/ExpressionParser.js';
-import StringTemplate from '../../../string/stringtemplate/StringTemplate.js';
-import DefaultExpressionTransformHandler from '../nodes/expressions/DefaultExpressionTransformHandler.js';
-import BaseExpression from '../nodes/expressions/BaseExpression.js';
-import RemoveItem from '../../../utils/array/Remove.js';
-import EvaluateExpressionValue from '../nodes/expressions/EvaluateExpressionValue.js';
+import RemoveItem from "../../../utils/array/Remove.js";
 
 class Tick {
 
@@ -15,27 +10,6 @@ class Tick {
         this.blackboard = null;
 
         this.target = null;
-
-        this.evalContextGetter = undefined;
-
-        this.expressionTransformHandler = DefaultExpressionTransformHandler;
-
-        var parser = new ExpressionParser({
-            cache: true
-        });
-        this.expressionParser = parser;
-        this.defaultCompileExpressionHandler = function (expression) {
-            return parser.compile(expression);
-        }
-        this.compileExpressionHandler = this.defaultCompileExpressionHandler;
-
-        var stringTemplateParser = new StringTemplate({
-            expressionParser: parser
-        })
-        this.defaultCompileStringTemplateHandler = function (expression) {
-            return stringTemplateParser.compile(expression);
-        }
-        this.compileStringTemplateHandler = this.defaultCompileStringTemplateHandler;
 
         // updated during the tick signal
 
@@ -52,7 +26,6 @@ class Tick {
         this.tree = null;
         this.blackboard = null;
         this.target = null;
-        this.evalContextGetter = undefined;
         this._openNodes.length = 0;
     }
 
@@ -69,11 +42,6 @@ class Tick {
 
     setTarget(target) {
         this.target = target;
-        return this;
-    }
-
-    setEvalContextGetter(callback) {
-        this.evalContextGetter = callback;
         return this;
     }
 
@@ -108,63 +76,8 @@ class Tick {
         }
     }
 
-    getEvalContext() {
-        if (this.evalContextGetter) {
-            return this.evalContextGetter(this);
-        }
-
-        return this.blackboard.getGlobalMemory();
-    }
-
-    setExpressionTransformHandler(callback) {
-        if (callback === undefined) {
-            callback = DefaultExpressionTransformHandler;
-        }
-        this.expressionTransformHandler = callback;
-        return this;
-    }
-
-    setCompileExpressionHandler(callback) {
-        if (callback === undefined) {
-            callback = this.defaultCompileExpressionHandler;
-        }
-        this.compileExpressionHandler = callback;
-        return this;
-    }
-
-    setCompileStringTemplateHandler(callback) {
-        if (callback === undefined) {
-            callback = this.defaultCompileStringTemplateHandler;
-        }
-        this.compileStringTemplateHandler = callback;
-        return this;
-    }
-
-    evalExpression(expressionObject, context, compile) {
-        if (context === undefined) {
-            context = this.getEvalContext();
-        }
-        if (compile === undefined) {
-            compile = this.compileExpressionHandler;
-        }
-
-        var source;
-        if (expressionObject instanceof BaseExpression) {
-            source = expressionObject.source;
-        } else {
-            source = expressionObject;
-        }
-
-        return expressionObject.runEvaluationPipeline(
-            source,
-            this.expressionTransformHandler,
-            compile,
-            context
-        );
-    }
-
-    evalStringTemplate(expressionObject, context) {
-        return this.evalExpression(expressionObject, context, this.compileStringTemplateHandler);
+    evalExpression(expression) {
+        return expression.eval(this.blackboard.getGlobalMemory());
     }
 
     _enterNode(node) {

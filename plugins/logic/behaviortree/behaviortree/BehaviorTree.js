@@ -117,26 +117,15 @@ class BehaviorTree {
         return out;
     }
 
-    tick(blackboard, target, options) {
+    tick(blackboard, target) {
         if (!blackboard) {
             throw 'The blackboard parameter is obligatory and must be an instance of Blackboard';
-        }
-
-        if (options === undefined) {
-            options = {};
         }
 
         var ticker = this.ticker;
         ticker
             .setBlackBoard(blackboard)
             .setTarget(target)
-
-            // Settings for evaluating expressions
-            .setEvalContextGetter(options.getEvalContext)
-            .setExpressionTransformHandler(options.expressionTransformHandler)
-            .setCompileExpressionHandler(options.compileExpressionHandler)
-            .setCompileStringTemplateHandler(options.compileStringTemplateHandler)
-
             .reset();
 
         /* TICK NODE */
@@ -150,20 +139,15 @@ class BehaviorTree {
         return state;
     }
 
-    abort(blackboard, target, options) {
+    abort(blackboard, target) {
         if (!blackboard) {
             throw 'The blackboard parameter is obligatory and must be an instance of Blackboard';
-        }
-
-        if (options === undefined) {
-            options = {};
         }
 
         var ticker = this.ticker;
         ticker
             .setBlackBoard(blackboard)
             .setTarget(target)
-            .setEvalContextGetter(options.getEvalContext)
             .reset();
 
         /* ABORT NODE */

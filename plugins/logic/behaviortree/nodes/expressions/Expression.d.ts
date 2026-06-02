@@ -10,15 +10,13 @@ declare namespace Expression {
 }
 
 /**
- * Expression wrapper for function, numeric, object, or string expressions.
+ * Expression wrapper for numeric or string expressions.
  */
 declare class Expression extends BaseExpression {
     /**
      * Create an Expression.
      *
-     * @param expression - Expression value.
+     * @param expression - Expression string or number.
      */
-    constructor(expression: string | number | object |
-        ((context: Expression.ContextType, expression: Expression) => any)
-    );
+    constructor(expression: string | number);
 }

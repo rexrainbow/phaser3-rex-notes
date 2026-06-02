@@ -35,7 +35,6 @@ import If from './decorators/If';
 import ContinueIf from './decorators/ContinueIf';
 import AbortIf from './decorators/AbortIf';
 import BreakDecorator from './decorators/BreakDecorator';
-import EvaluateExpressionValue from './expressions/EvaluateExpressionValue';
 
 export {
     BaseNode,
@@ -75,5 +74,4 @@ export {
     ContinueIf,
     AbortIf,
     BreakDecorator,
-    EvaluateExpressionValue,
 }
