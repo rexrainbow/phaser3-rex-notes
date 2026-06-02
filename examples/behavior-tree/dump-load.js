@@ -36,6 +36,29 @@ class PrintService extends RexPlugins.BehaviorTree.Service {
     }
 }
 
+var SortNodes = function (data) {
+    data.nodes.sort(function (a, b) {
+        return a.id.localeCompare(b.id);
+    });
+    return data;
+}
+
+var AssertDumpEquals = function (dataA, dataB) {
+    dataA = SortNodes(JSON.parse(JSON.stringify(dataA)));
+    dataB = SortNodes(JSON.parse(JSON.stringify(dataB)));
+
+    // Serial number may advance while load creates replacement node instances.
+    dataA.sn = null;
+    dataB.sn = null;
+
+    var jsonA = JSON.stringify(dataA);
+    var jsonB = JSON.stringify(dataB);
+    if (jsonA !== jsonB) {
+        console.error(dataA, dataB);
+        throw new Error('BehaviorTree dump/load round-trip failed.');
+    }
+}
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -78,15 +101,24 @@ class Demo extends Phaser.Scene {
                 })
 
             )
+        tree
+            .setTitle('')
+            .setDescription('')
+        tree.root.setTitle('');
 
         // Dump
         var data = tree.dump();
         console.log(data);
         // Load
-        var tree2 = btAdd.behaviorTree().load(data, {
-            MyAction: PrintAction,
-            MyPrintService: PrintService
-        });
+        var tree2 = btAdd.behaviorTree({
+            title: 'Original title before load',
+            description: 'Original description before load',
+        })
+            .load(data, {
+                MyAction: PrintAction,
+                MyPrintService: PrintService
+            });
+        AssertDumpEquals(data, tree2.dump());
 
         var blackboard = btAdd.blackboard()
             .set('name', 'rex')

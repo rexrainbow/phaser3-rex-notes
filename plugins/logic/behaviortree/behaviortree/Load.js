@@ -1,6 +1,10 @@
 import * as Nodes from '../nodes';
 import { GetSerialNumber, SetSerialNumber } from '../utils/CreateID.js'
 
+var HasOwnProperty = function (obj, prop) {
+    return Object.prototype.hasOwnProperty.call(obj, prop);
+}
+
 var Load = function (data, names) {
     var sn = data.sn;
     if (sn != null) {
@@ -9,9 +13,18 @@ var Load = function (data, names) {
 
     names = names || {};
 
-    this.title = data.title || this.title;
-    this.description = data.description || this.description;
-    this.properties = data.properties || this.properties;
+    if (HasOwnProperty(data, 'id')) {
+        this.id = data.id;
+    }
+    if (HasOwnProperty(data, 'title')) {
+        this.title = data.title;
+    }
+    if (HasOwnProperty(data, 'description')) {
+        this.description = data.description;
+    }
+    if (HasOwnProperty(data, 'properties')) {
+        this.properties = data.properties;
+    }
 
     var nodeData = data.nodes;
     var nodes = {};
@@ -33,13 +46,13 @@ var Load = function (data, names) {
         }
 
         var config = {};
-        if (spec.hasOwnProperty('children')) {
+        if (HasOwnProperty(spec, 'children')) {
             config.children = spec.children;
         }
-        if (spec.hasOwnProperty('child')) {
+        if (HasOwnProperty(spec, 'child')) {
             config.child = spec.child;
         }
-        if (spec.hasOwnProperty('services')) {
+        if (HasOwnProperty(spec, 'services')) {
             config.services = spec.services;
         }
 
@@ -49,10 +62,18 @@ var Load = function (data, names) {
         )
 
         var node = new Cls(config, nodes);
-        node.id = spec.id || node.id;
-        node.title = spec.title || node.title;
-        node.description = spec.description || node.description;
-        node.properties = spec.properties || node.properties;
+        if (HasOwnProperty(spec, 'id')) {
+            node.id = spec.id;
+        }
+        if (HasOwnProperty(spec, 'title')) {
+            node.title = spec.title;
+        }
+        if (HasOwnProperty(spec, 'description')) {
+            node.description = spec.description;
+        }
+        if (HasOwnProperty(spec, 'properties')) {
+            node.properties = spec.properties;
+        }
 
         nodes[node.id] = node;
     }

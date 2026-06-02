@@ -7,7 +7,7 @@ var DepthFirstSearch = function (root, callback, scope) {
         return;
     }
 
-    switch (current.category) {
+    switch (root.category) {
         case COMPOSITE:
             var children = root.children;
             for (var i = 0, cnt = children.length; i < cnt; i++) {
@@ -30,7 +30,7 @@ var DepthFirstSearch = function (root, callback, scope) {
             var services = root.services;
             if (services) {
                 for (var i = 0, cnt = services.length; i < cnt; i++) {
-                    DepthFirstSearch(services[i], callback);
+                    DepthFirstSearch(services[i], callback, scope);
                 }
             }
             break;
