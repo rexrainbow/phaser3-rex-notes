@@ -11376,6 +11376,51 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#custom-value" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom value
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#default-handler" class="md-nav__link">
+    <span class="md-ellipsis">
+      Default handler
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#default-value-handler" class="md-nav__link">
+    <span class="md-ellipsis">
+      Default value handler
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Safe mode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cache
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#proxy-as-context" class="md-nav__link">
     <span class="md-ellipsis">
       Proxy as context
@@ -15337,6 +15382,51 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#custom-value" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom value
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#default-handler" class="md-nav__link">
+    <span class="md-ellipsis">
+      Default handler
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#default-value-handler" class="md-nav__link">
+    <span class="md-ellipsis">
+      Default value handler
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Safe mode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cache
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#proxy-as-context" class="md-nav__link">
     <span class="md-ellipsis">
       Proxy as context
@@ -15445,6 +15535,34 @@ Parser is generated from <a href="https://github.com/zaach/jison">jison</a></p>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">parser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexExpressionParserPlugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">();</span>
 </code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">parser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexExpressionParserPlugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">safeMode</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">cache</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">functions</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">randomInt</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="nx">b</span><span class="o">-</span><span class="nx">a</span><span class="p">)</span><span class="o">+</span><span class="nx">a</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">values</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">PI</span><span class="o">:</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">defaultHandler</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">args</span><span class="p">,</span><span class="w"> </span><span class="nx">context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">defaultValueHandler</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">context</span><span class="p">,</span><span class="w"> </span><span class="nx">path</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+<ul>
+<li><code>safeMode</code> : Restrict expression access when expression strings come from external data. Default value is <code>false</code>.</li>
+<li><code>cache</code> : Cache compiled expressions. Default value is <code>false</code>.</li>
+<li><code>functions</code> : Methods registered into parser.</li>
+<li><code>values</code> : Values registered into parser.</li>
+<li><code>defaultHandler</code> : Fallback callback for missing custom methods.</li>
+<li><code>defaultValueHandler</code> : Fallback callback for missing variables or properties.</li>
+</ul>
 <h3 id="execute">Execute<a class="headerlink" href="#execute" title="Permanent link">&para;</a></h3>
 <h4 id="compile-then-execute">Compile then execute<a class="headerlink" href="#compile-then-execute" title="Permanent link">&para;</a></h4>
 <ol>
@@ -15461,7 +15579,10 @@ Parser is generated from <a href="https://github.com/zaach/jison">jison</a></p>
 <li>Boolean : <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>==</code>, <code>!=</code>, <code>&amp;&amp;</code>, <code>||</code>, ex <code>'(a &gt; 10) &amp;&amp; (a &lt; 30) || (b.c &gt; c)'</code>.</li>
 <li>Condition : <code>(cond)? v0:v1</code>, ex<code>'(a &gt; b.c)? a:b.c'</code>.</li>
 <li><a href="./#custom-method">Custom method</a> : <code>randomInt(a, b.c)</code>.</li>
-<li>String concat : <code>'Hello ' + name</code>.</li>
+<li>String concat : <code>'Hello ' + name</code>.<ul>
+<li>Escape sequence : <code>\n</code>, <code>\r</code>, <code>\t</code>, <code>\b</code>, <code>\f</code>, <code>\v</code>, <code>\0</code>, <code>\\</code>, <code>\'</code>, <code>\"</code>, <code>\xHH</code>, <code>\uHHHH</code>, <code>\u{H...}</code>.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -15491,6 +15612,13 @@ Parser is generated from <a href="https://github.com/zaach/jison">jison</a></p>
 </code></pre></div>
 <h3 id="custom-method">Custom method<a class="headerlink" href="#custom-method" title="Permanent link">&para;</a></h3>
 <ul>
+<li>Register method into parser instance
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">parser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexExpressionParserPlugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">();</span>
+<span class="nx">parser</span><span class="p">.</span><span class="nx">setFunction</span><span class="p">(</span><span class="s1">&#39;randomInt&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="nx">b</span><span class="o">-</span><span class="nx">a</span><span class="p">)</span><span class="o">+</span><span class="nx">a</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">// var value = parser.exec(&#39;randomInt(a, b)&#39;, {a:10, b:20});</span>
+</code></pre></div></li>
 <li>Add method into parser instance
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">parser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexExpressionParserPlugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">();</span>
 <span class="nx">parser</span><span class="p">.</span><span class="nx">randomInt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -15518,6 +15646,97 @@ Parser is generated from <a href="https://github.com/zaach/jison">jison</a></p>
 <span class="kd">var</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">parser</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="s1">&#39;randomInt(a, b)&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">context</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
+<h3 id="custom-value">Custom value<a class="headerlink" href="#custom-value" title="Permanent link">&para;</a></h3>
+<p>Register shared values into parser instance.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">parser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexExpressionParserPlugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">();</span>
+<span class="nx">parser</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="s1">&#39;PI&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">);</span>
+<span class="nx">parser</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="s1">&#39;math.E&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">E</span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">parser</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="s1">&#39;r * r * PI&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">r</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="w"> </span><span class="p">});</span>
+</code></pre></div>
+<ul>
+<li><code>setValue(name, value)</code> : Register a value.</li>
+<li><code>setValues(values)</code> : Register multiple values.</li>
+<li><code>getValue(name, defaultValue)</code> : Get a registered value.</li>
+<li><code>removeValue(name)</code> : Remove a registered value.</li>
+<li><code>clearValues()</code> : Remove all registered values.</li>
+</ul>
+<h3 id="default-handler">Default handler<a class="headerlink" href="#default-handler" title="Permanent link">&para;</a></h3>
+<p>Fallback callback for missing custom methods.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">defaultHandler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">args</span><span class="p">,</span><span class="w"> </span><span class="nx">context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><code>name</code> : Missing method name, for example <code>'randomInt'</code> or <code>'math.randomInt'</code>.</li>
+<li><code>args</code> : Evaluated arguments.</li>
+<li><code>context</code> : Evaluation context.</li>
+</ul>
+<p>Default handler could also be declared in context, which has higher priority than parser's default handler.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">context</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">a</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">b</span><span class="o">:</span><span class="w"> </span><span class="mf">20</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">defaultHandler</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">args</span><span class="p">,</span><span class="w"> </span><span class="nx">context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="default-value-handler">Default value handler<a class="headerlink" href="#default-value-handler" title="Permanent link">&para;</a></h3>
+<p>Fallback callback for missing variables or properties.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">defaultValueHandler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">context</span><span class="p">,</span><span class="w"> </span><span class="nx">path</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><code>name</code> : Missing variable or property path, for example <code>'a'</code> or <code>'player.hp'</code>.</li>
+<li><code>context</code> : Evaluation context.</li>
+<li><code>path</code> : Evaluated property path segments, for example <code>['player', 'hp']</code>.</li>
+</ul>
+<p>Default value handler could also be declared in context, which has higher priority than parser's default value handler.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">context</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">defaultValueHandler</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">context</span><span class="p">,</span><span class="w"> </span><span class="nx">path</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="sb">`Unknown variable: </span><span class="si">${</span><span class="nx">name</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="safe-mode">Safe mode<a class="headerlink" href="#safe-mode" title="Permanent link">&para;</a></h3>
+<p>Restrict expression access when expression strings come from external data.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">parser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ExpressionParser</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">safeMode</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">setSafeMode</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</code></pre></div>
+<p>In safe mode :</p>
+<ul>
+<li>Property lookup only reads own properties, not prototype properties.</li>
+<li>Unsafe property names are blocked : <code>__proto__</code>, <code>prototype</code>, <code>constructor</code>.</li>
+<li>Method calls can only invoke context methods or functions registered by <code>setFunction()</code>.</li>
+<li>Parser instance or prototype methods are not callable from expressions.</li>
+<li>Unsafe property access throws an error and does not call <code>defaultValueHandler</code> or <code>defaultHandler</code>.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">setFunction</span><span class="p">(</span><span class="s1">&#39;randomInt&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="nx">b</span><span class="o">-</span><span class="nx">a</span><span class="p">)</span><span class="o">+</span><span class="nx">a</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+<h3 id="cache">Cache<a class="headerlink" href="#cache" title="Permanent link">&para;</a></h3>
+<p>Cache compiled expressions.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">parser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ExpressionParser</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">cache</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">setCacheEnable</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">parser</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="s1">&#39;a + b&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">a</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="o">:</span><span class="w"> </span><span class="mf">20</span><span class="w"> </span><span class="p">});</span>
+<span class="nx">parser</span><span class="p">.</span><span class="nx">clearCache</span><span class="p">();</span>
+</code></pre></div>
+<p><code>compile()</code> also accepts a cache option.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">parser</span><span class="p">.</span><span class="nx">compile</span><span class="p">(</span><span class="s1">&#39;a + b&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">cache</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="p">});</span>
+</code></pre></div>
 <h3 id="proxy-as-context">Proxy as context<a class="headerlink" href="#proxy-as-context" title="Permanent link">&para;</a></h3>
 <p><a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Proxy">Proxy</a> 
 with <code>has</code> and <code>get</code> handlers could be a context.</p>
