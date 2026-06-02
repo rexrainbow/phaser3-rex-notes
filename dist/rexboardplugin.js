@@ -15868,8 +15868,8 @@
                 targetTileXY.y = mappedTileXY.y;
                 targetTileXY.z = chessTileXYZ.z;
                 var chess = this.board.uidToChess(uid);
-                if (this.putTestCallbackScpe) {
-                    isOccupied = this.putTestCallback.call(this.putTestCallbackScpe, targetTileXY, mainBoard, chess);
+                if (this.putTestCallbackScope) {
+                    isOccupied = this.putTestCallback.call(this.putTestCallbackScope, targetTileXY, mainBoard, chess);
                 } else {
                     isOccupied = this.putTestCallback(targetTileXY, mainBoard, chess);
                 }
@@ -16357,7 +16357,7 @@
             if (dragEnable !== undefined) {
                 this.setDraggable(dragEnable);
             }
-            this.setPutTestCallback(GetValue$c(o, 'putTestCallback', undefined), GetValue$c(o, 'putTestCallbackScpe', undefined));       
+            this.setPutTestCallback(GetValue$c(o, 'putTestCallback', undefined), GetValue$c(o, 'putTestCallbackScope', undefined));       
             this.lastTransferResult = GetValue$c(o, 'lastTransferResult', undefined);
             return this;
         }
@@ -16402,7 +16402,7 @@
 
         setPutTestCallback(callback, scope) {
             this.putTestCallback = callback;
-            this.putTestCallbackScpe = scope;
+            this.putTestCallbackScope = scope;
             return this;
         }
     }

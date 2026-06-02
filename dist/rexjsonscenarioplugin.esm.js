@@ -628,16 +628,7 @@ class BaseExpression {
     }
 
     eval(context) {
-        if (typeof (this.expressionHandler) === 'function') {
-            return this.expressionHandler(context, this);
-        }
-
-        var evalCallback = (context) ? context.evalExpressionObject : null;
-        if (evalCallback) {
-            return evalCallback(this.expressionHandler, this);
-        }
-
-        return this.expressionHandler;
+        return this.expressionHandler(context);
     }
 }
 
@@ -2018,21 +2009,12 @@ class Expression extends BaseExpression {
         super();
 
         var callback;
-        var expressionType = typeof (expression);
-        switch (expressionType) {
-            case 'number':
-                callback = function () {
-                    return expression;
-                };
-                break;
-
-            case 'string':
-                callback = Compile$1(expression);
-                break;
-
-            default: // 'function',  or 'object'
-                callback = expression;
-                break;
+        if (typeof (expression) === 'number') {
+            callback = function () {
+                return expression;
+            };
+        } else {
+            callback = Compile$1(expression);
         }
 
         this.setExpressionHandler(callback);
@@ -2045,11 +2027,282 @@ class BooleanExpression extends Expression {
     }
 }
 
+var FindExpressionEnd = function (content, startIndex, delimiterRight) {
+    var quoteChar;
+    var delimiterRightLength = delimiterRight.length;
+
+    for (var i = startIndex; i < content.length; i++) {
+        var char = content.charAt(i);
+
+        if (quoteChar) {
+            if (char === '\\') {
+                i++;
+            } else if (char === quoteChar) {
+                quoteChar = undefined;
+            }
+            continue;
+        }
+
+        if ((char === '"') || (char === '\'')) {
+            quoteChar = char;
+            continue;
+        }
+
+        if (content.substr(i, delimiterRightLength) === delimiterRight) {
+            return i;
+        }
+    }
+
+    return -1;
+};
+
+var CompileContent = function (
+    content,
+    delimiterLeft,
+    delimiterRight,
+    expressionParser,
+    expressionCompileConfig,
+    expressionTransform
+) {
+    var result = [];
+    var charIdx = 0;
+    var delimiterLeftLength = delimiterLeft.length;
+    var delimiterRightLength = delimiterRight.length;
+
+    while (charIdx < content.length) {
+        var matchStart = content.indexOf(delimiterLeft, charIdx);
+        if (matchStart === -1) {
+            break;
+        }
+
+        if ((matchStart > charIdx) && (content.charAt(matchStart - 1) === '\\')) {
+            result.push(content.substring(charIdx, matchStart - 1));
+            result.push(delimiterLeft);
+            charIdx = matchStart + delimiterLeftLength;
+            continue;
+        }
+
+        var expressionStart = matchStart + delimiterLeftLength;
+        var matchEnd = FindExpressionEnd(content, expressionStart, delimiterRight);
+        if (matchEnd === -1) {
+            break;
+        }
+
+        if (charIdx < matchStart) {
+            result.push(content.substring(charIdx, matchStart));
+        }
+
+        var expression = content.substring(expressionStart, matchEnd);
+        if (expressionTransform) {
+            expression = expressionTransform(expression);
+        }
+        result.push(expressionParser.compile(expression, expressionCompileConfig));
+
+        charIdx = matchEnd + delimiterRightLength;
+    }
+
+    if (charIdx < content.length) {
+        result.push(content.substring(charIdx));
+    }
+
+    return result;
+};
+
+var SplitTopLevelPipe = function (expression) {
+    var parts = [];
+    var startIndex = 0;
+    var quoteChar;
+    var parenDepth = 0;
+    var bracketDepth = 0;
+
+    for (var i = 0; i < expression.length; i++) {
+        var char = expression.charAt(i);
+
+        if (quoteChar) {
+            if (char === '\\') {
+                i++;
+            } else if (char === quoteChar) {
+                quoteChar = undefined;
+            }
+            continue;
+        }
+
+        if ((char === '"') || (char === '\'')) {
+            quoteChar = char;
+            continue;
+        }
+
+        switch (char) {
+            case '(':
+                parenDepth++;
+                break;
+            case ')':
+                parenDepth--;
+                break;
+            case '[':
+                bracketDepth++;
+                break;
+            case ']':
+                bracketDepth--;
+                break;
+            case '|':
+                if (
+                    (parenDepth === 0) &&
+                    (bracketDepth === 0) &&
+                    (expression.charAt(i - 1) !== '|') &&
+                    (expression.charAt(i + 1) !== '|')
+                ) {
+                    parts.push(expression.substring(startIndex, i).trim());
+                    startIndex = i + 1;
+                }
+                break;
+        }
+    }
+
+    parts.push(expression.substring(startIndex).trim());
+
+    return parts;
+};
+
+var ParseFilter = function (filter) {
+    var parenIndex = filter.indexOf('(');
+    if (parenIndex === -1) {
+        return {
+            name: filter.trim(),
+            args: ''
+        };
+    }
+
+    return {
+        name: filter.substring(0, parenIndex).trim(),
+        args: filter.substring(parenIndex + 1, filter.lastIndexOf(')')).trim()
+    };
+};
+
+var TransformExpression = function (expression) {
+    var parts = SplitTopLevelPipe(expression);
+    if (parts.length === 1) {
+        return expression;
+    }
+
+    var result = parts[0];
+    for (var i = 1; i < parts.length; i++) {
+        var filter = ParseFilter(parts[i]);
+        if (filter.args === '') {
+            result = `${filter.name}(${result})`;
+        } else {
+            result = `${filter.name}(${result}, ${filter.args})`;
+        }
+    }
+
+    return result;
+};
+
+var Upper = function (value) {
+    return String(value).toUpperCase();
+};
+
+var Lower = function (value) {
+    return String(value).toLowerCase();
+};
+
+var Capitalize = function (value) {
+    value = String(value);
+    return (value.length === 0) ? value : value.charAt(0).toUpperCase() + value.slice(1);
+};
+
+var Trim = function (value) {
+    return String(value).trim();
+};
+
+var Slice = function (value, start, end) {
+    return value.slice(start, end);
+};
+
+var Replace = function (value, search, replaceWith) {
+    return String(value).replace(search, replaceWith);
+};
+
+var DefaultValue = function (value, fallback) {
+    return ((value === undefined) || (value === null) || (value === '')) ? fallback : value;
+};
+
+var Json = function (value) {
+    return JSON.stringify(value);
+};
+
+var Fixed = function (value, digits) {
+    return Number(value).toFixed(digits);
+};
+
+var Round = function (value, digits) {
+    value = Number(value);
+    if (digits === undefined) {
+        return Math.round(value);
+    }
+
+    var scale = Math.pow(10, digits);
+    return Math.round(value * scale) / scale;
+};
+
+var Floor = function (value) {
+    return Math.floor(Number(value));
+};
+
+var Ceil = function (value) {
+    return Math.ceil(Number(value));
+};
+
+var Percent$6 = function (value, digits) {
+    if (digits === undefined) {
+        digits = 0;
+    }
+    return (Number(value) * 100).toFixed(digits) + '%';
+};
+
+var Currency = function (value, currency, locale) {
+    if (currency === undefined) {
+        currency = 'USD';
+    }
+
+    return new Intl.NumberFormat(locale, {
+        style: 'currency',
+        currency: currency
+    }).format(Number(value));
+};
+
+var NumberFormat = function (value, locale) {
+    return new Intl.NumberFormat(locale).format(Number(value));
+};
+
+var DefaultFilters = {
+    upper: Upper,
+    lower: Lower,
+    capitalize: Capitalize,
+    trim: Trim,
+    slice: Slice,
+    replace: Replace,
+    default: DefaultValue,
+    json: Json,
+    fixed: Fixed,
+    round: Round,
+    floor: Floor,
+    ceil: Ceil,
+    percent: Percent$6,
+    currency: Currency,
+    number: NumberFormat
+};
+
 class StringTemplate {
     constructor(config) {
         if (config === undefined) {
             config = {};
         }
+        this.cacheTemplates = false;
+        this.templateCache = Object.create(null);
+        this.filters = Object.create(null);
+        this.expressionTransform = TransformExpression;
+
         // Brackets and generate regex
         var delimiters = config.delimiters;
         if (delimiters === undefined) {
@@ -2059,9 +2312,23 @@ class StringTemplate {
 
         var expressionParser = config.expressionParser;
         if (expressionParser === undefined) {
-            expressionParser = new FormulaParser();
+            expressionParser = new FormulaParser(config);
         }
         this.setExpressionParser(expressionParser);
+
+        if (config.cache !== undefined) {
+            this.setCacheEnable(config.cache);
+        }
+
+        if (config.expressionTransform !== undefined) {
+            this.setExpressionTransform(config.expressionTransform);
+        }
+
+        this.setFilters(DefaultFilters);
+
+        if (config.filters) {
+            this.setFilters(config.filters);
+        }
     }
 
     setDelimiters(delimiterLeft, delimiterRight) {
@@ -2069,91 +2336,150 @@ class StringTemplate {
             delimiterRight = delimiterLeft[1];
             delimiterLeft = delimiterLeft[0];
         }
+        if (!delimiterLeft || !delimiterRight) {
+            throw new Error('Delimiters must be non-empty strings');
+        }
         this.delimiterLeft = delimiterLeft;
         this.delimiterRight = delimiterRight;
-
-        this.reDelimiter = RegExp(`${delimiterLeft}|${delimiterRight}`, 'gi');
-        this.reSplit = RegExp(`${delimiterLeft}.*?${delimiterRight}`, 'gi');
         return this;
     }
 
     setExpressionParser(expressionParser) {
         this.expressionParser = expressionParser;
+        this.registerFilters(expressionParser);
         return this;
     }
 
+    registerFilters(expressionParser) {
+        for (var name in this.filters) {
+            if (Object.prototype.hasOwnProperty.call(this.filters, name)) {
+                expressionParser.setFunction(name, this.filters[name]);
+            }
+        }
+        return this;
+    }
+
+    setCacheEnable(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.cacheTemplates = enable;
+        return this;
+    }
+
+    clearCache() {
+        this.templateCache = Object.create(null);
+        return this;
+    }
+
+    setExpressionTransform(callback) {
+        if (callback === undefined) {
+            callback = TransformExpression;
+        }
+        this.expressionTransform = callback;
+        return this;
+    }
+
+    setFilter(name, callback) {
+        this.filters[name] = callback;
+        this.expressionParser.setFunction(name, callback);
+        return this;
+    }
+
+    setFilters(filters) {
+        for (var name in filters) {
+            if (Object.prototype.hasOwnProperty.call(filters, name)) {
+                this.setFilter(name, filters[name]);
+            }
+        }
+        return this;
+    }
+
+    removeFilter(name) {
+        delete this.filters[name];
+        this.expressionParser.removeFunction(name);
+        return this;
+    }
+
+    clearFilters() {
+        for (var name in this.filters) {
+            if (Object.prototype.hasOwnProperty.call(this.filters, name)) {
+                this.expressionParser.removeFunction(name);
+            }
+        }
+        this.filters = Object.create(null);
+        return this;
+    }
+
+    getCacheKey(content, delimiterLeft, delimiterRight, expressionCompileConfig, expressionTransform) {
+        var expressionCompileConfigKey = expressionCompileConfig ? JSON.stringify(expressionCompileConfig) : '';
+        var expressionTransformKey = expressionTransform ? expressionTransform.toString() : '';
+        return `${delimiterLeft}\n${delimiterRight}\n${expressionCompileConfigKey}\n${expressionTransformKey}\n${content}`;
+    }
+
     compile(content, config) {
-        // Store previous setting
-        // Override current setting        
-        var delimiterLeftSave, delimiterRightSave;
-        var expressionParserSave;
+        var delimiterLeft = this.delimiterLeft;
+        var delimiterRight = this.delimiterRight;
+        var expressionParser = this.expressionParser;
+        var expressionCompileConfig;
+        var expressionTransform = this.expressionTransform;
+        var cache = this.cacheTemplates;
+        var hasCustomExpressionParser = false;
+
         if (config) {
             if (config instanceof (FormulaParser)) {
-                var expressionParser = config;
-                if (expressionParser) {
-                    expressionParserSave = this.expressionParser;
-                    this.setExpressionParser(expressionParser);
-                }
-
+                expressionParser = config;
+                hasCustomExpressionParser = true;
             } else {
                 var delimiters = config.delimiters;
                 if (delimiters) {
-                    delimiterLeftSave = this.delimiterLeft;
-                    delimiterRightSave = this.delimiterRight;
-                    this.setDelimiters(delimiters[0], delimiters[1]);
+                    delimiterLeft = delimiters[0];
+                    delimiterRight = delimiters[1];
                 }
 
-                var expressionParser = config.expressionParser;
-                if (expressionParser) {
-                    expressionParserSave = this.expressionParser;
-                    this.setExpressionParser(expressionParser);
+                if (config.expressionParser) {
+                    expressionParser = config.expressionParser;
+                    hasCustomExpressionParser = true;
+                }
+
+                if (config.cache !== undefined) {
+                    cache = config.cache;
+                }
+
+                expressionCompileConfig = config.expressionCompileConfig;
+                if (config.expressionTransform !== undefined) {
+                    expressionTransform = config.expressionTransform;
                 }
             }
         }
 
-        // Parse context
-        var reDelimiter = this.reDelimiter;
-        var reSplit = this.reSplit;
-        var expressionParser = this.expressionParser;
+        if (hasCustomExpressionParser) {
+            cache = false;
+            this.registerFilters(expressionParser);
+        }
 
-        var result = [];
-        var charIdx = 0;
-        while (true) {
-            var regexResult = reSplit.exec(content);
-            if (!regexResult) {
-                break;
+        if (!delimiterLeft || !delimiterRight) {
+            throw new Error('Delimiters must be non-empty strings');
+        }
+
+        if (cache) {
+            var cacheKey = this.getCacheKey(content, delimiterLeft, delimiterRight, expressionCompileConfig, expressionTransform);
+            if (Object.prototype.hasOwnProperty.call(this.templateCache, cacheKey)) {
+                return this.templateCache[cacheKey];
             }
-
-            var match = regexResult[0];
-            var matchEnd = reSplit.lastIndex;
-            var matchStart = matchEnd - match.length;
-
-            if (charIdx < matchStart) {
-                result.push(content.substring(charIdx, matchStart));
-            }
-
-            var s = content.substring(matchStart, matchEnd).replace(reDelimiter, '');
-            result.push(expressionParser.compile(s));
-
-            charIdx = matchEnd;
         }
 
-        var totalLen = content.length;
-        if (charIdx < totalLen) { // Push remainder string
-            result.push(content.substring(charIdx, totalLen));
-        }
-
-        // Restore previous setting
-        if (delimiterLeftSave) {
-            this.setDelimiters(delimiterLeftSave, delimiterRightSave);
-        }
-
-        if (expressionParserSave) {
-            this.setExpressionParser(expressionParserSave);
-        }
+        var result = CompileContent(
+            content,
+            delimiterLeft,
+            delimiterRight,
+            expressionParser,
+            expressionCompileConfig,
+            expressionTransform
+        );
 
         // Return render callback
-        return function (view) {
+        var renderCallback = function (view) {
             return result.map(function (item) {
                 if (typeof (item) === 'function') {
                     item = item(view);
@@ -2161,6 +2487,12 @@ class StringTemplate {
                 return item;
             }).join('');
         };
+
+        if (cache) {
+            this.templateCache[cacheKey] = renderCallback;
+        }
+
+        return renderCallback;
     }
 
     render(content, view, config) {
@@ -2187,38 +2519,6 @@ class StringTemplateExpression extends BaseExpression {
         this.setExpressionHandler(callback);
     }
 }
-
-var StringExpressionCache = new Map();
-
-var GetCompiledStringExpression = function (expression) {
-    var callback = StringExpressionCache.get(expression);
-    if (!callback) {
-        callback = Compile$1(expression);
-        StringExpressionCache.set(expression, callback);
-    }
-    return callback;
-};
-
-var EvaluateExpressionValue = function (value, context) {
-    switch (typeof (value)) {
-        case 'function':
-            return value(context);
-
-        case 'string':
-            return GetCompiledStringExpression(value)(context);
-
-        default:
-            if (
-                value &&
-                context &&
-                (typeof (value) === 'object') &&
-                (typeof (context.evalExpressionObject) === 'function')
-            ) {
-                return context.evalExpressionObject(value);
-            }
-            return value;
-    }
-};
 
 class BaseNode {
 
@@ -4485,7 +4785,6 @@ var Nodes = /*#__PURE__*/Object.freeze({
 	Cooldown: Cooldown$1,
 	Decorator: Decorator,
 	Error: Error$1,
-	EvaluateExpressionValue: EvaluateExpressionValue,
 	Failer: Failer,
 	ForceFailure: ForceFailure,
 	ForceSuccess: ForceSuccess,
@@ -4582,8 +4881,6 @@ class Tick {
 
         this.target = null;
 
-        this.evalContextGetter = undefined;
-
         // updated during the tick signal
 
         this._openNodes = [];  // Open nodes of current tick
@@ -4599,7 +4896,6 @@ class Tick {
         this.tree = null;
         this.blackboard = null;
         this.target = null;
-        this.evalContextGetter = undefined;
         this._openNodes.length = 0;
     }
 
@@ -4616,11 +4912,6 @@ class Tick {
 
     setTarget(target) {
         this.target = target;
-        return this;
-    }
-
-    setEvalContextGetter(callback) {
-        this.evalContextGetter = callback;
         return this;
     }
 
@@ -4655,26 +4946,8 @@ class Tick {
         }
     }
 
-    getEvalContext() {
-        if (this.evalContextGetter) {
-            return this.evalContextGetter(this);
-        }
-
-        return this.blackboard.getGlobalMemory();
-    }
-
-    evalExpression(expressionObject, context) {
-        if (context === undefined) {
-            context = this.getEvalContext();
-        }
-        return expressionObject.eval(this.getEvalContext());
-    }
-
-    evalExpressionValue(expressionString, context) {
-        if (context === undefined) {
-            context = this.getEvalContext();
-        }
-        return EvaluateExpressionValue(expressionString, context);
+    evalExpression(expression) {
+        return expression.eval(this.blackboard.getGlobalMemory());
     }
 
     _enterNode(node) {
@@ -4812,20 +5085,15 @@ class BehaviorTree {
         return out;
     }
 
-    tick(blackboard, target, options) {
+    tick(blackboard, target) {
         if (!blackboard) {
             throw 'The blackboard parameter is obligatory and must be an instance of Blackboard';
-        }
-
-        if (options === undefined) {
-            options = {};
         }
 
         var ticker = this.ticker;
         ticker
             .setBlackBoard(blackboard)
             .setTarget(target)
-            .setEvalContextGetter(options.getEvalContext)
             .reset();
 
         /* TICK NODE */
@@ -4839,20 +5107,15 @@ class BehaviorTree {
         return state;
     }
 
-    abort(blackboard, target, options) {
+    abort(blackboard, target) {
         if (!blackboard) {
             throw 'The blackboard parameter is obligatory and must be an instance of Blackboard';
-        }
-
-        if (options === undefined) {
-            options = {};
         }
 
         var ticker = this.ticker;
         ticker
             .setBlackBoard(blackboard)
             .setTarget(target)
-            .setEvalContextGetter(options.getEvalContext)
             .reset();
 
         /* ABORT NODE */
