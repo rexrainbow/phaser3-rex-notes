@@ -1,6 +1,6 @@
 import Tick from '../tick/Tick';
 import Blackboard from '../blackboard/Base';
-import { Expression, BooleanExpression, StringTemplateExpression } from './expressions';
+import { Expression, BooleanExpression } from './expressions';
 
 export default BaseNode;
 
@@ -163,20 +163,6 @@ declare class BaseNode {
      * @returns The expression instance.
      */
     addExpression(expression: BaseNode.ExpressionValue): Expression;
-    /**
-     * Add a boolean expression.
-     *
-     * @param expression - Expression value or callback.
-     * @returns The expression instance.
-     */
-    addBooleanExpression(expression: BaseNode.ExpressionValue): BooleanExpression;
-    /**
-     * Add a string template expression.
-     *
-     * @param expression - Expression value or callback.
-     * @returns The expression instance.
-     */
-    addStringTemplateExpression(expression: BaseNode.ExpressionValue): StringTemplateExpression;
 
     /**
      * Enter the node.

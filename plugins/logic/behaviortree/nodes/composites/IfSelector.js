@@ -28,7 +28,7 @@ class IfSelector extends Composite {
             nodePool
         );
 
-        this.expression = this.addBooleanExpression(expression);
+        this.expression = this.addExpression(expression);
         this.conditionEvalBreak = conditionEvalBreak;
         this.forceSelectChildIndex = undefined;
     }
@@ -48,7 +48,7 @@ class IfSelector extends Composite {
             return this.forceSelectChildIndex;
         }
 
-        return tick.evalExpression(this.expression) ? 0 : 1;
+        return (!!tick.evalExpression(this.expression)) ? 0 : 1;
     }
 
     tick(tick) {

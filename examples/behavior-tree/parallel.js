@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import BehaviorTreePlugin from '../../plugins/behaviortree-plugin.js';
 import ClockPlugin from '../../plugins/clock-plugin.js';
+import mustache from 'mustache';
 
 class PrintAction extends RexPlugins.BehaviorTree.Action {
     constructor({ text = '' } = {}) {
@@ -8,12 +9,10 @@ class PrintAction extends RexPlugins.BehaviorTree.Action {
             name: 'MyAction',
             properties: { text: text },
         });
-
-        this.textExpression = this.addStringTemplateExpression(text);
     }
 
     tick(tick) {
-        var text = this.textExpression.eval(tick.getGlobalMemory());
+        var text = mustache.render(this.properties.text, tick.getGlobalMemory());
         console.log(`Print: ${text}`);
         return this.SUCCESS;
     }

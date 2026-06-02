@@ -28,7 +28,7 @@ class ContinueIf extends Decorator {
             nodePool
         );
 
-        this.expression = this.addBooleanExpression(expression);
+        this.expression = this.addExpression(expression);
         this.returnSuccess = returnSuccess;
     }
 

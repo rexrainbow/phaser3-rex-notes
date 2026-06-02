@@ -28,7 +28,7 @@ class AbortIf extends Decorator {
             nodePool
         );
 
-        this.expression = this.addBooleanExpression(expression);
+        this.expression = this.addExpression(expression);
         this.returnSuccess = returnSuccess;
     }
 
@@ -40,7 +40,7 @@ class AbortIf extends Decorator {
         // child is running
         if (this.isChildRunning(tick)) {
             // Abort child if eval result is true
-            if (tick.evalExpression(this.expression)) {
+            if (!!tick.evalExpression(this.expression)) {
                 return (this.returnSuccess) ? SUCCESS : FAILURE;
             }
         }

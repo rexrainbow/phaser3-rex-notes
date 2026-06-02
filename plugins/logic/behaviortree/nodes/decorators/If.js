@@ -30,7 +30,7 @@ class If extends Decorator {
             nodePool
         );
 
-        this.expression = this.addBooleanExpression(expression);
+        this.expression = this.addExpression(expression);
         this.conditionEvalBreak = conditionEvalBreak;
         this.onFailState = onFailState;
     }

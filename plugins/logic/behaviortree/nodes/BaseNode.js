@@ -1,5 +1,5 @@
 import { CreateID } from '../utils/CreateID.js';
-import { Expression, BooleanExpression, StringTemplateExpression } from './expressions';
+import { Expression, BooleanExpression } from './expressions';
 import { TREE, SUCCESS, FAILURE, RUNNING, ABORT, ERROR } from '../constants.js';
 
 export default class BaseNode {
@@ -80,15 +80,6 @@ export default class BaseNode {
 
     addExpression(expression) {
         return new Expression(expression);
-    }
-
-    addBooleanExpression(expression) {
-        return new BooleanExpression(expression);
-    }
-
-    addStringTemplateExpression(expression) {
-        // TODO: Use mustache or handlebars ?
-        return new StringTemplateExpression(expression);
     }
 
     _execute(tick) {
