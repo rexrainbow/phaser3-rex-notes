@@ -1,4 +1,4 @@
-import { RUNNING, IDLE, SUCCESS } from '../../../behaviortree';
+import { RUNNING, IDLE, SUCCESS } from '../../../behaviortree/index.js';
 import RemoveItem from '../../../../utils/array/Remove.js';
 
 export var OpenEventSheet = function (eventSheetManager, eventsheet) {

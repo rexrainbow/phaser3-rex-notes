@@ -1,4 +1,4 @@
-import EventSheetManager from '../eventsheetmanager/EventSheetManager.js';
+import EventSheets from '../eventsheets/EventSheets';
 
 export default MarkedEventSheets;
 
@@ -6,7 +6,7 @@ declare namespace MarkedEventSheets {
     /**
      * Configuration options for creating MarkedEventSheets.
      */
-    interface IConfig extends EventSheetManager.IConfig {
+    interface IConfig extends EventSheets.IConfig {
 
     }
 
@@ -36,7 +36,7 @@ declare namespace MarkedEventSheets {
 /**
  * Event sheet manager that loads marked text definitions.
  */
-declare class MarkedEventSheets extends EventSheetManager {
+declare class MarkedEventSheets extends EventSheets {
     /**
      * Create MarkedEventSheets with scene and config.
      *

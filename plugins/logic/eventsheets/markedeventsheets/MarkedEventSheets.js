@@ -1,29 +1,7 @@
-import EventSheetManager from '../eventsheetmanager/EventSheetManager.js';
+import EventSheets from '../eventsheets/EventSheets.js';
 import BuildTree from './buildtree/BuildTree.js';
 
-class MarkedEventSheets extends EventSheetManager {
-    boot() {
-        super.boot();
-
-        if (this.scene) {
-            this.scene.sys.events.once('shutdown', this.destroy, this);
-        }
-    }
-
-    shutdown(fromScene) {
-        if (this.isShutdown) {
-            return;
-        }
-
-        if (this.scene) {
-            this.scene.sys.events.off('shutdown', this.destroy, this);
-        }
-
-        super.shutdown(fromScene);
-
-        return this;
-    }
-
+class MarkedEventSheets extends EventSheets {
     addEventSheet(markedString, groupName, config) {
         if (typeof (groupName) !== 'string') {
             config = groupName;

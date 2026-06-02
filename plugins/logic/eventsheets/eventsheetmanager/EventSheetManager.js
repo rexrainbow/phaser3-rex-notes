@@ -1,15 +1,15 @@
-import EventEmitter from '../../../utils/eventemitter/EventEmitter';
+import EventEmitter from '../../../utils/eventemitter/EventEmitter.js';
 import IsPlainObject from '../../../utils/object/IsPlainObject.js';
-import { BehaviorTree, Blackboard } from '../../behaviortree';
+import { BehaviorTree, Blackboard } from '../../behaviortree/index.js';
 import Methods from './methods/Methods.js';
 
 BehaviorTree.setStartIDValue(0);
 
 class EventSheetManager extends EventEmitter {
-    constructor(scene, config) {
-        if (IsPlainObject(scene) && (config === undefined)) {
-            config = scene;
-            scene = undefined;
+    constructor(owner, config) {
+        if (IsPlainObject(owner) && (config === undefined)) {
+            config = owner;
+            owner = undefined;
         }
 
         if (config === undefined) {
@@ -19,7 +19,7 @@ class EventSheetManager extends EventEmitter {
         super();
 
         this.isShutdown = false;
-        this.scene = scene;
+        this.owner = owner;
 
         var {
             commandExecutor,
@@ -40,19 +40,15 @@ class EventSheetManager extends EventEmitter {
 
         this.setRoundCounter(0);
 
-        this.boot();
     }
 
-    boot() {
-    }
-
-    shutdown(fromScene) {
+    shutdown(destroyConfig) {
         if (this.isShutdown) {
             return;
         }
 
         if (this.commandExecutor && this.commandExecutor.destroy) {
-            this.commandExecutor.destroy(fromScene);
+            this.commandExecutor.destroy(destroyConfig);
         }
 
         for (var name in this.treeGroups) {
@@ -63,7 +59,7 @@ class EventSheetManager extends EventEmitter {
 
         super.shutdown();
 
-        this.scene = undefined;
+        this.owner = undefined;
         this.commandExecutor = undefined;
         this.blackboard = undefined;
         this.isShutdown = true;
@@ -71,12 +67,12 @@ class EventSheetManager extends EventEmitter {
         return this;
     }
 
-    destroy(fromScene) {
+    destroy(destroyConfig) {
         if (this.isShutdown) {
             return;
         }
-        this.emit('destroy', this, fromScene);
-        this.shutdown(fromScene);
+        this.emit('destroy', this, destroyConfig);
+        this.shutdown(destroyConfig);
     }
 
 

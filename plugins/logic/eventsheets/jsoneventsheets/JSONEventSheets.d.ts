@@ -1,4 +1,4 @@
-import EventSheetManager from '../eventsheetmanager/EventSheetManager.js';
+import EventSheets from '../eventsheets/EventSheets';
 
 export default JSONEventSheets;
 
@@ -6,7 +6,7 @@ declare namespace JSONEventSheets {
     /**
      * Configuration options for creating JSONEventSheets.
      */
-    interface IConfig extends EventSheetManager.IConfig {
+    interface IConfig extends EventSheets.IConfig {
 
     }
 
@@ -28,7 +28,7 @@ declare namespace JSONEventSheets {
 /**
  * Event sheet manager that loads JSON definitions.
  */
-declare class JSONEventSheets extends EventSheetManager {
+declare class JSONEventSheets extends EventSheets {
     /**
      * Create JSONEventSheets with scene and config.
      *

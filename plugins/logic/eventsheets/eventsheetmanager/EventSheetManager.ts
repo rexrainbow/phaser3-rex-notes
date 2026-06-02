@@ -109,12 +109,12 @@ declare namespace EventSheetManager {
  */
 declare class EventSheetManager extends EventEmitter {
     /**
-     * Create an EventSheetManager with scene and config.
+     * Create an EventSheetManager with owner and config.
      *
-     * @param scene - Scene or owner object.
+     * @param owner - Owner object.
      * @param config - Configuration options.
      */
-    constructor(scene: unknown, config?: EventSheetManager.IConfig);
+    constructor(owner: unknown, config?: EventSheetManager.IConfig);
     /**
      * Create an EventSheetManager with config only.
      *
@@ -123,9 +123,21 @@ declare class EventSheetManager extends EventEmitter {
     constructor(config?: EventSheetManager.IConfig);
 
     /**
+     * Owner object passed to the manager.
+     */
+    owner: unknown;
+
+    /**
      * Destroy the manager.
      */
-    destroy(): void;
+    destroy(fromScene?: boolean): void;
+    /**
+     * Shutdown the manager.
+     *
+     * @param fromScene - Whether shutdown was triggered from a Scene.
+     * @returns This EventSheetManager instance.
+     */
+    shutdown(fromScene?: boolean): this;
 
     /**
      * Blackboard instance.
