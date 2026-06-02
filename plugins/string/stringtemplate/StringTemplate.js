@@ -1,10 +1,15 @@
 import ExpressionParser from '../../math/expressionparser/ExpressionParser.js';
+import CompileContent from './CompileContent.js';
+
 
 class StringTemplate {
     constructor(config) {
         if (config === undefined) {
             config = {};
         }
+        this.cacheTemplates = false;
+        this.templateCache = Object.create(null);
+
         // Brackets and generate regex
         var delimiters = config.delimiters;
         if (delimiters === undefined) {
@@ -14,9 +19,13 @@ class StringTemplate {
 
         var expressionParser = config.expressionParser;
         if (expressionParser === undefined) {
-            expressionParser = new ExpressionParser();
+            expressionParser = new ExpressionParser(config);
         }
         this.setExpressionParser(expressionParser);
+
+        if (config.cache !== undefined) {
+            this.setCacheEnable(config.cache);
+        }
     }
 
     setDelimiters(delimiterLeft, delimiterRight) {
@@ -24,11 +33,11 @@ class StringTemplate {
             delimiterRight = delimiterLeft[1];
             delimiterLeft = delimiterLeft[0];
         }
+        if (!delimiterLeft || !delimiterRight) {
+            throw new Error('Delimiters must be non-empty strings');
+        }
         this.delimiterLeft = delimiterLeft;
         this.delimiterRight = delimiterRight;
-
-        this.reDelimiter = RegExp(`${delimiterLeft}|${delimiterRight}`, 'gi');
-        this.reSplit = RegExp(`${delimiterLeft}.*?${delimiterRight}`, 'gi')
         return this;
     }
 
@@ -37,78 +46,75 @@ class StringTemplate {
         return this;
     }
 
+    setCacheEnable(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.cacheTemplates = enable;
+        return this;
+    }
+
+    clearCache() {
+        this.templateCache = Object.create(null);
+        return this;
+    }
+
+    getCacheKey(content, delimiterLeft, delimiterRight, expressionCompileConfig) {
+        var expressionCompileConfigKey = expressionCompileConfig ? JSON.stringify(expressionCompileConfig) : '';
+        return `${delimiterLeft}\n${delimiterRight}\n${expressionCompileConfigKey}\n${content}`;
+    }
+
     compile(content, config) {
-        // Store previous setting
-        // Override current setting        
-        var delimiterLeftSave, delimiterRightSave;
-        var expressionParserSave;
+        var delimiterLeft = this.delimiterLeft;
+        var delimiterRight = this.delimiterRight;
+        var expressionParser = this.expressionParser;
+        var expressionCompileConfig;
+        var cache = this.cacheTemplates;
+        var hasCustomExpressionParser = false;
+
         if (config) {
             if (config instanceof (ExpressionParser)) {
-                var expressionParser = config;
-                if (expressionParser) {
-                    expressionParserSave = this.expressionParser;
-                    this.setExpressionParser(expressionParser);
-                }
-
+                expressionParser = config;
+                hasCustomExpressionParser = true;
             } else {
                 var delimiters = config.delimiters;
                 if (delimiters) {
-                    delimiterLeftSave = this.delimiterLeft;
-                    delimiterRightSave = this.delimiterRight;
-                    this.setDelimiters(delimiters[0], delimiters[1]);
+                    delimiterLeft = delimiters[0];
+                    delimiterRight = delimiters[1];
                 }
 
-                var expressionParser = config.expressionParser;
-                if (expressionParser) {
-                    expressionParserSave = this.expressionParser;
-                    this.setExpressionParser(expressionParser);
+                if (config.expressionParser) {
+                    expressionParser = config.expressionParser;
+                    hasCustomExpressionParser = true;
                 }
+
+                if (config.cache !== undefined) {
+                    cache = config.cache;
+                }
+
+                expressionCompileConfig = config.expressionCompileConfig;
             }
         }
 
-        // Parse context
-        var reDelimiter = this.reDelimiter
-        var reSplit = this.reSplit;
-        var expressionParser = this.expressionParser;
+        if (hasCustomExpressionParser) {
+            cache = false;
+        }
 
-        var result = [];
-        var charIdx = 0;
-        while (true) {
-            var regexResult = reSplit.exec(content);
-            if (!regexResult) {
-                break;
+        if (!delimiterLeft || !delimiterRight) {
+            throw new Error('Delimiters must be non-empty strings');
+        }
+
+        if (cache) {
+            var cacheKey = this.getCacheKey(content, delimiterLeft, delimiterRight, expressionCompileConfig);
+            if (Object.prototype.hasOwnProperty.call(this.templateCache, cacheKey)) {
+                return this.templateCache[cacheKey];
             }
-
-            var match = regexResult[0];
-            var matchEnd = reSplit.lastIndex;
-            var matchStart = matchEnd - match.length;
-
-            if (charIdx < matchStart) {
-                result.push(content.substring(charIdx, matchStart));
-            }
-
-            var s = content.substring(matchStart, matchEnd).replace(reDelimiter, '');
-            result.push(expressionParser.compile(s))
-
-            charIdx = matchEnd;
         }
 
-        var totalLen = content.length;
-        if (charIdx < totalLen) { // Push remainder string
-            result.push(content.substring(charIdx, totalLen));
-        }
-
-        // Restore previous setting
-        if (delimiterLeftSave) {
-            this.setDelimiters(delimiterLeftSave, delimiterRightSave);
-        }
-
-        if (expressionParserSave) {
-            this.setExpressionParser(expressionParserSave);
-        }
+        var result = CompileContent(content, delimiterLeft, delimiterRight, expressionParser, expressionCompileConfig);
 
         // Return render callback
-        return function (view) {
+        var renderCallback = function (view) {
             return result.map(function (item) {
                 if (typeof (item) === 'function') {
                     item = item(view);
@@ -116,6 +122,12 @@ class StringTemplate {
                 return item;
             }).join('');
         };
+
+        if (cache) {
+            this.templateCache[cacheKey] = renderCallback;
+        }
+
+        return renderCallback;
     }
 
     render(content, view, config) {

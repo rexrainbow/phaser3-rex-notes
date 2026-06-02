@@ -14,6 +14,9 @@ class Demo extends Phaser.Scene {
 
     create() {
         var print = this.add.text(0, 0, '');
+        var log = function (label, value) {
+            print.text += `${label}: ${value}\n`;
+        }
 
         var stringTemplate = this.plugins.get('rexStringTemplate')
 
@@ -25,10 +28,43 @@ class Demo extends Phaser.Scene {
             name: 'rex'
         }
         var result = f(data);
-        print.text += `${result}\n`;
+        log('Default delimiters', result);
 
         var result = stringTemplate.render('Hello <<name>>', data, { delimiters: ['<<', '>>'] })
-        print.text += `${result}\n`;
+        log('Angle delimiters', result);
+
+        result = stringTemplate.render('Hello ${name}', data, { delimiters: ['${', '}'] });
+        log('Regex-special delimiters', result);
+
+        result = stringTemplate.render('Hello [name]', data, { delimiters: ['[', ']'] });
+        log('Square delimiters', result);
+
+        result = stringTemplate.render(`{{ '{{' + name + '}}' }}`, data);
+        log('Delimiter in expression string', result);
+
+        result = stringTemplate.render(`{{ '}}' + name }}`, data);
+        log('Right delimiter in quoted string', result);
+
+        result = stringTemplate.render('Escaped delimiter: \\{{name}}', data);
+        log('Escaped delimiter', result);
+
+        var cachedTemplate = stringTemplate.compile('Cached {{ name }}', {
+            cache: true,
+            expressionCompileConfig: {
+                cache: true
+            }
+        });
+        result = cachedTemplate(data);
+        log('Template and expression cache', result);
+
+        try {
+            stringTemplate.render('{{}}', data);
+        } catch (e) {
+            log('Expected parse error', e.message.split('\n')[0]);
+        }
+
+        result = stringTemplate.render('{{ a }} {{ b }}', { a: 1, b: 2 });
+        log('Render after parse error', result);
     }
 
     update() {

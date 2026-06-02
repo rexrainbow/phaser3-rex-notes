@@ -14,12 +14,12 @@ declare namespace StringTemplate {
      * @param view - Template data object.
      * @returns Rendered string.
      */
-    type CompileResultType = (view: Object) => string
+    type CompileResultType<TView = object> = (view: TView) => string
 
     /**
      * Configuration options for creating a StringTemplate instance.
      */
-    interface IConfig {
+    interface IConfig<TContext = object> extends ExpressionParser.IConfig<TContext> {
         /**
          * Template delimiters.
          */
@@ -41,7 +41,15 @@ declare namespace StringTemplate {
         /**
          * Expression parser instance.
          */
-        expressionParser?: ExpressionParser
+        expressionParser?: ExpressionParser,
+        /**
+         * Cache compiled template.
+         */
+        cache?: boolean,
+        /**
+         * Options passed to expression parser compile.
+         */
+        expressionCompileConfig?: ExpressionParser.ICompileConfig
     }
 }
 
@@ -81,6 +89,21 @@ declare class StringTemplate {
      * @returns This StringTemplate instance.
      */
     setExpressionParser(expressionParser: ExpressionParser): this;
+
+    /**
+     * Enable or disable template cache.
+     *
+     * @param enable - Enable cache. Default is true.
+     * @returns This StringTemplate instance.
+     */
+    setCacheEnable(enable?: boolean): this;
+
+    /**
+     * Clear compiled template cache.
+     *
+     * @returns This StringTemplate instance.
+     */
+    clearCache(): this;
 
     /**
      * Compile template content with optional parser.
