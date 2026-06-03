@@ -1,4 +1,5 @@
 import Decorator from '../Decorator.js';
+import CreateNumberExpression from '../expressions/CreateNumberExpression.js';
 import { FAILURE, ERROR } from '../../constants.js';
 
 class TimeLimit extends Decorator {
@@ -8,6 +9,7 @@ class TimeLimit extends Decorator {
             returnSuccess = true,
             child = null,
             title,
+            properties = {},
             name = 'TimeLimit'
         } = {},
         nodePool
@@ -19,21 +21,22 @@ class TimeLimit extends Decorator {
                 title,
                 name,
                 properties: {
-                    duration,
+                    ...properties,
                     returnSuccess
                 },
             },
             nodePool
         );
 
-        this.durationExpression = this.addExpression(duration);
+        this.duration = CreateNumberExpression(duration, nodePool);  // Expression node
+        this.addExpression('duration', this.duration);
         this.returnSuccess = returnSuccess;
     }
 
     open(tick) {
         var nodeMemory = this.getNodeMemory(tick);
         nodeMemory.$startTime = tick.currentTime;
-        nodeMemory.$duration = tick.evalExpression(this.durationExpression);
+        nodeMemory.$duration = this.duration.eval(tick);
     }
 
     tick(tick) {

@@ -1,6 +1,6 @@
 import Tick from '../tick/Tick';
 import Blackboard from '../blackboard/Base';
-import { Expression } from './expressions';
+import Expression from './Expression';
 
 export default BaseNode;
 
@@ -39,10 +39,10 @@ declare namespace BaseNode {
      * Expression value type.
      */
     type ExpressionValue =
+        Expression |
         number |
         string |
         boolean |
-        Record<string, unknown> |
         ((...args: unknown[]) => unknown);
 
     /**
@@ -156,13 +156,11 @@ declare class BaseNode {
      */
     getTree(tick?: Tick): BaseNode | null;
 
-    /**
-     * Add an expression.
-     *
-     * @param expression - Expression value or callback.
-     * @returns The expression instance.
-     */
-    addExpression(expression: BaseNode.ExpressionValue): Expression;
+    addExpression(
+        name: string,
+        node: BaseNode.ExpressionValue,
+        nodePool?: BaseNode.NodePoolType
+    ): Expression;
 
     /**
      * Enter the node.

@@ -1,4 +1,5 @@
 import Decorator from '../Decorator.js';
+import CreateNumberExpression from '../expressions/CreateNumberExpression.js';
 import { FAILURE, SUCCESS, ERROR } from '../../constants.js';
 
 
@@ -6,7 +7,7 @@ class AbortIf extends Decorator {
 
     constructor(
         {
-            expression = 'true',
+            condition = 'true',
             returnSuccess = true,
             child = null,
             title,
@@ -21,14 +22,14 @@ class AbortIf extends Decorator {
                 title,
                 name,
                 properties: {
-                    expression,
                     returnSuccess,
                 },
             },
             nodePool
         );
 
-        this.expression = this.addExpression(expression);
+        this.condition = CreateNumberExpression(condition, nodePool); // Expression node
+        this.addExpression('condition', this.condition);
         this.returnSuccess = returnSuccess;
     }
 
@@ -40,7 +41,7 @@ class AbortIf extends Decorator {
         // child is running
         if (this.isChildRunning(tick)) {
             // Abort child if eval result is true
-            if (!!tick.evalExpression(this.expression)) {
+            if (!!this.condition.eval(tick)) {
                 return (this.returnSuccess) ? SUCCESS : FAILURE;
             }
         }

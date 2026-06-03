@@ -1,6 +1,7 @@
 import BaseNode from '../nodes/BaseNode';
 import Blackboard from '../blackboard/Base';
 import Tick from '../tick/Tick';
+import ExpressionParser from '../../../math/expressionparser/ExpressionParser';
 
 export default BehaviorTree;
 
@@ -101,6 +102,10 @@ declare namespace BehaviorTree {
          * Service node ids.
          */
         services?: string[];
+        /**
+         * Expression node ids keyed by expression slot name.
+         */
+        expressions?: Record<string, string>;
     }
 }
 
@@ -226,6 +231,23 @@ declare class BehaviorTree {
         parent?: BaseNode,
         out?: BaseNode[]
     ): BaseNode[];
+
+    /**
+     * Set parser used by expression nodes.
+     *
+     * @param parser - Expression parser instance.
+     * @returns This BehaviorTree instance.
+     */
+    setExpressionParser(parser: ExpressionParser): this;
+
+    /**
+     * Get parser used by expression nodes.
+     *
+     * @returns Expression parser instance.
+     */
+    getExpressionParser(): ExpressionParser;
+
+    expressionParser: ExpressionParser;
 
     /**
      * Tick the tree.

@@ -3,6 +3,10 @@ import Action from './Action.js';
 import Composite from './Composite.js';
 import Decorator from './Decorator';
 import Service from './Service.js';
+import Expression from './Expression.js';
+import {
+    NumberExpression,
+} from './expressions';
 
 import Succeeder from './actions/Succeeder.js';
 import Failer from './actions/Failer.js';
@@ -137,6 +141,8 @@ SetValue(window, 'RexPlugins.BehaviorTree.Action', Action);
 SetValue(window, 'RexPlugins.BehaviorTree.Composite', Composite);
 SetValue(window, 'RexPlugins.BehaviorTree.Decorator', Decorator);
 SetValue(window, 'RexPlugins.BehaviorTree.Service', Service);
+SetValue(window, 'RexPlugins.BehaviorTree.Expression', Expression);
+SetValue(window, 'RexPlugins.BehaviorTree.NumberExpression', NumberExpression);
 
 SetValue(window, 'RexPlugins.BehaviorTree.Succeeder', Succeeder);
 SetValue(window, 'RexPlugins.BehaviorTree.Failer', Failer);
@@ -176,6 +182,8 @@ export {
     Composite,
     Decorator,
     Action,
+    Expression,
+    NumberExpression,
 
     Succeeder,
     Failer,

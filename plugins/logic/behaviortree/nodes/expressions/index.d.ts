@@ -1,7 +1,7 @@
-import BaseExpression from './BaseExpression';
-import Expression from './Expression';
+import NumberExpression from './NumberExpression';
+import CreateNumberExpression from './CreateNumberExpression';
 
 export {
-    BaseExpression,
-    Expression,
+    CreateNumberExpression,
+    NumberExpression,
 }

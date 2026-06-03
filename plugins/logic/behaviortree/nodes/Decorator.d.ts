@@ -36,11 +36,6 @@ declare class Decorator extends BaseNode {
     child: BaseNode | null;
 
     /**
-     * Destroy the node.
-     */
-    destroy(): void;
-
-    /**
      * Add a child node.
      *
      * @param node - Node id or instance.

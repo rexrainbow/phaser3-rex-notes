@@ -117,6 +117,23 @@ class BehaviorTree {
         return out;
     }
 
+    get expressionParser() {
+        return this.ticker.expressionParser;
+    }
+
+    set expressionParser(value) {
+        this.ticker.expressionParser = value;
+    }
+
+    setExpressionParser(parser) {
+        this.expressionParser = parser;
+        return this;
+    }
+
+    getExpressionParser() {
+        return this.expressionParser;
+    }
+
     tick(blackboard, target) {
         if (!blackboard) {
             throw 'The blackboard parameter is obligatory and must be an instance of Blackboard';

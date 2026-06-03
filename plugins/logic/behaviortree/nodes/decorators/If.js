@@ -1,4 +1,5 @@
 import Decorator from '../Decorator.js';
+import CreateNumberExpression from '../expressions/CreateNumberExpression.js';
 import { FAILURE, SUCCESS, ERROR } from '../../constants.js';
 
 
@@ -6,11 +7,12 @@ class If extends Decorator {
 
     constructor(
         {
-            expression = 'true',
+            condition = 'true',
             conditionEvalBreak = false,
             onFailState = FAILURE,
             child = null,
             title,
+            properties = {},
             name = 'If'
         } = {},
         nodePool
@@ -22,7 +24,7 @@ class If extends Decorator {
                 title,
                 name,
                 properties: {
-                    expression,
+                    ...properties,
                     conditionEvalBreak,
                     onFailState
                 },
@@ -30,7 +32,8 @@ class If extends Decorator {
             nodePool
         );
 
-        this.expression = this.addExpression(expression);
+        this.condition = CreateNumberExpression(condition, nodePool);  // Expression node
+        this.addExpression('condition', this.condition);
         this.conditionEvalBreak = conditionEvalBreak;
         this.onFailState = onFailState;
     }
@@ -49,7 +52,7 @@ class If extends Decorator {
                 - Equal to `ForceSuccess + If`
               - Return FAILURE for Selector node
             */
-            if (!tick.evalExpression(this.expression)) {
+            if (!this.condition.eval(tick)) {
                 return this.onFailState;
             } else if (this.conditionEvalBreak) {
                 // Open child but not run it now

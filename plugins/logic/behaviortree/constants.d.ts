@@ -40,6 +40,10 @@ export const DECORATOR = 'decorator';
  */
 export const ACTION = 'action';
 /**
+ * Node category for an expression.
+ */
+export const EXPRESSION = 'expression';
+/**
  * Node category for a service.
  */
 export const SERVICE = 'service';

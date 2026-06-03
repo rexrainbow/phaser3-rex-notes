@@ -1,4 +1,5 @@
 import RemoveItem from "../../../utils/array/Remove.js";
+import ExpressionParser from '../../../math/expressionparser/ExpressionParser.js';
 
 class Tick {
 
@@ -64,6 +65,21 @@ class Tick {
         return this.blackboard.getNodeMemory(this.tree.id, nodeID);
     }
 
+    get expressionParser() {
+        if (!this._expressionParser) {
+            this._expressionParser = new ExpressionParser({ cache: true });
+        }
+        return this._expressionParser;
+    }
+
+    set expressionParser(value) {
+        this._expressionParser = value;
+    }
+
+    getEvalContext() {
+        return this.blackboard.getGlobalMemory();
+    }
+
     get currentTime() {
         if (this.blackboard.hasValidCurrentTime()) {
             // Inject current-time through blackboard
@@ -77,7 +93,7 @@ class Tick {
     }
 
     evalExpression(expression) {
-        return expression.eval(this.blackboard.getGlobalMemory());
+        return expression.eval(this);
     }
 
     _enterNode(node) {

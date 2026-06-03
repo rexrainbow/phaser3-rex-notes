@@ -1,4 +1,5 @@
 import BaseNode from './BaseNode.js';
+import CreateNumberExpression from './expressions/CreateNumberExpression.js';
 import { SERVICE } from '../constants.js';
 
 class Service extends BaseNode {
@@ -10,15 +11,9 @@ class Service extends BaseNode {
             name = 'Service',
             title,
             properties
-        } = {}
+        } = {},
+        nodePool
     ) {
-
-        if (properties === undefined) {
-            properties = {};
-        }
-
-        properties.interval = interval;
-        properties.randomDeviation = randomDeviation;
 
         super({
             category: SERVICE,
@@ -27,9 +22,11 @@ class Service extends BaseNode {
             properties,
         });
 
-        this.intervalExpression = this.addExpression(interval);
-        this.randomDeviationExpression = this.addExpression(randomDeviation);
+        this.interval = CreateNumberExpression(interval, nodePool); // Expression node
+        this.addExpression('interval', this.interval);
 
+        this.randomDeviation = CreateNumberExpression(randomDeviation, nodePool); // Expression node
+        this.addExpression('randomDeviation', this.randomDeviation);
     }
 
     _tick(tick) {
@@ -50,8 +47,8 @@ class Service extends BaseNode {
         if (canTick) {
             nodeMemory.$lastEndTime = currTime;
 
-            var interval = tick.evalExpression(this.intervalExpression);
-            var randomDeviation = tick.evalExpression(this.randomDeviationExpression);
+            var interval = this.interval.eval(tick);
+            var randomDeviation = this.randomDeviation.eval(tick);
             if (randomDeviation > 0) {
                 interval += (0.5 - Math.random()) * randomDeviation;
             }

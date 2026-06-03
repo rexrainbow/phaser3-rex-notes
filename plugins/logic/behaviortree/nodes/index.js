@@ -3,6 +3,10 @@ import Action from './Action.js';
 import Composite from './Composite.js';
 import Decorator from './Decorator.js';
 import Service from './Service.js';
+import Expression from './Expression.js';
+import {
+    NumberExpression,
+} from './expressions';
 
 import Succeeder from './actions/Succeeder.js';
 import Failer from './actions/Failer.js';
@@ -42,6 +46,8 @@ export {
     Composite,
     Decorator,
     Service,
+    Expression,
+    NumberExpression,
 
     Succeeder,
     Failer,

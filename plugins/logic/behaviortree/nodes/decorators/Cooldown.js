@@ -1,4 +1,5 @@
 import Decorator from '../Decorator.js';
+import CreateNumberExpression from '../expressions/CreateNumberExpression.js';
 import { SUCCESS, FAILURE, RUNNING, ABORT, ERROR } from '../../constants.js';
 
 class Cooldown extends Decorator {
@@ -7,6 +8,7 @@ class Cooldown extends Decorator {
             duration = 0,
             child = null,
             title,
+            properties = {},
             name = 'Cooldown'
         } = {},
         nodePool
@@ -17,19 +19,18 @@ class Cooldown extends Decorator {
                 child,
                 title,
                 name,
-                properties: {
-                    duration
-                },
+                properties,
             },
             nodePool
         );
 
-        this.durationExpression = this.addExpression(duration);
+        this.duration = CreateNumberExpression(duration, nodePool);  // Expression node
+        this.addExpression('duration', this.duration);
     }
 
     open(tick) {
         var nodeMemory = this.getNodeMemory(tick);
-        nodeMemory.$cooldownTime = tick.evalExpression(this.durationExpression);
+        nodeMemory.$cooldownTime = this.duration.eval(tick);
     }
 
     tick(tick) {

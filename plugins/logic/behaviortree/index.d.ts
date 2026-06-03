@@ -1,6 +1,6 @@
 import {
     IDLE, SUCCESS, FAILURE, RUNNING, ABORT, ERROR,
-    COMPOSITE, DECORATOR, ACTION, SERVICE
+    COMPOSITE, DECORATOR, ACTION, EXPRESSION, SERVICE
 } from './constants';
 
 import { CreateID, SetSerialNumber, SetSerialNumberPrefix, GetSerialNumber } from './utils/CreateID'
@@ -14,6 +14,8 @@ import {
     Action,
     Composite,
     Decorator,
+    Expression,
+    NumberExpression,
 
     Succeeder,
     Failer,
@@ -59,6 +61,7 @@ export {
     COMPOSITE,
     DECORATOR,
     ACTION,
+    EXPRESSION,
     SERVICE,
 
     CreateID,
@@ -74,6 +77,8 @@ export {
     Action,
     Composite,
     Decorator,
+    Expression,
+    NumberExpression,
 
     Succeeder,
     Failer,

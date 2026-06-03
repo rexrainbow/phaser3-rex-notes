@@ -45,11 +45,6 @@ declare class Composite extends BaseNode {
     services?: BaseNode[];
 
     /**
-     * Destroy the node.
-     */
-    destroy(): void;
-
-    /**
      * Insert a child node at an index.
      *
      * @param node - Node id or instance.

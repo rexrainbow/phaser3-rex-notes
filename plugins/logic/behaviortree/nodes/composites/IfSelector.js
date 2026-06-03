@@ -1,14 +1,16 @@
 import Composite from '../Composite.js';
+import CreateNumberExpression from '../expressions/CreateNumberExpression.js';
 import { SUCCESS, FAILURE, RUNNING, ERROR } from '../../constants.js';
 
 class IfSelector extends Composite {
     constructor(
         {
-            expression = 'true',
+            condition = 'true',
             conditionEvalBreak = false,
             children = [],
             services,
             title,
+            properties = {},
             name = 'IfSelector'
         } = {},
         nodePool
@@ -21,14 +23,15 @@ class IfSelector extends Composite {
                 title,
                 name,
                 properties: {
-                    expression,
+                    ...properties,
                     conditionEvalBreak,
                 },
             },
             nodePool
         );
 
-        this.expression = this.addExpression(expression);
+        this.condition = CreateNumberExpression(condition, nodePool); // Expression node
+        this.addExpression('condition', this.condition);
         this.conditionEvalBreak = conditionEvalBreak;
         this.forceSelectChildIndex = undefined;
     }
@@ -48,7 +51,7 @@ class IfSelector extends Composite {
             return this.forceSelectChildIndex;
         }
 
-        return (!!tick.evalExpression(this.expression)) ? 0 : 1;
+        return (!!this.condition.eval(tick)) ? 0 : 1;
     }
 
     tick(tick) {

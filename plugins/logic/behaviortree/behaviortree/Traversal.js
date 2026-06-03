@@ -7,6 +7,15 @@ var DepthFirstSearch = function (root, callback, scope) {
         return;
     }
 
+    var expressions = root.expressions;
+    if (expressions) {
+        for (var name in expressions) {
+            if (Object.prototype.hasOwnProperty.call(expressions, name)) {
+                DepthFirstSearch(expressions[name], callback, scope);
+            }
+        }
+    }
+
     switch (root.category) {
         case COMPOSITE:
             var children = root.children;
@@ -45,6 +54,15 @@ var BreadthFirstSearch = function (root, callback, scope) {
 
         if (skip) {
             continue;
+        }
+
+        var expressions = current.expressions;
+        if (expressions) {
+            for (var name in expressions) {
+                if (Object.prototype.hasOwnProperty.call(expressions, name)) {
+                    queue.push(expressions[name]);
+                }
+            }
         }
 
         switch (current.category) {

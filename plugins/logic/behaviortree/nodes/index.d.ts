@@ -3,6 +3,8 @@ import Action from './Action';
 import Composite from './Composite';
 import Decorator from './Decorator';
 import Service from './Service';
+import Expression from './Expression';
+import { NumberExpression } from './expressions';
 
 import Succeeder from './actions/Succeeder';
 import Failer from './actions/Failer';
@@ -42,6 +44,8 @@ export {
     Composite,
     Decorator,
     Service,
+    Expression,
+    NumberExpression,
 
     Succeeder,
     Failer,

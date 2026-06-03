@@ -55,6 +55,13 @@ var Load = function (data, names) {
         if (HasOwnProperty(spec, 'services')) {
             config.services = spec.services;
         }
+        if (HasOwnProperty(spec, 'expressions')) {
+            for (var name in spec.expressions) {
+                if (HasOwnProperty(spec.expressions, name)) {
+                    config[name] = spec.expressions[name];
+                }
+            }
+        }
 
         config = Object.assign(
             config,

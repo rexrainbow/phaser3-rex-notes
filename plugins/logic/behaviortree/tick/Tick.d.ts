@@ -1,6 +1,7 @@
 import Tree from '../behaviortree/BehaviorTree.js';
 import Blackboard from '../blackboard/Base';
-import BaseExpression from '../nodes/expressions/BaseExpression';
+import Expression from '../nodes/Expression';
+import ExpressionParser from '../../../math/expressionparser/ExpressionParser';
 
 export default Tick;
 
@@ -95,11 +96,23 @@ declare class Tick<T = object> {
     readonly currentTime: number;
 
     /**
+     * Parser used by expression nodes.
+     */
+    expressionParser: ExpressionParser;
+
+    /**
+     * Get expression evaluation context.
+     *
+     * @returns Evaluation context.
+     */
+    getEvalContext(): Blackboard.MemoryType;
+
+    /**
      * Evaluate an expression.
      *
      * @param expression - Expression instance.
      * @returns Evaluation result.
      */
-    evalExpression(expression: BaseExpression): any;
+    evalExpression(expression: Expression): any;
 
 }

@@ -35,11 +35,6 @@ declare class Action extends BaseNode {
     services?: BaseNode[];
 
     /**
-     * Destroy the node.
-     */
-    destroy(): void;
-
-    /**
      * Add a service node.
      *
      * @param node - Node id or instance.

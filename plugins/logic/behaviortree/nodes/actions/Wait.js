@@ -1,32 +1,36 @@
 import Action from '../Action.js';
+import CreateNumberExpression from '../expressions/CreateNumberExpression.js';
 import { SUCCESS, RUNNING } from '../../constants.js';
 
 class Wait extends Action {
 
-    constructor({
-        duration = 0,
-        services,
-        title,
-        name = 'Wait'
-    } = {}) {
+    constructor(
+        {
+            duration = 0,
+            services,
+            title,
+            properties,
+            name = 'Wait'
+        } = {},
+        nodePool
+    ) {
 
         super({
             title,
             name,
-            properties: {
-                duration
-            },
+            properties,
             services,
         });
 
-        this.durationExpression = this.addExpression(duration);
+        this.duration = CreateNumberExpression(duration, nodePool); // Expression node
+        this.addExpression('duration', this.duration);
     }
 
     open(tick) {
         var nodeMemory = this.getNodeMemory(tick);
 
         nodeMemory.$startTime = tick.currentTime;
-        nodeMemory.$duration = tick.evalExpression(this.durationExpression);
+        nodeMemory.$duration = this.duration.eval(tick);
     }
 
     tick(tick) {

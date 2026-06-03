@@ -1,11 +1,12 @@
 import Composite from '../Composite.js';
+import CreateNumberExpression from '../expressions/CreateNumberExpression.js';
 import { SUCCESS, FAILURE, RUNNING, ERROR } from '../../constants.js';
 import BaseNode from '../BaseNode.js';
 
 class WeightSelector extends Composite {
     constructor(
         {
-            expression = null,
+            condition = null,
             weights = undefined,    // Or [weight, ...]
             conditionEvalBreak = false,
             children = [],          // [node, ...], or [{weight, node}, ...]
@@ -44,7 +45,6 @@ class WeightSelector extends Composite {
                 title,
                 name,
                 properties: {
-                    expression,
                     weights,
                     conditionEvalBreak,
                 },
@@ -52,7 +52,13 @@ class WeightSelector extends Composite {
             nodePool
         );
 
-        this.expression = (expression) ? this.addExpression(expression) : null;
+        if (condition != null) {
+            this.condition = CreateNumberExpression(condition, nodePool); // Expression node
+            this.addExpression('condition', this.condition);
+        } else {
+            this.condition = null;
+        }
+
         this.weights = weights;
         this.conditionEvalBreak = conditionEvalBreak;
         this.forceSelectChildIndex = undefined;
@@ -77,7 +83,7 @@ class WeightSelector extends Composite {
             return this.forceSelectChildIndex;
         }
 
-        var value = (this.expression) ? tick.evalExpression(this.expression) : Math.random();
+        var value = (this.condition) ? this.condition.eval(tick) : Math.random();
         for (var i = 0, cnt = this.weights.length; i < cnt; i++) {
             value -= this.weights[i];
             if (value < 0) {

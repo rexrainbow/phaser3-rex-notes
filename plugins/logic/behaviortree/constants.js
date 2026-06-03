@@ -10,5 +10,6 @@ export const COMPOSITE = 'composite';
 export const DECORATOR = 'decorator';
 export const ACTION = 'action';
 export const SERVICE = 'service';
+export const EXPRESSION = 'expression';
 
 export const TREE_STATE = '$state';

@@ -1,4 +1,5 @@
 import Decorator from '../Decorator.js';
+import CreateNumberExpression from '../expressions/CreateNumberExpression.js';
 import { SUCCESS, FAILURE, ERROR } from '../../constants.js';
 
 class RepeatUntilFailure extends Decorator {
@@ -9,6 +10,7 @@ class RepeatUntilFailure extends Decorator {
             returnSuccess = false,
             child = null,
             title,
+            properties = {},
             name = 'RepeatUntilFailure',
         } = {},
         nodePool
@@ -20,20 +22,21 @@ class RepeatUntilFailure extends Decorator {
                 title,
                 name,
                 properties: {
+                    ...properties,
                     returnSuccess,
-                    maxLoop
                 },
             },
             nodePool
         );
 
-        this.maxLoopExpression = this.addExpression(maxLoop);
+        this.maxLoop = CreateNumberExpression(maxLoop, nodePool);  // Expression node
+        this.addExpression('maxLoop', this.maxLoop);
         this.returnSuccess = returnSuccess;
     }
 
     open(tick) {
         var nodeMemory = this.getNodeMemory(tick);
-        nodeMemory.$maxLoop = tick.evalExpression(this.maxLoopExpression);
+        nodeMemory.$maxLoop = this.maxLoop.eval(tick);
         nodeMemory.$i = 0;
     }
 

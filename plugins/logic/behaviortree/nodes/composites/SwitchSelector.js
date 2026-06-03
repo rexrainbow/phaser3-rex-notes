@@ -1,10 +1,11 @@
 import Composite from '../Composite.js';
+import CreateNumberExpression from '../expressions/CreateNumberExpression.js';
 import { SUCCESS, FAILURE, RUNNING, ERROR } from '../../constants.js';
 
 class SwitchSelector extends Composite {
     constructor(
         {
-            expression = null,
+            condition = null,
             keys = undefined, // Or [key, ...]
             conditionEvalBreak = false,
             children = {},    // Or [child, ...]
@@ -27,7 +28,6 @@ class SwitchSelector extends Composite {
                 title,
                 name,
                 properties: {
-                    expression,
                     keys,
                     conditionEvalBreak,
                 },
@@ -35,7 +35,8 @@ class SwitchSelector extends Composite {
             nodePool
         );
 
-        this.expression = this.addExpression(expression);
+        this.condition = CreateNumberExpression(condition, nodePool); // Expression node
+        this.addExpression('condition', this.condition);
         this.keys = keys;  // Index of children
         this.conditionEvalBreak = conditionEvalBreak;
         this.forceSelectChildIndex = undefined;
@@ -60,7 +61,7 @@ class SwitchSelector extends Composite {
             }
         }
 
-        var key = tick.evalExpression(this.expression);
+        var key = this.condition.eval(tick);
         return this.keys.indexOf(key);
     }
 

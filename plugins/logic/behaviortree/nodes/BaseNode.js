@@ -1,5 +1,4 @@
 import { CreateID } from '../utils/CreateID.js';
-import { Expression } from './expressions';
 import { TREE, SUCCESS, FAILURE, RUNNING, ABORT, ERROR } from '../constants.js';
 
 export default class BaseNode {
@@ -78,8 +77,25 @@ export default class BaseNode {
         }
     }
 
-    addExpression(expression) {
-        return new Expression(expression);
+    addExpression(name, node, nodePool) {
+        // Load from JSON
+        if (nodePool && typeof (node) === 'string' && nodePool[node]) {  // Node ID
+            node = nodePool[node];
+        }
+
+        if (!node) {
+            return null;
+        }
+
+        if (this.expressions === undefined) {
+            this.expressions = {};
+        }
+
+        this.expressions[name] = node;
+
+        node.setParent(this);
+
+        return this;
     }
 
     _execute(tick) {
