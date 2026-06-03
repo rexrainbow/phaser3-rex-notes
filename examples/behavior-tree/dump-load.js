@@ -108,7 +108,7 @@ class Demo extends Phaser.Scene {
         var tree = btAdd.behaviorTree()
             .setRoot(
                 btAdd.repeat({
-                    maxLoop: 3,
+                    maxLoop: '1+1+1',
                     child: btAdd.selector({
                         children: [
                             btAdd.cooldown({

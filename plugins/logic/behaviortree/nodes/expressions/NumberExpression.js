@@ -31,7 +31,7 @@ class NumberExpression extends Expression {
                 title,
                 name,
                 properties: {
-                    expression,
+                    expression: expressionValue,
                 }
             });
 
