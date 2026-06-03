@@ -5,9 +5,11 @@ class Composite extends BaseNode {
 
     constructor(
         {
+            id,
             children = [],
             name = 'Composite',
             title,
+            description,
             properties,
             services,
         } = {},
@@ -15,9 +17,11 @@ class Composite extends BaseNode {
     ) {
 
         super({
+            id,
             category: COMPOSITE,
             name,
             title,
+            description,
             properties,
         });
 

@@ -5,25 +5,6 @@ var HasOwnProperty = function (obj, prop) {
     return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-var BindExpressionReferences = function (node, expressions, nodePool) {
-    if (!expressions) {
-        return;
-    }
-
-    for (var name in expressions) {
-        if (!HasOwnProperty(expressions, name)) {
-            continue;
-        }
-
-        var nodeID = expressions[name];
-        if (!HasOwnProperty(nodePool, nodeID)) {
-            throw new Error(`BehaviorTree.load: Missing node "${nodeID}" for ${node.name}.${name} expression`);
-        }
-
-        node[name] = node.addExpression(name, nodePool[nodeID]);
-    }
-}
-
 var Load = function (data, names) {
     var sn = data.sn;
     if (sn != null) {
@@ -75,6 +56,9 @@ var Load = function (data, names) {
             config.services = spec.services;
         }
 
+        if (HasOwnProperty(spec, 'id')) {
+            config.id = spec.id;
+        }
         config.name = spec.name;
         if (HasOwnProperty(spec, 'title')) {
             config.title = spec.title;
@@ -90,22 +74,6 @@ var Load = function (data, names) {
         }
 
         var node = new Cls(config, nodes);
-        if (HasOwnProperty(spec, 'id')) {
-            node.id = spec.id;
-        }
-        if (HasOwnProperty(spec, 'title')) {
-            node.title = spec.title;
-        }
-        if (HasOwnProperty(spec, 'description')) {
-            node.description = spec.description;
-        }
-        if (HasOwnProperty(spec, 'properties')) {
-            node.properties = spec.properties;
-        }
-        if (HasOwnProperty(spec, 'expressions')) {
-            BindExpressionReferences(node, spec.expressions, nodes);
-        }
-
         nodes[node.id] = node;
     }
 

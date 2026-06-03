@@ -22,13 +22,13 @@ export default class BaseNode {
 
         this.id = id;
 
-        this.category = category || '';
+        this.category = (category === undefined) ? '' : category;
 
-        this.name = name || '';
+        this.name = (name === undefined) ? '' : name;
 
-        this.title = title || this.name;
+        this.title = (title === undefined) ? this.name : title;
 
-        this.description = description || '';
+        this.description = (description === undefined) ? '' : description;
 
         this.properties = properties || {};
     }

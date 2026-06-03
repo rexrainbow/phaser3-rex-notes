@@ -9,15 +9,19 @@ class Service extends BaseNode {
 
         if (nodePool) {
             var {
+                id,
                 name = 'Service',
                 title,
+                description,
                 properties = {}
             } = config;
 
             super({
+                id,
                 category: SERVICE,
                 name,
                 title,
+                description,
                 properties,
             });
 
@@ -27,17 +31,21 @@ class Service extends BaseNode {
 
         } else {
             var {
+                id,
                 interval: intervalValue = 0,
                 randomDeviation: randomDeviationValue = 0,
                 name = 'Service',
                 title,
+                description,
                 properties = {}
             } = config;
 
             super({
+                id,
                 category: SERVICE,
                 name,
                 title,
+                description,
                 properties: {
                     ...properties,
                     interval: intervalValue,

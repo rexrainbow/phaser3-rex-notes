@@ -5,18 +5,22 @@ class Decorator extends BaseNode {
 
     constructor(
         {
+            id,
             child = null,
             name = 'Decorator',
             title,
+            description,
             properties
         } = {},
         nodePool
     ) {
 
         super({
+            id,
             category: DECORATOR,
             name,
             title,
+            description,
             properties,
         });
 

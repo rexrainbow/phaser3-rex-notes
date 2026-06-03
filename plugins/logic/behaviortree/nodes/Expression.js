@@ -5,17 +5,21 @@ class Expression extends BaseNode {
 
     constructor(
         {
+            id,
             name = 'Expression',
             title,
+            description,
             properties,
         } = {},
         nodePool
     ) {
 
         super({
+            id,
             category: EXPRESSION,
             name,
             title,
+            description,
             properties,
         });
     }

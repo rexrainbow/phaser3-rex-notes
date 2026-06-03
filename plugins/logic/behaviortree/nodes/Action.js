@@ -5,8 +5,10 @@ class Action extends BaseNode {
 
     constructor(
         {
+            id,
             name = 'Action',
             title,
+            description,
             properties,
             services,
         } = {},
@@ -14,9 +16,11 @@ class Action extends BaseNode {
     ) {
 
         super({
+            id,
             category: ACTION,
             name,
             title,
+            description,
             properties,
         });
 
