@@ -160,7 +160,7 @@ declare class BaseNode {
         name: string,
         node: BaseNode.ExpressionValue,
         nodePool?: BaseNode.NodePoolType
-    ): Expression;
+    ): BaseNode.ExpressionValue | null;
 
     /**
      * Enter the node.

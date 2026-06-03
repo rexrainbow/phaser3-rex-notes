@@ -19,7 +19,10 @@ class Cooldown extends Decorator {
                 child,
                 title,
                 name,
-                properties,
+                properties: {
+                    ...properties,
+                    duration,
+                },
             },
             nodePool
         );
@@ -30,7 +33,7 @@ class Cooldown extends Decorator {
 
     open(tick) {
         var nodeMemory = this.getNodeMemory(tick);
-        nodeMemory.$cooldownTime = this.duration.eval(tick);
+        nodeMemory.$cooldownTime = tick.evalExpression(this.duration);
     }
 
     tick(tick) {

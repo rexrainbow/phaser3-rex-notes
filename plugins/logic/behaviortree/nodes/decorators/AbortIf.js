@@ -11,6 +11,7 @@ class AbortIf extends Decorator {
             returnSuccess = true,
             child = null,
             title,
+            properties = {},
             name = 'AbortIf'
         } = {},
         nodePool
@@ -22,6 +23,8 @@ class AbortIf extends Decorator {
                 title,
                 name,
                 properties: {
+                    ...properties,
+                    condition,
                     returnSuccess,
                 },
             },
@@ -41,7 +44,7 @@ class AbortIf extends Decorator {
         // child is running
         if (this.isChildRunning(tick)) {
             // Abort child if eval result is true
-            if (!!this.condition.eval(tick)) {
+            if (!!tick.evalExpression(this.condition)) {
                 return (this.returnSuccess) ? SUCCESS : FAILURE;
             }
         }

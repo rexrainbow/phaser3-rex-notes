@@ -93,7 +93,11 @@ class Tick {
     }
 
     evalExpression(expression) {
-        return expression.eval(this);
+        if (expression && typeof (expression.eval) === 'function') {
+            return expression.eval(this);
+        }
+
+        return expression;
     }
 
     _enterNode(node) {

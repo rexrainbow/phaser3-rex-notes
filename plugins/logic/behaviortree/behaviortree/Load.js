@@ -5,6 +5,25 @@ var HasOwnProperty = function (obj, prop) {
     return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
+var BindExpressionReferences = function (node, expressions, nodePool) {
+    if (!expressions) {
+        return;
+    }
+
+    for (var name in expressions) {
+        if (!HasOwnProperty(expressions, name)) {
+            continue;
+        }
+
+        var nodeID = expressions[name];
+        if (!HasOwnProperty(nodePool, nodeID)) {
+            throw new Error(`BehaviorTree.load: Missing node "${nodeID}" for ${node.name}.${name} expression`);
+        }
+
+        node[name] = node.addExpression(name, nodePool[nodeID]);
+    }
+}
+
 var Load = function (data, names) {
     var sn = data.sn;
     if (sn != null) {
@@ -55,6 +74,12 @@ var Load = function (data, names) {
         if (HasOwnProperty(spec, 'services')) {
             config.services = spec.services;
         }
+
+        config = Object.assign(
+            config,
+            spec.properties,
+        )
+
         if (HasOwnProperty(spec, 'expressions')) {
             for (var name in spec.expressions) {
                 if (HasOwnProperty(spec.expressions, name)) {
@@ -63,10 +88,16 @@ var Load = function (data, names) {
             }
         }
 
-        config = Object.assign(
-            config,
-            spec.properties,
-        )
+        config.name = spec.name;
+        if (HasOwnProperty(spec, 'title')) {
+            config.title = spec.title;
+        }
+        if (HasOwnProperty(spec, 'description')) {
+            config.description = spec.description;
+        }
+        if (HasOwnProperty(spec, 'properties')) {
+            config.properties = spec.properties;
+        }
 
         var node = new Cls(config, nodes);
         if (HasOwnProperty(spec, 'id')) {
@@ -80,6 +111,9 @@ var Load = function (data, names) {
         }
         if (HasOwnProperty(spec, 'properties')) {
             node.properties = spec.properties;
+        }
+        if (HasOwnProperty(spec, 'expressions')) {
+            BindExpressionReferences(node, spec.expressions, nodes);
         }
 
         nodes[node.id] = node;

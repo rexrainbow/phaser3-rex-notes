@@ -4,6 +4,6 @@ import BaseNode from '../BaseNode';
 declare function CreateNumberExpression(
     expression: BaseNode.ExpressionValue,
     nodePool?: BaseNode.NodePoolType
-): Expression;
+): Expression | number | boolean | null;
 
 export default CreateNumberExpression;

@@ -12,6 +12,7 @@ class WeightSelector extends Composite {
             children = [],          // [node, ...], or [{weight, node}, ...]
             services,
             title,
+            properties = {},
             name = 'WeightSelector'
         } = {},
         nodePool
@@ -45,6 +46,8 @@ class WeightSelector extends Composite {
                 title,
                 name,
                 properties: {
+                    ...properties,
+                    condition,
                     weights,
                     conditionEvalBreak,
                 },
@@ -83,7 +86,7 @@ class WeightSelector extends Composite {
             return this.forceSelectChildIndex;
         }
 
-        var value = (this.condition) ? this.condition.eval(tick) : Math.random();
+        var value = (this.condition) ? tick.evalExpression(this.condition) : Math.random();
         for (var i = 0, cnt = this.weights.length; i < cnt; i++) {
             value -= this.weights[i];
             if (value < 0) {

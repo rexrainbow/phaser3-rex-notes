@@ -11,6 +11,7 @@ class SwitchSelector extends Composite {
             children = {},    // Or [child, ...]
             services,
             title,
+            properties = {},
             name = 'SwitchSelector'
         } = {},
         nodePool
@@ -28,6 +29,8 @@ class SwitchSelector extends Composite {
                 title,
                 name,
                 properties: {
+                    ...properties,
+                    condition,
                     keys,
                     conditionEvalBreak,
                 },
@@ -61,7 +64,7 @@ class SwitchSelector extends Composite {
             }
         }
 
-        var key = this.condition.eval(tick);
+        var key = tick.evalExpression(this.condition);
         return this.keys.indexOf(key);
     }
 

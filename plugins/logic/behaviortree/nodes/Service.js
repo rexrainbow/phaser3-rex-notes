@@ -10,7 +10,7 @@ class Service extends BaseNode {
             randomDeviation = 0,
             name = 'Service',
             title,
-            properties
+            properties = {}
         } = {},
         nodePool
     ) {
@@ -19,7 +19,11 @@ class Service extends BaseNode {
             category: SERVICE,
             name,
             title,
-            properties,
+            properties: {
+                ...properties,
+                interval,
+                randomDeviation,
+            },
         });
 
         this.interval = CreateNumberExpression(interval, nodePool); // Expression node
@@ -47,8 +51,8 @@ class Service extends BaseNode {
         if (canTick) {
             nodeMemory.$lastEndTime = currTime;
 
-            var interval = this.interval.eval(tick);
-            var randomDeviation = this.randomDeviation.eval(tick);
+            var interval = tick.evalExpression(this.interval);
+            var randomDeviation = tick.evalExpression(this.randomDeviation);
             if (randomDeviation > 0) {
                 interval += (0.5 - Math.random()) * randomDeviation;
             }

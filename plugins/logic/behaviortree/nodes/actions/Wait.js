@@ -9,7 +9,7 @@ class Wait extends Action {
             duration = 0,
             services,
             title,
-            properties,
+            properties = {},
             name = 'Wait'
         } = {},
         nodePool
@@ -18,7 +18,10 @@ class Wait extends Action {
         super({
             title,
             name,
-            properties,
+            properties: {
+                ...properties,
+                duration,
+            },
             services,
         });
 
@@ -30,7 +33,7 @@ class Wait extends Action {
         var nodeMemory = this.getNodeMemory(tick);
 
         nodeMemory.$startTime = tick.currentTime;
-        nodeMemory.$duration = this.duration.eval(tick);
+        nodeMemory.$duration = tick.evalExpression(this.duration);
     }
 
     tick(tick) {

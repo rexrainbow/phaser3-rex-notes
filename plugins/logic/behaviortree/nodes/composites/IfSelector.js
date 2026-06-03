@@ -24,6 +24,7 @@ class IfSelector extends Composite {
                 name,
                 properties: {
                     ...properties,
+                    condition,
                     conditionEvalBreak,
                 },
             },
@@ -51,7 +52,7 @@ class IfSelector extends Composite {
             return this.forceSelectChildIndex;
         }
 
-        return (!!this.condition.eval(tick)) ? 0 : 1;
+        return (!!tick.evalExpression(this.condition)) ? 0 : 1;
     }
 
     tick(tick) {

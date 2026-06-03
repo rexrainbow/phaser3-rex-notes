@@ -23,6 +23,7 @@ class RepeatUntilFailure extends Decorator {
                 name,
                 properties: {
                     ...properties,
+                    maxLoop,
                     returnSuccess,
                 },
             },
@@ -36,7 +37,7 @@ class RepeatUntilFailure extends Decorator {
 
     open(tick) {
         var nodeMemory = this.getNodeMemory(tick);
-        nodeMemory.$maxLoop = this.maxLoop.eval(tick);
+        nodeMemory.$maxLoop = tick.evalExpression(this.maxLoop);
         nodeMemory.$i = 0;
     }
 

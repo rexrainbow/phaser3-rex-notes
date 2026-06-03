@@ -78,26 +78,31 @@ export default class BaseNode {
     }
 
     addExpression(name, node, nodePool) {
-        if (nodePool) {
+        if (!node) {
+            return null;
+        }
+
+        if (nodePool && typeof (node) === 'string') {
             if (!nodePool.hasOwnProperty(node)) {
                 throw new Error(`BehaviorTree.load: Missing node "${node}" for ${name}'s Expression node`);
             }
             node = nodePool[node];
         }
 
-        if (!node) {
-            return null;
+        if (typeof (node.eval) !== 'function') {
+            return node;
         }
 
         if (this.expressions === undefined) {
             this.expressions = {};
         }
 
+        // config's property name <-> expression name  
         this.expressions[name] = node;
 
         node.setParent(this);
 
-        return this;
+        return node;
     }
 
     _execute(tick) {

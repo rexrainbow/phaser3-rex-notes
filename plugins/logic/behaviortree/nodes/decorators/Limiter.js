@@ -20,7 +20,10 @@ class Limiter extends Decorator {
                 child,
                 title,
                 name,
-                properties,
+                properties: {
+                    ...properties,
+                    maxLoop,
+                },
             },
             nodePool
         );
@@ -31,7 +34,7 @@ class Limiter extends Decorator {
 
     open(tick) {
         var nodeMemory = this.getNodeMemory(tick);
-        nodeMemory.$maxLoop = this.maxLoop.eval(tick);
+        nodeMemory.$maxLoop = tick.evalExpression(this.maxLoop);
         nodeMemory.$i = 0;
     }
 

@@ -4,34 +4,13 @@ class NumberExpression extends Expression {
 
     constructor(config = {}) {
 
-        var isConstant;
-        var canEval;
         var configType = typeof (config);
-        switch (configType) {
-            case 'number':
-            case 'boolean':
-                isConstant = true;
-                canEval = false;
-                config = {
-                    expression: config
-                }
-                break;
-
-            case 'function':  // function object can't be serialize
-                isConstant = false;
-                canEval = false;
-                config = {
-                    expression: config
-                }
-                break;
-
-            case 'string':
-                isConstant = false;
-                canEval = true;
-                config = {
-                    expression: config
-                }
-                break;
+        if (
+            (configType === 'number') || (configType === 'boolean') ||
+            (configType === 'string') || (configType === 'function')) {
+            config = {
+                expression: config
+            }
         }
 
         var {
@@ -39,6 +18,7 @@ class NumberExpression extends Expression {
             name = 'NumberExpression',
             expression = 0,
         } = config;
+
 
         super({
             title,
@@ -48,9 +28,11 @@ class NumberExpression extends Expression {
             }
         });
 
-        this.isConstant = isConstant;
-        this.canEval = canEval;
         this.expression = expression;
+
+        var expressionType = typeof (expression);
+        this.isConstant = (expressionType === 'number') || (expressionType === 'boolean');
+        this.canEval = (expressionType === 'string');
     }
 
     eval(tick) {
