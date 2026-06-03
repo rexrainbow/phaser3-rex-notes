@@ -1,5 +1,6 @@
 import { CreateID } from '../utils/CreateID.js';
 import { TREE, SUCCESS, FAILURE, RUNNING, ABORT, ERROR } from '../constants.js';
+import IsExpressionLike from '../utils/IsExpressionLike.js';
 
 export default class BaseNode {
 
@@ -89,7 +90,7 @@ export default class BaseNode {
             node = nodePool[node];
         }
 
-        if (typeof (node.eval) !== 'function') {
+        if (!IsExpressionLike(node)) {
             return node;
         }
 

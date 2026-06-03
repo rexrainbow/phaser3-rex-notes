@@ -3,7 +3,7 @@ import { SwitchSelector } from '../../../nodes';
 /*
 ```yaml
 switch-selector:
-    expression: key
+    condition: key
     children:
         A: seqence
         B: seqence

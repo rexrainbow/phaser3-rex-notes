@@ -5,7 +5,7 @@ import IsPlainObject from '../../../../../utils/object/IsPlainObject.js';
 ```yaml
 conditions:
     continue-if: A > 10
-    # abort-if: {expression:'A > 10', returnSuccess:true}
+    # abort-if: {condition:'A > 10', returnSuccess:true}
 ```
 */
 
@@ -14,7 +14,7 @@ var CreateContinueIfNode = function (data, child) {
         data.child = child;
     } else {
         data = {
-            expression: data,
+            condition: data,
             child: child
         }
     }

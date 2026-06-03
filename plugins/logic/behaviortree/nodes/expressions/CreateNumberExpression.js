@@ -1,4 +1,5 @@
 import NumberExpression from './NumberExpression.js';
+import IsExpressionLike from '../../utils/IsExpressionLike.js';
 
 var CreateNumberExpression = function (expression, nodePool) {
     if (expression == null) {
@@ -18,7 +19,7 @@ var CreateNumberExpression = function (expression, nodePool) {
         }
         node = nodePool[expression];
 
-    } else if (expression && typeof (expression.eval) === 'function') {
+    } else if (IsExpressionLike(expression)) {
         // Is Expression node already
         node = expression;
 

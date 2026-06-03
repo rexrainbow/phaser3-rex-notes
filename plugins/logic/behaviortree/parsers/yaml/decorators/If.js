@@ -5,7 +5,7 @@ import IsPlainObject from '../../../../../utils/object/IsPlainObject.js';
 ```yaml
 conditions:
     if: A > 10
-    # if: {expression:'A > 10'}
+    # if: {condition:'A > 10'}
 ```
 */
 
@@ -14,7 +14,7 @@ var CreateIfNode = function (data, child) {
         data.child = child;
     } else {
         data = {
-            expression: data,
+            condition: data,
             child: child
         }
     }

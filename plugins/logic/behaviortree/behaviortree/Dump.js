@@ -2,6 +2,31 @@ import { BreadthFirstSearch } from './Traversal.js';
 import { ACTION, COMPOSITE, DECORATOR } from '../constants.js';
 import DeepClone from '../../../utils/object/DeepClone.js';
 import { GetSerialNumber } from '../utils/CreateID.js'
+import IsNodeLike from '../utils/IsNodeLike.js';
+
+var DumpProperties = function (node) {
+    var properties = node.properties;
+    if (!properties) {
+        return properties;
+    }
+
+    var output = {};
+    for (var name in properties) {
+        if (!Object.prototype.hasOwnProperty.call(properties, name)) {
+            continue;
+        }
+
+        var value = properties[name];
+        // Exclude node-like value
+        if (IsNodeLike(value)) {
+            continue;
+        }
+
+        output[name] = DeepClone(value);
+    }
+
+    return output;
+}
 
 var Dump = function () {
     var data = {
@@ -10,7 +35,7 @@ var Dump = function () {
         title: this.title,
         description: this.description,
         root: (this.root) ? this.root.id : null,
-        properties: DeepClone(this.properties),
+        properties: DumpProperties(this),
         nodes: [],
     };
 
@@ -31,7 +56,7 @@ var Dump = function () {
             name: node.name,
             title: node.title,
             description: node.description,
-            properties: DeepClone(node.properties)
+            properties: DumpProperties(node)
         };
 
         // Each node can have expressions

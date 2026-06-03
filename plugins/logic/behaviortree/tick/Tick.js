@@ -1,5 +1,6 @@
-import RemoveItem from "../../../utils/array/Remove.js";
+import RemoveItem from '../../../utils/array/Remove.js';
 import ExpressionParser from '../../../math/expressionparser/ExpressionParser.js';
+import IsExpressionLike from '../utils/IsExpressionLike.js';
 
 class Tick {
 
@@ -93,7 +94,7 @@ class Tick {
     }
 
     evalExpression(expression) {
-        if (expression && typeof (expression.eval) === 'function') {
+        if (IsExpressionLike(expression)) {
             return expression.eval(this);
         }
 
