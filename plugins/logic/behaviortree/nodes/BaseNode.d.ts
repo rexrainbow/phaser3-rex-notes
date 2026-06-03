@@ -1,6 +1,6 @@
 import Tick from '../tick/Tick';
 import Blackboard from '../blackboard/Base';
-import { Expression, BooleanExpression } from './expressions';
+import { Expression } from './expressions';
 
 export default BaseNode;
 

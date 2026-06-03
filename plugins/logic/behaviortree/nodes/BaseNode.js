@@ -1,5 +1,5 @@
 import { CreateID } from '../utils/CreateID.js';
-import { Expression, BooleanExpression } from './expressions';
+import { Expression } from './expressions';
 import { TREE, SUCCESS, FAILURE, RUNNING, ABORT, ERROR } from '../constants.js';
 
 export default class BaseNode {
