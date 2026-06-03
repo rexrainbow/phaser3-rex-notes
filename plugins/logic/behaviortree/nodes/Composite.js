@@ -51,9 +51,13 @@ class Composite extends BaseNode {
     }
 
     insertChild(node, nodePool, index) {
-        if (typeof (node) === 'string') {  // Node ID
+        if (nodePool) {
+            if (!nodePool.hasOwnProperty(node)) {
+                throw new Error(`BehaviorTree.load: Missing node "${node}" for ${name}'s child node`);
+            }
             node = nodePool[node];
         }
+
 
         if (this.children.indexOf(node) === -1) {
             if (index < 0) {
@@ -77,7 +81,10 @@ class Composite extends BaseNode {
     }
 
     addService(node, nodePool) {
-        if (typeof (node) === 'string') {  // Node ID
+        if (nodePool) {
+            if (!nodePool.hasOwnProperty(node)) {
+                throw new Error(`BehaviorTree.load: Missing node "${node}" for ${name}'s Service node`);
+            }
             node = nodePool[node];
         }
 

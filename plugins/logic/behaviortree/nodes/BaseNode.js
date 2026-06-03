@@ -78,8 +78,10 @@ export default class BaseNode {
     }
 
     addExpression(name, node, nodePool) {
-        // Load from JSON
-        if (nodePool && typeof (node) === 'string' && nodePool[node]) {  // Node ID
+        if (nodePool) {
+            if (!nodePool.hasOwnProperty(node)) {
+                throw new Error(`BehaviorTree.load: Missing node "${node}" for ${name}'s Expression node`);
+            }
             node = nodePool[node];
         }
 

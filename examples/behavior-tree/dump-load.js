@@ -4,11 +4,17 @@ import ClockPlugin from '../../plugins/clock-plugin.js';
 import mustache from 'mustache';
 
 class PrintAction extends RexPlugins.BehaviorTree.Action {
-    constructor({ text = '' } = {}) {
-        super({
-            name: 'MyAction',
-            properties: { text: text },
-        });
+    constructor(
+        { text = '' } = {},
+        nodePool
+    ) {
+        super(
+            {
+                name: 'MyAction',
+                properties: { text: text },
+            },
+            nodePool
+        );
     }
 
     tick(tick) {
@@ -19,15 +25,21 @@ class PrintAction extends RexPlugins.BehaviorTree.Action {
 }
 
 class PrintService extends RexPlugins.BehaviorTree.Service {
-    constructor({
-        text = '',
-        interval = 70
-    } = {}) {
-        super({
-            name: 'MyPrintService',
-            interval: interval,
-            properties: { text: text },
-        });
+    constructor(
+        {
+            text = '',
+            interval = 70
+        } = {},
+        nodePool
+    ) {
+        super(
+            {
+                name: 'MyPrintService',
+                interval: interval,
+                properties: { text: text },
+            },
+            nodePool
+        );
     }
 
     tick(tick) {

@@ -37,7 +37,10 @@ class Decorator extends BaseNode {
     }
 
     addChild(node, nodePool) {
-        if (typeof (node) === 'string') {  // Node ID
+        if (nodePool) {
+            if (!nodePool.hasOwnProperty(node)) {
+                throw new Error(`BehaviorTree.load: Missing node "${node}" for ${name}'s child node`);
+            }
             node = nodePool[node];
         }
 

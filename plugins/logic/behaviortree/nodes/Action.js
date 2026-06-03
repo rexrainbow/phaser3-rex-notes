@@ -39,7 +39,10 @@ class Action extends BaseNode {
     }
 
     addService(node, nodePool) {
-        if (typeof (node) === 'string') {  // Node ID
+        if (nodePool) {
+            if (!nodePool.hasOwnProperty(node)) {
+                throw new Error(`BehaviorTree.load: Missing node "${node}" for ${name}'s Service node`);
+            }
             node = nodePool[node];
         }
 
