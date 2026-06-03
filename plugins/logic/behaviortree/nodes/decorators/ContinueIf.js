@@ -5,31 +5,45 @@ import { FAILURE, SUCCESS, ERROR } from '../../constants.js';
 
 class ContinueIf extends Decorator {
 
-    constructor(
-        {
-            condition = 'true',
-            returnSuccess = true,
-            child = null,
-            title,
-            properties = {},
-            name = 'ContinueIf'
-        } = {},
-        nodePool
-    ) {
+    constructor(config = {}, nodePool) {
+        var condition, returnSuccess;
 
-        super(
-            {
-                child,
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+            var expressions = config.expressions;
+            var properties = config.properties || {};
+            condition = (expressions && (expressions.condition !== undefined)) ? expressions.condition : properties.condition;
+            returnSuccess = properties.returnSuccess;
+
+        } else {
+            var {
+                condition: conditionValue = 'true',
+                returnSuccess: returnSuccessValue = true,
+                child = null,
                 title,
-                name,
-                properties: {
-                    ...properties,
-                    condition,
-                    returnSuccess,
+                properties = {},
+                name = 'ContinueIf'
+            } = config;
+
+            super(
+                {
+                    child,
+                    title,
+                    name,
+                    properties: {
+                        ...properties,
+                        condition: conditionValue,
+                        returnSuccess: returnSuccessValue,
+                    },
                 },
-            },
-            nodePool
-        );
+                nodePool
+            );
+
+            condition = conditionValue;
+            returnSuccess = returnSuccessValue;
+
+        }
 
         this.condition = CreateNumberExpression(condition, nodePool); // Expression node
         this.addExpression('condition', this.condition);

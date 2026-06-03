@@ -3,26 +3,33 @@ import { SUCCESS, ABORT } from '../../constants.js';
 import BreakDecorator from '../decorators/BreakDecorator.js';
 
 class BreakAction extends Action {
-    constructor({
-        breakDecoratorTitle,
-        tag,
-        services,
-        title,
-        name = 'Break'
-    } = {}) {
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
 
-        super({
-            name,
-            title,
-            properties: {
+        } else {  // New node
+            var {
                 breakDecoratorTitle,
-                tag
-            },
-            services,
-        });
+                tag,
+                services,
+                title,
+                name = 'Break'
+            } = config;
 
-        this.breakDecoratorTitle = breakDecoratorTitle;
-        this.tag = tag;
+            super({
+                name,
+                title,
+                properties: {
+                    breakDecoratorTitle,
+                    tag
+                },
+                services,
+            });
+
+        }
+
+        this.breakDecoratorTitle = this.properties.breakDecoratorTitle;
+        this.tag = this.properties.tag;
     }
 
     tick(tick) {

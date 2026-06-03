@@ -3,17 +3,24 @@ import { FAILURE } from '../../constants.js';
 
 class Failer extends Action {
 
-    constructor({
-        services,
-        title,
-        name = 'Failer'
-    } = {}) {
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
 
-        super({
-            services,
-            title,
-            name,
-        });
+        } else {  // New node
+            var {
+                services,
+                title,
+                name = 'Failer'
+            } = config;
+
+            super({
+                services,
+                title,
+                name,
+            });
+        }
+
     }
 
     tick(tick) {

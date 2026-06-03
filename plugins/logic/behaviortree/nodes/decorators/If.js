@@ -1,37 +1,53 @@
 import Decorator from '../Decorator.js';
 import CreateNumberExpression from '../expressions/CreateNumberExpression.js';
-import { FAILURE, SUCCESS, ERROR } from '../../constants.js';
+import { FAILURE, SUCCESS, RUNNING, ERROR } from '../../constants.js';
 
 
 class If extends Decorator {
 
-    constructor(
-        {
-            condition = 'true',
-            conditionEvalBreak = false,
-            onFailState = FAILURE,
-            child = null,
-            title,
-            properties = {},
-            name = 'If'
-        } = {},
-        nodePool
-    ) {
+    constructor(config = {}, nodePool) {
+        var condition, conditionEvalBreak, onFailState;
 
-        super(
-            {
-                child,
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+            var expressions = config.expressions;
+            var properties = config.properties || {};
+            condition = (expressions && (expressions.condition !== undefined)) ? expressions.condition : properties.condition;
+            conditionEvalBreak = properties.conditionEvalBreak;
+            onFailState = properties.onFailState;
+
+        } else {
+            var {
+                condition: conditionValue = 'true',
+                conditionEvalBreak: conditionEvalBreakValue = false,
+                onFailState: onFailStateValue = FAILURE,
+                child = null,
                 title,
-                name,
-                properties: {
-                    ...properties,
-                    condition,
-                    conditionEvalBreak,
-                    onFailState
+                properties = {},
+                name = 'If'
+            } = config;
+
+            super(
+                {
+                    child,
+                    title,
+                    name,
+                    properties: {
+                        ...properties,
+                        condition: conditionValue,
+                        conditionEvalBreak: conditionEvalBreakValue,
+                        onFailState: onFailStateValue
+                    },
                 },
-            },
-            nodePool
-        );
+                nodePool
+            );
+
+            condition = conditionValue;
+            conditionEvalBreak = conditionEvalBreakValue;
+            onFailState = onFailStateValue;
+
+        }
 
         this.condition = CreateNumberExpression(condition, nodePool);  // Expression node
         this.addExpression('condition', this.condition);

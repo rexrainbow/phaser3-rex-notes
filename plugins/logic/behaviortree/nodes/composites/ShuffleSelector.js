@@ -3,25 +3,29 @@ import Shuffle from '../../../../utils/array/Shuffle.js';
 import { SUCCESS, FAILURE, RUNNING, ABORT, ERROR } from '../../constants.js';
 
 class ShuffleSelector extends Composite {
-    constructor(
-        {
-            children = [],
-            services,
-            title,
-            name = 'ShuffleSelector'
-        } = {},
-        nodePool
-    ) {
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
 
-        super(
-            {
-                children,
+        } else {
+            var {
+                children = [],
                 services,
                 title,
-                name,
-            },
-            nodePool
-        );
+                name = 'ShuffleSelector'
+            } = config;
+
+            super(
+                {
+                    children,
+                    services,
+                    title,
+                    name,
+                },
+                nodePool
+            );
+
+        }
 
     }
 

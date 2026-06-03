@@ -3,17 +3,24 @@ import { ERROR } from '../../constants.js';
 
 class Error extends Action {
 
-    constructor({
-        services,
-        title,
-        name = 'Error',
-    } = {}) {
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
 
-        super({
-            services,
-            title,
-            name,
-        });
+        } else {  // New node
+            var {
+                services,
+                title,
+                name = 'Error',
+            } = config;
+
+            super({
+                services,
+                title,
+                name,
+            });
+
+        }
     }
 
     tick(tick) {

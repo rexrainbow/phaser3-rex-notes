@@ -3,33 +3,46 @@ import CreateNumberExpression from '../expressions/CreateNumberExpression.js';
 import { SUCCESS, FAILURE, RUNNING, ERROR } from '../../constants.js';
 
 class IfSelector extends Composite {
-    constructor(
-        {
-            condition = 'true',
-            conditionEvalBreak = false,
-            children = [],
-            services,
-            title,
-            properties = {},
-            name = 'IfSelector'
-        } = {},
-        nodePool
-    ) {
+    constructor(config = {}, nodePool) {
+        var condition, conditionEvalBreak;
 
-        super(
-            {
-                children: children,
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+            var expressions = config.expressions;
+            var properties = config.properties || {};
+            condition = (expressions && (expressions.condition !== undefined)) ? expressions.condition : properties.condition;
+            conditionEvalBreak = properties.conditionEvalBreak;
+
+        } else {
+            var {
+                condition: conditionValue = 'true',
+                conditionEvalBreak: conditionEvalBreakValue = false,
+                children = [],
                 services,
                 title,
-                name,
-                properties: {
-                    ...properties,
-                    condition,
-                    conditionEvalBreak,
+                properties = {},
+                name = 'IfSelector'
+            } = config;
+
+            super(
+                {
+                    children: children,
+                    services,
+                    title,
+                    name,
+                    properties: {
+                        ...properties,
+                        condition: conditionValue,
+                        conditionEvalBreak: conditionEvalBreakValue,
+                    },
                 },
-            },
-            nodePool
-        );
+                nodePool
+            );
+
+            condition = conditionValue;
+            conditionEvalBreak = conditionEvalBreakValue;
+        }
 
         this.condition = CreateNumberExpression(condition, nodePool); // Expression node
         this.addExpression('condition', this.condition);

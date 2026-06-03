@@ -4,23 +4,27 @@ import { FAILURE, SUCCESS, ERROR } from '../../constants.js';
 
 class Bypass extends Decorator {
 
-    constructor(
-        {
-            child = null,
-            title,
-            name = 'Bypass'
-        } = {},
-        nodePool
-    ) {
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
 
-        super(
-            {
-                child,
+        } else {
+            var {
+                child = null,
                 title,
-                name,
-            },
-            nodePool
-        );
+                name = 'Bypass'
+            } = config;
+
+            super(
+                {
+                    child,
+                    title,
+                    name,
+                },
+                nodePool
+            );
+
+        }
     }
 
     tick(tick) {

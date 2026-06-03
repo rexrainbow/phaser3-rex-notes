@@ -3,17 +3,24 @@ import { ABORT } from '../../constants.js';
 
 class Abort extends Action {
 
-    constructor({
-        services,
-        title,
-        name = 'Abort',
-    } = {}) {
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
 
-        super({
-            services,
-            title,
-            name,
-        });
+        } else {  // New node
+            var {
+                services,
+                title,
+                name = 'Abort',
+            } = config;
+
+            super({
+                services,
+                title,
+                name,
+            });
+
+        }
     }
 
     tick(tick) {

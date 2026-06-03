@@ -4,29 +4,41 @@ import { SUCCESS, ERROR, FAILURE } from '../../constants.js';
 
 class RepeatUntilSuccess extends Decorator {
 
-    constructor(
-        {
-            maxLoop = -1,
-            child = null,
-            title,
-            properties = {},
-            name = 'RepeatUntilSuccess'
-        } = {},
-        nodePool
-    ) {
+    constructor(config = {}, nodePool) {
+        var maxLoop;
 
-        super(
-            {
-                child,
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+            var expressions = config.expressions;
+            var properties = config.properties || {};
+            maxLoop = (expressions && (expressions.maxLoop !== undefined)) ? expressions.maxLoop : properties.maxLoop;
+
+        } else {
+            var {
+                maxLoop: maxLoopValue = -1,
+                child = null,
                 title,
-                name,
-                properties: {
-                    ...properties,
-                    maxLoop,
+                properties = {},
+                name = 'RepeatUntilSuccess'
+            } = config;
+
+            super(
+                {
+                    child,
+                    title,
+                    name,
+                    properties: {
+                        ...properties,
+                        maxLoop: maxLoopValue,
+                    },
                 },
-            },
-            nodePool
-        );
+                nodePool
+            );
+
+            maxLoop = maxLoopValue;
+
+        }
 
         this.maxLoop = CreateNumberExpression(maxLoop, nodePool);  // Expression node
         this.addExpression('maxLoop', this.maxLoop);

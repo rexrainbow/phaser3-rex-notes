@@ -2,35 +2,45 @@ import Expression from '../Expression.js';
 
 class NumberExpression extends Expression {
 
-    constructor(config = {}) {
+    constructor(config = {}, nodePool) {
+        var expression;
 
-        var configType = typeof (config);
-        if (
-            (configType === 'number') || (configType === 'boolean') ||
-            (configType === 'string') || (configType === 'function')) {
-            config = {
-                expression: config
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+            var properties = config.properties || {};
+            expression = properties.expression;
+
+        } else {
+            var configType = typeof (config);
+            if (
+                (configType === 'number') || (configType === 'boolean') ||
+                (configType === 'string') || (configType === 'function')) {
+                config = {
+                    expression: config
+                }
             }
+
+            var {
+                title,
+                name = 'NumberExpression',
+                expression: expressionValue = 0,
+            } = config;
+
+            super({
+                title,
+                name,
+                properties: {
+                    expression,
+                }
+            });
+
+            expression = expressionValue;
         }
-
-        var {
-            title,
-            name = 'NumberExpression',
-            expression = 0,
-        } = config;
-
-
-        super({
-            title,
-            name,
-            properties: {
-                expression,
-            }
-        });
 
         this.expression = expression;
 
-        var expressionType = typeof (expression);
+        var expressionType = typeof (this.expression);
         this.isConstant = (expressionType === 'number') || (expressionType === 'boolean');
         this.canEval = (expressionType === 'string');
     }

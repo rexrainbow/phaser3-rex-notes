@@ -75,19 +75,6 @@ var Load = function (data, names) {
             config.services = spec.services;
         }
 
-        config = Object.assign(
-            config,
-            spec.properties,
-        )
-
-        if (HasOwnProperty(spec, 'expressions')) {
-            for (var name in spec.expressions) {
-                if (HasOwnProperty(spec.expressions, name)) {
-                    config[name] = spec.expressions[name];
-                }
-            }
-        }
-
         config.name = spec.name;
         if (HasOwnProperty(spec, 'title')) {
             config.title = spec.title;
@@ -97,6 +84,9 @@ var Load = function (data, names) {
         }
         if (HasOwnProperty(spec, 'properties')) {
             config.properties = spec.properties;
+        }
+        if (HasOwnProperty(spec, 'expressions')) {
+            config.expressions = spec.expressions;
         }
 
         var node = new Cls(config, nodes);

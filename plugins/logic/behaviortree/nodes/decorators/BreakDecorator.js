@@ -2,30 +2,36 @@ import Decorator from '../Decorator.js';
 import { SUCCESS } from '../../constants.js';
 
 class BreakDecorator extends Decorator {
-    constructor(
-        {
-            child = null,
-            title,
-            name = 'Break',
-            tag,
-        } = {},
-        nodePool
-    ) {
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
 
-        super(
-            {
-                child,
+        } else {
+            var {
+                child = null,
                 title,
-                name,
-                properties: {
-                    tag
-                }
-            },
-            nodePool
-        );
+                properties = {},
+                name = 'Break',
+                tag,
+            } = config;
+
+            super(
+                {
+                    child,
+                    title,
+                    name,
+                    properties: {
+                        ...properties,
+                        tag
+                    }
+                },
+                nodePool
+            );
+
+        }
 
         this.breakFlag = false;
-        this.tag = tag;
+        this.tag = this.properties.tag;
     }
 
     setBreakFlag(enable) {

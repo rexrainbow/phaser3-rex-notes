@@ -4,27 +4,50 @@ import { SERVICE } from '../constants.js';
 
 class Service extends BaseNode {
 
-    constructor(
-        {
-            interval = 0,
-            randomDeviation = 0,
-            name = 'Service',
-            title,
-            properties = {}
-        } = {},
-        nodePool
-    ) {
+    constructor(config = {}, nodePool) {
+        var interval, randomDeviation;
 
-        super({
-            category: SERVICE,
-            name,
-            title,
-            properties: {
-                ...properties,
-                interval,
-                randomDeviation,
-            },
-        });
+        if (nodePool) {
+            var {
+                name = 'Service',
+                title,
+                properties = {}
+            } = config;
+
+            super({
+                category: SERVICE,
+                name,
+                title,
+                properties,
+            });
+
+            var expressions = config.expressions;
+            interval = (expressions && (expressions.interval !== undefined)) ? expressions.interval : properties.interval;
+            randomDeviation = (expressions && (expressions.randomDeviation !== undefined)) ? expressions.randomDeviation : properties.randomDeviation;
+
+        } else {
+            var {
+                interval: intervalValue = 0,
+                randomDeviation: randomDeviationValue = 0,
+                name = 'Service',
+                title,
+                properties = {}
+            } = config;
+
+            super({
+                category: SERVICE,
+                name,
+                title,
+                properties: {
+                    ...properties,
+                    interval: intervalValue,
+                    randomDeviation: randomDeviationValue,
+                },
+            });
+
+            interval = intervalValue;
+            randomDeviation = randomDeviationValue;
+        }
 
         this.interval = CreateNumberExpression(interval, nodePool); // Expression node
         this.addExpression('interval', this.interval);

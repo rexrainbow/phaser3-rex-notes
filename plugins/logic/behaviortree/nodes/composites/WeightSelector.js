@@ -4,56 +4,71 @@ import { SUCCESS, FAILURE, RUNNING, ERROR } from '../../constants.js';
 import BaseNode from '../BaseNode.js';
 
 class WeightSelector extends Composite {
-    constructor(
-        {
-            condition = null,
-            weights = undefined,    // Or [weight, ...]
-            conditionEvalBreak = false,
-            children = [],          // [node, ...], or [{weight, node}, ...]
-            services,
-            title,
-            properties = {},
-            name = 'WeightSelector'
-        } = {},
-        nodePool
-    ) {
+    constructor(config = {}, nodePool) {
+        var condition, weights, conditionEvalBreak;
 
-        if (weights === undefined) {
-            weights = [];
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
 
-            var totalWeight = 0;
-            for (var i = 0, cnt = children.length; i < cnt; i++) {
-                var child = children[i];
-                var weight;
-                if ((child instanceof BaseNode) || (typeof (child) === 'string')) {
-                    weight = 1;
-                } else {
-                    weight = child.weight;
-                    children[i] = child.node;
-                }
-                weights.push(weight);
-                totalWeight += weight;
-            }
-            for (var i = 0, cnt = weights.length; i < cnt; i++) {
-                weights[i] /= totalWeight;
-            }
-        }
+            var expressions = config.expressions;
+            var properties = config.properties || {};
+            condition = (expressions && (expressions.condition !== undefined)) ? expressions.condition : properties.condition;
+            weights = properties.weights;
+            conditionEvalBreak = properties.conditionEvalBreak;
 
-        super(
-            {
-                children: children,
+        } else {
+            var {
+                condition: conditionValue = null,
+                weights: weightsValue = undefined,    // Or [weight, ...]
+                conditionEvalBreak: conditionEvalBreakValue = false,
+                children = [],          // [node, ...], or [{weight, node}, ...]
                 services,
                 title,
-                name,
-                properties: {
-                    ...properties,
-                    condition,
-                    weights,
-                    conditionEvalBreak,
+                properties = {},
+                name = 'WeightSelector'
+            } = config;
+
+            if (weightsValue === undefined) {
+                weightsValue = [];
+
+                var totalWeight = 0;
+                for (var i = 0, cnt = children.length; i < cnt; i++) {
+                    var child = children[i];
+                    var weight;
+                    if ((child instanceof BaseNode) || (typeof (child) === 'string')) {
+                        weight = 1;
+                    } else {
+                        weight = child.weight;
+                        children[i] = child.node;
+                    }
+                    weightsValue.push(weight);
+                    totalWeight += weight;
+                }
+                for (var i = 0, cnt = weightsValue.length; i < cnt; i++) {
+                    weightsValue[i] /= totalWeight;
+                }
+            }
+
+            super(
+                {
+                    children: children,
+                    services,
+                    title,
+                    name,
+                    properties: {
+                        ...properties,
+                        condition: conditionValue,
+                        weights: weightsValue,
+                        conditionEvalBreak: conditionEvalBreakValue,
+                    },
                 },
-            },
-            nodePool
-        );
+                nodePool
+            );
+
+            condition = conditionValue;
+            weights = weightsValue;
+            conditionEvalBreak = conditionEvalBreakValue;
+        }
 
         if (condition != null) {
             this.condition = CreateNumberExpression(condition, nodePool); // Expression node

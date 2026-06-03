@@ -4,31 +4,45 @@ import { SUCCESS, FAILURE, ERROR } from '../../constants.js';
 
 class RepeatUntilFailure extends Decorator {
 
-    constructor(
-        {
-            maxLoop = -1,
-            returnSuccess = false,
-            child = null,
-            title,
-            properties = {},
-            name = 'RepeatUntilFailure',
-        } = {},
-        nodePool
-    ) {
+    constructor(config = {}, nodePool) {
+        var maxLoop, returnSuccess;
 
-        super(
-            {
-                child,
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+            var expressions = config.expressions;
+            var properties = config.properties || {};
+            maxLoop = (expressions && (expressions.maxLoop !== undefined)) ? expressions.maxLoop : properties.maxLoop;
+            returnSuccess = properties.returnSuccess;
+
+        } else {
+            var {
+                maxLoop: maxLoopValue = -1,
+                returnSuccess: returnSuccessValue = false,
+                child = null,
                 title,
-                name,
-                properties: {
-                    ...properties,
-                    maxLoop,
-                    returnSuccess,
+                properties = {},
+                name = 'RepeatUntilFailure',
+            } = config;
+
+            super(
+                {
+                    child,
+                    title,
+                    name,
+                    properties: {
+                        ...properties,
+                        maxLoop: maxLoopValue,
+                        returnSuccess: returnSuccessValue,
+                    },
                 },
-            },
-            nodePool
-        );
+                nodePool
+            );
+
+            maxLoop = maxLoopValue;
+            returnSuccess = returnSuccessValue;
+
+        }
 
         this.maxLoop = CreateNumberExpression(maxLoop, nodePool);  // Expression node
         this.addExpression('maxLoop', this.maxLoop);

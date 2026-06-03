@@ -4,26 +4,37 @@ import { SUCCESS, RUNNING } from '../../constants.js';
 
 class Wait extends Action {
 
-    constructor(
-        {
-            duration = 0,
-            services,
-            title,
-            properties = {},
-            name = 'Wait'
-        } = {},
-        nodePool
-    ) {
+    constructor(config = {}, nodePool) {
+        var duration;
 
-        super({
-            title,
-            name,
-            properties: {
-                ...properties,
-                duration,
-            },
-            services,
-        });
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+            var expressions = config.expressions;
+            var properties = config.properties || {};
+            duration = (expressions && (expressions.duration !== undefined)) ? expressions.duration : properties.duration;
+
+        } else {  // New node
+            var {
+                duration: durationValue = 0,
+                services,
+                title,
+                properties = {},
+                name = 'Wait'
+            } = config;
+
+            super({
+                title,
+                name,
+                properties: {
+                    ...properties,
+                    duration: durationValue,
+                },
+                services,
+            });
+
+            duration = durationValue;
+        }
 
         this.duration = CreateNumberExpression(duration, nodePool); // Expression node
         this.addExpression('duration', this.duration);

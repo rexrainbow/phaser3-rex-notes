@@ -1,33 +1,47 @@
 import Decorator from '../Decorator.js';
 import CreateNumberExpression from '../expressions/CreateNumberExpression.js';
-import { FAILURE, ERROR } from '../../constants.js';
+import { SUCCESS, FAILURE, ERROR } from '../../constants.js';
 
 class TimeLimit extends Decorator {
-    constructor(
-        {
-            duration = 0,
-            returnSuccess = true,
-            child = null,
-            title,
-            properties = {},
-            name = 'TimeLimit'
-        } = {},
-        nodePool
-    ) {
+    constructor(config = {}, nodePool) {
+        var duration, returnSuccess;
 
-        super(
-            {
-                child,
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+            var expressions = config.expressions;
+            var properties = config.properties || {};
+            duration = (expressions && (expressions.duration !== undefined)) ? expressions.duration : properties.duration;
+            returnSuccess = properties.returnSuccess;
+
+        } else {
+            var {
+                duration: durationValue = 0,
+                returnSuccess: returnSuccessValue = true,
+                child = null,
                 title,
-                name,
-                properties: {
-                    ...properties,
-                    duration,
-                    returnSuccess
+                properties = {},
+                name = 'TimeLimit'
+            } = config;
+
+            super(
+                {
+                    child,
+                    title,
+                    name,
+                    properties: {
+                        ...properties,
+                        duration: durationValue,
+                        returnSuccess: returnSuccessValue
+                    },
                 },
-            },
-            nodePool
-        );
+                nodePool
+            );
+
+            duration = durationValue;
+            returnSuccess = returnSuccessValue;
+
+        }
 
         this.duration = CreateNumberExpression(duration, nodePool);  // Expression node
         this.addExpression('duration', this.duration);

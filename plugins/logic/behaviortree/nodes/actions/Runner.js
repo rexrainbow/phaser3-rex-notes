@@ -3,17 +3,24 @@ import { RUNNING } from '../../constants.js';
 
 class Runner extends Action {
 
-    constructor({
-        services,
-        title,
-        name = 'Runner'
-    } = {}) {
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
 
-        super({
-            services,
-            title,
-            name,
-        });
+        } else {  // New node
+            var {
+                services,
+                title,
+                name = 'Runner'
+            } = config;
+
+            super({
+                services,
+                title,
+                name,
+            });
+
+        }
     }
 
     tick(tick) {

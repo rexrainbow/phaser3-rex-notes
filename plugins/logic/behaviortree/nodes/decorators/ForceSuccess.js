@@ -4,25 +4,29 @@ import { RUNNING, FAILURE, SUCCESS, ABORT, ERROR } from '../../constants.js';
 
 class ForceSuccess extends Decorator {
 
-    constructor(
-        {
-            child = null,
-            title,
-            name = 'ForceSuccess'
-        } = {},
-        nodePool
-    ) {
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
 
-        super(
-            {
-                child,
+        } else {
+            var {
+                child = null,
                 title,
-                name,
-                properties: {
+                name = 'ForceSuccess'
+            } = config;
+
+            super(
+                {
+                    child,
+                    title,
+                    name,
+                    properties: {
+                    },
                 },
-            },
-            nodePool
-        );
+                nodePool
+            );
+
+        }
     }
 
     tick(tick) {

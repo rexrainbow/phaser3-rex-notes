@@ -3,40 +3,55 @@ import CreateNumberExpression from '../expressions/CreateNumberExpression.js';
 import { SUCCESS, FAILURE, RUNNING, ERROR } from '../../constants.js';
 
 class SwitchSelector extends Composite {
-    constructor(
-        {
-            condition = null,
-            keys = undefined, // Or [key, ...]
-            conditionEvalBreak = false,
-            children = {},    // Or [child, ...]
-            services,
-            title,
-            properties = {},
-            name = 'SwitchSelector'
-        } = {},
-        nodePool
-    ) {
+    constructor(config = {}, nodePool) {
+        var condition, keys, conditionEvalBreak;
 
-        if (keys === undefined) {
-            keys = Object.keys(children);
-            children = Object.values(children);
-        }
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
 
-        super(
-            {
-                children: children,
+            var expressions = config.expressions;
+            var properties = config.properties || {};
+            condition = (expressions && (expressions.condition !== undefined)) ? expressions.condition : properties.condition;
+            keys = properties.keys;
+            conditionEvalBreak = properties.conditionEvalBreak;
+
+        } else {
+            var {
+                condition: conditionValue = null,
+                keys: keysValue = undefined, // Or [key, ...]
+                conditionEvalBreak: conditionEvalBreakValue = false,
+                children = {},    // Or [child, ...]
                 services,
                 title,
-                name,
-                properties: {
-                    ...properties,
-                    condition,
-                    keys,
-                    conditionEvalBreak,
+                properties = {},
+                name = 'SwitchSelector'
+            } = config;
+
+            if (keysValue === undefined) {
+                keysValue = Object.keys(children);
+                children = Object.values(children);
+            }
+
+            super(
+                {
+                    children: children,
+                    services,
+                    title,
+                    name,
+                    properties: {
+                        ...properties,
+                        condition: conditionValue,
+                        keys: keysValue,
+                        conditionEvalBreak: conditionEvalBreakValue,
+                    },
                 },
-            },
-            nodePool
-        );
+                nodePool
+            );
+
+            condition = conditionValue;
+            keys = keysValue;
+            conditionEvalBreak = conditionEvalBreakValue;
+        }
 
         this.condition = CreateNumberExpression(condition, nodePool); // Expression node
         this.addExpression('condition', this.condition);

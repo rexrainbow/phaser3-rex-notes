@@ -3,34 +3,40 @@ import { SUCCESS, FAILURE, RUNNING, ABORT, ERROR } from '../../constants.js';
 import RemoveItem from '../../../../utils/array/Remove.js';
 
 class Parallel extends Composite {
-    constructor(
-        {
-            finishMode = 0,
-            returnSuccess = true,
-            children = [],
-            services,
-            title,
-            name = 'Parallel'
-        } = {},
-        nodePool
-    ) {
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
 
-        super(
-            {
-                children,
+        } else {
+            var {
+                finishMode = 0,
+                returnSuccess = true,
+                children = [],
                 services,
                 title,
-                name,
-                properties: {
-                    finishMode,
-                    returnSuccess
-                },
-            },
-            nodePool
-        );
+                properties = {},
+                name = 'Parallel'
+            } = config;
 
-        this.finishMode = finishMode;
-        this.returnSuccess = returnSuccess;
+            super(
+                {
+                    children,
+                    services,
+                    title,
+                    name,
+                    properties: {
+                        ...properties,
+                        finishMode,
+                        returnSuccess
+                    },
+                },
+                nodePool
+            );
+
+        }
+
+        this.finishMode = this.properties.finishMode;
+        this.returnSuccess = this.properties.returnSuccess;
     }
 
     open(tick) {

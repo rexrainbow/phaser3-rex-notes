@@ -3,29 +3,41 @@ import CreateNumberExpression from '../expressions/CreateNumberExpression.js';
 import { SUCCESS, FAILURE, RUNNING, ABORT, ERROR } from '../../constants.js';
 
 class Cooldown extends Decorator {
-    constructor(
-        {
-            duration = 0,
-            child = null,
-            title,
-            properties = {},
-            name = 'Cooldown'
-        } = {},
-        nodePool
-    ) {
+    constructor(config = {}, nodePool) {
+        var duration;
 
-        super(
-            {
-                child,
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+            var expressions = config.expressions;
+            var properties = config.properties || {};
+            duration = (expressions && (expressions.duration !== undefined)) ? expressions.duration : properties.duration;
+
+        } else {
+            var {
+                duration: durationValue = 0,
+                child = null,
                 title,
-                name,
-                properties: {
-                    ...properties,
-                    duration,
+                properties = {},
+                name = 'Cooldown'
+            } = config;
+
+            super(
+                {
+                    child,
+                    title,
+                    name,
+                    properties: {
+                        ...properties,
+                        duration: durationValue,
+                    },
                 },
-            },
-            nodePool
-        );
+                nodePool
+            );
+
+            duration = durationValue;
+
+        }
 
         this.duration = CreateNumberExpression(duration, nodePool);  // Expression node
         this.addExpression('duration', this.duration);
