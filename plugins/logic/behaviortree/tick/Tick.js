@@ -95,7 +95,9 @@ class Tick {
 
     evalExpression(expression) {
         if (IsExpressionLike(expression)) {
-            return expression.eval(this);
+            var value = expression.eval(this);
+            expression.lastValue = value;  // For inspector
+            return value;
         }
 
         return expression;

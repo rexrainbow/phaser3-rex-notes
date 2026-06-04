@@ -47,12 +47,16 @@ class NumberExpression extends Expression {
         this.canEval = (expressionType === 'string');
     }
 
-    eval(tick) {
+    eval(tick, context) {
+        // Assign context for testing purpose
+
         var value;
         if (this.isConstant) {
             value = this.expression;
         } else {
-            var context = tick.getEvalContext();
+            if (!context) { // Normal case
+                context = tick.getEvalContext();
+            }
             if (this.canEval) {
                 value = tick.expressionParser.exec(this.expression, context);
             } else {
@@ -60,8 +64,6 @@ class NumberExpression extends Expression {
             }
 
         }
-
-        this.lastValue = value;
         return value;
     }
 }
