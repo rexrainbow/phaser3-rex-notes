@@ -29,7 +29,7 @@ class RepeatUntilFailure extends Decorator {
                     title,
                     properties: {
                         ...properties,
-                        returnSuccess: returnSuccessValue,
+                        returnSuccess,
                     },
                     name,
                 },

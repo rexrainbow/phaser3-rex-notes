@@ -60,7 +60,7 @@ class EventSheet extends BehaviorTree {
 
         var root = new IfSelector({
             title: this.title,
-            expression: condition,
+            condition,
             conditionEvalBreak: true   // Return RUNNING instead of SUCCESS for condition eval
         })
         this.setRoot(root);

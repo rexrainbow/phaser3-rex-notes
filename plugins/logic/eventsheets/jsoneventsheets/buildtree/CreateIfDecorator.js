@@ -5,7 +5,7 @@ var CreateIfDecorator = function (expression, onConditionFailValue) {
     var ifDecorator;
     try {
         ifDecorator = new If({
-            expression: expression,
+            condition: expression,
             onFailState: onFailState,
         });
     } catch (e) {
@@ -13,7 +13,7 @@ var CreateIfDecorator = function (expression, onConditionFailValue) {
         console.error(e);
 
         ifDecorator = new If({
-            expression: 'false',
+            condition: 'false',
             onFailState: onFailState,
         });
     }

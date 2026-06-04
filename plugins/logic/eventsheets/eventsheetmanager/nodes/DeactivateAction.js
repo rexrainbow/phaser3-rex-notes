@@ -1,23 +1,30 @@
 import { Action, } from '../../../behaviortree/index.js';
 
 class DeactivateAction extends Action {
-    constructor({
-        deactivateTreeTitle,
-        services,
-        title,
-        name = 'DeactivateTree'
-    } = {}) {
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
 
-        super({
-            name,
-            title,
-            properties: {
-                deactivateTreeTitle
-            },
-            services,
-        });
+        } else {
+            var {
+                deactivateTreeTitle,
+                services,
+                title,
+                properties = {},
+                name = 'DeactivateTree'
+            } = config;
+            super({
+                name,
+                title,
+                properties: {
+                    ...properties,
+                    deactivateTreeTitle
+                },
+                services,
+            });
+        }
 
-        this.deactivateTreeTitle = deactivateTreeTitle;
+        this.deactivateTreeTitle = this.properties.deactivateTreeTitle;
     }
 
     tick(tick) {

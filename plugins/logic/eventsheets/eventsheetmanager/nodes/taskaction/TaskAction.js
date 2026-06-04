@@ -5,15 +5,20 @@ import Compile from '../../../../../math/expressionparser/utils/Complile.js';
 import mustache from 'mustache';
 
 class TaskAction extends Action {
-    constructor(config) {
-        // config: {name, parameters:{...} }        
-        super({
-            name: 'TaskAction',
-            title: config.name,
-            properties: config,
-        });
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
 
-        var sourceParameters = config.parameters;
+        } else {
+            // config: {name, parameters:{...} }
+            super({
+                name: 'TaskAction',
+                title: config.name,
+                properties: config,
+            });
+        }
+
+        var sourceParameters = this.properties.parameters || {};
         var taskParameters = {};
         for (var name in sourceParameters) {
             taskParameters[name] = CompileExpression(sourceParameters[name]);

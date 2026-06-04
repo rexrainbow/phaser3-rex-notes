@@ -4,23 +4,29 @@ import {
 } from '../../../behaviortree/index.js';
 
 class LabelDecorator extends Decorator {
-    constructor(
-        {
-            child = null,
-            title,
-            name = 'Label'
-        } = {},
-        nodePool
-    ) {
 
-        super(
-            {
-                child,
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+        } else {
+            var {
+                child = null,
                 title,
-                name,
-            },
-            nodePool
-        );
+                properties,
+                name = 'Label'
+            } = config;
+            super(
+                {
+                    child,
+                    title,
+                    properties,
+                    name,
+                },
+                nodePool
+            );
+
+        }
     }
 
     open(tick) {

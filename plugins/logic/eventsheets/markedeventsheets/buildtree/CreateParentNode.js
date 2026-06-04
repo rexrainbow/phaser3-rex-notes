@@ -63,14 +63,14 @@ var CreateParentNode = function (node, config, output) {
                 var expression = GetConditionExpression(result.match[1], node);
                 try {
                     ifDecorator = new If({
-                        expression: expression
+                        condition: expression
                     });
                 } catch (e) {
                     console.error(`[EventSheet] Parse expression '${expression}' at Heading ${node.title} failed, replace expression by 'false'`);
                     console.error(e);
 
                     ifDecorator = new If({
-                        expression: 'false'
+                        condition: 'false'
                     });
                 }
 
@@ -94,7 +94,7 @@ var CreateParentNode = function (node, config, output) {
                 try {
                     ifDecorator = new If({
                         title: `[${nodeTypeName}]`,
-                        expression: expression
+                        condition: expression
                     });
                 } catch (e) {
                     console.error(`[EventSheet] Parse expression '${expression}' at Heading ${node.title} failed, replace expression by 'false'`);
@@ -102,7 +102,7 @@ var CreateParentNode = function (node, config, output) {
 
                     ifDecorator = new If({
                         title: `[${nodeTypeName}]`,
-                        expression: 'false'
+                        condition: 'false'
                     });
                 }
 
@@ -124,7 +124,7 @@ var CreateParentNode = function (node, config, output) {
                 try {
                     ifDecorator = new If({
                         title: '[while-IF]',
-                        expression: expression
+                        condition: expression
                     });
                 } catch (e) {
                     console.error(`[EventSheet] Parse expression '${expression}' at Heading ${node.title} failed, replace expression by 'false'`);
@@ -132,7 +132,7 @@ var CreateParentNode = function (node, config, output) {
 
                     ifDecorator = new If({
                         title: '[while-IF]',
-                        expression: 'false'
+                        condition: 'false'
                     });
                 }
 
