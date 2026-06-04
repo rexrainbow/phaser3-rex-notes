@@ -391,17 +391,18 @@ var IsPlainObject$B = function (obj)
 };
 
 const IDLE$7 = 0;
-const SUCCESS$1 = 1;
+const SUCCESS = 1;
 const FAILURE = 2;
 const RUNNING$1 = 3;
 const ABORT = 5;
-const ERROR$1 = 9;
+const ERROR = 9;
 
 const TREE = 'tree';
 const COMPOSITE = 'composite';
 const DECORATOR = 'decorator';
 const ACTION = 'action';
 const SERVICE = 'service';
+const EXPRESSION = 'expression';
 
 const TREE_STATE = '$state';
 
@@ -491,6 +492,13 @@ var DataMethods$5 = {
 
 };
 
+var IsNodeLike = function (value) {
+    return value &&
+        (typeof value === 'object') &&
+        (typeof value.id === 'string') &&
+        (typeof value.category === 'string');
+};
+
 var BreadthFirstSearch$1 = function (root, callback, scope) {
     var queue = [root];
     while (queue.length > 0) {
@@ -499,6 +507,17 @@ var BreadthFirstSearch$1 = function (root, callback, scope) {
 
         if (skip) {
             continue;
+        }
+
+        var expressions = current.expressions;
+        if (expressions) {
+            for (var name in expressions) {
+                if (Object.prototype.hasOwnProperty.call(expressions, name)) {
+                    if (IsNodeLike(expressions[name])) {
+                        queue.push(expressions[name]);
+                    }
+                }
+            }
         }
 
         switch (current.category) {
@@ -561,6 +580,44 @@ function DeepClone(obj) {
     return clonedObj;
 }
 
+var DumpProperties = function (node) {
+    var properties = node.properties;
+    if (!properties) {
+        return properties;
+    }
+
+    var output = {};
+    for (var name in properties) {
+        if (!Object.prototype.hasOwnProperty.call(properties, name)) {
+            continue;
+        }
+
+        var value = properties[name];
+        // Exclude node-like value
+        if (IsNodeLike(value)) {
+            continue;
+        }
+
+        output[name] = DeepClone(value);
+    }
+
+    return output;
+};
+
+var DumpExpression = function (expression) {
+    if (IsNodeLike(expression)) {
+        return {
+            type: 'node',
+            id: expression.id
+        };
+    }
+
+    return {
+        type: 'constant',
+        value: DeepClone(expression)
+    };
+};
+
 var Dump = function () {
     var data = {
         sn: GetSerialNumber(),
@@ -568,7 +625,7 @@ var Dump = function () {
         title: this.title,
         description: this.description,
         root: (this.root) ? this.root.id : null,
-        properties: DeepClone(this.properties),
+        properties: DumpProperties(this),
         nodes: [],
     };
 
@@ -589,8 +646,18 @@ var Dump = function () {
             name: node.name,
             title: node.title,
             description: node.description,
-            properties: DeepClone(node.properties)
+            properties: DumpProperties(node)
         };
+
+        // Each node can have expressions
+        if (node.expressions) {
+            spec.expressions = {};
+            for (var name in node.expressions) {
+                if (Object.prototype.hasOwnProperty.call(node.expressions, name)) {
+                    spec.expressions[name] = DumpExpression(node.expressions[name]);
+                }
+            }
+        }
 
         switch (node.category) {
             case COMPOSITE:
@@ -623,16 +690,2974 @@ var Dump = function () {
     return data;
 };
 
-class BaseExpression {
-    setExpressionHandler(callback) {
-        this.expressionHandler = callback;
+var IsExpressionLike = function (value) {
+    return value &&
+        (typeof (value.eval) === 'function') &&
+        (typeof (value.setParent) === 'function');
+};
+
+var ResolveNode = function (node, nodePool, owner, role) {
+    if (!nodePool) {
+        return node;
+    }
+
+    if (!Object.prototype.hasOwnProperty.call(nodePool, node)) {
+        var message;
+        if (owner && role) {
+            message = `BehaviorTree.load: Missing node "${node}" for ${owner}'s ${role}`;
+        } else if (role) {
+            message = `BehaviorTree.load: Missing ${role} "${node}"`;
+        } else {
+            message = `BehaviorTree.load: Missing node "${node}"`;
+        }
+        throw new Error(message);
+    }
+
+    return nodePool[node];
+};
+
+var DecodeExpression = function (expression, nodePool, name) {
+    if (!expression || (typeof (expression) !== 'object') || (typeof (expression.type) !== 'string')) {
+        return expression;
+    }
+
+    switch (expression.type) {
+        case 'node':
+            var nodeID = expression.id;
+            if (nodePool) {
+                return ResolveNode(nodeID, nodePool, name, 'expression node');
+            }
+            return nodeID;
+
+        case 'constant':
+            return expression.value;
+
+        default:
+            return expression;
+    }
+};
+
+class BaseNode {
+
+    constructor(
+        {
+            id,
+            category,
+            name,
+            title,
+            description,
+            properties
+        } = {}
+    ) {
+
+        if (id === undefined) {
+            id = CreateID();
+        }
+
+        this.parent = null;
+
+        this.id = id;
+
+        this.category = (category === undefined) ? '' : category;
+
+        this.name = (name === undefined) ? '' : name;
+
+        this.title = (title === undefined) ? this.name : title;
+
+        this.description = (description === undefined) ? '' : description;
+
+        this.properties = properties || {};
+    }
+
+    destroy() {
+        this.parent = undefined;
+        this.properties = undefined;
+    }
+
+    setTitle(title) {
+        this.title = title;
         return this;
     }
 
-    eval(context) {
-        return this.expressionHandler(context);
+    setName(name) {
+        this.name = name;
+        return this;
+    }
+
+    setDescription(description) {
+        this.description = description;
+        return this;
+    }
+
+    setParent(parent) {
+        this.parent = parent;
+        return this;
+    }
+
+    getParent() {
+        return this.parent;
+    }
+
+    getTree(tick) {
+        if (tick) {
+            return tick.tree;
+        } else {
+            var parent = this.parent;
+            while (parent) {
+                if (parent.category === TREE) {
+                    return parent;
+                }
+                parent = parent.parent;
+            }
+            return null;
+        }
+    }
+
+    addExpression(name, node, nodePool) {
+        node = DecodeExpression(node, nodePool, name);
+
+        // Ignore null, undefined
+        if (node == null) {
+            return null;
+        }
+
+        if (this.expressions === undefined) {
+            this.expressions = {};
+        }
+
+        // Get node from nodePool
+        if (nodePool && (typeof (node) === 'string')) {
+            node = ResolveNode(node, nodePool, name, 'expression node');
+        }
+
+        this.expressions[name] = node;  // Expression node or constant number, boolean
+
+        if (IsExpressionLike(node)) {
+            node.setParent(this);
+        }
+
+        return node;
+    }
+
+    _execute(tick) {
+        // ENTER
+        this._enter(tick);
+
+        // OPEN
+        if (!this.getOpenState(tick)) {
+            this._open(tick);
+        }
+
+        // TICK
+        var status = this._tick(tick);
+
+        // CLOSE
+        if ((status === SUCCESS) || (status === FAILURE) ||
+            (status === ABORT) || (status === ERROR)) {
+            this._close(tick);
+        }
+
+        // EXIT
+        this._exit(tick);
+
+        return status;
+    }
+
+    _enter(tick) {
+        tick._enterNode(this);
+        this.enter(tick);
+    }
+
+    _open(tick) {
+        tick._openNode(this);
+        this.setOpenState(tick, true);
+        this.open(tick);
+    }
+
+    _tick(tick) {
+        tick._tickNode(this);
+        return this.tick(tick);
+    }
+
+    _close(tick) {
+        tick._closeNode(this);
+        this.setOpenState(tick, false);
+        this.close(tick);
+        // Children will be closed before parent, otherwise abort children
+        this.abortChildren(tick);
+    }
+
+    _exit(tick) {
+        tick._exitNode(this);
+        this.exit(tick);
+    }
+
+    _abort(tick) {
+        this._close(tick);
+        this.abort(tick);
+    }
+
+    enter(tick) { }
+
+    open(tick) { }
+
+    tick(tick) { }
+
+    close(tick) { }
+
+    exit(tick) { }
+
+    abortChildren(tick) { }
+
+    abort(tick) { }
+
+    // open state of this node
+    getNodeMemory(tick) {
+        return tick.getNodeMemory(this.id);
+    }
+
+    getOpenState(tick) {
+        return this.getNodeMemory(tick).$isOpen;
+    }
+
+    setOpenState(tick, state) {
+        if (state === undefined) {
+            state = true;
+        }
+        this.getNodeMemory(tick).$isOpen = state;
+        return this;
+    }
+
+    // Return state value
+    get SUCCESS() {
+        return SUCCESS;
+    }
+
+    get FAILURE() {
+        return FAILURE;
+    }
+
+    get RUNNING() {
+        return RUNNING$1;
+    }
+
+    get ERROR() {
+        return ERROR;
     }
 }
+
+class Action extends BaseNode {
+
+    constructor(
+        {
+            id,
+            name = 'Action',
+            title,
+            description,
+            properties,
+            services,
+        } = {},
+        nodePool
+    ) {
+
+        super({
+            id,
+            category: ACTION,
+            name,
+            title,
+            description,
+            properties,
+        });
+
+        if (services) {
+            for (var i = 0, cnt = services.length; i < cnt; i++) {
+                this.addService(services[i], nodePool);
+            }
+        }
+    }
+
+    destroy() {
+        if (this.services) {
+            for (var i = 0, cnt = this.services.length; i < cnt; i++) {
+                this.services[i].destroy();
+            }
+        }
+        this.services = undefined;
+
+        super.destroy();
+    }
+
+    addService(node, nodePool) {
+        node = ResolveNode(node, nodePool, this.name, 'Service node');
+
+        if (this.services === undefined) {
+            this.services = [];
+        }
+
+        if (this.services.indexOf(node) === -1) {
+            this.services.push(node);
+            node.setParent(this);
+        }
+
+        return this;
+    }
+
+    _tick(tick) {
+        tick._tickNode(this);
+
+        if (this.services) {
+            for (var i = 0, cnt = this.services.length; i < cnt; i++) {
+                this.services[i]._tick(tick);
+            }
+        }
+
+        return this.tick(tick);
+    }
+
+}
+
+class Composite extends BaseNode {
+
+    constructor(
+        {
+            id,
+            children = [],
+            name = 'Composite',
+            title,
+            description,
+            properties,
+            services,
+        } = {},
+        nodePool
+    ) {
+
+        super({
+            id,
+            category: COMPOSITE,
+            name,
+            title,
+            description,
+            properties,
+        });
+
+        this.children = [];
+        for (var i = 0, cnt = children.length; i < cnt; i++) {
+            this.addChild(children[i], nodePool);
+        }
+
+        if (services) {
+            for (var i = 0, cnt = services.length; i < cnt; i++) {
+                this.addService(services[i], nodePool);
+            }
+        }
+    }
+
+    destroy() {
+        for (var i = 0, cnt = this.children.length; i < cnt; i++) {
+            this.children[i].destroy();
+        }
+
+        if (this.services) {
+            for (var i = 0, cnt = this.services.length; i < cnt; i++) {
+                this.services[i].destroy();
+            }
+        }
+
+        this.children = undefined;
+        this.services = undefined;
+
+        super.destroy();
+    }
+
+    insertChild(node, nodePool, index) {
+        if (nodePool) {
+            node = ResolveNode(node, nodePool, this.name, 'child node');
+        }
+
+
+        if (this.children.indexOf(node) === -1) {
+            if (index < 0) {
+                index = this.children.length + index;
+            }
+            if ((index === undefined) || (index >= this.children.length)) {
+                this.children.push(node);
+            } else {
+                this.children.splice(index, 0, node);
+            }
+
+            node.setParent(this);
+        }
+
+        return this;
+    }
+
+    addChild(node, nodePool,) {
+        this.insertChild(node, nodePool);
+        return this;
+    }
+
+    addService(node, nodePool) {
+        node = ResolveNode(node, nodePool, this.name, 'Service node');
+
+        if (this.services === undefined) {
+            this.services = [];
+        }
+
+        if (this.services.indexOf(node) === -1) {
+            this.services.push(node);
+            node.setParent(this);
+        }
+
+        return this;
+    }
+
+    _tick(tick) {
+        tick._tickNode(this);
+
+        if (this.services) {
+            for (var i = 0, cnt = this.services.length; i < cnt; i++) {
+                this.services[i]._tick(tick);
+            }
+        }
+
+        return this.tick(tick);
+    }
+
+    abortChildren(tick) {
+        for (var i = 0, cnt = this.children.length; i < cnt; i++) {
+            var childNode = this.children[i];
+            if (childNode.getOpenState(tick)) {
+                childNode._abort(tick);
+            }
+        }
+    }
+
+}
+
+class Decorator extends BaseNode {
+
+    constructor(
+        {
+            id,
+            child = null,
+            name = 'Decorator',
+            title,
+            description,
+            properties
+        } = {},
+        nodePool
+    ) {
+
+        super({
+            id,
+            category: DECORATOR,
+            name,
+            title,
+            description,
+            properties,
+        });
+
+        this.child = null;
+        if (child) {
+            this.addChild(child, nodePool);
+        }
+    }
+
+    destroy() {
+        if (this.child) {
+            this.child.destroy();
+        }
+
+        this.child = undefined;
+
+        super.destroy();
+    }
+
+    addChild(node, nodePool) {
+        node = ResolveNode(node, nodePool, this.name, 'child node');
+
+        this.child = node;
+        node.setParent(this);
+        return this;
+    }
+
+    chainChild(node, nodePool) {
+        // Get last decorator
+        var decorator = this;
+        while (decorator.child instanceof Decorator) {
+            decorator = decorator.child;
+        }
+        decorator.addChild(node, nodePool);
+        return this;
+    }
+
+    isChildRunning(tick) {
+        return this.child.getOpenState(tick);
+    }
+
+    abortChildren(tick) {
+        if (this.isChildRunning(tick)) {
+            this.child._abort(tick);
+        }
+    }
+
+    openChild(tick) {
+        this.child.setOpenState(tick, true);
+        return this;
+    }
+}
+
+class Expression extends BaseNode {
+
+    constructor(
+        {
+            id,
+            name = 'Expression',
+            title,
+            description,
+            properties,
+        } = {},
+        nodePool
+    ) {
+
+        super({
+            id,
+            category: EXPRESSION,
+            name,
+            title,
+            description,
+            properties,
+        });
+    }
+
+    eval(tick) {
+        return 0;
+    }
+
+}
+
+class NumberExpression extends Expression {
+
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+        } else {
+            var configType = typeof (config);
+            if (
+                (configType === 'number') || (configType === 'boolean') ||
+                (configType === 'string') || (configType === 'function')) {
+                config = {
+                    expression: config
+                };
+            }
+
+            var {
+                title,
+                properties = {},
+                name = 'NumberExpression',
+                expression = '',
+            } = config;
+
+            super({
+                title,
+                properties: {
+                    ...properties,
+                    expression
+                },
+                name,
+            });
+
+        }
+
+        this.expression = this.properties.expression;
+
+        var expressionType = typeof (this.expression);
+        this.isConstant = (expressionType === 'number') || (expressionType === 'boolean');
+        this.canEval = (expressionType === 'string');
+    }
+
+    eval(tick, context) {
+        // Assign context for testing purpose
+
+        var value;
+        if (this.isConstant) {
+            value = this.expression.toString();
+        } else {
+            if (!context) { // Normal case
+                context = tick.getEvalContext();
+            }
+            if (this.canEval) {
+                value = tick.expressionParser.exec(this.expression, context);
+            } else {
+                value = this.expression(context);
+            }
+
+        }
+        return value;
+    }
+}
+
+var StringToNumber = function (value) {
+    if (typeof (value) !== 'string') {
+        return value;
+    }
+
+    var text = value.trim();
+    if (text === '') {
+        return value;
+    }
+
+    var numberValue = Number(text);
+    return Number.isFinite(numberValue) ? numberValue : value;
+};
+
+var CreateNumberExpression = function (expression, nodePool) {
+    expression = DecodeExpression(expression, nodePool);
+
+    if (expression == null) {
+        return null;
+    }
+
+    // Convert number-string to number
+    expression = StringToNumber(expression);
+
+    // Constant number or boolean    
+    var expressionType = typeof (expression);
+    if ((expressionType === 'number') || (expressionType === 'boolean')) {
+        return expression;
+    }
+
+    var node;
+    if (nodePool && (expressionType === 'string')) {
+        // Get node from nodePool
+        node = ResolveNode(expression, nodePool, undefined, 'expression node');
+
+    } else if (IsExpressionLike(expression)) {
+        // Is Expression node already
+        node = expression;
+
+    } else {
+        // 
+        node = new NumberExpression(expression);
+
+    }
+
+    return node;
+};
+
+class Service extends BaseNode {
+
+    constructor(config = {}, nodePool) {
+        var interval, randomDeviation;
+
+        if (nodePool) {
+            var {
+                id,
+                name = 'Service',
+                title,
+                properties,
+                description,
+            } = config;
+
+            super({
+                id,
+                category: SERVICE,
+                name,
+                title,
+                properties,
+                description,
+            });
+
+            var expressions = config.expressions || {};
+            interval = expressions.interval;
+            randomDeviation = expressions.randomDeviation;
+
+        } else {
+            var {
+                interval: intervalValue = 0,                // expression
+                randomDeviation: randomDeviationValue = 0,  // expression
+                name = 'Service',
+                title,
+                properties,
+                description,
+            } = config;
+
+            super({
+                category: SERVICE,
+                name,
+                title,
+                description,
+                properties,
+            });
+
+            interval = intervalValue;
+            randomDeviation = randomDeviationValue;
+        }
+
+        // Expression node, or constant number/boolean
+        this.interval = CreateNumberExpression(interval, nodePool);
+        this.addExpression('interval', this.interval);
+
+        // Expression node, or constant number/boolean
+        this.randomDeviation = CreateNumberExpression(randomDeviation, nodePool);
+        this.addExpression('randomDeviation', this.randomDeviation);
+    }
+
+    _tick(tick) {
+        if (this.canTick(tick)) {
+            this.tick(tick);
+        }
+    }
+
+    canTick(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        var currTime = tick.currentTime;
+        var lastEndTime = nodeMemory.$lastEndTime;
+        var interval = nodeMemory.$interval;
+
+        var canTick = (lastEndTime === undefined) ||
+            ((currTime - lastEndTime) >= interval);
+
+        if (canTick) {
+            nodeMemory.$lastEndTime = currTime;
+
+            var interval = tick.evalExpression(this.interval);
+            var randomDeviation = tick.evalExpression(this.randomDeviation);
+            if (randomDeviation > 0) {
+                interval += (0.5 - Math.random()) * randomDeviation;
+            }
+            nodeMemory.$interval = interval;
+        }
+
+        return canTick;
+    }
+
+}
+
+class StringExpression extends Expression {
+
+    constructor(config = {}, nodePool) {
+        var expression;
+
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+            var properties = config.properties || {};
+            expression = properties.expression;
+
+        } else {
+            var configType = typeof (config);
+            if ((configType === 'string') || (configType === 'function')) {
+                config = {
+                    expression: config
+                };
+            }
+
+            var {
+                title,
+                properties = {},
+                name = 'StringExpression',
+                expression: expressionValue = '',
+            } = config;
+
+            super({
+                title,
+                properties: {
+                    ...properties,
+                    expression: expressionValue,
+                },
+                name,
+            });
+
+            expression = expressionValue;
+        }
+
+        this.expression = expression;
+
+        var expressionType = typeof (this.expression);
+        this.canRender = (expressionType === 'string');
+    }
+
+    eval(tick, context) {
+        // Assign context for testing purpose
+
+        var value;
+        if (!context) { // Normal case
+            context = tick.getEvalContext();
+        }
+
+        if (this.canRender) {
+            value = tick.stringTemplate.render(this.expression, context);
+        } else if (typeof (this.expression) === 'function') {
+            value = this.expression(context);
+        } else {
+            value = this.expression;
+        }
+
+        return value;
+    }
+}
+
+class Succeeder extends Action {
+
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+        } else {  // New node
+            var {
+                services,
+                title,
+                properties,
+                name = 'Succeeder'
+            } = config;
+
+            super({
+                services,
+                title,
+                properties,
+                name,
+            });
+
+        }
+    }
+
+    tick(tick) {
+        return SUCCESS;
+    }
+}
+
+class Failer extends Action {
+
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+        } else {  // New node
+            var {
+                services,
+                title,
+                properties,
+                name = 'Failer'
+            } = config;
+
+            super({
+                services,
+                title,
+                properties,
+                name,
+            });
+        }
+
+    }
+
+    tick(tick) {
+        return FAILURE;
+    }
+}
+
+class Runner extends Action {
+
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+        } else {  // New node
+            var {
+                services,
+                title,
+                properties,
+                name = 'Runner'
+            } = config;
+
+            super({
+                services,
+                title,
+                properties,
+                name,
+            });
+
+        }
+    }
+
+    tick(tick) {
+        return RUNNING$1;
+    }
+}
+
+let Error$1 = class Error extends Action {
+
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+        } else {  // New node
+            var {
+                services,
+                title,
+                properties,
+                name = 'Error',
+            } = config;
+
+            super({
+                services,
+                title,
+                properties,
+                name,
+            });
+
+        }
+    }
+
+    tick(tick) {
+        return ERROR;
+    }
+};
+
+class Wait extends Action {
+
+    constructor(config = {}, nodePool) {
+        var duration;
+
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+            var expressions = config.expressions || {};
+            duration = expressions.duration;
+
+        } else {  // New node
+            var {
+                duration: durationValue = 0,   // expression
+                services,
+                title,
+                properties,
+                name = 'Wait'
+            } = config;
+
+            super({
+                title,
+                properties,
+                name,
+                services,
+            });
+
+            duration = durationValue;
+        }
+
+        // Expression node, or constant number/boolean
+        this.duration = CreateNumberExpression(duration, nodePool);
+        this.addExpression('duration', this.duration);
+    }
+
+    open(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+
+        nodeMemory.$startTime = tick.currentTime;
+        nodeMemory.$duration = tick.evalExpression(this.duration);
+    }
+
+    tick(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        var currTime = tick.currentTime;
+        var startTime = nodeMemory.$startTime;
+        var duration = nodeMemory.$duration;
+
+        if (duration > 0) {
+            if ((currTime - startTime) < duration) {
+                return RUNNING$1;
+            }
+
+        } else if (duration === 0) { // Wait 1 tick            
+            if (currTime === startTime) {
+                return RUNNING$1;
+            }
+        }
+
+        return SUCCESS;
+    }
+}
+
+class Abort extends Action {
+
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+        } else {  // New node
+            var {
+                services,
+                title,
+                properties,
+                name = 'Abort',
+            } = config;
+
+            super({
+                services,
+                title,
+                properties,
+                name,
+            });
+
+        }
+    }
+
+    tick(tick) {
+        return ABORT;
+    }
+}
+
+let BreakDecorator$1 = class BreakDecorator extends Decorator {
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+        } else {
+            var {
+                child = null,
+                title,
+                properties = {},
+                name = 'Break',
+                tag,              // constant string
+            } = config;
+
+            super(
+                {
+                    child,
+                    title,
+                    properties: {
+                        ...properties,
+                        tag
+                    },
+                    name,
+                },
+                nodePool
+            );
+
+        }
+
+        this.tag = this.properties.tag;
+
+        this.breakFlag = false;
+    }
+
+    setBreakFlag(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.breakFlag = enable;
+        return this;
+    }
+
+    tick(tick) {
+        if (!this.child) {
+            return SUCCESS;
+        }
+
+        var status = this.child._execute(tick);
+
+        // breakFlag will be set by BreakAction of grandchild node
+        if (this.breakFlag) {
+            status = SUCCESS;
+            this.breakFlag = false;
+        }
+
+        return status;
+    }
+};
+
+let BreakAction$1 = class BreakAction extends Action {
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+        } else {  // New node
+            var {
+                breakDecoratorTitle,  // constant string
+                tag,                  // constant string
+                services,
+                title,
+                properties = {},
+                name = 'Break'
+            } = config;
+
+            super({
+                name,
+                title,
+                properties: {
+                    ...properties,
+                    breakDecoratorTitle,
+                    tag
+                },
+                services,
+            });
+
+        }
+
+        this.breakDecoratorTitle = this.properties.breakDecoratorTitle;
+        this.tag = this.properties.tag;
+    }
+
+    tick(tick) {
+        // Find nearest BreakDecorator
+        var parent = this.getParent();
+        while (true) {
+            if ((parent instanceof BreakDecorator$1) &&
+                ((!this.tag) || (this.tag === parent.tag)) &&
+                ((!this.breakDecoratorTitle) || (this.breakDecoratorTitle === parent.title))
+            ) {
+                break;
+            }
+
+            if (!parent.getParent) {
+                parent = null;
+                break;
+            }
+            parent = parent.getParent();
+        }
+
+        var status;
+        if (parent) {
+            parent.setBreakFlag();
+            status = ABORT;
+        } else {
+            // Can't get responded BreakDecorator, ignore this break action node
+            console.error(`[EventSheet] Can't get responded BreakDecorator, ignore this break action node.`);
+            status = SUCCESS;
+        }
+
+        return status;
+    }
+};
+
+class Selector extends Composite {
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+        } else {
+            var {
+                children = [],
+                services,
+                title,
+                properties,
+                name = 'Selector'
+            } = config;
+
+            super(
+                {
+                    children,
+                    services,
+                    title,
+                    properties,
+                    name,
+                },
+                nodePool
+            );
+
+        }
+
+    }
+
+    open(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        nodeMemory.$runningChild = -1;  // No running child
+    }
+
+    tick(tick) {
+        if (this.children.length === 0) {
+            return ERROR;
+        }
+
+        var nodeMemory = this.getNodeMemory(tick);
+        var childIndex = nodeMemory.$runningChild;
+        var status;
+        if (childIndex < 0) {
+            for (var i = 0, cnt = this.children.length; i < cnt; i++) {
+                status = this.children[i]._execute(tick);
+
+                if ((status === RUNNING$1) || (status === SUCCESS) || (status === ABORT)) {
+                    childIndex = i;
+                    break;
+                }
+            }
+        } else {
+            var child = this.children[childIndex];
+            status = child._execute(tick);
+        }
+
+        nodeMemory.$runningChild = (status === RUNNING$1) ? childIndex : -1;
+        return status;
+    }
+
+    abortChildren(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        var child = this.children[nodeMemory.$runningChild];
+        if (child) {
+            child._abort(tick);
+            nodeMemory.$runningChild = -1;
+        }
+    }
+}
+
+class Sequence extends Composite {
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+        } else {
+            var {
+                children = [],
+                services,
+                title,
+                properties,
+                name = 'Sequence'
+            } = config;
+
+            super(
+                {
+                    children,
+                    services,
+                    title,
+                    properties,
+                    name,
+                },
+                nodePool
+            );
+
+        }
+
+    }
+
+    open(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        nodeMemory.$runningChild = 0;
+    }
+
+    tick(tick) {
+        if (this.children.length === 0) {
+            return ERROR;
+        }
+
+        var nodeMemory = this.getNodeMemory(tick);
+
+        var childIndex = nodeMemory.$runningChild;
+        var status;
+        for (var i = childIndex, cnt = this.children.length; i < cnt; i++) {
+            status = this.children[i]._execute(tick);
+
+            if ((status === RUNNING$1) || (status === FAILURE) || (status === ABORT)) {
+                break;
+            }
+        }
+
+        nodeMemory.$runningChild = (status === RUNNING$1) ? i : -1;
+        return status;
+    }
+
+    abortChildren(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        var child = this.children[nodeMemory.$runningChild];
+        if (child) {
+            child._abort(tick);
+            nodeMemory.$runningChild = -1;
+        }
+    }
+}
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2018 Photon Storm Ltd.
+ * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
+ */
+
+/**
+ * Removes a single item from an array and returns it without creating gc, like the native splice does.
+ * Based on code by Mike Reinstein.
+ *
+ * @function Phaser.Utils.Array.SpliceOne
+ * @since 3.0.0
+ *
+ * @param {array} array - The array to splice from.
+ * @param {integer} index - The index of the item which should be spliced.
+ *
+ * @return {*} The item which was spliced (removed).
+ */
+var SpliceOne$2 = function (array, index)
+{
+    if (index >= array.length)
+    {
+        return;
+    }
+
+    var len = array.length - 1;
+
+    var item = array[index];
+
+    for (var i = index; i < len; i++)
+    {
+        array[i] = array[i + 1];
+    }
+
+    array.length = len;
+
+    return item;
+};
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2019 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+
+/**
+ * Removes the given item, or array of items, from the array.
+ * 
+ * The array is modified in-place.
+ * 
+ * You can optionally specify a callback to be invoked for each item successfully removed from the array.
+ *
+ * @function Phaser.Utils.Array.Remove
+ * @since 3.4.0
+ *
+ * @param {array} array - The array to be modified.
+ * @param {*|Array.<*>} item - The item, or array of items, to be removed from the array.
+ * @param {function} [callback] - A callback to be invoked for each item successfully removed from the array.
+ * @param {object} [context] - The context in which the callback is invoked.
+ *
+ * @return {*|Array.<*>} The item, or array of items, that were successfully removed from the array.
+ */
+var Remove$3 = function (array, item, callback, context)
+{
+    if (context === undefined) { context = array; }
+
+    var index;
+
+    //  Fast path to avoid array mutation and iteration
+    if (!Array.isArray(item))
+    {
+        index = array.indexOf(item);
+
+        if (index !== -1)
+        {
+            SpliceOne$2(array, index);
+
+            if (callback)
+            {
+                callback.call(context, item);
+            }
+
+            return item;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    //  If we got this far, we have an array of items to remove
+
+    var itemLength = item.length - 1;
+
+    while (itemLength >= 0)
+    {
+        var entry = item[itemLength];
+
+        index = array.indexOf(entry);
+
+        if (index !== -1)
+        {
+            SpliceOne$2(array, index);
+
+            if (callback)
+            {
+                callback.call(context, entry);
+            }
+        }
+        else
+        {
+            //  Item wasn't found in the array, so remove it from our return results
+            item.pop();
+        }
+
+        itemLength--;
+    }
+
+    return item;
+};
+
+class Parallel extends Composite {
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+        } else {
+            var {
+                finishMode = 0,        // mode
+                returnSuccess = true,  // mode
+                children = [],
+                services,
+                title,
+                properties = {},
+                name = 'Parallel'
+            } = config;
+
+            super(
+                {
+                    children,
+                    services,
+                    title,
+                    properties: {
+                        ...properties,
+                        finishMode,
+                        returnSuccess
+                    },
+                    name,
+                },
+                nodePool
+            );
+
+        }
+
+        this.finishMode = this.properties.finishMode;
+        this.returnSuccess = this.properties.returnSuccess;
+    }
+
+    open(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        nodeMemory.$runningChildren = this.children.map((child, index) => index);
+    }
+
+    tick(tick) {
+        if (this.children.length === 0) {
+            return ERROR;
+        }
+
+        var nodeMemory = this.getNodeMemory(tick);
+        var childIndexes = nodeMemory.$runningChildren;
+        var statusMap = {};
+        var hasAnyFinishStatus = false;
+        var hasAnyRunningStatus = false;
+        var hasAnyAbortStatus = false;
+        var hasAnyErrorStatus = false;
+        for (var i = 0, cnt = childIndexes.length; i < cnt; i++) {
+            var childIndex = childIndexes[i];
+            var status = this.children[childIndex]._execute(tick);
+            statusMap[childIndex] = status;
+
+            if (childIndex === 0) {
+                nodeMemory.$mainTaskStatus = status;
+            }
+
+            switch (status) {
+                case SUCCESS:
+                case FAILURE:
+                    hasAnyFinishStatus = true;
+                    break;
+
+                case RUNNING$1:
+                    hasAnyRunningStatus = true;
+                    break;
+
+                case ABORT:
+                    hasAnyAbortStatus = true;
+                    break;
+
+                case ERROR:
+                    hasAnyErrorStatus = true;
+                    break;
+            }
+        }
+
+        // Clear none-running child
+        if (hasAnyFinishStatus) {
+            for (var childIndex in statusMap) {
+                var status = statusMap[childIndex];
+                if ((status === SUCCESS) || (status === FAILURE)) {
+                    Remove$3(childIndexes, parseInt(childIndex));
+                }
+            }
+        }
+
+        if (this.finishMode === 0) {
+            return nodeMemory.$mainTaskStatus;
+        } else {
+            if (hasAnyErrorStatus) {
+                return ERROR;
+            } else if (hasAnyAbortStatus) {
+                return ABORT;
+            } else if (hasAnyRunningStatus) {
+                return RUNNING$1;
+            } else if (this.returnSuccess) {
+                return SUCCESS;
+            } else {
+                return nodeMemory.$mainTaskStatus;
+            }
+        }
+    }
+
+    abortChildren(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        var childIndexes = nodeMemory.$runningChildren;
+        for (var i = 0, cnt = childIndexes.length; i < cnt; i++) {
+            var childIndex = childIndexes[i];
+            this.children[childIndex]._abort(tick);
+        }
+        nodeMemory.$runningChildren.length = 0;
+    }
+}
+
+class IfSelector extends Composite {
+    constructor(config = {}, nodePool) {
+        var condition;
+
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+            var expressions = config.expressions || {};
+            condition = expressions.condition;
+
+        } else {
+            var {
+                condition: conditionValue = 'true',    // expression
+                conditionEvalBreak = false,  // mode
+                children = [],
+                services,
+                title,
+                properties = {},
+                name = 'IfSelector'
+            } = config;
+
+            super(
+                {
+                    children: children,
+                    services,
+                    title,
+                    properties: {
+                        ...properties,
+                        conditionEvalBreak,
+                    },
+                    name,
+                },
+                nodePool
+            );
+
+            condition = conditionValue;
+        }
+
+        // Expression node, or constant number/boolean
+        this.condition = CreateNumberExpression(condition, nodePool);
+        this.addExpression('condition', this.condition);
+
+        this.conditionEvalBreak = this.properties.conditionEvalBreak;
+
+        this.forceSelectChildIndex = undefined;
+    }
+
+    open(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        nodeMemory.$runningChild = -1;  // No running child
+    }
+
+    setSelectChildIndex(index) {
+        this.forceSelectChildIndex = index;
+        return this;
+    }
+
+    evalCondition(tick) {
+        if (this.forceSelectChildIndex !== undefined) {
+            return this.forceSelectChildIndex;
+        }
+
+        return (!!tick.evalExpression(this.condition)) ? 0 : 1;
+    }
+
+    tick(tick) {
+        if (this.children.length === 0) {
+            return ERROR;
+        }
+
+        var nodeMemory = this.getNodeMemory(tick);
+        var childIndex = nodeMemory.$runningChild;
+        if (childIndex < 0) {
+            childIndex = this.evalCondition(tick);
+            if (this.conditionEvalBreak) {
+                // Resolve runningChild index, but not run child now
+                nodeMemory.$runningChild = childIndex;
+                return RUNNING$1;
+            }
+        }
+
+        var child = this.children[childIndex];
+        var status = child._execute(tick);
+        nodeMemory.$runningChild = (status === RUNNING$1) ? childIndex : -1;
+
+        return status;
+    }
+
+    abortChildren(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        var child = this.children[nodeMemory.$runningChild];
+        if (child) {
+            child._abort(tick);
+            nodeMemory.$runningChild = -1;
+        }
+    }
+}
+
+class SwitchSelector extends Composite {
+    constructor(config = {}, nodePool) {
+        var condition;
+
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+            var expressions = config.expressions || {};
+            condition = expressions.condition;
+
+        } else {
+            var {
+                condition: conditionValue = null,    // expression
+                keys = undefined, // Or [key, ...]
+                conditionEvalBreak = false,  // mode
+                children = {},    // Or [child, ...]
+                services,
+                title,
+                properties = {},
+                name = 'SwitchSelector'
+            } = config;
+
+            if (keys === undefined) {
+                keys = Object.keys(children);
+                children = Object.values(children);
+            }
+
+            super(
+                {
+                    children: children,
+                    services,
+                    title,
+                    properties: {
+                        ...properties,
+                        keys,
+                        conditionEvalBreak,
+                    },
+                    name,
+                },
+                nodePool
+            );
+
+            condition = conditionValue;
+        }
+
+        // Expression node, or constant number/boolean
+        this.condition = CreateNumberExpression(condition, nodePool);
+        this.addExpression('condition', this.condition);
+
+        this.keys = this.properties.keys;
+        this.conditionEvalBreak = this.properties.conditionEvalBreak;
+
+        this.forceSelectChildIndex = undefined;
+    }
+
+    open(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        nodeMemory.$runningChild = -1;  // No running child
+    }
+
+    setSelectChildIndex(index) {
+        this.forceSelectChildIndex = index;
+        return this;
+    }
+
+    evalCondition(tick) {
+        if (this.forceSelectChildIndex !== undefined) {
+            if (typeof (this.forceSelectChildIndex) === 'number') {
+                return this.forceSelectChildIndex;
+            } else {
+                return this.keys.indexOf(this.forceSelectChildIndex);
+            }
+        }
+
+        var key = tick.evalExpression(this.condition);
+        return this.keys.indexOf(key);
+    }
+
+    tick(tick) {
+        if (this.children.length === 0) {
+            return ERROR;
+        }
+
+        var nodeMemory = this.getNodeMemory(tick);
+        var childIndex = nodeMemory.$runningChild;
+        if (childIndex < 0) {
+            childIndex = this.evalCondition(tick);
+            if (childIndex === -1) {
+                childIndex = this.keys.indexOf('default');
+            }
+            if (childIndex === -1) {
+                return ERROR;
+            }
+            if (this.conditionEvalBreak) {
+                // Resolve runningChild index, but not run child now
+                nodeMemory.$runningChild = childIndex;
+                return RUNNING$1;
+            }
+        }
+
+        var child = this.children[childIndex];
+        var status = child._execute(tick);
+        nodeMemory.$runningChild = (status === RUNNING$1) ? childIndex : -1;
+        return status;
+    }
+
+    abortChildren(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        var child = this.children[nodeMemory.$runningChild];
+        if (child) {
+            child._abort(tick);
+            nodeMemory.$runningChild = -1;
+        }
+    }
+}
+
+class WeightSelector extends Composite {
+    constructor(config = {}, nodePool) {
+        var condition;
+
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+            var expressions = config.expressions || {};
+            var properties = config.properties || {};
+            condition = expressions.condition;
+
+        } else {
+            var {
+                condition: conditionValue = null,     // expression
+                weights = undefined,    // Or [weight, ...]
+                conditionEvalBreak = false,  // mode
+                children = [],          // [node, ...], or [{weight, node}, ...]
+                services,
+                title,
+                properties = {},
+                name = 'WeightSelector'
+            } = config;
+
+            if (weightsValue === undefined) {
+                weightsValue = [];
+
+                var totalWeight = 0;
+                for (var i = 0, cnt = children.length; i < cnt; i++) {
+                    var child = children[i];
+                    var weight;
+                    if ((child instanceof BaseNode) || (typeof (child) === 'string')) {
+                        weight = 1;
+                    } else {
+                        weight = child.weight;
+                        children[i] = child.node;
+                    }
+                    weightsValue.push(weight);
+                    totalWeight += weight;
+                }
+                for (var i = 0, cnt = weightsValue.length; i < cnt; i++) {
+                    weightsValue[i] /= totalWeight;
+                }
+            }
+
+            super(
+                {
+                    children: children,
+                    services,
+                    title,
+                    properties: {
+                        ...properties,
+                        weights,
+                        conditionEvalBreak,
+                    },
+                    name,
+                },
+                nodePool
+            );
+
+            condition = conditionValue;
+        }
+
+        if (condition != null) {
+            // Expression node, or constant number/boolean
+            this.condition = CreateNumberExpression(condition, nodePool);
+            this.addExpression('condition', this.condition);
+        } else {
+            this.condition = null;
+        }
+
+        this.weights = this.properties.weights;
+
+        this.conditionEvalBreak = this.properties.conditionEvalBreak;
+
+        this.forceSelectChildIndex = undefined;
+    }
+
+    open(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        nodeMemory.$runningChild = -1;  // No running child
+    }
+
+    setSelectChildIndex(index) {
+        if (this.forceSelectChildIndex !== undefined) {
+            return this.forceSelectChildIndex;
+        }
+
+        this.forceSelectChildIndex = index;
+        return this;
+    }
+
+    evalCondition(tick) {
+        if (this.forceSelectChildIndex !== undefined) {
+            return this.forceSelectChildIndex;
+        }
+
+        var value = (this.condition) ? tick.evalExpression(this.condition) : Math.random();
+        for (var i = 0, cnt = this.weights.length; i < cnt; i++) {
+            value -= this.weights[i];
+            if (value < 0) {
+                return i;
+            }
+        }
+    }
+
+    tick(tick) {
+        if (this.children.length === 0) {
+            return ERROR;
+        }
+
+        var nodeMemory = this.getNodeMemory(tick);
+        var childIndex = nodeMemory.$runningChild;
+        if (childIndex < 0) {
+            childIndex = this.evalCondition(tick);
+            if (childIndex === undefined) {
+                childIndex = this.children.length - 1;
+            }
+            if (this.conditionEvalBreak) {
+                // Resolve runningChild index, but not run child now
+                nodeMemory.$runningChild = childIndex;
+                return RUNNING$1;
+            }
+        }
+
+        var child = this.children[childIndex];
+        var status = child._execute(tick);
+        nodeMemory.$runningChild = (status === RUNNING$1) ? childIndex : -1;
+        return status;
+    }
+
+    abortChildren(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        var child = this.children[nodeMemory.$runningChild];
+        if (child) {
+            child._abort(tick);
+            nodeMemory.$runningChild = -1;
+        }
+    }
+}
+
+class RandomSelector extends Composite {
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+        } else {
+            var {
+                children = [],
+                services,
+                title,
+                properties,
+                name = 'RandomSelector'
+            } = config;
+
+            super(
+                {
+                    children,
+                    services,
+                    title,
+                    properties,
+                    name,
+                },
+                nodePool
+            );
+
+        }
+
+    }
+
+    open(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        nodeMemory.$runningChild = -1;  // No running child
+    }
+
+    tick(tick) {
+        if (this.children.length === 0) {
+            return ERROR;
+        }
+
+        var nodeMemory = this.getNodeMemory(tick);
+        var childIndex = nodeMemory.$runningChild;
+        if (childIndex < 0) {
+            childIndex = Math.floor(Math.random() * this.children.length);
+        }
+
+        var child = this.children[childIndex];
+        var status = child._execute(tick);
+        nodeMemory.$runningChild = (status === RUNNING$1) ? childIndex : -1;
+        return status;
+    }
+
+    abortChildren(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        var child = this.children[nodeMemory.$runningChild];
+        if (child) {
+            child._abort(tick);
+            nodeMemory.$runningChild = -1;
+        }
+    }
+}
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2018 Photon Storm Ltd.
+ * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
+ */
+
+/**
+ * Shuffles the contents of the given array using the Fisher-Yates implementation.
+ *
+ * The original array is modified directly and returned.
+ *
+ * @function Phaser.Utils.Array.Shuffle
+ * @since 3.0.0
+ *
+ * @param {array} array - The array to shuffle. This array is modified in place.
+ *
+ * @return {array} The shuffled array.
+ */
+var Shuffle = function (array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+
+    return array;
+};
+
+class ShuffleSelector extends Composite {
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+        } else {
+            var {
+                children = [],
+                services,
+                title,
+                properties,
+                name = 'ShuffleSelector'
+            } = config;
+
+            super(
+                {
+                    children,
+                    services,
+                    title,
+                    properties,
+                    name,
+                },
+                nodePool
+            );
+
+        }
+
+    }
+
+    open(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        nodeMemory.$runningChild = 0;
+
+        if (!nodeMemory.$children) {
+            nodeMemory.$children = this.children.map((child, index) => index);
+        }
+        Shuffle(nodeMemory.$children);
+    }
+
+    tick(tick) {
+        if (this.children.length === 0) {
+            return ERROR;
+        }
+
+        var nodeMemory = this.getNodeMemory(tick);
+
+        var childIndex = nodeMemory.$runningChild;
+        var children = nodeMemory.$children;
+        var status;
+        for (var i = childIndex, cnt = children.length; i < cnt; i++) {
+            status = this.children[children[i]]._execute(tick);
+
+            if ((status === RUNNING$1) || (status === SUCCESS) || (status === ABORT)) {
+                break;
+            }
+        }
+
+        nodeMemory.$runningChild = (status === RUNNING$1) ? i : -1;
+        return status;
+    }
+
+    abortChildren(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        var child = this.children[nodeMemory.$runningChild];
+        if (child) {
+            child._abort(tick);
+            nodeMemory.$runningChild = -1;
+        }
+    }
+}
+
+class Bypass extends Decorator {
+
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+        } else {
+            var {
+                child = null,
+                title,
+                properties,
+                name = 'Bypass'
+            } = config;
+
+            super(
+                {
+                    child,
+                    title,
+                    properties,
+                    name,
+                },
+                nodePool
+            );
+
+        }
+    }
+
+    tick(tick) {
+        if (!this.child) {
+            return ERROR;
+        }
+
+        // Won't abort child
+        var status = this.child._execute(tick);
+
+        return status;
+    }
+}
+
+class ForceSuccess extends Decorator {
+
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+        } else {
+            var {
+                child = null,
+                title,
+                properties,
+                name = 'ForceSuccess'
+            } = config;
+
+            super(
+                {
+                    child,
+                    title,
+                    properties,
+                    name,
+                },
+                nodePool
+            );
+
+        }
+    }
+
+    tick(tick) {
+        if (!this.child) {
+            return ERROR;
+        }
+
+        var status = this.child._execute(tick);
+
+        if (status === FAILURE) {
+            return SUCCESS;
+        }
+
+        return status;
+    }
+}
+
+class ForceFailure extends Decorator {
+
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+        } else {
+            var {
+                child = null,
+                title,
+                properties,
+                name = 'ForceFailure'
+            } = config;
+
+            super(
+                {
+                    child,
+                    title,
+                    properties,
+                    name,
+                },
+                nodePool
+            );
+
+        }
+
+    }
+
+    tick(tick) {
+        if (!this.child) {
+            return ERROR;
+        }
+
+        var status = this.child._execute(tick);
+
+        if (status === SUCCESS) {
+            return FAILURE;
+        }
+
+        return status;
+    }
+}
+
+class Invert extends Decorator {
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+        } else {
+            var {
+                child = null,
+                title,
+                properties,
+                name = 'Invert'
+            } = config;
+
+            super(
+                {
+                    child,
+                    title,
+                    properties,
+                    name,
+                },
+                nodePool
+            );
+
+        }
+    }
+
+    tick(tick) {
+        if (!this.child) {
+            return ERROR;
+        }
+
+        var status = this.child._execute(tick);
+
+        if (status === SUCCESS) {
+            status = FAILURE;
+        } else if (status === FAILURE) {
+            status = SUCCESS;
+        }
+
+        return status;
+    }
+}
+
+class TimeLimit extends Decorator {
+    constructor(config = {}, nodePool) {
+        var duration;
+
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+            var expressions = config.expressions || {};
+            duration = expressions.duration;
+
+        } else {
+            var {
+                duration: durationValue = 0,  // expression
+                returnSuccess = true,         // mode
+                child = null,
+                title,
+                properties = {},
+                name = 'TimeLimit'
+            } = config;
+
+            super(
+                {
+                    child,
+                    title,
+                    properties: {
+                        ...properties,
+                        returnSuccess: returnSuccessValue
+                    },
+                    name,
+                },
+                nodePool
+            );
+
+            duration = durationValue;
+
+        }
+
+        // Expression node, or constant number/boolean
+        this.duration = CreateNumberExpression(duration, nodePool);
+        this.addExpression('duration', this.duration);
+
+        this.returnSuccess = this.properties.returnSuccess;
+    }
+
+    open(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        nodeMemory.$startTime = tick.currentTime;
+        nodeMemory.$duration = tick.evalExpression(this.duration);
+    }
+
+    tick(tick) {
+        if (!this.child) {
+            return ERROR;
+        }
+
+        // Abort child when timeout
+        var nodeMemory = this.getNodeMemory(tick);
+        var currTime = tick.currentTime;
+        var startTime = nodeMemory.$startTime;
+        var duration = nodeMemory.$duration;
+
+        if ((currTime - startTime) >= duration) {
+            return (this.returnSuccess) ? SUCCESS : FAILURE;
+        }
+
+        var status = this.child._execute(tick);
+
+        return status;
+    }
+}
+
+let Cooldown$1 = class Cooldown extends Decorator {
+    constructor(config = {}, nodePool) {
+        var duration;
+
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+            var expressions = config.expressions || {};
+            duration = expressions.duration;
+
+        } else {
+            var {
+                duration: durationValue = 0,  // expression
+                child = null,
+                title,
+                properties,
+                name = 'Cooldown'
+            } = config;
+
+            super(
+                {
+                    child,
+                    title,
+                    properties,
+                    name,
+                },
+                nodePool
+            );
+
+            duration = durationValue;
+
+        }
+
+        // Expression node, or constant number/boolean
+        this.duration = CreateNumberExpression(duration, nodePool);
+        this.addExpression('duration', this.duration);
+    }
+
+    open(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        nodeMemory.$cooldownTime = tick.evalExpression(this.duration);
+    }
+
+    tick(tick) {
+        if (!this.child) {
+            return ERROR;
+        }
+
+        // Won't abort child
+        var nodeMemory = this.getNodeMemory(tick);
+        var currTime = tick.currentTime;
+        var lastEndTime = nodeMemory.$lastEndTime;
+        var cooldownTime = nodeMemory.$cooldownTime;
+
+        // Open child after cooldown timeout
+        if (
+            (lastEndTime !== undefined) &&
+            ((currTime - lastEndTime) < cooldownTime)
+        ) {
+            return FAILURE;
+        }
+
+        var status = this.child._execute(tick);
+
+        if ((status === SUCCESS) || (status === FAILURE) || (status === ABORT)) {
+            nodeMemory.$lastEndTime = currTime;
+        }
+
+        return status;
+    }
+};
+
+class Repeat extends Decorator {
+
+    constructor(config = {}, nodePool) {
+        var maxLoop;
+
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+            var expressions = config.expressions || {};
+            maxLoop = expressions.maxLoop;
+
+        } else {
+            var {
+                maxLoop: maxLoopValue = -1,  // expression
+                child = null,
+                title,
+                properties,
+                name = 'Repeat'
+            } = config;
+
+            super(
+                {
+                    child,
+                    title,
+                    properties,
+                    name,
+                },
+                nodePool
+            );
+
+            maxLoop = maxLoopValue;
+
+        }
+
+        // Expression node, or constant number/boolean
+        this.maxLoop = CreateNumberExpression(maxLoop, nodePool);
+        this.addExpression('maxLoop', this.maxLoop);
+    }
+
+    open(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        nodeMemory.$maxLoop = tick.evalExpression(this.maxLoop);
+        nodeMemory.$i = 0;
+    }
+
+    tick(tick) {
+        if (!this.child) {
+            return ERROR;
+        }
+
+        var nodeMemory = this.getNodeMemory(tick);
+        var maxLoop = nodeMemory.$maxLoop;
+        var i = nodeMemory.$i;
+        var status = SUCCESS;
+
+        // Open child before exceed maxLoop
+        // Execute child many times in a tick
+        while (maxLoop < 0 || i < maxLoop) {
+            status = this.child._execute(tick);
+
+            if ((status === SUCCESS) || (status === FAILURE)) {
+                i++;
+            } else {
+                break;
+            }
+        }
+
+        nodeMemory.$i = i;
+        return status;
+    }
+}
+
+class RepeatUntilFailure extends Decorator {
+
+    constructor(config = {}, nodePool) {
+        var maxLoop;
+
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+            var expressions = config.expressions || {};
+            maxLoop = expressions.maxLoop;
+
+        } else {
+            var {
+                maxLoop: maxLoopValue = -1,  // expression
+                returnSuccess = false,  // mode
+                child = null,
+                title,
+                properties = {},
+                name = 'RepeatUntilFailure',
+            } = config;
+
+            super(
+                {
+                    child,
+                    title,
+                    properties: {
+                        ...properties,
+                        returnSuccess,
+                    },
+                    name,
+                },
+                nodePool
+            );
+
+            maxLoop = maxLoopValue;
+
+        }
+
+        // Expression node, or constant number/boolean
+        this.maxLoop = CreateNumberExpression(maxLoop, nodePool);
+        this.addExpression('maxLoop', this.maxLoop);
+
+        this.returnSuccess = this.properties.returnSuccess;
+    }
+
+    open(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        nodeMemory.$maxLoop = tick.evalExpression(this.maxLoop);
+        nodeMemory.$i = 0;
+    }
+
+    tick(tick) {
+        if (!this.child) {
+            return ERROR;
+        }
+
+        // Won't abort child
+        var nodeMemory = this.getNodeMemory(tick);
+        var maxLoop = nodeMemory.$maxLoop;
+        var i = nodeMemory.$i;
+        var status = ERROR;
+
+        // Open child before exceed maxLoop
+        // Execute child many times in a tick
+        while ((maxLoop < 0) || (i < maxLoop)) {
+            status = this.child._execute(tick);
+
+            if (status === SUCCESS) {
+                i++;
+            } else {
+                break;
+            }
+        }
+
+        nodeMemory.$i = i;
+
+        if ((status === this.FAILURE) && this.returnSuccess) {
+            status = SUCCESS;
+        }
+
+        return status;
+    }
+}
+
+class RepeatUntilSuccess extends Decorator {
+
+    constructor(config = {}, nodePool) {
+        var maxLoop;
+
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+            var expressions = config.expressions || {};
+            maxLoop = expressions.maxLoop;
+
+        } else {
+            var {
+                maxLoop: maxLoopValue = -1,   // expression
+                child = null,
+                title,
+                properties,
+                name = 'RepeatUntilSuccess'
+            } = config;
+
+            super(
+                {
+                    child,
+                    title,
+                    properties,
+                    name,
+                },
+                nodePool
+            );
+
+            maxLoop = maxLoopValue;
+
+        }
+
+        // Expression node, or constant number/boolean
+        this.maxLoop = CreateNumberExpression(maxLoop, nodePool);
+        this.addExpression('maxLoop', this.maxLoop);
+    }
+
+    open(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        nodeMemory.$maxLoop = tick.evalExpression(this.maxLoop);
+        nodeMemory.$i = 0;
+    }
+
+    tick(tick) {
+        if (!this.child) {
+            return ERROR;
+        }
+
+        // Won't abort child
+        var nodeMemory = this.getNodeMemory(tick);
+        var maxLoop = nodeMemory.$maxLoop;
+        var i = nodeMemory.$i;
+        var status = ERROR;
+
+        // Open child before exceed maxLoop
+        // Execute child many times in a tick
+        while (maxLoop < 0 || i < maxLoop) {
+            status = this.child._execute(tick);
+
+            if (status === FAILURE) {
+                i++;
+            } else {
+                break;
+            }
+        }
+
+        nodeMemory.$i = i;
+        return status;
+    }
+}
+
+class Limiter extends Decorator {
+
+    constructor(config = {}, nodePool) {
+        var maxLoop;
+
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+            var expressions = config.expressions || {};
+            maxLoop = expressions.maxLoop;
+
+        } else {
+            var {
+                maxLoop: maxLoopValue = 1,  // expression
+                child = null,
+                title,
+                properties,
+                name = 'Limiter'
+            } = config;
+
+            super(
+                {
+                    child,
+                    title,
+                    properties,
+                    name,
+                },
+                nodePool
+            );
+
+            maxLoop = maxLoopValue;
+
+        }
+
+        // Expression node, or constant number/boolean
+        this.maxLoop = CreateNumberExpression(maxLoop, nodePool);  // Expression node
+        this.addExpression('maxLoop', this.maxLoop);
+    }
+
+    open(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        nodeMemory.$maxLoop = tick.evalExpression(this.maxLoop);
+        nodeMemory.$i = 0;
+    }
+
+    tick(tick) {
+        if (!this.child) {
+            return ERROR;
+        }
+
+        // Won't abort child
+        var nodeMemory = this.getNodeMemory(tick);
+        var maxLoop = nodeMemory.$maxLoop;
+        var i = nodeMemory.$i;
+
+        // Open child before exceed maxLoop
+        // Execute child 1 time in a tick
+        if (i >= maxLoop) {
+            return FAILURE;
+        }
+
+        var status = this.child._execute(tick);
+        if ((status === SUCCESS) || (status === FAILURE)) {
+            nodeMemory.$i = i + 1;
+        }
+
+        return status;
+    }
+}
+
+class If extends Decorator {
+
+    constructor(config = {}, nodePool) {
+        var condition;
+
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+            var expressions = config.expressions || {};
+            condition = expressions.condition;
+
+        } else {
+            var {
+                condition: conditionValue = 'true',  // expression
+                conditionEvalBreak = false,    // mode
+                onFailState = FAILURE,         // mode
+                child = null,
+                title,
+                properties = {},
+                name = 'If'
+            } = config;
+
+            super(
+                {
+                    child,
+                    title,
+                    properties: {
+                        ...properties,
+                        conditionEvalBreak,
+                        onFailState
+                    },
+                    name,
+                },
+                nodePool
+            );
+
+            condition = conditionValue;
+
+        }
+
+        // Expression node, or constant number/boolean
+        this.condition = CreateNumberExpression(condition, nodePool);
+        this.addExpression('condition', this.condition);
+
+        this.conditionEvalBreak = this.properties.conditionEvalBreak;
+
+        this.onFailState = this.properties.onFailState;
+    }
+
+    tick(tick) {
+        if (!this.child) {
+            return ERROR;
+        }
+
+        // child is not running
+        if (!this.isChildRunning(tick)) {
+            /*
+            If expression return false:
+              - Don't run child node
+              - Return SUCCESS to run next child for Sequence node, or 
+                - Equal to `ForceSuccess + If`
+              - Return FAILURE for Selector node
+            */
+            if (!tick.evalExpression(this.condition)) {
+                return this.onFailState;
+            } else if (this.conditionEvalBreak) {
+                // Open child but not run it now
+                this.openChild();
+                return RUNNING$1;
+            }
+        }
+
+        var status = this.child._execute(tick);
+
+        return status;
+    }
+}
+
+class ContinueIf extends Decorator {
+
+    constructor(config = {}, nodePool) {
+        var condition;
+
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+            var expressions = config.expressions || {};
+            condition = expressions.condition;
+
+        } else {
+            var {
+                condition: conditionValue = 'true',  // expression
+                returnSuccess = true,                // mode
+                child = null,
+                title,
+                properties = {},
+                name = 'ContinueIf'
+            } = config;
+
+            super(
+                {
+                    child,
+                    title,
+                    properties: {
+                        ...properties,
+                        returnSuccess,
+                    },
+                    name,
+                },
+                nodePool
+            );
+
+            condition = conditionValue;
+
+        }
+
+        // Expression node, or constant number/boolean
+        this.condition = CreateNumberExpression(condition, nodePool);
+        this.addExpression('condition', this.condition);
+
+        this.returnSuccess = this.properties.returnSuccess;
+    }
+
+    tick(tick) {
+        if (!this.child) {
+            return ERROR;
+        }
+
+        // child is running
+        if (this.isChildRunning(tick)) {
+            // Abort child if eval result is false
+            if (!tick.evalExpression(this.condition)) {
+                return (this.returnSuccess) ? SUCCESS : FAILURE;
+            }
+        }
+
+        var status = this.child._execute(tick);
+
+        return status;
+    }
+}
+
+class AbortIf extends Decorator {
+
+    constructor(config = {}, nodePool) {
+        var condition;
+
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+            var expressions = config.expressions || {};
+            condition = expressions.condition;
+
+        } else {
+            var {
+                condition: conditionValue = 'true',
+                returnSuccess = true,  // mode
+                child = null,
+                title,
+                properties = {},
+                name = 'AbortIf'
+            } = config;
+
+            super(
+                {
+                    child,
+                    title,
+                    properties: {
+                        ...properties,
+                        returnSuccess: returnSuccessValue,
+                    },
+                    name,
+                },
+                nodePool
+            );
+
+            condition = conditionValue;
+        }
+
+        // Expression node, or constant number/boolean
+        this.condition = CreateNumberExpression(condition, nodePool);
+        this.addExpression('condition', this.condition);
+
+        this.returnSuccess = this.properties.returnSuccess;
+    }
+
+    tick(tick) {
+        if (!this.child) {
+            return ERROR;
+        }
+
+        // child is running
+        if (this.isChildRunning(tick)) {
+            // Abort child if eval result is true
+            if (!!tick.evalExpression(this.condition)) {
+                return (this.returnSuccess) ? SUCCESS : FAILURE;
+            }
+        }
+
+        var status = this.child._execute(tick);
+
+        return status;
+    }
+}
+
+var Nodes = /*#__PURE__*/Object.freeze({
+	__proto__: null,
+	Abort: Abort,
+	AbortIf: AbortIf,
+	Action: Action,
+	BaseNode: BaseNode,
+	BreakAction: BreakAction$1,
+	BreakDecorator: BreakDecorator$1,
+	Bypass: Bypass,
+	Composite: Composite,
+	ContinueIf: ContinueIf,
+	Cooldown: Cooldown$1,
+	Decorator: Decorator,
+	Error: Error$1,
+	Expression: Expression,
+	Failer: Failer,
+	ForceFailure: ForceFailure,
+	ForceSuccess: ForceSuccess,
+	If: If,
+	IfSelector: IfSelector,
+	Invert: Invert,
+	Limiter: Limiter,
+	NumberExpression: NumberExpression,
+	Parallel: Parallel,
+	RandomSelector: RandomSelector,
+	Repeat: Repeat,
+	RepeatUntilFailure: RepeatUntilFailure,
+	RepeatUntilSuccess: RepeatUntilSuccess,
+	Runner: Runner,
+	Selector: Selector,
+	Sequence: Sequence,
+	Service: Service,
+	ShuffleSelector: ShuffleSelector,
+	StringExpression: StringExpression,
+	Succeeder: Succeeder,
+	SwitchSelector: SwitchSelector,
+	TimeLimit: TimeLimit,
+	Wait: Wait,
+	WeightSelector: WeightSelector
+});
+
+var HasOwnProperty = function (obj, prop) {
+    return Object.prototype.hasOwnProperty.call(obj, prop);
+};
+
+var Load = function (data, names) {
+    var sn = data.sn;
+    if (sn != null) {
+        SetSerialNumber(Math.max(GetSerialNumber(), sn));
+    }
+
+    names = names || {};
+
+    if (HasOwnProperty(data, 'id')) {
+        this.id = data.id;
+    }
+    if (HasOwnProperty(data, 'title')) {
+        this.title = data.title;
+    }
+    if (HasOwnProperty(data, 'description')) {
+        this.description = data.description;
+    }
+    if (HasOwnProperty(data, 'properties')) {
+        this.properties = data.properties;
+    }
+
+    var nodeData = data.nodes;
+    var nodes = {};
+    for (var i = nodeData.length - 1; i >= 0; i--) {
+        // Create nodes from bottom to top
+        var spec = nodeData[i],
+            className = spec.name;
+
+        var Cls;
+        if (className in names) {
+            // Look for the name in custom nodes
+            Cls = names[className];
+        } else if (className in Nodes) {
+            // Look for the name in default nodes
+            Cls = Nodes[className];
+        } else {
+            // Invalid node name
+            throw new EvalError(`BehaviorTree.load: Invalid node name "${className}".`);
+        }
+
+        var config = {};
+        if (HasOwnProperty(spec, 'children')) {
+            config.children = spec.children;
+        }
+        if (HasOwnProperty(spec, 'child')) {
+            config.child = spec.child;
+        }
+        if (HasOwnProperty(spec, 'services')) {
+            config.services = spec.services;
+        }
+
+        if (HasOwnProperty(spec, 'id')) {
+            config.id = spec.id;
+        }
+        config.name = spec.name;
+        if (HasOwnProperty(spec, 'title')) {
+            config.title = spec.title;
+        }
+        if (HasOwnProperty(spec, 'description')) {
+            config.description = spec.description;
+        }
+        if (HasOwnProperty(spec, 'properties')) {
+            config.properties = spec.properties;
+        }
+        if (HasOwnProperty(spec, 'expressions')) {
+            config.expressions = spec.expressions;
+        }
+
+        var node = new Cls(config, nodes);
+        nodes[node.id] = node;
+    }
+
+    this.root = nodes[data.root];
+
+    return this;
+};
 
 function commonjsRequire(path) {
 	throw new Error('Could not dynamically require "' + path + '". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.');
@@ -2001,34 +5026,6 @@ class FormulaParser extends parser$2.Parser {
     }
 }
 
-var parser$1 = new FormulaParser();
-var Compile$1 = function(expression) {
-    return parser$1.compile(expression);
-};
-
-class Expression extends BaseExpression {
-    constructor(expression) {
-        super();
-
-        var callback;
-        if (typeof (expression) === 'number') {
-            callback = function () {
-                return expression;
-            };
-        } else {
-            callback = Compile$1(expression);
-        }
-
-        this.setExpressionHandler(callback);
-    }
-}
-
-class BooleanExpression extends Expression {
-    eval(context) {
-        return !!super.eval(context);
-    }
-}
-
 var FindExpressionEnd = function (content, startIndex, delimiterRight) {
     var quoteChar;
     var delimiterRightLength = delimiterRight.length;
@@ -2508,2370 +5505,6 @@ class StringTemplate {
     }
 }
 
-var stringTemplate = new StringTemplate();
-var Compile = function (content, config) {
-    return stringTemplate.compile(content, config);
-};
-
-class StringTemplateExpression extends BaseExpression {
-    constructor(expression) {
-        super();
-
-        var callback = Compile(expression);
-        this.setExpressionHandler(callback);
-    }
-}
-
-class BaseNode {
-
-    constructor(
-        {
-            id,
-            category,
-            name,
-            title,
-            description,
-            properties
-        } = {}
-    ) {
-
-        if (id === undefined) {
-            id = CreateID();
-        }
-
-        this.parent = null;
-
-        this.id = id;
-
-        this.category = category || '';
-
-        this.name = name || '';
-
-        this.title = title || this.name;
-
-        this.description = description || '';
-
-        this.properties = properties || {};
-    }
-
-    destroy() {
-        this.parent = undefined;
-        this.properties = undefined;
-    }
-
-    setTitle(title) {
-        this.title = title;
-        return this;
-    }
-
-    setName(name) {
-        this.name = name;
-        return this;
-    }
-
-    setDescription(description) {
-        this.description = description;
-        return this;
-    }
-
-    setParent(parent) {
-        this.parent = parent;
-        return this;
-    }
-
-    getParent() {
-        return this.parent;
-    }
-
-    getTree(tick) {
-        if (tick) {
-            return tick.tree;
-        } else {
-            var parent = this.parent;
-            while (parent) {
-                if (parent.category === TREE) {
-                    return parent;
-                }
-                parent = parent.parent;
-            }
-            return null;
-        }
-    }
-
-    addExpression(expression) {
-        return new Expression(expression);
-    }
-
-    addBooleanExpression(expression) {
-        return new BooleanExpression(expression);
-    }
-
-    addStringTemplateExpression(expression) {
-        // TODO: Use mustache or handlebars ?
-        return new StringTemplateExpression(expression);
-    }
-
-    _execute(tick) {
-        // ENTER
-        this._enter(tick);
-
-        // OPEN
-        if (!this.getOpenState(tick)) {
-            this._open(tick);
-        }
-
-        // TICK
-        var status = this._tick(tick);
-
-        // CLOSE
-        if ((status === SUCCESS$1) || (status === FAILURE) ||
-            (status === ABORT) || (status === ERROR$1)) {
-            this._close(tick);
-        }
-
-        // EXIT
-        this._exit(tick);
-
-        return status;
-    }
-
-    _enter(tick) {
-        tick._enterNode(this);
-        this.enter(tick);
-    }
-
-    _open(tick) {
-        tick._openNode(this);
-        this.setOpenState(tick, true);
-        this.open(tick);
-    }
-
-    _tick(tick) {
-        tick._tickNode(this);
-        return this.tick(tick);
-    }
-
-    _close(tick) {
-        tick._closeNode(this);
-        this.setOpenState(tick, false);
-        this.close(tick);
-        // Children will be closed before parent, otherwise abort children
-        this.abortChildren(tick);
-    }
-
-    _exit(tick) {
-        tick._exitNode(this);
-        this.exit(tick);
-    }
-
-    _abort(tick) {
-        this._close(tick);
-        this.abort(tick);
-    }
-
-    enter(tick) { }
-
-    open(tick) { }
-
-    tick(tick) { }
-
-    close(tick) { }
-
-    exit(tick) { }
-
-    abortChildren(tick) { }
-
-    abort(tick) { }
-
-    // open state of this node
-    getNodeMemory(tick) {
-        return tick.getNodeMemory(this.id);
-    }
-
-    getOpenState(tick) {
-        return this.getNodeMemory(tick).$isOpen;
-    }
-
-    setOpenState(tick, state) {
-        if (state === undefined) {
-            state = true;
-        }
-        this.getNodeMemory(tick).$isOpen = state;
-        return this;
-    }
-
-    // Return state value
-    get SUCCESS() {
-        return SUCCESS$1;
-    }
-
-    get FAILURE() {
-        return FAILURE;
-    }
-
-    get RUNNING() {
-        return RUNNING$1;
-    }
-
-    get ERROR() {
-        return ERROR$1;
-    }
-}
-
-class Action extends BaseNode {
-
-    constructor(
-        {
-            name = 'Action',
-            title,
-            properties,
-            services,
-        } = {},
-        nodePool
-    ) {
-
-        super({
-            category: ACTION,
-            name,
-            title,
-            properties,
-        });
-
-        if (services) {
-            for (var i = 0, cnt = services.length; i < cnt; i++) {
-                this.addService(services[i], nodePool);
-            }
-        }
-    }
-
-    destroy() {
-        if (this.services) {
-            for (var i = 0, cnt = this.services.length; i < cnt; i++) {
-                this.services[i].destroy();
-            }
-        }
-        this.services = undefined;
-
-        super.destroy();
-    }
-
-    addService(node, nodePool) {
-        if (typeof (node) === 'string') {  // Node ID
-            node = nodePool[node];
-        }
-
-        if (this.services === undefined) {
-            this.services = [];
-        }
-
-        if (this.services.indexOf(node) === -1) {
-            this.services.push(node);
-            node.setParent(this);
-        }
-
-        return this;
-    }
-
-    _tick(tick) {
-        tick._tickNode(this);
-
-        if (this.services) {
-            for (var i = 0, cnt = this.services.length; i < cnt; i++) {
-                this.services[i]._tick(tick);
-            }
-        }
-
-        return this.tick(tick);
-    }
-
-}
-
-class Composite extends BaseNode {
-
-    constructor(
-        {
-            children = [],
-            name = 'Composite',
-            title,
-            properties,
-            services,
-        } = {},
-        nodePool
-    ) {
-
-        super({
-            category: COMPOSITE,
-            name,
-            title,
-            properties,
-        });
-
-        this.children = [];
-        for (var i = 0, cnt = children.length; i < cnt; i++) {
-            this.addChild(children[i], nodePool);
-        }
-
-        if (services) {
-            for (var i = 0, cnt = services.length; i < cnt; i++) {
-                this.addService(services[i], nodePool);
-            }
-        }
-    }
-
-    destroy() {
-        for (var i = 0, cnt = this.children.length; i < cnt; i++) {
-            this.children[i].destroy();
-        }
-
-        if (this.services) {
-            for (var i = 0, cnt = this.services.length; i < cnt; i++) {
-                this.services[i].destroy();
-            }
-        }
-
-        this.children = undefined;
-        this.services = undefined;
-
-        super.destroy();
-    }
-
-    insertChild(node, nodePool, index) {
-        if (typeof (node) === 'string') {  // Node ID
-            node = nodePool[node];
-        }
-
-        if (this.children.indexOf(node) === -1) {
-            if (index < 0) {
-                index = this.children.length + index;
-            }
-            if ((index === undefined) || (index >= this.children.length)) {
-                this.children.push(node);
-            } else {
-                this.children.splice(index, 0, node);
-            }
-
-            node.setParent(this);
-        }
-
-        return this;
-    }
-
-    addChild(node, nodePool,) {
-        this.insertChild(node, nodePool);
-        return this;
-    }
-
-    addService(node, nodePool) {
-        if (typeof (node) === 'string') {  // Node ID
-            node = nodePool[node];
-        }
-
-        if (this.services === undefined) {
-            this.services = [];
-        }
-
-        if (this.services.indexOf(node) === -1) {
-            this.services.push(node);
-            node.setParent(this);
-        }
-
-        return this;
-    }
-
-    _tick(tick) {
-        tick._tickNode(this);
-
-        if (this.services) {
-            for (var i = 0, cnt = this.services.length; i < cnt; i++) {
-                this.services[i]._tick(tick);
-            }
-        }
-
-        return this.tick(tick);
-    }
-
-    abortChildren(tick) {
-        for (var i = 0, cnt = this.children.length; i < cnt; i++) {
-            var childNode = this.children[i];
-            if (childNode.getOpenState(tick)) {
-                childNode._abort(tick);
-            }
-        }
-    }
-
-}
-
-class Decorator extends BaseNode {
-
-    constructor(
-        {
-            child = null,
-            name = 'Decorator',
-            title,
-            properties
-        } = {},
-        nodePool
-    ) {
-
-        super({
-            category: DECORATOR,
-            name,
-            title,
-            properties,
-        });
-
-        this.child = null;
-        if (child) {
-            this.addChild(child, nodePool);
-        }
-    }
-
-    destroy() {
-        if (this.child) {
-            this.child.destroy();
-        }
-
-        this.child = undefined;
-
-        super.destroy();
-    }
-
-    addChild(node, nodePool) {
-        if (typeof (node) === 'string') {  // Node ID
-            node = nodePool[node];
-        }
-
-        this.child = node;
-        node.setParent(this);
-        return this;
-    }
-
-    chainChild(node, nodePool) {
-        // Get last decorator
-        var decorator = this;
-        while (decorator.child instanceof Decorator) {
-            decorator = decorator.child;
-        }
-        decorator.addChild(node, nodePool);
-        return this;
-    }
-
-    isChildRunning(tick) {
-        return this.child.getOpenState(tick);
-    }
-
-    abortChildren(tick) {
-        if (this.isChildRunning(tick)) {
-            this.child._abort(tick);
-        }
-    }
-
-    openChild(tick) {
-        this.child.setOpenState(tick, true);
-        return this;
-    }
-}
-
-class Service extends BaseNode {
-
-    constructor(
-        {
-            interval = 0,
-            randomDeviation = 0,
-            name = 'Service',
-            title,
-            properties
-        } = {}
-    ) {
-
-        if (properties === undefined) {
-            properties = {};
-        }
-
-        properties.interval = interval;
-        properties.randomDeviation = randomDeviation;
-
-        super({
-            category: SERVICE,
-            name,
-            title,
-            properties,
-        });
-
-        this.intervalExpression = this.addExpression(interval);
-        this.randomDeviationExpression = this.addExpression(randomDeviation);
-
-    }
-
-    _tick(tick) {
-        if (this.canTick(tick)) {
-            this.tick(tick);
-        }
-    }
-
-    canTick(tick) {
-        var nodeMemory = this.getNodeMemory(tick);
-        var currTime = tick.currentTime;
-        var lastEndTime = nodeMemory.$lastEndTime;
-        var interval = nodeMemory.$interval;
-
-        var canTick = (lastEndTime === undefined) ||
-            ((currTime - lastEndTime) >= interval);
-
-        if (canTick) {
-            nodeMemory.$lastEndTime = currTime;
-
-            var interval = tick.evalExpression(this.intervalExpression);
-            var randomDeviation = tick.evalExpression(this.randomDeviationExpression);
-            if (randomDeviation > 0) {
-                interval += (0.5 - Math.random()) * randomDeviation;
-            }
-            nodeMemory.$interval = interval;
-        }
-
-        return canTick;
-    }
-
-}
-
-class Succeeder extends Action {
-
-    constructor({
-        services,
-        title,
-        name = 'Succeeder'
-    } = {}) {
-
-        super({
-            services,
-            title,
-            name,
-        });
-    }
-
-    tick(tick) {
-        return SUCCESS$1;
-    }
-}
-
-class Failer extends Action {
-
-    constructor({
-        services,
-        title,
-        name = 'Failer'
-    } = {}) {
-
-        super({
-            services,
-            title,
-            name,
-        });
-    }
-
-    tick(tick) {
-        return FAILURE;
-    }
-}
-
-class Runner extends Action {
-
-    constructor({
-        services,
-        title,
-        name = 'Runner'
-    } = {}) {
-
-        super({
-            services,
-            title,
-            name,
-        });
-    }
-
-    tick(tick) {
-        return RUNNING$1;
-    }
-}
-
-let Error$1 = class Error extends Action {
-
-    constructor({
-        services,
-        title,
-        name = 'Error',
-    } = {}) {
-
-        super({
-            services,
-            title,
-            name,
-        });
-    }
-
-    tick(tick) {
-        return ERROR$1;
-    }
-};
-
-class Wait extends Action {
-
-    constructor({
-        duration = 0,
-        services,
-        title,
-        name = 'Wait'
-    } = {}) {
-
-        super({
-            title,
-            name,
-            properties: {
-                duration
-            },
-            services,
-        });
-
-        this.durationExpression = this.addExpression(duration);
-    }
-
-    open(tick) {
-        var nodeMemory = this.getNodeMemory(tick);
-
-        nodeMemory.$startTime = tick.currentTime;
-        nodeMemory.$duration = tick.evalExpression(this.durationExpression);
-    }
-
-    tick(tick) {
-        var nodeMemory = this.getNodeMemory(tick);
-        var currTime = tick.currentTime;
-        var startTime = nodeMemory.$startTime;
-        var duration = nodeMemory.$duration;
-
-        if (duration > 0) {
-            if ((currTime - startTime) < duration) {
-                return RUNNING$1;
-            }
-
-        } else if (duration === 0) { // Wait 1 tick            
-            if (currTime === startTime) {
-                return RUNNING$1;
-            }
-        }
-
-        return SUCCESS$1;
-    }
-}
-
-class Abort extends Action {
-
-    constructor({
-        services,
-        title,
-        name = 'Abort',
-    } = {}) {
-
-        super({
-            services,
-            title,
-            name,
-        });
-    }
-
-    tick(tick) {
-        return ABORT;
-    }
-}
-
-let BreakDecorator$1 = class BreakDecorator extends Decorator {
-    constructor(
-        {
-            child = null,
-            title,
-            name = 'Break',
-            tag,
-        } = {},
-        nodePool
-    ) {
-
-        super(
-            {
-                child,
-                title,
-                name,
-                properties: {
-                    tag
-                }
-            },
-            nodePool
-        );
-
-        this.breakFlag = false;
-        this.tag = tag;
-    }
-
-    setBreakFlag(enable) {
-        if (enable === undefined) {
-            enable = true;
-        }
-        this.breakFlag = enable;
-        return this;
-    }
-
-    tick(tick) {
-        if (!this.child) {
-            return SUCCESS$1;
-        }
-
-        var status = this.child._execute(tick);
-
-        // breakFlag will be set by BreakAction of grandchild node
-        if (this.breakFlag) {
-            status = SUCCESS$1;
-            this.breakFlag = false;
-        }
-
-        return status;
-    }
-};
-
-let BreakAction$1 = class BreakAction extends Action {
-    constructor({
-        breakDecoratorTitle,
-        tag,
-        services,
-        title,
-        name = 'Break'
-    } = {}) {
-
-        super({
-            name,
-            title,
-            properties: {
-                breakDecoratorTitle,
-                tag
-            },
-            services,
-        });
-
-        this.breakDecoratorTitle = breakDecoratorTitle;
-        this.tag = tag;
-    }
-
-    tick(tick) {
-        // Find nearest BreakDecorator
-        var parent = this.getParent();
-        while (true) {
-            if ((parent instanceof BreakDecorator$1) &&
-                ((!this.tag) || (this.tag === parent.tag)) &&
-                ((!this.breakDecoratorTitle) || (this.breakDecoratorTitle === parent.title))
-            ) {
-                break;
-            }
-
-            if (!parent.getParent) {
-                parent = null;
-                break;
-            }
-            parent = parent.getParent();
-        }
-
-        var status;
-        if (parent) {
-            parent.setBreakFlag();
-            status = ABORT;
-        } else {
-            // Can't get responded BreakDecorator, ignore this break action node
-            console.error(`[EventSheet] Can't get responded BreakDecorator, ignore this break action node.`);
-            status = SUCCESS$1;
-        }
-
-        return status;
-    }
-};
-
-class Selector extends Composite {
-    constructor(
-        {
-            children = [],
-            services,
-            title,
-            name = 'Selector'
-        } = {},
-        nodePool
-    ) {
-
-        super(
-            {
-                children,
-                services,
-                title,
-                name,
-            },
-            nodePool
-        );
-
-    }
-
-    open(tick) {
-        var nodeMemory = this.getNodeMemory(tick);
-        nodeMemory.$runningChild = -1;  // No running child
-    }
-
-    tick(tick) {
-        if (this.children.length === 0) {
-            return ERROR$1;
-        }
-
-        var nodeMemory = this.getNodeMemory(tick);
-        var childIndex = nodeMemory.$runningChild;
-        var status;
-        if (childIndex < 0) {
-            for (var i = 0, cnt = this.children.length; i < cnt; i++) {
-                status = this.children[i]._execute(tick);
-
-                if ((status === RUNNING$1) || (status === SUCCESS$1) || (status === ABORT)) {
-                    childIndex = i;
-                    break;
-                }
-            }
-        } else {
-            var child = this.children[childIndex];
-            status = child._execute(tick);
-        }
-
-        nodeMemory.$runningChild = (status === RUNNING$1) ? childIndex : -1;
-        return status;
-    }
-
-    abortChildren(tick) {
-        var nodeMemory = this.getNodeMemory(tick);
-        var child = this.children[nodeMemory.$runningChild];
-        if (child) {
-            child._abort(tick);
-            nodeMemory.$runningChild = -1;
-        }
-    }
-}
-
-class Sequence extends Composite {
-    constructor(
-        {
-            children = [],
-            services,
-            title,
-            name = 'Sequence'
-        } = {},
-        nodePool
-    ) {
-
-        super(
-            {
-                children,
-                services,
-                title,
-                name,
-            },
-            nodePool
-        );
-
-    }
-
-    open(tick) {
-        var nodeMemory = this.getNodeMemory(tick);
-        nodeMemory.$runningChild = 0;
-    }
-
-    tick(tick) {
-        if (this.children.length === 0) {
-            return ERROR$1;
-        }
-
-        var nodeMemory = this.getNodeMemory(tick);
-
-        var childIndex = nodeMemory.$runningChild;
-        var status;
-        for (var i = childIndex, cnt = this.children.length; i < cnt; i++) {
-            status = this.children[i]._execute(tick);
-
-            if ((status === RUNNING$1) || (status === FAILURE) || (status === ABORT)) {
-                break;
-            }
-        }
-
-        nodeMemory.$runningChild = (status === RUNNING$1) ? i : -1;
-        return status;
-    }
-
-    abortChildren(tick) {
-        var nodeMemory = this.getNodeMemory(tick);
-        var child = this.children[nodeMemory.$runningChild];
-        if (child) {
-            child._abort(tick);
-            nodeMemory.$runningChild = -1;
-        }
-    }
-}
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2018 Photon Storm Ltd.
- * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
- */
-
-/**
- * Removes a single item from an array and returns it without creating gc, like the native splice does.
- * Based on code by Mike Reinstein.
- *
- * @function Phaser.Utils.Array.SpliceOne
- * @since 3.0.0
- *
- * @param {array} array - The array to splice from.
- * @param {integer} index - The index of the item which should be spliced.
- *
- * @return {*} The item which was spliced (removed).
- */
-var SpliceOne$2 = function (array, index)
-{
-    if (index >= array.length)
-    {
-        return;
-    }
-
-    var len = array.length - 1;
-
-    var item = array[index];
-
-    for (var i = index; i < len; i++)
-    {
-        array[i] = array[i + 1];
-    }
-
-    array.length = len;
-
-    return item;
-};
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2019 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-
-/**
- * Removes the given item, or array of items, from the array.
- * 
- * The array is modified in-place.
- * 
- * You can optionally specify a callback to be invoked for each item successfully removed from the array.
- *
- * @function Phaser.Utils.Array.Remove
- * @since 3.4.0
- *
- * @param {array} array - The array to be modified.
- * @param {*|Array.<*>} item - The item, or array of items, to be removed from the array.
- * @param {function} [callback] - A callback to be invoked for each item successfully removed from the array.
- * @param {object} [context] - The context in which the callback is invoked.
- *
- * @return {*|Array.<*>} The item, or array of items, that were successfully removed from the array.
- */
-var Remove$3 = function (array, item, callback, context)
-{
-    if (context === undefined) { context = array; }
-
-    var index;
-
-    //  Fast path to avoid array mutation and iteration
-    if (!Array.isArray(item))
-    {
-        index = array.indexOf(item);
-
-        if (index !== -1)
-        {
-            SpliceOne$2(array, index);
-
-            if (callback)
-            {
-                callback.call(context, item);
-            }
-
-            return item;
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-    //  If we got this far, we have an array of items to remove
-
-    var itemLength = item.length - 1;
-
-    while (itemLength >= 0)
-    {
-        var entry = item[itemLength];
-
-        index = array.indexOf(entry);
-
-        if (index !== -1)
-        {
-            SpliceOne$2(array, index);
-
-            if (callback)
-            {
-                callback.call(context, entry);
-            }
-        }
-        else
-        {
-            //  Item wasn't found in the array, so remove it from our return results
-            item.pop();
-        }
-
-        itemLength--;
-    }
-
-    return item;
-};
-
-class Parallel extends Composite {
-    constructor(
-        {
-            finishMode = 0,
-            returnSuccess = true,
-            children = [],
-            services,
-            title,
-            name = 'Parallel'
-        } = {},
-        nodePool
-    ) {
-
-        super(
-            {
-                children,
-                services,
-                title,
-                name,
-                properties: {
-                    finishMode,
-                    returnSuccess
-                },
-            },
-            nodePool
-        );
-
-        this.finishMode = finishMode;
-        this.returnSuccess = returnSuccess;
-    }
-
-    open(tick) {
-        var nodeMemory = this.getNodeMemory(tick);
-        nodeMemory.$runningChildren = this.children.map((child, index) => index);
-    }
-
-    tick(tick) {
-        if (this.children.length === 0) {
-            return ERROR$1;
-        }
-
-        var nodeMemory = this.getNodeMemory(tick);
-        var childIndexes = nodeMemory.$runningChildren;
-        var statusMap = {};
-        var hasAnyFinishStatus = false;
-        var hasAnyRunningStatus = false;
-        var hasAnyAbortStatus = false;
-        var hasAnyErrorStatus = false;
-        for (var i = 0, cnt = childIndexes.length; i < cnt; i++) {
-            var childIndex = childIndexes[i];
-            var status = this.children[childIndex]._execute(tick);
-            statusMap[childIndex] = status;
-
-            if (childIndex === 0) {
-                nodeMemory.$mainTaskStatus = status;
-            }
-
-            switch (status) {
-                case SUCCESS$1:
-                case FAILURE:
-                    hasAnyFinishStatus = true;
-                    break;
-
-                case RUNNING$1:
-                    hasAnyRunningStatus = true;
-                    break;
-
-                case ABORT:
-                    hasAnyAbortStatus = true;
-                    break;
-
-                case ERROR$1:
-                    hasAnyErrorStatus = true;
-                    break;
-            }
-        }
-
-        // Clear none-running child
-        if (hasAnyFinishStatus) {
-            for (var childIndex in statusMap) {
-                var status = statusMap[childIndex];
-                if ((status === SUCCESS$1) || (status === FAILURE)) {
-                    Remove$3(childIndexes, parseInt(childIndex));
-                }
-            }
-        }
-
-        if (this.finishMode === 0) {
-            return nodeMemory.$mainTaskStatus;
-        } else {
-            if (hasAnyErrorStatus) {
-                return ERROR$1;
-            } else if (hasAnyAbortStatus) {
-                return ABORT;
-            } else if (hasAnyRunningStatus) {
-                return RUNNING$1;
-            } else if (this.returnSuccess) {
-                return SUCCESS$1;
-            } else {
-                return nodeMemory.$mainTaskStatus;
-            }
-        }
-    }
-
-    abortChildren(tick) {
-        var nodeMemory = this.getNodeMemory(tick);
-        var childIndexes = nodeMemory.$runningChildren;
-        for (var i = 0, cnt = childIndexes.length; i < cnt; i++) {
-            var childIndex = childIndexes[i];
-            this.children[childIndex]._abort(tick);
-        }
-        nodeMemory.$runningChildren.length = 0;
-    }
-}
-
-class IfSelector extends Composite {
-    constructor(
-        {
-            expression = 'true',
-            conditionEvalBreak = false,
-            children = [],
-            services,
-            title,
-            name = 'IfSelector'
-        } = {},
-        nodePool
-    ) {
-
-        super(
-            {
-                children: children,
-                services,
-                title,
-                name,
-                properties: {
-                    expression,
-                    conditionEvalBreak,
-                },
-            },
-            nodePool
-        );
-
-        this.expression = this.addBooleanExpression(expression);
-        this.conditionEvalBreak = conditionEvalBreak;
-        this.forceSelectChildIndex = undefined;
-    }
-
-    open(tick) {
-        var nodeMemory = this.getNodeMemory(tick);
-        nodeMemory.$runningChild = -1;  // No running child
-    }
-
-    setSelectChildIndex(index) {
-        this.forceSelectChildIndex = index;
-        return this;
-    }
-
-    evalCondition(tick) {
-        if (this.forceSelectChildIndex !== undefined) {
-            return this.forceSelectChildIndex;
-        }
-
-        return tick.evalExpression(this.expression) ? 0 : 1;
-    }
-
-    tick(tick) {
-        if (this.children.length === 0) {
-            return ERROR$1;
-        }
-
-        var nodeMemory = this.getNodeMemory(tick);
-        var childIndex = nodeMemory.$runningChild;
-        if (childIndex < 0) {
-            childIndex = this.evalCondition(tick);
-            if (this.conditionEvalBreak) {
-                // Resolve runningChild index, but not run child now
-                nodeMemory.$runningChild = childIndex;
-                return RUNNING$1;
-            }
-        }
-
-        var child = this.children[childIndex];
-        var status = child._execute(tick);
-        nodeMemory.$runningChild = (status === RUNNING$1) ? childIndex : -1;
-
-        return status;
-    }
-
-    abortChildren(tick) {
-        var nodeMemory = this.getNodeMemory(tick);
-        var child = this.children[nodeMemory.$runningChild];
-        if (child) {
-            child._abort(tick);
-            nodeMemory.$runningChild = -1;
-        }
-    }
-}
-
-class SwitchSelector extends Composite {
-    constructor(
-        {
-            expression = null,
-            keys = undefined, // Or [key, ...]
-            conditionEvalBreak = false,
-            children = {},    // Or [child, ...]
-            services,
-            title,
-            name = 'SwitchSelector'
-        } = {},
-        nodePool
-    ) {
-
-        if (keys === undefined) {
-            keys = Object.keys(children);
-            children = Object.values(children);
-        }
-
-        super(
-            {
-                children: children,
-                services,
-                title,
-                name,
-                properties: {
-                    expression,
-                    keys,
-                    conditionEvalBreak,
-                },
-            },
-            nodePool
-        );
-
-        this.expression = this.addExpression(expression);
-        this.keys = keys;  // Index of children
-        this.conditionEvalBreak = conditionEvalBreak;
-        this.forceSelectChildIndex = undefined;
-    }
-
-    open(tick) {
-        var nodeMemory = this.getNodeMemory(tick);
-        nodeMemory.$runningChild = -1;  // No running child
-    }
-
-    setSelectChildIndex(index) {
-        this.forceSelectChildIndex = index;
-        return this;
-    }
-
-    evalCondition(tick) {
-        if (this.forceSelectChildIndex !== undefined) {
-            if (typeof (this.forceSelectChildIndex) === 'number') {
-                return this.forceSelectChildIndex;
-            } else {
-                return this.keys.indexOf(this.forceSelectChildIndex);
-            }
-        }
-
-        var key = tick.evalExpression(this.expression);
-        return this.keys.indexOf(key);
-    }
-
-    tick(tick) {
-        if (this.children.length === 0) {
-            return ERROR$1;
-        }
-
-        var nodeMemory = this.getNodeMemory(tick);
-        var childIndex = nodeMemory.$runningChild;
-        if (childIndex < 0) {
-            childIndex = this.evalCondition(tick);
-            if (childIndex === -1) {
-                childIndex = this.keys.indexOf('default');
-            }
-            if (childIndex === -1) {
-                return ERROR$1;
-            }
-            if (this.conditionEvalBreak) {
-                // Resolve runningChild index, but not run child now
-                nodeMemory.$runningChild = childIndex;
-                return RUNNING$1;
-            }
-        }
-
-        var child = this.children[childIndex];
-        var status = child._execute(tick);
-        nodeMemory.$runningChild = (status === RUNNING$1) ? childIndex : -1;
-        return status;
-    }
-
-    abortChildren(tick) {
-        var nodeMemory = this.getNodeMemory(tick);
-        var child = this.children[nodeMemory.$runningChild];
-        if (child) {
-            child._abort(tick);
-            nodeMemory.$runningChild = -1;
-        }
-    }
-}
-
-class WeightSelector extends Composite {
-    constructor(
-        {
-            expression = null,
-            weights = undefined,    // Or [weight, ...]
-            conditionEvalBreak = false,
-            children = [],          // [node, ...], or [{weight, node}, ...]
-            services,
-            title,
-            name = 'WeightSelector'
-        } = {},
-        nodePool
-    ) {
-
-        if (weights === undefined) {
-            weights = [];
-
-            var totalWeight = 0;
-            for (var i = 0, cnt = children.length; i < cnt; i++) {
-                var child = children[i];
-                var weight;
-                if ((child instanceof BaseNode) || (typeof (child) === 'string')) {
-                    weight = 1;
-                } else {
-                    weight = child.weight;
-                    children[i] = child.node;
-                }
-                weights.push(weight);
-                totalWeight += weight;
-            }
-            for (var i = 0, cnt = weights.length; i < cnt; i++) {
-                weights[i] /= totalWeight;
-            }
-        }
-
-        super(
-            {
-                children: children,
-                services,
-                title,
-                name,
-                properties: {
-                    expression,
-                    weights,
-                    conditionEvalBreak,
-                },
-            },
-            nodePool
-        );
-
-        this.expression = (expression) ? this.addExpression(expression) : null;
-        this.weights = weights;
-        this.conditionEvalBreak = conditionEvalBreak;
-        this.forceSelectChildIndex = undefined;
-    }
-
-    open(tick) {
-        var nodeMemory = this.getNodeMemory(tick);
-        nodeMemory.$runningChild = -1;  // No running child
-    }
-
-    setSelectChildIndex(index) {
-        if (this.forceSelectChildIndex !== undefined) {
-            return this.forceSelectChildIndex;
-        }
-
-        this.forceSelectChildIndex = index;
-        return this;
-    }
-
-    evalCondition(tick) {
-        if (this.forceSelectChildIndex !== undefined) {
-            return this.forceSelectChildIndex;
-        }
-
-        var value = (this.expression) ? tick.evalExpression(this.expression) : Math.random();
-        for (var i = 0, cnt = this.weights.length; i < cnt; i++) {
-            value -= this.weights[i];
-            if (value < 0) {
-                return i;
-            }
-        }
-    }
-
-    tick(tick) {
-        if (this.children.length === 0) {
-            return ERROR$1;
-        }
-
-        var nodeMemory = this.getNodeMemory(tick);
-        var childIndex = nodeMemory.$runningChild;
-        if (childIndex < 0) {
-            childIndex = this.evalCondition(tick);
-            if (childIndex === undefined) {
-                childIndex = this.children.length - 1;
-            }
-            if (this.conditionEvalBreak) {
-                // Resolve runningChild index, but not run child now
-                nodeMemory.$runningChild = childIndex;
-                return RUNNING$1;
-            }
-        }
-
-        var child = this.children[childIndex];
-        var status = child._execute(tick);
-        nodeMemory.$runningChild = (status === RUNNING$1) ? childIndex : -1;
-        return status;
-    }
-
-    abortChildren(tick) {
-        var nodeMemory = this.getNodeMemory(tick);
-        var child = this.children[nodeMemory.$runningChild];
-        if (child) {
-            child._abort(tick);
-            nodeMemory.$runningChild = -1;
-        }
-    }
-}
-
-class RandomSelector extends Composite {
-    constructor(
-        {
-            children = [],
-            services,
-            title,
-            name = 'RandomSelector'
-        } = {},
-        nodePool
-    ) {
-
-        super(
-            {
-                children,
-                services,
-                title,
-                name,
-            },
-            nodePool
-        );
-
-    }
-
-    open(tick) {
-        var nodeMemory = this.getNodeMemory(tick);
-        nodeMemory.$runningChild = -1;  // No running child
-    }
-
-    tick(tick) {
-        if (this.children.length === 0) {
-            return ERROR;
-        }
-
-        var nodeMemory = this.getNodeMemory(tick);
-        var childIndex = nodeMemory.$runningChild;
-        if (childIndex < 0) {
-            childIndex = Math.floor(Math.random() * this.children.length);
-        }
-
-        var child = this.children[childIndex];
-        var status = child._execute(tick);
-        nodeMemory.$runningChild = (status === RUNNING) ? childIndex : -1;
-        return status;
-    }
-
-    abortChildren(tick) {
-        var nodeMemory = this.getNodeMemory(tick);
-        var child = this.children[nodeMemory.$runningChild];
-        if (child) {
-            child._abort(tick);
-            nodeMemory.$runningChild = -1;
-        }
-    }
-}
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2018 Photon Storm Ltd.
- * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
- */
-
-/**
- * Shuffles the contents of the given array using the Fisher-Yates implementation.
- *
- * The original array is modified directly and returned.
- *
- * @function Phaser.Utils.Array.Shuffle
- * @since 3.0.0
- *
- * @param {array} array - The array to shuffle. This array is modified in place.
- *
- * @return {array} The shuffled array.
- */
-var Shuffle = function (array) {
-    for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-
-    return array;
-};
-
-class ShuffleSelector extends Composite {
-    constructor(
-        {
-            children = [],
-            services,
-            title,
-            name = 'ShuffleSelector'
-        } = {},
-        nodePool
-    ) {
-
-        super(
-            {
-                children,
-                services,
-                title,
-                name,
-            },
-            nodePool
-        );
-
-    }
-
-    open(tick) {
-        var nodeMemory = this.getNodeMemory(tick);
-        nodeMemory.$runningChild = 0;
-
-        if (!nodeMemory.$children) {
-            nodeMemory.$children = this.children.map((child, index) => index);
-        }
-        Shuffle(nodeMemory.$children);
-    }
-
-    tick(tick) {
-        if (this.children.length === 0) {
-            return ERROR$1;
-        }
-
-        var nodeMemory = this.getNodeMemory(tick);
-
-        var childIndex = nodeMemory.$runningChild;
-        var children = nodeMemory.$children;
-        var status;
-        for (var i = childIndex, cnt = children.length; i < cnt; i++) {
-            status = this.children[children[i]]._execute(tick);
-
-            if ((status === RUNNING$1) || (status === SUCCESS$1) || (status === ABORT)) {
-                break;
-            }
-        }
-
-        nodeMemory.$runningChild = (status === RUNNING$1) ? i : -1;
-        return status;
-    }
-
-    abortChildren(tick) {
-        var nodeMemory = this.getNodeMemory(tick);
-        var child = this.children[nodeMemory.$runningChild];
-        if (child) {
-            child._abort(tick);
-            nodeMemory.$runningChild = -1;
-        }
-    }
-}
-
-class Bypass extends Decorator {
-
-    constructor(
-        {
-            child = null,
-            title,
-            name = 'Bypass'
-        } = {},
-        nodePool
-    ) {
-
-        super(
-            {
-                child,
-                title,
-                name,
-            },
-            nodePool
-        );
-    }
-
-    tick(tick) {
-        if (!this.child) {
-            return ERROR$1;
-        }
-
-        // Won't abort child
-        var status = this.child._execute(tick);
-
-        return status;
-    }
-}
-
-class ForceSuccess extends Decorator {
-
-    constructor(
-        {
-            child = null,
-            title,
-            name = 'ForceSuccess'
-        } = {},
-        nodePool
-    ) {
-
-        super(
-            {
-                child,
-                title,
-                name,
-                properties: {
-                },
-            },
-            nodePool
-        );
-    }
-
-    tick(tick) {
-        if (!this.child) {
-            return ERROR$1;
-        }
-
-        var status = this.child._execute(tick);
-
-        if (status === FAILURE) {
-            return SUCCESS$1;
-        }
-
-        return status;
-    }
-}
-
-class ForceFailure extends Decorator {
-
-    constructor(
-        {
-            child = null,
-            title,
-            name = 'ForceFailure'
-        } = {},
-        nodePool
-    ) {
-
-        super(
-            {
-                child,
-                title,
-                name,
-                properties: {
-                },
-            },
-            nodePool
-        );
-
-    }
-
-    tick(tick) {
-        if (!this.child) {
-            return ERROR$1;
-        }
-
-        var status = this.child._execute(tick);
-
-        if (status === SUCCESS$1) {
-            return FAILURE;
-        }
-
-        return status;
-    }
-}
-
-class Invert extends Decorator {
-    constructor(
-        {
-            child = null,
-            title,
-            name = 'Invert'
-        } = {},
-        nodePool
-    ) {
-
-        super(
-            {
-                child,
-                title,
-                name,
-            },
-            nodePool
-        );
-    }
-
-    tick(tick) {
-        if (!this.child) {
-            return ERROR$1;
-        }
-
-        var status = this.child._execute(tick);
-
-        if (status === SUCCESS$1) {
-            status = FAILURE;
-        } else if (status === FAILURE) {
-            status = SUCCESS$1;
-        }
-
-        return status;
-    }
-}
-
-class TimeLimit extends Decorator {
-    constructor(
-        {
-            duration = 0,
-            returnSuccess = true,
-            child = null,
-            title,
-            name = 'TimeLimit'
-        } = {},
-        nodePool
-    ) {
-
-        super(
-            {
-                child,
-                title,
-                name,
-                properties: {
-                    duration,
-                    returnSuccess
-                },
-            },
-            nodePool
-        );
-
-        this.durationExpression = this.addExpression(duration);
-        this.returnSuccess = returnSuccess;
-    }
-
-    open(tick) {
-        var nodeMemory = this.getNodeMemory(tick);
-        nodeMemory.$startTime = tick.currentTime;
-        nodeMemory.$duration = tick.evalExpression(this.durationExpression);
-    }
-
-    tick(tick) {
-        if (!this.child) {
-            return ERROR$1;
-        }
-
-        // Abort child when timeout
-        var nodeMemory = this.getNodeMemory(tick);
-        var currTime = tick.currentTime;
-        var startTime = nodeMemory.$startTime;
-        var duration = nodeMemory.$duration;
-
-        if ((currTime - startTime) >= duration) {
-            return (this.returnSuccess) ? SUCCESS : FAILURE;
-        }
-
-        var status = this.child._execute(tick);
-
-        return status;
-    }
-}
-
-let Cooldown$1 = class Cooldown extends Decorator {
-    constructor(
-        {
-            duration = 0,
-            child = null,
-            title,
-            name = 'Cooldown'
-        } = {},
-        nodePool
-    ) {
-
-        super(
-            {
-                child,
-                title,
-                name,
-                properties: {
-                    duration
-                },
-            },
-            nodePool
-        );
-
-        this.durationExpression = this.addExpression(duration);
-    }
-
-    open(tick) {
-        var nodeMemory = this.getNodeMemory(tick);
-        nodeMemory.$cooldownTime = tick.evalExpression(this.durationExpression);
-    }
-
-    tick(tick) {
-        if (!this.child) {
-            return ERROR$1;
-        }
-
-        // Won't abort child
-        var nodeMemory = this.getNodeMemory(tick);
-        var currTime = tick.currentTime;
-        var lastEndTime = nodeMemory.$lastEndTime;
-        var cooldownTime = nodeMemory.$cooldownTime;
-
-        // Open child after cooldown timeout
-        if (
-            (lastEndTime !== undefined) &&
-            ((currTime - lastEndTime) < cooldownTime)
-        ) {
-            return FAILURE;
-        }
-
-        var status = this.child._execute(tick);
-
-        if ((status === SUCCESS$1) || (status === FAILURE) || (status === ABORT)) {
-            nodeMemory.$lastEndTime = currTime;
-        }
-
-        return status;
-    }
-};
-
-class Repeat extends Decorator {
-
-    constructor(
-        {
-            maxLoop = -1,
-            child = null,
-            title,
-            name = 'Repeat'
-        } = {},
-        nodePool
-    ) {
-
-        super(
-            {
-                child,
-                title,
-                name,
-                properties: {
-                    maxLoop
-                },
-            },
-            nodePool
-        );
-
-        this.maxLoopExpression = this.addExpression(maxLoop);
-    }
-
-    open(tick) {
-        var nodeMemory = this.getNodeMemory(tick);
-        nodeMemory.$maxLoop = tick.evalExpression(this.maxLoopExpression);
-        nodeMemory.$i = 0;
-    }
-
-    tick(tick) {
-        if (!this.child) {
-            return ERROR$1;
-        }
-
-        var nodeMemory = this.getNodeMemory(tick);
-        var maxLoop = nodeMemory.$maxLoop;
-        var i = nodeMemory.$i;
-        var status = SUCCESS$1;
-
-        // Open child before exceed maxLoop
-        // Execute child many times in a tick
-        while (maxLoop < 0 || i < maxLoop) {
-            status = this.child._execute(tick);
-
-            if ((status === SUCCESS$1) || (status === FAILURE)) {
-                i++;
-            } else {
-                break;
-            }
-        }
-
-        nodeMemory.$i = i;
-        return status;
-    }
-}
-
-class RepeatUntilFailure extends Decorator {
-
-    constructor(
-        {
-            maxLoop = -1,
-            returnSuccess = false,
-            child = null,
-            title,
-            name = 'RepeatUntilFailure',
-        } = {},
-        nodePool
-    ) {
-
-        super(
-            {
-                child,
-                title,
-                name,
-                properties: {
-                    returnSuccess,
-                    maxLoop
-                },
-            },
-            nodePool
-        );
-
-        this.maxLoopExpression = this.addExpression(maxLoop);
-        this.returnSuccess = returnSuccess;
-    }
-
-    open(tick) {
-        var nodeMemory = this.getNodeMemory(tick);
-        nodeMemory.$maxLoop = tick.evalExpression(this.maxLoopExpression);
-        nodeMemory.$i = 0;
-    }
-
-    tick(tick) {
-        if (!this.child) {
-            return ERROR$1;
-        }
-
-        // Won't abort child
-        var nodeMemory = this.getNodeMemory(tick);
-        var maxLoop = nodeMemory.$maxLoop;
-        var i = nodeMemory.$i;
-        var status = ERROR$1;
-
-        // Open child before exceed maxLoop
-        // Execute child many times in a tick
-        while ((maxLoop < 0) || (i < maxLoop)) {
-            status = this.child._execute(tick);
-
-            if (status === SUCCESS$1) {
-                i++;
-            } else {
-                break;
-            }
-        }
-
-        nodeMemory.$i = i;
-
-        if ((status === this.FAILURE) && this.returnSuccess) {
-            status = SUCCESS$1;
-        }
-
-        return status;
-    }
-}
-
-class RepeatUntilSuccess extends Decorator {
-
-    constructor(
-        {
-            maxLoop = -1,
-            child = null,
-            title,
-            name = 'RepeatUntilSuccess'
-        } = {},
-        nodePool
-    ) {
-
-        super(
-            {
-                child,
-                title,
-                name,
-                properties: {
-                    maxLoop
-                },
-            },
-            nodePool
-        );
-
-        this.maxLoopExpression = this.addExpression(maxLoop);
-    }
-
-    open(tick) {
-        var nodeMemory = this.getNodeMemory(tick);
-        nodeMemory.$maxLoop = tick.evalExpression(this.maxLoopExpression);
-        nodeMemory.$i = 0;
-    }
-
-    tick(tick) {
-        if (!this.child) {
-            return ERROR$1;
-        }
-
-        // Won't abort child
-        var nodeMemory = this.getNodeMemory(tick);
-        var maxLoop = nodeMemory.$maxLoop;
-        var i = nodeMemory.$i;
-        var status = ERROR$1;
-
-        // Open child before exceed maxLoop
-        // Execute child many times in a tick
-        while (maxLoop < 0 || i < maxLoop) {
-            status = this.child._execute(tick);
-
-            if (status === FAILURE) {
-                i++;
-            } else {
-                break;
-            }
-        }
-
-        nodeMemory.$i = i;
-        return status;
-    }
-}
-
-class Limiter extends Decorator {
-
-    constructor(
-        {
-            maxLoop = 1,
-            child = null,
-            title,
-            name = 'Limiter'
-        } = {},
-        nodePool
-    ) {
-
-        super(
-            {
-                child,
-                title,
-                name,
-                properties: {
-                    maxLoop
-                },
-            },
-            nodePool
-        );
-
-        this.maxLoopExpression = this.addExpression(maxLoop);
-    }
-
-    open(tick) {
-        var nodeMemory = this.getNodeMemory(tick);
-        nodeMemory.$maxLoop = tick.evalExpression(this.maxLoopExpression);
-        nodeMemory.$i = 0;
-    }
-
-    tick(tick) {
-        if (!this.child) {
-            return ERROR$1;
-        }
-
-        // Won't abort child
-        var nodeMemory = this.getNodeMemory(tick);
-        var maxLoop = nodeMemory.$maxLoop;
-        var i = nodeMemory.$i;
-
-        // Open child before exceed maxLoop
-        // Execute child 1 time in a tick
-        if (i >= maxLoop) {
-            return FAILURE;
-        }
-
-        var status = this.child._execute(tick);
-        if ((status === SUCCESS$1) || (status === FAILURE)) {
-            nodeMemory.$i = i + 1;
-        }
-
-        return status;
-    }
-}
-
-class If extends Decorator {
-
-    constructor(
-        {
-            expression = 'true',
-            conditionEvalBreak = false,
-            onFailState = FAILURE,
-            child = null,
-            title,
-            name = 'If'
-        } = {},
-        nodePool
-    ) {
-
-        super(
-            {
-                child,
-                title,
-                name,
-                properties: {
-                    expression,
-                    conditionEvalBreak,
-                    onFailState
-                },
-            },
-            nodePool
-        );
-
-        this.expression = this.addBooleanExpression(expression);
-        this.conditionEvalBreak = conditionEvalBreak;
-        this.onFailState = onFailState;
-    }
-
-    tick(tick) {
-        if (!this.child) {
-            return ERROR$1;
-        }
-
-        // child is not running
-        if (!this.isChildRunning(tick)) {
-            /*
-            If expression return false:
-              - Don't run child node
-              - Return SUCCESS to run next child for Sequence node, or 
-                - Equal to `ForceSuccess + If`
-              - Return FAILURE for Selector node
-            */
-            if (!tick.evalExpression(this.expression)) {
-                return this.onFailState;
-            } else if (this.conditionEvalBreak) {
-                // Open child but not run it now
-                this.openChild();
-                return RUNNING;
-            }
-        }
-
-        var status = this.child._execute(tick);
-
-        return status;
-    }
-}
-
-class ContinueIf extends Decorator {
-
-    constructor(
-        {
-            expression = 'true',
-            returnSuccess = true,
-            child = null,
-            title,
-            name = 'ContinueIf'
-        } = {},
-        nodePool
-    ) {
-
-        super(
-            {
-                child,
-                title,
-                name,
-                properties: {
-                    expression,
-                    returnSuccess,
-                },
-            },
-            nodePool
-        );
-
-        this.expression = this.addBooleanExpression(expression);
-        this.returnSuccess = returnSuccess;
-    }
-
-    tick(tick) {
-        if (!this.child) {
-            return ERROR$1;
-        }
-
-        // child is running
-        if (this.isChildRunning(tick)) {
-            // Abort child if eval result is false
-            if (!tick.evalExpression(this.expression)) {
-                return (this.returnSuccess) ? SUCCESS$1 : FAILURE;
-            }
-        }
-
-        var status = this.child._execute(tick);
-
-        return status;
-    }
-}
-
-class AbortIf extends Decorator {
-
-    constructor(
-        {
-            expression = 'true',
-            returnSuccess = true,
-            child = null,
-            title,
-            name = 'AbortIf'
-        } = {},
-        nodePool
-    ) {
-
-        super(
-            {
-                child,
-                title,
-                name,
-                properties: {
-                    expression,
-                    returnSuccess,
-                },
-            },
-            nodePool
-        );
-
-        this.expression = this.addBooleanExpression(expression);
-        this.returnSuccess = returnSuccess;
-    }
-
-    tick(tick) {
-        if (!this.child) {
-            return ERROR$1;
-        }
-
-        // child is running
-        if (this.isChildRunning(tick)) {
-            // Abort child if eval result is true
-            if (tick.evalExpression(this.expression)) {
-                return (this.returnSuccess) ? SUCCESS$1 : FAILURE;
-            }
-        }
-
-        var status = this.child._execute(tick);
-
-        return status;
-    }
-}
-
-var Nodes = /*#__PURE__*/Object.freeze({
-	__proto__: null,
-	Abort: Abort,
-	AbortIf: AbortIf,
-	Action: Action,
-	BaseNode: BaseNode,
-	BreakAction: BreakAction$1,
-	BreakDecorator: BreakDecorator$1,
-	Bypass: Bypass,
-	Composite: Composite,
-	ContinueIf: ContinueIf,
-	Cooldown: Cooldown$1,
-	Decorator: Decorator,
-	Error: Error$1,
-	Failer: Failer,
-	ForceFailure: ForceFailure,
-	ForceSuccess: ForceSuccess,
-	If: If,
-	IfSelector: IfSelector,
-	Invert: Invert,
-	Limiter: Limiter,
-	Parallel: Parallel,
-	RandomSelector: RandomSelector,
-	Repeat: Repeat,
-	RepeatUntilFailure: RepeatUntilFailure,
-	RepeatUntilSuccess: RepeatUntilSuccess,
-	Runner: Runner,
-	Selector: Selector,
-	Sequence: Sequence,
-	Service: Service,
-	ShuffleSelector: ShuffleSelector,
-	Succeeder: Succeeder,
-	SwitchSelector: SwitchSelector,
-	TimeLimit: TimeLimit,
-	Wait: Wait,
-	WeightSelector: WeightSelector
-});
-
-var Load = function (data, names) {
-    var sn = data.sn;
-    if (sn != null) {
-        SetSerialNumber(Math.max(GetSerialNumber(), sn));
-    }
-
-    names = names || {};
-
-    this.title = data.title || this.title;
-    this.description = data.description || this.description;
-    this.properties = data.properties || this.properties;
-
-    var nodeData = data.nodes;
-    var nodes = {};
-    for (var i = nodeData.length - 1; i >= 0; i--) {
-        // Create nodes from bottom to top
-        var spec = nodeData[i],
-            className = spec.name;
-
-        var Cls;
-        if (className in names) {
-            // Look for the name in custom nodes
-            Cls = names[className];
-        } else if (className in Nodes) {
-            // Look for the name in default nodes
-            Cls = Nodes[className];
-        } else {
-            // Invalid node name
-            throw new EvalError(`BehaviorTree.load: Invalid node name "${className}".`);
-        }
-
-        var config = {};
-        if (spec.hasOwnProperty('children')) {
-            config.children = spec.children;
-        }
-        if (spec.hasOwnProperty('child')) {
-            config.child = spec.child;
-        }
-        if (spec.hasOwnProperty('services')) {
-            config.services = spec.services;
-        }
-
-        config = Object.assign(
-            config,
-            spec.properties,
-        );
-
-        var node = new Cls(config, nodes);
-        node.id = spec.id || node.id;
-        node.title = spec.title || node.title;
-        node.description = spec.description || node.description;
-        node.properties = spec.properties || node.properties;
-
-        nodes[node.id] = node;
-    }
-
-    this.root = nodes[data.root];
-
-    return this;
-};
-
 class Tick {
 
     constructor() {
@@ -4936,6 +5569,35 @@ class Tick {
         return this.blackboard.getNodeMemory(this.tree.id, nodeID);
     }
 
+    get expressionParser() {
+        if (!this._expressionParser) {
+            this._expressionParser = new FormulaParser({ cache: true });
+        }
+        return this._expressionParser;
+    }
+
+    set expressionParser(value) {
+        this._expressionParser = value;
+    }
+
+    get stringTemplate() {
+        if (!this._stringTemplate) {
+            this._stringTemplate = new StringTemplate({
+                expressionParser: this.expressionParser,
+                cache: true
+            });
+        }
+        return this._stringTemplate;
+    }
+
+    set stringTemplate(value) {
+        this._stringTemplate = value;
+    }
+
+    getEvalContext() {
+        return this.blackboard.getGlobalMemory();
+    }
+
     get currentTime() {
         if (this.blackboard.hasValidCurrentTime()) {
             // Inject current-time through blackboard
@@ -4949,7 +5611,13 @@ class Tick {
     }
 
     evalExpression(expression) {
-        return expression.eval(this.blackboard.getGlobalMemory());
+        if (IsExpressionLike(expression)) {
+            var value = expression.eval(this);
+            expression.lastValue = value;  // For inspector
+            return value;
+        }
+
+        return expression;
     }
 
     _enterNode(node) {
@@ -5085,6 +5753,40 @@ class BehaviorTree {
         });
 
         return out;
+    }
+
+    get expressionParser() {
+        return this.ticker.expressionParser;
+    }
+
+    set expressionParser(value) {
+        this.ticker.expressionParser = value;
+    }
+
+    setExpressionParser(parser) {
+        this.expressionParser = parser;
+        return this;
+    }
+
+    getExpressionParser() {
+        return this.expressionParser;
+    }
+
+    get stringTemplate() {
+        return this.ticker.stringTemplate;
+    }
+
+    set stringTemplate(value) {
+        this.ticker.stringTemplate = value;
+    }
+
+    setStringTemplate(parser) {
+        this.stringTemplate = parser;
+        return this;
+    }
+
+    getStringTemplate() {
+        return this.stringTemplate;
     }
 
     tick(blackboard, target) {
@@ -5738,46 +6440,69 @@ var TreeActiveStateMethods$1 = {
 };
 
 class BreakDecorator extends BreakDecorator$1 {
-    constructor(
-        config,
-        nodePool
-    ) {
-        if (config === undefined) {
-            config = {};
-        }
-        config.tag = 'break';
-        super(
-            config,
-            nodePool
-        );
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
 
+        } else {
+            if (config === undefined) {
+                config = {};
+            }
+            config.tag = 'break';
+            super(
+                config,
+                nodePool
+            );
+        }
     }
 }
 
 class ContinueDecorator extends BreakDecorator$1 {
-    constructor(
-        config,
-        nodePool
-    ) {
-        if (config === undefined) {
-            config = {};
-        }
-        config.tag = 'continue';
-        super(
-            config,
-            nodePool
-        );
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
 
+        } else {
+            if (config === undefined) {
+                config = {};
+            }
+            config.tag = 'continue';
+            super(
+                config,
+                nodePool
+            );
+        }
     }
 }
 
 class BreakAction extends BreakAction$1 {
-    constructor(config) {
-        if (config === undefined) {
-            config = {};
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+        } else {
+            if (config === undefined) {
+                config = {};
+            }
+            config.tag = 'break';
+            super(config);
         }
-        config.tag = 'break';
-        super(config);
+    }
+
+}
+
+class ContinueAction extends BreakAction$1 {
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+        } else {
+            if (config === undefined) {
+                config = {};
+            }
+            config.tag = 'continue';
+            super(config);
+        }
     }
 
 }
@@ -5834,6 +6559,11 @@ var IsEventEmitter = function (obj) {
         return !!obj.on;
     }
     return false;
+};
+
+var parser$1 = new FormulaParser();
+var Compile = function(expression) {
+    return parser$1.compile(expression);
 };
 
 /*!
@@ -6600,15 +7330,20 @@ mustache.Context = Context;
 mustache.Writer = Writer;
 
 class TaskAction extends Action {
-    constructor(config) {
-        // config: {name, parameters:{...} }        
-        super({
-            name: 'TaskAction',
-            title: config.name,
-            properties: config,
-        });
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
 
-        var sourceParameters = config.parameters;
+        } else {
+            // config: {name, parameters:{...} }
+            super({
+                name: 'TaskAction',
+                title: config.name,
+                properties: config,
+            });
+        }
+
+        var sourceParameters = this.properties.parameters || {};
         var taskParameters = {};
         for (var name in sourceParameters) {
             taskParameters[name] = CompileExpression(sourceParameters[name]);
@@ -6685,7 +7420,7 @@ var CompileExpression = function (s) {
     if (typeof (s) === 'string') {
         if (s.startsWith('#(') && s.endsWith(')')) {
             // Eval string to get number/boolean
-            s = Compile$1(s.substring(2, s.length - 1));
+            s = Compile(s.substring(2, s.length - 1));
         } else if ((s.indexOf('{{') > -1) && (s.indexOf('}}') > -1)) {
             // Might be a string template
             var template = s;
@@ -6703,23 +7438,31 @@ Object.assign(
 );
 
 class ActivateAction extends Action {
-    constructor({
-        activateTreeTitle,
-        services,
-        title,
-        name = 'ActivateTree'
-    } = {}) {
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
 
-        super({
-            name,
-            title,
-            properties: {
-                activateTreeTitle
-            },
-            services,
-        });
+        } else {
+            var {
+                activateTreeTitle,
+                services,
+                title,
+                properties = {},
+                name = 'ActivateTree'
+            } = config;
 
-        this.activateTreeTitle = activateTreeTitle;
+            super({
+                name,
+                title,
+                properties: {
+                    ...properties,
+                    activateTreeTitle
+                },
+                services,
+            });
+        }
+
+        this.activateTreeTitle = this.properties.activateTreeTitle;
     }
 
     tick(tick) {
@@ -6734,23 +7477,30 @@ class ActivateAction extends Action {
 }
 
 class DeactivateAction extends Action {
-    constructor({
-        deactivateTreeTitle,
-        services,
-        title,
-        name = 'DeactivateTree'
-    } = {}) {
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
 
-        super({
-            name,
-            title,
-            properties: {
-                deactivateTreeTitle
-            },
-            services,
-        });
+        } else {
+            var {
+                deactivateTreeTitle,
+                services,
+                title,
+                properties = {},
+                name = 'DeactivateTree'
+            } = config;
+            super({
+                name,
+                title,
+                properties: {
+                    ...properties,
+                    deactivateTreeTitle
+                },
+                services,
+            });
+        }
 
-        this.deactivateTreeTitle = deactivateTreeTitle;
+        this.deactivateTreeTitle = this.properties.deactivateTreeTitle;
     }
 
     tick(tick) {
@@ -6764,13 +7514,77 @@ class DeactivateAction extends Action {
     }
 }
 
+class LabelDecorator extends Decorator {
+
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+        } else {
+            var {
+                child = null,
+                title,
+                properties,
+                name = 'Label'
+            } = config;
+            super(
+                {
+                    child,
+                    title,
+                    properties,
+                    name,
+                },
+                nodePool
+            );
+
+        }
+    }
+
+    open(tick) {
+        super.open(tick);
+
+        var blackboard = tick.blackboard;
+        var eventSheetManager = blackboard.eventSheetManager;
+        var eventsheet = tick.tree;
+        var eventSheetGroup = eventsheet.eventSheetGroup;
+        eventSheetManager.emit('label.enter', this.title, eventsheet.title, eventSheetGroup.name, eventSheetManager);
+
+    }
+
+    tick(tick) {
+        if (!this.child) {
+            return SUCCESS;
+        }
+
+        // Bypass
+        var status = this.child._execute(tick);
+
+        return status;
+    }
+
+    close(tick) {
+        super.close(tick);
+
+        var blackboard = tick.blackboard;
+        var eventSheetManager = blackboard.eventSheetManager;
+        var eventsheet = tick.tree;
+        var eventSheetGroup = eventsheet.eventSheetGroup;
+        eventSheetManager.emit('label.exit', this.title, eventsheet.title, eventSheetGroup.name, eventSheetManager);
+    }
+}
+
 var CustomNodeMapping = {
     BreakDecorator: BreakDecorator,
     ContinueDecorator: ContinueDecorator,
     BreakAction: BreakAction,
+    ContinueAction: ContinueAction,
     TaskAction: TaskAction,
     ActivateAction: ActivateAction,
+    ActivateTree: ActivateAction,
     DeactivateAction: DeactivateAction,
+    DeactivateTree: DeactivateAction,
+    LabelDecorator: LabelDecorator,
+    Label: LabelDecorator,
 };
 
 var SaveLoadTreeMethods = {
@@ -15374,7 +16188,7 @@ var ValueConvertMethods = {
             return s;
         }
 
-        return Compile$1(s)(this.memory);
+        return Compile(s)(this.memory);
     },
 
     renderString(s) {
@@ -15737,7 +16551,7 @@ class EventSheet extends BehaviorTree {
 
         var root = new IfSelector({
             title: this.title,
-            expression: condition,
+            condition,
             conditionEvalBreak: true   // Return RUNNING instead of SUCCESS for condition eval
         });
         this.setRoot(root);
@@ -16144,59 +16958,6 @@ var GetANDExpression = function (node) {
     return expression;
 };
 
-class LabelDecorator extends Decorator {
-    constructor(
-        {
-            child = null,
-            title,
-            name = 'Label'
-        } = {},
-        nodePool
-    ) {
-
-        super(
-            {
-                child,
-                title,
-                name,
-            },
-            nodePool
-        );
-    }
-
-    open(tick) {
-        super.open(tick);
-
-        var blackboard = tick.blackboard;
-        var eventSheetManager = blackboard.eventSheetManager;
-        var eventsheet = tick.tree;
-        var eventSheetGroup = eventsheet.eventSheetGroup;
-        eventSheetManager.emit('label.enter', this.title, eventsheet.title, eventSheetGroup.name, eventSheetManager);
-
-    }
-
-    tick(tick) {
-        if (!this.child) {
-            return SUCCESS$1;
-        }
-
-        // Bypass
-        var status = this.child._execute(tick);
-
-        return status;
-    }
-
-    close(tick) {
-        super.close(tick);
-
-        var blackboard = tick.blackboard;
-        var eventSheetManager = blackboard.eventSheetManager;
-        var eventsheet = tick.tree;
-        var eventSheetGroup = eventsheet.eventSheetGroup;
-        eventSheetManager.emit('label.exit', this.title, eventsheet.title, eventSheetGroup.name, eventSheetManager);
-    }
-}
-
 var CreateActionNode = function (paragraph, config) {
     var commandData = GetCommandData(paragraph, config);
     if (!commandData) {
@@ -16385,14 +17146,14 @@ var CreateParentNode = function (node, config, output) {
                 var expression = GetConditionExpression(result.match[1], node);
                 try {
                     ifDecorator = new If({
-                        expression: expression
+                        condition: expression
                     });
                 } catch (e) {
                     console.error(`[EventSheet] Parse expression '${expression}' at Heading ${node.title} failed, replace expression by 'false'`);
                     console.error(e);
 
                     ifDecorator = new If({
-                        expression: 'false'
+                        condition: 'false'
                     });
                 }
 
@@ -16416,7 +17177,7 @@ var CreateParentNode = function (node, config, output) {
                 try {
                     ifDecorator = new If({
                         title: `[${nodeTypeName}]`,
-                        expression: expression
+                        condition: expression
                     });
                 } catch (e) {
                     console.error(`[EventSheet] Parse expression '${expression}' at Heading ${node.title} failed, replace expression by 'false'`);
@@ -16424,7 +17185,7 @@ var CreateParentNode = function (node, config, output) {
 
                     ifDecorator = new If({
                         title: `[${nodeTypeName}]`,
-                        expression: 'false'
+                        condition: 'false'
                     });
                 }
 
@@ -16446,7 +17207,7 @@ var CreateParentNode = function (node, config, output) {
                 try {
                     ifDecorator = new If({
                         title: '[while-IF]',
-                        expression: expression
+                        condition: expression
                     });
                 } catch (e) {
                     console.error(`[EventSheet] Parse expression '${expression}' at Heading ${node.title} failed, replace expression by 'false'`);
@@ -16454,7 +17215,7 @@ var CreateParentNode = function (node, config, output) {
 
                     ifDecorator = new If({
                         title: '[while-IF]',
-                        expression: 'false'
+                        condition: 'false'
                     });
                 }
 
