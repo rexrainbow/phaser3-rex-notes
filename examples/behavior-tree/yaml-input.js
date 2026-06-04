@@ -34,15 +34,25 @@ selector :
 
 
 class PrintAction extends RexPlugins.BehaviorTree.Action {
-    constructor({ text = '' } = {}) {
-        super({
-            name: 'MyAction',
-            properties: { text: text },
-        });
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+        } else {  // New node
+            var { text = '' } = config;
+            super(
+                {
+                    name: 'MyAction',
+                    properties: { text: text },
+                },
+            );
+        }
+
+        this.text = this.properties.text;
     }
 
     tick(tick) {
-        var text = mustache.render(this.properties.text, tick.getGlobalMemory());
+        var text = mustache.render(this.text, tick.getGlobalMemory());
         console.log(`Print: ${text}`);
         return this.SUCCESS;
     }
@@ -55,19 +65,30 @@ var CreatePrintNode = function (text) {
 }
 
 class PrintService extends RexPlugins.BehaviorTree.Service {
-    constructor({
-        text = '',
-        interval = 70
-    } = {}) {
-        super({
-            name: 'MyPrintService',
-            interval: interval,
-            properties: { text: text },
-        });
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+        } else {
+            var {
+                text = '',
+                interval = 70
+            } = config;
+            super(
+                {
+                    name: 'MyPrintService',
+                    interval: interval,
+                    properties: { text: text },
+                },
+            );
+
+        }
+
+        this.text = this.properties.text;
     }
 
     tick(tick) {
-        var text = mustache.render(this.properties.text, tick.getGlobalMemory());
+        var text = mustache.render(this.text, tick.getGlobalMemory());
         console.log(`Print-Service: ${text}`);
     }
 }

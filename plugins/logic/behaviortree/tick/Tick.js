@@ -1,6 +1,8 @@
 import RemoveItem from '../../../utils/array/Remove.js';
 import ExpressionParser from '../../../math/expressionparser/ExpressionParser.js';
 import IsExpressionLike from '../utils/IsExpressionLike.js';
+import StringTemplate from '../../../string/stringtemplate/StringTemplate.js';
+
 
 class Tick {
 
@@ -75,6 +77,20 @@ class Tick {
 
     set expressionParser(value) {
         this._expressionParser = value;
+    }
+
+    get stringTemplate() {
+        if (!this._stringTemplate) {
+            this._stringTemplate = new StringTemplate({
+                expressionParser: this.expressionParser,
+                cache: true
+            })
+        }
+        return this._stringTemplate;
+    }
+
+    set stringTemplate(value) {
+        this._stringTemplate = value;
     }
 
     getEvalContext() {

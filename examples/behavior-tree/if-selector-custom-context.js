@@ -3,6 +3,25 @@ import BehaviorTreePlugin from '../../plugins/behaviortree-plugin.js';
 import ClockPlugin from '../../plugins/clock-plugin.js';
 import mustache from 'mustache';
 
+class World {
+    constructor() {
+        this.state = {
+            player: {
+                name: 'rex',
+                coin: 10
+            }
+        };
+    }
+
+    get player() {
+        return this.state.player;
+    }
+
+    get time() {
+        return 0;
+    }
+}
+
 class PrintAction extends RexPlugins.BehaviorTree.Action {
     constructor(config = {}, nodePool) {
         if (nodePool) {  // Rebuild node, don't touch config
@@ -22,9 +41,45 @@ class PrintAction extends RexPlugins.BehaviorTree.Action {
     }
 
     tick(tick) {
-        var text = mustache.render(this.text, tick.getGlobalMemory());
+        var context = tick.target; // target = World instance
+        // var text = mustache.render(this.text, context);  // Use mustache string template
+        var text = tick.stringTemplate.render(this.text, context); // Use built-in string template
         console.log(`Print: ${text}`);
         return this.SUCCESS;
+    }
+}
+
+class Comparator extends RexPlugins.BehaviorTree.Expression {
+    constructor(config = {}, nodePool) {
+        if (nodePool) {  // Rebuild node, don't touch config
+            super(config, nodePool);
+
+        } else {  // New node
+            var {
+                opA = 'true',
+                cmp = '==',
+                opB = 'true'
+            } = config;
+            super(
+                {
+                    name: 'MyComparator',
+                    properties: {
+                        opA, cmp, opB,
+                    },
+                },
+            );
+        }
+
+        var opA = this.properties.opA;
+        var cmp = this.properties.cmp;
+        var opB = this.properties.opB;
+        this.condition = `(${opA})${cmp}(${opB})`;
+    }
+
+    eval(tick) {
+        var context = tick.target; // target = World instance
+        var value = tick.expressionParser.exec(this.condition, context);
+        return value;
     }
 }
 
@@ -39,6 +94,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         var btAdd = this.plugins.get('rexBT').add;
+        var world = new World();
 
         var CreateTask = function (taskName, waitDuration) {
             if (waitDuration === undefined) {
@@ -47,35 +103,32 @@ class Demo extends Phaser.Scene {
 
             return btAdd.sequence({
                 children: [
-                    new PrintAction({ text: `${taskName}.Start : {{$currentTime}}` }),
+                    new PrintAction({ text: `${taskName}.Start : {{time}}, hello {{player.name}}` }),
                     btAdd.wait({ duration: waitDuration }),
-                    new PrintAction({ text: `${taskName}.End : {{$currentTime}}` }),
+                    new PrintAction({ text: `${taskName}.End : {{time}}` }),
                 ]
             });
         }
         var tree = btAdd.behaviorTree()
             .setRoot(
-                btAdd.repeat({
-                    maxLoop: 5,
-                    child: btAdd.randomSelector({
-                        children: [
-                            CreateTask('TaskA', 500),
-                            CreateTask('TaskB', 500),
-                            CreateTask('TaskC', 500),
-                            CreateTask('TaskD', 500),
-                        ]
-                    })
+                btAdd.ifSelector({
+                    condition: new Comparator({
+                        opA: 'player.coin', cmp: '>', opB: 'time * 10'
+                    }),
+                    children: [
+                        CreateTask('TaskA', 500),
+                        CreateTask('TaskB', 500)
+                    ]
                 })
 
             )
 
-        var blackboard = btAdd.blackboard()
-
+        var blackboard = btAdd.blackboard();
         var clock = this.plugins.get('rexClock').add(this);
         clock
             .on('update', function (time, delta) {
                 blackboard.setCurrentTime(time);
-                var state = tree.tick(blackboard);
+                var state = tree.tick(blackboard, world);
                 console.log(`Run tick ${state}`);
 
                 // Stop ticking

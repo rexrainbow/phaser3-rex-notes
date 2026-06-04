@@ -59,45 +59,34 @@ class PrintService extends RexPlugins.BehaviorTree.Service {
 
 class Comparator extends RexPlugins.BehaviorTree.Expression {
     constructor(config = {}, nodePool) {
-        var opA, cmp, opB;
-
         if (nodePool) {  // Rebuild node, don't touch config
             super(config, nodePool);
 
-            var properties = config.properties || {};
-            opA = properties.opA;
-            cmp = properties.cmp;
-            opB = properties.opB;
-
         } else {  // New node
             var {
-                opA: opAValue = 'true',
-                cmp: cmpValue = '==',
-                opB: opBValue = 'true'
+                opA = 'true',
+                cmp = '==',
+                opB = 'true'
             } = config;
             super(
                 {
                     name: 'MyComparator',
                     properties: {
-                        opA: opAValue,
-                        cmp: cmpValue,
-                        opB: opBValue,
+                        opA, cmp, opB,
                     },
                 },
             );
-
-            opA = opAValue;
-            cmp = cmpValue;
-            opB = opBValue;
         }
 
-        this.expression = `${opA}${cmp}${opB}`;
+        var opA = this.properties.opA;
+        var cmp = this.properties.cmp;
+        var opB = this.properties.opB;
+        this.condition = `(${opA})${cmp}(${opB})`;
     }
 
     eval(tick) {
         var context = tick.getEvalContext();
-        var value = tick.expressionParser.exec(this.expression, context);
-        this.lastValue = value;
+        var value = tick.expressionParser.exec(this.condition, context);
         return value;
     }
 }

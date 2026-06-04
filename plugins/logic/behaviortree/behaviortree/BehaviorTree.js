@@ -134,6 +134,23 @@ class BehaviorTree {
         return this.expressionParser;
     }
 
+    get stringTemplate() {
+        return this.ticker.stringTemplate;
+    }
+
+    set stringTemplate(value) {
+        this.ticker.stringTemplate = value;
+    }
+
+    setStringTemplate(parser) {
+        this.stringTemplate = parser;
+        return this;
+    }
+
+    getStringTemplate() {
+        return this.stringTemplate;
+    }
+
     tick(blackboard, target) {
         if (!blackboard) {
             throw 'The blackboard parameter is obligatory and must be an instance of Blackboard';
