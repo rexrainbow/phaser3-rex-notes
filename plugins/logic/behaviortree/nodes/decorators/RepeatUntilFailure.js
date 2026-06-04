@@ -19,6 +19,7 @@ class RepeatUntilFailure extends Decorator {
                 returnSuccess = false,  // mode
                 child = null,
                 title,
+                properties = {},
                 name = 'RepeatUntilFailure',
             } = config;
 
@@ -26,10 +27,11 @@ class RepeatUntilFailure extends Decorator {
                 {
                     child,
                     title,
-                    name,
                     properties: {
+                        ...properties,
                         returnSuccess: returnSuccessValue,
                     },
+                    name,
                 },
                 nodePool
             );

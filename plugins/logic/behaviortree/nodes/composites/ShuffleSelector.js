@@ -12,6 +12,7 @@ class ShuffleSelector extends Composite {
                 children = [],
                 services,
                 title,
+                properties,
                 name = 'ShuffleSelector'
             } = config;
 
@@ -20,6 +21,7 @@ class ShuffleSelector extends Composite {
                     children,
                     services,
                     title,
+                    properties,
                     name,
                 },
                 nodePool

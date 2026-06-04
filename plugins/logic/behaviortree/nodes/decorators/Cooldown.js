@@ -17,6 +17,7 @@ class Cooldown extends Decorator {
                 duration: durationValue = 0,  // expression
                 child = null,
                 title,
+                properties,
                 name = 'Cooldown'
             } = config;
 
@@ -24,6 +25,7 @@ class Cooldown extends Decorator {
                 {
                     child,
                     title,
+                    properties,
                     name,
                 },
                 nodePool

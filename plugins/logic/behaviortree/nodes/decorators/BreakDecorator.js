@@ -10,6 +10,7 @@ class BreakDecorator extends Decorator {
             var {
                 child = null,
                 title,
+                properties = {},
                 name = 'Break',
                 tag,              // constant string
             } = config;
@@ -18,10 +19,11 @@ class BreakDecorator extends Decorator {
                 {
                     child,
                     title,
-                    name,
                     properties: {
+                        ...properties,
                         tag
-                    }
+                    },
+                    name,
                 },
                 nodePool
             );

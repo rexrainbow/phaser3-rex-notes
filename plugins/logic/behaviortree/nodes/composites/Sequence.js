@@ -11,6 +11,7 @@ class Sequence extends Composite {
                 children = [],
                 services,
                 title,
+                properties,
                 name = 'Sequence'
             } = config;
 
@@ -19,6 +20,7 @@ class Sequence extends Composite {
                     children,
                     services,
                     title,
+                    properties,
                     name,
                 },
                 nodePool

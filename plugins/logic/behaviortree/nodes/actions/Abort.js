@@ -11,12 +11,14 @@ class Abort extends Action {
             var {
                 services,
                 title,
+                properties,
                 name = 'Abort',
             } = config;
 
             super({
                 services,
                 title,
+                properties,
                 name,
             });
 

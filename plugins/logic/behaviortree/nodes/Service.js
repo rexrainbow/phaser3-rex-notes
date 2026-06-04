@@ -12,8 +12,8 @@ class Service extends BaseNode {
                 id,
                 name = 'Service',
                 title,
+                properties,
                 description,
-                properties = {}
             } = config;
 
             super({
@@ -21,8 +21,8 @@ class Service extends BaseNode {
                 category: SERVICE,
                 name,
                 title,
-                description,
                 properties,
+                description,
             });
 
             var expressions = config.expressions || {};
@@ -31,7 +31,6 @@ class Service extends BaseNode {
 
         } else {
             var {
-                id,
                 interval: intervalValue = 0,                // expression
                 randomDeviation: randomDeviationValue = 0,  // expression
                 name = 'Service',
@@ -41,7 +40,6 @@ class Service extends BaseNode {
             } = config;
 
             super({
-                id,
                 category: SERVICE,
                 name,
                 title,

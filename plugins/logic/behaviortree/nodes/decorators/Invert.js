@@ -11,6 +11,7 @@ class Invert extends Decorator {
             var {
                 child = null,
                 title,
+                properties,
                 name = 'Invert'
             } = config;
 
@@ -18,6 +19,7 @@ class Invert extends Decorator {
                 {
                     child,
                     title,
+                    properties,
                     name,
                 },
                 nodePool

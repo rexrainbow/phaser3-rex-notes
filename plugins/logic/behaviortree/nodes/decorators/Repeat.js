@@ -18,6 +18,7 @@ class Repeat extends Decorator {
                 maxLoop: maxLoopValue = -1,  // expression
                 child = null,
                 title,
+                properties,
                 name = 'Repeat'
             } = config;
 
@@ -25,6 +26,7 @@ class Repeat extends Decorator {
                 {
                     child,
                     title,
+                    properties,
                     name,
                 },
                 nodePool

@@ -11,6 +11,7 @@ class Selector extends Composite {
                 children = [],
                 services,
                 title,
+                properties,
                 name = 'Selector'
             } = config;
 
@@ -19,6 +20,7 @@ class Selector extends Composite {
                     children,
                     services,
                     title,
+                    properties,
                     name,
                 },
                 nodePool

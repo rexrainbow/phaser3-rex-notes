@@ -20,6 +20,7 @@ class AbortIf extends Decorator {
                 returnSuccess = true,  // mode
                 child = null,
                 title,
+                properties = {},
                 name = 'AbortIf'
             } = config;
 
@@ -27,10 +28,11 @@ class AbortIf extends Decorator {
                 {
                     child,
                     title,
-                    name,
                     properties: {
+                        ...properties,
                         returnSuccess: returnSuccessValue,
                     },
+                    name,
                 },
                 nodePool
             );

@@ -12,6 +12,7 @@ class Bypass extends Decorator {
             var {
                 child = null,
                 title,
+                properties,
                 name = 'Bypass'
             } = config;
 
@@ -19,6 +20,7 @@ class Bypass extends Decorator {
                 {
                     child,
                     title,
+                    properties,
                     name,
                 },
                 nodePool

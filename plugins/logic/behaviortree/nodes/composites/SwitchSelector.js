@@ -20,6 +20,7 @@ class SwitchSelector extends Composite {
                 children = {},    // Or [child, ...]
                 services,
                 title,
+                properties = {},
                 name = 'SwitchSelector'
             } = config;
 
@@ -33,11 +34,12 @@ class SwitchSelector extends Composite {
                     children: children,
                     services,
                     title,
-                    name,
                     properties: {
+                        ...properties,
                         keys,
                         conditionEvalBreak,
                     },
+                    name,
                 },
                 nodePool
             );

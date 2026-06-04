@@ -20,6 +20,7 @@ class ContinueIf extends Decorator {
                 returnSuccess = true,                // mode
                 child = null,
                 title,
+                properties = {},
                 name = 'ContinueIf'
             } = config;
 
@@ -27,10 +28,11 @@ class ContinueIf extends Decorator {
                 {
                     child,
                     title,
-                    name,
                     properties: {
+                        ...properties,
                         returnSuccess,
                     },
+                    name,
                 },
                 nodePool
             );

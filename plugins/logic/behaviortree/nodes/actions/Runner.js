@@ -11,12 +11,14 @@ class Runner extends Action {
             var {
                 services,
                 title,
+                properties,
                 name = 'Runner'
             } = config;
 
             super({
                 services,
                 title,
+                properties,
                 name,
             });
 

@@ -11,12 +11,14 @@ class Failer extends Action {
             var {
                 services,
                 title,
+                properties,
                 name = 'Failer'
             } = config;
 
             super({
                 services,
                 title,
+                properties,
                 name,
             });
         }

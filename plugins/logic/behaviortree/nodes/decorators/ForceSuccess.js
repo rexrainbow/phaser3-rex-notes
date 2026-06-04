@@ -12,6 +12,7 @@ class ForceSuccess extends Decorator {
             var {
                 child = null,
                 title,
+                properties,
                 name = 'ForceSuccess'
             } = config;
 
@@ -19,9 +20,8 @@ class ForceSuccess extends Decorator {
                 {
                     child,
                     title,
+                    properties,
                     name,
-                    properties: {
-                    },
                 },
                 nodePool
             );

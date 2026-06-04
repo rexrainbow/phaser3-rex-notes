@@ -18,11 +18,13 @@ class Wait extends Action {
                 duration: durationValue = 0,   // expression
                 services,
                 title,
+                properties,
                 name = 'Wait'
             } = config;
 
             super({
                 title,
+                properties,
                 name,
                 services,
             });

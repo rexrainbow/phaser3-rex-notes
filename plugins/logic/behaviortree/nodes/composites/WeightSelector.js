@@ -22,6 +22,7 @@ class WeightSelector extends Composite {
                 children = [],          // [node, ...], or [{weight, node}, ...]
                 services,
                 title,
+                properties = {},
                 name = 'WeightSelector'
             } = config;
 
@@ -51,11 +52,12 @@ class WeightSelector extends Composite {
                     children: children,
                     services,
                     title,
-                    name,
                     properties: {
+                        ...properties,
                         weights,
                         conditionEvalBreak,
                     },
+                    name,
                 },
                 nodePool
             );

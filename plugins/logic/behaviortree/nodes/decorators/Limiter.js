@@ -18,6 +18,7 @@ class Limiter extends Decorator {
                 maxLoop: maxLoopValue = 1,  // expression
                 child = null,
                 title,
+                properties,
                 name = 'Limiter'
             } = config;
 
@@ -25,6 +26,7 @@ class Limiter extends Decorator {
                 {
                     child,
                     title,
+                    properties,
                     name,
                 },
                 nodePool

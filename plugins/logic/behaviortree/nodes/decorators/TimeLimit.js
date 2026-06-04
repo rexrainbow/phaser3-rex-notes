@@ -18,6 +18,7 @@ class TimeLimit extends Decorator {
                 returnSuccess = true,         // mode
                 child = null,
                 title,
+                properties = {},
                 name = 'TimeLimit'
             } = config;
 
@@ -25,10 +26,11 @@ class TimeLimit extends Decorator {
                 {
                     child,
                     title,
-                    name,
                     properties: {
+                        ...properties,
                         returnSuccess: returnSuccessValue
                     },
+                    name,
                 },
                 nodePool
             );

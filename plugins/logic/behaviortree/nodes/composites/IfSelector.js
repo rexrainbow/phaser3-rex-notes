@@ -19,6 +19,7 @@ class IfSelector extends Composite {
                 children = [],
                 services,
                 title,
+                properties = {},
                 name = 'IfSelector'
             } = config;
 
@@ -27,10 +28,11 @@ class IfSelector extends Composite {
                     children: children,
                     services,
                     title,
-                    name,
                     properties: {
+                        ...properties,
                         conditionEvalBreak,
                     },
+                    name,
                 },
                 nodePool
             );

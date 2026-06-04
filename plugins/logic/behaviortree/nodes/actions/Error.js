@@ -11,12 +11,14 @@ class Error extends Action {
             var {
                 services,
                 title,
+                properties,
                 name = 'Error',
             } = config;
 
             super({
                 services,
                 title,
+                properties,
                 name,
             });
 

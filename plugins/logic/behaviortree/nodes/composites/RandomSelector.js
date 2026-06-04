@@ -11,6 +11,7 @@ class RandomSelector extends Composite {
                 children = [],
                 services,
                 title,
+                properties,
                 name = 'RandomSelector'
             } = config;
 
@@ -19,6 +20,7 @@ class RandomSelector extends Composite {
                     children,
                     services,
                     title,
+                    properties,
                     name,
                 },
                 nodePool

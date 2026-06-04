@@ -11,12 +11,14 @@ class Succeeder extends Action {
             var {
                 services,
                 title,
+                properties,
                 name = 'Succeeder'
             } = config;
 
             super({
                 services,
                 title,
+                properties,
                 name,
             });
 

@@ -18,6 +18,7 @@ class RepeatUntilSuccess extends Decorator {
                 maxLoop: maxLoopValue = -1,   // expression
                 child = null,
                 title,
+                properties,
                 name = 'RepeatUntilSuccess'
             } = config;
 
@@ -25,6 +26,7 @@ class RepeatUntilSuccess extends Decorator {
                 {
                     child,
                     title,
+                    properties,
                     name,
                 },
                 nodePool

@@ -14,6 +14,7 @@ class Parallel extends Composite {
                 children = [],
                 services,
                 title,
+                properties = {},
                 name = 'Parallel'
             } = config;
 
@@ -22,11 +23,12 @@ class Parallel extends Composite {
                     children,
                     services,
                     title,
-                    name,
                     properties: {
+                        ...properties,
                         finishMode,
                         returnSuccess
                     },
+                    name,
                 },
                 nodePool
             );

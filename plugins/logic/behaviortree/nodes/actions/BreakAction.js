@@ -13,6 +13,7 @@ class BreakAction extends Action {
                 tag,                  // constant string
                 services,
                 title,
+                properties = {},
                 name = 'Break'
             } = config;
 
@@ -20,6 +21,7 @@ class BreakAction extends Action {
                 name,
                 title,
                 properties: {
+                    ...properties,
                     breakDecoratorTitle,
                     tag
                 },

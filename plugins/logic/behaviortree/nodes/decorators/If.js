@@ -21,6 +21,7 @@ class If extends Decorator {
                 onFailState = FAILURE,         // mode
                 child = null,
                 title,
+                properties = {},
                 name = 'If'
             } = config;
 
@@ -28,11 +29,12 @@ class If extends Decorator {
                 {
                     child,
                     title,
-                    name,
                     properties: {
+                        ...properties,
                         conditionEvalBreak,
                         onFailState
                     },
+                    name,
                 },
                 nodePool
             );

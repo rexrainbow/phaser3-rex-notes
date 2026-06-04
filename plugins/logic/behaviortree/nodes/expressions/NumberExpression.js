@@ -23,16 +23,18 @@ class NumberExpression extends Expression {
 
             var {
                 title,
+                properties = {},
                 name = 'NumberExpression',
                 expression: expressionValue = 0,
             } = config;
 
             super({
                 title,
-                name,
                 properties: {
+                    ...properties,
                     expression: expressionValue,
-                }
+                },
+                name,
             });
 
             expression = expressionValue;

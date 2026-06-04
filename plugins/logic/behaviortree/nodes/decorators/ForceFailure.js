@@ -12,6 +12,7 @@ class ForceFailure extends Decorator {
             var {
                 child = null,
                 title,
+                properties,
                 name = 'ForceFailure'
             } = config;
 
@@ -19,9 +20,8 @@ class ForceFailure extends Decorator {
                 {
                     child,
                     title,
+                    properties,
                     name,
-                    properties: {
-                    },
                 },
                 nodePool
             );
