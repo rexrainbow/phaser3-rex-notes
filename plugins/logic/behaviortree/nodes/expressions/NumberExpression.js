@@ -3,13 +3,8 @@ import Expression from '../Expression.js';
 class NumberExpression extends Expression {
 
     constructor(config = {}, nodePool) {
-        var expression;
-
         if (nodePool) {  // Rebuild node, don't touch config
             super(config, nodePool);
-
-            var properties = config.properties || {};
-            expression = properties.expression;
 
         } else {
             var configType = typeof (config);
@@ -25,22 +20,21 @@ class NumberExpression extends Expression {
                 title,
                 properties = {},
                 name = 'NumberExpression',
-                expression: expressionValue = 0,
+                expression = '',
             } = config;
 
             super({
                 title,
                 properties: {
                     ...properties,
-                    expression: expressionValue,
+                    expression
                 },
                 name,
             });
 
-            expression = expressionValue;
         }
 
-        this.expression = expression;
+        this.expression = this.properties.expression;
 
         var expressionType = typeof (this.expression);
         this.isConstant = (expressionType === 'number') || (expressionType === 'boolean');
@@ -52,7 +46,7 @@ class NumberExpression extends Expression {
 
         var value;
         if (this.isConstant) {
-            value = this.expression;
+            value = this.expression.toString();
         } else {
             if (!context) { // Normal case
                 context = tick.getEvalContext();

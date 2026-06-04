@@ -2,6 +2,7 @@ import Tree from '../behaviortree/BehaviorTree.js';
 import Blackboard from '../blackboard/Base';
 import BaseNode from '../nodes/BaseNode';
 import ExpressionParser from '../../../math/expressionparser/ExpressionParser';
+import StringTemplate from '../../../string/stringtemplate/StringTemplate';
 
 export default Tick;
 
@@ -99,6 +100,11 @@ declare class Tick<T = object> {
      * Parser used by expression nodes.
      */
     expressionParser: ExpressionParser;
+
+    /**
+     * String template renderer used by string expression nodes.
+     */
+    stringTemplate: StringTemplate;
 
     /**
      * Get expression evaluation context.

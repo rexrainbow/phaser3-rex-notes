@@ -2,6 +2,7 @@ import BaseNode from '../nodes/BaseNode';
 import Blackboard from '../blackboard/Base';
 import Tick from '../tick/Tick';
 import ExpressionParser from '../../../math/expressionparser/ExpressionParser';
+import StringTemplate from '../../../string/stringtemplate/StringTemplate';
 
 export default BehaviorTree;
 
@@ -248,6 +249,23 @@ declare class BehaviorTree {
     getExpressionParser(): ExpressionParser;
 
     expressionParser: ExpressionParser;
+
+    /**
+     * Set string template renderer used by string expression nodes.
+     *
+     * @param template - String template instance.
+     * @returns This BehaviorTree instance.
+     */
+    setStringTemplate(template: StringTemplate): this;
+
+    /**
+     * Get string template renderer used by string expression nodes.
+     *
+     * @returns String template instance.
+     */
+    getStringTemplate(): StringTemplate;
+
+    stringTemplate: StringTemplate;
 
     /**
      * Tick the tree.

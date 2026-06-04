@@ -6,6 +6,7 @@ import Service from './Service.js';
 import Expression from './Expression.js';
 import {
     NumberExpression,
+    StringExpression,
 } from './expressions';
 
 import Succeeder from './actions/Succeeder.js';
@@ -48,6 +49,7 @@ export {
     Service,
     Expression,
     NumberExpression,
+    StringExpression,
 
     Succeeder,
     Failer,

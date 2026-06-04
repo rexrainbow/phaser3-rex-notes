@@ -16,6 +16,7 @@ import {
     Decorator,
     Expression,
     NumberExpression,
+    StringExpression,
 
     Succeeder,
     Failer,
@@ -79,6 +80,7 @@ export {
     Decorator,
     Expression,
     NumberExpression,
+    StringExpression,
 
     Succeeder,
     Failer,

@@ -4,7 +4,7 @@ import Composite from './Composite';
 import Decorator from './Decorator';
 import Service from './Service';
 import Expression from './Expression';
-import { NumberExpression } from './expressions';
+import { NumberExpression, StringExpression } from './expressions';
 
 import Succeeder from './actions/Succeeder';
 import Failer from './actions/Failer';
@@ -46,6 +46,7 @@ export {
     Service,
     Expression,
     NumberExpression,
+    StringExpression,
 
     Succeeder,
     Failer,
