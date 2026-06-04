@@ -1,8 +1,8 @@
-import { BreadthFirstSearch } from './Traversal.js';
-import { ACTION, COMPOSITE, DECORATOR } from '../constants.js';
-import DeepClone from '../../../utils/object/DeepClone.js';
-import { GetSerialNumber } from '../utils/CreateID.js'
-import IsNodeLike from '../utils/IsNodeLike.js';
+import { BreadthFirstSearch } from '../Traversal.js';
+import { ACTION, COMPOSITE, DECORATOR } from '../../constants.js';
+import DeepClone from '../../../../utils/object/DeepClone.js';
+import { GetSerialNumber } from '../../utils/CreateID.js'
+import IsNodeLike from '../../utils/IsNodeLike.js';
 
 var DumpProperties = function (node) {
     var properties = node.properties;

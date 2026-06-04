@@ -2,6 +2,7 @@ import { CreateID } from '../utils/CreateID.js';
 import { TREE, SUCCESS, FAILURE, RUNNING, ABORT, ERROR } from '../constants.js';
 import IsExpressionLike from '../utils/IsExpressionLike.js';
 import DecodeExpression from '../utils/DecodeExpression.js';
+import ResolveNode from '../behaviortree/dump/ResolveNode.js';
 
 export default class BaseNode {
 
@@ -92,11 +93,8 @@ export default class BaseNode {
         }
 
         // Get node from nodePool
-        if (nodePool) {
-            if (!nodePool.hasOwnProperty(node)) {
-                throw new Error(`BehaviorTree.load: Missing node "${node}" for ${name}'s Expression node`);
-            }
-            node = nodePool[node];
+        if (nodePool && (typeof (node) === 'string')) {
+            node = ResolveNode(node, nodePool, name, 'expression node');
         }
 
         this.expressions[name] = node;  // Expression node or constant number, boolean

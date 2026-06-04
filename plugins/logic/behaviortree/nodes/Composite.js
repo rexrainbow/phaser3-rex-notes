@@ -1,5 +1,6 @@
 import BaseNode from './BaseNode.js';
 import { COMPOSITE } from '../constants.js';
+import ResolveNode from '../behaviortree/dump/ResolveNode.js';
 
 class Composite extends BaseNode {
 
@@ -56,10 +57,7 @@ class Composite extends BaseNode {
 
     insertChild(node, nodePool, index) {
         if (nodePool) {
-            if (!nodePool.hasOwnProperty(node)) {
-                throw new Error(`BehaviorTree.load: Missing node "${node}" for ${name}'s child node`);
-            }
-            node = nodePool[node];
+            node = ResolveNode(node, nodePool, this.name, 'child node');
         }
 
 
@@ -85,12 +83,7 @@ class Composite extends BaseNode {
     }
 
     addService(node, nodePool) {
-        if (nodePool) {
-            if (!nodePool.hasOwnProperty(node)) {
-                throw new Error(`BehaviorTree.load: Missing node "${node}" for ${name}'s Service node`);
-            }
-            node = nodePool[node];
-        }
+        node = ResolveNode(node, nodePool, this.name, 'Service node');
 
         if (this.services === undefined) {
             this.services = [];

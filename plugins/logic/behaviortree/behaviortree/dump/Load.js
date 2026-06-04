@@ -1,5 +1,5 @@
-import * as Nodes from '../nodes';
-import { GetSerialNumber, SetSerialNumber } from '../utils/CreateID.js'
+import * as Nodes from '../../nodes/index.js';
+import { GetSerialNumber, SetSerialNumber } from '../../utils/CreateID.js'
 
 var HasOwnProperty = function (obj, prop) {
     return Object.prototype.hasOwnProperty.call(obj, prop);

@@ -1,5 +1,6 @@
 import BaseNode from './BaseNode.js';
 import { DECORATOR } from '../constants.js';
+import ResolveNode from '../behaviortree/dump/ResolveNode.js';
 
 class Decorator extends BaseNode {
 
@@ -41,12 +42,7 @@ class Decorator extends BaseNode {
     }
 
     addChild(node, nodePool) {
-        if (nodePool) {
-            if (!nodePool.hasOwnProperty(node)) {
-                throw new Error(`BehaviorTree.load: Missing node "${node}" for ${name}'s child node`);
-            }
-            node = nodePool[node];
-        }
+        node = ResolveNode(node, nodePool, this.name, 'child node');
 
         this.child = node;
         node.setParent(this);

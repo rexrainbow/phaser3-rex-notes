@@ -1,3 +1,5 @@
+import ResolveNode from '../behaviortree/dump/ResolveNode.js';
+
 var DecodeExpression = function (expression, nodePool, name) {
     if (!expression || (typeof (expression) !== 'object') || (typeof (expression.type) !== 'string')) {
         return expression;
@@ -7,10 +9,7 @@ var DecodeExpression = function (expression, nodePool, name) {
         case 'node':
             var nodeID = expression.id;
             if (nodePool) {
-                if (!nodePool.hasOwnProperty(nodeID)) {
-                    throw new Error(`BehaviorTree.load: Missing expression node "${nodeID}"${name ? ` for ${name}` : ''}`);
-                }
-                return nodePool[nodeID];
+                return ResolveNode(nodeID, nodePool, name, 'expression node');
             }
             return nodeID;
 

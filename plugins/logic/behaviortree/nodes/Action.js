@@ -1,5 +1,6 @@
 import BaseNode from './BaseNode.js';
 import { ACTION } from '../constants.js';
+import ResolveNode from '../behaviortree/dump/ResolveNode.js';
 
 class Action extends BaseNode {
 
@@ -43,12 +44,7 @@ class Action extends BaseNode {
     }
 
     addService(node, nodePool) {
-        if (nodePool) {
-            if (!nodePool.hasOwnProperty(node)) {
-                throw new Error(`BehaviorTree.load: Missing node "${node}" for ${name}'s Service node`);
-            }
-            node = nodePool[node];
-        }
+        node = ResolveNode(node, nodePool, this.name, 'Service node');
 
         if (this.services === undefined) {
             this.services = [];

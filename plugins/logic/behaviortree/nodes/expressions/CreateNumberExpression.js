@@ -1,6 +1,7 @@
 import NumberExpression from './NumberExpression.js';
 import IsExpressionLike from '../../utils/IsExpressionLike.js';
 import DecodeExpression from '../../utils/DecodeExpression.js';
+import ResolveNode from '../../behaviortree/dump/ResolveNode.js';
 
 var StringToNumber = function (value) {
     if (typeof (value) !== 'string') {
@@ -35,10 +36,7 @@ var CreateNumberExpression = function (expression, nodePool) {
     var node;
     if (nodePool && (expressionType === 'string')) {
         // Get node from nodePool
-        if (!nodePool.hasOwnProperty(expression)) {
-            throw new Error(`BehaviorTree.load: Missing expression node "${expression}"`);
-        }
-        node = nodePool[expression];
+        node = ResolveNode(expression, nodePool, undefined, 'expression node');
 
     } else if (IsExpressionLike(expression)) {
         // Is Expression node already

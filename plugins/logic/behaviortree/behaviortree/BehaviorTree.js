@@ -1,8 +1,8 @@
 import { TREE, TREE_STATE, IDLE } from '../constants.js';
 import { CreateID, SetSerialNumber, SetSerialNumberPrefix, GetSerialNumber } from '../utils/CreateID.js';
 import DataMethods from './DataMethods.js';
-import Dump from './Dump.js';
-import Load from './Load.js';
+import Dump from './dump/Dump.js';
+import Load from './dump/Load.js';
 import Tick from '../tick/Tick.js';
 import { BreadthFirstSearch } from './Traversal.js';
 
