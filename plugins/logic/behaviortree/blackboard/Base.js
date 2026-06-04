@@ -7,16 +7,16 @@ import RemoveKey from '../../../utils/object/RemoveKey.js';
 class Blackboard {
 
     constructor() {
-        this._baseMemory = {};
+        this._globalMemory = {};
         this._treeMemory = {};
 
-        // Global memory : this._baseMemory
+        // Global memory : this._globalMemory
         // Tree memory : this._treeMemory[treeID]
         // Node memory : this._treeMemory[treeID].nodeMemory[nodeID]
     }
 
     destroy() {
-        this._baseMemory = undefined;
+        this._globalMemory = undefined;
         this._treeMemory = undefined;
     }
 
@@ -48,7 +48,7 @@ class Blackboard {
                 memory = this._getNodeMemory(memory, nodeID);
             }
         } else {
-            memory = this._baseMemory;
+            memory = this._globalMemory;
         }
 
         return memory;
@@ -81,7 +81,7 @@ class Blackboard {
                 memory = treeMemory.nodeMemory[nodeID];
             }
         } else {
-            memory = this._baseMemory;
+            memory = this._globalMemory;
         }
 
         if (memory) {
@@ -161,7 +161,7 @@ class Blackboard {
     }
 
     getGlobalMemory() {
-        return this._baseMemory;
+        return this._globalMemory;
     }
 
     getTreeMemory(treeID) {
@@ -174,13 +174,13 @@ class Blackboard {
 
     dump() {
         return {
-            base: DeepClone(this._baseMemory),
+            global: DeepClone(this._globalMemory),
             tree: DeepClone(this._treeMemory),
         }
     }
 
     load(data) {
-        this._baseMemory = DeepClone(data.base);
+        this._globalMemory = DeepClone(data.global);
         this._treeMemory = DeepClone(data.tree);
         return this;
     }
