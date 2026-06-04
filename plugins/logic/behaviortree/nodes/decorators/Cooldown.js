@@ -9,16 +9,14 @@ class Cooldown extends Decorator {
         if (nodePool) {  // Rebuild node, don't touch config
             super(config, nodePool);
 
-            var expressions = config.expressions;
-            var properties = config.properties || {};
-            duration = (expressions && (expressions.duration !== undefined)) ? expressions.duration : properties.duration;
+            var expressions = config.expressions || {};
+            duration = expressions.duration;
 
         } else {
             var {
-                duration: durationValue = 0,
+                duration: durationValue = 0,  // expression
                 child = null,
                 title,
-                properties = {},
                 name = 'Cooldown'
             } = config;
 
@@ -27,10 +25,6 @@ class Cooldown extends Decorator {
                     child,
                     title,
                     name,
-                    properties: {
-                        ...properties,
-                        duration: durationValue,
-                    },
                 },
                 nodePool
             );
@@ -39,7 +33,8 @@ class Cooldown extends Decorator {
 
         }
 
-        this.duration = CreateNumberExpression(duration, nodePool);  // Expression node
+        // Expression node, or constant number/boolean
+        this.duration = CreateNumberExpression(duration, nodePool);
         this.addExpression('duration', this.duration);
     }
 

@@ -9,8 +9,8 @@ class BreakAction extends Action {
 
         } else {  // New node
             var {
-                breakDecoratorTitle,
-                tag,
+                breakDecoratorTitle,  // constant string
+                tag,                  // constant string
                 services,
                 title,
                 name = 'Break'

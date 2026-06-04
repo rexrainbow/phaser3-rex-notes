@@ -4,24 +4,21 @@ import { SUCCESS, FAILURE, RUNNING, ERROR } from '../../constants.js';
 
 class IfSelector extends Composite {
     constructor(config = {}, nodePool) {
-        var condition, conditionEvalBreak;
+        var condition;
 
         if (nodePool) {  // Rebuild node, don't touch config
             super(config, nodePool);
 
-            var expressions = config.expressions;
-            var properties = config.properties || {};
-            condition = (expressions && (expressions.condition !== undefined)) ? expressions.condition : properties.condition;
-            conditionEvalBreak = properties.conditionEvalBreak;
+            var expressions = config.expressions || {};
+            condition = expressions.condition;
 
         } else {
             var {
-                condition: conditionValue = 'true',
-                conditionEvalBreak: conditionEvalBreakValue = false,
+                condition: conditionValue = 'true',    // expression
+                conditionEvalBreak = false,  // mode
                 children = [],
                 services,
                 title,
-                properties = {},
                 name = 'IfSelector'
             } = config;
 
@@ -32,21 +29,21 @@ class IfSelector extends Composite {
                     title,
                     name,
                     properties: {
-                        ...properties,
-                        condition: conditionValue,
-                        conditionEvalBreak: conditionEvalBreakValue,
+                        conditionEvalBreak,
                     },
                 },
                 nodePool
             );
 
             condition = conditionValue;
-            conditionEvalBreak = conditionEvalBreakValue;
         }
 
-        this.condition = CreateNumberExpression(condition, nodePool); // Expression node
+        // Expression node, or constant number/boolean
+        this.condition = CreateNumberExpression(condition, nodePool);
         this.addExpression('condition', this.condition);
-        this.conditionEvalBreak = conditionEvalBreak;
+
+        this.conditionEvalBreak = this.properties.conditionEvalBreak;
+
         this.forceSelectChildIndex = undefined;
     }
 

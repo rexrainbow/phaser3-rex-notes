@@ -1,6 +1,7 @@
 import { CreateID } from '../utils/CreateID.js';
 import { TREE, SUCCESS, FAILURE, RUNNING, ABORT, ERROR } from '../constants.js';
 import IsExpressionLike from '../utils/IsExpressionLike.js';
+import DecodeExpression from '../utils/DecodeExpression.js';
 
 export default class BaseNode {
 
@@ -79,29 +80,30 @@ export default class BaseNode {
     }
 
     addExpression(name, node, nodePool) {
-        if (!node) {
+        node = DecodeExpression(node, nodePool, name);
+
+        // Ignore null, undefined
+        if (node == null) {
             return null;
-        }
-
-        if (nodePool && typeof (node) === 'string') {
-            if (!nodePool.hasOwnProperty(node)) {
-                throw new Error(`BehaviorTree.load: Missing node "${node}" for ${name}'s Expression node`);
-            }
-            node = nodePool[node];
-        }
-
-        if (!IsExpressionLike(node)) {
-            return node;
         }
 
         if (this.expressions === undefined) {
             this.expressions = {};
         }
 
-        // config's property name <-> expression name  
-        this.expressions[name] = node;
+        // Get node from nodePool
+        if (nodePool) {
+            if (!nodePool.hasOwnProperty(node)) {
+                throw new Error(`BehaviorTree.load: Missing node "${node}" for ${name}'s Expression node`);
+            }
+            node = nodePool[node];
+        }
 
-        node.setParent(this);
+        this.expressions[name] = node;  // Expression node or constant number, boolean
+
+        if (IsExpressionLike(node)) {
+            node.setParent(this);
+        }
 
         return node;
     }

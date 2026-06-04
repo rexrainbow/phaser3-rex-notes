@@ -6,23 +6,20 @@ import { FAILURE, SUCCESS, ERROR } from '../../constants.js';
 class AbortIf extends Decorator {
 
     constructor(config = {}, nodePool) {
-        var condition, returnSuccess;
+        var condition;
 
         if (nodePool) {  // Rebuild node, don't touch config
             super(config, nodePool);
 
-            var expressions = config.expressions;
-            var properties = config.properties || {};
-            condition = (expressions && (expressions.condition !== undefined)) ? expressions.condition : properties.condition;
-            returnSuccess = properties.returnSuccess;
+            var expressions = config.expressions || {};
+            condition = expressions.condition;
 
         } else {
             var {
                 condition: conditionValue = 'true',
-                returnSuccess: returnSuccessValue = true,
+                returnSuccess = true,  // mode
                 child = null,
                 title,
-                properties = {},
                 name = 'AbortIf'
             } = config;
 
@@ -32,8 +29,6 @@ class AbortIf extends Decorator {
                     title,
                     name,
                     properties: {
-                        ...properties,
-                        condition: conditionValue,
                         returnSuccess: returnSuccessValue,
                     },
                 },
@@ -41,12 +36,13 @@ class AbortIf extends Decorator {
             );
 
             condition = conditionValue;
-            returnSuccess = returnSuccessValue;
         }
 
-        this.condition = CreateNumberExpression(condition, nodePool); // Expression node
+        // Expression node, or constant number/boolean
+        this.condition = CreateNumberExpression(condition, nodePool);
         this.addExpression('condition', this.condition);
-        this.returnSuccess = returnSuccess;
+
+        this.returnSuccess = this.properties.returnSuccess;
     }
 
     tick(tick) {

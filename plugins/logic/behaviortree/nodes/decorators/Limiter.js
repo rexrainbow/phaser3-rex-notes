@@ -10,16 +10,14 @@ class Limiter extends Decorator {
         if (nodePool) {  // Rebuild node, don't touch config
             super(config, nodePool);
 
-            var expressions = config.expressions;
-            var properties = config.properties || {};
-            maxLoop = (expressions && (expressions.maxLoop !== undefined)) ? expressions.maxLoop : properties.maxLoop;
+            var expressions = config.expressions || {};
+            maxLoop = expressions.maxLoop;
 
         } else {
             var {
-                maxLoop: maxLoopValue = 1,
+                maxLoop: maxLoopValue = 1,  // expression
                 child = null,
                 title,
-                properties = {},
                 name = 'Limiter'
             } = config;
 
@@ -28,10 +26,6 @@ class Limiter extends Decorator {
                     child,
                     title,
                     name,
-                    properties: {
-                        ...properties,
-                        maxLoop: maxLoopValue,
-                    },
                 },
                 nodePool
             );
@@ -40,6 +34,7 @@ class Limiter extends Decorator {
 
         }
 
+        // Expression node, or constant number/boolean
         this.maxLoop = CreateNumberExpression(maxLoop, nodePool);  // Expression node
         this.addExpression('maxLoop', this.maxLoop);
     }

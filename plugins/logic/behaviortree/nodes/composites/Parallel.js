@@ -9,12 +9,11 @@ class Parallel extends Composite {
 
         } else {
             var {
-                finishMode = 0,
-                returnSuccess = true,
+                finishMode = 0,        // mode
+                returnSuccess = true,  // mode
                 children = [],
                 services,
                 title,
-                properties = {},
                 name = 'Parallel'
             } = config;
 
@@ -25,7 +24,6 @@ class Parallel extends Composite {
                     title,
                     name,
                     properties: {
-                        ...properties,
                         finishMode,
                         returnSuccess
                     },

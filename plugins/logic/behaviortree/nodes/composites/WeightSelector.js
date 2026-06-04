@@ -5,26 +5,23 @@ import BaseNode from '../BaseNode.js';
 
 class WeightSelector extends Composite {
     constructor(config = {}, nodePool) {
-        var condition, weights, conditionEvalBreak;
+        var condition;
 
         if (nodePool) {  // Rebuild node, don't touch config
             super(config, nodePool);
 
-            var expressions = config.expressions;
+            var expressions = config.expressions || {};
             var properties = config.properties || {};
-            condition = (expressions && (expressions.condition !== undefined)) ? expressions.condition : properties.condition;
-            weights = properties.weights;
-            conditionEvalBreak = properties.conditionEvalBreak;
+            condition = expressions.condition;
 
         } else {
             var {
-                condition: conditionValue = null,
-                weights: weightsValue = undefined,    // Or [weight, ...]
-                conditionEvalBreak: conditionEvalBreakValue = false,
+                condition: conditionValue = null,     // expression
+                weights = undefined,    // Or [weight, ...]
+                conditionEvalBreak = false,  // mode
                 children = [],          // [node, ...], or [{weight, node}, ...]
                 services,
                 title,
-                properties = {},
                 name = 'WeightSelector'
             } = config;
 
@@ -56,29 +53,28 @@ class WeightSelector extends Composite {
                     title,
                     name,
                     properties: {
-                        ...properties,
-                        condition: conditionValue,
-                        weights: weightsValue,
-                        conditionEvalBreak: conditionEvalBreakValue,
+                        weights,
+                        conditionEvalBreak,
                     },
                 },
                 nodePool
             );
 
             condition = conditionValue;
-            weights = weightsValue;
-            conditionEvalBreak = conditionEvalBreakValue;
         }
 
         if (condition != null) {
-            this.condition = CreateNumberExpression(condition, nodePool); // Expression node
+            // Expression node, or constant number/boolean
+            this.condition = CreateNumberExpression(condition, nodePool);
             this.addExpression('condition', this.condition);
         } else {
             this.condition = null;
         }
 
-        this.weights = weights;
-        this.conditionEvalBreak = conditionEvalBreak;
+        this.weights = this.properties.weights;
+
+        this.conditionEvalBreak = this.properties.conditionEvalBreak;
+
         this.forceSelectChildIndex = undefined;
     }
 

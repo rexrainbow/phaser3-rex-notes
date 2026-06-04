@@ -6,25 +6,21 @@ import { FAILURE, SUCCESS, RUNNING, ERROR } from '../../constants.js';
 class If extends Decorator {
 
     constructor(config = {}, nodePool) {
-        var condition, conditionEvalBreak, onFailState;
+        var condition;
 
         if (nodePool) {  // Rebuild node, don't touch config
             super(config, nodePool);
 
-            var expressions = config.expressions;
-            var properties = config.properties || {};
-            condition = (expressions && (expressions.condition !== undefined)) ? expressions.condition : properties.condition;
-            conditionEvalBreak = properties.conditionEvalBreak;
-            onFailState = properties.onFailState;
+            var expressions = config.expressions || {};
+            condition = expressions.condition;
 
         } else {
             var {
-                condition: conditionValue = 'true',
-                conditionEvalBreak: conditionEvalBreakValue = false,
-                onFailState: onFailStateValue = FAILURE,
+                condition: conditionValue = 'true',  // expression
+                conditionEvalBreak = false,    // mode
+                onFailState = FAILURE,         // mode
                 child = null,
                 title,
-                properties = {},
                 name = 'If'
             } = config;
 
@@ -34,25 +30,24 @@ class If extends Decorator {
                     title,
                     name,
                     properties: {
-                        ...properties,
-                        condition: conditionValue,
-                        conditionEvalBreak: conditionEvalBreakValue,
-                        onFailState: onFailStateValue
+                        conditionEvalBreak,
+                        onFailState
                     },
                 },
                 nodePool
             );
 
             condition = conditionValue;
-            conditionEvalBreak = conditionEvalBreakValue;
-            onFailState = onFailStateValue;
 
         }
 
-        this.condition = CreateNumberExpression(condition, nodePool);  // Expression node
+        // Expression node, or constant number/boolean
+        this.condition = CreateNumberExpression(condition, nodePool);
         this.addExpression('condition', this.condition);
-        this.conditionEvalBreak = conditionEvalBreak;
-        this.onFailState = onFailState;
+
+        this.conditionEvalBreak = this.properties.conditionEvalBreak;
+
+        this.onFailState = this.properties.onFailState;
     }
 
     tick(tick) {

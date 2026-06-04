@@ -10,9 +10,8 @@ class BreakDecorator extends Decorator {
             var {
                 child = null,
                 title,
-                properties = {},
                 name = 'Break',
-                tag,
+                tag,              // constant string
             } = config;
 
             super(
@@ -21,7 +20,6 @@ class BreakDecorator extends Decorator {
                     title,
                     name,
                     properties: {
-                        ...properties,
                         tag
                     }
                 },
@@ -30,8 +28,9 @@ class BreakDecorator extends Decorator {
 
         }
 
-        this.breakFlag = false;
         this.tag = this.properties.tag;
+
+        this.breakFlag = false;
     }
 
     setBreakFlag(enable) {

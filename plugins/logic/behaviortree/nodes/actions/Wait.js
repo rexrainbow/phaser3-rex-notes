@@ -10,33 +10,28 @@ class Wait extends Action {
         if (nodePool) {  // Rebuild node, don't touch config
             super(config, nodePool);
 
-            var expressions = config.expressions;
-            var properties = config.properties || {};
-            duration = (expressions && (expressions.duration !== undefined)) ? expressions.duration : properties.duration;
+            var expressions = config.expressions || {};
+            duration = expressions.duration;
 
         } else {  // New node
             var {
-                duration: durationValue = 0,
+                duration: durationValue = 0,   // expression
                 services,
                 title,
-                properties = {},
                 name = 'Wait'
             } = config;
 
             super({
                 title,
                 name,
-                properties: {
-                    ...properties,
-                    duration: durationValue,
-                },
                 services,
             });
 
             duration = durationValue;
         }
 
-        this.duration = CreateNumberExpression(duration, nodePool); // Expression node
+        // Expression node, or constant number/boolean
+        this.duration = CreateNumberExpression(duration, nodePool);
         this.addExpression('duration', this.duration);
     }
 

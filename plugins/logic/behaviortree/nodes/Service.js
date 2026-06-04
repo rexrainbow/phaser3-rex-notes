@@ -25,19 +25,19 @@ class Service extends BaseNode {
                 properties,
             });
 
-            var expressions = config.expressions;
-            interval = (expressions && (expressions.interval !== undefined)) ? expressions.interval : properties.interval;
-            randomDeviation = (expressions && (expressions.randomDeviation !== undefined)) ? expressions.randomDeviation : properties.randomDeviation;
+            var expressions = config.expressions || {};
+            interval = expressions.interval;
+            randomDeviation = expressions.randomDeviation;
 
         } else {
             var {
                 id,
-                interval: intervalValue = 0,
-                randomDeviation: randomDeviationValue = 0,
+                interval: intervalValue = 0,                // expression
+                randomDeviation: randomDeviationValue = 0,  // expression
                 name = 'Service',
                 title,
+                properties,
                 description,
-                properties = {}
             } = config;
 
             super({
@@ -46,21 +46,19 @@ class Service extends BaseNode {
                 name,
                 title,
                 description,
-                properties: {
-                    ...properties,
-                    interval: intervalValue,
-                    randomDeviation: randomDeviationValue,
-                },
+                properties,
             });
 
             interval = intervalValue;
             randomDeviation = randomDeviationValue;
         }
 
-        this.interval = CreateNumberExpression(interval, nodePool); // Expression node
+        // Expression node, or constant number/boolean
+        this.interval = CreateNumberExpression(interval, nodePool);
         this.addExpression('interval', this.interval);
 
-        this.randomDeviation = CreateNumberExpression(randomDeviation, nodePool); // Expression node
+        // Expression node, or constant number/boolean
+        this.randomDeviation = CreateNumberExpression(randomDeviation, nodePool);
         this.addExpression('randomDeviation', this.randomDeviation);
     }
 

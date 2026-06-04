@@ -28,6 +28,20 @@ var DumpProperties = function (node) {
     return output;
 }
 
+var DumpExpression = function (expression) {
+    if (IsNodeLike(expression)) {
+        return {
+            type: 'node',
+            id: expression.id
+        };
+    }
+
+    return {
+        type: 'constant',
+        value: DeepClone(expression)
+    };
+}
+
 var Dump = function () {
     var data = {
         sn: GetSerialNumber(),
@@ -64,7 +78,7 @@ var Dump = function () {
             spec.expressions = {};
             for (var name in node.expressions) {
                 if (Object.prototype.hasOwnProperty.call(node.expressions, name)) {
-                    spec.expressions[name] = node.expressions[name].id;
+                    spec.expressions[name] = DumpExpression(node.expressions[name]);
                 }
             }
         }

@@ -1,4 +1,5 @@
 import { ACTION, COMPOSITE, DECORATOR } from '../constants.js';
+import IsNodeLike from '../utils/IsNodeLike.js';
 
 var DepthFirstSearch = function (root, callback, scope) {
     var skip = callback.call(scope, root);
@@ -11,7 +12,9 @@ var DepthFirstSearch = function (root, callback, scope) {
     if (expressions) {
         for (var name in expressions) {
             if (Object.prototype.hasOwnProperty.call(expressions, name)) {
-                DepthFirstSearch(expressions[name], callback, scope);
+                if (IsNodeLike(expressions[name])) {
+                    DepthFirstSearch(expressions[name], callback, scope);
+                }
             }
         }
     }
@@ -60,7 +63,9 @@ var BreadthFirstSearch = function (root, callback, scope) {
         if (expressions) {
             for (var name in expressions) {
                 if (Object.prototype.hasOwnProperty.call(expressions, name)) {
-                    queue.push(expressions[name]);
+                    if (IsNodeLike(expressions[name])) {
+                        queue.push(expressions[name]);
+                    }
                 }
             }
         }

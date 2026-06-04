@@ -4,31 +4,27 @@ import { SUCCESS, FAILURE, RUNNING, ERROR } from '../../constants.js';
 
 class SwitchSelector extends Composite {
     constructor(config = {}, nodePool) {
-        var condition, keys, conditionEvalBreak;
+        var condition;
 
         if (nodePool) {  // Rebuild node, don't touch config
             super(config, nodePool);
 
-            var expressions = config.expressions;
-            var properties = config.properties || {};
-            condition = (expressions && (expressions.condition !== undefined)) ? expressions.condition : properties.condition;
-            keys = properties.keys;
-            conditionEvalBreak = properties.conditionEvalBreak;
+            var expressions = config.expressions || {};
+            condition = expressions.condition;
 
         } else {
             var {
-                condition: conditionValue = null,
-                keys: keysValue = undefined, // Or [key, ...]
-                conditionEvalBreak: conditionEvalBreakValue = false,
+                condition: conditionValue = null,    // expression
+                keys = undefined, // Or [key, ...]
+                conditionEvalBreak = false,  // mode
                 children = {},    // Or [child, ...]
                 services,
                 title,
-                properties = {},
                 name = 'SwitchSelector'
             } = config;
 
-            if (keysValue === undefined) {
-                keysValue = Object.keys(children);
+            if (keys === undefined) {
+                keys = Object.keys(children);
                 children = Object.values(children);
             }
 
@@ -39,24 +35,24 @@ class SwitchSelector extends Composite {
                     title,
                     name,
                     properties: {
-                        ...properties,
-                        condition: conditionValue,
-                        keys: keysValue,
-                        conditionEvalBreak: conditionEvalBreakValue,
+                        keys,
+                        conditionEvalBreak,
                     },
                 },
                 nodePool
             );
 
             condition = conditionValue;
-            keys = keysValue;
-            conditionEvalBreak = conditionEvalBreakValue;
         }
 
-        this.condition = CreateNumberExpression(condition, nodePool); // Expression node
+        // Expression node, or constant number/boolean
+        this.condition = CreateNumberExpression(condition, nodePool);
         this.addExpression('condition', this.condition);
-        this.keys = keys;  // Index of children
-        this.conditionEvalBreak = conditionEvalBreak;
+
+        this.keys = this.properties.keys;;  // Index of children
+
+        this.conditionEvalBreak = this.properties.conditionEvalBreak;
+
         this.forceSelectChildIndex = undefined;
     }
 

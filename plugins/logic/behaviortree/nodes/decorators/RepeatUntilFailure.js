@@ -5,23 +5,20 @@ import { SUCCESS, FAILURE, ERROR } from '../../constants.js';
 class RepeatUntilFailure extends Decorator {
 
     constructor(config = {}, nodePool) {
-        var maxLoop, returnSuccess;
+        var maxLoop;
 
         if (nodePool) {  // Rebuild node, don't touch config
             super(config, nodePool);
 
-            var expressions = config.expressions;
-            var properties = config.properties || {};
-            maxLoop = (expressions && (expressions.maxLoop !== undefined)) ? expressions.maxLoop : properties.maxLoop;
-            returnSuccess = properties.returnSuccess;
+            var expressions = config.expressions || {};
+            maxLoop = expressions.maxLoop;
 
         } else {
             var {
-                maxLoop: maxLoopValue = -1,
-                returnSuccess: returnSuccessValue = false,
+                maxLoop: maxLoopValue = -1,  // expression
+                returnSuccess = false,  // mode
                 child = null,
                 title,
-                properties = {},
                 name = 'RepeatUntilFailure',
             } = config;
 
@@ -31,8 +28,6 @@ class RepeatUntilFailure extends Decorator {
                     title,
                     name,
                     properties: {
-                        ...properties,
-                        maxLoop: maxLoopValue,
                         returnSuccess: returnSuccessValue,
                     },
                 },
@@ -40,13 +35,14 @@ class RepeatUntilFailure extends Decorator {
             );
 
             maxLoop = maxLoopValue;
-            returnSuccess = returnSuccessValue;
 
         }
 
-        this.maxLoop = CreateNumberExpression(maxLoop, nodePool);  // Expression node
+        // Expression node, or constant number/boolean
+        this.maxLoop = CreateNumberExpression(maxLoop, nodePool);
         this.addExpression('maxLoop', this.maxLoop);
-        this.returnSuccess = returnSuccess;
+
+        this.returnSuccess = this.properties.returnSuccess;
     }
 
     open(tick) {

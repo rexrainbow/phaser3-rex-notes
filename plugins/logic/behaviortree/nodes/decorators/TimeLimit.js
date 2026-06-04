@@ -4,23 +4,20 @@ import { SUCCESS, FAILURE, ERROR } from '../../constants.js';
 
 class TimeLimit extends Decorator {
     constructor(config = {}, nodePool) {
-        var duration, returnSuccess;
+        var duration;
 
         if (nodePool) {  // Rebuild node, don't touch config
             super(config, nodePool);
 
-            var expressions = config.expressions;
-            var properties = config.properties || {};
-            duration = (expressions && (expressions.duration !== undefined)) ? expressions.duration : properties.duration;
-            returnSuccess = properties.returnSuccess;
+            var expressions = config.expressions || {};
+            duration = expressions.duration;
 
         } else {
             var {
-                duration: durationValue = 0,
-                returnSuccess: returnSuccessValue = true,
+                duration: durationValue = 0,  // expression
+                returnSuccess = true,         // mode
                 child = null,
                 title,
-                properties = {},
                 name = 'TimeLimit'
             } = config;
 
@@ -30,8 +27,6 @@ class TimeLimit extends Decorator {
                     title,
                     name,
                     properties: {
-                        ...properties,
-                        duration: durationValue,
                         returnSuccess: returnSuccessValue
                     },
                 },
@@ -39,13 +34,14 @@ class TimeLimit extends Decorator {
             );
 
             duration = durationValue;
-            returnSuccess = returnSuccessValue;
 
         }
 
-        this.duration = CreateNumberExpression(duration, nodePool);  // Expression node
+        // Expression node, or constant number/boolean
+        this.duration = CreateNumberExpression(duration, nodePool);
         this.addExpression('duration', this.duration);
-        this.returnSuccess = returnSuccess;
+
+        this.returnSuccess = this.properties.returnSuccess;
     }
 
     open(tick) {
