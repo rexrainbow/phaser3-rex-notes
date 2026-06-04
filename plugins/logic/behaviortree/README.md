@@ -62,6 +62,198 @@ tree evaluates them each tick while using a blackboard to store state.
     - BreakAction
         - Search for the nearest BreakDecorator ancestor, set its break flag, and return `ABORT`.
 
+## Custom Action, Service, and Expression
+
+Custom nodes can extend `RexPlugins.BehaviorTree.Action`,
+`RexPlugins.BehaviorTree.Service`, or `RexPlugins.BehaviorTree.Expression`.
+Use the same constructor shape as built-in nodes:
+
+```javascript
+constructor(config = {}, nodePool) {
+    if (nodePool) {  // Rebuild node, don't touch config
+        super(config, nodePool);
+
+    } else {  // New node
+        // Convert user-facing options to the serialized node config.
+        super({
+            name: 'MyNodeName',
+            properties: {
+                // Custom values to preserve in dump/load.
+            },
+        });
+    }
+
+    // Copy values from this.properties or config after super().
+}
+```
+
+The `nodePool` argument is supplied while loading a dumped tree. When
+`nodePool` exists, the node is being rebuilt from serialized data, so pass
+`config` and `nodePool` unchanged to `super(config, nodePool)`. Do not rewrite
+`config` in this branch. The base classes use `nodePool` to resolve child,
+service, and expression node ids back to node instances.
+
+When `nodePool` is not supplied, the node is being created directly by user
+code. In this branch, convert convenient constructor options into the canonical
+node config. Store custom serializable values in `properties`; they will be
+included in `dump()` and restored during `load()`.
+
+Separate regular properties from expressions. Regular parameters should be
+stored in `properties` and read back from `this.properties.xxx` after `super()`.
+Expression parameters should not be stored in `properties`; create the
+expression node or constant value, then register it with `this.addExpression()`.
+During `dump()`, expressions are written to `spec.expressions`; during `load()`,
+read them from `config.expressions`. Built-in nodes such as `AbortIf` follow
+this pattern.
+
+```javascript
+class MyDecorator extends RexPlugins.BehaviorTree.Decorator {
+    constructor(config = {}, nodePool) {
+        var condition;
+
+        if (nodePool) {
+            super(config, nodePool);
+
+            var expressions = config.expressions || {};
+            condition = expressions.condition;
+
+        } else {
+            var {
+                condition: conditionValue = 'true',
+                returnSuccess = true,
+                child = null,
+                properties = {},
+            } = config;
+
+            super({
+                child,
+                properties: {
+                    ...properties,
+                    returnSuccess: returnSuccess,
+                },
+                name: 'MyDecorator',
+            }, nodePool);
+
+            condition = conditionValue;
+        }
+
+        // In source modules, import CreateNumberExpression from the expressions folder.
+        this.condition = CreateNumberExpression(condition, nodePool);
+        this.addExpression('condition', this.condition);
+
+        this.returnSuccess = this.properties.returnSuccess;
+    }
+}
+```
+
+Example action:
+
+```javascript
+class PrintAction extends RexPlugins.BehaviorTree.Action {
+    constructor(config = {}, nodePool) {
+        if (nodePool) {
+            super(config, nodePool);
+
+        } else {
+            var { text = '' } = config;
+            super({
+                name: 'MyAction',
+                properties: { text: text },
+            });
+        }
+
+        this.text = this.properties.text;
+    }
+
+    tick(tick) {
+        console.log(this.text);
+        return this.SUCCESS;
+    }
+}
+```
+
+Example service:
+
+```javascript
+class PrintService extends RexPlugins.BehaviorTree.Service {
+    constructor(config = {}, nodePool) {
+        if (nodePool) {
+            super(config, nodePool);
+
+        } else {
+            var { text = '', interval = 70 } = config;
+            super({
+                name: 'MyPrintService',
+                interval: interval,
+                properties: { text: text },
+            });
+        }
+
+        this.text = this.properties.text;
+    }
+
+    tick(tick) {
+        console.log(this.text);
+    }
+}
+```
+
+Example expression:
+
+```javascript
+class Comparator extends RexPlugins.BehaviorTree.Expression {
+    constructor(config = {}, nodePool) {
+        var opA, cmp, opB;
+
+        if (nodePool) {
+            super(config, nodePool);
+
+            var properties = config.properties || {};
+            opA = properties.opA;
+            cmp = properties.cmp;
+            opB = properties.opB;
+
+        } else {
+            var {
+                opA: opAValue = 'true',
+                cmp: cmpValue = '==',
+                opB: opBValue = 'true'
+            } = config;
+
+            super({
+                name: 'MyComparator',
+                properties: {
+                    opA: opAValue,
+                    cmp: cmpValue,
+                    opB: opBValue,
+                },
+            });
+
+            opA = opAValue;
+            cmp = cmpValue;
+            opB = opBValue;
+        }
+
+        this.expression = `${opA}${cmp}${opB}`;
+    }
+
+    eval(tick) {
+        var context = tick.getEvalContext();
+        return tick.expressionParser.exec(this.expression, context);
+    }
+}
+```
+
+Register custom node classes when loading:
+
+```javascript
+tree.load(data, {
+    MyAction: PrintAction,
+    MyPrintService: PrintService,
+    MyComparator: Comparator
+});
+```
+
 ## Blackboard
 
 The blackboard stores execution data with global, tree, and node scopes. It can
