@@ -1,24 +1,16 @@
-import StringToNumber from '../../utils/StringToNumber.js';
-import NumberExpression from './NumberExpression.js';
+import StringExpression from './StringExpression.js';
 import IsExpressionLike from '../../utils/IsExpressionLike.js';
 import DecodeExpression from '../../utils/DecodeExpression.js';
 import ResolveNode from '../../behaviortree/dump/ResolveNode.js';
 
-var CreateNumberExpression = function (expression, nodePool) {
+var CreateStringExpression = function (expression, nodePool) {
     expression = DecodeExpression(expression, nodePool);
 
     if (expression == null) {
         return null;
     }
 
-    // Convert number-string to number
-    expression = StringToNumber(expression);
-
-    // Constant number or boolean    
     var expressionType = typeof (expression);
-    if ((expressionType === 'number') || (expressionType === 'boolean')) {
-        return expression;
-    }
 
     var node;
     if (nodePool && (expressionType === 'string')) {
@@ -30,12 +22,12 @@ var CreateNumberExpression = function (expression, nodePool) {
         node = expression;
 
     } else {
-        // Create new number expression object
-        node = new NumberExpression(expression);
+        // Create new string expression object
+        node = new StringExpression(expression);
 
     }
 
     return node;
 }
 
-export default CreateNumberExpression;
+export default CreateStringExpression;

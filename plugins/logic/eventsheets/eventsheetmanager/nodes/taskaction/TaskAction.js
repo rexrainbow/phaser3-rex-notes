@@ -1,13 +1,20 @@
 import { Action, } from '../../../../behaviortree/index.js';
 import PauseEventSheetMethods from './PauseEventSheetMethods.js';
 import IsEventEmitter from '../../../../../utils/system/IsEventEmitter.js';
-import Compile from '../../../../../math/expressionparser/utils/Complile.js';
-import mustache from 'mustache';
+import DecodeExpression from '../../../../behaviortree/utils/DecodeExpression.js';
+import CreateNumberExpression from '../../../../behaviortree/nodes/expressions/CreateNumberExpression.js';
+import CreateStringExpression from '../../../../behaviortree/nodes/expressions/CreateStringExpression.js';
+
 
 class TaskAction extends Action {
     constructor(config = {}, nodePool) {
+        var parameters;
+
         if (nodePool) {  // Rebuild node, don't touch config
             super(config, nodePool);
+
+            var expressions = config.expressions || {};
+            parameters = expressions;
 
         } else {
             // config: {name, parameters:{...} }
@@ -16,15 +23,17 @@ class TaskAction extends Action {
                 title: config.name,
                 properties: config,
             });
+
+            parameters = config.parameters;
         }
 
-        var sourceParameters = this.properties.parameters || {};
-        var taskParameters = {};
-        for (var name in sourceParameters) {
-            taskParameters[name] = CompileExpression(sourceParameters[name]);
+        var expression;
+        for (var name in parameters) {
+            // Number/String Expression nodes, or constant number/boolean/string values
+            expression = CreateExpression(parameters[name], nodePool);
+            this.addExpression(name, expression);
         }
-        this.taskParameters = taskParameters;
-
+        
         this.isRunning = false;
         this.waitId = 0;
     }
@@ -42,16 +51,12 @@ class TaskAction extends Action {
         var blackboard = tick.blackboard;
         var eventSheetManager = blackboard.eventSheetManager;
         var eventSheet = tick.tree;
-        var memory = eventSheetManager.memory;
 
-        var taskParameters = this.taskParameters;
-        var parametersCopy = {};
+        // Eval parameters
+        var taskParameters = this.expressions;
+        var evaledParameters = {};
         for (var name in taskParameters) {
-            var value = taskParameters[name];
-            if (typeof (value) === 'function') {
-                value = value(memory);
-            }
-            parametersCopy[name] = value;
+            evaledParameters[name] = tick.evalExpression(taskParameters[name]);
         }
 
         eventSheetManager.bindTaskActionNode(tick, this);
@@ -61,11 +66,11 @@ class TaskAction extends Action {
         var eventEmitter;
         var handler = commandExecutor[taskName];
         if (handler) {
-            eventEmitter = handler.call(commandExecutor, parametersCopy, eventSheetManager, eventSheet);
+            eventEmitter = handler.call(commandExecutor, evaledParameters, eventSheetManager, eventSheet);
         } else {
             handler = commandExecutor.defaultHandler;
             if (handler) {
-                eventEmitter = handler.call(commandExecutor, taskName, parametersCopy, eventSheetManager, eventSheet);
+                eventEmitter = handler.call(commandExecutor, taskName, evaledParameters, eventSheetManager, eventSheet);
             }
         }
 
@@ -91,20 +96,39 @@ class TaskAction extends Action {
     }
 }
 
-var CompileExpression = function (s) {
-    if (typeof (s) === 'string') {
-        if (s.startsWith('#(') && s.endsWith(')')) {
-            // Eval string to get number/boolean
-            s = Compile(s.substring(2, s.length - 1));
-        } else if ((s.indexOf('{{') > -1) && (s.indexOf('}}') > -1)) {
-            // Might be a string template
-            var template = s;
-            s = function (data) {
-                return mustache.render(template, data);
-            }
-        }
+var CreateExpression = function (expression, nodePool) {
+    var decodeResult = DecodeExpression(expression, nodePool);
+    if (decodeResult !== expression) {
+        return decodeResult;
     }
-    return s;
+
+    // Expression Node, string, number, boolean
+    if (typeof (expression) === 'string') {
+        if (IsNumberExpressionString(expression)) {
+            // Is a number
+            expression = RemoveNumberExpressionWrapper(expression);
+            expression = CreateNumberExpression(expression, nodePool);
+
+        } else if (IsStringExpressionString(expression)) {
+            // Might be a string tempate
+            expression = CreateStringExpression(expression, nodePool);
+
+        }
+        // else : Constant string
+    }
+    return expression;
+}
+
+var IsNumberExpressionString = function (s) {
+    return s.startsWith('#(') && s.endsWith(')')
+}
+
+var IsStringExpressionString = function (s) {
+    return (s.indexOf('{{') > -1) && (s.indexOf('}}') > -1)
+}
+
+var RemoveNumberExpressionWrapper = function (s) {
+    return s.substring(2, s.length - 1);
 }
 
 Object.assign(
