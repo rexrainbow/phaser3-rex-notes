@@ -11,6 +11,36 @@ class World {
                 coin: 10
             }
         };
+
+        this.system = {
+
+        };
+    }
+
+    getEvalContext() {
+        return this;
+    }
+
+    set(key, value) {
+        this.system[key] = value;
+        return this;
+    }
+    get(key) {
+        return this.system[key]
+    }
+    has(key) {
+        return key in this.system;
+    }
+
+    dump() {
+        var systemData = { ...this.system };
+        return {
+            system: systemData
+        }
+    }
+    load(data) {
+        this.system = data.system;
+        return this;
     }
 
     get player() {
@@ -18,8 +48,9 @@ class World {
     }
 
     get time() {
-        return 0;
+        return this.system.$currentTime;
     }
+
 }
 
 class PrintAction extends RexPlugins.BehaviorTree.Action {
@@ -41,7 +72,7 @@ class PrintAction extends RexPlugins.BehaviorTree.Action {
     }
 
     tick(tick) {
-        var context = tick.target; // target = World instance
+        var context = tick.getEvalContext();  // World instance
         // var text = mustache.render(this.text, context);  // Use mustache string template
         var text = tick.stringTemplate.render(this.text, context); // Use built-in string template
         console.log(`Print: ${text}`);
@@ -77,7 +108,7 @@ class Comparator extends RexPlugins.BehaviorTree.Expression {
     }
 
     eval(tick) {
-        var context = tick.target; // target = World instance
+        var context = tick.getEvalContext();  // World instance
         var value = tick.expressionParser.exec(this.condition, context);
         return value;
     }
@@ -103,7 +134,7 @@ class Demo extends Phaser.Scene {
 
             return btAdd.sequence({
                 children: [
-                    new PrintAction({ text: `${taskName}.Start : {{time}}, hello {{player.name}}` }),
+                    new PrintAction({ text: `${taskName}.Start : {{$time}}, hello {{player.name}}` }),
                     btAdd.wait({ duration: waitDuration }),
                     new PrintAction({ text: `${taskName}.End : {{time}}` }),
                 ]
@@ -113,7 +144,7 @@ class Demo extends Phaser.Scene {
             .setRoot(
                 btAdd.ifSelector({
                     condition: new Comparator({
-                        opA: 'player.coin', cmp: '>', opB: 'time * 10'
+                        opA: 'player.coin', cmp: '>', opB: 'time * 0.001'
                     }),
                     children: [
                         CreateTask('TaskA', 500),
@@ -123,12 +154,14 @@ class Demo extends Phaser.Scene {
 
             )
 
-        var blackboard = btAdd.blackboard();
+        var blackboard = btAdd.blackboard({
+            globalMemory: world
+        });
         var clock = this.plugins.get('rexClock').add(this);
         clock
             .on('update', function (time, delta) {
                 blackboard.setCurrentTime(time);
-                var state = tree.tick(blackboard, world);
+                var state = tree.tick(blackboard);
                 console.log(`Run tick ${state}`);
 
                 // Stop ticking

@@ -252,6 +252,82 @@ The blackboard stores execution data with global, tree, and node scopes. It can
 track a tree's last state, keep per-node memories, and supply a custom current
 time shared across ticks.
 
+### Custom global memory
+
+By default, the blackboard stores global data in a plain object. Pass
+`globalMemory` when creating a blackboard to use an application-owned context
+object instead:
+
+```javascript
+class World {
+    constructor() {
+        this.state = {
+            player: {
+                name: 'rex',
+                coin: 10
+            }
+        };
+
+        this.system = {};
+    }
+
+    getEvalContext() {
+        return this;
+    }
+
+    set(key, value) {
+        this.system[key] = value;
+        return this;
+    }
+
+    get(key) {
+        return this.system[key];
+    }
+
+    has(key) {
+        return key in this.system;
+    }
+
+    remove(key) {
+        delete this.system[key];
+        return this;
+    }
+
+    dump() {
+        return {
+            system: { ...this.system }
+        };
+    }
+
+    load(data) {
+        this.system = data.system;
+        return this;
+    }
+
+    destroy() {
+    }
+
+    get player() {
+        return this.state.player;
+    }
+}
+
+var world = new World();
+var blackboard = btAdd.blackboard({
+    globalMemory: world
+});
+```
+
+When `globalMemory` is not a plain object, the blackboard treats it as custom
+global memory. `set`, `get`, `has`, and `remove` are used by the matching
+blackboard data methods. `dump` and `load` are used when serializing or
+restoring blackboard data. `destroy` is called when the blackboard is
+destroyed.
+
+`getEvalContext` is optional. When present, expressions and string templates
+evaluate against its return value; otherwise they evaluate against the custom
+global memory object itself.
+
 ## Logic mapping
 
 ### If
@@ -348,6 +424,10 @@ Support `break` and `continue`
 A `Tick` represents one traversal of the tree. It holds references to the tree,
 blackboard, and target object, collects open nodes, and exposes helpers such as
 `currentTime` and `evalExpression`.
+
+`tick.currentTime` is required by built-in time-based nodes. `Service`,
+`Wait`, `Cooldown`, and `TimeLimit` use it to calculate elapsed time between
+ticks.
 
 #### State machine
 

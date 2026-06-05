@@ -1,7 +1,6 @@
 var IsExpressionLike = function (value) {
     return value &&
-        (typeof (value.eval) === 'function') &&
-        (typeof (value.setParent) === 'function');
+        (typeof (value._eval) === 'function');
 }
 
 export default IsExpressionLike;

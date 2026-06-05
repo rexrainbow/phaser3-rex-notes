@@ -106,6 +106,17 @@ export default class BaseNode {
         return node;
     }
 
+    getExpressionValue(tick, name) {
+        var value;
+        var expression = this.expressions[name];
+        if (IsExpressionLike(expression)) {
+            value = expression.getLastValue(tick);
+        } else {
+            value = expression;
+        }
+        return value;
+    }
+
     _execute(tick) {
         // ENTER
         this._enter(tick);

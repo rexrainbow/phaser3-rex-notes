@@ -3,11 +3,19 @@ import SetValue from '../../../utils/object/SetValue.js';
 import GetValue from '../../../utils/object/GetValue.js';
 import HasValue from '../../../utils/object/HasValue.js';
 import RemoveKey from '../../../utils/object/RemoveKey.js';
+import IsPlainObject from '../../../utils/object/IsPlainObject.js';
+
 
 class Blackboard {
 
-    constructor() {
-        this._globalMemory = {};
+    constructor(config) {
+        var {
+            globalMemory = {}
+        } = config;
+
+        // For global variables or application variables
+        this.setGlobalMemory(globalMemory);
+
         this._treeMemory = {};
 
         // Global memory : this._globalMemory
@@ -16,8 +24,22 @@ class Blackboard {
     }
 
     destroy() {
+        if (this.isCustomGlobalMemory(this._globalMemory) && this._globalMemory.destroy) {
+            this._globalMemory.destroy()
+        }
+
         this._globalMemory = undefined;
         this._treeMemory = undefined;
+    }
+
+    setGlobalMemory(memory) {
+        this._globalMemory = memory;
+        this.isPlainGlobalMemory = IsPlainObject(memory);
+        return this;
+    }
+
+    isCustomGlobalMemory(memory) {
+        return (memory === this._globalMemory) && (!this.isPlainGlobalMemory)
     }
 
     _getTreeMemory(treeID) {
@@ -56,7 +78,12 @@ class Blackboard {
 
     set(key, value, treeID, nodeID) {
         var memory = this._getMemory(treeID, nodeID);
-        SetValue(memory, key, value);
+
+        if (this.isCustomGlobalMemory(memory) && memory.set) {
+            memory.set(key, value);
+        } else {
+            SetValue(memory, key, value);
+        }
         return this;
     }
 
@@ -66,7 +93,13 @@ class Blackboard {
 
     get(key, treeID, nodeID) {
         var memory = this._getMemory(treeID, nodeID);
-        return GetValue(memory, key);
+
+        if (this.isCustomGlobalMemory(memory) && memory.get) {
+            return memory.get(key);
+        } else {
+            return GetValue(memory, key);
+        }
+
     }
 
     getData(key, treeID, nodeID) {
@@ -85,7 +118,12 @@ class Blackboard {
         }
 
         if (memory) {
-            return HasValue(memory, key);
+            if (this.isCustomGlobalMemory(memory) && memory.has) {
+                return memory.has(key);
+            } else {
+                return HasValue(memory, key);
+            }
+
         } else {
             return false;
         }
@@ -133,7 +171,13 @@ class Blackboard {
 
     removeData(key, treeID, nodeID) {
         var memory = this._getMemory(treeID, nodeID);
-        RemoveKey(memory, key);
+
+        if (this.isCustomGlobalMemory(memory) && memory.remove) {
+            memory.remove(key);
+        } else {
+            RemoveKey(memory, key);
+        }
+
     }
 
     removeTree(treeID) {
@@ -160,6 +204,14 @@ class Blackboard {
         return this.removeNode(treeID, nodeID);
     }
 
+    getEvalContext() {
+        if (this.isCustomGlobalMemory(this._globalMemory) && this._globalMemory.getEvalContext) {
+            return this._globalMemory.getEvalContext();
+        } else {
+            return this._globalMemory;
+        }
+    }
+
     getGlobalMemory() {
         return this._globalMemory;
     }
@@ -173,14 +225,27 @@ class Blackboard {
     }
 
     dump() {
+        var globalData;
+        if (this.isCustomGlobalMemory(this._globalMemory) && this._globalMemory.dump) {
+            globalData = this._globalMemory.dump();
+        } else {
+            globalData = DeepClone(this._globalMemory);
+        }
+
+        var treeData = DeepClone(this._treeMemory)
         return {
-            global: DeepClone(this._globalMemory),
-            tree: DeepClone(this._treeMemory),
+            global: globalData,
+            tree: treeData,
         }
     }
 
     load(data) {
-        this._globalMemory = DeepClone(data.global);
+        if (this.isCustomGlobalMemory(this._globalMemory) && this._globalMemory.load) {
+            this._globalMemory.load(data.global);
+        } else {
+            this._globalMemory = DeepClone(data.global);
+        }
+
         this._treeMemory = DeepClone(data.tree);
         return this;
     }

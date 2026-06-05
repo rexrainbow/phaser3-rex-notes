@@ -24,8 +24,22 @@ class Expression extends BaseNode {
         });
     }
 
+    _eval(tick) {
+        var value = this.eval(tick);
+
+        var nodeMemory = this.getNodeMemory(tick);
+        nodeMemory.$lastValue = value;  // For inspector
+
+        return value;
+    }
+
     eval(tick) {
         return 0;
+    }
+
+    getLastValue(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        return nodeMemory.$lastValue;
     }
 
 };

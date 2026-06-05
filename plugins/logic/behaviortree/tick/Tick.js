@@ -68,6 +68,18 @@ class Tick {
         return this.blackboard.getNodeMemory(this.tree.id, nodeID);
     }
 
+    get currentTime() {
+        if (this.blackboard.hasValidCurrentTime()) {
+            // Inject current-time through blackboard
+            return this.blackboard.getCurrentTime();
+        } else {
+            if (this._currentTime === undefined) {
+                this._currentTime = (new Date()).getTime();
+            }
+            return this._currentTime;
+        }
+    }
+
     get expressionParser() {
         if (!this._expressionParser) {
             this._expressionParser = new ExpressionParser({ cache: true });
@@ -94,26 +106,12 @@ class Tick {
     }
 
     getEvalContext() {
-        return this.blackboard.getGlobalMemory();
-    }
-
-    get currentTime() {
-        if (this.blackboard.hasValidCurrentTime()) {
-            // Inject current-time through blackboard
-            return this.blackboard.getCurrentTime();
-        } else {
-            if (this._currentTime === undefined) {
-                this._currentTime = (new Date()).getTime();
-            }
-            return this._currentTime;
-        }
+        return this.blackboard.getEvalContext();
     }
 
     evalExpression(expression) {
         if (IsExpressionLike(expression)) {
-            var value = expression.eval(this);
-            expression.lastValue = value;  // For inspector
-            return value;
+            return expression._eval(this);;
         }
 
         return expression;

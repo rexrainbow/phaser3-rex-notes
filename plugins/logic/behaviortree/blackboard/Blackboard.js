@@ -2,12 +2,19 @@ import Base from './Base.js';
 import { TREE_STATE } from '../constants.js';
 
 class Blackboard extends Base {
-    constructor({
-        currentTimeKey = '$currentTime'
-    } = {}) {
-        super();
+    constructor(config) {
+        super(config);
+
+        var {
+            currentTimeKey = '$currentTime'
+        } = config;
 
         this.currentTimeKey = currentTimeKey;
+        /*
+        currentTime is required by built-in time-based nodes. 
+        `Service`, `Wait`, `Cooldown`, and `TimeLimit` 
+        use it to calculate elapsed time between ticks.
+        */
     }
 
     getTreeState(treeID) {

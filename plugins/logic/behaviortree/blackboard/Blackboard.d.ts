@@ -9,9 +9,14 @@ declare namespace Blackboard {
     type MemoryType = Base.MemoryType;
 
     /**
+     * Global memory storage type.
+     */
+    type GlobalMemoryType = Base.GlobalMemoryType;
+
+    /**
      * Configuration options for creating a Blackboard.
      */
-    interface IConfig {
+    interface IConfig extends Base.IConfig {
         /**
          * Key used for current time.
          */

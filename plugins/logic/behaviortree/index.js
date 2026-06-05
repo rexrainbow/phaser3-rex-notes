@@ -7,6 +7,7 @@ import { CreateID, SetSerialNumber, SetSerialNumberPrefix, GetSerialNumber } fro
 
 import BehaviorTree from './behaviortree/BehaviorTree.js';
 import Blackboard from './blackboard/Blackboard.js';
+import ContextMemoryBase from './blackboard/ContextMemoryBase.js';
 import Tick from './tick/Tick.js';
 
 import {
@@ -72,6 +73,7 @@ export {
 
     BehaviorTree,
     Blackboard,
+    ContextMemoryBase,
     Tick,
 
     BaseNode,

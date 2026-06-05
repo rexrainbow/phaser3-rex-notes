@@ -7,13 +7,41 @@ declare namespace Base {
     type MemoryType = Record<string, any>;
 
     /**
+     * Custom global memory storage.
+     */
+    interface ICustomGlobalMemory {
+        destroy(): void;
+        dump(): MemoryType;
+        load(data: MemoryType): this;
+        get(path: string): any;
+        set(path: string, value: any): this;
+        has(path: string): boolean;
+        remove(path: string): this;
+    }
+
+    /**
+     * Global memory storage type.
+     */
+    type GlobalMemoryType = MemoryType | ICustomGlobalMemory;
+
+    /**
+     * Configuration options for creating a blackboard base.
+     */
+    interface IConfig {
+        /**
+         * Global memory storage.
+         */
+        globalMemory?: GlobalMemoryType;
+    }
+
+    /**
      * Dumped blackboard data.
      */
     interface IDumpData {
         /**
          * Global memory.
          */
-        base: Base.MemoryType,
+        global: Base.MemoryType,
         /**
          * Tree memory.
          */
@@ -28,13 +56,31 @@ declare class Base {
 
     /**
      * Create a blackboard.
+     *
+     * @param config - Configuration options.
      */
-    constructor();
+    constructor(config?: Base.IConfig);
 
     /**
      * Destroy the blackboard.
      */
     destroy(): void;
+
+    /**
+     * Set global memory storage.
+     *
+     * @param memory - Global memory storage.
+     * @returns This Base instance.
+     */
+    setGlobalMemory(memory: Base.GlobalMemoryType): this;
+
+    /**
+     * Check if a memory object is the custom global memory storage.
+     *
+     * @param memory - Memory object.
+     * @returns True if the memory object is custom global memory.
+     */
+    isCustomGlobalMemory(memory: any): boolean;
 
     /**
      * Set a value.
@@ -250,7 +296,7 @@ declare class Base {
      *
      * @returns Global memory.
      */
-    getGlobalMemory(): Base.MemoryType;
+    getGlobalMemory(): Base.GlobalMemoryType;
 
     /**
      * Get tree memory.
