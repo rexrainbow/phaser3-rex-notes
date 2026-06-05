@@ -24,6 +24,7 @@ class EventSheetManager extends EventEmitter {
         var {
             commandExecutor,
             parallel = false,
+            globalMemory = {},
         } = config;
 
         this.defaultTreeGroupName = '_';
@@ -32,7 +33,8 @@ class EventSheetManager extends EventEmitter {
         this.parallel = parallel;
 
         this.blackboard = new Blackboard({
-            currentTimeKey: '$roundCounter'
+            currentTimeKey: '$roundCounter',
+            globalMemory,
         });
         this.blackboard.eventSheetManager = this; // For TaskAction
 
@@ -90,6 +92,11 @@ class EventSheetManager extends EventEmitter {
 
     setCommandExecutor(commandExecutor) {
         this.commandExecutor = commandExecutor;
+        return this;
+    }
+
+    setGlobalMemory(memory) {
+        this.blackboard.setGlobalMemory(memory);
         return this;
     }
 

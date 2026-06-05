@@ -46,6 +46,10 @@ declare namespace EventSheetManager {
          * Enable parallel execution.
          */
         parallel?: boolean,
+        /**
+         * Global memory storage type.
+         */
+        globalMemory?: Blackboard.GlobalMemoryType
     }
 
     /**
