@@ -60,6 +60,54 @@ condition:
   - and: ["stage == 1", "boss"]    # OR ((stage == 1) && (boss))
 ```
 
+### Object: Parameter expression
+
+Invoke a method of `commandExecutor` and use its return value as the condition result.
+
+```yaml
+condition:
+  name: expressionName
+  parameters:
+    param0: value
+    param1: value
+```
+
+* **`name`**: Method name of `commandExecutor`
+* **`parameters`**: Parameters passed to this method
+* **Return value**: Boolean or number. The condition passes when this value is truthy.
+
+The method callback has this signature.
+
+```javascript
+expressionName(parameters) {
+    return value;
+}
+```
+
+Example:
+
+```javascript
+class CommandExecutor {
+    cmp({ opA, cmp, opB } = {}) {
+        switch (cmp) {
+            case '==': return opA == opB;
+            case '!=': return opA != opB;
+            case '>': return opA > opB;
+            case '>=': return opA >= opB;
+            case '<': return opA < opB;
+            case '<=': return opA <= opB;
+            default: return false;
+        }
+    }
+}
+```
+
+```yaml
+condition:
+  name: cmp
+  parameters: { opA: "#(coin)", cmp: "<", opB: "#(5)" }
+```
+
 > **Note**: When omitted or malformed, defaults to `"true"`.
 > This format also applies to any action's `condition` field (e.g., `command`, `while`, `label`, `exit`, `break`, `activate`, `deactivate`, etc.).
 
@@ -74,7 +122,7 @@ condition:
 | `type`       | Optional; defaults to `command`                                      |
 | `name`       | Command name                                                         |
 | `parameters` | Parameter object; use `#(expr)` for evaluation or `{{}}` as template |
-| `condition`  | Optional expression controlling execution                            |
+| `condition`  | Optional condition controlling execution; see [condition Format](#2-condition-format) |
 
 #### Example
 
@@ -95,7 +143,7 @@ condition:
 
 Each branch may include:
 
-* `condition`: Expression; omitted means `else`
+* `condition`: Condition expression; omitted means `else`
 * `actions`: Array of actions to execute if condition is true
 
 #### Example
@@ -119,7 +167,7 @@ Each branch may include:
 
 | Field       | Description              |
 | ----------- | ------------------------ |
-| `condition` | Expression               |
+| `condition` | Condition expression     |
 | `actions`   | Array of actions in loop |
 
 #### Example
@@ -152,7 +200,7 @@ Each branch may include:
 | Field       | Description               |
 | ----------- | ------------------------- |
 | `title`     | Block name                |
-| `condition` | Additional condition      |
+| `condition` | Additional condition expression |
 | `actions`   | Array of actions in block |
 
 #### Example
@@ -169,7 +217,7 @@ Each branch may include:
 
 | Field       | Description                          |
 |-------------|--------------------------------------|
-| `condition` | Optional expression to trigger exit  |
+| `condition` | Optional condition expression to trigger exit |
 
 Immediately terminates the event sheet.
 
@@ -182,7 +230,7 @@ Immediately terminates the event sheet.
 
 | Field       | Description                               |
 |-------------|-------------------------------------------|
-| `condition` | Optional expression to trigger the break  |
+| `condition` | Optional condition expression to trigger the break |
 
 Interrupts the current sequence (returns failure).
 
@@ -196,7 +244,7 @@ Interrupts the current sequence (returns failure).
 | Field       | Description                          |
 | ----------- | ------------------------------------ |
 | `target`    | Target event sheet title             |
-| `condition` | Optional expression to trigger call |
+| `condition` | Optional condition expression to trigger call |
 
 #### Example
 
@@ -210,7 +258,7 @@ Interrupts the current sequence (returns failure).
 | Field       | Description                          |
 | ----------- | ------------------------------------ |
 | `target`    | Target event sheet title             |
-| `condition` | Optional expression to trigger call |
+| `condition` | Optional condition expression to trigger call |
 
 #### Example
 

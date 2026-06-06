@@ -19,6 +19,18 @@ class CommandExecutor {
         setTimeout(resumeCallback, duration);
         return this;
     }
+
+    cmp({ opA, cmp, opB } = {}) {
+        switch (cmp) {
+            case '==': return opA == opB;
+            case '!=': return opA != opB;
+            case '>': return opA > opB;
+            case '>=': return opA >= opB;
+            case '<': return opA < opB;
+            case '<=': return opA <= opB;
+            default: return false;
+        }
+    }
 }
 var commandExecutor = new CommandExecutor();
 

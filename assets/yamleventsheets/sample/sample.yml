@@ -92,6 +92,20 @@ script:
       - name: print
         parameters: { text: "After break-label" }
 
+  - title: ParameterExpression test
+    type: if
+    branches:
+      - condition:
+          name: cmp
+          parameters: { opA: "#(coin)", cmp: "<", opB: "#(5)" }
+        actions:
+          - name: print
+            parameters: { text: "ParameterExpression: If (coin < 5)" }
+
+      - actions: # ELSE
+          - name: print
+            parameters: { text: "ParameterExpression: Else (coin < 5)" }
+
   - title: Exit test
     actions:
       - name: print

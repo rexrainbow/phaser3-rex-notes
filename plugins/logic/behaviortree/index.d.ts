@@ -17,6 +17,8 @@ import {
     Expression,
     NumberExpression,
     StringExpression,
+    CreateNumberExpression,
+    CreateStringExpression,
 
     Succeeder,
     Failer,
@@ -81,6 +83,8 @@ export {
     Expression,
     NumberExpression,
     StringExpression,
+    CreateNumberExpression,
+    CreateStringExpression,
 
     Succeeder,
     Failer,

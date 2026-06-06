@@ -338,12 +338,14 @@ Local memory is shared for all event sheets.
 
 ### Custom expression
 
+#### Expression parser function
+
 ```javascript
 eventSheetManager.addExpression(name, callback);
 ```
 
 - `name` : A string value
-- `callback` : A function object retuen a number
+- `callback` : A function object returns a value
     ```javascript
     function(a, b, c, ...) { return x; }
     ```
@@ -356,7 +358,55 @@ eventSheetManager.addExpression('randomInt', function (a, b) {
 });
 ```
 
-Expression will store at [local memory](#local-memory)
+Expression parser functions are stored in [local memory](#local-memory).
+
+#### Parameter expression
+
+A condition can also invoke a method of `commandExecutor` by using an object with `name` and `parameters`.
+
+```yaml
+condition:
+  name: expressionName
+  parameters:
+    param0: value
+    param1: value
+```
+
+- `name` : Method name of `commandExecutor`.
+- `parameters` : Parameters passed to this method.
+- Return value : A boolean or number value. The condition passes when this value is truthy.
+
+The method callback has this signature.
+
+```javascript
+expressionName(parameters) {
+    return value;
+}
+```
+
+For example :
+
+```javascript
+class CommandExecutor {
+    cmp({ opA, cmp, opB } = {}) {
+        switch (cmp) {
+            case '==': return opA == opB;
+            case '!=': return opA != opB;
+            case '>': return opA > opB;
+            case '>=': return opA >= opB;
+            case '<': return opA < opB;
+            case '<=': return opA <= opB;
+            default: return false;
+        }
+    }
+}
+```
+
+```yaml
+condition:
+  name: cmp
+  parameters: { opA: "#(coin)", cmp: "<", opB: "#(5)" }
+```
 
 ### States
 
@@ -442,26 +492,41 @@ fallback:
 - `active=false` : Set `active` property of this event sheet to `false`.
 - `once` : Set `once` property of this event sheet to `true`.
 - `condition` : Main condition.
-    - A string : Single boolean expression
-        ```yaml
-        condition: "hp > 0 && mp > 0"
-        ```
-    - An array : Represents OR, elements can be
-        - A string : Single expression
-        - An array : Represents AND, e.g., `["a", "b"]` -> `(a) && (b)`
-        - Object `{and: [...]}`: Equivalent to AND
-            ```yaml
-            condition:
-              - "score > 0"                    # (score > 0)
-              - ["hp > 0", "mp > 0"]           # OR ((hp > 0) && (mp > 0))
-              - and: ["stage == 1", "boss"]    # OR ((stage == 1) && (boss))
-            ```
-        - When omitted or malformed, defaults to `"true"`
-    - Read data from [local memory](yamleventsheets.md#local-memory)
+    - See [Condition expression](yamleventsheets.md#condition-expression)
 - `script` : Actions when main condition is `true`.
     - [Flow control instructions](yamleventsheets.md#flow-control-instructions)
     - Actions : [Custom command](yamleventsheets.md#custom-command)
 - `fallback` : Actions when main condition is `false`.
+
+#### Condition expression
+
+`condition` fields can be used in the main heading, branches of [If](yamleventsheets.md#if-else-if-else), [For loop](yamleventsheets.md#for-loop), [While loop](yamleventsheets.md#while-loop), [Label](yamleventsheets.md#label), flow-control actions, and [Custom command](yamleventsheets.md#custom-command).
+
+- A string : Single boolean expression.
+    ```yaml
+    condition: "hp > 0 && mp > 0"
+    ```
+    - Read data from [local memory](yamleventsheets.md#local-memory).
+    - Boolean expression AND : `&&`.
+    - Boolean expression OR : `||`.
+- An array : Represents OR, elements can be
+    - A string : Single expression
+    - An array : Represents AND, e.g., `["a", "b"]` -> `(a) && (b)`
+    - Object `{and: [...]}`: Equivalent to AND
+        ```yaml
+        condition:
+          - "score > 0"                    # (score > 0)
+          - ["hp > 0", "mp > 0"]           # OR ((hp > 0) && (mp > 0))
+          - and: ["stage == 1", "boss"]    # OR ((stage == 1) && (boss))
+        ```
+- A parameter expression object : Invoke a method of `commandExecutor` and use its return value.
+    ```yaml
+    condition:
+      name: cmp
+      parameters: { opA: "#(coin)", cmp: "<", opB: "#(5)" }
+    ```
+    - See [Parameter expression](yamleventsheets.md#parameter-expression).
+- When omitted or malformed, defaults to `"true"`.
 
 #### Flow control instructions
 
@@ -484,9 +549,7 @@ fallback:
 
 - `type: if` with `branches:`, each branch contains `condition: expression`, and `actions: `
     - `condition: expression`
-        - Read data from [local memory](yamleventsheets.md#local-memory)
-        - Boolean expression AND/OR : `&&`.
-        - Boolean expression OR : `||`.
+        - See [Condition expression](yamleventsheets.md#condition-expression).
         - No `condition` : ELSE part
     - And `actions: `, run actions when expression is `true`.
 
@@ -535,10 +598,7 @@ or
 - `type: for`
     - `init` : Actions executed at the beginning
     - `condition: expression` : Evaluate the condition at the beginning of each loop.
-        - Read data from [local memory](yamleventsheets.md#local-memory)
-        - Boolean expression AND/OR : `&&`.
-        - Boolean expression OR : `||`.
-        - No `condition` : ELSE part
+        - See [Condition expression](yamleventsheets.md#condition-expression).
     - `step` : Actions executed at the end of each loop
     - And `actions: `, the loop body.
 
@@ -598,6 +658,7 @@ or
 - `title: labelTitle` : Optional title name.
 - `actions` : Run commands sequentially
 - `condition: expression` : Run commands if `expression` return `true`, optional
+    - See [Condition expression](yamleventsheets.md#condition-expression).
     - Each custom command can have this `condition` property, including all command in [Command executor](yamleventsheets.md#command-executor)
 
 
@@ -766,6 +827,7 @@ or
                 eventSheetManager.pauseEventSheetUnitlEvent(eventEmitter, eventName);
                 ```
 - `condition: expression` : Run command if `expression` return `true`, optional
+    - See [Condition expression](yamleventsheets.md#condition-expression).
     - Each custom command can have this `condition` property, including all command in [Command executor](yamleventsheets.md#command-executor)
 
 

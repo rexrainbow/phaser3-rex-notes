@@ -1,9 +1,12 @@
 import NumberExpression from './NumberExpression';
 import StringExpression from './StringExpression';
 import CreateNumberExpression from './CreateNumberExpression';
+import CreateStringExpression from './CreateStringExpression';
+
 
 export {
-    CreateNumberExpression,
     NumberExpression,
     StringExpression,
+    CreateNumberExpression,
+    CreateStringExpression,
 }

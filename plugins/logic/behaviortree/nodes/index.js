@@ -5,9 +5,9 @@ import Decorator from './Decorator.js';
 import Service from './Service.js';
 import Expression from './Expression.js';
 import {
-    NumberExpression,
-    StringExpression,
-} from './expressions';
+    NumberExpression, StringExpression,
+    CreateNumberExpression, CreateStringExpression,
+} from './expressions/index';
 
 import Succeeder from './actions/Succeeder.js';
 import Failer from './actions/Failer.js';
@@ -50,6 +50,8 @@ export {
     Expression,
     NumberExpression,
     StringExpression,
+    CreateNumberExpression,
+    CreateStringExpression,
 
     Succeeder,
     Failer,

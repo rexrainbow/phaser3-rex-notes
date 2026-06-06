@@ -1,6 +1,11 @@
 import ResolveNode from '../behaviortree/dump/ResolveNode.js';
 
 var DecodeExpression = function (expression, nodePool, name) {
+    /* 
+    constant value: number/number-string, boolean
+    evaluation source: string
+    plain object from Load: {type: 'node'|'constant', value}
+    */
     if (!expression || (typeof (expression) !== 'object') || (typeof (expression.type) !== 'string')) {
         return expression;
     }

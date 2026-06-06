@@ -42,5 +42,24 @@ script:
               - name: print
                 parameters: { text: "IF branch: (coin < 5)" }
 
+  - title: ParameterExpressionIF branch
+    actions:
+      - type: if
+        branches:
+          - condition: 
+              name: cmp
+              parameters: { opA: "#(coin)", cmp: "<", opB: "#(5)" }
+            actions:
+              - name: print
+                parameters: { text: "IF branch: (coin > 10)" }
+          - condition: (coin > 5) && (coin <=10)
+            actions:
+              - name: print
+                parameters: { text: "IF branch: (coin > 5) && (coin <=10)" }
+          - actions:
+              - name: print
+                parameters: { text: "IF branch: (coin < 5)" }
+
+
   - name: print
     parameters: { text: "-- end --" }

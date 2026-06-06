@@ -1,3 +1,6 @@
+import ParameterExpression from '../../eventsheetmanager/nodes/parameterexpression/ParameterExpression.js';
+
+
 var GetConditionExpression = function (conditions) {
     var t = typeof (conditions);
 
@@ -5,11 +8,15 @@ var GetConditionExpression = function (conditions) {
         return 'true';
     } else if ((t === 'string') || (t === 'number')) {
         return conditions;
-    } else if (!Array.isArray(conditions) || !conditions.length) {
-        return 'true'
-    };
+    } else if (!Array.isArray(conditions)) {
+        return new ParameterExpression(conditions);
+    }
 
     // conditions is an array
+    if (conditions.length === 0) {
+        return true;
+    }
+
     var condition;
     for (var i = 0, cnt = conditions.length; i < cnt; i++) {
         condition = conditions[i];
