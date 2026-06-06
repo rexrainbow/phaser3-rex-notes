@@ -24,7 +24,7 @@ class TaskAction extends Action {
                 properties: config,
             });
 
-            parameters = config.parameters;
+            parameters = config.parameters || {};
         }
 
         var expression;
@@ -33,7 +33,7 @@ class TaskAction extends Action {
             expression = CreateExpression(parameters[name], nodePool);
             this.addExpression(name, expression);
         }
-        
+
         this.isRunning = false;
         this.waitId = 0;
     }
@@ -53,7 +53,7 @@ class TaskAction extends Action {
         var eventSheet = tick.tree;
 
         // Eval parameters
-        var taskParameters = this.expressions;
+        var taskParameters = this.expressions || {};
         var evaledParameters = {};
         for (var name in taskParameters) {
             evaledParameters[name] = tick.evalExpression(taskParameters[name]);
@@ -97,9 +97,8 @@ class TaskAction extends Action {
 }
 
 var CreateExpression = function (expression, nodePool) {
-    var decodeResult = DecodeExpression(expression, nodePool);
-    if (decodeResult !== expression) {
-        return decodeResult;
+    if (typeof (expression) !== 'string') {
+        return expression;
     }
 
     // Expression Node, string, number, boolean
