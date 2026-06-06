@@ -1,6 +1,8 @@
 import EventEmitter from '../../../utils/eventemitter/EventEmitter.js';
 import IsPlainObject from '../../../utils/object/IsPlainObject.js';
 import { BehaviorTree, Blackboard } from '../../behaviortree/index.js';
+import ExpressionParser from '../../../expressionparser.js';
+import StringTemplate from '../../../stringtemplate.js';
 import Methods from './methods/Methods.js';
 
 BehaviorTree.setStartIDValue(0);
@@ -37,6 +39,15 @@ class EventSheetManager extends EventEmitter {
             globalMemory,
         });
         this.blackboard.eventSheetManager = this; // For TaskAction
+
+        // All event sheets (BT) use the same expressionParser and stringTemplate
+        this.expressionParser = new ExpressionParser({
+            cache: true
+        });
+        this.stringTemplate = new StringTemplate({
+            expressionParser: this.expressionParser,
+            cache: true
+        })
 
         this.treeGroups = {};
 
@@ -99,7 +110,6 @@ class EventSheetManager extends EventEmitter {
         this.blackboard.setGlobalMemory(memory);
         return this;
     }
-
 }
 
 Object.assign(
