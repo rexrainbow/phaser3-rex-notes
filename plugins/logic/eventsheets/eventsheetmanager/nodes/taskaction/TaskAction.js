@@ -30,11 +30,13 @@ class TaskAction extends Action {
         CreateExpressions(this, nodePool, parameters);
 
         this.isRunning = false;
+        this.isFailure = false;   // return Failure
         this.waitId = 0;
     }
 
     open(tick) {
         this.isRunning = false;
+        this.isFailure = false;
 
         var taskData = this.properties;
 
@@ -55,27 +57,35 @@ class TaskAction extends Action {
         eventSheetManager.bindTaskActionNode(tick, this);
         // For invoking eventSheetManager.pauseEventSheet() to generate new resumeEventName
 
-        var eventEmitter;
+        var result;
         var handler = commandExecutor[taskName];
         if (handler) {
-            eventEmitter = handler.call(commandExecutor, evaledParameters, eventSheetManager, eventSheet);
+            result = handler.call(commandExecutor, evaledParameters, eventSheetManager, eventSheet);
         } else {
             handler = commandExecutor.defaultHandler;
             if (handler) {
-                eventEmitter = handler.call(commandExecutor, taskName, evaledParameters, eventSheetManager, eventSheet);
+                result = handler.call(commandExecutor, taskName, evaledParameters, eventSheetManager, eventSheet);
             }
         }
 
         eventSheetManager.unBindTaskAction(tick, this);
 
-        // Event-emitter mode
-        if (!this.isRunning && IsEventEmitter(eventEmitter)) {
-            this.pauseEventSheetUnitlEvent(tick, eventEmitter);
+        if (!this.isRunning) {
+            // Event-emitter mode
+            if (IsEventEmitter(result)) {
+                this.pauseEventSheetUnitlEvent(tick, result);
+            } else {
+                this.isFailure = (result === false) || (result === 0) || (result === null);
+            }
         }
     }
 
     tick(tick) {
-        return (this.isRunning) ? this.RUNNING : this.SUCCESS;
+        if (this.isRunning) {
+            return this.RUNNING;
+        } else {
+            return (!this.isFailure) ? this.SUCCESS : this.FAILURE;
+        }
     }
 
     close(tick) {

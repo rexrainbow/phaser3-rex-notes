@@ -806,6 +806,11 @@ or
                 ```javascript
                 eventSheetManager.pauseEventSheetUnitlEvent(eventEmitter, eventName);
                 ```
+        - Return value
+            - An event emitter : Current command returns `RUNNING` until the event emitter fires the complete event.
+            - If command execution is paused by `eventSheetManager.pauseEventSheet()`, current command returns `RUNNING` until the resume callback is invoked.
+            - `undefined` or any truthy value : Current command returns `SUCCESS`.
+            - Explicit falsy value, such as `false`, `null`, or `0` : Current command returns `FAILURE`.
     1. Otherwise, invoke `commandExecutor.defaultHandler`.
         ```javascript
         defaultHandler(commandName, config, eventSheetManager) {
@@ -826,6 +831,11 @@ or
                 ```javascript
                 eventSheetManager.pauseEventSheetUnitlEvent(eventEmitter, eventName);
                 ```
+        - Return value
+            - `undefined` or any truthy value : Current command returns `SUCCESS`.
+            - Explicit falsy value, such as `false`, `null`, or `0` : Current command returns `FAILURE`.
+            - An event emitter : Current command returns `RUNNING` until the event emitter fires the complete event.
+            - If command execution is paused by `eventSheetManager.pauseEventSheet()`, current command returns `RUNNING` until the resume callback is invoked.
 - `condition: expression` : Run command if `expression` return `true`, optional
     - See [Condition expression](yamleventsheets.md#condition-expression).
     - Each custom command can have this `condition` property, including all command in [Command executor](yamleventsheets.md#command-executor)
@@ -1765,3 +1775,22 @@ commandExecutor.addCommand(commandName, function(config, eventSheetManager){
         ```javascript
         eventSheetManager.pauseEventSheetUnitlEvent(eventEmitter, eventName);
         ```
+- Return value
+    - An event emitter : Current command returns `RUNNING` until the event emitter fires the complete event.
+    - If command execution is paused by `eventSheetManager.pauseEventSheet()`, current command returns `RUNNING` until the resume callback is invoked.
+    - `undefined` or any truthy value : Current command returns `SUCCESS`.
+    - Explicit falsy value, such as `false`, `null`, or `0` : Current command returns `FAILURE`.
+
+Returning `FAILURE` stops the remainder of the current sequence. It can be used as a guard command in behavior-tree style flows.
+
+```javascript
+commandExecutor.addCommand('condition.staminaAtLeast', function(config, eventSheetManager) {
+    var stamina = eventSheetManager.getData('stamina');
+    return stamina >= config.value;
+});
+```
+
+```yaml
+- name: condition.staminaAtLeast
+  parameters: { value: 30 }
+```
