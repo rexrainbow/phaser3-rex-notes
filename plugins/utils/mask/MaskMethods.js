@@ -35,11 +35,17 @@ var SetMask = function (gameObject, maskGameObject, invert, maskType) {
 
 }
 
+var GetMaskFilterScaleFactor = function (maskGameObject) {
+    return (maskGameObject.getMaskFilterScaleFactor) ? maskGameObject.getMaskFilterScaleFactor() : 1;
+}
+
 var WebGLSetSharedMask = function (gameObject, maskGameObject, invert) {
+    var scaleFactor = GetMaskFilterScaleFactor(maskGameObject);
+
     // Share this mask filter controller for all mask target game object
     var maskObject = maskGameObject._maskObject;
     if (!maskObject) {
-        maskObject = new MaskController(maskGameObject.scene.cameras.main, maskGameObject, invert);
+        maskObject = new MaskController(maskGameObject.scene.cameras.main, maskGameObject, invert, undefined, undefined, scaleFactor);
         maskObject.ignoreDestroy = true;
         // camera, mask, invert, viewCamera, viewTransform, scaleFactor
         maskGameObject._maskObject = maskObject;
@@ -52,6 +58,10 @@ var WebGLSetSharedMask = function (gameObject, maskGameObject, invert) {
     } else {
         if ((invert !== undefined) && (maskObject.invert !== undefined)) {
             maskObject.invert = invert;
+        }
+        if (maskObject.scaleFactor !== scaleFactor) {
+            maskObject.scaleFactor = scaleFactor;
+            maskObject.needsUpdate = true;
         }
 
     }
@@ -99,7 +109,8 @@ var WebGLSetPrivateMask = function (gameObject, maskGameObject, invert, maskType
     }
 
     var filtersList = (maskType === 'local') ? gameObject.filters.internal : gameObject.filters.external;
-    var maskObject = filtersList.addMask(maskGameObject, invert, undefined, maskType);
+    var scaleFactor = GetMaskFilterScaleFactor(maskGameObject);
+    var maskObject = filtersList.addMask(maskGameObject, invert, undefined, maskType, scaleFactor);
     gameObject.mask = maskObject;
 }
 
