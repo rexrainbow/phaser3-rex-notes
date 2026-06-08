@@ -9049,6 +9049,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Custom expression">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#expression-parser-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expression parser function
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameter-expression" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parameter expression
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -9083,6 +9107,15 @@
   <a href="#main-headings" class="md-nav__link">
     <span class="md-ellipsis">
       Main headings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#condition-expression" class="md-nav__link">
+    <span class="md-ellipsis">
+      Condition expression
     </span>
   </a>
   
@@ -16037,6 +16070,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Custom expression">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#expression-parser-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expression parser function
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameter-expression" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parameter expression
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -16071,6 +16128,15 @@
   <a href="#main-headings" class="md-nav__link">
     <span class="md-ellipsis">
       Main headings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#condition-expression" class="md-nav__link">
+    <span class="md-ellipsis">
+      Condition expression
     </span>
   </a>
   
@@ -16903,11 +16969,12 @@ And game objects with <code>'autoClear'</code> will be destroyed.</p>
 </code></pre></div></li>
 </ul>
 <h3 id="custom-expression">Custom expression<a class="headerlink" href="#custom-expression" title="Permanent link">&para;</a></h3>
+<h4 id="expression-parser-function">Expression parser function<a class="headerlink" href="#expression-parser-function" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">addExpression</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">callback</span><span class="p">);</span>
 </code></pre></div>
 <ul>
 <li><code>name</code> : A string value</li>
-<li><code>callback</code> : A function object retuen a number
+<li><code>callback</code> : A function object returns a value
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="p">,</span><span class="w"> </span><span class="p">...)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">x</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 </code></pre></div></li>
 </ul>
@@ -16916,7 +16983,44 @@ And game objects with <code>'autoClear'</code> will be destroyed.</p>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="nx">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">));</span>
 <span class="p">});</span>
 </code></pre></div>
-<p>Expression will store at <a href="#local-memory">local memory</a></p>
+<p>Expression parser functions are stored in <a href="#local-memory">local memory</a>.</p>
+<h4 id="parameter-expression">Parameter expression<a class="headerlink" href="#parameter-expression" title="Permanent link">&para;</a></h4>
+<p>A condition can also invoke a method of <code>commandExecutor</code> by using an object with <code>name</code> and <code>parameters</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">condition</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">expressionName</span>
+<span class="w">  </span><span class="nt">parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">param0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value</span>
+<span class="w">    </span><span class="nt">param1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value</span>
+</code></pre></div>
+<ul>
+<li><code>name</code> : Method name of <code>commandExecutor</code>.</li>
+<li><code>parameters</code> : Parameters passed to this method.</li>
+<li>Return value : A boolean or number value. The condition passes when this value is truthy.</li>
+</ul>
+<p>The method callback has this signature.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">expressionName</span><span class="p">(</span><span class="nx">parameters</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">value</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>For example :</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">CommandExecutor</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">cmp</span><span class="p">({</span><span class="w"> </span><span class="nx">opA</span><span class="p">,</span><span class="w"> </span><span class="nx">cmp</span><span class="p">,</span><span class="w"> </span><span class="nx">opB</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{})</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="nx">cmp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;==&#39;</span><span class="o">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">opA</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">opB</span><span class="p">;</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;!=&#39;</span><span class="o">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">opA</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">opB</span><span class="p">;</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;&gt;&#39;</span><span class="o">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">opA</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nx">opB</span><span class="p">;</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;&gt;=&#39;</span><span class="o">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">opA</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">opB</span><span class="p">;</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;&lt;&#39;</span><span class="o">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">opA</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">opB</span><span class="p">;</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;&lt;=&#39;</span><span class="o">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">opA</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="nx">opB</span><span class="p">;</span>
+<span class="w">            </span><span class="k">default</span><span class="o">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nt">condition</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cmp</span>
+<span class="w">  </span><span class="nt">parameters</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> opA</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;#(coin)&quot;</span><span class="p p-Indicator">,</span><span class="nt"> cmp</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;&quot;</span><span class="p p-Indicator">,</span><span class="nt"> opB</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;#(5)&quot;</span><span class="w"> </span><span class="p p-Indicator">}</span>
+</code></pre></div>
 <h3 id="states">States<a class="headerlink" href="#states" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Dump state of event sheets of all groups
@@ -16987,9 +17091,27 @@ And game objects with <code>'autoClear'</code> will be destroyed.</p>
 <li><code>active=false</code> : Set <code>active</code> property of this event sheet to <code>false</code>.</li>
 <li><code>once</code> : Set <code>once</code> property of this event sheet to <code>true</code>.</li>
 <li><code>condition</code> : Main condition.<ul>
-<li>A string : Single boolean expression
+<li>See <a href="./#condition-expression">Condition expression</a></li>
+</ul>
+</li>
+<li><code>script</code> : Actions when main condition is <code>true</code>.<ul>
+<li><a href="./#flow-control-instructions">Flow control instructions</a></li>
+<li>Actions : <a href="./#custom-command">Custom command</a></li>
+</ul>
+</li>
+<li><code>fallback</code> : Actions when main condition is <code>false</code>.</li>
+</ul>
+<h4 id="condition-expression">Condition expression<a class="headerlink" href="#condition-expression" title="Permanent link">&para;</a></h4>
+<p><code>condition</code> fields can be used in the main heading, branches of <a href="./#if-else-if-else">If</a>, <a href="./#for-loop">For loop</a>, <a href="./#while-loop">While loop</a>, <a href="./#label">Label</a>, flow-control actions, and <a href="./#custom-command">Custom command</a>.</p>
+<ul>
+<li>A string : Single boolean expression.
     <div class="highlight"><pre><span></span><code><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;hp</span><span class="nv"> </span><span class="s">&gt;</span><span class="nv"> </span><span class="s">0</span><span class="nv"> </span><span class="s">&amp;&amp;</span><span class="nv"> </span><span class="s">mp</span><span class="nv"> </span><span class="s">&gt;</span><span class="nv"> </span><span class="s">0&quot;</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li>Read data from <a href="./#local-memory">local memory</a>.</li>
+<li>Boolean expression AND : <code>&amp;&amp;</code>.</li>
+<li>Boolean expression OR : <code>||</code>.</li>
+</ul>
+</li>
 <li>An array : Represents OR, elements can be<ul>
 <li>A string : Single expression</li>
 <li>An array : Represents AND, e.g., <code>["a", "b"]</code> -&gt; <code>(a) &amp;&amp; (b)</code></li>
@@ -16999,18 +17121,17 @@ And game objects with <code>'autoClear'</code> will be destroyed.</p>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;hp</span><span class="nv"> </span><span class="s">&gt;</span><span class="nv"> </span><span class="s">0&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;mp</span><span class="nv"> </span><span class="s">&gt;</span><span class="nv"> </span><span class="s">0&quot;</span><span class="p p-Indicator">]</span><span class="w">           </span><span class="c1"># OR ((hp &gt; 0) &amp;&amp; (mp &gt; 0))</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">and</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;stage</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">1&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;boss&quot;</span><span class="p p-Indicator">]</span><span class="w">    </span><span class="c1"># OR ((stage == 1) &amp;&amp; (boss))</span>
 </code></pre></div></li>
-<li>When omitted or malformed, defaults to <code>"true"</code></li>
 </ul>
 </li>
-<li>Read data from <a href="./#local-memory">local memory</a></li>
+<li>A parameter expression object : Invoke a method of <code>commandExecutor</code> and use its return value.
+    <div class="highlight"><pre><span></span><code><span class="nt">condition</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cmp</span>
+<span class="w">  </span><span class="nt">parameters</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> opA</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;#(coin)&quot;</span><span class="p p-Indicator">,</span><span class="nt"> cmp</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;&quot;</span><span class="p p-Indicator">,</span><span class="nt"> opB</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;#(5)&quot;</span><span class="w"> </span><span class="p p-Indicator">}</span>
+</code></pre></div><ul>
+<li>See <a href="./#parameter-expression">Parameter expression</a>.</li>
 </ul>
 </li>
-<li><code>script</code> : Actions when main condition is <code>true</code>.<ul>
-<li><a href="./#flow-control-instructions">Flow control instructions</a></li>
-<li>Actions : <a href="./#custom-command">Custom command</a></li>
-</ul>
-</li>
-<li><code>fallback</code> : Actions when main condition is <code>false</code>.</li>
+<li>When omitted or malformed, defaults to <code>"true"</code>.</li>
 </ul>
 <h4 id="flow-control-instructions">Flow control instructions<a class="headerlink" href="#flow-control-instructions" title="Permanent link">&para;</a></h4>
 <h5 id="if-else-if-else">If, Else if, Else<a class="headerlink" href="#if-else-if-else" title="Permanent link">&para;</a></h5>
@@ -17030,9 +17151,7 @@ And game objects with <code>'autoClear'</code> will be destroyed.</p>
 <ul>
 <li><code>type: if</code> with <code>branches:</code>, each branch contains <code>condition: expression</code>, and <code>actions:</code><ul>
 <li><code>condition: expression</code><ul>
-<li>Read data from <a href="./#local-memory">local memory</a></li>
-<li>Boolean expression AND/OR : <code>&amp;&amp;</code>.</li>
-<li>Boolean expression OR : <code>||</code>.</li>
+<li>See <a href="./#condition-expression">Condition expression</a>.</li>
 <li>No <code>condition</code> : ELSE part</li>
 </ul>
 </li>
@@ -17075,10 +17194,7 @@ And game objects with <code>'autoClear'</code> will be destroyed.</p>
 <li><code>type: for</code><ul>
 <li><code>init</code> : Actions executed at the beginning</li>
 <li><code>condition: expression</code> : Evaluate the condition at the beginning of each loop.<ul>
-<li>Read data from <a href="./#local-memory">local memory</a></li>
-<li>Boolean expression AND/OR : <code>&amp;&amp;</code>.</li>
-<li>Boolean expression OR : <code>||</code>.</li>
-<li>No <code>condition</code> : ELSE part</li>
+<li>See <a href="./#condition-expression">Condition expression</a>.</li>
 </ul>
 </li>
 <li><code>step</code> : Actions executed at the end of each loop</li>
@@ -17123,6 +17239,7 @@ And game objects with <code>'autoClear'</code> will be destroyed.</p>
 <li><code>title: labelTitle</code> : Optional title name.</li>
 <li><code>actions</code> : Run commands sequentially</li>
 <li><code>condition: expression</code> : Run commands if <code>expression</code> return <code>true</code>, optional<ul>
+<li>See <a href="./#condition-expression">Condition expression</a>.</li>
 <li>Each custom command can have this <code>condition</code> property, including all command in <a href="./#command-executor">Command executor</a></li>
 </ul>
 </li>
@@ -17227,6 +17344,13 @@ And game objects with <code>'autoClear'</code> will be destroyed.</p>
 </code></pre></div></li>
 </ul>
 </li>
+<li>Return value<ul>
+<li>An event emitter : Current command returns <code>RUNNING</code> until the event emitter fires the complete event.</li>
+<li>If command execution is paused by <code>eventSheetManager.pauseEventSheet()</code>, current command returns <code>RUNNING</code> until the resume callback is invoked.</li>
+<li><code>undefined</code> or any truthy value : Current command returns <code>SUCCESS</code>.</li>
+<li>Explicit falsy value, such as <code>false</code>, <code>null</code>, or <code>0</code> : Current command returns <code>FAILURE</code>.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Otherwise, invoke <code>commandExecutor.defaultHandler</code>.
@@ -17248,11 +17372,19 @@ And game objects with <code>'autoClear'</code> will be destroyed.</p>
 </code></pre></div></li>
 </ul>
 </li>
+<li>Return value<ul>
+<li><code>undefined</code> or any truthy value : Current command returns <code>SUCCESS</code>.</li>
+<li>Explicit falsy value, such as <code>false</code>, <code>null</code>, or <code>0</code> : Current command returns <code>FAILURE</code>.</li>
+<li>An event emitter : Current command returns <code>RUNNING</code> until the event emitter fires the complete event.</li>
+<li>If command execution is paused by <code>eventSheetManager.pauseEventSheet()</code>, current command returns <code>RUNNING</code> until the resume callback is invoked.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ol>
 </li>
 <li><code>condition: expression</code> : Run command if <code>expression</code> return <code>true</code>, optional<ul>
+<li>See <a href="./#condition-expression">Condition expression</a>.</li>
 <li>Each custom command can have this <code>condition</code> property, including all command in <a href="./#command-executor">Command executor</a></li>
 </ul>
 </li>
@@ -18155,7 +18287,23 @@ can see it by <code>log.memory</code>, or get property of game object via <code>
 </code></pre></div></li>
 </ul>
 </li>
+<li>Return value<ul>
+<li>An event emitter : Current command returns <code>RUNNING</code> until the event emitter fires the complete event.</li>
+<li>If command execution is paused by <code>eventSheetManager.pauseEventSheet()</code>, current command returns <code>RUNNING</code> until the resume callback is invoked.</li>
+<li><code>undefined</code> or any truthy value : Current command returns <code>SUCCESS</code>.</li>
+<li>Explicit falsy value, such as <code>false</code>, <code>null</code>, or <code>0</code> : Current command returns <code>FAILURE</code>.</li>
 </ul>
+</li>
+</ul>
+<p>Returning <code>FAILURE</code> stops the remainder of the current sequence. It can be used as a guard command in behavior-tree style flows.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">commandExecutor</span><span class="p">.</span><span class="nx">addCommand</span><span class="p">(</span><span class="s1">&#39;condition.staminaAtLeast&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">stamina</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">getData</span><span class="p">(</span><span class="s1">&#39;stamina&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">stamina</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">config</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">condition.staminaAtLeast</span>
+<span class="w">  </span><span class="nt">parameters</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> value</span><span class="p">:</span><span class="w"> </span><span class="nv">30</span><span class="w"> </span><span class="p p-Indicator">}</span>
+</code></pre></div>
 
 
 
