@@ -1,4 +1,4 @@
-import DefaultMaskGraphics from '../../../../utils/mask/defaultmaskgraphics/DefaultMaskGraphics.js';
+import IsDefaultMaskInstance from '../../../../utils/mask/defaultmaskgameobject/IsDefaultMaskInstance.js';
 import { SetMask, ClearMask } from '../../../../utils/mask/MaskMethods.js';
 
 export default {
@@ -9,7 +9,7 @@ export default {
         }
 
         if (this.maskGameObject) {
-            if ((gameObject === true) && (this.maskGameObject instanceof DefaultMaskGraphics)) {
+            if ((gameObject === true) && (IsDefaultMaskInstance(this.maskGameObject))) {
                 return this;
             }
             if (this.maskGameObject === gameObject) {
@@ -22,7 +22,7 @@ export default {
 
         // Add new Mask Game Object
         if (gameObject === true) {
-            gameObject = new DefaultMaskGraphics(this);
+            gameObject = new RectangleMask(this);
         }
 
         gameObject
@@ -58,7 +58,7 @@ export default {
         }
 
         if (enable) {
-            // Use DefaultMaskGraphics if not given
+            // Use DefaultMaskGameObject if not given
             if (!this.maskGameObject) {
                 this.setMaskGameObject(true);
             }

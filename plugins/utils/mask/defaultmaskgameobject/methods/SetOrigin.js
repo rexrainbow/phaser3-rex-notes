@@ -1,5 +1,3 @@
-import DrawShape from './DrawShape.js';
-
 var SetOrigin = function (originX, originY) {
     if (originY === undefined) {
         originY = originX;
@@ -12,17 +10,14 @@ var SetOrigin = function (originX, originY) {
     if (originY === undefined) {
         originY = parent.originY;
     }
-    if ((this.originX === originX) && (this.originY === originY)) {
+    if ((this._maskOriginX === originX) && (this._maskOriginY === originY)) {
         return this;
     }
 
-    this.originX = originX;
-    this.originY = originY;
+    this._maskOriginX = originX;
+    this._maskOriginY = originY;
 
-    DrawShape.call(this,
-        this.width, this.height, this.padding,
-        originX, originY,
-    );
+    this._updateMaskGeometry();
     return this;
 }
 

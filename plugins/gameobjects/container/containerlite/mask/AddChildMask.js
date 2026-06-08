@@ -1,8 +1,10 @@
-import DefaultMaskGraphics from '../../../../utils/mask/defaultmaskgraphics/DefaultMaskGraphics.js';
+import CreateDefaultMaskGameObject from '../../../../utils/mask/defaultmaskgameobject/CreateDefaultMaskGameObject.js';
 import { SetMask } from '../../../../utils/mask/MaskMethods.js';
 
 var AddChildMask = function (maskTarget, sizeTarget, shape, padding) {
-    var maskGameObject = new DefaultMaskGraphics(sizeTarget, shape, padding); // A Graphics game object
+    // Rectangle or circle shape game object
+    var maskGameObject = CreateDefaultMaskGameObject(sizeTarget, shape, padding);
+
     if (maskTarget && !maskTarget.isRexSizer) { // Sizer game object can't apply mask
         SetMask(maskTarget, maskGameObject);
     }

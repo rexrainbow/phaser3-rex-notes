@@ -1,4 +1,4 @@
-import DrawShape from './DrawShape.js';
+import GetBoundsConfig from '../../../bounds/GetBoundsConfig.js';
 import IsKeyValueEqual from '../../../object/IsKeyValueEqual.js';
 import Clone from '../../../object/Clone.js';
 
@@ -17,28 +17,23 @@ var Resize = function (width, height, padding) {
         padding = GetBoundsConfig(padding);
     }
 
-    var isSizeChanged = (this.width !== width) || (this.height !== height);
+    var isSizeChanged = (this._maskWidth !== width) || (this._maskHeight !== height);
     var isPaddingChanged = (this.padding !== padding) && !IsKeyValueEqual(this.padding, padding);
     if (!isSizeChanged && !isPaddingChanged) {
         return this;
     }
 
-    this.width = width;
-    this.height = height;
+    this._maskWidth = width;
+    this._maskHeight = height;
 
     if (isPaddingChanged) {
         Clone(padding, this.padding);
     }
 
-    // Graphics does not have originX, originY properties
-    this.originX = parent.originX;
-    this.originY = parent.originY;
+    this._maskOriginX = parent.originX;
+    this._maskOriginY = parent.originY;
 
-    DrawShape.call(this,
-        width, height, padding,
-        parent.originX, parent.originY
-    );
-
+    this._updateMaskGeometry();
     return this;
 }
 
