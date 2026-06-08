@@ -7,8 +7,16 @@ var SetPosition = function (x, y) {
         y = parent.y;
     }
 
-    this.x = x;
-    this.y = y;
+    this._maskX = x;
+    this._maskY = y;
+
+    if (this._updateMaskPosition) {
+        this._updateMaskPosition();
+    } else {
+        this.x = x;
+        this.y = y;
+    }
+
     return this;
 }
 

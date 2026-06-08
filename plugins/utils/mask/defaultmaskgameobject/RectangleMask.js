@@ -4,6 +4,7 @@ import IsWebGLRenderMode from '../../system/IsWebGLRenderMode.js';
 
 import { GameObjects as PhaserGameObjects } from 'phaser';
 const Base = PhaserGameObjects.Rectangle;
+const TransformMatrix = PhaserGameObjects.Components.TransformMatrix;
 
 const MaxMaskSize = 256;
 
@@ -25,6 +26,10 @@ class RectangleMask extends Base {
         this.padding = GetBoundsConfig(padding);
         this.useMaskScaleFactor = IsWebGLRenderMode(parent.scene);
         this.maskScaleFactor = 1;
+        this._maskFilterViewTransform = new TransformMatrix();
+        this._maskFilterParentTransform = new TransformMatrix();
+        this._maskFilterController = undefined;
+        this._maskFilterType = undefined;
         this.setPosition().resize().setVisible(false);
 
         // Add to display list or container, depend on parent
@@ -37,23 +42,33 @@ class RectangleMask extends Base {
 
     _updateMaskGeometry() {
         this._updateMaskScaleFactor();
+        this._updateMaskPosition();
 
         var width = this._maskWidth;
         var height = this._maskHeight;
         var padding = this.padding;
         var originX = this._maskOriginX;
         var originY = this._maskOriginY;
-        var scale = 1 / this.maskScaleFactor;
+        var displayOriginX = (width * originX) + padding.left;
+        var displayOriginY = (height * originY) + padding.top;
 
         this.setSize(
-            (width + padding.left + padding.right) * scale,
-            (height + padding.top + padding.bottom) * scale
+            width + padding.left + padding.right,
+            height + padding.top + padding.bottom
         );
 
         this.originX = originX;
         this.originY = originY;
-        this._displayOriginX = ((width * originX) + padding.left) * scale;
-        this._displayOriginY = ((height * originY) + padding.top) * scale;
+        this._displayOriginX = displayOriginX;
+        this._displayOriginY = displayOriginY;
+
+        return this;
+    }
+
+    _updateMaskPosition() {
+        this.x = this._maskX;
+        this.y = this._maskY;
+        this.setScale(1);
 
         return this;
     }
@@ -69,12 +84,7 @@ class RectangleMask extends Base {
         var height = this._maskHeight + padding.top + padding.bottom;
 
         this.maskScaleFactor = (this.useMaskScaleFactor) ? GetAutoMaskScaleFactor(width, height) : 1;
-
-        var maskObject = this._maskObject;
-        if (maskObject) {
-            maskObject.scaleFactor = this.getMaskFilterScaleFactor();
-            maskObject.needsUpdate = true;
-        }
+        this._syncMaskFilterController(this._maskFilterController, this._maskFilterType);
 
         return this;
     }
@@ -83,8 +93,99 @@ class RectangleMask extends Base {
         return 1 / this.maskScaleFactor;
     }
 
+    _getMaskFilterViewTransform(maskType) {
+        var scale = this.getMaskFilterScaleFactor();
+
+        if (scale === 1) {
+            switch (maskType) {
+                case 'local':
+                case 'world':
+                    return maskType;
+
+                default:
+                    return 'world';
+            }
+        }
+
+        var viewTransform = this._maskFilterViewTransform;
+
+        viewTransform.applyITRS(0, 0, 0, scale, scale);
+
+        if ((maskType !== 'local') && this.parentContainer) {
+            viewTransform.multiply(
+                this.parentContainer.getWorldTransformMatrix(this._maskFilterParentTransform),
+                viewTransform
+            );
+        }
+
+        return viewTransform;
+    }
+
+    _syncMaskFilter(maskObject, maskType) {
+        if (!maskObject || !maskObject.updateDynamicTexture) {
+            return this;
+        }
+
+        maskObject._rexDefaultMaskGameObjectType = maskType;
+
+        this._maskFilterController = maskObject;
+        this._maskFilterType = maskType;
+        this._installMaskFilterSync(maskObject);
+        this._syncMaskFilterController(maskObject, maskType);
+
+        return this;
+    }
+
+    _syncMaskFilterController(maskObject, maskType) {
+        if (!maskObject || (maskObject.maskGameObject !== this)) {
+            if (this._maskFilterController === maskObject) {
+                this._maskFilterController = undefined;
+                this._maskFilterType = undefined;
+            }
+
+            return this;
+        }
+
+        var scaleFactor = this.getMaskFilterScaleFactor();
+
+        if (maskObject.scaleFactor !== scaleFactor) {
+            maskObject.scaleFactor = scaleFactor;
+        }
+
+        maskObject.viewTransform = this._getMaskFilterViewTransform(maskType);
+        maskObject.needsUpdate = true;
+
+        return this;
+    }
+
+    _installMaskFilterSync(maskObject) {
+        if (maskObject._rexDefaultMaskGameObjectUpdateDynamicTexture) {
+            return this;
+        }
+
+        var updateDynamicTexture = maskObject.updateDynamicTexture;
+
+        maskObject.updateDynamicTexture = function (width, height) {
+            var maskGameObject = this.maskGameObject;
+
+            if (maskGameObject && maskGameObject._syncMaskFilterController) {
+                maskGameObject._syncMaskFilterController(this, this._rexDefaultMaskGameObjectType);
+            }
+
+            updateDynamicTexture.call(this, width, height);
+        };
+
+        maskObject._rexDefaultMaskGameObjectUpdateDynamicTexture = updateDynamicTexture;
+
+        return this;
+    }
+
     destroy(fromScene) {
         this.parent = undefined;
+        this._maskFilterController = undefined;
+        this._maskFilterType = undefined;
+        this._maskFilterViewTransform.destroy();
+        this._maskFilterParentTransform.destroy();
         super.destroy(fromScene);
         return this;
     }
