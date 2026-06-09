@@ -128,6 +128,7 @@ export default class BaseNode {
 
         // TICK
         var status = this._tick(tick);
+        tick.emitNodeStatus(this, status);
 
         // CLOSE
         if ((status === SUCCESS) || (status === FAILURE) ||
@@ -172,6 +173,7 @@ export default class BaseNode {
 
     _abort(tick) {
         this._close(tick);
+        tick.emitNodeAbort(this);
         this.abort(tick);
     }
 

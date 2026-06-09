@@ -1,3 +1,4 @@
+import EventEmitMethods from './EventEmitMethods.js';
 import RemoveItem from '../../../utils/array/Remove.js';
 import ExpressionParser from '../../../math/expressionparser/ExpressionParser.js';
 import IsExpressionLike from '../utils/IsExpressionLike.js';
@@ -8,6 +9,10 @@ class Tick {
 
     constructor() {
         // set by BehaviorTree
+
+        this.eventEmitter = null;
+
+        this.eventEnable = false;
 
         this.tree = null;
 
@@ -27,6 +32,7 @@ class Tick {
     }
 
     destroy() {
+        this.eventEmitter = null;
         this.tree = null;
         this.blackboard = null;
         this.target = null;
@@ -121,24 +127,34 @@ class Tick {
         this._nodeCount++;
         this._openNodes.push(node);
         this._currentNode = node;
+        this.emitNodeEvent('enter', node);
     }
 
     _openNode(node) {
         this._currentNode = node;
+        this.emitNodeEvent('open', node);
     }
 
     _tickNode(node) {
         this._currentNode = node;
+        this.emitNodeEvent('tick', node);
     }
 
     _closeNode(node) {
         RemoveItem(this._openNodes, node);
         this._currentNode = node;
+        this.emitNodeEvent('close', node);
     }
 
     _exitNode(node) {
         this._currentNode = node;
+        this.emitNodeEvent('exit', node);
     }
 };
+
+Object.assign(
+    Tick.prototype,
+    EventEmitMethods,
+);
 
 export default Tick;

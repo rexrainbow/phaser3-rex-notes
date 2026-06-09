@@ -3,6 +3,7 @@ import Blackboard from '../blackboard/Base';
 import Tick from '../tick/Tick';
 import ExpressionParser from '../../../math/expressionparser/ExpressionParser';
 import StringTemplate from '../../../string/stringtemplate/StringTemplate';
+import EventEmitter from '../../../utils/eventemitter/EventEmitter';
 
 export default BehaviorTree;
 
@@ -114,7 +115,7 @@ declare namespace BehaviorTree {
 /**
  * Behavior tree runtime and configuration container.
  */
-declare class BehaviorTree {
+declare class BehaviorTree extends EventEmitter {
     /**
      * Create a BehaviorTree.
      *
@@ -266,6 +267,21 @@ declare class BehaviorTree {
     getStringTemplate(): StringTemplate;
 
     stringTemplate: StringTemplate;
+
+    /**
+     * Enable or disable runtime diagnostic events emitted by ticks.
+     *
+     * @param enable - True to enable event emission.
+     * @returns This BehaviorTree instance.
+     */
+    setEventEnable(enable?: boolean): this;
+
+    /**
+     * Toggle runtime diagnostic event emission.
+     *
+     * @returns This BehaviorTree instance.
+     */
+    toggleEventEnable(): this;
 
     /**
      * Tick the tree.

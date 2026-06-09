@@ -3,6 +3,7 @@ import Blackboard from '../blackboard/Base';
 import BaseNode from '../nodes/BaseNode';
 import ExpressionParser from '../../../math/expressionparser/ExpressionParser';
 import StringTemplate from '../../../string/stringtemplate/StringTemplate';
+import EventEmitter from '../../../utils/eventemitter/EventEmitter';
 
 export default Tick;
 
@@ -32,6 +33,14 @@ declare class Tick<T = object> {
      * Target object.
      */
     target: T;
+    /**
+     * Event emitter used by runtime diagnostic events.
+     */
+    eventEmitter: EventEmitter | null;
+    /**
+     * True when runtime diagnostic events are emitted.
+     */
+    eventEnable: boolean;
 
     /**
      * Destroy the tick context.
@@ -61,6 +70,79 @@ declare class Tick<T = object> {
      * @returns This Tick instance.
      */
     setTarget(target: T): this;
+
+    /**
+     * Set event emitter used by runtime diagnostic events.
+     *
+     * @param eventEmitter - Event emitter instance.
+     * @returns This Tick instance.
+     */
+    setEventEmitter(eventEmitter: EventEmitter | null): this;
+
+    /**
+     * Enable or disable runtime diagnostic events.
+     *
+     * @param enable - True to enable event emission.
+     * @returns This Tick instance.
+     */
+    setEventEnable(enable?: boolean): this;
+
+    /**
+     * Toggle runtime diagnostic event emission.
+     *
+     * @returns This Tick instance.
+     */
+    toggleEventEnable(): this;
+
+    /**
+     * Emit a runtime diagnostic event.
+     *
+     * @param name - Event name.
+     * @param args - Event arguments.
+     * @returns This Tick instance.
+     */
+    emit(name: string | symbol, ...args: any[]): this;
+
+    /**
+     * Emit tick start event.
+     *
+     * @returns This Tick instance.
+     */
+    emitTickStart(): this;
+
+    /**
+     * Emit tick end event.
+     *
+     * @param status - Tree status code.
+     * @returns This Tick instance.
+     */
+    emitTickEnd(status: number): this;
+
+    /**
+     * Emit a node lifecycle event.
+     *
+     * @param name - Lifecycle event suffix.
+     * @param node - Node instance.
+     * @returns This Tick instance.
+     */
+    emitNodeEvent(name: string, node: BaseNode): this;
+
+    /**
+     * Emit node status event.
+     *
+     * @param node - Node instance.
+     * @param status - Node status code.
+     * @returns This Tick instance.
+     */
+    emitNodeStatus(node: BaseNode, status: number): this;
+
+    /**
+     * Emit node abort event.
+     *
+     * @param node - Node instance.
+     * @returns This Tick instance.
+     */
+    emitNodeAbort(node: BaseNode): this;
 
     /**
      * Reset tick state.

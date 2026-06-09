@@ -1,3 +1,4 @@
+import EventEmitter from '../../../utils/eventemitter/EventEmitter.js';
 import { TREE, TREE_STATE, IDLE } from '../constants.js';
 import { CreateID, SetSerialNumber, SetSerialNumberPrefix, GetSerialNumber } from '../utils/CreateID.js';
 import DataMethods from './DataMethods.js';
@@ -6,7 +7,7 @@ import Load from './dump/Load.js';
 import Tick from '../tick/Tick.js';
 import { BreadthFirstSearch } from './Traversal.js';
 
-class BehaviorTree {
+class BehaviorTree extends EventEmitter {
 
     constructor(
         {
@@ -17,6 +18,8 @@ class BehaviorTree {
             root = null
         } = {}
     ) {
+
+        super();
 
         if (id === undefined) {
             id = CreateID();
@@ -36,12 +39,15 @@ class BehaviorTree {
 
         this._root = root;
 
-        this.ticker = (new Tick()).setTree(this);
+        this.ticker = (new Tick())
+            .setEventEmitter(this)
+            .setTree(this);
     }
 
     destroy() {
         this._root.destroy();
         this.ticker.destroy();
+        super.destroy();
 
         this._root = undefined;
         this.ticker = undefined;
@@ -151,6 +157,16 @@ class BehaviorTree {
         return this.stringTemplate;
     }
 
+    setEventEnable(enable = true) {
+        this.ticker.setEventEnable(enable);
+        return this;
+    }
+
+    toggleEventEnable() {
+        this.ticker.toggleEventEnable();
+        return this;
+    }
+
     tick(blackboard, target) {
         if (!blackboard) {
             throw 'The blackboard parameter is obligatory and must be an instance of Blackboard';
@@ -162,6 +178,8 @@ class BehaviorTree {
             .setTarget(target)
             .reset();
 
+        ticker.emitTickStart();
+
         /* TICK NODE */
         var state = this.root._execute(ticker);
 
@@ -169,6 +187,8 @@ class BehaviorTree {
         // blackboard.set('$openNodes', ticker._openNodes.slice(0), this.id);
         // blackboard.set('$nodeCount', ticker._nodeCount, this.id);
         blackboard.set(TREE_STATE, state, this.id);
+
+        ticker.emitTickEnd(state);
 
         return state;
     }
@@ -184,11 +204,15 @@ class BehaviorTree {
             .setTarget(target)
             .reset();
 
+        ticker.emitTickStart();
+
         /* ABORT NODE */
         this.root.abortChildren(ticker);
 
         /* POPULATE BLACKBOARD */
         blackboard.set(TREE_STATE, IDLE, this.id);
+
+        ticker.emitTickEnd(IDLE);
 
         return IDLE;
     }
