@@ -1,7 +1,6 @@
 import Phaser from 'phaser';
 import BehaviorTreePlugin from '../../plugins/behaviortree-plugin.js';
 import ClockPlugin from '../../plugins/clock-plugin.js';
-import { RUNNING } from '../../plugins/logic/behaviortree/constants.js';
 
 const CreateStringExpression = RexPlugins.BehaviorTree.CreateStringExpression;
 
