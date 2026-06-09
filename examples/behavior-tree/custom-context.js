@@ -53,28 +53,36 @@ class World {
 
 }
 
+const CreateStringExpression = RexPlugins.BehaviorTree.CreateStringExpression;
+
 class PrintAction extends RexPlugins.BehaviorTree.Action {
     constructor(config = {}, nodePool) {
-        if (nodePool) {  // Rebuild node, don't touch config
+        var text;
+
+        if (nodePool) {
             super(config, nodePool);
 
-        } else {  // New node
-            var { text = '' } = config;
-            super(
-                {
-                    name: 'MyAction',
-                    properties: { text: text },
-                },
-            );
+            var expressions = config.expressions || {};
+            text = expressions.text;
+
+        } else {
+            var {
+                text: textValue = ''
+            } = config;
+
+            super({
+                name: 'Print',
+                properties: { text: textValue },
+            });
+
+            text = textValue;
         }
 
-        this.text = this.properties.text;
+        this.text = this.addExpression('text', CreateStringExpression(text, nodePool));
     }
 
     tick(tick) {
-        var context = tick.getEvalContext();  // World instance
-        // var text = mustache.render(this.text, context);  // Use mustache string template
-        var text = tick.stringTemplate.render(this.text, context); // Use built-in string template
+        var text = tick.evalExpression(this.text);
         console.log(`Print: ${text}`);
         return this.SUCCESS;
     }
