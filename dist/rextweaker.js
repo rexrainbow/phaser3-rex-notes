@@ -407,7 +407,7 @@
     const RemoveItem$a = phaser.Utils.Array.Remove;
     const SKIP_CHECK_BLEND_MODE = phaser.BlendModes.SKIP_CHECK;
 
-    let Base$2 = class Base extends Zone$2 {
+    let Base$4 = class Base extends Zone$2 {
         constructor(scene, x, y, width, height) {
             if (x === undefined) {
                 x = 0;
@@ -574,7 +574,7 @@
     };
 
     const Components$3 = phaser.GameObjects.Components;
-    phaser.Class.mixin(Base$2,
+    phaser.Class.mixin(Base$4,
         [
             Components$3.Alpha,
             Components$3.Flip
@@ -582,7 +582,7 @@
     );
 
     Object.assign(
-        Base$2.prototype,
+        Base$4.prototype,
         Renderer,
     );
 
@@ -649,7 +649,7 @@
     };
 
     const GetValue$2U = phaser.Utils.Objects.GetValue;
-    const BaseAdd = Base$2.prototype.add;
+    const BaseAdd = Base$4.prototype.add;
 
     var Add$8 = function (gameObject, config) {
         this.setParent(gameObject);
@@ -797,8 +797,8 @@
         }
     };
 
-    const BaseRemove = Base$2.prototype.remove;
-    const BaseClear = Base$2.prototype.clear;
+    const BaseRemove = Base$4.prototype.remove;
+    const BaseClear = Base$4.prototype.clear;
 
     var RemoveChild$2 = {
         // Can override this method
@@ -2853,7 +2853,7 @@
         RenderTexture$1,
     );
 
-    class ContainerLite extends Base$2 {
+    class ContainerLite extends Base$4 {
         constructor(scene, x, y, width, height, children) {
             if (Array.isArray(width)) {
                 children = width;
@@ -3657,7 +3657,7 @@
 
     const GetValue$2P = phaser.Utils.Objects.GetValue;
 
-    var GetBoundsConfig$1 = function (config, out) {
+    var GetBoundsConfig = function (config, out) {
         if (config === undefined) {
             config = 0;
         }
@@ -3711,7 +3711,7 @@
             this.backgroundChildren.push(gameObject);
 
             var config = this.getSizerConfig(gameObject);
-            config.padding = GetBoundsConfig$1(paddingConfig);
+            config.padding = GetBoundsConfig(paddingConfig);
 
             if (childKey !== undefined) {
                 this.addChildrenMap(childKey, gameObject);
@@ -12301,7 +12301,7 @@
 
     const GetValue$2g = phaser.Utils.Objects.GetValue;
 
-    let Base$1 = class Base extends ContainerLite {
+    let Base$3 = class Base extends ContainerLite {
         constructor(scene, x, y, minWidth, minHeight, config) {
             super(scene, x, y, 1, 1);
             this.isRexSizer = true;
@@ -12548,7 +12548,7 @@
     };
 
     Object.assign(
-        Base$1.prototype,
+        Base$3.prototype,
         methods$n
     );
 
@@ -13227,7 +13227,7 @@
         var config = this.getSizerConfig(gameObject);
         config.proportion = proportion;
         config.align = align;
-        config.padding = GetBoundsConfig$1(paddingConfig);
+        config.padding = GetBoundsConfig(paddingConfig);
         config.expand = expand;
         config.fitRatio = (proportion === 0) ? fitRatio : 0;
         config.alignOffsetX = offsetX;
@@ -13570,7 +13570,7 @@
     const IsPlainObject$n = phaser.Utils.Objects.IsPlainObject;
     const GetValue$2e = phaser.Utils.Objects.GetValue;
 
-    class Sizer extends Base$1 {
+    class Sizer extends Base$3 {
         constructor(scene, x, y, minWidth, minHeight, orientation, config) {
             if (IsPlainObject$n(x)) {
                 config = x;
@@ -14141,7 +14141,7 @@
 
         var config = this.getSizerConfig(gameObject);
         config.align = ALIGN_CENTER$2;
-        config.padding = GetBoundsConfig$1(paddingConfig);
+        config.padding = GetBoundsConfig(paddingConfig);
         config.alignOffsetX = offsetX;
         config.alignOffsetY = offsetY;
         config.alignOffsetOriginX = offsetOriginX;
@@ -14309,7 +14309,7 @@
     const IsPlainObject$l = phaser.Utils.Objects.IsPlainObject;
     const GetValue$2c = phaser.Utils.Objects.GetValue;
 
-    class FixWidthSizer extends Base$1 {
+    class FixWidthSizer extends Base$3 {
         constructor(scene, x, y, minWidth, minHeight, config) {
             if (IsPlainObject$l(x)) {
                 config = x;
@@ -14751,8 +14751,6 @@
         methods$k,
     );
 
-    const SetPositionBase = phaser.GameObjects.Graphics.prototype.setPosition;
-
     var SetPosition$1 = function (x, y) {
         var parent = this.parent;
         if (x === undefined) {
@@ -14762,58 +14760,17 @@
             y = parent.y;
         }
 
-        SetPositionBase.call(this, x, y);
+        this._maskX = x;
+        this._maskY = y;
+
+        if (this._updateMaskPosition) {
+            this._updateMaskPosition();
+        } else {
+            this.x = x;
+            this.y = y;
+        }
+
         return this;
-    };
-
-    const RectangleGeom = phaser.Geom.Rectangle;
-    const CircleGemo = phaser.Geom.Circle;
-
-    var GetGeom = function (shapeType, width, height, padding, originX, originY, out) {
-        switch (shapeType) {
-            case 1: // circle
-                // Assume that all padding are the same value in this circle shape
-                padding = padding.left;
-                var centerX = -width * (originX - 0.5);
-                var centerY = -height * (originY - 0.5);
-                var radius = Math.min(width, height) / 2 + padding;
-
-                if ((out === undefined) || !(out instanceof (CircleGemo))) {
-                    out = new CircleGemo();
-                }
-                out.setTo(centerX, centerY, radius);
-                break;
-
-            default: // 0|'rectangle'
-                var topLeftX = -(width * originX) - padding.left;
-                var topLeftY = -(height * originY) - padding.top;
-                var rectWidth = width + padding.left + padding.right;
-                var rectHeight = height + padding.top + padding.bottom;
-
-                if ((out === undefined) || !(out instanceof (RectangleGeom))) {
-                    out = new RectangleGeom();
-                }
-                out.setTo(topLeftX, topLeftY, rectWidth, rectHeight);
-                break;
-        }
-
-        return out;
-    };
-
-    var DrawShape = function (width, height, padding, originX, originY) {
-        this.geom = GetGeom(this.shapeType, width, height, padding, originX, originY, this.geom);
-
-        this.clear().fillStyle(0xffffff);
-        switch (this.shapeType) {
-            case 1: // circle
-                // Assume that all padding are the same value in this circle shape
-                this.fillCircleShape(this.geom);
-                break;
-
-            default: // 0|'rectangle'
-                this.fillRectShape(this.geom);
-                break;
-        }
     };
 
     var IsKeyValueEqual = function (objA, objB) {
@@ -14851,28 +14808,23 @@
             padding = GetBoundsConfig(padding);
         }
 
-        var isSizeChanged = (this.width !== width) || (this.height !== height);
+        var isSizeChanged = (this._maskWidth !== width) || (this._maskHeight !== height);
         var isPaddingChanged = (this.padding !== padding) && !IsKeyValueEqual(this.padding, padding);
         if (!isSizeChanged && !isPaddingChanged) {
             return this;
         }
 
-        this.width = width;
-        this.height = height;
+        this._maskWidth = width;
+        this._maskHeight = height;
 
         if (isPaddingChanged) {
             Clone(padding, this.padding);
         }
 
-        // Graphics does not have originX, originY properties
-        this.originX = parent.originX;
-        this.originY = parent.originY;
+        this._maskOriginX = parent.originX;
+        this._maskOriginY = parent.originY;
 
-        DrawShape.call(this,
-            width, height, padding,
-            parent.originX, parent.originY
-        );
-
+        this._updateMaskGeometry();
         return this;
     };
 
@@ -14888,24 +14840,22 @@
         if (originY === undefined) {
             originY = parent.originY;
         }
-        if ((this.originX === originX) && (this.originY === originY)) {
+        if ((this._maskOriginX === originX) && (this._maskOriginY === originY)) {
             return this;
         }
 
-        this.originX = originX;
-        this.originY = originY;
+        this._maskOriginX = originX;
+        this._maskOriginY = originY;
 
-        DrawShape.call(this,
-            this.width, this.height, this.padding,
-            originX, originY,
-        );
+        this._updateMaskGeometry();
         return this;
     };
 
     var Contains$1 = function (x, y) {
-        x -= this.x;
-        y -= this.y;
-        return this.geom.contains(x, y);
+        var localPoint = this.getLocalPoint(x, y, this._maskLocalPoint);
+        this._maskLocalPoint = localPoint;
+
+        return this.geom.contains(localPoint.x, localPoint.y);
     };
 
     var Methods$b = {
@@ -14915,47 +14865,32 @@
         contains: Contains$1,
     };
 
-    const Graphics = phaser.GameObjects.Graphics;
+    const TransformMatrix$3 = phaser.GameObjects.Components.TransformMatrix;
 
-    class DefaultMaskGraphics extends Graphics {
-        constructor(parent, shapeType, padding) {
-            if (shapeType === undefined) {
-                shapeType = 0;
-            }
-            if (typeof (shapeType) === 'string') {
-                shapeType = SHAPEMODE[shapeType];
-            }
-
-            super(parent.scene);
-            this.parent = parent;
-            this.shapeType = shapeType;
-            this.padding = GetBoundsConfig$1(padding);
-            this.setPosition().resize().setVisible(false);
-
-            // Add to display list or container, depend on parent
-            if (parent.parentContainer) {
-                parent.parentContainer.add(this);
-            } else {
-                parent.scene.add.existing(this);
-            }
+    var GetMaskFilterViewTransformByScaleFactor = function (maskGameObject, scaleFactor, maskType, viewTransform) {
+        // maskType: 'local' or 'world'
+        if (scaleFactor === 1) {
+            return maskType;
         }
 
-        destroy() {
-            this.parent = undefined;
-            super.destroy();
-            return this;
+        if (viewTransform === undefined) {
+            viewTransform = new TransformMatrix$3();
         }
-    }
 
-    const SHAPEMODE = {
-        rectangle: 0,
-        circle: 1,
+        var scale = 1 / scaleFactor;
+        viewTransform.applyITRS(0, 0, 0, scale, scale);
+
+        if ((maskType === 'world') && maskGameObject.parentContainer) {
+            viewTransform.multiply(
+                maskGameObject.parentContainer.getWorldTransformMatrix(ParentTransform),
+                viewTransform
+            );
+        }
+
+        return viewTransform;
     };
 
-    Object.assign(
-        DefaultMaskGraphics.prototype,
-        Methods$b
-    );
+    const ParentTransform = new TransformMatrix$3();
 
     var GetRenderer = function (scene) {
         scene = GetSceneObject(scene);
@@ -14975,6 +14910,256 @@
         return !!renderer.gl;
     };
 
+    const Base$2 = phaser.GameObjects.Rectangle;
+    const TransformMatrix$2 = phaser.GameObjects.Components.TransformMatrix;
+
+    const MaxMaskSize = 256;
+
+    var GetAutoMaskScaleFactor = function (width, height) {
+        var maxSize = Math.max(width, height);
+        var scaleFactor = 1;
+
+        while ((maxSize / scaleFactor) > MaxMaskSize) {
+            scaleFactor *= 2;
+        }
+
+        return scaleFactor;
+    };
+
+    class RectangleMask extends Base$2 {
+        constructor(parent, padding) {
+            super(parent.scene, 0, 0, 1, 1, 0xffffff, 1);
+            this.parent = parent;
+            this.padding = GetBoundsConfig(padding);
+            this.useMaskScaleFactor = IsWebGLRenderMode(parent.scene);
+            this.maskScaleFactor = 1;
+            this._maskFilterViewTransform = new TransformMatrix$2();
+            this._maskFilterController = undefined;
+            this._maskFilterType = undefined;
+            this.setPosition().resize().setVisible(false);
+
+            // Add to display list or container, depend on parent
+            if (parent.parentContainer) {
+                parent.parentContainer.add(this);
+            } else {
+                parent.scene.add.existing(this);
+            }
+        }
+
+        _updateMaskGeometry() {
+            this._updateMaskScaleFactor();
+            this._updateMaskPosition();
+
+            var width = this._maskWidth;
+            var height = this._maskHeight;
+            var padding = this.padding;
+            var originX = this._maskOriginX;
+            var originY = this._maskOriginY;
+            var displayOriginX = (width * originX) + padding.left;
+            var displayOriginY = (height * originY) + padding.top;
+
+            this.setSize(
+                width + padding.left + padding.right,
+                height + padding.top + padding.bottom
+            );
+
+            this.originX = originX;
+            this.originY = originY;
+            this._displayOriginX = displayOriginX;
+            this._displayOriginY = displayOriginY;
+
+            return this;
+        }
+
+        _updateMaskPosition() {
+            this.x = this._maskX;
+            this.y = this._maskY;
+            this.setScale(1);
+
+            return this;
+        }
+
+        _updateMaskScaleFactor() {
+            var padding = this.padding;
+            if ((this._maskWidth === undefined) || (this._maskHeight === undefined)) {
+                this.maskScaleFactor = 1;
+                return this;
+            }
+
+            var width = this._maskWidth + padding.left + padding.right;
+            var height = this._maskHeight + padding.top + padding.bottom;
+
+            this.maskScaleFactor = (this.useMaskScaleFactor) ? GetAutoMaskScaleFactor(width, height) : 1;
+            this._syncMaskFilterController(this._maskFilterController, this._maskFilterType);
+
+            return this;
+        }
+
+        getMaskFilterScaleFactor() {
+            return 1 / this.maskScaleFactor;
+        }
+
+        _syncMaskFilter(maskObject, maskType) {
+            if (!maskObject || !maskObject.updateDynamicTexture) {
+                return this;
+            }
+
+            maskObject._rexDefaultMaskGameObjectType = maskType;
+
+            this._maskFilterController = maskObject;
+            this._maskFilterType = maskType;
+            this._installMaskFilterSync(maskObject);
+            this._syncMaskFilterController(maskObject, maskType);
+
+            return this;
+        }
+
+        _syncMaskFilterController(maskObject, maskType) {
+            if (!maskObject || (maskObject.maskGameObject !== this)) {
+                if (this._maskFilterController === maskObject) {
+                    this._maskFilterController = undefined;
+                    this._maskFilterType = undefined;
+                }
+
+                return this;
+            }
+
+            var scaleFactor = this.getMaskFilterScaleFactor();
+
+            if (maskObject.scaleFactor !== scaleFactor) {
+                maskObject.scaleFactor = scaleFactor;
+            }
+
+            var normalizeMaskType = ((maskType === 'local') || (maskType === 'world')) ? maskType : 'world';
+            maskObject.viewTransform = GetMaskFilterViewTransformByScaleFactor(
+                this,
+                this.maskScaleFactor,
+                normalizeMaskType,
+                this._maskFilterViewTransform
+            );
+            maskObject.needsUpdate = true;
+
+            return this;
+        }
+
+        _installMaskFilterSync(maskObject) {
+            if (maskObject._rexDefaultMaskGameObjectUpdateDynamicTexture) {
+                return this;
+            }
+
+            var updateDynamicTexture = maskObject.updateDynamicTexture;
+
+            maskObject.updateDynamicTexture = function (width, height) {
+                var maskGameObject = this.maskGameObject;
+
+                if (maskGameObject && maskGameObject._syncMaskFilterController) {
+                    maskGameObject._syncMaskFilterController(this, this._rexDefaultMaskGameObjectType);
+                }
+
+                updateDynamicTexture.call(this, width, height);
+            };
+
+            maskObject._rexDefaultMaskGameObjectUpdateDynamicTexture = updateDynamicTexture;
+
+            return this;
+        }
+
+        destroy(fromScene) {
+            this.parent = undefined;
+            this._maskFilterController = undefined;
+            this._maskFilterType = undefined;
+            this._maskFilterViewTransform.destroy();
+            super.destroy(fromScene);
+            return this;
+        }
+
+    }
+
+    Object.assign(
+        RectangleMask.prototype,
+        Methods$b
+    );
+
+    const Base$1 = phaser.GameObjects.Arc;
+
+    class CircleMask extends Base$1 {
+        constructor(parent, padding) {
+            super(parent.scene, 0, 0, 1, 0, 360, false, 0xffffff, 1);
+            this.parent = parent;
+            this.padding = GetBoundsConfig(padding);
+            this.setPosition().resize().setVisible(false);
+
+            // Add to display list or container, depend on parent
+            if (parent.parentContainer) {
+                parent.parentContainer.add(this);
+            } else {
+                parent.scene.add.existing(this);
+            }
+        }
+
+        _updateMaskGeometry() {
+            var width = this._maskWidth;
+            var height = this._maskHeight;
+            var padding = this.padding;
+            var originX = this._maskOriginX;
+            var originY = this._maskOriginY;
+            var radius = (Math.min(width, height) / 2) + padding.left;
+            var diameter = radius * 2;
+            var displayOriginX = radius + (width * (originX - 0.5));
+            var displayOriginY = radius + (height * (originY - 0.5));
+
+            this.setRadius(radius);
+            this.geom.setTo(radius, radius, radius);
+
+            this.originX = (diameter === 0) ? 0.5 : displayOriginX / diameter;
+            this.originY = (diameter === 0) ? 0.5 : displayOriginY / diameter;
+            this._displayOriginX = displayOriginX;
+            this._displayOriginY = displayOriginY;
+
+            return this;
+        }
+
+        destroy(fromScene) {
+            this.parent = undefined;
+            super.destroy(fromScene);
+            return this;
+        }
+
+    }
+
+    Object.assign(
+        CircleMask.prototype,
+        Methods$b
+    );
+
+    var CreateDefaultMaskGameObject = function (parent, shapeType, padding) {
+        if (shapeType === undefined) {
+            shapeType = 0;
+        }
+
+        var MaskGameObjectClass;
+
+        switch (shapeType) {
+            case 0:
+            case 'rectangle':
+                MaskGameObjectClass = RectangleMask;
+                break;
+
+            case 1:
+            case 'circle':
+                MaskGameObjectClass = CircleMask;
+                break;
+
+            default:
+                MaskGameObjectClass = RectangleMask;
+                break;
+        }
+
+        var maskGameObject = new MaskGameObjectClass(parent, padding);
+
+        return maskGameObject;
+    };
+
     const MaskController = phaser.Filters.Mask;
 
     var SetMask = function (gameObject, maskGameObject, invert, maskType) {
@@ -14984,7 +15169,7 @@
             if (maskType === undefined) {
                 maskType = 'shared';
             }
-            maskGameObject._maskTpe = maskType;
+            maskGameObject._maskType = maskType;
 
             switch (maskType) {
                 case 'local':
@@ -14999,7 +15184,7 @@
 
             /*
             gameObject.mask
-            maskGameObject._maskTpe
+            maskGameObject._maskType
             */
 
         } else {
@@ -15009,24 +15194,75 @@
 
     };
 
+    var SyncMaskFilter = function (maskGameObject, maskObject, maskType) {
+        if (maskGameObject._syncMaskFilter) {
+            // Set scaleFactor and viewTransform in maskGameObject._syncMaskFilter()
+            maskGameObject._syncMaskFilter(maskObject, maskType);
+        }
+    };
+
+    var WarnInvalidMaskFilterUsage = function (message) {
+        if ((typeof console !== 'undefined') && console.warn) {
+            console.warn(message);
+        }
+    };
+
+    var AssignMaskObject = function (maskGameObject, maskObject, maskObjectType, maskTarget, maskType) {
+        /*
+        maskObjectType:
+
+        - 'shared'：WebGL shared mask filter
+        - 'local'：WebGL private internal/local mask filter
+        - 'world'：WebGL private external/world mask filter
+        - 'canvas'：Canvas GeometryMask
+
+        maskType: undefined('shared'), 'local', or 'world'
+        */
+         
+        maskGameObject._maskObject = maskObject;
+        maskGameObject._maskObjectType = maskObjectType;
+        maskGameObject._maskTarget = maskTarget;
+
+        if (maskObject) {
+            maskObject._maskType = maskType;
+        }
+    };
+
+    var ClearAssignedMaskObject = function (maskGameObject, maskObject) {
+        if (maskGameObject._maskObject !== maskObject) {
+            return;
+        }
+
+        maskGameObject._maskObject = undefined;
+        maskGameObject._maskObjectType = undefined;
+        maskGameObject._maskTarget = undefined;
+    };
+
     var WebGLSetSharedMask = function (gameObject, maskGameObject, invert) {
-        // Share this mask filter controller for all mask target game object
+        // Share this mask filter controller for all mask target game objects
         var maskObject = maskGameObject._maskObject;
         if (!maskObject) {
             maskObject = new MaskController(maskGameObject.scene.cameras.main, maskGameObject, invert);
             maskObject.ignoreDestroy = true;
-            // camera, mask, invert, viewCamera, viewTransform, scaleFactor
-            maskGameObject._maskObject = maskObject;
+            AssignMaskObject(maskGameObject, maskObject, 'shared', undefined, maskGameObject._maskType);
+            SyncMaskFilter(maskGameObject, maskObject, maskGameObject._maskType);
             // Destroy mask object when mask source game object is destroyed
             maskGameObject.once('destroy', function () {
                 maskObject.destroy();
-                maskGameObject._maskObject = undefined;
+                ClearAssignedMaskObject(maskGameObject, maskObject);
             });
 
         } else {
+            if (maskGameObject._maskObjectType !== 'shared') {
+                WarnInvalidMaskFilterUsage('MaskMethods: this mask game object is already used by a private mask filter.');
+                return;
+            }
+
             if ((invert !== undefined) && (maskObject.invert !== undefined)) {
                 maskObject.invert = invert;
             }
+            AssignMaskObject(maskGameObject, maskObject, 'shared', undefined, maskGameObject._maskType);
+            SyncMaskFilter(maskGameObject, maskObject, maskGameObject._maskType);
 
         }
 
@@ -15073,7 +15309,21 @@
         }
 
         var filtersList = (maskType === 'local') ? gameObject.filters.internal : gameObject.filters.external;
+        if (maskGameObject._maskObject) {
+            if (maskGameObject._maskObjectType === 'shared') {
+                WarnInvalidMaskFilterUsage('MaskMethods: this mask game object is already used by a shared mask filter.');
+                return;
+            }
+
+            if (maskGameObject._maskTarget !== gameObject) {
+                WarnInvalidMaskFilterUsage('MaskMethods: a private mask filter can only be used by one target game object.');
+                return;
+            }
+        }
+
         var maskObject = filtersList.addMask(maskGameObject, invert, undefined, maskType);
+        AssignMaskObject(maskGameObject, maskObject, maskType, gameObject, maskType);
+        SyncMaskFilter(maskGameObject, maskObject, maskType);
         gameObject.mask = maskObject;
     };
 
@@ -15082,11 +15332,11 @@
         var maskObject = maskGameObject._maskObject;
         if (!maskObject) {
             maskObject = maskGameObject.createGeometryMask();
-            maskGameObject._maskObject = maskObject;
+            AssignMaskObject(maskGameObject, maskObject, 'canvas', undefined, undefined);
             // Destroy mask object when mask source game object is destroyed
             maskGameObject.once('destroy', function () {
                 maskObject.destroy();
-                maskGameObject._maskObject = undefined;
+                ClearAssignedMaskObject(maskGameObject, maskObject);
             });
         }
 
@@ -15099,11 +15349,11 @@
         }
 
         if (IsWebGLRenderMode(gameObject)) {
-            var maskTpe = gameObject.mask.maskGameObject._maskTpe;
-            switch (maskTpe) {
+            var maskType = gameObject.mask._maskType || gameObject.mask.maskGameObject._maskType;
+            switch (maskType) {
                 case 'local':
                 case 'world':
-                    WebGLClearPrivateMask(gameObject, maskTpe);
+                    WebGLClearPrivateMask(gameObject, maskType);
                     break;
                 default: // shared
                     WebglClearSharedMask(gameObject);
@@ -15124,12 +15374,15 @@
         gameObject.mask = null;
     };
 
-    var WebGLClearPrivateMask = function (gameObject, maskTpe) {
+    var WebGLClearPrivateMask = function (gameObject, maskType) {
         if (!gameObject.mask) {
             return;
         }
-        var filtersList = (maskTpe === 'local') ? gameObject.filters.internal : gameObject.filters.external;
-        filtersList.remove(gameObject.mask, true);
+        var maskObject = gameObject.mask;
+        var maskGameObject = maskObject.maskGameObject;
+        var filtersList = (maskType === 'local') ? gameObject.filters.internal : gameObject.filters.external;
+        ClearAssignedMaskObject(maskGameObject, maskObject);
+        filtersList.remove(maskObject, true);
         gameObject.mask = null;
     };
 
@@ -15138,7 +15391,9 @@
     };
 
     var AddChildMask = function (maskTarget, sizeTarget, shape, padding) {
-        var maskGameObject = new DefaultMaskGraphics(sizeTarget, shape, padding); // A Graphics game object
+        // Rectangle or circle shape game object
+        var maskGameObject = CreateDefaultMaskGameObject(sizeTarget, shape, padding);
+
         if (maskTarget && !maskTarget.isRexSizer) { // Sizer game object can't apply mask
             SetMask(maskTarget, maskGameObject);
         }
@@ -33538,7 +33793,7 @@ void main (void) {
 
         var config = this.getSizerConfig(gameObject);
         config.align = align;
-        config.padding = GetBoundsConfig$1(paddingConfig);
+        config.padding = GetBoundsConfig(paddingConfig);
 
         if (IsPlainObject$d(expand)) {
             config.expandWidth = GetValue$1H(expand, 'width', false);
@@ -33861,7 +34116,7 @@ void main (void) {
     const IsPlainObject$c = phaser.Utils.Objects.IsPlainObject;
     const GetValue$1F = phaser.Utils.Objects.GetValue;
 
-    class GridSizer extends Base$1 {
+    class GridSizer extends Base$3 {
         constructor(scene, x, y, minWidth, minHeight, columnCount, rowCount, columnProportions, rowProportions, config) {
             if (IsPlainObject$c(x)) {
                 config = x;
@@ -36665,7 +36920,7 @@ void main (void) {
     const GetValue$1t = phaser.Utils.Objects.GetValue;
     const ALIGN_LEFTTOP$1 = phaser.Display.Align.TOP_LEFT;
 
-    class BaseTextBlock extends Base$1 {
+    class BaseTextBlock extends Base$3 {
         constructor(scene, x, y, minWidth, minHeight, config) {
             if (IsPlainObject$a(x)) {
                 config = x;
@@ -36716,7 +36971,7 @@ void main (void) {
 
             var sizerConfig = this.getSizerConfig(textObject);
             sizerConfig.align = ALIGN_LEFTTOP$1;
-            sizerConfig.padding = GetBoundsConfig$1(0);
+            sizerConfig.padding = GetBoundsConfig(0);
             sizerConfig.expand = true;
             this.textObject = textObject;
 
@@ -39849,7 +40104,7 @@ void main (void) {
 
         config.align = align;
 
-        config.padding = GetBoundsConfig$1(padding);
+        config.padding = GetBoundsConfig(padding);
 
         if (IsPlainObject$8(expand)) {
             config.expandWidth = NormalizeExpand(GetValue$1i(expand, 'width', false));
@@ -39968,7 +40223,7 @@ void main (void) {
     const IsPlainObject$7 = phaser.Utils.Objects.IsPlainObject;
     const GetValue$1h = phaser.Utils.Objects.GetValue;
 
-    class OverlapSizer extends Base$1 {
+    class OverlapSizer extends Base$3 {
         constructor(scene, x, y, minWidth, minHeight, config) {
             if (IsPlainObject$7(x)) {
                 config = x;
@@ -42276,7 +42531,7 @@ void main (void) {
     const GetValue$10 = phaser.Utils.Objects.GetValue;
     const ALIGN_LEFTTOP = phaser.Display.Align.TOP_LEFT;
 
-    class ScrollableBlock extends Base$1 {
+    class ScrollableBlock extends Base$3 {
         constructor(scene, x, y, minWidth, minHeight, config) {
             if (IsPlainObject$5(x)) {
                 config = x;

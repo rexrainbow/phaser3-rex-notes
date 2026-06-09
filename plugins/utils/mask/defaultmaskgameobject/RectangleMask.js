@@ -1,5 +1,6 @@
 import Methods from './methods/Methods.js';
 import GetBoundsConfig from '../../bounds/GetBoundsConfig.js';
+import GetMaskFilterViewTransformByScaleFactor from '../GetMaskFilterViewTransformByScaleFactor.js';
 import IsWebGLRenderMode from '../../system/IsWebGLRenderMode.js';
 
 import { GameObjects as PhaserGameObjects } from 'phaser';
@@ -27,7 +28,6 @@ class RectangleMask extends Base {
         this.useMaskScaleFactor = IsWebGLRenderMode(parent.scene);
         this.maskScaleFactor = 1;
         this._maskFilterViewTransform = new TransformMatrix();
-        this._maskFilterParentTransform = new TransformMatrix();
         this._maskFilterController = undefined;
         this._maskFilterType = undefined;
         this.setPosition().resize().setVisible(false);
@@ -93,34 +93,6 @@ class RectangleMask extends Base {
         return 1 / this.maskScaleFactor;
     }
 
-    _getMaskFilterViewTransform(maskType) {
-        var scale = this.getMaskFilterScaleFactor();
-
-        if (scale === 1) {
-            switch (maskType) {
-                case 'local':
-                case 'world':
-                    return maskType;
-
-                default:
-                    return 'world';
-            }
-        }
-
-        var viewTransform = this._maskFilterViewTransform;
-
-        viewTransform.applyITRS(0, 0, 0, scale, scale);
-
-        if ((maskType !== 'local') && this.parentContainer) {
-            viewTransform.multiply(
-                this.parentContainer.getWorldTransformMatrix(this._maskFilterParentTransform),
-                viewTransform
-            );
-        }
-
-        return viewTransform;
-    }
-
     _syncMaskFilter(maskObject, maskType) {
         if (!maskObject || !maskObject.updateDynamicTexture) {
             return this;
@@ -152,7 +124,13 @@ class RectangleMask extends Base {
             maskObject.scaleFactor = scaleFactor;
         }
 
-        maskObject.viewTransform = this._getMaskFilterViewTransform(maskType);
+        var normalizeMaskType = ((maskType === 'local') || (maskType === 'world')) ? maskType : 'world';
+        maskObject.viewTransform = GetMaskFilterViewTransformByScaleFactor(
+            this,
+            this.maskScaleFactor,
+            normalizeMaskType,
+            this._maskFilterViewTransform
+        );
         maskObject.needsUpdate = true;
 
         return this;
@@ -185,7 +163,6 @@ class RectangleMask extends Base {
         this._maskFilterController = undefined;
         this._maskFilterType = undefined;
         this._maskFilterViewTransform.destroy();
-        this._maskFilterParentTransform.destroy();
         super.destroy(fromScene);
         return this;
     }

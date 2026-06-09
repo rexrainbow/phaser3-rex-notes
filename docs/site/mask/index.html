@@ -6571,6 +6571,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#scalefactor-and-viewtransform" class="md-nav__link">
+    <span class="md-ellipsis">
+      scaleFactor and viewTransform
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -15193,6 +15202,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#scalefactor-and-viewtransform" class="md-nav__link">
+    <span class="md-ellipsis">
+      scaleFactor and viewTransform
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -15252,10 +15270,12 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">maskObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gameObject</span>
 <span class="w">    </span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">external</span><span class="p">.</span><span class="nx">addMask</span><span class="p">(</span><span class="nx">maskGameObject</span><span class="p">)</span>
 <span class="w">    </span><span class="c1">// .filters.external.addMask(maskGameObject, invert, viewCamera, &#39;world&#39;, scaleFactor)</span>
+<span class="w">    </span><span class="c1">// .filters.external.addMask(maskGameObject, invert, viewCamera, viewTransform, scaleFactor)</span>
 </code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">maskObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gameObject</span>
 <span class="w">    </span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">internal</span><span class="p">.</span><span class="nx">addMask</span><span class="p">(</span><span class="nx">maskGameObject</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;local&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">)</span>
 <span class="w">    </span><span class="c1">// .filters.internal.addMask(maskGameObject, invert, viewCamera, &#39;local&#39;, scaleFactor)</span>
+<span class="w">    </span><span class="c1">// .filters.internal.addMask(maskGameObject, invert, viewCamera, viewTransform, scaleFactor)</span>
 </code></pre></div></li>
 <li>clear mask object
     <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">external</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">maskObject</span><span class="p">)</span>
@@ -15281,6 +15301,39 @@
     <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">external</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">maskObject</span><span class="p">)</span>
 </code></pre></div></li>
 </ol>
+<h4 id="scalefactor-and-viewtransform"><code>scaleFactor</code> and <code>viewTransform</code><a class="headerlink" href="#scalefactor-and-viewtransform" title="Permanent link">&para;</a></h4>
+<p>When <code>scaleFactor</code> is not <code>1</code>, the mask texture size is changed, but the mask
+game object's capture transform is not adjusted automatically. In this case,
+do not pass <code>'local'</code> or <code>'world'</code> directly as <code>viewTransform</code>; create a
+<code>TransformMatrix</code> that applies the matching scale, as shown below.</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">GameObjects</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">PhaserGameObjects</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser&#39;</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">TransformMatrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">PhaserGameObjects</span><span class="p">.</span><span class="nx">Components</span><span class="p">.</span><span class="nx">TransformMatrix</span><span class="p">;</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">GetMaskFilterViewTransformByScaleFactor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">maskGameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">scaleFactor</span><span class="p">,</span><span class="w"> </span><span class="nx">maskType</span><span class="p">,</span><span class="w"> </span><span class="nx">viewTransform</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// maskType: &#39;local&#39; or &#39;world&#39;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">scaleFactor</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">maskType</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">viewTransform</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="kc">undefined</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">viewTransform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">TransformMatrix</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">scaleFactor</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">viewTransform</span><span class="p">.</span><span class="nx">applyITRS</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">scale</span><span class="p">,</span><span class="w"> </span><span class="nx">scale</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="nx">maskType</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;world&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">maskGameObject</span><span class="p">.</span><span class="nx">parentContainer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">viewTransform</span><span class="p">.</span><span class="nx">multiply</span><span class="p">(</span>
+<span class="w">            </span><span class="nx">maskGameObject</span><span class="p">.</span><span class="nx">parentContainer</span><span class="p">.</span><span class="nx">getWorldTransformMatrix</span><span class="p">(</span><span class="nx">ParentTransform</span><span class="p">),</span>
+<span class="w">            </span><span class="nx">viewTransform</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">viewTransform</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">ParentTransform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">TransformMatrix</span><span class="p">();</span>
+</code></pre></div>
 <h3 id="canvas-render-mode">CANVAS render mode<a class="headerlink" href="#canvas-render-mode" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Create mask game object, from <a href="../graphics/">Graphics</a> game object

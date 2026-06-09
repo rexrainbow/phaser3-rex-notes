@@ -23,11 +23,13 @@ Apply mask on game object or camera.
     var maskObject = gameObject
         .filters.external.addMask(maskGameObject)
         // .filters.external.addMask(maskGameObject, invert, viewCamera, 'world', scaleFactor)
+        // .filters.external.addMask(maskGameObject, invert, viewCamera, viewTransform, scaleFactor)
     ```
     ```javascript
     var maskObject = gameObject
         .filters.internal.addMask(maskGameObject, undefined, undefined, 'local', undefined)
         // .filters.internal.addMask(maskGameObject, invert, viewCamera, 'local', scaleFactor)
+        // .filters.internal.addMask(maskGameObject, invert, viewCamera, viewTransform, scaleFactor)
     ```
 1. clear mask object
     ```javascript
@@ -58,6 +60,43 @@ Apply mask on game object or camera.
     ```javascript
     gameObject.filters.external.remove(maskObject)
     ```
+
+####  `scaleFactor` and `viewTransform`
+
+When `scaleFactor` is not `1`, the mask texture size is changed, but the mask
+game object's capture transform is not adjusted automatically. In this case,
+do not pass `'local'` or `'world'` directly as `viewTransform`; create a
+`TransformMatrix` that applies the matching scale, as shown below.
+
+```javascript
+import { GameObjects as PhaserGameObjects } from 'phaser';
+const TransformMatrix = PhaserGameObjects.Components.TransformMatrix;
+
+var GetMaskFilterViewTransformByScaleFactor = function (maskGameObject, scaleFactor, maskType, viewTransform) {
+    // maskType: 'local' or 'world'
+    if (scaleFactor === 1) {
+        return maskType;
+    }
+
+    if (viewTransform === undefined) {
+        viewTransform = new TransformMatrix();
+    }
+
+    var scale = 1 / scaleFactor;
+    viewTransform.applyITRS(0, 0, 0, scale, scale);
+
+    if ((maskType === 'world') && maskGameObject.parentContainer) {
+        viewTransform.multiply(
+            maskGameObject.parentContainer.getWorldTransformMatrix(ParentTransform),
+            viewTransform
+        );
+    }
+
+    return viewTransform;
+}
+
+const ParentTransform = new TransformMatrix();
+```
 
 ### CANVAS render mode
 
