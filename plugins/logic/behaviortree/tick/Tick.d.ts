@@ -121,7 +121,7 @@ declare class Tick<T = object> {
     /**
      * Emit a node lifecycle event.
      *
-     * @param name - Lifecycle event suffix.
+     * @param name - Lifecycle event name.
      * @param node - Node instance.
      * @returns This Tick instance.
      */
@@ -143,6 +143,20 @@ declare class Tick<T = object> {
      * @returns This Tick instance.
      */
     emitNodeAbort(node: BaseNode): this;
+
+    /**
+     * Emit node log event.
+     *
+     * @param node - Node instance.
+     * @param message - Log message.
+     * @param data - Optional structured data.
+     * @returns This Tick instance.
+     */
+    emitNodeLog(
+        node: BaseNode,
+        message: string,
+        data?: unknown
+    ): this;
 
     /**
      * Reset tick state.

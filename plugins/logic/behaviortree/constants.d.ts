@@ -52,3 +52,45 @@ export const SERVICE = 'service';
  * Blackboard key used for tree state.
  */
 export const TREE_STATE = '$state';
+
+/**
+ * Event emitted when a tree tick starts.
+ */
+export const EVT_TICK_START = 'tick.start';
+/**
+ * Event emitted when a tree tick ends.
+ */
+export const EVT_TICK_END = 'tick.end';
+
+/**
+ * Event emitted when a node enters.
+ */
+export const EVT_NODE_ENTER = 'node.enter';
+/**
+ * Event emitted when a node opens.
+ */
+export const EVT_NODE_OPEN = 'node.open';
+/**
+ * Event emitted when a node ticks.
+ */
+export const EVT_NODE_TICK = 'node.tick';
+/**
+ * Event emitted when a node returns status.
+ */
+export const EVT_NODE_STATUS = 'node.status';
+/**
+ * Event emitted when a node closes.
+ */
+export const EVT_NODE_CLOSE = 'node.close';
+/**
+ * Event emitted when a node exits.
+ */
+export const EVT_NODE_EXIT = 'node.exit';
+/**
+ * Event emitted when a node aborts.
+ */
+export const EVT_NODE_ABORT = 'node.abort';
+/**
+ * Event emitted when a node writes a diagnostics log message.
+ */
+export const EVT_NODE_LOG = 'node.log';

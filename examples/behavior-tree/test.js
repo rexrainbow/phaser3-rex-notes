@@ -1,7 +1,8 @@
 import Phaser from 'phaser';
 import BehaviorTreePlugin from '../../plugins/behaviortree-plugin.js';
 import ClockPlugin from '../../plugins/clock-plugin.js';
-import mustache from 'mustache';
+
+const CreateStringExpression = RexPlugins.BehaviorTree.CreateStringExpression;
 
 class PrintAction extends RexPlugins.BehaviorTree.Action {
     constructor(config = {}, nodePool) {
@@ -18,11 +19,12 @@ class PrintAction extends RexPlugins.BehaviorTree.Action {
             );
         }
 
-        this.text = this.properties.text;
+        this.addExpression('text', CreateStringExpression(text, nodePool));
+        this.text = this.expressions.text;
     }
 
     tick(tick) {
-        var text = mustache.render(this.text, tick.getGlobalMemory());
+        var text = tick.evalExpression(this.text)
         console.log(`Print: ${text}`);
         return this.SUCCESS;
     }
@@ -47,7 +49,7 @@ class Demo extends Phaser.Scene {
 
             return btAdd.sequence({
                 children: [
-                    new PrintAction({ text: `${taskName}.Start : {{$currentTime}}` }),
+                    new PrintAction({ text: `${taskName}.Start : {{$currentTime}} Hi, {{name}}` }),
                     btAdd.wait({ duration: waitDuration }),
                     new PrintAction({ text: `${taskName}.End : {{$currentTime}}` }),
                 ]
@@ -86,7 +88,7 @@ class Demo extends Phaser.Scene {
                 console.log(`Run tick ${state}`);
 
                 // Stop ticking
-                if (state !== 3) {
+                if (!tree.isRunningState()) {
                     clock.stop();
                 }
             })

@@ -78,7 +78,7 @@ class Demo extends Phaser.Scene {
                 console.log(`Run tick ${state}`);
 
                 // Stop ticking
-                if (state !== 3) {
+                if (!tree.isRunningState()) {
                     clock.stop();
                 }
             })

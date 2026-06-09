@@ -1,3 +1,11 @@
+import {
+    EVT_TICK_START,
+    EVT_TICK_END,
+    EVT_NODE_STATUS,
+    EVT_NODE_ABORT,
+    EVT_NODE_LOG,
+} from '../constants.js';
+
 export default {
     setEventEmitter(eventEmitter) {
         this.eventEmitter = eventEmitter;
@@ -23,35 +31,42 @@ export default {
 
     emitTickStart() {
         if (this.eventEnable && this.eventEmitter) {
-            this.eventEmitter.emit('tick.start', this);
+            this.eventEmitter.emit(EVT_TICK_START, this);
         }
         return this;
     },
 
     emitTickEnd(status) {
         if (this.eventEnable && this.eventEmitter) {
-            this.eventEmitter.emit('tick.end', status, this);
+            this.eventEmitter.emit(EVT_TICK_END, status, this);
         }
         return this;
     },
 
     emitNodeEvent(name, node) {
         if (this.eventEnable && this.eventEmitter) {
-            this.eventEmitter.emit(`node.${name}`, node, this);
+            this.eventEmitter.emit(name, node, this);
         }
         return this;
     },
 
     emitNodeStatus(node, status) {
         if (this.eventEnable && this.eventEmitter) {
-            this.eventEmitter.emit('node.status', node, status, this);
+            this.eventEmitter.emit(EVT_NODE_STATUS, node, status, this);
         }
         return this;
     },
 
     emitNodeAbort(node) {
         if (this.eventEnable && this.eventEmitter) {
-            this.eventEmitter.emit('node.abort', node, this);
+            this.eventEmitter.emit(EVT_NODE_ABORT, node, this);
+        }
+        return this;
+    },
+
+    emitNodeLog(node, message, data) {
+        if (this.eventEnable && this.eventEmitter) {
+            this.eventEmitter.emit(EVT_NODE_LOG, node, message, data, this);
         }
         return this;
     },

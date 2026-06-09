@@ -2,7 +2,7 @@ import Base from './Base.js';
 import { TREE_STATE } from '../constants.js';
 
 class Blackboard extends Base {
-    constructor(config) {
+    constructor(config = {}) {
         super(config);
 
         var {

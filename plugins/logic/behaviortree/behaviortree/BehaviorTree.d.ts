@@ -383,6 +383,15 @@ declare class BehaviorTree extends EventEmitter {
     ): this;
 
     /**
+     * Check if the last tree state is RUNNING.
+     *
+     * The last state is updated by `tick()` and reset to IDLE by `abort()`.
+     *
+     * @returns True when the most recent tree state is RUNNING.
+     */
+    isRunningState(): boolean;
+
+    /**
      * Set the starting serial number.
      *
      * @param value - Start value.

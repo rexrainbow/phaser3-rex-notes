@@ -7,6 +7,8 @@ import Expression from './Expression.js';
 import {
     NumberExpression,
     StringExpression,
+    CreateNumberExpression,
+    CreateStringExpression,
 } from './expressions';
 
 import Succeeder from './actions/Succeeder.js';
@@ -145,6 +147,8 @@ SetValue(window, 'RexPlugins.BehaviorTree.Service', Service);
 SetValue(window, 'RexPlugins.BehaviorTree.Expression', Expression);
 SetValue(window, 'RexPlugins.BehaviorTree.NumberExpression', NumberExpression);
 SetValue(window, 'RexPlugins.BehaviorTree.StringExpression', StringExpression);
+SetValue(window, 'RexPlugins.BehaviorTree.CreateNumberExpression', CreateNumberExpression);
+SetValue(window, 'RexPlugins.BehaviorTree.CreateStringExpression', CreateStringExpression);
 
 SetValue(window, 'RexPlugins.BehaviorTree.Succeeder', Succeeder);
 SetValue(window, 'RexPlugins.BehaviorTree.Failer', Failer);

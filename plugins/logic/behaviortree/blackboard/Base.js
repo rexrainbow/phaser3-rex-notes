@@ -8,7 +8,7 @@ import IsPlainObject from '../../../utils/object/IsPlainObject.js';
 
 class Blackboard {
 
-    constructor(config) {
+    constructor(config = {}) {
         var {
             globalMemory = {}
         } = config;

@@ -3,6 +3,13 @@ import RemoveItem from '../../../utils/array/Remove.js';
 import ExpressionParser from '../../../math/expressionparser/ExpressionParser.js';
 import IsExpressionLike from '../utils/IsExpressionLike.js';
 import StringTemplate from '../../../string/stringtemplate/StringTemplate.js';
+import {
+    EVT_NODE_ENTER,
+    EVT_NODE_OPEN,
+    EVT_NODE_TICK,
+    EVT_NODE_CLOSE,
+    EVT_NODE_EXIT,
+} from '../constants.js';
 
 
 class Tick {
@@ -127,28 +134,28 @@ class Tick {
         this._nodeCount++;
         this._openNodes.push(node);
         this._currentNode = node;
-        this.emitNodeEvent('enter', node);
+        this.emitNodeEvent(EVT_NODE_ENTER, node);
     }
 
     _openNode(node) {
         this._currentNode = node;
-        this.emitNodeEvent('open', node);
+        this.emitNodeEvent(EVT_NODE_OPEN, node);
     }
 
     _tickNode(node) {
         this._currentNode = node;
-        this.emitNodeEvent('tick', node);
+        this.emitNodeEvent(EVT_NODE_TICK, node);
     }
 
     _closeNode(node) {
         RemoveItem(this._openNodes, node);
         this._currentNode = node;
-        this.emitNodeEvent('close', node);
+        this.emitNodeEvent(EVT_NODE_CLOSE, node);
     }
 
     _exitNode(node) {
         this._currentNode = node;
-        this.emitNodeEvent('exit', node);
+        this.emitNodeEvent(EVT_NODE_EXIT, node);
     }
 };
 

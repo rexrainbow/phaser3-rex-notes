@@ -40,6 +40,11 @@ import {
     BreakDecorator,
 } from './nodes/Factory.js';
 
+import {
+    Logger,
+    Tracer
+} from './diagnostics/Factory.js';
+
 export {
     // Core
     BehaviorTree,
@@ -84,4 +89,7 @@ export {
     Wait,
     Abort,
     BreakAction,
+
+    Logger,
+    Tracer,
 };

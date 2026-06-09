@@ -86,7 +86,7 @@ class Demo extends Phaser.Scene {
                 }
 
                 // Stop ticking
-                if (state !== 3) {
+                if (!tree.isRunningState()) {
                     clock.stop();
                 }
             })

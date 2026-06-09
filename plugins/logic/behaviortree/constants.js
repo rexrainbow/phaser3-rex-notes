@@ -13,3 +13,15 @@ export const SERVICE = 'service';
 export const EXPRESSION = 'expression';
 
 export const TREE_STATE = '$state';
+
+export const EVT_TICK_START = 'tick.start';
+export const EVT_TICK_END = 'tick.end';
+
+export const EVT_NODE_ENTER = 'node.enter';
+export const EVT_NODE_OPEN = 'node.open';
+export const EVT_NODE_TICK = 'node.tick';
+export const EVT_NODE_STATUS = 'node.status';
+export const EVT_NODE_CLOSE = 'node.close';
+export const EVT_NODE_EXIT = 'node.exit';
+export const EVT_NODE_ABORT = 'node.abort';
+export const EVT_NODE_LOG = 'node.log';

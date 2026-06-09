@@ -1,5 +1,5 @@
 import EventEmitter from '../../../utils/eventemitter/EventEmitter.js';
-import { TREE, TREE_STATE, IDLE } from '../constants.js';
+import { TREE, TREE_STATE, IDLE, RUNNING } from '../constants.js';
 import { CreateID, SetSerialNumber, SetSerialNumberPrefix, GetSerialNumber } from '../utils/CreateID.js';
 import DataMethods from './DataMethods.js';
 import Dump from './dump/Dump.js';
@@ -42,6 +42,8 @@ class BehaviorTree extends EventEmitter {
         this.ticker = (new Tick())
             .setEventEmitter(this)
             .setTree(this);
+
+        this.lastState = IDLE;
     }
 
     destroy() {
@@ -188,6 +190,8 @@ class BehaviorTree extends EventEmitter {
         // blackboard.set('$nodeCount', ticker._nodeCount, this.id);
         blackboard.set(TREE_STATE, state, this.id);
 
+        this.lastState = state;
+
         ticker.emitTickEnd(state);
 
         return state;
@@ -212,9 +216,15 @@ class BehaviorTree extends EventEmitter {
         /* POPULATE BLACKBOARD */
         blackboard.set(TREE_STATE, IDLE, this.id);
 
+        this.lastState = IDLE;
+
         ticker.emitTickEnd(IDLE);
 
         return IDLE;
+    }
+
+    isRunningState() {
+        return this.lastState === RUNNING;
     }
 
     static setStartIDValue(value) {
