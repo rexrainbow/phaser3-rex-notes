@@ -1,4 +1,5 @@
 import YAMLEventSheets from '../../plugins/yamleventsheets.js';
+import Logger from '../../plugins/logic/eventsheets/diagnostics/logger/Logger.js';
 import eventSheet0 from 'raw-loader!/assets/yamleventsheets/parallel-groups/parallel0.yml';
 import eventSheet1 from 'raw-loader!/assets/yamleventsheets/parallel-groups/parallel1.yml';
 
@@ -44,6 +45,12 @@ eventSheetManager
 
 console.log(eventSheetManager.dumpEventSheetGroup('task0'))
 console.log(eventSheetManager.dumpEventSheetGroup('task1'))
+
+var logger = new Logger({
+    manager: eventSheetManager,
+    level: 'flow',
+    format: 'compact'
+});
 
 eventSheetManager.startGroup('task0')
 

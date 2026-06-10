@@ -1,4 +1,5 @@
 import YAMLEventSheets from '../../plugins/yamleventsheets.js';
+import Logger from '../../plugins/logic/eventsheets/diagnostics/logger/Logger.js';
 import eventSheet0 from 'raw-loader!/assets/yamleventsheets/parallel/parallel0.yml';
 import eventSheet1 from 'raw-loader!/assets/yamleventsheets/parallel/parallel1.yml';
 
@@ -41,20 +42,14 @@ eventSheetManager
 
 console.log(eventSheetManager.dumpEventSheetGroup())
 
+var logger = new Logger({
+    manager: eventSheetManager,
+    level: 'flow',
+    format: 'compact'
+});
+
 eventSheetManager
     .setData('coin', 10)
-    .on('eventsheet.enter', function (title) {
-        console.log(`..Enter event sheet '${title}'..`)
-    })
-    .on('eventsheet.exit', function (title) {
-        console.log(`..Exit event sheet '${title}'..`)
-    })
-    .on('eventsheet.catch', function (title) {
-        console.log(`..Fail event sheet '${title}'..`)
-    })
-    .on('complete', function () {
-        console.log('..Execute events complete..')
-    })
     .startGroup()
 
-console.log(eventSheetManager.memory)
+// console.log(eventSheetManager.memory)

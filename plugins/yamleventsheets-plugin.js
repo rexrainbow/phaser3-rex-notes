@@ -1,5 +1,6 @@
 import YAMLEventSheets from './yamleventsheets.js';
 import CommandExecutor from './commandexecutor.js';
+import { Logger, Tracer } from './yamleventsheets.js';
 
 import { Plugins as PhaserPlugins } from 'phaser';
 class YAMLEventSheetsPlugin extends PhaserPlugins.BasePlugin {
@@ -18,6 +19,14 @@ class YAMLEventSheetsPlugin extends PhaserPlugins.BasePlugin {
 
     addCommandExecutor(scene, config) {
         return new CommandExecutor(scene, config);
+    }
+
+    addLogger(config) {
+        return new Logger(config);
+    }
+
+    addTracer(config) {
+        return new Tracer(config);
     }
 
 }
