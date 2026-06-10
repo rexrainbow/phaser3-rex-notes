@@ -39,11 +39,11 @@ class BehaviorTree extends EventEmitter {
 
         this._root = root;
 
-        this.ticker = (new Tick())
-            .setEventEmitter(this)
-            .setTree(this);
+        this.ticker = (new Tick()).setTree(this);
 
         this.lastState = IDLE;
+
+        this.setEventEmitter(this);
     }
 
     destroy() {
@@ -225,6 +225,11 @@ class BehaviorTree extends EventEmitter {
 
     isRunningState() {
         return this.lastState === RUNNING;
+    }
+
+    setEventEmitter(eventEmitter) {
+        this.ticker.setEventEmitter(eventEmitter);
+        return this;
     }
 
     static setStartIDValue(value) {
