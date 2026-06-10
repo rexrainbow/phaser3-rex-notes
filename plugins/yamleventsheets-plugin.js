@@ -3,6 +3,7 @@ import CommandExecutor from './commandexecutor.js';
 import { Logger, Tracer } from './yamleventsheets.js';
 
 import { Plugins as PhaserPlugins } from 'phaser';
+
 class YAMLEventSheetsPlugin extends PhaserPlugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);

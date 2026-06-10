@@ -18,7 +18,7 @@ import {
     EVT_COMMAND_RESUME,
     EVT_COMMAND_ABORT,
     EVT_CONDITION_EVAL,
-} from '../../plugins/logic/eventsheets/eventsheetmanager/constants.js';
+} from '../../plugins/yamleventsheets.js';
 
 var FormatValue = function (value) {
     if (value === undefined) {

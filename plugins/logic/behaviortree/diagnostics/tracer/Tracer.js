@@ -1,4 +1,5 @@
 import Recorder from '../recorder/Recorder.js';
+import TracerMethods from './TracerMethods.js';
 
 class Tracer {
     constructor(config) {
@@ -34,55 +35,16 @@ class Tracer {
         this.recorder.maxRecords = value;
     }
 
-    setTree(tree) {
-        this.recorder.setTree(tree);
-        this.tree = tree;
-        return this;
-    }
-
-    setTrees(trees) {
-        this.recorder.setTrees(trees);
-        this.tree = this.recorder.tree;
-        return this;
-    }
-
-    start() {
-        this.recorder.start();
-        this.tree = this.recorder.tree;
-        return this;
-    }
-
-    stop() {
-        this.recorder.stop();
-        return this;
-    }
-
-    clear() {
-        this.recorder.clear();
-        return this;
-    }
-
     destroy() {
         this.recorder.destroy();
         this.tree = undefined;
         this.recorder = undefined;
     }
-
-    getRecords() {
-        return this.recorder.getRecords();
-    }
-
-    getLastRecord() {
-        return this.recorder.getLastRecord();
-    }
-
-    getCurrentRecord() {
-        return this.recorder.getCurrentRecord();
-    }
-
-    toJSON() {
-        return this.recorder.toJSON();
-    }
 }
+
+Object.assign(
+    Tracer.prototype,
+    TracerMethods,
+)
 
 export default Tracer;
