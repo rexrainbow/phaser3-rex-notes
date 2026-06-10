@@ -1,20 +1,27 @@
+import {
+    EVT_PAUSE_CLICK,
+    EVT_PAUSE_KEY,
+    EVT_PAUSE_INPUT,
+    EVT_RESUME_INPUT,
+} from '../../eventsheetmanager/constants.js';
+
 export default {
 
     wait(config, eventSheetManager, eventsheet) {
         var { click, key, event } = config;
 
         if (click) {
-            eventSheetManager.emit('pause.click');
+            eventSheetManager.emit(EVT_PAUSE_CLICK);
         }
 
         if (key) {
-            eventSheetManager.emit('pause.key', config.key);
+            eventSheetManager.emit(EVT_PAUSE_KEY, config.key);
         }
 
         if (click | key) {
-            eventSheetManager.emit('pause.input');
+            eventSheetManager.emit(EVT_PAUSE_INPUT);
             this.sys.once('complete', function () {
-                eventSheetManager.emit('resume.input');
+                eventSheetManager.emit(EVT_RESUME_INPUT);
             })
         }
 

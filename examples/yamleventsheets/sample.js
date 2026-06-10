@@ -1,4 +1,5 @@
 import YAMLEventSheets from '../../plugins/yamleventsheets.js';
+import Logger from '../../plugins/logic/eventsheets/diagnostics/logger/Logger.js';
 import content from 'raw-loader!/assets/yamleventsheets/sample/sample.yml';
 
 class CommandExecutor {
@@ -40,25 +41,20 @@ var eventSheetManager = new YAMLEventSheets({
 eventSheetManager.addEventSheet(content);
 console.log(eventSheetManager.dumpEventSheetGroup())
 
-eventSheetManager.
-    on('label.enter', function (title) {
-        console.log(`Enter label '${title}'`)
-    })
-    .on('label.exit', function (title) {
-        console.log(`Exit label '${title}'`)
-    })
+var logger = new Logger({
+    manager: eventSheetManager,
+    level: 'flow',
+    format: 'compact'
+});
 
 eventSheetManager
     .setData('name', 'rex')
     .setData('coin', 1)
     .setData('hp', 4)
     .setData('randomInt', function (a, b) {
-        console.log('-- run custom method randomInt--')
+        // console.log('-- run custom method randomInt--')
         return Math.floor(a + Math.random() * (b - a + 1));
-    })
-    .on('complete', function () {
-        console.log('..Execute events complete..')
     })
     .startGroup()
 
-console.log(eventSheetManager.memory)
+// console.log(eventSheetManager.memory)

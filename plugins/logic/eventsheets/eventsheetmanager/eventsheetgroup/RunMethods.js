@@ -1,5 +1,19 @@
 import { RUNNING, IDLE, SUCCESS } from '../../../behaviortree/index.js';
 import RemoveItem from '../../../../utils/array/Remove.js';
+import {
+    EVT_GROUP_START,
+    EVT_GROUP_CONTINUE,
+    EVT_GROUP_COMPLETE,
+    EVT_EVENTSHEET_OPEN,
+    EVT_EVENTSHEET_CONDITION,
+    EVT_EVENTSHEET_ENTER,
+    EVT_EVENTSHEET_CATCH,
+    EVT_EVENTSHEET_TICK,
+    EVT_EVENTSHEET_STATUS,
+    EVT_EVENTSHEET_CLOSE,
+    EVT_EVENTSHEET_EXIT,
+    EVT_EVENTSHEET_SKIP,
+} from '../constants.js';
 
 export var OpenEventSheet = function (eventSheetManager, eventsheet) {
     var blackboard = eventSheetManager.blackboard;
@@ -10,23 +24,31 @@ export var OpenEventSheet = function (eventSheetManager, eventsheet) {
         return;
     }
 
+    eventSheetManager.emit(EVT_EVENTSHEET_OPEN, eventsheet.title, this.name, eventSheetManager, eventsheet, this);
+    eventSheetManager.emit(EVT_EVENTSHEET_CONDITION, eventsheet.title, this.name, eventsheet.conditionPassed, eventSheetManager, eventsheet, this);
+
     if (eventsheet.conditionPassed) {
-        eventSheetManager.emit('eventsheet.enter', eventsheet.title, this.name, eventSheetManager);
+        eventSheetManager.emit(EVT_EVENTSHEET_ENTER, eventsheet.title, this.name, eventSheetManager, eventsheet, this);
     } else {
-        eventSheetManager.emit('eventsheet.catch', eventsheet.title, this.name, eventSheetManager);
+        eventSheetManager.emit(EVT_EVENTSHEET_CATCH, eventsheet.title, this.name, eventSheetManager, eventsheet, this);
     }
 }
 
 export var TickEventSheet = function (eventSheetManager, eventsheet) {
     var blackboard = eventSheetManager.blackboard;
     var commandExecutor = eventSheetManager.commandExecutor;
+    var eventSheetGroup = eventsheet.eventSheetGroup;
+    eventSheetManager.emit(EVT_EVENTSHEET_TICK, eventsheet.title, eventSheetGroup.name, eventSheetManager, eventsheet, eventSheetGroup);
     var status = eventsheet.tick(blackboard, commandExecutor);
+    eventSheetManager.emit(EVT_EVENTSHEET_STATUS, eventsheet.title, eventSheetGroup.name, status, eventSheetManager, eventsheet, eventSheetGroup);
     return status;
 }
 
 export var CloseEventSheet = function (eventSheetManager, eventsheet) {
+    eventSheetManager.emit(EVT_EVENTSHEET_CLOSE, eventsheet.title, this.name, eventSheetManager, eventsheet, this);
+
     if (eventsheet.conditionPassed) {
-        eventSheetManager.emit('eventsheet.exit', eventsheet.title, this.name, eventSheetManager);
+        eventSheetManager.emit(EVT_EVENTSHEET_EXIT, eventsheet.title, this.name, eventSheetManager, eventsheet, this);
     }
 }
 
@@ -64,7 +86,7 @@ export default {
         var pendingTrees = this.pendingTrees;
         var blackboard = eventSheetManager.blackboard;
 
-        eventSheetManager.emit('start', this.name, eventSheetManager);
+        eventSheetManager.emit(EVT_GROUP_START, this.name, eventSheetManager, this);
 
         // pendingTrees.length = 0;
 
@@ -73,6 +95,7 @@ export default {
             var eventsheet = trees[i];
 
             if (!eventsheet.active) {
+                eventSheetManager.emit(EVT_EVENTSHEET_SKIP, eventsheet.title, this.name, 'inactive', eventSheetManager, eventsheet, this);
                 continue;
             }
 
@@ -111,6 +134,8 @@ export default {
 
         closedTrees.length = 0;
 
+        eventSheetManager.emit(EVT_GROUP_CONTINUE, this.name, eventSheetManager, this);
+
         for (var i = 0, cnt = trees.length; i < cnt; i++) {
             var eventsheet = trees[i];
 
@@ -148,7 +173,7 @@ export default {
 
         if (trees.length === 0) {
             this.isRunning = false;
-            eventSheetManager.emit('complete', this.name, eventSheetManager);
+            eventSheetManager.emit(EVT_GROUP_COMPLETE, this.name, eventSheetManager, this);
         }
 
         return this;

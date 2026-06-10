@@ -1,4 +1,5 @@
-import { BehaviorTree, IfSelector, IDLE, RUNNING } from '../../../behaviortree/index.js';
+import { BehaviorTree, IDLE, RUNNING } from '../../../behaviortree/index.js';
+import EventSheetIfSelector from '../nodes/condition/EventSheetIfSelector.js';
 
 const RoundIdle = 0;
 const RoundRun = 1;
@@ -58,7 +59,7 @@ class EventSheet extends BehaviorTree {
         this.blackboard = eventSheetManager.blackboard;
         this.setTreeGroup(groupName);
 
-        var root = new IfSelector({
+        var root = new EventSheetIfSelector({
             title: this.title,
             condition,
             conditionEvalBreak: true   // Return RUNNING instead of SUCCESS for condition eval

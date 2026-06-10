@@ -2,6 +2,10 @@ import {
     Decorator,
     SUCCESS, FAILURE
 } from '../../../behaviortree/index.js';
+import {
+    EVT_LABEL_ENTER,
+    EVT_LABEL_EXIT,
+} from '../constants.js';
 
 class LabelDecorator extends Decorator {
 
@@ -36,7 +40,7 @@ class LabelDecorator extends Decorator {
         var eventSheetManager = blackboard.eventSheetManager;
         var eventsheet = tick.tree;
         var eventSheetGroup = eventsheet.eventSheetGroup;
-        eventSheetManager.emit('label.enter', this.title, eventsheet.title, eventSheetGroup.name, eventSheetManager);
+        eventSheetManager.emit(EVT_LABEL_ENTER, this.title, eventsheet.title, eventSheetGroup.name, eventSheetManager, eventsheet, this, eventSheetGroup);
 
     }
 
@@ -58,7 +62,7 @@ class LabelDecorator extends Decorator {
         var eventSheetManager = blackboard.eventSheetManager;
         var eventsheet = tick.tree;
         var eventSheetGroup = eventsheet.eventSheetGroup;
-        eventSheetManager.emit('label.exit', this.title, eventsheet.title, eventSheetGroup.name, eventSheetManager);
+        eventSheetManager.emit(EVT_LABEL_EXIT, this.title, eventsheet.title, eventSheetGroup.name, eventSheetManager, eventsheet, this, eventSheetGroup);
     }
 }
 

@@ -3,6 +3,11 @@ import PauseEventSheetMethods from './PauseEventSheetMethods.js';
 import IsEventEmitter from '../../../../../utils/system/IsEventEmitter.js';
 import CreateExpressions from '../utils/CreateExpressions.js';
 import EvalParameters from '../utils/EvalParameters.js';
+import {
+    EVT_COMMAND_START,
+    EVT_COMMAND_END,
+    EVT_COMMAND_ABORT,
+} from '../../constants.js';
 
 
 
@@ -53,6 +58,11 @@ class TaskAction extends Action {
         // Eval parameters
         var taskParameters = this.expressions || {};
         var evaledParameters = EvalParameters(tick, taskParameters);
+        this.evaledParameters = evaledParameters;
+
+        var eventSheetGroup = eventSheet.eventSheetGroup;
+        var groupName = eventSheetGroup.name;
+        eventSheetManager.emit(EVT_COMMAND_START, taskName, evaledParameters, eventSheet.title, groupName, eventSheetManager, eventSheet, this, eventSheetGroup);
 
         eventSheetManager.bindTaskActionNode(tick, this);
         // For invoking eventSheetManager.pauseEventSheet() to generate new resumeEventName
@@ -76,6 +86,7 @@ class TaskAction extends Action {
                 this.pauseEventSheetUnitlEvent(tick, result);
             } else {
                 this.isFailure = (result === false) || (result === 0) || (result === null);
+                eventSheetManager.emit(EVT_COMMAND_END, taskName, evaledParameters, !this.isFailure, result, eventSheet.title, groupName, eventSheetManager, eventSheet, this, eventSheetGroup);
             }
         }
     }
@@ -92,6 +103,15 @@ class TaskAction extends Action {
     }
 
     abort(tick) {
+        var blackboard = tick.blackboard;
+        var eventSheetManager = blackboard.eventSheetManager;
+        var eventSheet = tick.tree;
+        var eventSheetGroup = eventSheet.eventSheetGroup;
+        var groupName = eventSheetGroup.name;
+        var taskName = this.properties.name;
+
+        eventSheetManager.emit(EVT_COMMAND_ABORT, taskName, this.evaledParameters, eventSheet.title, groupName, eventSheetManager, eventSheet, this, eventSheetGroup);
+
         if (this.removeTaskCompleteCallback) {
             this.removeTaskCompleteCallback();
         }

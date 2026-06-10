@@ -1,10 +1,11 @@
-import { If, SUCCESS, FAILURE } from '../../../behaviortree/index.js';
+import { SUCCESS, FAILURE } from '../../../behaviortree/index.js';
+import EventSheetIf from '../../eventsheetmanager/nodes/condition/EventSheetIf.js';
 
 var CreateIfDecorator = function (expression, onConditionFailValue) {
     var onFailState = (onConditionFailValue) ? SUCCESS : FAILURE;
     var ifDecorator;
     try {
-        ifDecorator = new If({
+        ifDecorator = new EventSheetIf({
             condition: expression,
             onFailState: onFailState,
         });
@@ -12,7 +13,7 @@ var CreateIfDecorator = function (expression, onConditionFailValue) {
         console.error(`[EventSheet] Parse expression '${expression}' failed, replace expression by 'false'`);
         console.error(e);
 
-        ifDecorator = new If({
+        ifDecorator = new EventSheetIf({
             condition: 'false',
             onFailState: onFailState,
         });
