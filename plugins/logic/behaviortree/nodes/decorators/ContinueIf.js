@@ -48,6 +48,10 @@ class ContinueIf extends Decorator {
         this.returnSuccess = this.properties.returnSuccess;
     }
 
+    evalCondition(tick) {
+        return tick.evalExpression(this.condition);
+    }
+
     tick(tick) {
         if (!this.child) {
             return ERROR;
@@ -56,7 +60,7 @@ class ContinueIf extends Decorator {
         // child is running
         if (this.isChildRunning(tick)) {
             // Abort child if eval result is false
-            if (!tick.evalExpression(this.condition)) {
+            if (!this.evalCondition(tick)) {
                 return (this.returnSuccess) ? SUCCESS : FAILURE;
             }
         }

@@ -52,6 +52,10 @@ class If extends Decorator {
         this.onFailState = this.properties.onFailState;
     }
 
+    evalCondition(tick) {
+        return tick.evalExpression(this.condition);
+    }
+
     tick(tick) {
         if (!this.child) {
             return ERROR;
@@ -66,7 +70,7 @@ class If extends Decorator {
                 - Equal to `ForceSuccess + If`
               - Return FAILURE for Selector node
             */
-            if (!tick.evalExpression(this.condition)) {
+            if (!this.evalCondition(tick)) {
                 return this.onFailState;
             } else if (this.conditionEvalBreak) {
                 // Open child but not run it now

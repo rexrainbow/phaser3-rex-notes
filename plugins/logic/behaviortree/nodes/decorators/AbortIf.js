@@ -47,6 +47,10 @@ class AbortIf extends Decorator {
         this.returnSuccess = this.properties.returnSuccess;
     }
 
+    evalCondition(tick) {
+        return tick.evalExpression(this.condition);
+    }
+
     tick(tick) {
         if (!this.child) {
             return ERROR;
@@ -55,7 +59,7 @@ class AbortIf extends Decorator {
         // child is running
         if (this.isChildRunning(tick)) {
             // Abort child if eval result is true
-            if (!!tick.evalExpression(this.condition)) {
+            if (!!this.evalCondition(tick)) {
                 return (this.returnSuccess) ? SUCCESS : FAILURE;
             }
         }
