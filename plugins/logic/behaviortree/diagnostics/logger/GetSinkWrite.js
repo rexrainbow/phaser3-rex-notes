@@ -13,6 +13,12 @@ var GetSinkWrite = function (sink, output) {
                 sink.write(value);
             };
         }
+
+        if (sink.log) {
+            return function (value) {
+                sink.log(value);
+            };
+        }
     }
 
     if (output) {

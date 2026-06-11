@@ -1,5 +1,5 @@
 import YAMLEventSheets from '../../plugins/yamleventsheets.js';
-import Logger from '../../plugins/logic/eventsheets/diagnostics/logger/Logger.js';
+import { Logger, BBCodeSink } from '../../plugins/yamleventsheets.js';
 import TaskventSheet from 'raw-loader!/assets/yamleventsheets/rounds/task.yml';
 
 
@@ -40,7 +40,8 @@ console.log(eventSheetManager.dumpEventSheetGroup())
 var logger = new Logger({
     manager: eventSheetManager,
     level: 'flow',
-    format: 'compact'
+    format: 'bbcode',
+    sink: new BBCodeSink()
 });
 
 eventSheetManager.on('complete', function () {

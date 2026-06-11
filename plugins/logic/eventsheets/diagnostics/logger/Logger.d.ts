@@ -12,7 +12,7 @@ declare namespace Logger {
     /**
      * Built-in text formatter name.
      */
-    type Format = 'compact' | 'json';
+    type Format = 'compact' | 'json' | 'bbcode';
 
     /**
      * Formatter callback.
@@ -56,6 +56,18 @@ declare namespace Logger {
     }
 
     /**
+     * Console-like output sink.
+     */
+    interface ILogSink {
+        /**
+         * Log formatted text.
+         *
+         * @param value - Formatted text.
+         */
+        log(value: string): void;
+    }
+
+    /**
      * Configuration options for creating a Logger.
      */
     interface IConfig {
@@ -65,7 +77,7 @@ declare namespace Logger {
         events?: Recorder.EventNames;
         format?: Format;
         formatter?: Format | Formatter;
-        sink?: ISink | ((value: string) => void);
+        sink?: ISink | ILogSink | ((value: string) => void);
         output?: Output;
         filter?: Recorder.FilterCallback;
         includeTime?: boolean;

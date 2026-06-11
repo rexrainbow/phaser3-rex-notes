@@ -1,6 +1,6 @@
 import YAMLEventSheets from './yamleventsheets.js';
 import CommandExecutor from './commandexecutor.js';
-import { Logger, Tracer } from './yamleventsheets.js';
+import { Logger, Tracer, BBCodeSink } from './yamleventsheets.js';
 
 import { Plugins as PhaserPlugins } from 'phaser';
 
@@ -23,6 +23,12 @@ class YAMLEventSheetsPlugin extends PhaserPlugins.BasePlugin {
     }
 
     addLogger(config) {
+        return new Logger(config);
+    }
+
+    addBBCodeLogger(config) {
+        config.format = 'bbcode';
+        config.sink = new BBCodeSink();
         return new Logger(config);
     }
 

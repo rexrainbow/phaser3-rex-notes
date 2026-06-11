@@ -42,7 +42,8 @@ import {
 
 import {
     Logger,
-    Tracer
+    Tracer,
+    BBCodeSink,
 } from './diagnostics/Factory.js';
 
 export {
@@ -92,4 +93,5 @@ export {
 
     Logger,
     Tracer,
+    BBCodeSink,
 };

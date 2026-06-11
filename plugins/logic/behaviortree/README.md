@@ -480,6 +480,17 @@ var logger = btAdd.logger({
 tree.tick(blackboard, target);
 ```
 
+Use `format: 'bbcode'` with `BBCodeSink` to print colored console output:
+
+```javascript
+var logger = btAdd.logger({
+    tree: tree,
+    level: 'status',
+    format: 'bbcode',
+    sink: new RexPlugins.BehaviorTree.BBCodeSink()
+});
+```
+
 Common levels are:
 
 - `status` : Tick end, node status, aborts, and node logs.

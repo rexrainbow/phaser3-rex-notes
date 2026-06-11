@@ -1,4 +1,4 @@
-import Parser from './parser/Parser';
+import Parser from './parser/Parser.js';
 
 class BBCodeLog {
     constructor({

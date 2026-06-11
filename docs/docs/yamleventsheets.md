@@ -1991,7 +1991,18 @@ Logs event sheet manager diagnostic events as text.
     var logger = scene.plugins.get('rexYAMLEventSheets').addLogger({
         manager: eventSheetManager,
         level: 'flow',
-        format: 'compact'
+        format: 'compact',
+
+        // formatter:
+        // sink:
+        // output:
+        // events:
+        // filter:
+        // includeTime: false,
+        // includeReferences: false,
+        // includeParameters: true,
+        // includeResult: true,
+        // autoStart: true
     });
     ```
 - Create logger from class
@@ -2002,6 +2013,25 @@ Logs event sheet manager diagnostic events as text.
         manager: eventSheetManager,
         level: 'flow',
         format: 'compact',
+
+        // formatter:
+        // sink:
+        // output:
+        // events:
+        // filter:
+        // includeTime: false,
+        // includeReferences: false,
+        // includeParameters: true,
+        // includeResult: true,
+        // autoStart: true
+    });
+    ```
+
+- Display logger with Colors
+    ```javascript
+    var logger = scene.plugins.get('rexYAMLEventSheets').addBBCodeLogger({
+        manager: eventSheetManager,
+        level: 'flow',        
 
         // formatter:
         // sink:
@@ -2028,6 +2058,7 @@ Parameters
 - `format` :
     - `'compact'` : One line text per event. Default behavior.
     - `'json'` : JSON string per event.
+    - `'bbcode'` : BBCode tagged text for colored console output.
 - `formatter` : Custom formatter callback.
     ```javascript
     function(event, record, recorder) {
@@ -2043,6 +2074,17 @@ Parameters
                 textarea.value += text + '\n';
             }
         }
+    });
+    ```
+- Colored console output with BBCode.
+    ```javascript
+    import { Logger, BBCodeSink } from 'phaser4-rex-plugins/plugins/yamleventsheets.js';
+
+    var logger = new Logger({
+        manager: eventSheetManager,
+        level: 'flow',
+        format: 'bbcode',
+        sink: new BBCodeSink()
     });
     ```
 - `output` : Custom output callback.

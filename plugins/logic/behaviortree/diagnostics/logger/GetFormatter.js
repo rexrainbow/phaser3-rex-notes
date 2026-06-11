@@ -1,5 +1,6 @@
 import CompactFormatter from './formatters/CompactFormatter.js';
 import JSONFormatter from './formatters/JSONFormatter.js';
+import BBCodeFormatter from './formatters/BBCodeFormatter.js';
 
 var GetFormatter = function (format) {
     if (typeof (format) === 'function') {
@@ -11,6 +12,11 @@ var GetFormatter = function (format) {
             return JSONFormatter;
 
         case 'compact':
+            return CompactFormatter;
+
+        case 'bbcode':
+            return BBCodeFormatter;
+
         default:
             return CompactFormatter;
     }
