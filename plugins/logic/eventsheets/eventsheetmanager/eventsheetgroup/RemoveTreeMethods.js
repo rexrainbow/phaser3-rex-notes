@@ -1,19 +1,34 @@
+import { RUNNING } from '../../../behaviortree/constants.js';
 import RemoveItem from '../../../../utils/array/Remove.js';
+import {
+    EVT_EVENTSHEET_REMOVE,
+    EVT_EVENTSHEET_REMOVE_ALL,
+} from '../constants.js';
 
 export default {
     removeAllEventSheets() {
+        var removedTrees = this.trees.slice();
+        var sheetTitles = removedTrees.map(function (eventsheet) {
+            return eventsheet.title;
+        });
+
         this.trees.forEach(function (eventsheet) {
-            this.blackboard.removeTreeData(eventsheet.id);
+            this.parent.blackboard.removeTreeData(eventsheet.id);
         }, this)
         this.trees.length = 0;
         this.pendingTrees.length = 0;
+
+        if (sheetTitles.length > 0) {
+            this.parent.emit(EVT_EVENTSHEET_REMOVE_ALL, this.name, sheetTitles, this.parent, this);
+        }
+
         return this;
     },
 
     removeEventSheet(title) {
         var removedTrees = [];
         this.trees.forEach(function (eventsheet) {
-            if (!eventsheet.title === title) {
+            if (eventsheet.title !== title) {
                 return;
             }
             var status = this.getTreeState(eventsheet);
@@ -23,12 +38,17 @@ export default {
             }
 
             removedTrees.push(eventsheet);
-            this.blackboard.removeTreeData(eventsheet.id);
+            this.parent.blackboard.removeTreeData(eventsheet.id);
         }, this);
 
         if (removedTrees.length > 0) {
-            RemoveItem(this.trees, removedTrees);
-            RemoveItem(this.pendingTrees, removedTrees);
+            RemoveItem(this.trees, removedTrees.slice());
+            RemoveItem(this.pendingTrees, removedTrees.slice());
+
+            for (var i = 0, cnt = removedTrees.length; i < cnt; i++) {
+                var eventsheet = removedTrees[i];
+                this.parent.emit(EVT_EVENTSHEET_REMOVE, eventsheet.title, this.name, this.parent, eventsheet, this);
+            }
         }
 
         return this;

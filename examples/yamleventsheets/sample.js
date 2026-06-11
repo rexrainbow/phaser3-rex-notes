@@ -55,6 +55,10 @@ eventSheetManager
         // console.log('-- run custom method randomInt--')
         return Math.floor(a + Math.random() * (b - a + 1));
     })
+    .on('complete', function (groupName) {
+        console.log(`Group '${groupName}' complete`)
+        eventSheetManager.removeAllEventSheets()
+    })
     .startGroup()
 
 // console.log(eventSheetManager.memory)

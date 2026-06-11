@@ -143,6 +143,10 @@ declare namespace Recorder {
          */
         sheetTitle?: string;
         /**
+         * Event sheet titles.
+         */
+        sheetTitles?: string[];
+        /**
          * Event sheet id.
          */
         sheetID?: string | number;

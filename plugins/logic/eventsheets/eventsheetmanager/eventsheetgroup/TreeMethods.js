@@ -11,7 +11,7 @@ export default {
 
     getTreeState(eventsheet) {
         var treeID = (typeof (eventsheet) === 'string') ? eventsheet : eventsheet.id;
-        return this.blackboard.getTreeState(treeID);
+        return this.parent.blackboard.getTreeState(treeID);
     },
 
     getEventSheetTitleList(out) {

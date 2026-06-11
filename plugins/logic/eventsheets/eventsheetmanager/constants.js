@@ -27,6 +27,27 @@ export const EVT_GROUP_COMPLETE = 'complete';
 export const EVT_GROUP_STOP = 'stop';
 
 /**
+ * Add an event sheet to a group.
+ *
+ * Params: (sheetTitle, groupName, eventSheetManager, eventSheet, eventSheetGroup)
+ */
+export const EVT_EVENTSHEET_ADD = 'eventsheet.add';
+
+/**
+ * Remove an event sheet from a group.
+ *
+ * Params: (sheetTitle, groupName, eventSheetManager, eventSheet, eventSheetGroup)
+ */
+export const EVT_EVENTSHEET_REMOVE = 'eventsheet.remove';
+
+/**
+ * Remove all event sheets from a group.
+ *
+ * Params: (groupName, sheetTitles, eventSheetManager, eventSheetGroup)
+ */
+export const EVT_EVENTSHEET_REMOVE_ALL = 'eventsheet.removeall';
+
+/**
  * Open an event sheet for condition evaluation and execution.
  *
  * Params: (sheetTitle, groupName, eventSheetManager, eventSheet, eventSheetGroup)

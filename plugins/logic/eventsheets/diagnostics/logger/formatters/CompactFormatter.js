@@ -3,6 +3,9 @@ import {
     EVT_GROUP_CONTINUE,
     EVT_GROUP_COMPLETE,
     EVT_GROUP_STOP,
+    EVT_EVENTSHEET_ADD,
+    EVT_EVENTSHEET_REMOVE,
+    EVT_EVENTSHEET_REMOVE_ALL,
     EVT_EVENTSHEET_OPEN,
     EVT_EVENTSHEET_CONDITION,
     EVT_EVENTSHEET_ENTER,
@@ -68,6 +71,15 @@ var CompactFormatter = function (record) {
 
         case EVT_GROUP_STOP:
             return `${prefix} stop`;
+
+        case EVT_EVENTSHEET_ADD:
+            return `${prefix}${GetSheetLabel(record)} add`;
+
+        case EVT_EVENTSHEET_REMOVE:
+            return `${prefix}${GetSheetLabel(record)} remove`;
+
+        case EVT_EVENTSHEET_REMOVE_ALL:
+            return `${prefix} removeall sheets=${FormatValue(record.sheetTitles)}`;
 
         case EVT_EVENTSHEET_OPEN:
             return `${prefix}${GetSheetLabel(record)} open`;

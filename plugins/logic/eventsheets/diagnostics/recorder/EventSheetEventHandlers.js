@@ -1,4 +1,7 @@
 import {
+    EVT_EVENTSHEET_ADD,
+    EVT_EVENTSHEET_REMOVE,
+    EVT_EVENTSHEET_REMOVE_ALL,
     EVT_EVENTSHEET_OPEN,
     EVT_EVENTSHEET_CONDITION,
     EVT_EVENTSHEET_ENTER,
@@ -33,6 +36,26 @@ var GetStatusName = function (status) {
 }
 
 export default {
+    onEventSheetAdd(sheetTitle, groupName, manager, eventSheet, eventSheetGroup) {
+        this.addEvent(this.createEventSheetEvent(EVT_EVENTSHEET_ADD, sheetTitle, groupName, manager, eventSheet, eventSheetGroup), manager, groupName);
+    },
+
+    onEventSheetRemove(sheetTitle, groupName, manager, eventSheet, eventSheetGroup) {
+        this.addEvent(this.createEventSheetEvent(EVT_EVENTSHEET_REMOVE, sheetTitle, groupName, manager, eventSheet, eventSheetGroup), manager, groupName);
+    },
+
+    onEventSheetRemoveAll(groupName, sheetTitles, manager, eventSheetGroup) {
+        var event = this.createBaseEvent(EVT_EVENTSHEET_REMOVE_ALL, manager, groupName);
+        event.sheetTitles = sheetTitles.slice();
+
+        if (this.includeReferences) {
+            event.manager = manager;
+            event.eventSheetGroup = eventSheetGroup;
+        }
+
+        this.addEvent(event, manager, groupName);
+    },
+
     onEventSheetOpen(sheetTitle, groupName, manager, eventSheet, eventSheetGroup) {
         this.addEvent(this.createEventSheetEvent(EVT_EVENTSHEET_OPEN, sheetTitle, groupName, manager, eventSheet, eventSheetGroup), manager, groupName);
     },

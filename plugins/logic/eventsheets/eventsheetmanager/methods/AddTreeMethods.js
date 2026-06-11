@@ -8,12 +8,12 @@ export default {
         if (groupName === undefined) {
             groupName = this.defaultTreeGroupName
         }
-        this.getTreeGroup(groupName).addTree(eventSheet);
-
         // All event sheets (BT) use the same expressionParser and stringTemplate
         eventSheet
             .setExpressionParser(this.expressionParser)
             .setStringTemplate(this.stringTemplate)
+
+        this.getTreeGroup(groupName).addTree(eventSheet);
 
         return this;
     },
