@@ -210,6 +210,14 @@ declare class EventSheetManager extends EventEmitter {
     removeAllEventSheets(groupName?: string): this;
 
     /**
+     * Mark all event sheets in a group for removal at the next safe point.
+     *
+     * @param groupName - Group name.
+     * @returns This EventSheetManager instance.
+     */
+    removeAllEventSheetsLater(groupName?: string): this;
+
+    /**
      * Remove an event sheet by title.
      *
      * @param title - Tree title.
@@ -217,6 +225,15 @@ declare class EventSheetManager extends EventEmitter {
      * @returns This EventSheetManager instance.
      */
     removeEventSheet(title: string, groupName?: string): this;
+
+    /**
+     * Mark an event sheet for removal at the next safe point.
+     *
+     * @param title - Tree title.
+     * @param groupName - Group name.
+     * @returns This EventSheetManager instance.
+     */
+    removeEventSheetLater(title: string, groupName?: string): this;
 
     /**
      * Get event sheet title list.

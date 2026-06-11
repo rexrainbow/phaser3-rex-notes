@@ -172,6 +172,7 @@ export default {
         }
 
         if (trees.length === 0) {
+            this.removePendingEventSheets();
             this.isRunning = false;
             eventSheetManager.emit(EVT_GROUP_COMPLETE, this.name, eventSheetManager, this);
         }

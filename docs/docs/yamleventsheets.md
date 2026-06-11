@@ -134,21 +134,39 @@ eventSheetManager.addEventSheet(content, {
 
 ### Remove event sheet
 
-- Remove an event sheet in default group
+- Remove an event sheet immediately in default group
     ```javascript
     eventSheetManager.removeEventSheet(title);
     ```
-- Remove an event sheet in a specific group
+- Remove an event sheet immediately in a specific group
     ```javascript
     eventSheetManager.removeEventSheet(title, groupName);
     ```
-- Remove all event sheets in default group
+- Remove an event sheet at the next safe point.
+    - If the group is running, the event sheet is marked for removal and removed before the current round fires the `'complete'` event.
+    - If the group is not running, the event sheet is removed immediately.
+    ```javascript
+    eventSheetManager.removeEventSheetLater(title);
+    ```
+    ```javascript
+    eventSheetManager.removeEventSheetLater(title, groupName);
+    ```
+- Remove all event sheets immediately in default group
     ```javascript
     eventSheetManager.removeAllEventSheets();
     ```
-- Remove all event sheets in a specific group
+- Remove all event sheets immediately in a specific group
     ```javascript
     eventSheetManager.removeAllEventSheets(groupName);
+    ```
+- Remove all event sheets at the next safe point.
+    - If the group is running, all event sheets are marked for removal and removed before the current round fires the `'complete'` event.
+    - If the group is not running, all event sheets are removed immediately.
+    ```javascript
+    eventSheetManager.removeAllEventSheetsLater();
+    ```
+    ```javascript
+    eventSheetManager.removeAllEventSheetsLater(groupName);
     ```
 
 ### Start running

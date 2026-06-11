@@ -6,20 +6,57 @@ import {
 } from '../constants.js';
 
 export default {
+    removeTrees(removedTrees) {
+        if (removedTrees.length === 0) {
+            return this;
+        }
+
+        for (var i = 0, cnt = removedTrees.length; i < cnt; i++) {
+            this.parent.blackboard.removeTreeData(removedTrees[i].id);
+        }
+
+        RemoveItem(this.trees, removedTrees.slice());
+        RemoveItem(this.pendingTrees, removedTrees.slice());
+        RemoveItem(this.closedTrees, removedTrees.slice());
+
+        for (var i = 0, cnt = removedTrees.length; i < cnt; i++) {
+            var eventsheet = removedTrees[i];
+            eventsheet.pendingRemove = false;
+            this.parent.emit(EVT_EVENTSHEET_REMOVE, eventsheet.title, this.name, this.parent, eventsheet, this);
+        }
+
+        return this;
+    },
+
     removeAllEventSheets() {
         var removedTrees = this.trees.slice();
         var sheetTitles = removedTrees.map(function (eventsheet) {
             return eventsheet.title;
         });
 
-        this.trees.forEach(function (eventsheet) {
+        removedTrees.forEach(function (eventsheet) {
             this.parent.blackboard.removeTreeData(eventsheet.id);
-        }, this)
+            eventsheet.pendingRemove = false;
+        }, this);
+
         this.trees.length = 0;
         this.pendingTrees.length = 0;
+        this.closedTrees.length = 0;
 
         if (sheetTitles.length > 0) {
             this.parent.emit(EVT_EVENTSHEET_REMOVE_ALL, this.name, sheetTitles, this.parent, this);
+        }
+
+        return this;
+    },
+
+    removeAllEventSheetsLater() {
+        this.trees.forEach(function (eventsheet) {
+            eventsheet.pendingRemove = true;
+        });
+
+        if (!this.isRunning) {
+            this.removePendingEventSheets();
         }
 
         return this;
@@ -38,19 +75,37 @@ export default {
             }
 
             removedTrees.push(eventsheet);
-            this.parent.blackboard.removeTreeData(eventsheet.id);
         }, this);
 
-        if (removedTrees.length > 0) {
-            RemoveItem(this.trees, removedTrees.slice());
-            RemoveItem(this.pendingTrees, removedTrees.slice());
+        return this.removeTrees(removedTrees);
+    },
 
-            for (var i = 0, cnt = removedTrees.length; i < cnt; i++) {
-                var eventsheet = removedTrees[i];
-                this.parent.emit(EVT_EVENTSHEET_REMOVE, eventsheet.title, this.name, this.parent, eventsheet, this);
+    removeEventSheetLater(title) {
+        this.trees.forEach(function (eventsheet) {
+            if (eventsheet.title !== title) {
+                return;
             }
+
+            eventsheet.pendingRemove = true;
+        });
+
+        if (!this.isRunning) {
+            this.removePendingEventSheets();
         }
 
         return this;
+    },
+
+    // Internal method
+    removePendingEventSheets() {
+        var removedTrees = [];
+
+        this.trees.forEach(function (eventsheet) {
+            if (eventsheet.pendingRemove) {
+                removedTrees.push(eventsheet);
+            }
+        });
+
+        return this.removeTrees(removedTrees);
     },
 }
