@@ -9091,6 +9091,66 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Events">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#event-sheet-group" class="md-nav__link">
+    <span class="md-ellipsis">
+      Event sheet group
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event-sheet" class="md-nav__link">
+    <span class="md-ellipsis">
+      Event sheet
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#label" class="md-nav__link">
+    <span class="md-ellipsis">
+      Label
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command" class="md-nav__link">
+    <span class="md-ellipsis">
+      Command
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#condition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Condition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#input-pause" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input pause
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -9168,7 +9228,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#label" class="md-nav__link">
+  <a href="#label_1" class="md-nav__link">
     <span class="md-ellipsis">
       Label
     </span>
@@ -9633,6 +9693,24 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logger" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logger
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tracer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tracer
+    </span>
+  </a>
   
 </li>
         
@@ -16112,6 +16190,66 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Events">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#event-sheet-group" class="md-nav__link">
+    <span class="md-ellipsis">
+      Event sheet group
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event-sheet" class="md-nav__link">
+    <span class="md-ellipsis">
+      Event sheet
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#label" class="md-nav__link">
+    <span class="md-ellipsis">
+      Label
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command" class="md-nav__link">
+    <span class="md-ellipsis">
+      Command
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#condition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Condition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#input-pause" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input pause
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -16189,7 +16327,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#label" class="md-nav__link">
+  <a href="#label_1" class="md-nav__link">
     <span class="md-ellipsis">
       Label
     </span>
@@ -16657,6 +16795,24 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#logger" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logger
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tracer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tracer
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -16809,18 +16965,36 @@
 </ul>
 <h3 id="remove-event-sheet">Remove event sheet<a class="headerlink" href="#remove-event-sheet" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Remove an event sheet in default group
+<li>Remove an event sheet immediately in default group
     <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">removeEventSheet</span><span class="p">(</span><span class="nx">title</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Remove an event sheet in a specific group
+<li>Remove an event sheet immediately in a specific group
     <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">removeEventSheet</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Remove all event sheets in default group
+<li>Remove an event sheet at the next safe point.<ul>
+<li>If the group is running, the event sheet is marked for removal and removed before the current round fires the <code>'complete'</code> event.</li>
+<li>If the group is not running, the event sheet is removed immediately.
+<div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">removeEventSheetLater</span><span class="p">(</span><span class="nx">title</span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">removeEventSheetLater</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Remove all event sheets immediately in default group
     <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">removeAllEventSheets</span><span class="p">();</span>
 </code></pre></div></li>
-<li>Remove all event sheets in a specific group
+<li>Remove all event sheets immediately in a specific group
     <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">removeAllEventSheets</span><span class="p">(</span><span class="nx">groupName</span><span class="p">);</span>
 </code></pre></div></li>
+<li>Remove all event sheets at the next safe point.<ul>
+<li>If the group is running, all event sheets are marked for removal and removed before the current round fires the <code>'complete'</code> event.</li>
+<li>If the group is not running, all event sheets are removed immediately.
+<div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">removeAllEventSheetsLater</span><span class="p">();</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">removeAllEventSheetsLater</span><span class="p">(</span><span class="nx">groupName</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
 </ul>
 <h3 id="start-running">Start running<a class="headerlink" href="#start-running" title="Permanent link">&para;</a></h3>
 <p>Starting command will be ignored if group is running.</p>
@@ -17031,39 +17205,156 @@ And game objects with <code>'autoClear'</code> will be destroyed.</p>
 </code></pre></div></li>
 </ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<h4 id="event-sheet-group">Event sheet group<a class="headerlink" href="#event-sheet-group" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Start A group of event sheets
-    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">){</span><span class="w"> </span>
+<li>Start running a group of event sheets
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetGroup</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">});</span>
+</code></pre></div></li>
+<li>Continue running a group of event sheets after a pause or between pending sheets
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;continue&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetGroup</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="p">});</span>
 </code></pre></div></li>
 <li>A group of event sheets has been executed completed
-    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">){</span><span class="w"> </span>
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetGroup</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="p">});</span>
 </code></pre></div></li>
-<li>Enter an event sheet
-    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;eventsheet.enter&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">){</span><span class="w"> </span>
+<li>Stop a group of event sheets and abort pending event sheets
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;stop&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetGroup</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="p">});</span>
 </code></pre></div></li>
-<li>Exit an event sheet
-    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;eventsheet.exit&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">){</span><span class="w"> </span>
+</ul>
+<h4 id="event-sheet">Event sheet<a class="headerlink" href="#event-sheet" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Open an event sheet for condition evaluation and execution
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;eventsheet.open&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">sheetTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheet</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetGroup</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="p">});</span>
 </code></pre></div></li>
-<li>Enter a <a href="./#label">label</a> an event sheet
-    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;label.enter&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">headingTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">){</span><span class="w"> </span>
+<li>Finish event sheet condition evaluation
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;eventsheet.condition&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">sheetTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">conditionPassed</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheet</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetGroup</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="p">});</span>
 </code></pre></div></li>
-<li>Exit a <a href="./#label">label</a> of an event sheet
-    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;label.exit&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">headingTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">){</span><span class="w"> </span>
+<li>Enter an event sheet whose condition passed
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;eventsheet.enter&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">sheetTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheet</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetGroup</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="p">});</span>
 </code></pre></div></li>
-<li>Test condition of an event sheet failed
-    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;eventsheet.catch&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">){</span><span class="w"> </span>
+<li>Catch an event sheet whose condition did not pass
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;eventsheet.catch&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">sheetTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheet</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetGroup</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">});</span>
+</code></pre></div></li>
+<li>Tick an opened event sheet
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;eventsheet.tick&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">sheetTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheet</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetGroup</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">});</span>
+</code></pre></div></li>
+<li>Finish ticking an event sheet and report behavior-tree status
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;eventsheet.status&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">sheetTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">status</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheet</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetGroup</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">});</span>
+</code></pre></div></li>
+<li>Close an event sheet at the end of this round
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;eventsheet.close&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">sheetTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheet</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetGroup</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">});</span>
+</code></pre></div></li>
+<li>Exit an event sheet whose condition passed
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;eventsheet.exit&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">sheetTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheet</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetGroup</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">});</span>
+</code></pre></div></li>
+<li>Skip an event sheet before opening it
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;eventsheet.skip&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">sheetTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">reason</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheet</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetGroup</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">});</span>
+</code></pre></div></li>
+<li>Abort a pending event sheet during group stop
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;eventsheet.abort&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">sheetTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheet</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetGroup</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">});</span>
+</code></pre></div></li>
+</ul>
+<h4 id="label">Label<a class="headerlink" href="#label" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Enter a <a href="./#label">label</a> in an event sheet
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;label.enter&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">labelTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">sheetTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheet</span><span class="p">,</span><span class="w"> </span><span class="nx">labelNode</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetGroup</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">});</span>
+</code></pre></div></li>
+<li>Exit a <a href="./#label">label</a> in an event sheet
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;label.exit&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">labelTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">sheetTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheet</span><span class="p">,</span><span class="w"> </span><span class="nx">labelNode</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetGroup</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">});</span>
+</code></pre></div></li>
+</ul>
+<h4 id="command">Command<a class="headerlink" href="#command" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Start executing a command task
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;command.start&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">commandName</span><span class="p">,</span><span class="w"> </span><span class="nx">parameters</span><span class="p">,</span><span class="w"> </span><span class="nx">sheetTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheet</span><span class="p">,</span><span class="w"> </span><span class="nx">taskNode</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetGroup</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">});</span>
+</code></pre></div></li>
+<li>Finish executing a command task
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;command.end&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">commandName</span><span class="p">,</span><span class="w"> </span><span class="nx">parameters</span><span class="p">,</span><span class="w"> </span><span class="nx">success</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">,</span><span class="w"> </span><span class="nx">sheetTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheet</span><span class="p">,</span><span class="w"> </span><span class="nx">taskNode</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetGroup</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">});</span>
+</code></pre></div></li>
+<li>Pause a command task and wait for resume
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;command.pause&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">commandName</span><span class="p">,</span><span class="w"> </span><span class="nx">parameters</span><span class="p">,</span><span class="w"> </span><span class="nx">sheetTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheet</span><span class="p">,</span><span class="w"> </span><span class="nx">taskNode</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetGroup</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">});</span>
+</code></pre></div></li>
+<li>Resume a paused command task
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;command.resume&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">commandName</span><span class="p">,</span><span class="w"> </span><span class="nx">parameters</span><span class="p">,</span><span class="w"> </span><span class="nx">sheetTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheet</span><span class="p">,</span><span class="w"> </span><span class="nx">taskNode</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetGroup</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">});</span>
+</code></pre></div></li>
+<li>Abort a command task
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;command.abort&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">commandName</span><span class="p">,</span><span class="w"> </span><span class="nx">parameters</span><span class="p">,</span><span class="w"> </span><span class="nx">sheetTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheet</span><span class="p">,</span><span class="w"> </span><span class="nx">taskNode</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetGroup</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">});</span>
+</code></pre></div></li>
+</ul>
+<h4 id="condition">Condition<a class="headerlink" href="#condition" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>Evaluate a condition on the execution path
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;condition.eval&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">expression</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">,</span><span class="w"> </span><span class="nx">sheetTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheet</span><span class="p">,</span><span class="w"> </span><span class="nx">conditionNode</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetGroup</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">});</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><code>expression</code> : Serialized condition expression.</p>
+</li>
+<li><code>result</code> : Boolean result of this condition.</li>
+</ul>
+<h4 id="input-pause">Input pause<a class="headerlink" href="#input-pause" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Wait for pointer click
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pause.click&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">});</span>
+</code></pre></div></li>
+<li>Wait for a keyboard key
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pause.key&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">});</span>
+</code></pre></div></li>
+<li>Wait for pointer input
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pause.input&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">});</span>
+</code></pre></div></li>
+<li>Resume from pointer input
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;resume.input&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
 <span class="p">});</span>
 </code></pre></div></li>
@@ -17208,7 +17499,7 @@ And game objects with <code>'autoClear'</code> will be destroyed.</p>
 <span class="w">  </span><span class="nt">actions</span><span class="p">:</span>
 <span class="w">    </span><span class="c1"># - name:</span>
 </code></pre></div>
-<h5 id="label">Label<a class="headerlink" href="#label" title="Permanent link">&para;</a></h5>
+<h5 id="label_1">Label<a class="headerlink" href="#label_1" title="Permanent link">&para;</a></h5>
 <div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">labelTitle</span>
 <span class="w">  </span><span class="nt">actions</span><span class="p">:</span>
 <span class="w">    </span><span class="c1"># - name: </span>
@@ -18304,6 +18595,186 @@ can see it by <code>log.memory</code>, or get property of game object via <code>
 <div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">condition.staminaAtLeast</span>
 <span class="w">  </span><span class="nt">parameters</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> value</span><span class="p">:</span><span class="w"> </span><span class="nv">30</span><span class="w"> </span><span class="p p-Indicator">}</span>
 </code></pre></div>
+<h3 id="logger">Logger<a class="headerlink" href="#logger" title="Permanent link">&para;</a></h3>
+<p>Logs event sheet manager diagnostic events as text.</p>
+<ul>
+<li>Create logger from plugin
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexYAMLEventSheets&#39;</span><span class="p">).</span><span class="nx">addLogger</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">manager</span><span class="o">:</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">level</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;flow&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">format</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;compact&#39;</span>
+<span class="p">});</span>
+</code></pre></div></li>
+<li>Create logger from class
+    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Logger</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser4-rex-plugins/plugins/yamleventsheets.js&#39;</span><span class="p">;</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Logger</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">manager</span><span class="o">:</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">level</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;flow&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">format</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;compact&#39;</span><span class="p">,</span>
+
+<span class="w">    </span><span class="c1">// formatter:</span>
+<span class="w">    </span><span class="c1">// sink:</span>
+<span class="w">    </span><span class="c1">// output:</span>
+<span class="w">    </span><span class="c1">// events:</span>
+<span class="w">    </span><span class="c1">// filter:</span>
+<span class="w">    </span><span class="c1">// includeTime: false,</span>
+<span class="w">    </span><span class="c1">// includeReferences: false,</span>
+<span class="w">    </span><span class="c1">// includeParameters: true,</span>
+<span class="w">    </span><span class="c1">// includeResult: true,</span>
+<span class="w">    </span><span class="c1">// autoStart: true</span>
+<span class="p">});</span>
+</code></pre></div></li>
+</ul>
+<p>Parameters</p>
+<ul>
+<li><code>manager</code> : Event sheet manager to listen to.</li>
+<li><code>managers</code> : An array of event sheet managers to listen to.</li>
+<li><code>level</code> :<ul>
+<li><code>'error'</code> : Stop, abort, failed command, and failed event sheet status events.</li>
+<li><code>'flow'</code> : Group, event sheet, label, condition, and command flow events. Default behavior.</li>
+<li><code>'status'</code> : Includes event sheet status events.</li>
+<li><code>'verbose'</code> : Includes all recorded events.</li>
+</ul>
+</li>
+<li><code>format</code> :<ul>
+<li><code>'compact'</code> : One line text per event. Default behavior.</li>
+<li><code>'json'</code> : JSON string per event.</li>
+</ul>
+</li>
+<li><code>formatter</code> : Custom formatter callback.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span><span class="w"> </span><span class="nx">record</span><span class="p">,</span><span class="w"> </span><span class="nx">recorder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">event</span><span class="p">.</span><span class="nx">type</span><span class="si">}</span><span class="sb"> : </span><span class="si">${</span><span class="nx">event</span><span class="p">.</span><span class="nx">groupName</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><code>sink</code> : Output target.
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Logger</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">manager</span><span class="o">:</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">sink</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">write</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">textarea</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">text</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;\n&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div></li>
+<li><code>output</code> : Custom output callback.</li>
+<li><code>events</code> : Event names to record.<ul>
+<li><code>'all'</code> : Record all diagnostic events. Default behavior.</li>
+<li>A string event name, or an array of event names.</li>
+</ul>
+</li>
+<li><code>filter</code> : Return <code>false</code> to skip an event.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span><span class="w"> </span><span class="nx">record</span><span class="p">,</span><span class="w"> </span><span class="nx">recorder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// return true;</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><code>includeTime</code> : Include timestamp in records. Default value is <code>false</code></li>
+<li><code>includeReferences</code> : Include runtime object references in records. Default value is <code>false</code>.</li>
+<li><code>includeParameters</code> : Include command parameters in command events. Default value is <code>true</code>.</li>
+<li><code>includeResult</code> : Include command return value in command events. Default value is <code>true</code>.</li>
+<li><code>autoStart</code> : Start listening after construction. Default behavior is <code>true</code>.</li>
+</ul>
+<p>Commands</p>
+<ul>
+<li>Start or stop logger
+    <div class="highlight"><pre><span></span><code><span class="nx">logger</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
+<span class="nx">logger</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Destroy logger
+    <div class="highlight"><pre><span></span><code><span class="nx">logger</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+</code></pre></div></li>
+</ul>
+<h3 id="tracer">Tracer<a class="headerlink" href="#tracer" title="Permanent link">&para;</a></h3>
+<p>Stores event sheet manager diagnostic events as structured records. It is useful for building a custom trace view or inspector UI.</p>
+<ul>
+<li>Create tracer from plugin
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">tracer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexYAMLEventSheets&#39;</span><span class="p">).</span><span class="nx">addTracer</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">manager</span><span class="o">:</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">maxRecords</span><span class="o">:</span><span class="w"> </span><span class="mf">32</span>
+<span class="p">});</span>
+</code></pre></div></li>
+<li>Create tracer from class
+    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Tracer</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser4-rex-plugins/plugins/yamleventsheets.js&#39;</span><span class="p">;</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">tracer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Tracer</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">manager</span><span class="o">:</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">maxRecords</span><span class="o">:</span><span class="w"> </span><span class="mf">32</span>
+<span class="p">});</span>
+</code></pre></div></li>
+</ul>
+<p>Parameters</p>
+<ul>
+<li><code>manager</code> : Event sheet manager to listen to.</li>
+<li><code>managers</code> : An array of event sheet managers to listen to.</li>
+<li><code>maxRecords</code> : Maximum finalized group records to keep. Default behavior is <code>60</code>.</li>
+<li><code>events</code> : Event names to record.</li>
+<li><code>filter</code> : Return <code>false</code> to skip an event.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span><span class="w"> </span><span class="nx">record</span><span class="p">,</span><span class="w"> </span><span class="nx">recorder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// return true;</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><code>includeTime</code> : Include timestamp in records. Default value is <code>false</code></li>
+<li><code>includeReferences</code> : Include runtime object references in records. Default value is <code>false</code>.</li>
+<li><code>includeParameters</code> : Include command parameters in command events. Default value is <code>true</code>.</li>
+<li><code>includeResult</code> : Include command return value in command events. Default value is <code>true</code>.</li>
+<li><code>autoStart</code> : Start listening after construction. Default behavior is <code>true</code>.</li>
+</ul>
+<p>Commands:</p>
+<ul>
+<li>Get trace records
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">records</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tracer</span><span class="p">.</span><span class="nx">getRecords</span><span class="p">();</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">lastRecord</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tracer</span><span class="p">.</span><span class="nx">getLastRecord</span><span class="p">();</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">runningRecord</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tracer</span><span class="p">.</span><span class="nx">getCurrentRecord</span><span class="p">(</span><span class="nx">groupName</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Destroy Tracer
+    <div class="highlight"><pre><span></span><code><span class="nx">tracer</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+</code></pre></div></li>
+</ul>
+<p>Record structure:</p>
+<ul>
+<li>
+<p>A record contains one group execution round.
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;eventsheet.round&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">managerID</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">groupName</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;task0&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">roundID</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">statusName</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;COMPLETE&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">events</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;condition.eval&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">groupName</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;task0&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">sheetTitle</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Main&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">conditionType</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;sheet&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">expression</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;coin &gt; 0&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">result</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;command.start&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">groupName</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;task0&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">sheetTitle</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Main&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">commandName</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;print&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">parameters</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;hello&#39;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>Show current running groups
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;task0&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;task1&#39;</span><span class="p">].</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">groupName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">record</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tracer</span><span class="p">.</span><span class="nx">getCurrentRecord</span><span class="p">(</span><span class="nx">groupName</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">record</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">groupName</span><span class="si">}</span><span class="sb">: IDLE`</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">groupName</span><span class="si">}</span><span class="sb">: RUNNING, events=</span><span class="si">${</span><span class="nx">record</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">length</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="p">}).</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;\n&#39;</span><span class="p">);</span>
+</code></pre></div></p>
+</li>
+</ul>
 
 
 

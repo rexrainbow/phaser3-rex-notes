@@ -395,7 +395,7 @@
 	const IDLE$7 = 0;
 	const SUCCESS = 1;
 	const FAILURE = 2;
-	const RUNNING$1 = 3;
+	const RUNNING = 3;
 	const ABORT = 5;
 	const ERROR = 9;
 
@@ -407,6 +407,18 @@
 	const EXPRESSION = 'expression';
 
 	const TREE_STATE = '$state';
+
+	const EVT_TICK_START = 'tick.start';
+	const EVT_TICK_END = 'tick.end';
+
+	const EVT_NODE_ENTER = 'node.enter';
+	const EVT_NODE_OPEN = 'node.open';
+	const EVT_NODE_TICK = 'node.tick';
+	const EVT_NODE_STATUS = 'node.status';
+	const EVT_NODE_CLOSE = 'node.close';
+	const EVT_NODE_EXIT = 'node.exit';
+	const EVT_NODE_ABORT = 'node.abort';
+	const EVT_NODE_LOG = 'node.log';
 
 	/**
 	 * @author       Richard Davey <rich@photonstorm.com>
@@ -867,6 +879,7 @@
 
 	        // TICK
 	        var status = this._tick(tick);
+	        tick.emitNodeStatus(this, status);
 
 	        // CLOSE
 	        if ((status === SUCCESS) || (status === FAILURE) ||
@@ -911,6 +924,7 @@
 
 	    _abort(tick) {
 	        this._close(tick);
+	        tick.emitNodeAbort(this);
 	        this.abort(tick);
 	    }
 
@@ -955,7 +969,7 @@
 	    }
 
 	    get RUNNING() {
-	        return RUNNING$1;
+	        return RUNNING;
 	    }
 
 	    get ERROR() {
@@ -1640,7 +1654,7 @@
 	    }
 
 	    tick(tick) {
-	        return RUNNING$1;
+	        return RUNNING;
 	    }
 	}
 
@@ -1723,12 +1737,12 @@
 
 	        if (duration > 0) {
 	            if ((currTime - startTime) < duration) {
-	                return RUNNING$1;
+	                return RUNNING;
 	            }
 
 	        } else if (duration === 0) { // Wait 1 tick            
 	            if (currTime === startTime) {
-	                return RUNNING$1;
+	                return RUNNING;
 	            }
 	        }
 
@@ -1934,7 +1948,7 @@
 	            for (var i = 0, cnt = this.children.length; i < cnt; i++) {
 	                status = this.children[i]._execute(tick);
 
-	                if ((status === RUNNING$1) || (status === SUCCESS) || (status === ABORT)) {
+	                if ((status === RUNNING) || (status === SUCCESS) || (status === ABORT)) {
 	                    childIndex = i;
 	                    break;
 	                }
@@ -1944,7 +1958,7 @@
 	            status = child._execute(tick);
 	        }
 
-	        nodeMemory.$runningChild = (status === RUNNING$1) ? childIndex : -1;
+	        nodeMemory.$runningChild = (status === RUNNING) ? childIndex : -1;
 	        return status;
 	    }
 
@@ -2004,12 +2018,12 @@
 	        for (var i = childIndex, cnt = this.children.length; i < cnt; i++) {
 	            status = this.children[i]._execute(tick);
 
-	            if ((status === RUNNING$1) || (status === FAILURE) || (status === ABORT)) {
+	            if ((status === RUNNING) || (status === FAILURE) || (status === ABORT)) {
 	                break;
 	            }
 	        }
 
-	        nodeMemory.$runningChild = (status === RUNNING$1) ? i : -1;
+	        nodeMemory.$runningChild = (status === RUNNING) ? i : -1;
 	        return status;
 	    }
 
@@ -2214,7 +2228,7 @@
 	                    hasAnyFinishStatus = true;
 	                    break;
 
-	                case RUNNING$1:
+	                case RUNNING:
 	                    hasAnyRunningStatus = true;
 	                    break;
 
@@ -2246,7 +2260,7 @@
 	            } else if (hasAnyAbortStatus) {
 	                return ABORT;
 	            } else if (hasAnyRunningStatus) {
-	                return RUNNING$1;
+	                return RUNNING;
 	            } else if (this.returnSuccess) {
 	                return SUCCESS;
 	            } else {
@@ -2343,13 +2357,13 @@
 	            if (this.conditionEvalBreak) {
 	                // Resolve runningChild index, but not run child now
 	                nodeMemory.$runningChild = childIndex;
-	                return RUNNING$1;
+	                return RUNNING;
 	            }
 	        }
 
 	        var child = this.children[childIndex];
 	        var status = child._execute(tick);
-	        nodeMemory.$runningChild = (status === RUNNING$1) ? childIndex : -1;
+	        nodeMemory.$runningChild = (status === RUNNING) ? childIndex : -1;
 
 	        return status;
 	    }
@@ -2460,13 +2474,13 @@
 	            if (this.conditionEvalBreak) {
 	                // Resolve runningChild index, but not run child now
 	                nodeMemory.$runningChild = childIndex;
-	                return RUNNING$1;
+	                return RUNNING;
 	            }
 	        }
 
 	        var child = this.children[childIndex];
 	        var status = child._execute(tick);
-	        nodeMemory.$runningChild = (status === RUNNING$1) ? childIndex : -1;
+	        nodeMemory.$runningChild = (status === RUNNING) ? childIndex : -1;
 	        return status;
 	    }
 
@@ -2600,13 +2614,13 @@
 	            if (this.conditionEvalBreak) {
 	                // Resolve runningChild index, but not run child now
 	                nodeMemory.$runningChild = childIndex;
-	                return RUNNING$1;
+	                return RUNNING;
 	            }
 	        }
 
 	        var child = this.children[childIndex];
 	        var status = child._execute(tick);
-	        nodeMemory.$runningChild = (status === RUNNING$1) ? childIndex : -1;
+	        nodeMemory.$runningChild = (status === RUNNING) ? childIndex : -1;
 	        return status;
 	    }
 
@@ -2667,7 +2681,7 @@
 
 	        var child = this.children[childIndex];
 	        var status = child._execute(tick);
-	        nodeMemory.$runningChild = (status === RUNNING$1) ? childIndex : -1;
+	        nodeMemory.$runningChild = (status === RUNNING) ? childIndex : -1;
 	        return status;
 	    }
 
@@ -2762,12 +2776,12 @@
 	        for (var i = childIndex, cnt = children.length; i < cnt; i++) {
 	            status = this.children[children[i]]._execute(tick);
 
-	            if ((status === RUNNING$1) || (status === SUCCESS) || (status === ABORT)) {
+	            if ((status === RUNNING) || (status === SUCCESS) || (status === ABORT)) {
 	                break;
 	            }
 	        }
 
-	        nodeMemory.$runningChild = (status === RUNNING$1) ? i : -1;
+	        nodeMemory.$runningChild = (status === RUNNING) ? i : -1;
 	        return status;
 	    }
 
@@ -3439,6 +3453,10 @@
 	        this.onFailState = this.properties.onFailState;
 	    }
 
+	    evalCondition(tick) {
+	        return tick.evalExpression(this.condition);
+	    }
+
 	    tick(tick) {
 	        if (!this.child) {
 	            return ERROR;
@@ -3453,12 +3471,12 @@
 	                - Equal to `ForceSuccess + If`
 	              - Return FAILURE for Selector node
 	            */
-	            if (!tick.evalExpression(this.condition)) {
+	            if (!this.evalCondition(tick)) {
 	                return this.onFailState;
 	            } else if (this.conditionEvalBreak) {
 	                // Open child but not run it now
 	                this.openChild();
-	                return RUNNING$1;
+	                return RUNNING;
 	            }
 	        }
 
@@ -3513,6 +3531,10 @@
 	        this.returnSuccess = this.properties.returnSuccess;
 	    }
 
+	    evalCondition(tick) {
+	        return tick.evalExpression(this.condition);
+	    }
+
 	    tick(tick) {
 	        if (!this.child) {
 	            return ERROR;
@@ -3521,7 +3543,7 @@
 	        // child is running
 	        if (this.isChildRunning(tick)) {
 	            // Abort child if eval result is false
-	            if (!tick.evalExpression(this.condition)) {
+	            if (!this.evalCondition(tick)) {
 	                return (this.returnSuccess) ? SUCCESS : FAILURE;
 	            }
 	        }
@@ -3576,6 +3598,10 @@
 	        this.returnSuccess = this.properties.returnSuccess;
 	    }
 
+	    evalCondition(tick) {
+	        return tick.evalExpression(this.condition);
+	    }
+
 	    tick(tick) {
 	        if (!this.child) {
 	            return ERROR;
@@ -3584,7 +3610,7 @@
 	        // child is running
 	        if (this.isChildRunning(tick)) {
 	            // Abort child if eval result is true
-	            if (!!tick.evalExpression(this.condition)) {
+	            if (!!this.evalCondition(tick)) {
 	                return (this.returnSuccess) ? SUCCESS : FAILURE;
 	            }
 	        }
@@ -3717,6 +3743,72 @@
 	    this.root = nodes[data.root];
 
 	    return this;
+	};
+
+	var EventEmitMethods = {
+	    setEventEmitter(eventEmitter) {
+	        this.eventEmitter = eventEmitter;
+	        return this;
+	    },
+
+	    setEventEnable(enable = true) {
+	        this.eventEnable = enable;
+	        return this;
+	    },
+
+	    toggleEventEnable() {
+	        this.eventEnable = !this.eventEnable;
+	        return this;
+	    },
+
+	    emit(name, ...args) {
+	        if (this.eventEnable && this.eventEmitter) {
+	            this.eventEmitter.emit(name, ...args);
+	        }
+	        return this;
+	    },
+
+	    emitTickStart() {
+	        if (this.eventEnable && this.eventEmitter) {
+	            this.eventEmitter.emit(EVT_TICK_START, this);
+	        }
+	        return this;
+	    },
+
+	    emitTickEnd(status) {
+	        if (this.eventEnable && this.eventEmitter) {
+	            this.eventEmitter.emit(EVT_TICK_END, status, this);
+	        }
+	        return this;
+	    },
+
+	    emitNodeEvent(name, node) {
+	        if (this.eventEnable && this.eventEmitter) {
+	            this.eventEmitter.emit(name, node, this);
+	        }
+	        return this;
+	    },
+
+	    emitNodeStatus(node, status) {
+	        if (this.eventEnable && this.eventEmitter) {
+	            this.eventEmitter.emit(EVT_NODE_STATUS, node, status, this);
+	        }
+	        return this;
+	    },
+
+	    emitNodeAbort(node) {
+	        if (this.eventEnable && this.eventEmitter) {
+	            this.eventEmitter.emit(EVT_NODE_ABORT, node, this);
+	        }
+	        return this;
+	    },
+
+	    emitNodeLog(node, message, data) {
+	        if (this.eventEnable && this.eventEmitter) {
+	            this.eventEmitter.emit(EVT_NODE_LOG, node, message, data, this);
+	        }
+	        return this;
+	    },
 	};
 
 	function commonjsRequire(path) {
@@ -5570,6 +5662,10 @@
 	    constructor() {
 	        // set by BehaviorTree
 
+	        this.eventEmitter = null;
+
+	        this.eventEnable = false;
+
 	        this.tree = null;
 
 	        this.blackboard = null;
@@ -5588,6 +5684,7 @@
 	    }
 
 	    destroy() {
+	        this.eventEmitter = null;
 	        this.tree = null;
 	        this.blackboard = null;
 	        this.target = null;
@@ -5681,27 +5778,36 @@
 	        this._nodeCount++;
 	        this._openNodes.push(node);
 	        this._currentNode = node;
+	        this.emitNodeEvent(EVT_NODE_ENTER, node);
 	    }
 
 	    _openNode(node) {
 	        this._currentNode = node;
+	        this.emitNodeEvent(EVT_NODE_OPEN, node);
 	    }
 
 	    _tickNode(node) {
 	        this._currentNode = node;
+	        this.emitNodeEvent(EVT_NODE_TICK, node);
 	    }
 
 	    _closeNode(node) {
 	        Remove$3(this._openNodes, node);
 	        this._currentNode = node;
+	        this.emitNodeEvent(EVT_NODE_CLOSE, node);
 	    }
 
 	    _exitNode(node) {
 	        this._currentNode = node;
+	        this.emitNodeEvent(EVT_NODE_EXIT, node);
 	    }
 	}
+	Object.assign(
+	    Tick.prototype,
+	    EventEmitMethods,
+	);
 
-	class BehaviorTree {
+	class BehaviorTree extends EventEmitter$2 {
 
 	    constructor(
 	        {
@@ -5712,6 +5818,8 @@
 	            root = null
 	        } = {}
 	    ) {
+
+	        super();
 
 	        if (id === undefined) {
 	            id = CreateID();
@@ -5732,11 +5840,16 @@
 	        this._root = root;
 
 	        this.ticker = (new Tick()).setTree(this);
+
+	        this.lastState = IDLE$7;
+
+	        this.setEventEmitter(this);
 	    }
 
 	    destroy() {
 	        this._root.destroy();
 	        this.ticker.destroy();
+	        super.destroy();
 
 	        this._root = undefined;
 	        this.ticker = undefined;
@@ -5846,6 +5959,16 @@
 	        return this.stringTemplate;
 	    }
 
+	    setEventEnable(enable = true) {
+	        this.ticker.setEventEnable(enable);
+	        return this;
+	    }
+
+	    toggleEventEnable() {
+	        this.ticker.toggleEventEnable();
+	        return this;
+	    }
+
 	    tick(blackboard, target) {
 	        if (!blackboard) {
 	            throw 'The blackboard parameter is obligatory and must be an instance of Blackboard';
@@ -5857,6 +5980,8 @@
 	            .setTarget(target)
 	            .reset();
 
+	        ticker.emitTickStart();
+
 	        /* TICK NODE */
 	        var state = this.root._execute(ticker);
 
@@ -5864,6 +5989,10 @@
 	        // blackboard.set('$openNodes', ticker._openNodes.slice(0), this.id);
 	        // blackboard.set('$nodeCount', ticker._nodeCount, this.id);
 	        blackboard.set(TREE_STATE, state, this.id);
+
+	        this.lastState = state;
+
+	        ticker.emitTickEnd(state);
 
 	        return state;
 	    }
@@ -5879,13 +6008,28 @@
 	            .setTarget(target)
 	            .reset();
 
+	        ticker.emitTickStart();
+
 	        /* ABORT NODE */
 	        this.root.abortChildren(ticker);
 
 	        /* POPULATE BLACKBOARD */
 	        blackboard.set(TREE_STATE, IDLE$7, this.id);
 
+	        this.lastState = IDLE$7;
+
+	        ticker.emitTickEnd(IDLE$7);
+
 	        return IDLE$7;
+	    }
+
+	    isRunningState() {
+	        return this.lastState === RUNNING;
+	    }
+
+	    setEventEmitter(eventEmitter) {
+	        this.ticker.setEventEmitter(eventEmitter);
+	        return this;
 	    }
 
 	    static setStartIDValue(value) {
@@ -6143,7 +6287,7 @@
 
 	let Blackboard$1 = class Blackboard {
 
-	    constructor(config) {
+	    constructor(config = {}) {
 	        var {
 	            globalMemory = {}
 	        } = config;
@@ -6387,7 +6531,7 @@
 	};
 
 	class Blackboard extends Blackboard$1 {
-	    constructor(config) {
+	    constructor(config = {}) {
 	        super(config);
 
 	        var {
@@ -6490,7 +6634,7 @@
 
 	    getTreeState(eventsheet) {
 	        var treeID = (typeof (eventsheet) === 'string') ? eventsheet : eventsheet.id;
-	        return this.blackboard.getTreeState(treeID);
+	        return this.parent.blackboard.getTreeState(treeID);
 	    },
 
 	    getEventSheetTitleList(out) {
@@ -6504,27 +6648,278 @@
 	    },
 	};
 
+	/**
+	 * Start running an event sheet group.
+	 *
+	 * Params: (groupName, eventSheetManager, eventSheetGroup)
+	 */
+	const EVT_GROUP_START = 'start';
+
+	/**
+	 * Continue running an event sheet group after a pause or between pending sheets.
+	 *
+	 * Params: (groupName, eventSheetManager, eventSheetGroup)
+	 */
+	const EVT_GROUP_CONTINUE = 'continue';
+
+	/**
+	 * Complete one run of an event sheet group.
+	 *
+	 * Params: (groupName, eventSheetManager, eventSheetGroup)
+	 */
+	const EVT_GROUP_COMPLETE = 'complete';
+
+	/**
+	 * Stop an event sheet group and abort pending sheets.
+	 *
+	 * Params: (groupName, eventSheetManager, eventSheetGroup)
+	 */
+	const EVT_GROUP_STOP = 'stop';
+
+	/**
+	 * Add an event sheet to a group.
+	 *
+	 * Params: (sheetTitle, groupName, eventSheetManager, eventSheet, eventSheetGroup)
+	 */
+	const EVT_EVENTSHEET_ADD = 'eventsheet.add';
+
+	/**
+	 * Remove an event sheet from a group.
+	 *
+	 * Params: (sheetTitle, groupName, eventSheetManager, eventSheet, eventSheetGroup)
+	 */
+	const EVT_EVENTSHEET_REMOVE = 'eventsheet.remove';
+
+	/**
+	 * Remove all event sheets from a group.
+	 *
+	 * Params: (groupName, sheetTitles, eventSheetManager, eventSheetGroup)
+	 */
+	const EVT_EVENTSHEET_REMOVE_ALL = 'eventsheet.removeall';
+
+	/**
+	 * Open an event sheet for condition evaluation and execution.
+	 *
+	 * Params: (sheetTitle, groupName, eventSheetManager, eventSheet, eventSheetGroup)
+	 */
+	const EVT_EVENTSHEET_OPEN = 'eventsheet.open';
+
+	/**
+	 * Finish event sheet condition evaluation.
+	 *
+	 * Params: (sheetTitle, groupName, conditionPassed, eventSheetManager, eventSheet, eventSheetGroup)
+	 */
+	const EVT_EVENTSHEET_CONDITION = 'eventsheet.condition';
+
+	/**
+	 * Enter an event sheet whose condition passed.
+	 *
+	 * Params: (sheetTitle, groupName, eventSheetManager, eventSheet, eventSheetGroup)
+	 */
+	const EVT_EVENTSHEET_ENTER = 'eventsheet.enter';
+
+	/**
+	 * Catch an event sheet whose condition did not pass.
+	 *
+	 * Params: (sheetTitle, groupName, eventSheetManager, eventSheet, eventSheetGroup)
+	 */
+	const EVT_EVENTSHEET_CATCH = 'eventsheet.catch';
+
+	/**
+	 * Tick an opened event sheet.
+	 *
+	 * Params: (sheetTitle, groupName, eventSheetManager, eventSheet, eventSheetGroup)
+	 */
+	const EVT_EVENTSHEET_TICK = 'eventsheet.tick';
+
+	/**
+	 * Finish ticking an event sheet and report its behavior-tree status.
+	 *
+	 * Params: (sheetTitle, groupName, status, eventSheetManager, eventSheet, eventSheetGroup)
+	 */
+	const EVT_EVENTSHEET_STATUS = 'eventsheet.status';
+
+	/**
+	 * Close an event sheet at the end of this round.
+	 *
+	 * Params: (sheetTitle, groupName, eventSheetManager, eventSheet, eventSheetGroup)
+	 */
+	const EVT_EVENTSHEET_CLOSE = 'eventsheet.close';
+
+	/**
+	 * Exit an event sheet whose condition passed.
+	 *
+	 * Params: (sheetTitle, groupName, eventSheetManager, eventSheet, eventSheetGroup)
+	 */
+	const EVT_EVENTSHEET_EXIT = 'eventsheet.exit';
+
+	/**
+	 * Skip an event sheet before opening it.
+	 *
+	 * Params: (sheetTitle, groupName, reason, eventSheetManager, eventSheet, eventSheetGroup)
+	 */
+	const EVT_EVENTSHEET_SKIP = 'eventsheet.skip';
+
+	/**
+	 * Abort a pending event sheet during group stop.
+	 *
+	 * Params: (sheetTitle, groupName, eventSheetManager, eventSheet, eventSheetGroup)
+	 */
+	const EVT_EVENTSHEET_ABORT = 'eventsheet.abort';
+
+	/**
+	 * Enter a label node inside an event sheet.
+	 *
+	 * Params: (labelTitle, sheetTitle, groupName, eventSheetManager, eventSheet, labelNode, eventSheetGroup)
+	 */
+	const EVT_LABEL_ENTER = 'label.enter';
+
+	/**
+	 * Exit a label node inside an event sheet.
+	 *
+	 * Params: (labelTitle, sheetTitle, groupName, eventSheetManager, eventSheet, labelNode, eventSheetGroup)
+	 */
+	const EVT_LABEL_EXIT = 'label.exit';
+
+	/**
+	 * Start executing a command task.
+	 *
+	 * Params: (commandName, parameters, sheetTitle, groupName, eventSheetManager, eventSheet, taskNode, eventSheetGroup)
+	 */
+	const EVT_COMMAND_START = 'command.start';
+
+	/**
+	 * Finish executing a command task.
+	 *
+	 * Params: (commandName, parameters, success, result, sheetTitle, groupName, eventSheetManager, eventSheet, taskNode, eventSheetGroup)
+	 */
+	const EVT_COMMAND_END = 'command.end';
+
+	/**
+	 * Pause a command task and wait for resume.
+	 *
+	 * Params: (commandName, parameters, sheetTitle, groupName, eventSheetManager, eventSheet, taskNode, eventSheetGroup)
+	 */
+	const EVT_COMMAND_PAUSE = 'command.pause';
+
+	/**
+	 * Resume a paused command task.
+	 *
+	 * Params: (commandName, parameters, sheetTitle, groupName, eventSheetManager, eventSheet, taskNode, eventSheetGroup)
+	 */
+	const EVT_COMMAND_RESUME = 'command.resume';
+
+	/**
+	 * Abort a command task.
+	 *
+	 * Params: (commandName, parameters, sheetTitle, groupName, eventSheetManager, eventSheet, taskNode, eventSheetGroup)
+	 */
+	const EVT_COMMAND_ABORT = 'command.abort';
+
+	/**
+	 * Evaluate a condition on the execution path.
+	 *
+	 * Params: (expression, result, sheetTitle, groupName, eventSheetManager, eventSheet, conditionNode, eventSheetGroup)
+	 */
+	const EVT_CONDITION_EVAL = 'condition.eval';
+
+	/**
+	 * Wait for pointer click.
+	 *
+	 * Params: ()
+	 */
+	const EVT_PAUSE_CLICK = 'pause.click';
+
+	/**
+	 * Wait for a keyboard key.
+	 *
+	 * Params: (key)
+	 */
+	const EVT_PAUSE_KEY = 'pause.key';
+
+	/**
+	 * Wait for pointer input.
+	 *
+	 * Params: ()
+	 */
+	const EVT_PAUSE_INPUT = 'pause.input';
+
+	/**
+	 * Resume from pointer input.
+	 *
+	 * Params: ()
+	 */
+	const EVT_RESUME_INPUT = 'resume.input';
+
 	var AddTreeMethods$1 = {
 	    addTree(eventsheet) {
 	        this.trees.push(eventsheet);
+	        this.parent.emit(EVT_EVENTSHEET_ADD, eventsheet.title, this.name, this.parent, eventsheet, this);
 	        return this;
 	    },
 	};
 
 	var RemoveTreeMethods$1 = {
+	    removeTrees(removedTrees) {
+	        if (removedTrees.length === 0) {
+	            return this;
+	        }
+
+	        for (var i = 0, cnt = removedTrees.length; i < cnt; i++) {
+	            this.parent.blackboard.removeTreeData(removedTrees[i].id);
+	        }
+
+	        Remove$3(this.trees, removedTrees.slice());
+	        Remove$3(this.pendingTrees, removedTrees.slice());
+	        Remove$3(this.closedTrees, removedTrees.slice());
+
+	        for (var i = 0, cnt = removedTrees.length; i < cnt; i++) {
+	            var eventsheet = removedTrees[i];
+	            eventsheet.pendingRemove = false;
+	            this.parent.emit(EVT_EVENTSHEET_REMOVE, eventsheet.title, this.name, this.parent, eventsheet, this);
+	        }
+
+	        return this;
+	    },
+
 	    removeAllEventSheets() {
-	        this.trees.forEach(function (eventsheet) {
-	            this.blackboard.removeTreeData(eventsheet.id);
+	        var removedTrees = this.trees.slice();
+	        var sheetTitles = removedTrees.map(function (eventsheet) {
+	            return eventsheet.title;
+	        });
+
+	        removedTrees.forEach(function (eventsheet) {
+	            this.parent.blackboard.removeTreeData(eventsheet.id);
+	            eventsheet.pendingRemove = false;
 	        }, this);
+
 	        this.trees.length = 0;
 	        this.pendingTrees.length = 0;
+	        this.closedTrees.length = 0;
+
+	        if (sheetTitles.length > 0) {
+	            this.parent.emit(EVT_EVENTSHEET_REMOVE_ALL, this.name, sheetTitles, this.parent, this);
+	        }
+
+	        return this;
+	    },
+
+	    removeAllEventSheetsLater() {
+	        this.trees.forEach(function (eventsheet) {
+	            eventsheet.pendingRemove = true;
+	        });
+
+	        if (!this.isRunning) {
+	            this.removePendingEventSheets();
+	        }
+
 	        return this;
 	    },
 
 	    removeEventSheet(title) {
 	        var removedTrees = [];
 	        this.trees.forEach(function (eventsheet) {
-	            if (!eventsheet.title === title) {
+	            if (eventsheet.title !== title) {
 	                return;
 	            }
 	            var status = this.getTreeState(eventsheet);
@@ -6534,15 +6929,38 @@
 	            }
 
 	            removedTrees.push(eventsheet);
-	            this.blackboard.removeTreeData(eventsheet.id);
 	        }, this);
 
-	        if (removedTrees.length > 0) {
-	            Remove$3(this.trees, removedTrees);
-	            Remove$3(this.pendingTrees, removedTrees);
+	        return this.removeTrees(removedTrees);
+	    },
+
+	    removeEventSheetLater(title) {
+	        this.trees.forEach(function (eventsheet) {
+	            if (eventsheet.title !== title) {
+	                return;
+	            }
+
+	            eventsheet.pendingRemove = true;
+	        });
+
+	        if (!this.isRunning) {
+	            this.removePendingEventSheets();
 	        }
 
 	        return this;
+	    },
+
+	    // Internal method
+	    removePendingEventSheets() {
+	        var removedTrees = [];
+
+	        this.trees.forEach(function (eventsheet) {
+	            if (eventsheet.pendingRemove) {
+	                removedTrees.push(eventsheet);
+	            }
+	        });
+
+	        return this.removeTrees(removedTrees);
 	    },
 	};
 
@@ -6639,9 +7057,15 @@
 	    pauseEventSheet(tick) {
 	        // Pause eventSheetGroup, wait until eventEmitter fires resumeEventName
 	        var eventSheetGroup = tick.tree.eventSheetGroup;
+	        var eventSheetManager = tick.blackboard.eventSheetManager;
+	        var eventSheet = tick.tree;
+	        var taskName = this.properties.name;
+	        var parameters = this.evaledParameters;
+	        var groupName = eventSheetGroup.name;
 
 	        // Pause eventSheetGroup
 	        this.isRunning = true;
+	        eventSheetManager.emit(EVT_COMMAND_PAUSE, taskName, parameters, eventSheet.title, groupName, eventSheetManager, eventSheet, this, eventSheetGroup);
 
 	        var self = this;
 	        var waitId = this.waitId;
@@ -6654,6 +7078,8 @@
 
 	            // Resume event sheet group
 	            self.isRunning = false;
+	            eventSheetManager.emit(EVT_COMMAND_RESUME, taskName, parameters, eventSheet.title, groupName, eventSheetManager, eventSheet, self, eventSheetGroup);
+	            eventSheetManager.emit(EVT_COMMAND_END, taskName, parameters, true, undefined, eventSheet.title, groupName, eventSheetManager, eventSheet, self, eventSheetGroup);
 	            eventSheetGroup.continue();
 	        };
 
@@ -6787,6 +7213,11 @@
 	        // Eval parameters
 	        var taskParameters = this.expressions || {};
 	        var evaledParameters = EvalParameters(tick, taskParameters);
+	        this.evaledParameters = evaledParameters;
+
+	        var eventSheetGroup = eventSheet.eventSheetGroup;
+	        var groupName = eventSheetGroup.name;
+	        eventSheetManager.emit(EVT_COMMAND_START, taskName, evaledParameters, eventSheet.title, groupName, eventSheetManager, eventSheet, this, eventSheetGroup);
 
 	        eventSheetManager.bindTaskActionNode(tick, this);
 	        // For invoking eventSheetManager.pauseEventSheet() to generate new resumeEventName
@@ -6810,6 +7241,7 @@
 	                this.pauseEventSheetUnitlEvent(tick, result);
 	            } else {
 	                this.isFailure = (result === false) || (result === 0) || (result === null);
+	                eventSheetManager.emit(EVT_COMMAND_END, taskName, evaledParameters, !this.isFailure, result, eventSheet.title, groupName, eventSheetManager, eventSheet, this, eventSheetGroup);
 	            }
 	        }
 	    }
@@ -6826,6 +7258,15 @@
 	    }
 
 	    abort(tick) {
+	        var blackboard = tick.blackboard;
+	        var eventSheetManager = blackboard.eventSheetManager;
+	        var eventSheet = tick.tree;
+	        var eventSheetGroup = eventSheet.eventSheetGroup;
+	        var groupName = eventSheetGroup.name;
+	        var taskName = this.properties.name;
+
+	        eventSheetManager.emit(EVT_COMMAND_ABORT, taskName, this.evaledParameters, eventSheet.title, groupName, eventSheetManager, eventSheet, this, eventSheetGroup);
+
 	        if (this.removeTaskCompleteCallback) {
 	            this.removeTaskCompleteCallback();
 	        }
@@ -7003,7 +7444,7 @@
 	        var eventSheetManager = blackboard.eventSheetManager;
 	        var eventsheet = tick.tree;
 	        var eventSheetGroup = eventsheet.eventSheetGroup;
-	        eventSheetManager.emit('label.enter', this.title, eventsheet.title, eventSheetGroup.name, eventSheetManager);
+	        eventSheetManager.emit(EVT_LABEL_ENTER, this.title, eventsheet.title, eventSheetGroup.name, eventSheetManager, eventsheet, this, eventSheetGroup);
 
 	    }
 
@@ -7025,7 +7466,7 @@
 	        var eventSheetManager = blackboard.eventSheetManager;
 	        var eventsheet = tick.tree;
 	        var eventSheetGroup = eventsheet.eventSheetGroup;
-	        eventSheetManager.emit('label.exit', this.title, eventsheet.title, eventSheetGroup.name, eventSheetManager);
+	        eventSheetManager.emit(EVT_LABEL_EXIT, this.title, eventsheet.title, eventSheetGroup.name, eventSheetManager, eventsheet, this, eventSheetGroup);
 	    }
 	}
 
@@ -7117,23 +7558,31 @@
 	        return;
 	    }
 
+	    eventSheetManager.emit(EVT_EVENTSHEET_OPEN, eventsheet.title, this.name, eventSheetManager, eventsheet, this);
+	    eventSheetManager.emit(EVT_EVENTSHEET_CONDITION, eventsheet.title, this.name, eventsheet.conditionPassed, eventSheetManager, eventsheet, this);
+
 	    if (eventsheet.conditionPassed) {
-	        eventSheetManager.emit('eventsheet.enter', eventsheet.title, this.name, eventSheetManager);
+	        eventSheetManager.emit(EVT_EVENTSHEET_ENTER, eventsheet.title, this.name, eventSheetManager, eventsheet, this);
 	    } else {
-	        eventSheetManager.emit('eventsheet.catch', eventsheet.title, this.name, eventSheetManager);
+	        eventSheetManager.emit(EVT_EVENTSHEET_CATCH, eventsheet.title, this.name, eventSheetManager, eventsheet, this);
 	    }
 	};
 
 	var TickEventSheet = function (eventSheetManager, eventsheet) {
 	    var blackboard = eventSheetManager.blackboard;
 	    var commandExecutor = eventSheetManager.commandExecutor;
+	    var eventSheetGroup = eventsheet.eventSheetGroup;
+	    eventSheetManager.emit(EVT_EVENTSHEET_TICK, eventsheet.title, eventSheetGroup.name, eventSheetManager, eventsheet, eventSheetGroup);
 	    var status = eventsheet.tick(blackboard, commandExecutor);
+	    eventSheetManager.emit(EVT_EVENTSHEET_STATUS, eventsheet.title, eventSheetGroup.name, status, eventSheetManager, eventsheet, eventSheetGroup);
 	    return status;
 	};
 
 	var CloseEventSheet = function (eventSheetManager, eventsheet) {
+	    eventSheetManager.emit(EVT_EVENTSHEET_CLOSE, eventsheet.title, this.name, eventSheetManager, eventsheet, this);
+
 	    if (eventsheet.conditionPassed) {
-	        eventSheetManager.emit('eventsheet.exit', eventsheet.title, this.name, eventSheetManager);
+	        eventSheetManager.emit(EVT_EVENTSHEET_EXIT, eventsheet.title, this.name, eventSheetManager, eventsheet, this);
 	    }
 	};
 
@@ -7171,7 +7620,7 @@
 	        var pendingTrees = this.pendingTrees;
 	        var blackboard = eventSheetManager.blackboard;
 
-	        eventSheetManager.emit('start', this.name, eventSheetManager);
+	        eventSheetManager.emit(EVT_GROUP_START, this.name, eventSheetManager, this);
 
 	        // pendingTrees.length = 0;
 
@@ -7180,6 +7629,7 @@
 	            var eventsheet = trees[i];
 
 	            if (!eventsheet.active) {
+	                eventSheetManager.emit(EVT_EVENTSHEET_SKIP, eventsheet.title, this.name, 'inactive', eventSheetManager, eventsheet, this);
 	                continue;
 	            }
 
@@ -7218,6 +7668,8 @@
 
 	        closedTrees.length = 0;
 
+	        eventSheetManager.emit(EVT_GROUP_CONTINUE, this.name, eventSheetManager, this);
+
 	        for (var i = 0, cnt = trees.length; i < cnt; i++) {
 	            var eventsheet = trees[i];
 
@@ -7235,7 +7687,7 @@
 	            if (eventsheet.roundComplete) {
 	                closedTrees.push(eventsheet);
 	                CloseEventSheet.call(this, eventSheetManager, eventsheet);
-	            } else if (status === RUNNING$1) {
+	            } else if (status === RUNNING) {
 	                // Stall command execution here
 	                break;
 	            }
@@ -7254,8 +7706,9 @@
 	        }
 
 	        if (trees.length === 0) {
+	            this.removePendingEventSheets();
 	            this.isRunning = false;
-	            eventSheetManager.emit('complete', this.name, eventSheetManager);
+	            eventSheetManager.emit(EVT_GROUP_COMPLETE, this.name, eventSheetManager, this);
 	        }
 
 	        return this;
@@ -7303,9 +7756,12 @@
 	        var blackboard = eventSheetManager.blackboard;
 	        var commandExecutor = eventSheetManager.commandExecutor;
 
+	        eventSheetManager.emit(EVT_GROUP_STOP, this.name, eventSheetManager, this);
+
 	        var trees = this.pendingTrees;
 	        for (var i = 0, cnt = trees.length; i < cnt; i++) {
 	            var eventsheet = trees[i];
+	            eventSheetManager.emit(EVT_EVENTSHEET_ABORT, eventsheet.title, this.name, eventSheetManager, eventsheet, this);
 	            eventsheet.abort(blackboard, commandExecutor);
 	            CloseEventSheet.call(this, eventSheetManager, eventsheet);
 	        }
@@ -7412,12 +7868,12 @@
 	        if (groupName === undefined) {
 	            groupName = this.defaultTreeGroupName;
 	        }
-	        this.getTreeGroup(groupName).addTree(eventSheet);
-
 	        // All event sheets (BT) use the same expressionParser and stringTemplate
 	        eventSheet
 	            .setExpressionParser(this.expressionParser)
 	            .setStringTemplate(this.stringTemplate);
+
+	        this.getTreeGroup(groupName).addTree(eventSheet);
 
 	        return this;
 	    },
@@ -7433,11 +7889,27 @@
 	        return this;
 	    },
 
+	    removeAllEventSheetsLater(groupName) {
+	        if (groupName === undefined) {
+	            groupName = this.defaultTreeGroupName;
+	        }
+	        this.getTreeGroup(groupName).removeAllEventSheetsLater();
+	        return this;
+	    },
+
 	    removeEventSheet(title, groupName) {
 	        if (groupName === undefined) {
 	            groupName = this.defaultTreeGroupName;
 	        }
 	        this.getTreeGroup(groupName).removeEventSheet(title);
+	        return this;
+	    },
+
+	    removeEventSheetLater(title, groupName) {
+	        if (groupName === undefined) {
+	            groupName = this.defaultTreeGroupName;
+	        }
+	        this.getTreeGroup(groupName).removeEventSheetLater(title);
 	        return this;
 	    },
 	};
@@ -15974,6 +16446,112 @@
 
 	}
 
+	var SerializeConditionExpression = function (expression) {
+	    if (expression == null) {
+	        return expression;
+	    }
+
+	    var expressionType = typeof (expression);
+	    if ((expressionType === 'string') ||
+	        (expressionType === 'number') ||
+	        (expressionType === 'boolean')) {
+	        return expression;
+	    }
+
+	    if (expression.properties && (expression.properties.expression !== undefined)) {
+	        return expression.properties.expression;
+	    }
+
+	    if (expression.name === 'ParameterExpression') {
+	        var parameters = {};
+	        var expressions = expression.expressions || {};
+	        for (var key in expressions) {
+	            parameters[key] = SerializeConditionExpression(expressions[key]);
+	        }
+
+	        return {
+	            name: expression.properties.name,
+	            parameters: parameters,
+	        };
+	    }
+
+	    if (expression.expression !== undefined) {
+	        return expression.expression;
+	    }
+
+	    return expression.name || expressionType;
+	};
+
+	var GetConditionType = function (node) {
+	    if (node.name === 'IfSelector') {
+	        return 'sheet';
+	    }
+
+	    var parent = node.parent;
+	    var parentTitle = parent && parent.title;
+	    if (parentTitle === '[if]') {
+	        return 'branch';
+	    }
+
+	    if (parentTitle === '[while]') {
+	        return 'while';
+	    }
+
+	    if (parent && parent.parent && (parent.parent.title === '[for]')) {
+	        return 'for';
+	    }
+
+	    var child = node.child;
+	    if (child && (child.name === 'TaskAction')) {
+	        return 'embedded';
+	    }
+
+	    return 'condition';
+	};
+
+	var EmitConditionEval = function (tick, node, condition, result) {
+	    var blackboard = tick.blackboard;
+	    if (!blackboard) {
+	        return;
+	    }
+
+	    var eventSheetManager = blackboard.eventSheetManager;
+	    if (!eventSheetManager) {
+	        return;
+	    }
+
+	    var eventSheet = tick.tree;
+	    var eventSheetGroup = eventSheet.eventSheetGroup;
+	    var groupName = eventSheetGroup.name;
+
+	    node.conditionType = GetConditionType(node);
+
+	    eventSheetManager.emit(
+	        EVT_CONDITION_EVAL,
+	        SerializeConditionExpression(condition),
+	        !!result,
+	        eventSheet.title,
+	        groupName,
+	        eventSheetManager,
+	        eventSheet,
+	        node,
+	        eventSheetGroup
+	    );
+	};
+
+	class EventSheetIfSelector extends IfSelector {
+	    evalCondition(tick) {
+	        if (this.forceSelectChildIndex !== undefined) {
+	            return this.forceSelectChildIndex;
+	        }
+
+	        var result = tick.evalExpression(this.condition);
+	        EmitConditionEval(tick, this, this.condition, result);
+
+	        return (!!result) ? 0 : 1;
+	    }
+	}
+
 	const RoundIdle = 0;
 	const RoundRun = 1;
 	const RoundComplete = 2;
@@ -16032,7 +16610,7 @@
 	        this.blackboard = eventSheetManager.blackboard;
 	        this.setTreeGroup(groupName);
 
-	        var root = new IfSelector({
+	        var root = new EventSheetIfSelector({
 	            title: this.title,
 	            condition,
 	            conditionEvalBreak: true   // Return RUNNING instead of SUCCESS for condition eval
@@ -16089,7 +16667,7 @@
 	            return false;
 	        }
 
-	        var startFromTop = (this.getState(blackboard) !== RUNNING$1);
+	        var startFromTop = (this.getState(blackboard) !== RUNNING);
 	        if (startFromTop) {
 	            this.resetState(blackboard);
 	        }
@@ -16110,7 +16688,7 @@
 	    tick(blackboard, target) {
 	        var state = super.tick(blackboard, target);
 
-	        if (state !== RUNNING$1) {
+	        if (state !== RUNNING) {
 	            // Will remove from pendingTrees
 	            this.roundState = RoundComplete;
 
@@ -16175,11 +16753,19 @@
 	    return condition;
 	};
 
+	class EventSheetIf extends If {
+	    evalCondition(tick) {
+	        var result = super.evalCondition(tick);
+	        EmitConditionEval(tick, this, this.condition, result);
+	        return result;
+	    }
+	}
+
 	var CreateIfDecorator = function (expression, onConditionFailValue) {
 	    var onFailState = (onConditionFailValue) ? SUCCESS : FAILURE;
 	    var ifDecorator;
 	    try {
-	        ifDecorator = new If({
+	        ifDecorator = new EventSheetIf({
 	            condition: expression,
 	            onFailState: onFailState,
 	        });
@@ -16187,7 +16773,7 @@
 	        console.error(`[EventSheet] Parse expression '${expression}' failed, replace expression by 'false'`);
 	        console.error(e);
 
-	        ifDecorator = new If({
+	        ifDecorator = new EventSheetIf({
 	            condition: 'false',
 	            onFailState: onFailState,
 	        });
@@ -20496,6 +21082,1132 @@
 	        return this;
 	    }
 	}
+
+	var AllEvents = [
+	    EVT_GROUP_START,
+	    EVT_GROUP_CONTINUE,
+	    EVT_GROUP_COMPLETE,
+	    EVT_GROUP_STOP,
+	    EVT_EVENTSHEET_ADD,
+	    EVT_EVENTSHEET_REMOVE,
+	    EVT_EVENTSHEET_REMOVE_ALL,
+	    EVT_EVENTSHEET_OPEN,
+	    EVT_EVENTSHEET_CONDITION,
+	    EVT_EVENTSHEET_ENTER,
+	    EVT_EVENTSHEET_CATCH,
+	    EVT_EVENTSHEET_TICK,
+	    EVT_EVENTSHEET_STATUS,
+	    EVT_EVENTSHEET_CLOSE,
+	    EVT_EVENTSHEET_EXIT,
+	    EVT_EVENTSHEET_SKIP,
+	    EVT_EVENTSHEET_ABORT,
+	    EVT_LABEL_ENTER,
+	    EVT_LABEL_EXIT,
+	    EVT_COMMAND_START,
+	    EVT_COMMAND_END,
+	    EVT_COMMAND_PAUSE,
+	    EVT_COMMAND_RESUME,
+	    EVT_COMMAND_ABORT,
+	    EVT_CONDITION_EVAL,
+	    EVT_PAUSE_CLICK,
+	    EVT_PAUSE_KEY,
+	    EVT_PAUSE_INPUT,
+	    EVT_RESUME_INPUT,
+	];
+
+	var NormalizeEvents = function (events) {
+	    if ((events === undefined) || (events === 'all')) {
+	        return AllEvents.slice();
+	    }
+
+	    if (typeof (events) === 'string') {
+	        return [events];
+	    }
+
+	    return events.slice();
+	};
+
+	var NormalizeManagers = function (manager, managers) {
+	    var output;
+
+	    if (managers === undefined) {
+	        if (manager === undefined) {
+	            return [];
+	        } else if (Array.isArray(manager)) {
+	            output = manager.slice();
+	        } else {
+	            output = [manager];
+	        }
+	    } else if (Array.isArray(managers)) {
+	        output = managers.slice();
+	    } else {
+	        output = [managers];
+	    }
+
+	    return output.filter(function (manager) {
+	        return !!manager;
+	    });
+	};
+
+	var CreateHandlers = function (recorder) {
+	    return {
+	        [EVT_GROUP_START]: recorder.onGroupStart,
+	        [EVT_GROUP_CONTINUE]: recorder.onGroupContinue,
+	        [EVT_GROUP_COMPLETE]: recorder.onGroupComplete,
+	        [EVT_GROUP_STOP]: recorder.onGroupStop,
+	        [EVT_EVENTSHEET_ADD]: recorder.onEventSheetAdd,
+	        [EVT_EVENTSHEET_REMOVE]: recorder.onEventSheetRemove,
+	        [EVT_EVENTSHEET_REMOVE_ALL]: recorder.onEventSheetRemoveAll,
+	        [EVT_EVENTSHEET_OPEN]: recorder.onEventSheetOpen,
+	        [EVT_EVENTSHEET_CONDITION]: recorder.onEventSheetCondition,
+	        [EVT_EVENTSHEET_ENTER]: recorder.onEventSheetEnter,
+	        [EVT_EVENTSHEET_CATCH]: recorder.onEventSheetCatch,
+	        [EVT_EVENTSHEET_TICK]: recorder.onEventSheetTick,
+	        [EVT_EVENTSHEET_STATUS]: recorder.onEventSheetStatus,
+	        [EVT_EVENTSHEET_CLOSE]: recorder.onEventSheetClose,
+	        [EVT_EVENTSHEET_EXIT]: recorder.onEventSheetExit,
+	        [EVT_EVENTSHEET_SKIP]: recorder.onEventSheetSkip,
+	        [EVT_EVENTSHEET_ABORT]: recorder.onEventSheetAbort,
+	        [EVT_LABEL_ENTER]: recorder.onLabelEnter,
+	        [EVT_LABEL_EXIT]: recorder.onLabelExit,
+	        [EVT_COMMAND_START]: recorder.onCommandStart,
+	        [EVT_COMMAND_END]: recorder.onCommandEnd,
+	        [EVT_COMMAND_PAUSE]: recorder.onCommandPause,
+	        [EVT_COMMAND_RESUME]: recorder.onCommandResume,
+	        [EVT_COMMAND_ABORT]: recorder.onCommandAbort,
+	        [EVT_CONDITION_EVAL]: recorder.onConditionEval,
+	        [EVT_PAUSE_CLICK]: recorder.onPauseClick,
+	        [EVT_PAUSE_KEY]: recorder.onPauseKey,
+	        [EVT_PAUSE_INPUT]: recorder.onPauseInput,
+	        [EVT_RESUME_INPUT]: recorder.onResumeInput,
+	    };
+	};
+
+	var ManagerMethods = {
+	    setManager(manager) {
+	        return this.setManagers(manager);
+	    },
+
+	    setManagers(managers) {
+	        var wasStarted = this.isStarted;
+	        if (wasStarted) {
+	            this.stop();
+	        }
+
+	        this.managers = NormalizeManagers(undefined, managers);
+
+	        if (wasStarted) {
+	            this.start();
+	        }
+
+	        return this;
+	    },
+
+	    start() {
+	        if ((this.managers.length === 0) || this.isStarted) {
+	            return this;
+	        }
+
+	        this._handlers = CreateHandlers(this);
+	        for (var i = 0, cnt = this.managers.length; i < cnt; i++) {
+	            this.startManager(this.managers[i]);
+	        }
+
+	        this.isStarted = true;
+	        return this;
+	    },
+
+	    stop() {
+	        if ((this.managers.length === 0) || !this.isStarted) {
+	            return this;
+	        }
+
+	        for (var i = 0, cnt = this.managers.length; i < cnt; i++) {
+	            this.stopManager(this.managers[i]);
+	        }
+
+	        this._handlers = undefined;
+	        this.isStarted = false;
+	        return this;
+	    },
+
+	    startManager(manager) {
+	        var handlers = this._handlers;
+	        for (var eventName in handlers) {
+	            manager.on(eventName, handlers[eventName], this);
+	        }
+
+	        return this;
+	    },
+
+	    stopManager(manager) {
+	        var handlers = this._handlers;
+	        if (!handlers) {
+	            return this;
+	        }
+
+	        for (var eventName in handlers) {
+	            manager.off(eventName, handlers[eventName], this);
+	        }
+
+	        return this;
+	    },
+	};
+
+	var ManagerIDMap = new WeakMap();
+	var ManagerID = 0;
+
+	var GetManagerID = function (manager) {
+	    if (!ManagerIDMap.has(manager)) {
+	        ManagerIDMap.set(manager, ManagerID++);
+	    }
+
+	    return ManagerIDMap.get(manager);
+	};
+
+	var RecordMethods = {
+	    clear() {
+	        this.records.length = 0;
+	        this.currentRecord = null;
+	        this.currentRecords = {};
+	        this.roundID = 0;
+	        this._stopTimers = {};
+	        return this;
+	    },
+
+	    getRecords() {
+	        return this.records;
+	    },
+
+	    getLastRecord() {
+	        return this.records[this.records.length - 1];
+	    },
+
+	    getCurrentRecord(groupName, manager) {
+	        if (groupName !== undefined) {
+	            return this.currentRecords[this.getRecordKey(manager || this.manager, groupName)];
+	        }
+
+	        return this.currentRecord;
+	    },
+
+	    toJSON() {
+	        return this.records;
+	    },
+
+	    getRecordKey(manager, groupName) {
+	        return `${GetManagerID(manager)}:${groupName}`;
+	    },
+
+	    createRecord(manager, groupName) {
+	        this.roundID++;
+
+	        var record = {
+	            type: 'eventsheet.round',
+	            managerID: GetManagerID(manager),
+	            groupName: groupName,
+	            roundID: this.roundID,
+	            events: [],
+	        };
+
+	        if (this.includeTime) {
+	            record.startTime = Date.now();
+	        }
+
+	        return record;
+	    },
+
+	    startRecord(manager, groupName) {
+	        var recordKey = this.getRecordKey(manager, groupName);
+	        var previousRecord = this.currentRecords[recordKey];
+	        if (previousRecord) {
+	            previousRecord.statusName = 'INTERRUPTED';
+	            this.finalizeRecord(recordKey);
+	        }
+
+	        var record = this.createRecord(manager, groupName);
+	        this.currentRecords[recordKey] = record;
+	        this.currentRecord = record;
+	        return record;
+	    },
+
+	    finalizeRecord(recordKey, statusName) {
+	        var record = this.currentRecords[recordKey];
+	        if (!record) {
+	            return;
+	        }
+
+	        if (statusName !== undefined) {
+	            record.statusName = statusName;
+	        }
+
+	        if (this.includeTime) {
+	            record.endTime = Date.now();
+	        }
+
+	        if (this.maxRecords > 0) {
+	            this.records.push(record);
+	            if (this.records.length > this.maxRecords) {
+	                this.records.shift();
+	            }
+	        }
+
+	        if (this.onRecord) {
+	            this.onRecord(record, this);
+	        }
+
+	        delete this.currentRecords[recordKey];
+	        this.currentRecord = null;
+	        for (var key in this.currentRecords) {
+	            this.currentRecord = this.currentRecords[key];
+	            break;
+	        }
+	    },
+
+	    scheduleStopRecord(recordKey) {
+	        var self = this;
+	        this._stopTimers[recordKey] = setTimeout(function () {
+	            delete self._stopTimers[recordKey];
+	            self.finalizeRecord(recordKey, 'STOPPED');
+	        }, 0);
+	    },
+	};
+
+	var EventMethods = {
+	    hasEvent(eventName) {
+	        return (this.events.indexOf(eventName) !== -1);
+	    },
+
+	    addEvent(event, manager, groupName) {
+	        if (!this.hasEvent(event.type)) {
+	            return;
+	        }
+
+	        if (this.includeTime) {
+	            event.time = Date.now();
+	        }
+
+	        var record;
+	        if ((manager !== undefined) && (groupName !== undefined)) {
+	            record = this.currentRecords[this.getRecordKey(manager, groupName)];
+	        }
+	        if (!record) {
+	            record = this.currentRecord;
+	        }
+
+	        if (this.filter && !this.filter(event, record, this)) {
+	            return;
+	        }
+
+	        if (record) {
+	            event.roundID = record.roundID;
+	            record.events.push(event);
+	        }
+
+	        if (this.onEvent) {
+	            this.onEvent(event, record, this);
+	        }
+	    },
+	};
+
+	var SerializeValue = function (value) {
+	    if (value == null) {
+	        return value;
+	    }
+
+	    var valueType = typeof (value);
+	    if ((valueType === 'string') || (valueType === 'number') || (valueType === 'boolean')) {
+	        return value;
+	    }
+
+	    if (valueType === 'function') {
+	        return `[function ${value.name || 'anonymous'}]`;
+	    }
+
+	    try {
+	        return JSON.parse(JSON.stringify(value));
+	    } catch (e) {
+	        var constructorName = value.constructor && value.constructor.name;
+	        return `[${constructorName || valueType}]`;
+	    }
+	};
+
+	var EventFactoryMethods = {
+	    createBaseEvent(type, manager, groupName) {
+	        return {
+	            type: type,
+	            managerID: GetManagerID(manager),
+	            groupName: groupName,
+	        };
+	    },
+
+	    createEventSheetEvent(type, sheetTitle, groupName, manager, eventSheet, eventSheetGroup) {
+	        var event = this.createBaseEvent(type, manager, groupName);
+	        event.sheetTitle = sheetTitle;
+
+	        if (eventSheet && (eventSheet.id !== undefined)) {
+	            event.sheetID = eventSheet.id;
+	        }
+
+	        if (this.includeReferences) {
+	            event.manager = manager;
+	            event.eventSheet = eventSheet;
+	            event.eventSheetGroup = eventSheetGroup;
+	        }
+
+	        return event;
+	    },
+
+	    createNodeEvent(type, labelTitle, sheetTitle, groupName, manager, eventSheet, node, eventSheetGroup) {
+	        var event = this.createEventSheetEvent(type, sheetTitle, groupName, manager, eventSheet, eventSheetGroup);
+	        event.labelTitle = labelTitle;
+
+	        if (node && (node.id !== undefined)) {
+	            event.nodeID = node.id;
+	        }
+
+	        if (this.includeReferences) {
+	            event.node = node;
+	        }
+
+	        return event;
+	    },
+
+	    createCommandEvent(type, commandName, parameters, sheetTitle, groupName, manager, eventSheet, node, eventSheetGroup) {
+	        var event = this.createEventSheetEvent(type, sheetTitle, groupName, manager, eventSheet, eventSheetGroup);
+	        event.commandName = commandName;
+
+	        if (this.includeParameters) {
+	            event.parameters = SerializeValue(parameters);
+	        }
+
+	        if (node && (node.id !== undefined)) {
+	            event.nodeID = node.id;
+	        }
+
+	        if (this.includeReferences) {
+	            event.node = node;
+	        }
+
+	        return event;
+	    },
+
+	    createConditionEvent(type, expression, result, sheetTitle, groupName, manager, eventSheet, node, eventSheetGroup) {
+	        var event = this.createEventSheetEvent(type, sheetTitle, groupName, manager, eventSheet, eventSheetGroup);
+	        event.expression = SerializeValue(expression);
+	        event.result = result;
+
+	        if (node) {
+	            event.conditionType = node.conditionType || 'condition';
+
+	            if (node.id !== undefined) {
+	                event.nodeID = node.id;
+	            }
+
+	            event.nodeName = node.name;
+	            event.nodeTitle = node.title;
+	        }
+
+	        if (this.includeReferences) {
+	            event.node = node;
+	        }
+
+	        return event;
+	    },
+	};
+
+	var GroupEventHandlers = {
+	    onGroupStart(groupName, manager) {
+	        var record = this.startRecord(manager, groupName);
+	        this.addEvent(this.createBaseEvent(EVT_GROUP_START, manager, groupName), manager, groupName);
+	        return record;
+	    },
+
+	    onGroupContinue(groupName, manager) {
+	        this.addEvent(this.createBaseEvent(EVT_GROUP_CONTINUE, manager, groupName), manager, groupName);
+	    },
+
+	    onGroupComplete(groupName, manager) {
+	        var recordKey = this.getRecordKey(manager, groupName);
+	        this.addEvent(this.createBaseEvent(EVT_GROUP_COMPLETE, manager, groupName), manager, groupName);
+	        this.finalizeRecord(recordKey, 'COMPLETE');
+	    },
+
+	    onGroupStop(groupName, manager) {
+	        var recordKey = this.getRecordKey(manager, groupName);
+	        this.addEvent(this.createBaseEvent(EVT_GROUP_STOP, manager, groupName), manager, groupName);
+	        this.scheduleStopRecord(recordKey);
+	    },
+
+	};
+
+	const StatusNameMap = {
+	    [IDLE$7]: 'IDLE',
+	    [SUCCESS]: 'SUCCESS',
+	    [FAILURE]: 'FAILURE',
+	    [RUNNING]: 'RUNNING',
+	    [ABORT]: 'ABORT',
+	    [ERROR]: 'ERROR',
+	};
+
+	var GetStatusName = function (status) {
+	    return StatusNameMap[status] || `UNKNOWN(${status})`;
+	};
+
+	var EventSheetEventHandlers = {
+	    onEventSheetAdd(sheetTitle, groupName, manager, eventSheet, eventSheetGroup) {
+	        this.addEvent(this.createEventSheetEvent(EVT_EVENTSHEET_ADD, sheetTitle, groupName, manager, eventSheet, eventSheetGroup), manager, groupName);
+	    },
+
+	    onEventSheetRemove(sheetTitle, groupName, manager, eventSheet, eventSheetGroup) {
+	        this.addEvent(this.createEventSheetEvent(EVT_EVENTSHEET_REMOVE, sheetTitle, groupName, manager, eventSheet, eventSheetGroup), manager, groupName);
+	    },
+
+	    onEventSheetRemoveAll(groupName, sheetTitles, manager, eventSheetGroup) {
+	        var event = this.createBaseEvent(EVT_EVENTSHEET_REMOVE_ALL, manager, groupName);
+	        event.sheetTitles = sheetTitles.slice();
+
+	        if (this.includeReferences) {
+	            event.manager = manager;
+	            event.eventSheetGroup = eventSheetGroup;
+	        }
+
+	        this.addEvent(event, manager, groupName);
+	    },
+
+	    onEventSheetOpen(sheetTitle, groupName, manager, eventSheet, eventSheetGroup) {
+	        this.addEvent(this.createEventSheetEvent(EVT_EVENTSHEET_OPEN, sheetTitle, groupName, manager, eventSheet, eventSheetGroup), manager, groupName);
+	    },
+
+	    onEventSheetCondition(sheetTitle, groupName, passed, manager, eventSheet, eventSheetGroup) {
+	        var event = this.createEventSheetEvent(EVT_EVENTSHEET_CONDITION, sheetTitle, groupName, manager, eventSheet, eventSheetGroup);
+	        event.conditionPassed = passed;
+	        this.addEvent(event, manager, groupName);
+	    },
+
+	    onEventSheetEnter(sheetTitle, groupName, manager, eventSheet, eventSheetGroup) {
+	        this.addEvent(this.createEventSheetEvent(EVT_EVENTSHEET_ENTER, sheetTitle, groupName, manager, eventSheet, eventSheetGroup), manager, groupName);
+	    },
+
+	    onEventSheetCatch(sheetTitle, groupName, manager, eventSheet, eventSheetGroup) {
+	        this.addEvent(this.createEventSheetEvent(EVT_EVENTSHEET_CATCH, sheetTitle, groupName, manager, eventSheet, eventSheetGroup), manager, groupName);
+	    },
+
+	    onEventSheetTick(sheetTitle, groupName, manager, eventSheet, eventSheetGroup) {
+	        this.addEvent(this.createEventSheetEvent(EVT_EVENTSHEET_TICK, sheetTitle, groupName, manager, eventSheet, eventSheetGroup), manager, groupName);
+	    },
+
+	    onEventSheetStatus(sheetTitle, groupName, status, manager, eventSheet, eventSheetGroup) {
+	        var event = this.createEventSheetEvent(EVT_EVENTSHEET_STATUS, sheetTitle, groupName, manager, eventSheet, eventSheetGroup);
+	        event.status = status;
+	        event.statusName = GetStatusName(status);
+	        this.addEvent(event, manager, groupName);
+	    },
+
+	    onEventSheetClose(sheetTitle, groupName, manager, eventSheet, eventSheetGroup) {
+	        this.addEvent(this.createEventSheetEvent(EVT_EVENTSHEET_CLOSE, sheetTitle, groupName, manager, eventSheet, eventSheetGroup), manager, groupName);
+	    },
+
+	    onEventSheetExit(sheetTitle, groupName, manager, eventSheet, eventSheetGroup) {
+	        this.addEvent(this.createEventSheetEvent(EVT_EVENTSHEET_EXIT, sheetTitle, groupName, manager, eventSheet, eventSheetGroup), manager, groupName);
+	    },
+
+	    onEventSheetSkip(sheetTitle, groupName, reason, manager, eventSheet, eventSheetGroup) {
+	        var event = this.createEventSheetEvent(EVT_EVENTSHEET_SKIP, sheetTitle, groupName, manager, eventSheet, eventSheetGroup);
+	        event.reason = reason;
+	        this.addEvent(event, manager, groupName);
+	    },
+
+	    onEventSheetAbort(sheetTitle, groupName, manager, eventSheet, eventSheetGroup) {
+	        this.addEvent(this.createEventSheetEvent(EVT_EVENTSHEET_ABORT, sheetTitle, groupName, manager, eventSheet, eventSheetGroup), manager, groupName);
+	    },
+
+	};
+
+	var LabelEventHandlers = {
+	    onLabelEnter(labelTitle, sheetTitle, groupName, manager, eventSheet, labelNode, eventSheetGroup) {
+	        this.addEvent(this.createNodeEvent(EVT_LABEL_ENTER, labelTitle, sheetTitle, groupName, manager, eventSheet, labelNode, eventSheetGroup), manager, groupName);
+	    },
+
+	    onLabelExit(labelTitle, sheetTitle, groupName, manager, eventSheet, labelNode, eventSheetGroup) {
+	        this.addEvent(this.createNodeEvent(EVT_LABEL_EXIT, labelTitle, sheetTitle, groupName, manager, eventSheet, labelNode, eventSheetGroup), manager, groupName);
+	    },
+	};
+
+	var ConditionEvalEventHandlers = {
+	    onConditionEval(expression, result, sheetTitle, groupName, manager, eventSheet, conditionNode, eventSheetGroup) {
+	        this.addEvent(this.createConditionEvent(EVT_CONDITION_EVAL, expression, result, sheetTitle, groupName, manager, eventSheet, conditionNode, eventSheetGroup), manager, groupName);
+	    },
+
+	};
+
+	var CommandEventHandlers = {
+	    onCommandStart(commandName, parameters, sheetTitle, groupName, manager, eventSheet, taskNode, eventSheetGroup) {
+	        this.addEvent(this.createCommandEvent(EVT_COMMAND_START, commandName, parameters, sheetTitle, groupName, manager, eventSheet, taskNode, eventSheetGroup), manager, groupName);
+	    },
+
+	    onCommandEnd(commandName, parameters, success, result, sheetTitle, groupName, manager, eventSheet, taskNode, eventSheetGroup) {
+	        var event = this.createCommandEvent(EVT_COMMAND_END, commandName, parameters, sheetTitle, groupName, manager, eventSheet, taskNode, eventSheetGroup);
+	        event.success = success;
+	        if (this.includeResult) {
+	            event.result = SerializeValue(result);
+	        }
+	        this.addEvent(event, manager, groupName);
+	    },
+
+	    onCommandPause(commandName, parameters, sheetTitle, groupName, manager, eventSheet, taskNode, eventSheetGroup) {
+	        this.addEvent(this.createCommandEvent(EVT_COMMAND_PAUSE, commandName, parameters, sheetTitle, groupName, manager, eventSheet, taskNode, eventSheetGroup), manager, groupName);
+	    },
+
+	    onCommandResume(commandName, parameters, sheetTitle, groupName, manager, eventSheet, taskNode, eventSheetGroup) {
+	        this.addEvent(this.createCommandEvent(EVT_COMMAND_RESUME, commandName, parameters, sheetTitle, groupName, manager, eventSheet, taskNode, eventSheetGroup), manager, groupName);
+	    },
+
+	    onCommandAbort(commandName, parameters, sheetTitle, groupName, manager, eventSheet, taskNode, eventSheetGroup) {
+	        this.addEvent(this.createCommandEvent(EVT_COMMAND_ABORT, commandName, parameters, sheetTitle, groupName, manager, eventSheet, taskNode, eventSheetGroup), manager, groupName);
+	    },
+
+	};
+
+	var PauseResumeEventHandlers = {
+	    onPauseClick() {
+	        this.addEvent({ type: EVT_PAUSE_CLICK }, undefined, undefined);
+	    },
+
+	    onPauseKey(key) {
+	        this.addEvent({ type: EVT_PAUSE_KEY, key: key }, undefined, undefined);
+	    },
+
+	    onPauseInput() {
+	        this.addEvent({ type: EVT_PAUSE_INPUT }, undefined, undefined);
+	    },
+
+	    onResumeInput() {
+	        this.addEvent({ type: EVT_RESUME_INPUT }, undefined, undefined);
+	    },
+	};
+
+	class Recorder {
+	    constructor(config) {
+	        if (config === undefined) {
+	            config = {};
+	        }
+
+	        var {
+	            manager,
+	            managers,
+	            maxRecords = 60,
+	            events,
+	            includeTime = true,
+	            includeReferences = false,
+	            includeParameters = true,
+	            includeResult = true,
+	            autoStart = true,
+	            filter,
+	            onEvent,
+	            onRecord,
+	        } = config;
+
+	        this.managers = [];
+	        this.maxRecords = maxRecords;
+	        this.events = NormalizeEvents(events);
+	        this.includeTime = includeTime;
+	        this.includeReferences = includeReferences;
+	        this.includeParameters = includeParameters;
+	        this.includeResult = includeResult;
+	        this.filter = filter;
+	        this.onEvent = onEvent;
+	        this.onRecord = onRecord;
+
+	        this.records = [];
+	        this.currentRecord = null;
+	        this.currentRecords = {};
+	        this.roundID = 0;
+	        this.isStarted = false;
+	        this._handlers = undefined;
+	        this._stopTimers = {};
+
+	        var managerList = NormalizeManagers(manager, managers);
+	        if (managerList.length > 0) {
+	            this.setManagers(managerList);
+	        }
+
+	        if (autoStart && (this.managers.length > 0)) {
+	            this.start();
+	        }
+	    }
+
+	    get manager() {
+	        return this.managers[0] || null;
+	    }
+
+	    destroy() {
+	        this.stop();
+	        this.clear();
+	        this.managers = undefined;
+	        this.filter = undefined;
+	        this.onEvent = undefined;
+	        this.onRecord = undefined;
+	    }
+	}
+
+	Object.assign(
+	    Recorder.prototype,
+	    ManagerMethods,
+	    RecordMethods,
+	    EventMethods,
+	    EventFactoryMethods,
+	    GroupEventHandlers,
+	    EventSheetEventHandlers,
+	    LabelEventHandlers,
+	    ConditionEvalEventHandlers,
+	    CommandEventHandlers,
+	    PauseResumeEventHandlers,
+	);
+
+	var LevelEvents = {
+	    error: [
+	        EVT_GROUP_STOP,
+	        EVT_EVENTSHEET_STATUS,
+	        EVT_EVENTSHEET_ABORT,
+	        EVT_COMMAND_END,
+	        EVT_COMMAND_ABORT,
+	    ],
+	    flow: [
+	        EVT_GROUP_START,
+	        EVT_GROUP_CONTINUE,
+	        EVT_GROUP_COMPLETE,
+	        EVT_GROUP_STOP,
+	        EVT_EVENTSHEET_ADD,
+	        EVT_EVENTSHEET_REMOVE,
+	        EVT_EVENTSHEET_REMOVE_ALL,
+	        EVT_EVENTSHEET_ENTER,
+	        EVT_EVENTSHEET_CATCH,
+	        EVT_EVENTSHEET_SKIP,
+	        EVT_EVENTSHEET_ABORT,
+	        EVT_LABEL_ENTER,
+	        EVT_LABEL_EXIT,
+	        EVT_COMMAND_START,
+	        EVT_COMMAND_END,
+	        EVT_COMMAND_PAUSE,
+	        EVT_COMMAND_RESUME,
+	        EVT_COMMAND_ABORT,
+	        EVT_CONDITION_EVAL,
+	        EVT_PAUSE_CLICK,
+	        EVT_PAUSE_KEY,
+	        EVT_PAUSE_INPUT,
+	        EVT_RESUME_INPUT,
+	    ],
+	    status: [
+	        EVT_GROUP_START,
+	        EVT_GROUP_COMPLETE,
+	        EVT_GROUP_STOP,
+	        EVT_EVENTSHEET_STATUS,
+	        EVT_EVENTSHEET_SKIP,
+	        EVT_EVENTSHEET_ABORT,
+	        EVT_COMMAND_END,
+	        EVT_COMMAND_ABORT,
+	    ],
+	    verbose: 'all',
+	};
+
+	const ErrorStatusNames = [
+	    'FAILURE',
+	    'ABORT',
+	    'ERROR',
+	];
+
+	var DefaultFilter = function (level) {
+	    if (level !== 'error') {
+	        return undefined;
+	    }
+
+	    return function (record) {
+	        if ((record.type === EVT_GROUP_STOP) ||
+	            (record.type === EVT_EVENTSHEET_ABORT) ||
+	            (record.type === EVT_COMMAND_ABORT)) {
+	            return true;
+	        }
+
+	        if (record.type === EVT_EVENTSHEET_STATUS) {
+	            return (ErrorStatusNames.indexOf(record.statusName) !== -1);
+	        }
+
+	        if (record.type === EVT_COMMAND_END) {
+	            return !record.success;
+	        }
+
+	        return false;
+	    }
+	};
+
+	var FormatValue = function (value) {
+	    if (value === undefined) {
+	        return '';
+	    }
+
+	    if (typeof (value) === 'string') {
+	        return value;
+	    }
+
+	    return JSON.stringify(value);
+	};
+
+	var GetSheetLabel = function (record) {
+	    return (record.sheetTitle) ? ` sheet="${record.sheetTitle}"` : '';
+	};
+
+	var GetCommandLabel = function (record) {
+	    var text = ` command="${record.commandName}"`;
+	    if (record.parameters !== undefined) {
+	        text += ` ${FormatValue(record.parameters)}`;
+	    }
+	    return text;
+	};
+
+	var FormatExpression = function (expression) {
+	    if (expression && (typeof (expression) === 'object')) {
+	        var text = expression.name || JSON.stringify(expression);
+	        if (expression.parameters) {
+	            text += ` ${FormatValue(expression.parameters)}`;
+	        }
+	        return text;
+	    }
+
+	    return `"${expression}"`;
+	};
+
+	var CompactFormatter = function (record) {
+	    var groupName = (record.groupName !== undefined) ? record.groupName : '-';
+	    var prefix = `[ES ${groupName}]`;
+
+	    switch (record.type) {
+	        case EVT_GROUP_START:
+	            return `${prefix} start`;
+
+	        case EVT_GROUP_CONTINUE:
+	            return `${prefix} continue`;
+
+	        case EVT_GROUP_COMPLETE:
+	            return `${prefix} complete`;
+
+	        case EVT_GROUP_STOP:
+	            return `${prefix} stop`;
+
+	        case EVT_EVENTSHEET_ADD:
+	            return `${prefix}${GetSheetLabel(record)} add`;
+
+	        case EVT_EVENTSHEET_REMOVE:
+	            return `${prefix}${GetSheetLabel(record)} remove`;
+
+	        case EVT_EVENTSHEET_REMOVE_ALL:
+	            return `${prefix} removeall sheets=${FormatValue(record.sheetTitles)}`;
+
+	        case EVT_EVENTSHEET_OPEN:
+	            return `${prefix}${GetSheetLabel(record)} open`;
+
+	        case EVT_EVENTSHEET_CONDITION:
+	            return `${prefix}${GetSheetLabel(record)} condition=${record.conditionPassed}`;
+
+	        case EVT_EVENTSHEET_ENTER:
+	            return `${prefix}${GetSheetLabel(record)} enter`;
+
+	        case EVT_EVENTSHEET_CATCH:
+	            return `${prefix}${GetSheetLabel(record)} catch`;
+
+	        case EVT_EVENTSHEET_TICK:
+	            return `${prefix}${GetSheetLabel(record)} tick`;
+
+	        case EVT_EVENTSHEET_STATUS:
+	            return `${prefix}${GetSheetLabel(record)} status=${record.statusName}`;
+
+	        case EVT_EVENTSHEET_CLOSE:
+	            return `${prefix}${GetSheetLabel(record)} close`;
+
+	        case EVT_EVENTSHEET_EXIT:
+	            return `${prefix}${GetSheetLabel(record)} exit`;
+
+	        case EVT_EVENTSHEET_SKIP:
+	            return `${prefix}${GetSheetLabel(record)} skip reason=${record.reason}`;
+
+	        case EVT_EVENTSHEET_ABORT:
+	            return `${prefix}${GetSheetLabel(record)} abort`;
+
+	        case EVT_LABEL_ENTER:
+	            return `${prefix}${GetSheetLabel(record)} label="${record.labelTitle}" enter`;
+
+	        case EVT_LABEL_EXIT:
+	            return `${prefix}${GetSheetLabel(record)} label="${record.labelTitle}" exit`;
+
+	        case EVT_COMMAND_START:
+	            return `${prefix}${GetSheetLabel(record)}${GetCommandLabel(record)} start`;
+
+	        case EVT_COMMAND_END:
+	            return `${prefix}${GetSheetLabel(record)}${GetCommandLabel(record)} end success=${record.success}`;
+
+	        case EVT_COMMAND_PAUSE:
+	            return `${prefix}${GetSheetLabel(record)}${GetCommandLabel(record)} pause`;
+
+	        case EVT_COMMAND_RESUME:
+	            return `${prefix}${GetSheetLabel(record)}${GetCommandLabel(record)} resume`;
+
+	        case EVT_COMMAND_ABORT:
+	            return `${prefix}${GetSheetLabel(record)}${GetCommandLabel(record)} abort`;
+
+	        case EVT_CONDITION_EVAL:
+	            return `${prefix}${GetSheetLabel(record)} condition.${record.conditionType} ${FormatExpression(record.expression)} => ${record.result}`;
+
+	        case EVT_PAUSE_CLICK:
+	            return '[ES -] pause.click';
+
+	        case EVT_PAUSE_KEY:
+	            return `[ES -] pause.key key="${record.key}"`;
+
+	        case EVT_PAUSE_INPUT:
+	            return '[ES -] pause.input';
+
+	        case EVT_RESUME_INPUT:
+	            return '[ES -] resume.input';
+
+	        default:
+	            return `${prefix} ${record.type}`;
+	    }
+	};
+
+	var JSONFormatter = function (record) {
+	    return JSON.stringify(record);
+	};
+
+	var GetFormatter = function (format) {
+	    if (typeof (format) === 'function') {
+	        return format;
+	    }
+
+	    switch (format) {
+	        case 'json':
+	            return JSONFormatter;
+
+	        case 'compact':
+	        default:
+	            return CompactFormatter;
+	    }
+	};
+
+	var ConsoleWrite = function (value) {
+	    console.log(value);
+	};
+
+	var GetSinkWrite = function (sink, output) {
+	    if (sink) {
+	        if (typeof (sink) === 'function') {
+	            return sink;
+	        }
+
+	        if (sink.write) {
+	            return function (value) {
+	                sink.write(value);
+	            };
+	        }
+	    }
+
+	    if (output) {
+	        return output;
+	    }
+
+	    return ConsoleWrite;
+	};
+
+	var LoggerMethods = {
+	    setManager(manager) {
+	        this.recorder.setManager(manager);
+	        this.manager = this.recorder.manager;
+	        return this;
+	    },
+
+	    setManagers(managers) {
+	        this.recorder.setManagers(managers);
+	        this.manager = this.recorder.manager;
+	        return this;
+	    },
+
+	    start() {
+	        this.recorder.start();
+	        return this;
+	    },
+
+	    stop() {
+	        this.recorder.stop();
+	        return this;
+	    },
+
+	    onRecorderEvent(record, roundRecord, recorder) {
+	        if (this.filter && !this.filter(record, roundRecord, recorder)) {
+	            return;
+	        }
+
+	        var value = this.formatter(record, roundRecord, recorder);
+	        if (value === undefined) {
+	            return;
+	        }
+
+	        this.write(value, record, roundRecord, recorder);
+	    },
+	};
+
+	class Logger {
+	    constructor(config) {
+	        if (config === undefined) {
+	            config = {};
+	        }
+
+	        var {
+	            manager,
+	            managers,
+	            level = 'flow',
+	            events,
+	            format = 'compact',
+	            formatter,
+	            sink,
+	            output,
+	            filter,
+	            includeTime = false,
+	            includeReferences = false,
+	            includeParameters = true,
+	            includeResult = true,
+	            autoStart = true,
+	        } = config;
+
+	        this.manager = null;
+	        this.level = level;
+	        this.formatter = GetFormatter(formatter || format);
+	        this.write = GetSinkWrite(sink, output);
+	        this.filter = filter || DefaultFilter(level);
+	        this.recorder = new Recorder({
+	            manager: manager,
+	            managers: managers,
+	            maxRecords: 0,
+	            events: events || LevelEvents[level] || LevelEvents.flow,
+	            includeTime: includeTime,
+	            includeReferences: includeReferences,
+	            includeParameters: includeParameters,
+	            includeResult: includeResult,
+	            autoStart: false,
+	            onEvent: this.onRecorderEvent.bind(this),
+	        });
+
+	        this.manager = this.recorder.manager;
+
+	        if (autoStart && (this.recorder.managers.length > 0)) {
+	            this.start();
+	        }
+	    }
+
+	    destroy() {
+	        this.recorder.destroy();
+	        this.manager = undefined;
+	        this.recorder = undefined;
+	        this.formatter = undefined;
+	        this.write = undefined;
+	        this.filter = undefined;
+	    }
+	}
+
+	Object.assign(
+	    Logger.prototype,
+	    LoggerMethods,
+	);
+
+	var TracerMethods = {
+	    setManager(manager) {
+	        this.recorder.setManager(manager);
+	        this.manager = this.recorder.manager;
+	        return this;
+	    },
+
+	    setManagers(managers) {
+	        this.recorder.setManagers(managers);
+	        this.manager = this.recorder.manager;
+	        return this;
+	    },
+
+	    start() {
+	        this.recorder.start();
+	        this.manager = this.recorder.manager;
+	        return this;
+	    },
+
+	    stop() {
+	        this.recorder.stop();
+	        return this;
+	    },
+
+	    clear() {
+	        this.recorder.clear();
+	        return this;
+	    },
+
+	    getRecords() {
+	        return this.recorder.getRecords();
+	    },
+
+	    getLastRecord() {
+	        return this.recorder.getLastRecord();
+	    },
+
+	    getCurrentRecord(groupName, manager) {
+	        return this.recorder.getCurrentRecord(groupName, manager);
+	    },
+
+	    toJSON() {
+	        return this.recorder.toJSON();
+	    },
+	};
+
+	class Tracer {
+	    constructor(config) {
+	        if (config === undefined) {
+	            config = {};
+	        }
+
+	        this.recorder = new Recorder(config);
+	        this.manager = this.recorder.manager;
+	    }
+
+	    get records() {
+	        return this.recorder.records;
+	    }
+
+	    get currentRecord() {
+	        return this.recorder.currentRecord;
+	    }
+
+	    get roundID() {
+	        return this.recorder.roundID;
+	    }
+
+	    get isStarted() {
+	        return this.recorder.isStarted;
+	    }
+
+	    get maxRecords() {
+	        return this.recorder.maxRecords;
+	    }
+
+	    set maxRecords(value) {
+	        this.recorder.maxRecords = value;
+	    }
+
+	    destroy() {
+	        this.recorder.destroy();
+	        this.manager = undefined;
+	        this.recorder = undefined;
+	    }
+	}
+
+	Object.assign(
+	    Tracer.prototype,
+	    TracerMethods,
+	);
 
 	var EventEmitterMethods$1 = {
 	    setEventEmitter(eventEmitter, EventEmitterClass) {
@@ -29132,17 +30844,17 @@ void main (void) {
 	        var { click, key, event } = config;
 
 	        if (click) {
-	            eventSheetManager.emit('pause.click');
+	            eventSheetManager.emit(EVT_PAUSE_CLICK);
 	        }
 
 	        if (key) {
-	            eventSheetManager.emit('pause.key', config.key);
+	            eventSheetManager.emit(EVT_PAUSE_KEY, config.key);
 	        }
 
 	        if (click | key) {
-	            eventSheetManager.emit('pause.input');
+	            eventSheetManager.emit(EVT_PAUSE_INPUT);
 	            this.sys.once('complete', function () {
-	                eventSheetManager.emit('resume.input');
+	                eventSheetManager.emit(EVT_RESUME_INPUT);
 	            });
 	        }
 
