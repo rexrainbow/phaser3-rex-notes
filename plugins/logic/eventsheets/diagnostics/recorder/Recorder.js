@@ -8,6 +8,7 @@ import GroupEventHandlers from './GroupEventHandlers.js';
 import EventSheetEventHandlers from './EventSheetEventHandlers.js';
 import LabelEventHandlers from './LabelEventHandlers.js';
 import ConditionEvalEventHandlers from './ConditionEvalEventHandlers.js';
+import RepeatEventHandlers from './RepeatEventHandlers.js';
 import CommandEventHandlers from './CommandEventHandlers.js';
 import PauseResumeEventHandlers from './PauseResumeEventHandlers.js';
 
@@ -85,6 +86,7 @@ Object.assign(
     EventSheetEventHandlers,
     LabelEventHandlers,
     ConditionEvalEventHandlers,
+    RepeatEventHandlers,
     CommandEventHandlers,
     PauseResumeEventHandlers,
 )

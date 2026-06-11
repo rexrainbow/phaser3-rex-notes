@@ -30,6 +30,10 @@ export const ActionCommandTypes = [
     { name: 'exit' },
     { name: 'break' },
     {
+        name: 'nextround',
+        pattern: new RegExp('^next\\s*[- ]?\\s*(r|R)ound$', 'i')
+    },
+    {
         name: 'activate',
         pattern: new RegExp('^activate\\s*(.*)', 'i')
     },

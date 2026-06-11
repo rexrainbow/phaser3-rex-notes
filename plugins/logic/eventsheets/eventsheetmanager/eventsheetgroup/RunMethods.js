@@ -84,7 +84,6 @@ export default {
         var eventSheetManager = this.parent;
         var trees = this.trees;
         var pendingTrees = this.pendingTrees;
-        var blackboard = eventSheetManager.blackboard;
 
         eventSheetManager.emit(EVT_GROUP_START, this.name, eventSheetManager, this);
 
@@ -99,7 +98,6 @@ export default {
                 continue;
             }
 
-            eventsheet.resetState(blackboard);
             if (eventsheet.parallel) {
                 // Open all event sheets
                 OpenEventSheet.call(this, eventSheetManager, eventsheet);
@@ -196,11 +194,8 @@ export default {
 
         var eventSheetManager = this.parent;
         var pendingTrees = this.pendingTrees;
-        var blackboard = eventSheetManager.blackboard;
 
         pendingTrees.length = 0;
-
-        eventsheet.resetState(blackboard);
 
         eventsheet.setConditionEnable(!ignoreCondition);
 

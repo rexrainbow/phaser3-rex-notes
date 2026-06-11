@@ -528,6 +528,12 @@ condition:
 
     });
     ```
+- Break current event sheet round while keeping behavior-tree state running
+    ```javascript
+    eventSheetManager.on('eventsheet.roundbreak', function(sheetTitle, groupName, eventSheetManager, eventSheet, actionNode, eventSheetGroup) {
+
+    });
+    ```
 
 #### Label
 
@@ -588,6 +594,19 @@ condition:
 
 - `expression` : Serialized condition expression.
 - `result` : Boolean result of this condition.
+
+#### Repeat
+
+- Complete one repeat iteration
+    ```javascript
+    eventSheetManager.on('repeat.iteration', function(iterationIndex, maxLoop, status, sheetTitle, groupName, eventSheetManager, eventSheet, repeatNode, eventSheetGroup) {
+
+    });
+    ```
+
+- `iterationIndex` : Completed repeat iteration index, 1-based.
+- `maxLoop` : Maximum repeat loop count.
+- `status` : Behavior-tree status code returned from this iteration.
 
 #### Input pause
 
@@ -844,6 +863,22 @@ or
 ```
 
 - Action `type: continue` : Simulate `continue` instruction of programming language.
+
+
+##### Next round
+
+```yaml
+- type: next-round
+```
+
+or
+
+```yaml
+- type: next-round
+  condition: expression
+```
+
+- Action `type: next-round` : Stop current event sheet execution in this round, keep behavior-tree state as `RUNNING`, then continue from the next action in the next round.
 
 
 ##### Exit

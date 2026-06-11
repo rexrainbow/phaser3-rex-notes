@@ -5,6 +5,7 @@ import ParseProperty from './ParseProperty.js';
 import TaskAction from '../../eventsheetmanager/nodes/taskaction/TaskAction.js';
 import ActivateAction from '../../eventsheetmanager/nodes/ActivateAction.js';
 import DeactivateAction from '../../eventsheetmanager/nodes/DeactivateAction.js';
+import NextRoundAction from '../../eventsheetmanager/nodes/NextRoundAction.js';
 
 var CreateActionNode = function (paragraph, config) {
     var commandData = GetCommandData(paragraph, config);
@@ -20,6 +21,12 @@ var CreateActionNode = function (paragraph, config) {
 
         case 'break':
             actionNode = new Failer({ title: '[break]' });
+            break;
+
+        case 'nextRound':
+        case 'next-round':
+        case 'nextround':
+            actionNode = new NextRoundAction({ title: '[nextRound]' });
             break;
 
         case 'activate':

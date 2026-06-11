@@ -7,6 +7,7 @@ import ParameterExpression from './parameterexpression/ParameterExpression.js';
 import ActivateAction from './ActivateAction.js';
 import DeactivateAction from './DeactivateAction.js';
 import LabelDecorator from './LabelDecorator.js';
+import NextRoundAction from './NextRoundAction.js';
 
 export default {
     BreakDecorator: BreakDecorator,
@@ -21,4 +22,5 @@ export default {
     DeactivateTree: DeactivateAction,
     LabelDecorator: LabelDecorator,
     Label: LabelDecorator,
+    NextRound: NextRoundAction,
 }

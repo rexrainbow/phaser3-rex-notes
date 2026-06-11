@@ -57,6 +57,7 @@ class EventSheet extends BehaviorTree {
         var groupName = this.groupName;
         this.eventSheetManager = eventSheetManager;
         this.blackboard = eventSheetManager.blackboard;
+        this.roundBreak = false;
         this.setTreeGroup(groupName);
 
         var root = new EventSheetIfSelector({
@@ -111,6 +112,11 @@ class EventSheet extends BehaviorTree {
         return this;
     }
 
+    breakRound() {
+        this.roundBreak = true;
+        return this;
+    }
+
     start(blackboard, target) {
         if (this.roundState === RoundRun) {
             return false;
@@ -123,25 +129,31 @@ class EventSheet extends BehaviorTree {
 
         this.roundState = RoundRun;
 
+        if (!startFromTop) {
+            return true;
+        }
+
         // First tick, condition-eval
         super.tick(blackboard, target);
 
-        if (startFromTop) {
-            var nodeMemory = this.root.getNodeMemory(this.ticker);
-            this.conditionPassed = (nodeMemory.$runningChild === 0);
-        }
+        var nodeMemory = this.root.getNodeMemory(this.ticker);
+        this.conditionPassed = (nodeMemory.$runningChild === 0);
 
         return true;
     }
 
     tick(blackboard, target) {
+        this.roundBreak = false;
         var state = super.tick(blackboard, target);
+        var roundBreak = this.roundBreak;
+        this.roundBreak = false;
 
-        if (state !== RUNNING) {
+        var isRunningState = (state === RUNNING);
+        if ((!isRunningState) || roundBreak) {
             // Will remove from pendingTrees
             this.roundState = RoundComplete;
 
-            if (this.conditionPassed && this.properties.once) {
+            if ((!isRunningState) && this.conditionPassed && this.properties.once) {
                 this.setActive(false);
             }
         }

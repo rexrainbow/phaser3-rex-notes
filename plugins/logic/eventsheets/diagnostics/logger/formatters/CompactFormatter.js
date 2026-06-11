@@ -16,6 +16,7 @@ import {
     EVT_EVENTSHEET_EXIT,
     EVT_EVENTSHEET_SKIP,
     EVT_EVENTSHEET_ABORT,
+    EVT_EVENTSHEET_ROUND_BREAK,
     EVT_LABEL_ENTER,
     EVT_LABEL_EXIT,
     EVT_COMMAND_START,
@@ -24,6 +25,7 @@ import {
     EVT_COMMAND_RESUME,
     EVT_COMMAND_ABORT,
     EVT_CONDITION_EVAL,
+    EVT_REPEAT_ITERATION,
     EVT_PAUSE_CLICK,
     EVT_PAUSE_KEY,
     EVT_PAUSE_INPUT,
@@ -111,6 +113,9 @@ var CompactFormatter = function (record) {
         case EVT_EVENTSHEET_ABORT:
             return `${prefix}${GetSheetLabel(record)} abort`;
 
+        case EVT_EVENTSHEET_ROUND_BREAK:
+            return `${prefix}${GetSheetLabel(record)} roundbreak node="${record.nodeTitle || record.nodeName}"`;
+
         case EVT_LABEL_ENTER:
             return `${prefix}${GetSheetLabel(record)} label="${record.labelTitle}" enter`;
 
@@ -134,6 +139,9 @@ var CompactFormatter = function (record) {
 
         case EVT_CONDITION_EVAL:
             return `${prefix}${GetSheetLabel(record)} condition.${record.conditionType} ${FormatExpression(record.expression)} => ${record.result}`;
+
+        case EVT_REPEAT_ITERATION:
+            return `${prefix}${GetSheetLabel(record)} repeat ${record.iterationIndex}/${record.maxLoop} status=${record.statusName} node="${record.nodeTitle || record.nodeName}"`;
 
         case EVT_PAUSE_CLICK:
             return '[ES -] pause.click';

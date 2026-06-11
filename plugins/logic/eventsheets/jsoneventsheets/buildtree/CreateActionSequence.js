@@ -1,10 +1,11 @@
 import {
-    Sequence, Selector, If, RepeatUntilFailure, Repeat,
+    Sequence, Selector, If, RepeatUntilFailure,
     Succeeder,
 } from '../../../behaviortree/index.js';
 import LabelDecorator from '../../eventsheetmanager/nodes/LabelDecorator.js';
 import BreakDecorator from '../../eventsheetmanager/nodes/BreakDecorator.js';
 import ContinueDecorator from '../../eventsheetmanager/nodes/ContinueDecorator.js';
+import Repeat from '../../eventsheetmanager/nodes/Repeat.js';
 import CreateIfDecorator from './CreateIfDecorator.js';
 import CreateActionNode from './CreateActionNode.js';
 import GetConditionExpression from './GetConditionExpression.js';

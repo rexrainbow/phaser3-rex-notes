@@ -118,6 +118,13 @@ export const EVT_EVENTSHEET_SKIP = 'eventsheet.skip';
 export const EVT_EVENTSHEET_ABORT = 'eventsheet.abort';
 
 /**
+ * Break current event sheet round while keeping behavior-tree state running.
+ *
+ * Params: (sheetTitle, groupName, eventSheetManager, eventSheet, actionNode, eventSheetGroup)
+ */
+export const EVT_EVENTSHEET_ROUND_BREAK = 'eventsheet.roundbreak';
+
+/**
  * Enter a label node inside an event sheet.
  *
  * Params: (labelTitle, sheetTitle, groupName, eventSheetManager, eventSheet, labelNode, eventSheetGroup)
@@ -172,6 +179,13 @@ export const EVT_COMMAND_ABORT = 'command.abort';
  * Params: (expression, result, sheetTitle, groupName, eventSheetManager, eventSheet, conditionNode, eventSheetGroup)
  */
 export const EVT_CONDITION_EVAL = 'condition.eval';
+
+/**
+ * Complete one repeat iteration.
+ *
+ * Params: (iterationIndex, maxLoop, status, sheetTitle, groupName, eventSheetManager, eventSheet, repeatNode, eventSheetGroup)
+ */
+export const EVT_REPEAT_ITERATION = 'repeat.iteration';
 
 /**
  * Wait for pointer click.

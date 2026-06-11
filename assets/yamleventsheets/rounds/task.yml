@@ -1,0 +1,30 @@
+title: Task
+once: true
+script:
+  - name: print
+    parameters: { text: "Task start" }
+
+  # Initialize variables
+  - name: set
+    parameters: { coin: 10, energy: 20 }
+  - name: print
+    parameters: { text: "Init: coin = {{coin}}, energy = {{energy}}" }
+
+  - type: repeat
+    times: 5
+    actions:
+      - type: next-round
+      
+      # Check condition
+      - condition: energy < 10
+        type: break
+
+      # Run task
+      - name: inc
+        parameters: { coin: 10, energy: -10 }
+      - name: print
+        parameters: { text: "Next round : coin = {{coin}}, energy = {{energy}}" }
+
+
+  - name: print
+    parameters: { text: "Task end" }

@@ -12,6 +12,7 @@ import {
     EVT_EVENTSHEET_EXIT,
     EVT_EVENTSHEET_SKIP,
     EVT_EVENTSHEET_ABORT,
+    EVT_EVENTSHEET_ROUND_BREAK,
 } from '../../eventsheetmanager/constants.js';
 import {
     IDLE,
@@ -101,6 +102,25 @@ export default {
 
     onEventSheetAbort(sheetTitle, groupName, manager, eventSheet, eventSheetGroup) {
         this.addEvent(this.createEventSheetEvent(EVT_EVENTSHEET_ABORT, sheetTitle, groupName, manager, eventSheet, eventSheetGroup), manager, groupName);
+    },
+
+    onEventSheetRoundBreak(sheetTitle, groupName, manager, eventSheet, actionNode, eventSheetGroup) {
+        var event = this.createEventSheetEvent(EVT_EVENTSHEET_ROUND_BREAK, sheetTitle, groupName, manager, eventSheet, eventSheetGroup);
+
+        if (actionNode) {
+            if (actionNode.id !== undefined) {
+                event.nodeID = actionNode.id;
+            }
+
+            event.nodeName = actionNode.name;
+            event.nodeTitle = actionNode.title;
+        }
+
+        if (this.includeReferences) {
+            event.node = actionNode;
+        }
+
+        this.addEvent(event, manager, groupName);
     },
 
 }

@@ -195,6 +195,14 @@ declare namespace Recorder {
          */
         conditionType?: string;
         /**
+         * Completed repeat iteration index, 1-based.
+         */
+        iterationIndex?: number;
+        /**
+         * Maximum repeat loop count.
+         */
+        maxLoop?: number;
+        /**
          * Node id.
          */
         nodeID?: string | number;

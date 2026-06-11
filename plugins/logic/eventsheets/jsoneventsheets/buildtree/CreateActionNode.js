@@ -8,6 +8,7 @@ import ActivateAction from '../../eventsheetmanager/nodes/ActivateAction.js';
 import DeactivateAction from '../../eventsheetmanager/nodes/DeactivateAction.js';
 import BreakAction from '../../eventsheetmanager/nodes/BreakAction.js';
 import ContinueAction from '../../eventsheetmanager/nodes/ContinueAction.js';
+import NextRoundAction from '../../eventsheetmanager/nodes/NextRoundAction.js';
 
 var CreateActionNode = function (nodeData) {
     var node, ifDecorator;
@@ -55,6 +56,13 @@ var CreateActionNode = function (nodeData) {
         case 'continue':
             node = new ContinueAction({
                 title: '[continue]',
+            });
+            break;
+
+        case 'nextRound':
+        case 'next-round':
+            node = new NextRoundAction({
+                title: '[nextRound]',
             });
             break;
 
