@@ -3105,7 +3105,7 @@
 	    }
 	};
 
-	class Repeat extends Decorator {
+	let Repeat$1 = class Repeat extends Decorator {
 
 	    constructor(config = {}, nodePool) {
 	        var maxLoop;
@@ -3175,7 +3175,7 @@
 	        nodeMemory.$i = i;
 	        return status;
 	    }
-	}
+	};
 
 	class RepeatUntilFailure extends Decorator {
 
@@ -3648,7 +3648,7 @@
 		NumberExpression: NumberExpression,
 		Parallel: Parallel,
 		RandomSelector: RandomSelector,
-		Repeat: Repeat,
+		Repeat: Repeat$1,
 		RepeatUntilFailure: RepeatUntilFailure,
 		RepeatUntilSuccess: RepeatUntilSuccess,
 		Runner: Runner,
@@ -6768,6 +6768,13 @@
 	const EVT_EVENTSHEET_ABORT = 'eventsheet.abort';
 
 	/**
+	 * Break current event sheet round while keeping behavior-tree state running.
+	 *
+	 * Params: (sheetTitle, groupName, eventSheetManager, eventSheet, actionNode, eventSheetGroup)
+	 */
+	const EVT_EVENTSHEET_ROUND_BREAK = 'eventsheet.roundbreak';
+
+	/**
 	 * Enter a label node inside an event sheet.
 	 *
 	 * Params: (labelTitle, sheetTitle, groupName, eventSheetManager, eventSheet, labelNode, eventSheetGroup)
@@ -6822,6 +6829,13 @@
 	 * Params: (expression, result, sheetTitle, groupName, eventSheetManager, eventSheet, conditionNode, eventSheetGroup)
 	 */
 	const EVT_CONDITION_EVAL = 'condition.eval';
+
+	/**
+	 * Complete one repeat iteration.
+	 *
+	 * Params: (iterationIndex, maxLoop, status, sheetTitle, groupName, eventSheetManager, eventSheet, repeatNode, eventSheetGroup)
+	 */
+	const EVT_REPEAT_ITERATION = 'repeat.iteration';
 
 	/**
 	 * Wait for pointer click.
@@ -7470,6 +7484,67 @@
 	    }
 	}
 
+	class NextRoundAction extends Action {
+	    constructor(config = {}, nodePool) {
+	        if (nodePool) {  // Rebuild node, don't touch config
+	            super(config, nodePool);
+
+	        } else {
+	            var {
+	                services,
+	                title,
+	                properties,
+	                name = 'NextRound'
+	            } = config;
+
+	            super({
+	                services,
+	                title,
+	                properties,
+	                name,
+	            });
+	        }
+	    }
+
+	    open(tick) {
+	        this.getNodeMemory(tick).$waitNextRound = false;
+	    }
+
+	    tick(tick) {
+	        var nodeMemory = this.getNodeMemory(tick);
+
+	        if (!nodeMemory.$waitNextRound) {  // First tick, invoke breakRound
+	            nodeMemory.$waitNextRound = true;
+
+	            var eventSheet = this.getTree(tick);
+	            if (eventSheet && eventSheet.breakRound) {
+	                eventSheet.breakRound();
+	                eventSheet.eventSheetManager.emit(
+	                    EVT_EVENTSHEET_ROUND_BREAK,
+	                    eventSheet.title,
+	                    eventSheet.groupName,
+	                    eventSheet.eventSheetManager,
+	                    eventSheet,
+	                    this,
+	                    eventSheet.eventSheetGroup
+	                );
+	            }
+	            return RUNNING;
+
+	        } else {  // Next tick(next round), continue next action
+	            nodeMemory.$waitNextRound = false;
+	            return SUCCESS;
+
+	        }
+
+
+	    }
+
+	    close(tick) {
+	        this.getNodeMemory(tick).$waitNextRound = false;
+	    }
+	}
+
 	var CustomNodeMapping = {
 	    BreakDecorator: BreakDecorator,
 	    ContinueDecorator: ContinueDecorator,
@@ -7483,6 +7558,7 @@
 	    DeactivateTree: DeactivateAction,
 	    LabelDecorator: LabelDecorator,
 	    Label: LabelDecorator,
+	    NextRound: NextRoundAction,
 	};
 
 	var SaveLoadTreeMethods = {
@@ -7618,7 +7694,6 @@
 	        var eventSheetManager = this.parent;
 	        var trees = this.trees;
 	        var pendingTrees = this.pendingTrees;
-	        var blackboard = eventSheetManager.blackboard;
 
 	        eventSheetManager.emit(EVT_GROUP_START, this.name, eventSheetManager, this);
 
@@ -7633,7 +7708,6 @@
 	                continue;
 	            }
 
-	            eventsheet.resetState(blackboard);
 	            if (eventsheet.parallel) {
 	                // Open all event sheets
 	                OpenEventSheet.call(this, eventSheetManager, eventsheet);
@@ -7730,11 +7804,8 @@
 
 	        var eventSheetManager = this.parent;
 	        var pendingTrees = this.pendingTrees;
-	        var blackboard = eventSheetManager.blackboard;
 
 	        pendingTrees.length = 0;
-
-	        eventsheet.resetState(blackboard);
 
 	        eventsheet.setConditionEnable(!ignoreCondition);
 
@@ -7975,7 +8046,7 @@
 	        } else {
 	            value = 0;
 	        }
-	        this.setData(value + inc);
+	        this.setData(key, value + inc);
 	        return this;
 	    },
 
@@ -7986,7 +8057,7 @@
 	        } else {
 	            value = false;
 	        }
-	        this.setData(!value);
+	        this.setData(key, !value);
 	        return this;
 	    },
 
@@ -72990,6 +73061,7 @@ void main (void) {
 	        var groupName = this.groupName;
 	        this.eventSheetManager = eventSheetManager;
 	        this.blackboard = eventSheetManager.blackboard;
+	        this.roundBreak = false;
 	        this.setTreeGroup(groupName);
 
 	        var root = new EventSheetIfSelector({
@@ -73044,6 +73116,11 @@ void main (void) {
 	        return this;
 	    }
 
+	    breakRound() {
+	        this.roundBreak = true;
+	        return this;
+	    }
+
 	    start(blackboard, target) {
 	        if (this.roundState === RoundRun) {
 	            return false;
@@ -73056,25 +73133,31 @@ void main (void) {
 
 	        this.roundState = RoundRun;
 
+	        if (!startFromTop) {
+	            return true;
+	        }
+
 	        // First tick, condition-eval
 	        super.tick(blackboard, target);
 
-	        if (startFromTop) {
-	            var nodeMemory = this.root.getNodeMemory(this.ticker);
-	            this.conditionPassed = (nodeMemory.$runningChild === 0);
-	        }
+	        var nodeMemory = this.root.getNodeMemory(this.ticker);
+	        this.conditionPassed = (nodeMemory.$runningChild === 0);
 
 	        return true;
 	    }
 
 	    tick(blackboard, target) {
+	        this.roundBreak = false;
 	        var state = super.tick(blackboard, target);
+	        var roundBreak = this.roundBreak;
+	        this.roundBreak = false;
 
-	        if (state !== RUNNING) {
+	        var isRunningState = (state === RUNNING);
+	        if ((!isRunningState) || roundBreak) {
 	            // Will remove from pendingTrees
 	            this.roundState = RoundComplete;
 
-	            if (this.conditionPassed && this.properties.once) {
+	            if ((!isRunningState) && this.conditionPassed && this.properties.once) {
 	                this.setActive(false);
 	            }
 	        }
@@ -73134,6 +73217,105 @@ void main (void) {
 
 	    return condition;
 	};
+
+	var EmitRepeatIteration = function (tick, node, iterationIndex, maxLoop, status) {
+	    var eventSheet = node.getTree(tick);
+	    if (!eventSheet) {
+	        return;
+	    }
+
+	    var eventSheetManager = eventSheet.eventSheetManager;
+	    if (!eventSheetManager) {
+	        return;
+	    }
+
+	    var eventSheetGroup = eventSheet.eventSheetGroup;
+	    var groupName = eventSheetGroup.name;
+
+	    eventSheetManager.emit(
+	        EVT_REPEAT_ITERATION,
+	        iterationIndex,
+	        maxLoop,
+	        status,
+	        eventSheet.title,
+	        groupName,
+	        eventSheetManager,
+	        eventSheet,
+	        node,
+	        eventSheetGroup
+	    );
+	};
+
+	class Repeat extends Decorator {
+
+	    constructor(config = {}, nodePool) {
+	        var maxLoop;
+
+	        if (nodePool) {  // Rebuild node, don't touch config
+	            super(config, nodePool);
+
+	            var expressions = config.expressions || {};
+	            maxLoop = expressions.maxLoop;
+
+	        } else {
+	            var {
+	                maxLoop: maxLoopValue = -1,  // expression
+	                child = null,
+	                title,
+	                properties,
+	                name = 'Repeat'
+	            } = config;
+
+	            super(
+	                {
+	                    child,
+	                    title,
+	                    properties,
+	                    name,
+	                },
+	                nodePool
+	            );
+
+	            maxLoop = maxLoopValue;
+	        }
+
+	        this.maxLoop = CreateNumberExpression(maxLoop, nodePool);
+	        this.addExpression('maxLoop', this.maxLoop);
+	    }
+
+	    open(tick) {
+	        var nodeMemory = this.getNodeMemory(tick);
+	        nodeMemory.$maxLoop = tick.evalExpression(this.maxLoop);
+	        nodeMemory.$i = 0;
+	    }
+
+	    tick(tick) {
+	        if (!this.child) {
+	            return ERROR;
+	        }
+
+	        var nodeMemory = this.getNodeMemory(tick);
+	        var maxLoop = nodeMemory.$maxLoop;
+	        var i = nodeMemory.$i;
+	        var status = SUCCESS;
+
+	        // Open child before exceed maxLoop
+	        // Execute child many times in a tick
+	        while (maxLoop < 0 || i < maxLoop) {
+	            status = this.child._execute(tick);
+
+	            if ((status === SUCCESS) || (status === FAILURE)) {
+	                i++;
+	                EmitRepeatIteration(tick, this, i, maxLoop, status);
+	            } else {
+	                break;
+	            }
+	        }
+
+	        nodeMemory.$i = i;
+	        return status;
+	    }
+	}
 
 	class EventSheetIf extends If {
 	    evalCondition(tick) {
@@ -73210,6 +73392,13 @@ void main (void) {
 	        case 'continue':
 	            node = new ContinueAction({
 	                title: '[continue]',
+	            });
+	            break;
+
+	        case 'nextRound':
+	        case 'next-round':
+	            node = new NextRoundAction({
+	                title: '[nextRound]',
 	            });
 	            break;
 
@@ -77483,6 +77672,7 @@ void main (void) {
 	    EVT_EVENTSHEET_EXIT,
 	    EVT_EVENTSHEET_SKIP,
 	    EVT_EVENTSHEET_ABORT,
+	    EVT_EVENTSHEET_ROUND_BREAK,
 	    EVT_LABEL_ENTER,
 	    EVT_LABEL_EXIT,
 	    EVT_COMMAND_START,
@@ -77491,6 +77681,7 @@ void main (void) {
 	    EVT_COMMAND_RESUME,
 	    EVT_COMMAND_ABORT,
 	    EVT_CONDITION_EVAL,
+	    EVT_REPEAT_ITERATION,
 	    EVT_PAUSE_CLICK,
 	    EVT_PAUSE_KEY,
 	    EVT_PAUSE_INPUT,
@@ -77550,6 +77741,7 @@ void main (void) {
 	        [EVT_EVENTSHEET_EXIT]: recorder.onEventSheetExit,
 	        [EVT_EVENTSHEET_SKIP]: recorder.onEventSheetSkip,
 	        [EVT_EVENTSHEET_ABORT]: recorder.onEventSheetAbort,
+	        [EVT_EVENTSHEET_ROUND_BREAK]: recorder.onEventSheetRoundBreak,
 	        [EVT_LABEL_ENTER]: recorder.onLabelEnter,
 	        [EVT_LABEL_EXIT]: recorder.onLabelExit,
 	        [EVT_COMMAND_START]: recorder.onCommandStart,
@@ -77558,6 +77750,7 @@ void main (void) {
 	        [EVT_COMMAND_RESUME]: recorder.onCommandResume,
 	        [EVT_COMMAND_ABORT]: recorder.onCommandAbort,
 	        [EVT_CONDITION_EVAL]: recorder.onConditionEval,
+	        [EVT_REPEAT_ITERATION]: recorder.onRepeatIteration,
 	        [EVT_PAUSE_CLICK]: recorder.onPauseClick,
 	        [EVT_PAUSE_KEY]: recorder.onPauseKey,
 	        [EVT_PAUSE_INPUT]: recorder.onPauseInput,
@@ -77923,7 +78116,7 @@ void main (void) {
 
 	};
 
-	const StatusNameMap = {
+	const StatusNameMap$1 = {
 	    [IDLE$7]: 'IDLE',
 	    [SUCCESS]: 'SUCCESS',
 	    [FAILURE]: 'FAILURE',
@@ -77932,8 +78125,8 @@ void main (void) {
 	    [ERROR]: 'ERROR',
 	};
 
-	var GetStatusName = function (status) {
-	    return StatusNameMap[status] || `UNKNOWN(${status})`;
+	var GetStatusName$1 = function (status) {
+	    return StatusNameMap$1[status] || `UNKNOWN(${status})`;
 	};
 
 	var EventSheetEventHandlers = {
@@ -77982,7 +78175,7 @@ void main (void) {
 	    onEventSheetStatus(sheetTitle, groupName, status, manager, eventSheet, eventSheetGroup) {
 	        var event = this.createEventSheetEvent(EVT_EVENTSHEET_STATUS, sheetTitle, groupName, manager, eventSheet, eventSheetGroup);
 	        event.status = status;
-	        event.statusName = GetStatusName(status);
+	        event.statusName = GetStatusName$1(status);
 	        this.addEvent(event, manager, groupName);
 	    },
 
@@ -78004,6 +78197,25 @@ void main (void) {
 	        this.addEvent(this.createEventSheetEvent(EVT_EVENTSHEET_ABORT, sheetTitle, groupName, manager, eventSheet, eventSheetGroup), manager, groupName);
 	    },
 
+	    onEventSheetRoundBreak(sheetTitle, groupName, manager, eventSheet, actionNode, eventSheetGroup) {
+	        var event = this.createEventSheetEvent(EVT_EVENTSHEET_ROUND_BREAK, sheetTitle, groupName, manager, eventSheet, eventSheetGroup);
+
+	        if (actionNode) {
+	            if (actionNode.id !== undefined) {
+	                event.nodeID = actionNode.id;
+	            }
+
+	            event.nodeName = actionNode.name;
+	            event.nodeTitle = actionNode.title;
+	        }
+
+	        if (this.includeReferences) {
+	            event.node = actionNode;
+	        }
+
+	        this.addEvent(event, manager, groupName);
+	    },
+
 	};
 
 	var LabelEventHandlers = {
@@ -78021,6 +78233,45 @@ void main (void) {
 	        this.addEvent(this.createConditionEvent(EVT_CONDITION_EVAL, expression, result, sheetTitle, groupName, manager, eventSheet, conditionNode, eventSheetGroup), manager, groupName);
 	    },
 
+	};
+
+	const StatusNameMap = {
+	    [IDLE$7]: 'IDLE',
+	    [SUCCESS]: 'SUCCESS',
+	    [FAILURE]: 'FAILURE',
+	    [RUNNING]: 'RUNNING',
+	    [ABORT]: 'ABORT',
+	    [ERROR]: 'ERROR',
+	};
+
+	var GetStatusName = function (status) {
+	    return StatusNameMap[status] || `UNKNOWN(${status})`;
+	};
+
+	var RepeatEventHandlers = {
+	    onRepeatIteration(iterationIndex, maxLoop, status, sheetTitle, groupName, manager, eventSheet, repeatNode, eventSheetGroup) {
+	        var event = this.createEventSheetEvent(EVT_REPEAT_ITERATION, sheetTitle, groupName, manager, eventSheet, eventSheetGroup);
+
+	        event.iterationIndex = iterationIndex;
+	        event.maxLoop = maxLoop;
+	        event.status = status;
+	        event.statusName = GetStatusName(status);
+
+	        if (repeatNode) {
+	            if (repeatNode.id !== undefined) {
+	                event.nodeID = repeatNode.id;
+	            }
+
+	            event.nodeName = repeatNode.name;
+	            event.nodeTitle = repeatNode.title;
+	        }
+
+	        if (this.includeReferences) {
+	            event.node = repeatNode;
+	        }
+
+	        this.addEvent(event, manager, groupName);
+	    },
 	};
 
 	var CommandEventHandlers = {
@@ -78143,6 +78394,7 @@ void main (void) {
 	    EventSheetEventHandlers,
 	    LabelEventHandlers,
 	    ConditionEvalEventHandlers,
+	    RepeatEventHandlers,
 	    CommandEventHandlers,
 	    PauseResumeEventHandlers,
 	);
@@ -78167,6 +78419,7 @@ void main (void) {
 	        EVT_EVENTSHEET_CATCH,
 	        EVT_EVENTSHEET_SKIP,
 	        EVT_EVENTSHEET_ABORT,
+	        EVT_EVENTSHEET_ROUND_BREAK,
 	        EVT_LABEL_ENTER,
 	        EVT_LABEL_EXIT,
 	        EVT_COMMAND_START,
@@ -78175,6 +78428,7 @@ void main (void) {
 	        EVT_COMMAND_RESUME,
 	        EVT_COMMAND_ABORT,
 	        EVT_CONDITION_EVAL,
+	        EVT_REPEAT_ITERATION,
 	        EVT_PAUSE_CLICK,
 	        EVT_PAUSE_KEY,
 	        EVT_PAUSE_INPUT,
@@ -78187,6 +78441,7 @@ void main (void) {
 	        EVT_EVENTSHEET_STATUS,
 	        EVT_EVENTSHEET_SKIP,
 	        EVT_EVENTSHEET_ABORT,
+	        EVT_EVENTSHEET_ROUND_BREAK,
 	        EVT_COMMAND_END,
 	        EVT_COMMAND_ABORT,
 	    ],
@@ -78315,6 +78570,9 @@ void main (void) {
 	        case EVT_EVENTSHEET_ABORT:
 	            return `${prefix}${GetSheetLabel(record)} abort`;
 
+	        case EVT_EVENTSHEET_ROUND_BREAK:
+	            return `${prefix}${GetSheetLabel(record)} roundbreak node="${record.nodeTitle || record.nodeName}"`;
+
 	        case EVT_LABEL_ENTER:
 	            return `${prefix}${GetSheetLabel(record)} label="${record.labelTitle}" enter`;
 
@@ -78338,6 +78596,9 @@ void main (void) {
 
 	        case EVT_CONDITION_EVAL:
 	            return `${prefix}${GetSheetLabel(record)} condition.${record.conditionType} ${FormatExpression(record.expression)} => ${record.result}`;
+
+	        case EVT_REPEAT_ITERATION:
+	            return `${prefix}${GetSheetLabel(record)} repeat ${record.iterationIndex}/${record.maxLoop} status=${record.statusName} node="${record.nodeTitle || record.nodeName}"`;
 
 	        case EVT_PAUSE_CLICK:
 	            return '[ES -] pause.click';

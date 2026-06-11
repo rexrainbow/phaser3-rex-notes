@@ -6770,6 +6770,13 @@
 	const EVT_EVENTSHEET_ABORT = 'eventsheet.abort';
 
 	/**
+	 * Break current event sheet round while keeping behavior-tree state running.
+	 *
+	 * Params: (sheetTitle, groupName, eventSheetManager, eventSheet, actionNode, eventSheetGroup)
+	 */
+	const EVT_EVENTSHEET_ROUND_BREAK = 'eventsheet.roundbreak';
+
+	/**
 	 * Enter a label node inside an event sheet.
 	 *
 	 * Params: (labelTitle, sheetTitle, groupName, eventSheetManager, eventSheet, labelNode, eventSheetGroup)
@@ -7472,6 +7479,67 @@
 	    }
 	}
 
+	class NextRoundAction extends Action {
+	    constructor(config = {}, nodePool) {
+	        if (nodePool) {  // Rebuild node, don't touch config
+	            super(config, nodePool);
+
+	        } else {
+	            var {
+	                services,
+	                title,
+	                properties,
+	                name = 'NextRound'
+	            } = config;
+
+	            super({
+	                services,
+	                title,
+	                properties,
+	                name,
+	            });
+	        }
+	    }
+
+	    open(tick) {
+	        this.getNodeMemory(tick).$waitNextRound = false;
+	    }
+
+	    tick(tick) {
+	        var nodeMemory = this.getNodeMemory(tick);
+
+	        if (!nodeMemory.$waitNextRound) {  // First tick, invoke breakRound
+	            nodeMemory.$waitNextRound = true;
+
+	            var eventSheet = this.getTree(tick);
+	            if (eventSheet && eventSheet.breakRound) {
+	                eventSheet.breakRound();
+	                eventSheet.eventSheetManager.emit(
+	                    EVT_EVENTSHEET_ROUND_BREAK,
+	                    eventSheet.title,
+	                    eventSheet.groupName,
+	                    eventSheet.eventSheetManager,
+	                    eventSheet,
+	                    this,
+	                    eventSheet.eventSheetGroup
+	                );
+	            }
+	            return RUNNING;
+
+	        } else {  // Next tick(next round), continue next action
+	            nodeMemory.$waitNextRound = false;
+	            return SUCCESS;
+
+	        }
+
+
+	    }
+
+	    close(tick) {
+	        this.getNodeMemory(tick).$waitNextRound = false;
+	    }
+	}
+
 	var CustomNodeMapping = {
 	    BreakDecorator: BreakDecorator,
 	    ContinueDecorator: ContinueDecorator,
@@ -7485,6 +7553,7 @@
 	    DeactivateTree: DeactivateAction,
 	    LabelDecorator: LabelDecorator,
 	    Label: LabelDecorator,
+	    NextRound: NextRoundAction,
 	};
 
 	var SaveLoadTreeMethods = {
@@ -7620,7 +7689,6 @@
 	        var eventSheetManager = this.parent;
 	        var trees = this.trees;
 	        var pendingTrees = this.pendingTrees;
-	        var blackboard = eventSheetManager.blackboard;
 
 	        eventSheetManager.emit(EVT_GROUP_START, this.name, eventSheetManager, this);
 
@@ -7635,7 +7703,6 @@
 	                continue;
 	            }
 
-	            eventsheet.resetState(blackboard);
 	            if (eventsheet.parallel) {
 	                // Open all event sheets
 	                OpenEventSheet.call(this, eventSheetManager, eventsheet);
@@ -7732,11 +7799,8 @@
 
 	        var eventSheetManager = this.parent;
 	        var pendingTrees = this.pendingTrees;
-	        var blackboard = eventSheetManager.blackboard;
 
 	        pendingTrees.length = 0;
-
-	        eventsheet.resetState(blackboard);
 
 	        eventsheet.setConditionEnable(!ignoreCondition);
 
@@ -7977,7 +8041,7 @@
 	        } else {
 	            value = 0;
 	        }
-	        this.setData(value + inc);
+	        this.setData(key, value + inc);
 	        return this;
 	    },
 
@@ -7988,7 +8052,7 @@
 	        } else {
 	            value = false;
 	        }
-	        this.setData(!value);
+	        this.setData(key, !value);
 	        return this;
 	    },
 
@@ -16610,6 +16674,7 @@
 	        var groupName = this.groupName;
 	        this.eventSheetManager = eventSheetManager;
 	        this.blackboard = eventSheetManager.blackboard;
+	        this.roundBreak = false;
 	        this.setTreeGroup(groupName);
 
 	        var root = new EventSheetIfSelector({
@@ -16664,6 +16729,11 @@
 	        return this;
 	    }
 
+	    breakRound() {
+	        this.roundBreak = true;
+	        return this;
+	    }
+
 	    start(blackboard, target) {
 	        if (this.roundState === RoundRun) {
 	            return false;
@@ -16676,25 +16746,31 @@
 
 	        this.roundState = RoundRun;
 
+	        if (!startFromTop) {
+	            return true;
+	        }
+
 	        // First tick, condition-eval
 	        super.tick(blackboard, target);
 
-	        if (startFromTop) {
-	            var nodeMemory = this.root.getNodeMemory(this.ticker);
-	            this.conditionPassed = (nodeMemory.$runningChild === 0);
-	        }
+	        var nodeMemory = this.root.getNodeMemory(this.ticker);
+	        this.conditionPassed = (nodeMemory.$runningChild === 0);
 
 	        return true;
 	    }
 
 	    tick(blackboard, target) {
+	        this.roundBreak = false;
 	        var state = super.tick(blackboard, target);
+	        var roundBreak = this.roundBreak;
+	        this.roundBreak = false;
 
-	        if (state !== RUNNING) {
+	        var isRunningState = (state === RUNNING);
+	        if ((!isRunningState) || roundBreak) {
 	            // Will remove from pendingTrees
 	            this.roundState = RoundComplete;
 
-	            if (this.conditionPassed && this.properties.once) {
+	            if ((!isRunningState) && this.conditionPassed && this.properties.once) {
 	                this.setActive(false);
 	            }
 	        }
@@ -16878,6 +16954,10 @@
 	    { name: 'exit' },
 	    { name: 'break' },
 	    {
+	        name: 'nextround',
+	        pattern: new RegExp('^next\\s*[- ]?\\s*(r|R)ound$', 'i')
+	    },
+	    {
 	        name: 'activate',
 	        pattern: new RegExp('^activate\\s*(.*)', 'i')
 	    },
@@ -17035,6 +17115,12 @@
 
 	        case 'break':
 	            actionNode = new Failer({ title: '[break]' });
+	            break;
+
+	        case 'nextRound':
+	        case 'next-round':
+	        case 'nextround':
+	            actionNode = new NextRoundAction({ title: '[nextRound]' });
 	            break;
 
 	        case 'activate':

@@ -3105,7 +3105,7 @@
 	    }
 	};
 
-	class Repeat extends Decorator {
+	let Repeat$1 = class Repeat extends Decorator {
 
 	    constructor(config = {}, nodePool) {
 	        var maxLoop;
@@ -3175,7 +3175,7 @@
 	        nodeMemory.$i = i;
 	        return status;
 	    }
-	}
+	};
 
 	class RepeatUntilFailure extends Decorator {
 
@@ -3648,7 +3648,7 @@
 		NumberExpression: NumberExpression,
 		Parallel: Parallel,
 		RandomSelector: RandomSelector,
-		Repeat: Repeat,
+		Repeat: Repeat$1,
 		RepeatUntilFailure: RepeatUntilFailure,
 		RepeatUntilSuccess: RepeatUntilSuccess,
 		Runner: Runner,
@@ -6768,6 +6768,13 @@
 	const EVT_EVENTSHEET_ABORT = 'eventsheet.abort';
 
 	/**
+	 * Break current event sheet round while keeping behavior-tree state running.
+	 *
+	 * Params: (sheetTitle, groupName, eventSheetManager, eventSheet, actionNode, eventSheetGroup)
+	 */
+	const EVT_EVENTSHEET_ROUND_BREAK = 'eventsheet.roundbreak';
+
+	/**
 	 * Enter a label node inside an event sheet.
 	 *
 	 * Params: (labelTitle, sheetTitle, groupName, eventSheetManager, eventSheet, labelNode, eventSheetGroup)
@@ -6822,6 +6829,13 @@
 	 * Params: (expression, result, sheetTitle, groupName, eventSheetManager, eventSheet, conditionNode, eventSheetGroup)
 	 */
 	const EVT_CONDITION_EVAL = 'condition.eval';
+
+	/**
+	 * Complete one repeat iteration.
+	 *
+	 * Params: (iterationIndex, maxLoop, status, sheetTitle, groupName, eventSheetManager, eventSheet, repeatNode, eventSheetGroup)
+	 */
+	const EVT_REPEAT_ITERATION = 'repeat.iteration';
 
 	/**
 	 * Wait for pointer click.
@@ -7470,6 +7484,67 @@
 	    }
 	}
 
+	class NextRoundAction extends Action {
+	    constructor(config = {}, nodePool) {
+	        if (nodePool) {  // Rebuild node, don't touch config
+	            super(config, nodePool);
+
+	        } else {
+	            var {
+	                services,
+	                title,
+	                properties,
+	                name = 'NextRound'
+	            } = config;
+
+	            super({
+	                services,
+	                title,
+	                properties,
+	                name,
+	            });
+	        }
+	    }
+
+	    open(tick) {
+	        this.getNodeMemory(tick).$waitNextRound = false;
+	    }
+
+	    tick(tick) {
+	        var nodeMemory = this.getNodeMemory(tick);
+
+	        if (!nodeMemory.$waitNextRound) {  // First tick, invoke breakRound
+	            nodeMemory.$waitNextRound = true;
+
+	            var eventSheet = this.getTree(tick);
+	            if (eventSheet && eventSheet.breakRound) {
+	                eventSheet.breakRound();
+	                eventSheet.eventSheetManager.emit(
+	                    EVT_EVENTSHEET_ROUND_BREAK,
+	                    eventSheet.title,
+	                    eventSheet.groupName,
+	                    eventSheet.eventSheetManager,
+	                    eventSheet,
+	                    this,
+	                    eventSheet.eventSheetGroup
+	                );
+	            }
+	            return RUNNING;
+
+	        } else {  // Next tick(next round), continue next action
+	            nodeMemory.$waitNextRound = false;
+	            return SUCCESS;
+
+	        }
+
+
+	    }
+
+	    close(tick) {
+	        this.getNodeMemory(tick).$waitNextRound = false;
+	    }
+	}
+
 	var CustomNodeMapping = {
 	    BreakDecorator: BreakDecorator,
 	    ContinueDecorator: ContinueDecorator,
@@ -7483,6 +7558,7 @@
 	    DeactivateTree: DeactivateAction,
 	    LabelDecorator: LabelDecorator,
 	    Label: LabelDecorator,
+	    NextRound: NextRoundAction,
 	};
 
 	var SaveLoadTreeMethods = {
@@ -7618,7 +7694,6 @@
 	        var eventSheetManager = this.parent;
 	        var trees = this.trees;
 	        var pendingTrees = this.pendingTrees;
-	        var blackboard = eventSheetManager.blackboard;
 
 	        eventSheetManager.emit(EVT_GROUP_START, this.name, eventSheetManager, this);
 
@@ -7633,7 +7708,6 @@
 	                continue;
 	            }
 
-	            eventsheet.resetState(blackboard);
 	            if (eventsheet.parallel) {
 	                // Open all event sheets
 	                OpenEventSheet.call(this, eventSheetManager, eventsheet);
@@ -7730,11 +7804,8 @@
 
 	        var eventSheetManager = this.parent;
 	        var pendingTrees = this.pendingTrees;
-	        var blackboard = eventSheetManager.blackboard;
 
 	        pendingTrees.length = 0;
-
-	        eventsheet.resetState(blackboard);
 
 	        eventsheet.setConditionEnable(!ignoreCondition);
 
@@ -7975,7 +8046,7 @@
 	        } else {
 	            value = 0;
 	        }
-	        this.setData(value + inc);
+	        this.setData(key, value + inc);
 	        return this;
 	    },
 
@@ -7986,7 +8057,7 @@
 	        } else {
 	            value = false;
 	        }
-	        this.setData(!value);
+	        this.setData(key, !value);
 	        return this;
 	    },
 
@@ -72990,6 +73061,7 @@ void main (void) {
 	        var groupName = this.groupName;
 	        this.eventSheetManager = eventSheetManager;
 	        this.blackboard = eventSheetManager.blackboard;
+	        this.roundBreak = false;
 	        this.setTreeGroup(groupName);
 
 	        var root = new EventSheetIfSelector({
@@ -73044,6 +73116,11 @@ void main (void) {
 	        return this;
 	    }
 
+	    breakRound() {
+	        this.roundBreak = true;
+	        return this;
+	    }
+
 	    start(blackboard, target) {
 	        if (this.roundState === RoundRun) {
 	            return false;
@@ -73056,25 +73133,31 @@ void main (void) {
 
 	        this.roundState = RoundRun;
 
+	        if (!startFromTop) {
+	            return true;
+	        }
+
 	        // First tick, condition-eval
 	        super.tick(blackboard, target);
 
-	        if (startFromTop) {
-	            var nodeMemory = this.root.getNodeMemory(this.ticker);
-	            this.conditionPassed = (nodeMemory.$runningChild === 0);
-	        }
+	        var nodeMemory = this.root.getNodeMemory(this.ticker);
+	        this.conditionPassed = (nodeMemory.$runningChild === 0);
 
 	        return true;
 	    }
 
 	    tick(blackboard, target) {
+	        this.roundBreak = false;
 	        var state = super.tick(blackboard, target);
+	        var roundBreak = this.roundBreak;
+	        this.roundBreak = false;
 
-	        if (state !== RUNNING) {
+	        var isRunningState = (state === RUNNING);
+	        if ((!isRunningState) || roundBreak) {
 	            // Will remove from pendingTrees
 	            this.roundState = RoundComplete;
 
-	            if (this.conditionPassed && this.properties.once) {
+	            if ((!isRunningState) && this.conditionPassed && this.properties.once) {
 	                this.setActive(false);
 	            }
 	        }
@@ -73134,6 +73217,105 @@ void main (void) {
 
 	    return condition;
 	};
+
+	var EmitRepeatIteration = function (tick, node, iterationIndex, maxLoop, status) {
+	    var eventSheet = node.getTree(tick);
+	    if (!eventSheet) {
+	        return;
+	    }
+
+	    var eventSheetManager = eventSheet.eventSheetManager;
+	    if (!eventSheetManager) {
+	        return;
+	    }
+
+	    var eventSheetGroup = eventSheet.eventSheetGroup;
+	    var groupName = eventSheetGroup.name;
+
+	    eventSheetManager.emit(
+	        EVT_REPEAT_ITERATION,
+	        iterationIndex,
+	        maxLoop,
+	        status,
+	        eventSheet.title,
+	        groupName,
+	        eventSheetManager,
+	        eventSheet,
+	        node,
+	        eventSheetGroup
+	    );
+	};
+
+	class Repeat extends Decorator {
+
+	    constructor(config = {}, nodePool) {
+	        var maxLoop;
+
+	        if (nodePool) {  // Rebuild node, don't touch config
+	            super(config, nodePool);
+
+	            var expressions = config.expressions || {};
+	            maxLoop = expressions.maxLoop;
+
+	        } else {
+	            var {
+	                maxLoop: maxLoopValue = -1,  // expression
+	                child = null,
+	                title,
+	                properties,
+	                name = 'Repeat'
+	            } = config;
+
+	            super(
+	                {
+	                    child,
+	                    title,
+	                    properties,
+	                    name,
+	                },
+	                nodePool
+	            );
+
+	            maxLoop = maxLoopValue;
+	        }
+
+	        this.maxLoop = CreateNumberExpression(maxLoop, nodePool);
+	        this.addExpression('maxLoop', this.maxLoop);
+	    }
+
+	    open(tick) {
+	        var nodeMemory = this.getNodeMemory(tick);
+	        nodeMemory.$maxLoop = tick.evalExpression(this.maxLoop);
+	        nodeMemory.$i = 0;
+	    }
+
+	    tick(tick) {
+	        if (!this.child) {
+	            return ERROR;
+	        }
+
+	        var nodeMemory = this.getNodeMemory(tick);
+	        var maxLoop = nodeMemory.$maxLoop;
+	        var i = nodeMemory.$i;
+	        var status = SUCCESS;
+
+	        // Open child before exceed maxLoop
+	        // Execute child many times in a tick
+	        while (maxLoop < 0 || i < maxLoop) {
+	            status = this.child._execute(tick);
+
+	            if ((status === SUCCESS) || (status === FAILURE)) {
+	                i++;
+	                EmitRepeatIteration(tick, this, i, maxLoop, status);
+	            } else {
+	                break;
+	            }
+	        }
+
+	        nodeMemory.$i = i;
+	        return status;
+	    }
+	}
 
 	class EventSheetIf extends If {
 	    evalCondition(tick) {
@@ -73210,6 +73392,13 @@ void main (void) {
 	        case 'continue':
 	            node = new ContinueAction({
 	                title: '[continue]',
+	            });
+	            break;
+
+	        case 'nextRound':
+	        case 'next-round':
+	            node = new NextRoundAction({
+	                title: '[nextRound]',
 	            });
 	            break;
 

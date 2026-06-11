@@ -9140,6 +9140,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#repeat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Repeat
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#input-pause" class="md-nav__link">
     <span class="md-ellipsis">
       Input pause
@@ -9249,6 +9258,15 @@
   <a href="#continue" class="md-nav__link">
     <span class="md-ellipsis">
       Continue
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#next-round" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next round
     </span>
   </a>
   
@@ -16239,6 +16257,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#repeat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Repeat
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#input-pause" class="md-nav__link">
     <span class="md-ellipsis">
       Input pause
@@ -16348,6 +16375,15 @@
   <a href="#continue" class="md-nav__link">
     <span class="md-ellipsis">
       Continue
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#next-round" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next round
     </span>
   </a>
   
@@ -17280,6 +17316,11 @@ And game objects with <code>'autoClear'</code> will be destroyed.</p>
 
 <span class="p">});</span>
 </code></pre></div></li>
+<li>Break current event sheet round while keeping behavior-tree state running
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;eventsheet.roundbreak&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">sheetTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheet</span><span class="p">,</span><span class="w"> </span><span class="nx">actionNode</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetGroup</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">});</span>
+</code></pre></div></li>
 </ul>
 <h4 id="label">Label<a class="headerlink" href="#label" title="Permanent link">&para;</a></h4>
 <ul>
@@ -17335,6 +17376,21 @@ And game objects with <code>'autoClear'</code> will be destroyed.</p>
 <p><code>expression</code> : Serialized condition expression.</p>
 </li>
 <li><code>result</code> : Boolean result of this condition.</li>
+</ul>
+<h4 id="repeat">Repeat<a class="headerlink" href="#repeat" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>Complete one repeat iteration
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;repeat.iteration&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">iterationIndex</span><span class="p">,</span><span class="w"> </span><span class="nx">maxLoop</span><span class="p">,</span><span class="w"> </span><span class="nx">status</span><span class="p">,</span><span class="w"> </span><span class="nx">sheetTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheet</span><span class="p">,</span><span class="w"> </span><span class="nx">repeatNode</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetGroup</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">});</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><code>iterationIndex</code> : Completed repeat iteration index, 1-based.</p>
+</li>
+<li><code>maxLoop</code> : Maximum repeat loop count.</li>
+<li><code>status</code> : Behavior-tree status code returned from this iteration.</li>
 </ul>
 <h4 id="input-pause">Input pause<a class="headerlink" href="#input-pause" title="Permanent link">&para;</a></h4>
 <ul>
@@ -17554,6 +17610,16 @@ And game objects with <code>'autoClear'</code> will be destroyed.</p>
 </code></pre></div>
 <ul>
 <li>Action <code>type: continue</code> : Simulate <code>continue</code> instruction of programming language.</li>
+</ul>
+<h5 id="next-round">Next round<a class="headerlink" href="#next-round" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">next-round</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">next-round</span>
+<span class="w">  </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">expression</span>
+</code></pre></div>
+<ul>
+<li>Action <code>type: next-round</code> : Stop current event sheet execution in this round, keep behavior-tree state as <code>RUNNING</code>, then continue from the next action in the next round.</li>
 </ul>
 <h5 id="exit">Exit<a class="headerlink" href="#exit" title="Permanent link">&para;</a></h5>
 <div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exit</span>
