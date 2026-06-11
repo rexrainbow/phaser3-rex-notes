@@ -22,7 +22,7 @@ export default {
         } else {
             value = 0;
         }
-        this.setData(value + inc);
+        this.setData(key, value + inc);
         return this;
     },
 
@@ -33,7 +33,7 @@ export default {
         } else {
             value = false;
         }
-        this.setData(!value);
+        this.setData(key, !value);
         return this;
     },
 
