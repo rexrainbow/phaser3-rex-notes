@@ -16,6 +16,11 @@ declare namespace Logger {
 
     /**
      * Formatter callback.
+     *
+     * @param event - Event record to format.
+     * @param record - Current round record.
+     * @param recorder - Recorder instance.
+     * @returns Text to output, or undefined to skip output.
      */
     type Formatter = (
         event: Recorder.IEventRecord,
@@ -25,6 +30,11 @@ declare namespace Logger {
 
     /**
      * Output callback.
+     *
+     * @param value - Formatted text.
+     * @param event - Event record that produced the text.
+     * @param record - Current round record.
+     * @param recorder - Recorder instance.
      */
     type Output = (
         value: string,
@@ -37,6 +47,11 @@ declare namespace Logger {
      * Writable output sink.
      */
     interface ISink {
+        /**
+         * Write formatted text.
+         *
+         * @param value - Formatted text.
+         */
         write(value: string): void;
     }
 
@@ -97,12 +112,48 @@ declare class Logger {
      */
     filter?: Recorder.FilterCallback;
 
+    /**
+     * Set the event sheet manager to log.
+     *
+     * @param manager - EventSheetManager instance.
+     * @returns This Logger instance.
+     */
     setManager(manager: EventSheetManager): this;
+
+    /**
+     * Set one or more event sheet managers to log.
+     *
+     * @param managers - EventSheetManager instance or instances.
+     * @returns This Logger instance.
+     */
     setManagers(managers: EventSheetManager | EventSheetManager[]): this;
+
+    /**
+     * Start logging diagnostic events.
+     *
+     * @returns This Logger instance.
+     */
     start(): this;
+
+    /**
+     * Stop logging diagnostic events.
+     *
+     * @returns This Logger instance.
+     */
     stop(): this;
+
+    /**
+     * Stop logging and release recorder, formatter, output, and filter references.
+     */
     destroy(): void;
 
+    /**
+     * Handle an event accepted by the underlying recorder.
+     *
+     * @param event - Event record accepted by the recorder.
+     * @param record - Current round record.
+     * @param recorder - Recorder instance.
+     */
     onRecorderEvent(
         event: Recorder.IEventRecord,
         record: Recorder.IRecord | null | undefined,

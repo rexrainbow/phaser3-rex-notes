@@ -252,6 +252,18 @@ The blackboard stores execution data with global, tree, and node scopes. It can
 track a tree's last state, keep per-node memories, and supply a custom current
 time shared across ticks.
 
+Tree and node memories are keyed by `tree.id` inside one blackboard:
+
+```text
+blackboard._treeMemory[tree.id]
+blackboard._treeMemory[tree.id].nodeMemory[node.id]
+```
+
+Therefore one blackboard can only store one runtime state set for a given
+`BehaviorTree` id. If two tasks need to run the same tree at the same time,
+do not share both the same tree id and the same blackboard. Use separate
+blackboards, or create separate tree instances with different ids.
+
 ### Custom global memory
 
 By default, the blackboard stores global data in a plain object. Pass
@@ -453,3 +465,55 @@ TICK  --> |isRunning| EXIT
 ```
 
 - Closing a node also closes its running children.
+
+## Logger
+
+Use a logger to print diagnostic events without storing records:
+
+```javascript
+var logger = btAdd.logger({
+    tree: tree,
+    level: 'status',
+    format: 'compact'
+});
+
+tree.tick(blackboard, target);
+```
+
+Common levels are:
+
+- `status` : Tick end, node status, aborts, and node logs.
+- `tick` : Tick start and tick end.
+- `verbose` : All behavior-tree diagnostic events.
+
+Custom action nodes can emit user-facing log events:
+
+```javascript
+class PrintAction extends RexPlugins.BehaviorTree.Action {
+    tick(tick) {
+        var text = 'Hello';
+        tick.emitNodeLog(this, text);
+        return this.SUCCESS;
+    }
+}
+```
+
+## Tracer
+
+Use a tracer when structured records are needed, for example an inspector UI:
+
+```javascript
+var tracer = btAdd.tracer({
+    tree: tree,
+    maxRecords: 16,
+    includeTime: false
+});
+
+tree.tick(blackboard, target);
+
+var record = tracer.getLastRecord();
+console.log(record.events);
+```
+
+Each record represents one tree tick and contains the tick status, node count,
+open node ids, and recorded events.

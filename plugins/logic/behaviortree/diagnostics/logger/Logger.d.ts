@@ -16,6 +16,11 @@ declare namespace Logger {
 
     /**
      * Formatter callback.
+     *
+     * @param event - Event record to format.
+     * @param record - Current tick record.
+     * @param recorder - Recorder instance.
+     * @returns Text to output, or undefined to skip output.
      */
     type Formatter = (
         event: Recorder.IEventRecord,
@@ -25,6 +30,11 @@ declare namespace Logger {
 
     /**
      * Output callback.
+     *
+     * @param value - Formatted text.
+     * @param event - Event record that produced the text.
+     * @param record - Current tick record.
+     * @param recorder - Recorder instance.
      */
     type Output = (
         value: string,
@@ -37,6 +47,11 @@ declare namespace Logger {
      * Writable output sink.
      */
     interface ISink {
+        /**
+         * Write formatted text.
+         *
+         * @param value - Formatted text.
+         */
         write(value: string): void;
     }
 
@@ -66,6 +81,11 @@ declare namespace Logger {
  * Logs BehaviorTree diagnostic events as text.
  */
 declare class Logger {
+    /**
+     * Create a Logger.
+     *
+     * @param config - Logger configuration.
+     */
     constructor(config?: Logger.IConfig);
 
     tree: BehaviorTree | null;
@@ -75,12 +95,48 @@ declare class Logger {
     write: Logger.Output;
     filter?: Recorder.FilterCallback;
 
+    /**
+     * Set the behavior tree to log.
+     *
+     * @param tree - BehaviorTree instance.
+     * @returns This Logger instance.
+     */
     setTree(tree: BehaviorTree): this;
+
+    /**
+     * Set one or more behavior trees to log.
+     *
+     * @param trees - BehaviorTree instance or instances.
+     * @returns This Logger instance.
+     */
     setTrees(trees: BehaviorTree | BehaviorTree[]): this;
+
+    /**
+     * Start logging diagnostic events.
+     *
+     * @returns This Logger instance.
+     */
     start(): this;
+
+    /**
+     * Stop logging diagnostic events.
+     *
+     * @returns This Logger instance.
+     */
     stop(): this;
+
+    /**
+     * Stop logging and release recorder, formatter, output, and filter references.
+     */
     destroy(): void;
 
+    /**
+     * Handle an event accepted by the underlying recorder.
+     *
+     * @param event - Event record accepted by the recorder.
+     * @param record - Current tick record.
+     * @param recorder - Recorder instance.
+     */
     onRecorderEvent(
         event: Recorder.IEventRecord,
         record: Recorder.IRecord | null | undefined,

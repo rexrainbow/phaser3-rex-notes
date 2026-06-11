@@ -421,45 +421,179 @@ condition:
 
 ### Events
 
-- Start A group of event sheets
+#### Event sheet group
+
+- Start running a group of event sheets
     ```javascript
-    eventSheetManager.on('start', function(groupName, eventSheetManager){ 
+    eventSheetManager.on('start', function(groupName, eventSheetManager, eventSheetGroup) {
+
+    });
+    ```
+- Continue running a group of event sheets after a pause or between pending sheets
+    ```javascript
+    eventSheetManager.on('continue', function(groupName, eventSheetManager, eventSheetGroup) {
 
     });
     ```
 - A group of event sheets has been executed completed
     ```javascript
-    eventSheetManager.on('complete', function(groupName, eventSheetManager){ 
+    eventSheetManager.on('complete', function(groupName, eventSheetManager, eventSheetGroup) {
 
     });
     ```
-- Enter an event sheet
+- Stop a group of event sheets and abort pending event sheets
     ```javascript
-    eventSheetManager.on('eventsheet.enter', function(title, groupName, eventSheetManager){ 
+    eventSheetManager.on('stop', function(groupName, eventSheetManager, eventSheetGroup) {
 
     });
     ```
-- Exit an event sheet
+
+#### Event sheet
+
+- Open an event sheet for condition evaluation and execution
     ```javascript
-    eventSheetManager.on('eventsheet.exit', function(title, groupName, eventSheetManager){ 
+    eventSheetManager.on('eventsheet.open', function(sheetTitle, groupName, eventSheetManager, eventSheet, eventSheetGroup) {
 
     });
     ```
-- Enter a [label](yamleventsheets.md#label) an event sheet
+- Finish event sheet condition evaluation
     ```javascript
-    eventSheetManager.on('label.enter', function(headingTitle, eventSheetTitle, groupName, eventSheetManager){ 
+    eventSheetManager.on('eventsheet.condition', function(sheetTitle, groupName, conditionPassed, eventSheetManager, eventSheet, eventSheetGroup) {
 
     });
     ```
-- Exit a [label](yamleventsheets.md#label) of an event sheet
+- Enter an event sheet whose condition passed
     ```javascript
-    eventSheetManager.on('label.exit', function(headingTitle, eventSheetTitle, groupName, eventSheetManager){ 
+    eventSheetManager.on('eventsheet.enter', function(sheetTitle, groupName, eventSheetManager, eventSheet, eventSheetGroup) {
 
     });
     ```
-- Test condition of an event sheet failed
+- Catch an event sheet whose condition did not pass
     ```javascript
-    eventSheetManager.on('eventsheet.catch', function(title, groupName, eventSheetManager){ 
+    eventSheetManager.on('eventsheet.catch', function(sheetTitle, groupName, eventSheetManager, eventSheet, eventSheetGroup) {
+
+    });
+    ```
+- Tick an opened event sheet
+    ```javascript
+    eventSheetManager.on('eventsheet.tick', function(sheetTitle, groupName, eventSheetManager, eventSheet, eventSheetGroup) {
+
+    });
+    ```
+- Finish ticking an event sheet and report behavior-tree status
+    ```javascript
+    eventSheetManager.on('eventsheet.status', function(sheetTitle, groupName, status, eventSheetManager, eventSheet, eventSheetGroup) {
+
+    });
+    ```
+- Close an event sheet at the end of this round
+    ```javascript
+    eventSheetManager.on('eventsheet.close', function(sheetTitle, groupName, eventSheetManager, eventSheet, eventSheetGroup) {
+
+    });
+    ```
+- Exit an event sheet whose condition passed
+    ```javascript
+    eventSheetManager.on('eventsheet.exit', function(sheetTitle, groupName, eventSheetManager, eventSheet, eventSheetGroup) {
+
+    });
+    ```
+- Skip an event sheet before opening it
+    ```javascript
+    eventSheetManager.on('eventsheet.skip', function(sheetTitle, groupName, reason, eventSheetManager, eventSheet, eventSheetGroup) {
+
+    });
+    ```
+- Abort a pending event sheet during group stop
+    ```javascript
+    eventSheetManager.on('eventsheet.abort', function(sheetTitle, groupName, eventSheetManager, eventSheet, eventSheetGroup) {
+
+    });
+    ```
+
+#### Label
+
+- Enter a [label](yamleventsheets.md#label) in an event sheet
+    ```javascript
+    eventSheetManager.on('label.enter', function(labelTitle, sheetTitle, groupName, eventSheetManager, eventSheet, labelNode, eventSheetGroup) {
+
+    });
+    ```
+- Exit a [label](yamleventsheets.md#label) in an event sheet
+    ```javascript
+    eventSheetManager.on('label.exit', function(labelTitle, sheetTitle, groupName, eventSheetManager, eventSheet, labelNode, eventSheetGroup) {
+
+    });
+    ```
+
+#### Command
+
+- Start executing a command task
+    ```javascript
+    eventSheetManager.on('command.start', function(commandName, parameters, sheetTitle, groupName, eventSheetManager, eventSheet, taskNode, eventSheetGroup) {
+
+    });
+    ```
+- Finish executing a command task
+    ```javascript
+    eventSheetManager.on('command.end', function(commandName, parameters, success, result, sheetTitle, groupName, eventSheetManager, eventSheet, taskNode, eventSheetGroup) {
+
+    });
+    ```
+- Pause a command task and wait for resume
+    ```javascript
+    eventSheetManager.on('command.pause', function(commandName, parameters, sheetTitle, groupName, eventSheetManager, eventSheet, taskNode, eventSheetGroup) {
+
+    });
+    ```
+- Resume a paused command task
+    ```javascript
+    eventSheetManager.on('command.resume', function(commandName, parameters, sheetTitle, groupName, eventSheetManager, eventSheet, taskNode, eventSheetGroup) {
+
+    });
+    ```
+- Abort a command task
+    ```javascript
+    eventSheetManager.on('command.abort', function(commandName, parameters, sheetTitle, groupName, eventSheetManager, eventSheet, taskNode, eventSheetGroup) {
+
+    });
+    ```
+
+#### Condition
+
+- Evaluate a condition on the execution path
+    ```javascript
+    eventSheetManager.on('condition.eval', function(expression, result, sheetTitle, groupName, eventSheetManager, eventSheet, conditionNode, eventSheetGroup) {
+
+    });
+    ```
+
+- `expression` : Serialized condition expression.
+- `result` : Boolean result of this condition.
+
+#### Input pause
+
+- Wait for pointer click
+    ```javascript
+    eventSheetManager.on('pause.click', function() {
+
+    });
+    ```
+- Wait for a keyboard key
+    ```javascript
+    eventSheetManager.on('pause.key', function(key) {
+
+    });
+    ```
+- Wait for pointer input
+    ```javascript
+    eventSheetManager.on('pause.input', function() {
+
+    });
+    ```
+- Resume from pointer input
+    ```javascript
+    eventSheetManager.on('resume.input', function() {
 
     });
     ```
@@ -1794,3 +1928,190 @@ commandExecutor.addCommand('condition.staminaAtLeast', function(config, eventShe
 - name: condition.staminaAtLeast
   parameters: { value: 30 }
 ```
+
+### Logger
+
+Logs event sheet manager diagnostic events as text.
+
+- Create logger from plugin
+    ```javascript
+    var logger = scene.plugins.get('rexYAMLEventSheets').addLogger({
+        manager: eventSheetManager,
+        level: 'flow',
+        format: 'compact'
+    });
+    ```
+- Create logger from class
+    ```javascript
+    import { Logger } from 'phaser4-rex-plugins/plugins/yamleventsheets.js';
+
+    var logger = new Logger({
+        manager: eventSheetManager,
+        level: 'flow',
+        format: 'compact',
+
+        // formatter:
+        // sink:
+        // output:
+        // events:
+        // filter:
+        // includeTime: false,
+        // includeReferences: false,
+        // includeParameters: true,
+        // includeResult: true,
+        // autoStart: true
+    });
+    ```
+
+Parameters
+
+- `manager` : Event sheet manager to listen to.
+- `managers` : An array of event sheet managers to listen to.
+- `level` :
+    - `'error'` : Stop, abort, failed command, and failed event sheet status events.
+    - `'flow'` : Group, event sheet, label, condition, and command flow events. Default behavior.
+    - `'status'` : Includes event sheet status events.
+    - `'verbose'` : Includes all recorded events.
+- `format` :
+    - `'compact'` : One line text per event. Default behavior.
+    - `'json'` : JSON string per event.
+- `formatter` : Custom formatter callback.
+    ```javascript
+    function(event, record, recorder) {
+        return `${event.type} : ${event.groupName}`;
+    }
+    ```
+- `sink` : Output target.
+    ```javascript
+    var logger = new Logger({
+        manager: eventSheetManager,
+        sink: {
+            write: function(text) {
+                textarea.value += text + '\n';
+            }
+        }
+    });
+    ```
+- `output` : Custom output callback.
+- `events` : Event names to record.
+    - `'all'` : Record all diagnostic events. Default behavior.
+    - A string event name, or an array of event names.
+- `filter` : Return `false` to skip an event.
+    ```javascript
+    function(event, record, recorder) {
+        // return true;
+    }
+    ```
+- `includeTime` : Include timestamp in records. Default value is `false`
+- `includeReferences` : Include runtime object references in records. Default value is `false`.
+- `includeParameters` : Include command parameters in command events. Default value is `true`.
+- `includeResult` : Include command return value in command events. Default value is `true`.
+- `autoStart` : Start listening after construction. Default behavior is `true`.
+
+Commands
+
+- Start or stop logger
+    ```javascript
+    logger.start();
+    logger.stop();
+    ```
+- Destroy logger
+    ```javascript
+    logger.destroy();
+    ```
+
+### Tracer
+
+Stores event sheet manager diagnostic events as structured records. It is useful for building a custom trace view or inspector UI.
+
+- Create tracer from plugin
+    ```javascript
+    var tracer = scene.plugins.get('rexYAMLEventSheets').addTracer({
+        manager: eventSheetManager,
+        maxRecords: 32
+    });
+    ```
+- Create tracer from class
+    ```javascript
+    import { Tracer } from 'phaser4-rex-plugins/plugins/yamleventsheets.js';
+
+    var tracer = new Tracer({
+        manager: eventSheetManager,
+        maxRecords: 32
+    });
+    ```
+
+Parameters
+
+- `manager` : Event sheet manager to listen to.
+- `managers` : An array of event sheet managers to listen to.
+- `maxRecords` : Maximum finalized group records to keep. Default behavior is `60`.
+- `events` : Event names to record.
+- `filter` : Return `false` to skip an event.
+    ```javascript
+    function(event, record, recorder) {
+        // return true;
+    }
+    ```
+- `includeTime` : Include timestamp in records. Default value is `false`
+- `includeReferences` : Include runtime object references in records. Default value is `false`.
+- `includeParameters` : Include command parameters in command events. Default value is `true`.
+- `includeResult` : Include command return value in command events. Default value is `true`.
+- `autoStart` : Start listening after construction. Default behavior is `true`.
+
+Commands:
+
+- Get trace records
+    ```javascript
+    var records = tracer.getRecords();
+    var lastRecord = tracer.getLastRecord();
+    var runningRecord = tracer.getCurrentRecord(groupName);
+    ```
+- Destroy Tracer
+    ```javascript
+    tracer.destroy();
+    ```
+
+Record structure:
+
+- A record contains one group execution round.
+    ```javascript
+    {
+        type: 'eventsheet.round',
+        managerID: 0,
+        groupName: 'task0',
+        roundID: 1,
+        statusName: 'COMPLETE',
+        events: [
+            {
+                type: 'condition.eval',
+                groupName: 'task0',
+                sheetTitle: 'Main',
+                conditionType: 'sheet',
+                expression: 'coin > 0',
+                result: true
+            },
+            {
+                type: 'command.start',
+                groupName: 'task0',
+                sheetTitle: 'Main',
+                commandName: 'print',
+                parameters: {
+                    text: 'hello'
+                }
+            }
+        ]
+    }
+    ```
+
+- Show current running groups
+    ```javascript
+    var text = ['task0', 'task1'].map(function(groupName) {
+        var record = tracer.getCurrentRecord(groupName);
+        if (!record) {
+            return `${groupName}: IDLE`;
+        }
+
+        return `${groupName}: RUNNING, events=${record.events.length}`;
+    }).join('\n');
+    ```

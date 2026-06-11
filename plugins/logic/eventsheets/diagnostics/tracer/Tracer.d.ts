@@ -51,15 +51,78 @@ declare class Tracer {
      */
     maxRecords: number;
 
+    /**
+     * Set the event sheet manager to trace.
+     *
+     * @param manager - EventSheetManager instance.
+     * @returns This Tracer instance.
+     */
     setManager(manager: EventSheetManager): this;
+
+    /**
+     * Set one or more event sheet managers to trace.
+     *
+     * @param managers - EventSheetManager instance or instances.
+     * @returns This Tracer instance.
+     */
     setManagers(managers: EventSheetManager | EventSheetManager[]): this;
+
+    /**
+     * Start tracing diagnostic events.
+     *
+     * @returns This Tracer instance.
+     */
     start(): this;
+
+    /**
+     * Stop tracing diagnostic events.
+     *
+     * @returns This Tracer instance.
+     */
     stop(): this;
+
+    /**
+     * Clear finalized records, current records, and the round counter.
+     *
+     * @returns This Tracer instance.
+     */
     clear(): this;
+
+    /**
+     * Stop tracing and release recorder references.
+     */
     destroy(): void;
 
+    /**
+     * Get finalized round records.
+     *
+     * @returns Finalized round records.
+     */
     getRecords(): Recorder.IRecord[];
+
+    /**
+     * Get the latest finalized round record.
+     *
+     * @returns Latest finalized record, or undefined if no record exists.
+     */
     getLastRecord(): Recorder.IRecord | undefined;
-    getCurrentRecord(groupName?: string, manager?: EventSheetManager): Recorder.IRecord | null | undefined;
+
+    /**
+     * Get the current active round record.
+     *
+     * @param groupName - Event sheet group name. If omitted, returns the latest active record.
+     * @param manager - EventSheetManager instance. If omitted, uses the first configured manager.
+     * @returns Current active record, null, or undefined.
+     */
+    getCurrentRecord(
+        groupName?: string,
+        manager?: EventSheetManager
+    ): Recorder.IRecord | null | undefined;
+
+    /**
+     * Get finalized round records for JSON serialization.
+     *
+     * @returns Finalized round records.
+     */
     toJSON(): Recorder.IRecord[];
 }

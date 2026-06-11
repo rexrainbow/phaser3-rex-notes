@@ -315,15 +315,78 @@ declare class Recorder {
      */
     isStarted: boolean;
 
+    /**
+     * Set the event sheet manager to record.
+     *
+     * @param manager - EventSheetManager instance.
+     * @returns This Recorder instance.
+     */
     setManager(manager: EventSheetManager): this;
+
+    /**
+     * Set one or more event sheet managers to record.
+     *
+     * @param managers - EventSheetManager instance or instances.
+     * @returns This Recorder instance.
+     */
     setManagers(managers: EventSheetManager | EventSheetManager[]): this;
+
+    /**
+     * Start listening to diagnostic events on all configured managers.
+     *
+     * @returns This Recorder instance.
+     */
     start(): this;
+
+    /**
+     * Stop listening to diagnostic events on all configured managers.
+     *
+     * @returns This Recorder instance.
+     */
     stop(): this;
+
+    /**
+     * Clear finalized records, current records, and the round counter.
+     *
+     * @returns This Recorder instance.
+     */
     clear(): this;
+
+    /**
+     * Stop recording and release manager and callback references.
+     */
     destroy(): void;
 
+    /**
+     * Get finalized round records.
+     *
+     * @returns Finalized round records.
+     */
     getRecords(): Recorder.IRecord[];
+
+    /**
+     * Get the latest finalized round record.
+     *
+     * @returns Latest finalized record, or undefined if no record exists.
+     */
     getLastRecord(): Recorder.IRecord | undefined;
-    getCurrentRecord(groupName?: string, manager?: EventSheetManager): Recorder.IRecord | null | undefined;
+
+    /**
+     * Get the current active round record.
+     *
+     * @param groupName - Event sheet group name. If omitted, returns the latest active record.
+     * @param manager - EventSheetManager instance. If omitted, uses the first configured manager.
+     * @returns Current active record, null, or undefined.
+     */
+    getCurrentRecord(
+        groupName?: string,
+        manager?: EventSheetManager
+    ): Recorder.IRecord | null | undefined;
+
+    /**
+     * Get finalized round records for JSON serialization.
+     *
+     * @returns Finalized round records.
+     */
     toJSON(): Recorder.IRecord[];
 }
