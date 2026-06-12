@@ -22108,11 +22108,11 @@
 	    return JSON.stringify(value);
 	};
 
-	var GetSheetLabel = function (record) {
+	var GetSheetLabel$1 = function (record) {
 	    return (record.sheetTitle) ? ` sheet="${record.sheetTitle}"` : '';
 	};
 
-	var GetCommandLabel = function (record) {
+	var GetCommandLabel$1 = function (record) {
 	    var text = ` command="${record.commandName}"`;
 	    if (record.parameters !== undefined) {
 	        text += ` ${FormatValue(record.parameters)}`;
@@ -22120,7 +22120,7 @@
 	    return text;
 	};
 
-	var FormatExpression = function (expression) {
+	var FormatExpression$1 = function (expression) {
 	    if (expression && (typeof (expression) === 'object')) {
 	        var text = expression.name || JSON.stringify(expression);
 	        if (expression.parameters) {
@@ -22150,73 +22150,73 @@
 	            return `${prefix} stop`;
 
 	        case EVT_EVENTSHEET_ADD:
-	            return `${prefix}${GetSheetLabel(record)} add`;
+	            return `${prefix}${GetSheetLabel$1(record)} add`;
 
 	        case EVT_EVENTSHEET_REMOVE:
-	            return `${prefix}${GetSheetLabel(record)} remove`;
+	            return `${prefix}${GetSheetLabel$1(record)} remove`;
 
 	        case EVT_EVENTSHEET_REMOVE_ALL:
 	            return `${prefix} removeall sheets=${FormatValue(record.sheetTitles)}`;
 
 	        case EVT_EVENTSHEET_OPEN:
-	            return `${prefix}${GetSheetLabel(record)} open`;
+	            return `${prefix}${GetSheetLabel$1(record)} open`;
 
 	        case EVT_EVENTSHEET_CONDITION:
-	            return `${prefix}${GetSheetLabel(record)} condition=${record.conditionPassed}`;
+	            return `${prefix}${GetSheetLabel$1(record)} condition=${record.conditionPassed}`;
 
 	        case EVT_EVENTSHEET_ENTER:
-	            return `${prefix}${GetSheetLabel(record)} enter`;
+	            return `${prefix}${GetSheetLabel$1(record)} enter`;
 
 	        case EVT_EVENTSHEET_CATCH:
-	            return `${prefix}${GetSheetLabel(record)} catch`;
+	            return `${prefix}${GetSheetLabel$1(record)} catch`;
 
 	        case EVT_EVENTSHEET_TICK:
-	            return `${prefix}${GetSheetLabel(record)} tick`;
+	            return `${prefix}${GetSheetLabel$1(record)} tick`;
 
 	        case EVT_EVENTSHEET_STATUS:
-	            return `${prefix}${GetSheetLabel(record)} status=${record.statusName}`;
+	            return `${prefix}${GetSheetLabel$1(record)} status=${record.statusName}`;
 
 	        case EVT_EVENTSHEET_CLOSE:
-	            return `${prefix}${GetSheetLabel(record)} close`;
+	            return `${prefix}${GetSheetLabel$1(record)} close`;
 
 	        case EVT_EVENTSHEET_EXIT:
-	            return `${prefix}${GetSheetLabel(record)} exit`;
+	            return `${prefix}${GetSheetLabel$1(record)} exit`;
 
 	        case EVT_EVENTSHEET_SKIP:
-	            return `${prefix}${GetSheetLabel(record)} skip reason=${record.reason}`;
+	            return `${prefix}${GetSheetLabel$1(record)} skip reason=${record.reason}`;
 
 	        case EVT_EVENTSHEET_ABORT:
-	            return `${prefix}${GetSheetLabel(record)} abort`;
+	            return `${prefix}${GetSheetLabel$1(record)} abort`;
 
 	        case EVT_EVENTSHEET_ROUND_BREAK:
-	            return `${prefix}${GetSheetLabel(record)} roundbreak node="${record.nodeTitle || record.nodeName}"`;
+	            return `${prefix}${GetSheetLabel$1(record)} roundbreak node="${record.nodeTitle || record.nodeName}"`;
 
 	        case EVT_LABEL_ENTER:
-	            return `${prefix}${GetSheetLabel(record)} label="${record.labelTitle}" enter`;
+	            return `${prefix}${GetSheetLabel$1(record)} label="${record.labelTitle}" enter`;
 
 	        case EVT_LABEL_EXIT:
-	            return `${prefix}${GetSheetLabel(record)} label="${record.labelTitle}" exit`;
+	            return `${prefix}${GetSheetLabel$1(record)} label="${record.labelTitle}" exit`;
 
 	        case EVT_COMMAND_START:
-	            return `${prefix}${GetSheetLabel(record)}${GetCommandLabel(record)} start`;
+	            return `${prefix}${GetSheetLabel$1(record)}${GetCommandLabel$1(record)} start`;
 
 	        case EVT_COMMAND_END:
-	            return `${prefix}${GetSheetLabel(record)}${GetCommandLabel(record)} end success=${record.success}`;
+	            return `${prefix}${GetSheetLabel$1(record)}${GetCommandLabel$1(record)} end success=${record.success}`;
 
 	        case EVT_COMMAND_PAUSE:
-	            return `${prefix}${GetSheetLabel(record)}${GetCommandLabel(record)} pause`;
+	            return `${prefix}${GetSheetLabel$1(record)}${GetCommandLabel$1(record)} pause`;
 
 	        case EVT_COMMAND_RESUME:
-	            return `${prefix}${GetSheetLabel(record)}${GetCommandLabel(record)} resume`;
+	            return `${prefix}${GetSheetLabel$1(record)}${GetCommandLabel$1(record)} resume`;
 
 	        case EVT_COMMAND_ABORT:
-	            return `${prefix}${GetSheetLabel(record)}${GetCommandLabel(record)} abort`;
+	            return `${prefix}${GetSheetLabel$1(record)}${GetCommandLabel$1(record)} abort`;
 
 	        case EVT_CONDITION_EVAL:
-	            return `${prefix}${GetSheetLabel(record)} condition.${record.conditionType} ${FormatExpression(record.expression)} => ${record.result}`;
+	            return `${prefix}${GetSheetLabel$1(record)} condition.${record.conditionType} ${FormatExpression$1(record.expression)} => ${record.result}`;
 
 	        case EVT_REPEAT_ITERATION:
-	            return `${prefix}${GetSheetLabel(record)} repeat ${record.iterationIndex}/${record.maxLoop} status=${record.statusName} node="${record.nodeTitle || record.nodeName}"`;
+	            return `${prefix}${GetSheetLabel$1(record)} repeat ${record.iterationIndex}/${record.maxLoop} status=${record.statusName} node="${record.nodeTitle || record.nodeName}"`;
 
 	        case EVT_PAUSE_CLICK:
 	            return '[ES -] pause.click';
@@ -22239,6 +22239,176 @@
 	    return JSON.stringify(record);
 	};
 
+	const Colors = {
+	    group: '#5DADE2',
+	    sheet: '#48C9B0',
+	    condition: '#BB8FCE',
+	    command: '#58D68D',
+	    pause: '#F5B041',
+	    flow: '#F4D03F',
+	    warning: '#E67E22',
+	    error: '#EC7063',
+	    muted: '#AEB6BF',
+	    text: '#EAECEE',
+	};
+
+	var Color = function (color, text) {
+	    return `[color=${color}]${text}[/color]`;
+	};
+
+	var Bold = function (text) {
+	    return `[b]${text}[/b]`;
+	};
+
+	var GetPrefix = function (record) {
+	    var groupName = (record.groupName !== undefined) ? record.groupName : '-';
+	    return `${Bold(Color(Colors.group, `ES ${groupName}`))}`;
+	};
+
+	var GetSheetLabel = function (record) {
+	    return (record.sheetTitle) ? ` sheet="${Color(Colors.sheet, record.sheetTitle)}"` : '';
+	};
+
+	var GetCommandLabel = function (record) {
+	    var text = ` command="${Color(Colors.command, record.commandName)}"`;
+	    if (record.parameters !== undefined) {
+	        text += ` ${FormatValue(record.parameters)}`;
+	    }
+	    return text;
+	};
+
+	var FormatExpression = function (expression) {
+	    if (expression && (typeof (expression) === 'object')) {
+	        var text = expression.name || JSON.stringify(expression);
+	        if (expression.parameters) {
+	            text += ` ${FormatValue(expression.parameters)}`;
+	        }
+	        return text;
+	    }
+
+	    return `"${expression}"`;
+	};
+
+	var FormatStatus = function (statusName) {
+	    switch (statusName) {
+	        case 'FAILURE':
+	        case 'ABORT':
+	        case 'ERROR':
+	            return Color(Colors.error, statusName);
+
+	        case 'RUNNING':
+	            return Color(Colors.warning, statusName);
+
+	        case 'SUCCESS':
+	            return Color(Colors.command, statusName);
+
+	        default:
+	            return Color(Colors.text, statusName);
+	    }
+	};
+
+	var BBCodeFormatter = function (record) {
+	    var prefix = GetPrefix(record);
+
+	    switch (record.type) {
+	        case EVT_GROUP_START:
+	            return `${prefix} ${Color(Colors.group, 'start')}`;
+
+	        case EVT_GROUP_CONTINUE:
+	            return `${prefix} ${Color(Colors.group, 'continue')}`;
+
+	        case EVT_GROUP_COMPLETE:
+	            return `${prefix} ${Color(Colors.group, 'complete')}`;
+
+	        case EVT_GROUP_STOP:
+	            return `${prefix} ${Color(Colors.error, 'stop')}`;
+
+	        case EVT_EVENTSHEET_ADD:
+	            return `${prefix}${GetSheetLabel(record)} ${Color(Colors.sheet, 'add')}`;
+
+	        case EVT_EVENTSHEET_REMOVE:
+	            return `${prefix}${GetSheetLabel(record)} ${Color(Colors.warning, 'remove')}`;
+
+	        case EVT_EVENTSHEET_REMOVE_ALL:
+	            return `${prefix} ${Color(Colors.warning, 'removeall')} sheets=${FormatValue(record.sheetTitles)}`;
+
+	        case EVT_EVENTSHEET_OPEN:
+	            return `${prefix}${GetSheetLabel(record)} ${Color(Colors.sheet, 'open')}`;
+
+	        case EVT_EVENTSHEET_CONDITION:
+	            return `${prefix}${GetSheetLabel(record)} ${Color(Colors.condition, 'condition')}=${record.conditionPassed}`;
+
+	        case EVT_EVENTSHEET_ENTER:
+	            return `${prefix}${GetSheetLabel(record)} ${Color(Colors.sheet, 'enter')}`;
+
+	        case EVT_EVENTSHEET_CATCH:
+	            return `${prefix}${GetSheetLabel(record)} ${Color(Colors.warning, 'catch')}`;
+
+	        case EVT_EVENTSHEET_TICK:
+	            return `${prefix}${GetSheetLabel(record)} ${Color(Colors.muted, 'tick')}`;
+
+	        case EVT_EVENTSHEET_STATUS:
+	            return `${prefix}${GetSheetLabel(record)} status=${FormatStatus(record.statusName)}`;
+
+	        case EVT_EVENTSHEET_CLOSE:
+	            return `${prefix}${GetSheetLabel(record)} ${Color(Colors.muted, 'close')}`;
+
+	        case EVT_EVENTSHEET_EXIT:
+	            return `${prefix}${GetSheetLabel(record)} ${Color(Colors.sheet, 'exit')}`;
+
+	        case EVT_EVENTSHEET_SKIP:
+	            return `${prefix}${GetSheetLabel(record)} ${Color(Colors.warning, 'skip')} reason=${record.reason}`;
+
+	        case EVT_EVENTSHEET_ABORT:
+	            return `${prefix}${GetSheetLabel(record)} ${Color(Colors.error, 'abort')}`;
+
+	        case EVT_EVENTSHEET_ROUND_BREAK:
+	            return `${prefix}${GetSheetLabel(record)} ${Color(Colors.flow, 'roundbreak')} node="${record.nodeTitle || record.nodeName}"`;
+
+	        case EVT_LABEL_ENTER:
+	            return `${prefix}${GetSheetLabel(record)} label="${Color(Colors.flow, record.labelTitle)}" ${Color(Colors.sheet, 'enter')}`;
+
+	        case EVT_LABEL_EXIT:
+	            return `${prefix}${GetSheetLabel(record)} label="${Color(Colors.flow, record.labelTitle)}" ${Color(Colors.sheet, 'exit')}`;
+
+	        case EVT_COMMAND_START:
+	            return `${prefix}${GetSheetLabel(record)}${GetCommandLabel(record)} ${Color(Colors.command, 'start')}`;
+
+	        case EVT_COMMAND_END:
+	            return `${prefix}${GetSheetLabel(record)}${GetCommandLabel(record)} end success=${record.success}`;
+
+	        case EVT_COMMAND_PAUSE:
+	            return `${prefix}${GetSheetLabel(record)}${GetCommandLabel(record)} ${Color(Colors.pause, 'pause')}`;
+
+	        case EVT_COMMAND_RESUME:
+	            return `${prefix}${GetSheetLabel(record)}${GetCommandLabel(record)} ${Color(Colors.pause, 'resume')}`;
+
+	        case EVT_COMMAND_ABORT:
+	            return `${prefix}${GetSheetLabel(record)}${GetCommandLabel(record)} ${Color(Colors.error, 'abort')}`;
+
+	        case EVT_CONDITION_EVAL:
+	            return `${prefix}${GetSheetLabel(record)} ${Color(Colors.condition, `condition.${record.conditionType}`)} ${FormatExpression(record.expression)} => ${record.result}`;
+
+	        case EVT_REPEAT_ITERATION:
+	            return `${prefix}${GetSheetLabel(record)} ${Color(Colors.flow, 'repeat')} ${record.iterationIndex}/${record.maxLoop} status=${FormatStatus(record.statusName)} node="${record.nodeTitle || record.nodeName}"`;
+
+	        case EVT_PAUSE_CLICK:
+	            return `${Color(Colors.pause, 'ES - pause.click')}`;
+
+	        case EVT_PAUSE_KEY:
+	            return `${Color(Colors.pause, `ES - pause.key`)} key="${record.key}"`;
+
+	        case EVT_PAUSE_INPUT:
+	            return `${Color(Colors.pause, 'ES - pause.input')}`;
+
+	        case EVT_RESUME_INPUT:
+	            return `${Color(Colors.pause, 'ES - resume.input')}`;
+
+	        default:
+	            return `${prefix} ${Color(Colors.muted, record.type)}`;
+	    }
+	};
+
 	var GetFormatter = function (format) {
 	    if (typeof (format) === 'function') {
 	        return format;
@@ -22249,6 +22419,11 @@
 	            return JSONFormatter;
 
 	        case 'compact':
+	            return CompactFormatter;
+
+	        case 'bbcode':
+	            return BBCodeFormatter;
+
 	        default:
 	            return CompactFormatter;
 	    }
@@ -22267,6 +22442,12 @@
 	        if (sink.write) {
 	            return function (value) {
 	                sink.write(value);
+	            };
+	        }
+
+	        if (sink.log) {
+	            return function (value) {
+	                sink.log(value);
 	            };
 	        }
 	    }
@@ -22471,6 +22652,837 @@
 	);
 
 	var EventEmitterMethods$1 = {
+	    setEventEmitter(eventEmitter, EventEmitterClass) {
+	        if (EventEmitterClass === undefined) {
+	            EventEmitterClass = EventEmitter$2;
+	        }
+	        this._privateEE = (eventEmitter === true) || (eventEmitter === undefined);
+	        this._eventEmitter = (this._privateEE) ? (new EventEmitterClass()) : eventEmitter;
+	        return this;
+	    },
+
+	    destroyEventEmitter() {
+	        if (this._eventEmitter && this._privateEE) {
+	            this._eventEmitter.shutdown();
+	        }
+	        return this;
+	    },
+
+	    getEventEmitter() {
+	        return this._eventEmitter;
+	    },
+
+	    on: function () {
+	        if (this._eventEmitter) {
+	            this._eventEmitter.on.apply(this._eventEmitter, arguments);
+	        }
+	        return this;
+	    },
+
+	    once: function () {
+	        if (this._eventEmitter) {
+	            this._eventEmitter.once.apply(this._eventEmitter, arguments);
+	        }
+	        return this;
+	    },
+
+	    off: function () {
+	        if (this._eventEmitter) {
+	            this._eventEmitter.off.apply(this._eventEmitter, arguments);
+	        }
+	        return this;
+	    },
+
+	    emit: function (event) {
+	        if (this._eventEmitter && event) {
+	            this._eventEmitter.emit.apply(this._eventEmitter, arguments);
+	        }
+	        return this;
+	    },
+
+	    addListener: function () {
+	        if (this._eventEmitter) {
+	            this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
+	        }
+	        return this;
+	    },
+
+	    removeListener: function () {
+	        if (this._eventEmitter) {
+	            this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
+	        }
+	        return this;
+	    },
+
+	    removeAllListeners: function () {
+	        if (this._eventEmitter) {
+	            this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
+	        }
+	        return this;
+	    },
+
+	    listenerCount: function () {
+	        if (this._eventEmitter) {
+	            return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
+	        }
+	        return 0;
+	    },
+
+	    listeners: function () {
+	        if (this._eventEmitter) {
+	            return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
+	        }
+	        return [];
+	    },
+
+	    eventNames: function () {
+	        if (this._eventEmitter) {
+	            return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
+	        }
+	        return [];
+	    },
+	};
+
+	var FLOAT = /^\s*-?(\d*\.?\d+|\d+\.?\d*)(e[-+]?\d+)?\s*$/i;
+	var HEX = /^0x[0-9A-F]+$/i;
+
+	var TypeConvert = function (s) {
+	    if (typeof (s) !== 'string') {
+	        return s;
+	    }
+
+	    if (s === '') {
+	        s = null;
+
+	    } else if (FLOAT.test(s)) {
+	        s = parseFloat(s);
+
+	    } else if (HEX.test(s)) {
+	        s = parseInt(s, 16);
+
+	    } else {
+	        switch (s) {
+	            case 'false': s = false; break;
+	            case 'true': s = true; break;
+	            case 'null': s = null; break;
+	            case 'undefined': s = undefined; break;
+	        }
+	    }
+
+	    return s;
+	};
+
+	// https://github.com/sindresorhus/escape-string-regexp/blob/master/index.js
+
+	var EscapeRegex = function (s) {
+	    return s
+	        .replace(re0, '\\$&')
+	        .replace(re1, '\\x2d');
+	};
+
+	var re0 = /[|\\{}()[\]^$+*?.]/g;
+	var re1 = /-/g;
+
+	// This class might be used standalone
+
+	let BracketParser$1 = class BracketParser {
+	    constructor(config) {
+	        // Event emitter
+	        this.setEventEmitter(GetValue$k(config, 'eventEmitter', undefined));
+
+	        // Value convert
+	        this.setValueConverter(GetValue$k(config, 'valueConvert', true));
+	        // Loop
+	        this.setLoopEnable(GetValue$k(config, 'loop', false));
+
+	        // Brackets and generate regex
+	        this.setMultipleLinesTagEnable(GetValue$k(config, 'multipleLinesTag', false));
+	        var delimiters = GetValue$k(config, 'delimiters', '<>');
+	        this.setDelimiters(delimiters[0], delimiters[1]);
+
+	        // Translate tagName callback
+	        this.setTranslateTagNameCallback(GetValue$k(config, 'translateTagNameCallback'));
+
+	        this.isRunning = false;
+	        this.isPaused = false;
+	        this.skipEventFlag = false;
+	        this.justCompleted = false;
+	        this.lastTagStart = null;
+	        this.lastTagEnd = null;
+	        this.lastContent = null;
+	    }
+
+	    shutdown() {
+	        this.destroyEventEmitter();
+	    }
+
+	    destroy() {
+	        this.shutdown();
+	    }
+
+	    setMultipleLinesTagEnable(enable) {
+	        if (enable === undefined) {
+	            enable = true;
+	        }
+	        this.multipleLinesTagEnable = enable;
+	        return this;
+	    }
+
+	    // Override
+	    setDelimiters(delimiterLeft, delimiterRight) {
+	        if (delimiterRight === undefined) {
+	            delimiterRight = delimiterLeft[1];
+	            delimiterLeft = delimiterLeft[0];
+	        }
+	        this.delimiterLeft = delimiterLeft;
+	        this.delimiterRight = delimiterRight;
+
+	        delimiterLeft = EscapeRegex(this.delimiterLeft);
+	        delimiterRight = EscapeRegex(this.delimiterRight);
+
+	        var flag = (this.multipleLinesTagEnable) ? 'gs' : 'gi';
+	        this.reSplit = RegExp(`${delimiterLeft}(.+?)${delimiterRight}`, flag);
+
+	        return this;
+	    }
+
+	    setTranslateTagNameCallback(callback) {
+	        this.translateTagNameCallback = callback;
+	        return this;
+	    }
+
+	    setValueConverter(converter) {
+	        if (converter === true) {
+	            converter = TypeConvert;
+	        } else if (!converter) {
+	            converter = BypassValueConverter;
+	        }
+	        this.valueConverter = converter;
+	        return this;
+	    }
+
+	    setLoopEnable(enable) {
+	        if (enable === undefined) {
+	            enable = true;
+	        }
+	        this.loopEnable = enable;
+	        return this;
+	    }
+
+	    setSource(source) {
+	        this.source = source;
+	        return this;
+	    }
+
+	    resetIndex(index) {
+	        if (index === undefined) {
+	            index = 0;
+	        }
+	        this.progressIndex = index;
+	        this.reSplit.lastIndex = index;
+	        this.lastTagStart = null;
+	        this.lastTagEnd = null;
+	        this.lastContent = null;
+	        this.justCompleted = false;
+	        this.isRunning = false;
+	        return this;
+	    }
+
+	    start(source) {
+	        this
+	            .setSource(source)
+	            .restart();
+	        return this;
+	    }
+
+	    restart() {
+	        this
+	            .resetIndex()
+	            .next();
+	    }
+
+	    next() {
+	        if (this.isPaused) {
+	            this.onResume();
+	        }
+
+	        // Don't re-enter this method
+	        if (this.isRunning) {
+	            return this;
+	        }
+
+	        this.isRunning = true;
+
+	        if (this.justCompleted) {
+	            this.isRunning = false;
+	            return this;
+	        }
+
+	        if (this.reSplit.lastIndex === 0) {
+	            this.onStart();
+	        }
+
+	        var text = this.source,
+	            lastIndex = text.length;
+
+	        this.reSplit.lastIndex = this.progressIndex;
+	        while (true) {
+	            var regexResult = this.reSplit.exec(text);
+	            // No tag found, complete
+	            if (!regexResult) {
+	                if (this.progressIndex < lastIndex) {
+	                    this.onContent(text.substring(this.progressIndex, lastIndex));
+	                    // Might pause here
+	                    if (this.isPaused) {
+	                        this.progressIndex = lastIndex;
+	                        break;
+	                    }
+	                }
+	                this.onComplete();
+	                this.isRunning = false;
+	                return;
+	            }
+
+	            var matchEnd = this.reSplit.lastIndex;
+	            var matchStart = matchEnd - regexResult[0].length;
+
+	            // Process content between previous tag and current tag            
+	            if (this.progressIndex < matchStart) {
+	                this.onContent(text.substring(this.progressIndex, matchStart));
+	                // Might pause here
+	                if (this.isPaused) {
+	                    this.progressIndex = matchStart;
+	                    break;
+	                }
+	            }
+
+	            // Process current tag
+	            this.lastTagSource = regexResult[0];
+	            this.onTag(regexResult[1]);
+	            this.lastTagSource = undefined;
+
+	            this.progressIndex = matchEnd;
+	            // Might pause here
+	            if (this.isPaused) {
+	                break;
+	            }
+
+	        }
+
+	        this.isRunning = false;
+	        return this;
+	    }
+
+	    skipEvent() {
+	        this.skipEventFlag = true;
+	        return this;
+	    }
+
+	    pause() {
+	        if (!this.isPaused) {
+	            this.onPause();
+	        }
+	        return this;
+	    }
+
+	    pauseUntilEvent(eventEmitter, eventName) {
+	        if (this.isPaused) {
+	            return this;
+	        }
+
+	        this.pause();
+	        eventEmitter.once(eventName, function () {
+	            this.next();
+	        }, this);
+	        return this;
+	    }
+
+	    onContent(content) {
+	        this.skipEventFlag = false;
+	        this.emit('content', content);
+	        this.lastContent = content;
+	    }
+
+	    // Override
+	    onTag(tagContent) {
+
+	    }
+
+	    onStart() {
+	        this.isRunning = true;
+	        this.emit('start', this);
+	    }
+
+	    onComplete() {
+	        this.isRunning = false;
+	        this.justCompleted = true;
+	        this.emit('complete', this);
+	        if (this.loopEnable) {
+	            this.resetIndex();
+	        }
+	    }
+
+	    onPause() {
+	        this.isPaused = true;
+	        this.emit('pause', this);
+	    }
+
+	    onResume() {
+	        this.isPaused = false;
+	        this.emit('resume', this);
+	    }
+
+	};
+
+	const BypassValueConverter = function (s) { return s; };
+
+	Object.assign(
+	    BracketParser$1.prototype,
+	    EventEmitterMethods$1,
+	);
+
+	var StringToValues = function (text, valueConverter, delimiter) {
+	    if (text == null) {
+	        return [];
+	    }
+	    if (valueConverter === undefined) {
+	        valueConverter = TypeConvert;
+	    }
+	    if (delimiter === undefined) {
+	        delimiter = ',';
+	    }
+
+	    var values = text.split(delimiter);
+	    for (var i = 0, cnt = values.length; i < cnt; i++) {
+	        values[i] = valueConverter(values[i]);
+	    }
+	    return values;
+	};
+
+	class BracketParser extends BracketParser$1 {
+	    constructor(config) {
+	        if (config === undefined) {
+	            config = {};
+	        }
+
+	        if (!config.hasOwnProperty('multipleLinesTag')) {
+	            config.multipleLinesTag = false;
+	        }
+
+	        super(config);
+
+	        // Parameters for regex
+	        this.setTagExpression(GetValue$k(config, 'regex.tag', undefined));
+	        this.setValueExpression(GetValue$k(config, 'regex.value', undefined));
+	        // Brackets and generate regex
+	        var delimiters = GetValue$k(config, 'delimiters', '<>');
+	        this.setDelimiters(delimiters[0], delimiters[1]);
+	    }
+
+	    setTagExpression(express) {
+	        if (!express) {
+	            express = DefaultTokenExpression;
+	        }
+	        this.tagExpression = express;
+	        return this;
+	    }
+
+	    setValueExpression(express) {
+	        if (!express) {
+	            express = DefaultTokenExpression;
+	        }
+	        this.valueExpression = express;
+	        return this;
+	    }
+
+	    setDelimiters(delimiterLeft, delimiterRight) {
+	        super.setDelimiters(delimiterLeft, delimiterRight);
+
+	        var tag = `(${this.tagExpression})(=(${this.valueExpression}))?`;
+	        this.reTag = RegExp(tag, 'i');
+
+	        if ((this.tagExpression !== DefaultTokenExpression) || (this.valueExpression !== DefaultTokenExpression)) {
+	            var startTagExpression = `${this.tagExpression}(=${this.valueExpression})?`;
+	            var endTagExpression = `/${this.tagExpression}`;
+
+	            delimiterLeft = EscapeRegex(this.delimiterLeft);
+	            delimiterRight = EscapeRegex(this.delimiterRight);
+
+	            var flag = (this.multipleLinesTagEnable) ? 'gs' : 'gi';
+	            this.reSplit = RegExp(`${delimiterLeft}((${startTagExpression})|(${endTagExpression}))${delimiterRight}`, flag);
+	        }
+
+	        return this;
+	    }
+
+	    onTag(tagContent) {
+	        var regexResult = tagContent.match(this.reTag);
+	        var tagName = regexResult[1];
+	       
+	        var isEndTag = (tagName.charAt(0) === '/');
+	        if (isEndTag) {
+	            tagName = tagName.substring(1, tagName.length);
+	        }
+
+	        if (this.translateTagNameCallback) {
+	            tagName = this.translateTagNameCallback(tagName);
+	        }
+
+	        this.skipEventFlag = false;
+	        if (!isEndTag) {
+	            var values = StringToValues(regexResult[3], this.valueConverter);
+	            this.emit(`+${tagName}`, ...values);
+	            if (!this.skipEventFlag) {
+	                this.emit('+', tagName, ...values);
+	            }
+	            this.lastTagStart = tagName;
+	        } else {
+	            this.emit(`-${tagName}`);
+	            if (!this.skipEventFlag) {
+	                this.emit('-', tagName);
+	            }
+	            this.lastTagEnd = tagName;
+	        }
+	    }
+	}
+
+	const DefaultTokenExpression = `[^=]+`;
+
+	var OnParseColorTag = function (parser) {
+	    parser
+	        .on('+color', function (color) {
+	            parser.addStyle('color', color);
+	            parser.skipEvent();
+	        })
+	        .on('-color', function () {
+	            parser.removeStyle('color');
+	            parser.skipEvent();
+	        });
+	};
+
+	var OnParseBackgroundColorTag = function (parser) {
+	    parser
+	        .on('+bgcolor', function (color) {
+	            parser.addStyle('background-color', color);
+	            parser.skipEvent();
+	        })
+	        .on('-bgcolor', function () {
+	            parser.removeStyle('background-color');
+	            parser.skipEvent();
+	        });
+	};
+
+	var ParseBoldTag = function (parser) {
+	    parser
+	        .on('+b', function () {
+	            parser.addStyle('font-weight', 'bold');
+	            parser.skipEvent();
+	        })
+	        .on('-b', function () {
+	            parser.removeStyle('font-weight');
+	            parser.skipEvent();
+	        });
+	};
+
+	var OnParseItalicTag = function (parser) {
+	    parser
+	        .on('+i', function () {
+	            parser.addStyle('font-style', 'italic');
+	            parser.skipEvent();
+	        })
+	        .on('-i', function () {
+	            parser.removeStyle('font-style');
+	            parser.skipEvent();
+	        });
+	};
+
+	var OnParseSizeTag = function (parser) {
+	    parser
+	        .on('+size', function (size) {
+	            if (typeof (size) === 'number') {
+	                size = `${size}px`;
+	            }
+	            parser.addStyle('font-size', size);
+	            parser.skipEvent();
+	        })
+	        .on('-size', function () {
+	            parser.removeStyle('font-size');
+	            parser.skipEvent();
+	        });
+	};
+
+	var OnParseUnderlineTag = function (parser) {
+	    parser
+	        .on('+u', function () {
+	            parser.addStyle('text-decoration', 'underline');
+	            parser.skipEvent();
+	        })
+	        .on('-u', function () {
+	            parser.removeStyle('text-decoration');
+	            parser.skipEvent();
+	        });
+	};
+
+	var OnParseShadowTag = function (parser) {
+	    parser
+	        .on('+shadow', function (color) {
+	            parser.addStyle('text-shadow', `1px 1px 3px ${color}`);
+	            parser.skipEvent();
+	        })
+	        .on('-shadow', function () {
+	            parser.removeStyle('text-shadow');
+	            parser.skipEvent();
+	        });
+	};
+
+	var OnParseRoundBlockTag = function (parser) {
+	    parser
+	        .on('+round', function (radius, padding) {
+	            if (radius === undefined) {
+	                radius = 3;
+	            }
+	            if (padding === undefined) {
+	                padding = radius;
+	            }
+
+	            if (typeof (radius) === 'number') {
+	                radius = `${radius}px`;
+	            }
+	            if (typeof (padding) === 'number') {
+	                padding = `${padding}px`;
+	            }
+
+	            parser.addStyle('display', 'inline-block');
+	            parser.addStyle('border-radius', radius);
+	            parser.addStyle('padding', padding);
+	            parser.skipEvent();
+	        })
+	        .on('-round', function () {
+	            parser.removeStyle('display');
+	            parser.removeStyle('border-radius');
+	            parser.removeStyle('padding');
+	            parser.skipEvent();
+	        });
+	};
+
+	var OnParseFontFamilyTag = function (parser) {
+	    parser
+	        .on('+family', function (family) {
+	            parser.addStyle('font-family', family);
+	            parser.skipEvent();
+	        })
+	        .on('-family', function () {
+	            parser.removeStyle('font-family');
+	            parser.skipEvent();
+	        });
+	};
+
+	var ParseContent = function (parser) {
+	    parser
+	        .on('content', function (content) {
+	            parser.addContent(content);
+	            parser.skipEvent();
+	        })
+	        .on('+', function () {
+	            parser.addContent(parser.lastTagSource);
+	            parser.skipEvent();
+	        })
+	        .on('-', function () {
+	            parser.addContent(parser.lastTagSource);
+	            parser.skipEvent();
+	        });
+	};
+
+	var ParseHandlers = [
+	    OnParseColorTag,
+	    OnParseBackgroundColorTag,
+	    ParseBoldTag,
+	    OnParseItalicTag,
+	    OnParseSizeTag,
+	    OnParseUnderlineTag,
+	    OnParseShadowTag,
+	    OnParseRoundBlockTag,
+	    OnParseFontFamilyTag,
+	    ParseContent
+	];
+
+	var Clear = function (obj) {
+	    if ((typeof (obj) !== 'object') || (obj === null)) {
+	        return obj;
+	    }
+
+	    if (Array.isArray(obj)) {
+	        obj.length = 0;
+	    } else {
+	        for (var key in obj) {
+	            delete obj[key];
+	        }
+	    }
+
+	    return obj;
+	};
+
+	/**
+	 * Shallow Object Clone. Will not out nested objects.
+	 * @param {object} obj JSON object
+	 * @param {object} ret JSON object to return, set null to return a new object
+	 * @returns {object} this object
+	 */
+	var Clone = function (obj, out) {
+	    var objIsArray = Array.isArray(obj);
+
+	    if (out === undefined) {
+	        out = (objIsArray) ? [] : {};
+	    } else {
+	        Clear(out);
+	    }
+
+	    if (objIsArray) {
+	        out.length = obj.length;
+	        for (var i = 0, cnt = obj.length; i < cnt; i++) {
+	            out[i] = obj[i];
+	        }
+	    } else {
+	        for (var key in obj) {
+	            out[key] = obj[key];
+	        }
+	    }
+
+	    return out;
+	};
+
+	class Parser extends BracketParser {
+	    constructor(config) {
+	        super(config);
+
+	        this.segments = [];
+	        this.lastPropFlags = {};
+
+	        for (var i = 0, cnt = ParseHandlers.length; i < cnt; i++) {
+	            ParseHandlers[i](this);
+	        }
+	    }
+
+	    clearBuffers() {
+	        this.segments.length = 0;
+	        this.lastPropFlags = {};
+	        return this;
+	    }
+
+	    addStyle(name, value) {
+	        this.lastPropFlags[name] = value;
+	        return this;
+	    }
+
+	    removeStyle(name) {
+	        delete this.lastPropFlags[name];
+	        return this;
+	    }
+
+	    addContent(content) {
+	        this.segments.push(Clone(this.lastPropFlags));
+	        this.segments.push(content);
+	        return this;
+	    }
+
+	    parse(s) {
+	        this.start(s);
+
+	        var result = [];
+	        for (var i = 0, cnt = this.segments.length; i < cnt; i++) {
+	            var text = this.segments[i];
+	            if (typeof (text) !== 'string') {
+	                continue;
+	            }
+
+	            var propFlags = this.segments[i - 1];
+	            if (typeof (propFlags) === 'object') {
+	                result.push({
+	                    value: text,
+	                    css: PropToStyle(propFlags)
+	                });
+	            } else {
+	                result.push({
+	                    value: text,
+	                    css: null
+	                });
+	            }
+	        }
+
+	        this.clearBuffers();
+
+	        return result;
+	    }
+	}
+
+	var PropToStyle = function (propFlags) {
+	    var styles = [];
+	    for (var propName in propFlags) {
+	        styles.push(`${propName}:${propFlags[propName]}`);
+	    }
+
+	    return styles.join(';');
+	};
+
+	class BBCodeLog {
+	    constructor({
+	        delimiters = '[]',
+	        enable = true
+	    } = {}) {
+
+	        this.parser = new Parser({
+	            delimiters: delimiters
+	        });
+
+	        this.enable = enable;
+	    }
+
+	    setEnable(enable = true) {
+	        this.enable = enable;
+	        return this;
+	    }
+
+	    log(s, logType = 'log') {
+	        if (!this.enable) {
+	            return this;
+	        }
+
+	        if (typeof (s) == 'string') {
+	            var inputs = [];
+	            var modifiers = [];
+	            this.parser.parse(s).forEach(function (item) {
+	                inputs.push(`%c${item.value}`);
+	                modifiers.push(item.css);
+	            });
+
+	            console[logType].call(console, inputs.join(''), ...modifiers);
+
+	        } else {
+	            console[logType](s);
+
+	        }
+
+	        return this;
+	    }
+	}
+
+	class BBCodeSink {
+	    constructor(config) {
+	        this.logger = new BBCodeLog(config);
+	    }
+
+	    setEnable(enable = true) {
+	        this.logger.setEnable(enable);
+	        return this;
+	    }
+
+	    write(value) {
+	        this.logger.log(value);
+	        return this;
+	    }
+	}
+
+	var EventEmitterMethods = {
 	    setEventEmitter(eventEmitter, EventEmitterClass) {
 	        if (EventEmitterClass === undefined) {
 	            EventEmitterClass = phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
@@ -26753,7 +27765,7 @@ void main (void) {
 
 	Object.assign(
 	    GOManager.prototype,
-	    EventEmitterMethods$1,
+	    EventEmitterMethods,
 	    Methods$2
 	);
 
@@ -27361,7 +28373,7 @@ void main (void) {
 	}
 	Object.assign(
 	    ComponentBase.prototype,
-	    EventEmitterMethods$1
+	    EventEmitterMethods
 	);
 
 	const GetValue$c = phaser.Utils.Objects.GetValue;
@@ -29415,7 +30427,7 @@ void main (void) {
 
 	Object.assign(
 	    WaitEvent.prototype,
-	    EventEmitterMethods$1
+	    EventEmitterMethods
 	);
 
 	var WaitTimeMethods = {
@@ -30169,821 +31181,6 @@ void main (void) {
 	        this.scene = undefined;
 
 	        super.destroy();
-	    }
-	}
-
-	var EventEmitterMethods = {
-	    setEventEmitter(eventEmitter, EventEmitterClass) {
-	        if (EventEmitterClass === undefined) {
-	            EventEmitterClass = EventEmitter$2;
-	        }
-	        this._privateEE = (eventEmitter === true) || (eventEmitter === undefined);
-	        this._eventEmitter = (this._privateEE) ? (new EventEmitterClass()) : eventEmitter;
-	        return this;
-	    },
-
-	    destroyEventEmitter() {
-	        if (this._eventEmitter && this._privateEE) {
-	            this._eventEmitter.shutdown();
-	        }
-	        return this;
-	    },
-
-	    getEventEmitter() {
-	        return this._eventEmitter;
-	    },
-
-	    on: function () {
-	        if (this._eventEmitter) {
-	            this._eventEmitter.on.apply(this._eventEmitter, arguments);
-	        }
-	        return this;
-	    },
-
-	    once: function () {
-	        if (this._eventEmitter) {
-	            this._eventEmitter.once.apply(this._eventEmitter, arguments);
-	        }
-	        return this;
-	    },
-
-	    off: function () {
-	        if (this._eventEmitter) {
-	            this._eventEmitter.off.apply(this._eventEmitter, arguments);
-	        }
-	        return this;
-	    },
-
-	    emit: function (event) {
-	        if (this._eventEmitter && event) {
-	            this._eventEmitter.emit.apply(this._eventEmitter, arguments);
-	        }
-	        return this;
-	    },
-
-	    addListener: function () {
-	        if (this._eventEmitter) {
-	            this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
-	        }
-	        return this;
-	    },
-
-	    removeListener: function () {
-	        if (this._eventEmitter) {
-	            this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
-	        }
-	        return this;
-	    },
-
-	    removeAllListeners: function () {
-	        if (this._eventEmitter) {
-	            this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
-	        }
-	        return this;
-	    },
-
-	    listenerCount: function () {
-	        if (this._eventEmitter) {
-	            return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
-	        }
-	        return 0;
-	    },
-
-	    listeners: function () {
-	        if (this._eventEmitter) {
-	            return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
-	        }
-	        return [];
-	    },
-
-	    eventNames: function () {
-	        if (this._eventEmitter) {
-	            return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
-	        }
-	        return [];
-	    },
-	};
-
-	var FLOAT = /^\s*-?(\d*\.?\d+|\d+\.?\d*)(e[-+]?\d+)?\s*$/i;
-	var HEX = /^0x[0-9A-F]+$/i;
-
-	var TypeConvert = function (s) {
-	    if (typeof (s) !== 'string') {
-	        return s;
-	    }
-
-	    if (s === '') {
-	        s = null;
-
-	    } else if (FLOAT.test(s)) {
-	        s = parseFloat(s);
-
-	    } else if (HEX.test(s)) {
-	        s = parseInt(s, 16);
-
-	    } else {
-	        switch (s) {
-	            case 'false': s = false; break;
-	            case 'true': s = true; break;
-	            case 'null': s = null; break;
-	            case 'undefined': s = undefined; break;
-	        }
-	    }
-
-	    return s;
-	};
-
-	// https://github.com/sindresorhus/escape-string-regexp/blob/master/index.js
-
-	var EscapeRegex = function (s) {
-	    return s
-	        .replace(re0, '\\$&')
-	        .replace(re1, '\\x2d');
-	};
-
-	var re0 = /[|\\{}()[\]^$+*?.]/g;
-	var re1 = /-/g;
-
-	// This class might be used standalone
-
-	let BracketParser$1 = class BracketParser {
-	    constructor(config) {
-	        // Event emitter
-	        this.setEventEmitter(GetValue$k(config, 'eventEmitter', undefined));
-
-	        // Value convert
-	        this.setValueConverter(GetValue$k(config, 'valueConvert', true));
-	        // Loop
-	        this.setLoopEnable(GetValue$k(config, 'loop', false));
-
-	        // Brackets and generate regex
-	        this.setMultipleLinesTagEnable(GetValue$k(config, 'multipleLinesTag', false));
-	        var delimiters = GetValue$k(config, 'delimiters', '<>');
-	        this.setDelimiters(delimiters[0], delimiters[1]);
-
-	        // Translate tagName callback
-	        this.setTranslateTagNameCallback(GetValue$k(config, 'translateTagNameCallback'));
-
-	        this.isRunning = false;
-	        this.isPaused = false;
-	        this.skipEventFlag = false;
-	        this.justCompleted = false;
-	        this.lastTagStart = null;
-	        this.lastTagEnd = null;
-	        this.lastContent = null;
-	    }
-
-	    shutdown() {
-	        this.destroyEventEmitter();
-	    }
-
-	    destroy() {
-	        this.shutdown();
-	    }
-
-	    setMultipleLinesTagEnable(enable) {
-	        if (enable === undefined) {
-	            enable = true;
-	        }
-	        this.multipleLinesTagEnable = enable;
-	        return this;
-	    }
-
-	    // Override
-	    setDelimiters(delimiterLeft, delimiterRight) {
-	        if (delimiterRight === undefined) {
-	            delimiterRight = delimiterLeft[1];
-	            delimiterLeft = delimiterLeft[0];
-	        }
-	        this.delimiterLeft = delimiterLeft;
-	        this.delimiterRight = delimiterRight;
-
-	        delimiterLeft = EscapeRegex(this.delimiterLeft);
-	        delimiterRight = EscapeRegex(this.delimiterRight);
-
-	        var flag = (this.multipleLinesTagEnable) ? 'gs' : 'gi';
-	        this.reSplit = RegExp(`${delimiterLeft}(.+?)${delimiterRight}`, flag);
-
-	        return this;
-	    }
-
-	    setTranslateTagNameCallback(callback) {
-	        this.translateTagNameCallback = callback;
-	        return this;
-	    }
-
-	    setValueConverter(converter) {
-	        if (converter === true) {
-	            converter = TypeConvert;
-	        } else if (!converter) {
-	            converter = BypassValueConverter;
-	        }
-	        this.valueConverter = converter;
-	        return this;
-	    }
-
-	    setLoopEnable(enable) {
-	        if (enable === undefined) {
-	            enable = true;
-	        }
-	        this.loopEnable = enable;
-	        return this;
-	    }
-
-	    setSource(source) {
-	        this.source = source;
-	        return this;
-	    }
-
-	    resetIndex(index) {
-	        if (index === undefined) {
-	            index = 0;
-	        }
-	        this.progressIndex = index;
-	        this.reSplit.lastIndex = index;
-	        this.lastTagStart = null;
-	        this.lastTagEnd = null;
-	        this.lastContent = null;
-	        this.justCompleted = false;
-	        this.isRunning = false;
-	        return this;
-	    }
-
-	    start(source) {
-	        this
-	            .setSource(source)
-	            .restart();
-	        return this;
-	    }
-
-	    restart() {
-	        this
-	            .resetIndex()
-	            .next();
-	    }
-
-	    next() {
-	        if (this.isPaused) {
-	            this.onResume();
-	        }
-
-	        // Don't re-enter this method
-	        if (this.isRunning) {
-	            return this;
-	        }
-
-	        this.isRunning = true;
-
-	        if (this.justCompleted) {
-	            this.isRunning = false;
-	            return this;
-	        }
-
-	        if (this.reSplit.lastIndex === 0) {
-	            this.onStart();
-	        }
-
-	        var text = this.source,
-	            lastIndex = text.length;
-
-	        this.reSplit.lastIndex = this.progressIndex;
-	        while (true) {
-	            var regexResult = this.reSplit.exec(text);
-	            // No tag found, complete
-	            if (!regexResult) {
-	                if (this.progressIndex < lastIndex) {
-	                    this.onContent(text.substring(this.progressIndex, lastIndex));
-	                    // Might pause here
-	                    if (this.isPaused) {
-	                        this.progressIndex = lastIndex;
-	                        break;
-	                    }
-	                }
-	                this.onComplete();
-	                this.isRunning = false;
-	                return;
-	            }
-
-	            var matchEnd = this.reSplit.lastIndex;
-	            var matchStart = matchEnd - regexResult[0].length;
-
-	            // Process content between previous tag and current tag            
-	            if (this.progressIndex < matchStart) {
-	                this.onContent(text.substring(this.progressIndex, matchStart));
-	                // Might pause here
-	                if (this.isPaused) {
-	                    this.progressIndex = matchStart;
-	                    break;
-	                }
-	            }
-
-	            // Process current tag
-	            this.lastTagSource = regexResult[0];
-	            this.onTag(regexResult[1]);
-	            this.lastTagSource = undefined;
-
-	            this.progressIndex = matchEnd;
-	            // Might pause here
-	            if (this.isPaused) {
-	                break;
-	            }
-
-	        }
-
-	        this.isRunning = false;
-	        return this;
-	    }
-
-	    skipEvent() {
-	        this.skipEventFlag = true;
-	        return this;
-	    }
-
-	    pause() {
-	        if (!this.isPaused) {
-	            this.onPause();
-	        }
-	        return this;
-	    }
-
-	    pauseUntilEvent(eventEmitter, eventName) {
-	        if (this.isPaused) {
-	            return this;
-	        }
-
-	        this.pause();
-	        eventEmitter.once(eventName, function () {
-	            this.next();
-	        }, this);
-	        return this;
-	    }
-
-	    onContent(content) {
-	        this.skipEventFlag = false;
-	        this.emit('content', content);
-	        this.lastContent = content;
-	    }
-
-	    // Override
-	    onTag(tagContent) {
-
-	    }
-
-	    onStart() {
-	        this.isRunning = true;
-	        this.emit('start', this);
-	    }
-
-	    onComplete() {
-	        this.isRunning = false;
-	        this.justCompleted = true;
-	        this.emit('complete', this);
-	        if (this.loopEnable) {
-	            this.resetIndex();
-	        }
-	    }
-
-	    onPause() {
-	        this.isPaused = true;
-	        this.emit('pause', this);
-	    }
-
-	    onResume() {
-	        this.isPaused = false;
-	        this.emit('resume', this);
-	    }
-
-	};
-
-	const BypassValueConverter = function (s) { return s; };
-
-	Object.assign(
-	    BracketParser$1.prototype,
-	    EventEmitterMethods,
-	);
-
-	var StringToValues = function (text, valueConverter, delimiter) {
-	    if (text == null) {
-	        return [];
-	    }
-	    if (valueConverter === undefined) {
-	        valueConverter = TypeConvert;
-	    }
-	    if (delimiter === undefined) {
-	        delimiter = ',';
-	    }
-
-	    var values = text.split(delimiter);
-	    for (var i = 0, cnt = values.length; i < cnt; i++) {
-	        values[i] = valueConverter(values[i]);
-	    }
-	    return values;
-	};
-
-	class BracketParser extends BracketParser$1 {
-	    constructor(config) {
-	        if (config === undefined) {
-	            config = {};
-	        }
-
-	        if (!config.hasOwnProperty('multipleLinesTag')) {
-	            config.multipleLinesTag = false;
-	        }
-
-	        super(config);
-
-	        // Parameters for regex
-	        this.setTagExpression(GetValue$k(config, 'regex.tag', undefined));
-	        this.setValueExpression(GetValue$k(config, 'regex.value', undefined));
-	        // Brackets and generate regex
-	        var delimiters = GetValue$k(config, 'delimiters', '<>');
-	        this.setDelimiters(delimiters[0], delimiters[1]);
-	    }
-
-	    setTagExpression(express) {
-	        if (!express) {
-	            express = DefaultTokenExpression;
-	        }
-	        this.tagExpression = express;
-	        return this;
-	    }
-
-	    setValueExpression(express) {
-	        if (!express) {
-	            express = DefaultTokenExpression;
-	        }
-	        this.valueExpression = express;
-	        return this;
-	    }
-
-	    setDelimiters(delimiterLeft, delimiterRight) {
-	        super.setDelimiters(delimiterLeft, delimiterRight);
-
-	        var tag = `(${this.tagExpression})(=(${this.valueExpression}))?`;
-	        this.reTag = RegExp(tag, 'i');
-
-	        if ((this.tagExpression !== DefaultTokenExpression) || (this.valueExpression !== DefaultTokenExpression)) {
-	            var startTagExpression = `${this.tagExpression}(=${this.valueExpression})?`;
-	            var endTagExpression = `/${this.tagExpression}`;
-
-	            delimiterLeft = EscapeRegex(this.delimiterLeft);
-	            delimiterRight = EscapeRegex(this.delimiterRight);
-
-	            var flag = (this.multipleLinesTagEnable) ? 'gs' : 'gi';
-	            this.reSplit = RegExp(`${delimiterLeft}((${startTagExpression})|(${endTagExpression}))${delimiterRight}`, flag);
-	        }
-
-	        return this;
-	    }
-
-	    onTag(tagContent) {
-	        var regexResult = tagContent.match(this.reTag);
-	        var tagName = regexResult[1];
-	       
-	        var isEndTag = (tagName.charAt(0) === '/');
-	        if (isEndTag) {
-	            tagName = tagName.substring(1, tagName.length);
-	        }
-
-	        if (this.translateTagNameCallback) {
-	            tagName = this.translateTagNameCallback(tagName);
-	        }
-
-	        this.skipEventFlag = false;
-	        if (!isEndTag) {
-	            var values = StringToValues(regexResult[3], this.valueConverter);
-	            this.emit(`+${tagName}`, ...values);
-	            if (!this.skipEventFlag) {
-	                this.emit('+', tagName, ...values);
-	            }
-	            this.lastTagStart = tagName;
-	        } else {
-	            this.emit(`-${tagName}`);
-	            if (!this.skipEventFlag) {
-	                this.emit('-', tagName);
-	            }
-	            this.lastTagEnd = tagName;
-	        }
-	    }
-	}
-
-	const DefaultTokenExpression = `[^=]+`;
-
-	var OnParseColorTag = function (parser) {
-	    parser
-	        .on('+color', function (color) {
-	            parser.addStyle('color', color);
-	            parser.skipEvent();
-	        })
-	        .on('-color', function () {
-	            parser.removeStyle('color');
-	            parser.skipEvent();
-	        });
-	};
-
-	var OnParseBackgroundColorTag = function (parser) {
-	    parser
-	        .on('+bgcolor', function (color) {
-	            parser.addStyle('background-color', color);
-	            parser.skipEvent();
-	        })
-	        .on('-bgcolor', function () {
-	            parser.removeStyle('background-color');
-	            parser.skipEvent();
-	        });
-	};
-
-	var ParseBoldTag = function (parser) {
-	    parser
-	        .on('+b', function () {
-	            parser.addStyle('font-weight', 'bold');
-	            parser.skipEvent();
-	        })
-	        .on('-b', function () {
-	            parser.removeStyle('font-weight');
-	            parser.skipEvent();
-	        });
-	};
-
-	var OnParseItalicTag = function (parser) {
-	    parser
-	        .on('+i', function () {
-	            parser.addStyle('font-style', 'italic');
-	            parser.skipEvent();
-	        })
-	        .on('-i', function () {
-	            parser.removeStyle('font-style');
-	            parser.skipEvent();
-	        });
-	};
-
-	var OnParseSizeTag = function (parser) {
-	    parser
-	        .on('+size', function (size) {
-	            if (typeof (size) === 'number') {
-	                size = `${size}px`;
-	            }
-	            parser.addStyle('font-size', size);
-	            parser.skipEvent();
-	        })
-	        .on('-size', function () {
-	            parser.removeStyle('font-size');
-	            parser.skipEvent();
-	        });
-	};
-
-	var OnParseUnderlineTag = function (parser) {
-	    parser
-	        .on('+u', function () {
-	            parser.addStyle('text-decoration', 'underline');
-	            parser.skipEvent();
-	        })
-	        .on('-u', function () {
-	            parser.removeStyle('text-decoration');
-	            parser.skipEvent();
-	        });
-	};
-
-	var OnParseShadowTag = function (parser) {
-	    parser
-	        .on('+shadow', function (color) {
-	            parser.addStyle('text-shadow', `1px 1px 3px ${color}`);
-	            parser.skipEvent();
-	        })
-	        .on('-shadow', function () {
-	            parser.removeStyle('text-shadow');
-	            parser.skipEvent();
-	        });
-	};
-
-	var OnParseRoundBlockTag = function (parser) {
-	    parser
-	        .on('+round', function (radius, padding) {
-	            if (radius === undefined) {
-	                radius = 3;
-	            }
-	            if (padding === undefined) {
-	                padding = radius;
-	            }
-
-	            if (typeof (radius) === 'number') {
-	                radius = `${radius}px`;
-	            }
-	            if (typeof (padding) === 'number') {
-	                padding = `${padding}px`;
-	            }
-
-	            parser.addStyle('display', 'inline-block');
-	            parser.addStyle('border-radius', radius);
-	            parser.addStyle('padding', padding);
-	            parser.skipEvent();
-	        })
-	        .on('-round', function () {
-	            parser.removeStyle('display');
-	            parser.removeStyle('border-radius');
-	            parser.removeStyle('padding');
-	            parser.skipEvent();
-	        });
-	};
-
-	var OnParseFontFamilyTag = function (parser) {
-	    parser
-	        .on('+family', function (family) {
-	            parser.addStyle('font-family', family);
-	            parser.skipEvent();
-	        })
-	        .on('-family', function () {
-	            parser.removeStyle('font-family');
-	            parser.skipEvent();
-	        });
-	};
-
-	var ParseContent = function (parser) {
-	    parser
-	        .on('content', function (content) {
-	            parser.addContent(content);
-	            parser.skipEvent();
-	        })
-	        .on('+', function () {
-	            parser.addContent(parser.lastTagSource);
-	            parser.skipEvent();
-	        })
-	        .on('-', function () {
-	            parser.addContent(parser.lastTagSource);
-	            parser.skipEvent();
-	        });
-	};
-
-	var ParseHandlers = [
-	    OnParseColorTag,
-	    OnParseBackgroundColorTag,
-	    ParseBoldTag,
-	    OnParseItalicTag,
-	    OnParseSizeTag,
-	    OnParseUnderlineTag,
-	    OnParseShadowTag,
-	    OnParseRoundBlockTag,
-	    OnParseFontFamilyTag,
-	    ParseContent
-	];
-
-	var Clear = function (obj) {
-	    if ((typeof (obj) !== 'object') || (obj === null)) {
-	        return obj;
-	    }
-
-	    if (Array.isArray(obj)) {
-	        obj.length = 0;
-	    } else {
-	        for (var key in obj) {
-	            delete obj[key];
-	        }
-	    }
-
-	    return obj;
-	};
-
-	/**
-	 * Shallow Object Clone. Will not out nested objects.
-	 * @param {object} obj JSON object
-	 * @param {object} ret JSON object to return, set null to return a new object
-	 * @returns {object} this object
-	 */
-	var Clone = function (obj, out) {
-	    var objIsArray = Array.isArray(obj);
-
-	    if (out === undefined) {
-	        out = (objIsArray) ? [] : {};
-	    } else {
-	        Clear(out);
-	    }
-
-	    if (objIsArray) {
-	        out.length = obj.length;
-	        for (var i = 0, cnt = obj.length; i < cnt; i++) {
-	            out[i] = obj[i];
-	        }
-	    } else {
-	        for (var key in obj) {
-	            out[key] = obj[key];
-	        }
-	    }
-
-	    return out;
-	};
-
-	class Parser extends BracketParser {
-	    constructor(config) {
-	        super(config);
-
-	        this.segments = [];
-	        this.lastPropFlags = {};
-
-	        for (var i = 0, cnt = ParseHandlers.length; i < cnt; i++) {
-	            ParseHandlers[i](this);
-	        }
-	    }
-
-	    clearBuffers() {
-	        this.segments.length = 0;
-	        this.lastPropFlags = {};
-	        return this;
-	    }
-
-	    addStyle(name, value) {
-	        this.lastPropFlags[name] = value;
-	        return this;
-	    }
-
-	    removeStyle(name) {
-	        delete this.lastPropFlags[name];
-	        return this;
-	    }
-
-	    addContent(content) {
-	        this.segments.push(Clone(this.lastPropFlags));
-	        this.segments.push(content);
-	        return this;
-	    }
-
-	    parse(s) {
-	        this.start(s);
-
-	        var result = [];
-	        for (var i = 0, cnt = this.segments.length; i < cnt; i++) {
-	            var text = this.segments[i];
-	            if (typeof (text) !== 'string') {
-	                continue;
-	            }
-
-	            var propFlags = this.segments[i - 1];
-	            if (typeof (propFlags) === 'object') {
-	                result.push({
-	                    value: text,
-	                    css: PropToStyle(propFlags)
-	                });
-	            } else {
-	                result.push({
-	                    value: text,
-	                    css: null
-	                });
-	            }
-	        }
-
-	        this.clearBuffers();
-
-	        return result;
-	    }
-	}
-
-	var PropToStyle = function (propFlags) {
-	    var styles = [];
-	    for (var propName in propFlags) {
-	        styles.push(`${propName}:${propFlags[propName]}`);
-	    }
-
-	    return styles.join(';');
-	};
-
-	class BBCodeLog {
-	    constructor({
-	        delimiters = '[]',
-	        enable = true
-	    } = {}) {
-
-	        this.parser = new Parser({
-	            delimiters: delimiters
-	        });
-
-	        this.enable = enable;
-	    }
-
-	    setEnable(enable = true) {
-	        this.enable = enable;
-	        return this;
-	    }
-
-	    log(s, logType = 'log') {
-	        if (!this.enable) {
-	            return this;
-	        }
-
-	        if (typeof (s) == 'string') {
-	            var inputs = [];
-	            var modifiers = [];
-	            this.parser.parse(s).forEach(function (item) {
-	                inputs.push(`%c${item.value}`);
-	                modifiers.push(item.css);
-	            });
-
-	            console[logType].call(console, inputs.join(''), ...modifiers);
-
-	        } else {
-	            console[logType](s);
-
-	        }
-
-	        return this;
 	    }
 	}
 
@@ -32390,6 +32587,12 @@ void main (void) {
 	    }
 
 	    addLogger(config) {
+	        return new Logger(config);
+	    }
+
+	    addBBCodeLogger(config) {
+	        config.format = 'bbcode';
+	        config.sink = new BBCodeSink();
 	        return new Logger(config);
 	    }
 

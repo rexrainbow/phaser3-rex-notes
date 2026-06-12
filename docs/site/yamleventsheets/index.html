@@ -18668,10 +18668,22 @@ can see it by <code>log.memory</code>, or get property of game object via <code>
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexYAMLEventSheets&#39;</span><span class="p">).</span><span class="nx">addLogger</span><span class="p">({</span>
 <span class="w">    </span><span class="nx">manager</span><span class="o">:</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">level</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;flow&#39;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">format</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;compact&#39;</span>
+<span class="w">    </span><span class="nx">format</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;compact&#39;</span><span class="p">,</span>
+
+<span class="w">    </span><span class="c1">// formatter:</span>
+<span class="w">    </span><span class="c1">// sink:</span>
+<span class="w">    </span><span class="c1">// output:</span>
+<span class="w">    </span><span class="c1">// events:</span>
+<span class="w">    </span><span class="c1">// filter:</span>
+<span class="w">    </span><span class="c1">// includeTime: false,</span>
+<span class="w">    </span><span class="c1">// includeReferences: false,</span>
+<span class="w">    </span><span class="c1">// includeParameters: true,</span>
+<span class="w">    </span><span class="c1">// includeResult: true,</span>
+<span class="w">    </span><span class="c1">// autoStart: true</span>
 <span class="p">});</span>
 </code></pre></div></li>
-<li>Create logger from class
+<li>
+<p>Create logger from class
     <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Logger</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser4-rex-plugins/plugins/yamleventsheets.js&#39;</span><span class="p">;</span>
 
 <span class="kd">var</span><span class="w"> </span><span class="nx">logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Logger</span><span class="p">({</span>
@@ -18690,7 +18702,27 @@ can see it by <code>log.memory</code>, or get property of game object via <code>
 <span class="w">    </span><span class="c1">// includeResult: true,</span>
 <span class="w">    </span><span class="c1">// autoStart: true</span>
 <span class="p">});</span>
-</code></pre></div></li>
+</code></pre></div></p>
+</li>
+<li>
+<p>Display logger with Colors
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexYAMLEventSheets&#39;</span><span class="p">).</span><span class="nx">addBBCodeLogger</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">manager</span><span class="o">:</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">level</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;flow&#39;</span><span class="p">,</span><span class="w">        </span>
+
+<span class="w">    </span><span class="c1">// formatter:</span>
+<span class="w">    </span><span class="c1">// sink:</span>
+<span class="w">    </span><span class="c1">// output:</span>
+<span class="w">    </span><span class="c1">// events:</span>
+<span class="w">    </span><span class="c1">// filter:</span>
+<span class="w">    </span><span class="c1">// includeTime: false,</span>
+<span class="w">    </span><span class="c1">// includeReferences: false,</span>
+<span class="w">    </span><span class="c1">// includeParameters: true,</span>
+<span class="w">    </span><span class="c1">// includeResult: true,</span>
+<span class="w">    </span><span class="c1">// autoStart: true</span>
+<span class="p">});</span>
+</code></pre></div></p>
+</li>
 </ul>
 <p>Parameters</p>
 <ul>
@@ -18706,6 +18738,7 @@ can see it by <code>log.memory</code>, or get property of game object via <code>
 <li><code>format</code> :<ul>
 <li><code>'compact'</code> : One line text per event. Default behavior.</li>
 <li><code>'json'</code> : JSON string per event.</li>
+<li><code>'bbcode'</code> : BBCode tagged text for colored console output.</li>
 </ul>
 </li>
 <li><code>formatter</code> : Custom formatter callback.
@@ -18721,6 +18754,16 @@ can see it by <code>log.memory</code>, or get property of game object via <code>
 <span class="w">            </span><span class="nx">textarea</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">text</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;\n&#39;</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div></li>
+<li>Colored console output with BBCode.
+    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Logger</span><span class="p">,</span><span class="w"> </span><span class="nx">BBCodeSink</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser4-rex-plugins/plugins/yamleventsheets.js&#39;</span><span class="p">;</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Logger</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">manager</span><span class="o">:</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">level</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;flow&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">format</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;bbcode&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">sink</span><span class="o">:</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">BBCodeSink</span><span class="p">()</span>
 <span class="p">});</span>
 </code></pre></div></li>
 <li><code>output</code> : Custom output callback.</li>
