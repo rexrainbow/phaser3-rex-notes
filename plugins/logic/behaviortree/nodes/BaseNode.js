@@ -4,6 +4,28 @@ import IsExpressionLike from '../utils/IsExpressionLike.js';
 import DecodeExpression from '../utils/DecodeExpression.js';
 import ResolveNode from '../behaviortree/dump/ResolveNode.js';
 
+var CreateExpressionNode = function (node, nodePool, owner) {
+    node = DecodeExpression(node, nodePool, owner);
+
+    // Ignore null, undefined
+    if (node == null) {
+        return null;
+    }
+
+    // Get node from nodePool
+    if (nodePool && (typeof (node) === 'string')) {
+        node = ResolveNode(node, nodePool, owner, 'expression node');
+    }
+
+    return node;
+}
+
+var SetExpressionParent = function (parent, node) {
+    if (IsExpressionLike(node)) {
+        node.setParent(parent);
+    }
+}
+
 export default class BaseNode {
 
     constructor(
@@ -81,7 +103,7 @@ export default class BaseNode {
     }
 
     addExpression(name, node, nodePool) {
-        node = DecodeExpression(node, nodePool, name);
+        node = CreateExpressionNode(node, nodePool, name);
 
         // Ignore null, undefined
         if (node == null) {
@@ -90,18 +112,34 @@ export default class BaseNode {
 
         if (this.expressions === undefined) {
             this.expressions = {};
-        }
-
-        // Get node from nodePool
-        if (nodePool && (typeof (node) === 'string')) {
-            node = ResolveNode(node, nodePool, name, 'expression node');
+        } else if (Array.isArray(this.expressions)) {
+            throw new Error(`${this.name}: expressions is an array.`);
         }
 
         this.expressions[name] = node;  // Expression node or constant number, boolean
 
-        if (IsExpressionLike(node)) {
-            node.setParent(this);
+        SetExpressionParent(this, node);
+
+        return node;
+    }
+
+    addExpressionItem(node, nodePool) {
+        node = CreateExpressionNode(node, nodePool);
+
+        // Ignore null, undefined
+        if (node == null) {
+            return null;
         }
+
+        if (this.expressions === undefined) {
+            this.expressions = [];
+        } else if (!Array.isArray(this.expressions)) {
+            throw new Error(`${this.name}: expressions is not an array.`);
+        }
+
+        this.expressions.push(node);  // Expression node or constant number, boolean
+
+        SetExpressionParent(this, node);
 
         return node;
     }

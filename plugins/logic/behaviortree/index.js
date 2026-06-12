@@ -18,6 +18,9 @@ import {
     Expression,
     NumberExpression,
     StringExpression,
+    ANDExpression,
+    ORExpression,
+    NOTExpression,
     CreateNumberExpression,
     CreateStringExpression,
 
@@ -85,6 +88,9 @@ export {
     Expression,
     NumberExpression,
     StringExpression,
+    ANDExpression,
+    ORExpression,
+    NOTExpression,
     CreateNumberExpression,
     CreateStringExpression,
 

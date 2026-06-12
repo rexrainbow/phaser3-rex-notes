@@ -3,6 +3,10 @@ var SerializeConditionExpression = function (expression) {
         return expression;
     }
 
+    if (Array.isArray(expression)) {
+        return expression.map(SerializeConditionExpression);
+    }
+
     var expressionType = typeof (expression);
     if ((expressionType === 'string') ||
         (expressionType === 'number') ||

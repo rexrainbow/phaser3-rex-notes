@@ -75,10 +75,15 @@ var Dump = function () {
 
         // Each node can have expressions
         if (node.expressions) {
-            spec.expressions = {};
-            for (var name in node.expressions) {
-                if (Object.prototype.hasOwnProperty.call(node.expressions, name)) {
-                    spec.expressions[name] = DumpExpression(node.expressions[name]);
+            if (Array.isArray(node.expressions)) {
+                spec.expressions = node.expressions.map(DumpExpression);
+
+            } else {
+                spec.expressions = {};
+                for (var name in node.expressions) {
+                    if (Object.prototype.hasOwnProperty.call(node.expressions, name)) {
+                        spec.expressions[name] = DumpExpression(node.expressions[name]);
+                    }
                 }
             }
         }

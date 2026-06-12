@@ -1,6 +1,21 @@
 import { ACTION, COMPOSITE, DECORATOR } from '../constants.js';
 import IsNodeLike from '../utils/IsNodeLike.js';
 
+var ForEachExpression = function (expressions, callback, scope) {
+    if (Array.isArray(expressions)) {
+        for (var i = 0, cnt = expressions.length; i < cnt; i++) {
+            callback.call(scope, expressions[i], i);
+        }
+
+    } else {
+        for (var name in expressions) {
+            if (Object.prototype.hasOwnProperty.call(expressions, name)) {
+                callback.call(scope, expressions[name], name);
+            }
+        }
+    }
+}
+
 var DepthFirstSearch = function (root, callback, scope) {
     var skip = callback.call(scope, root);
 
@@ -10,13 +25,11 @@ var DepthFirstSearch = function (root, callback, scope) {
 
     var expressions = root.expressions;
     if (expressions) {
-        for (var name in expressions) {
-            if (Object.prototype.hasOwnProperty.call(expressions, name)) {
-                if (IsNodeLike(expressions[name])) {
-                    DepthFirstSearch(expressions[name], callback, scope);
-                }
+        ForEachExpression(expressions, function (expression) {
+            if (IsNodeLike(expression)) {
+                DepthFirstSearch(expression, callback, scope);
             }
-        }
+        });
     }
 
     switch (root.category) {
@@ -61,13 +74,11 @@ var BreadthFirstSearch = function (root, callback, scope) {
 
         var expressions = current.expressions;
         if (expressions) {
-            for (var name in expressions) {
-                if (Object.prototype.hasOwnProperty.call(expressions, name)) {
-                    if (IsNodeLike(expressions[name])) {
-                        queue.push(expressions[name]);
-                    }
+            ForEachExpression(expressions, function (expression) {
+                if (IsNodeLike(expression)) {
+                    queue.push(expression);
                 }
-            }
+            });
         }
 
         switch (current.category) {
@@ -95,6 +106,7 @@ var BreadthFirstSearch = function (root, callback, scope) {
 }
 
 export {
+    ForEachExpression,
     DepthFirstSearch,
     BreadthFirstSearch
 };

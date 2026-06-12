@@ -6,6 +6,12 @@ import {
     Action,
     Composite,
     Decorator,
+    Expression,
+    NumberExpression,
+    StringExpression,
+    ANDExpression,
+    ORExpression,
+    NOTExpression,
 
     Succeeder,
     Failer,
@@ -55,6 +61,12 @@ export {
     Composite,
     Decorator,
     Action,
+    Expression,
+    NumberExpression,
+    StringExpression,
+    ANDExpression,
+    ORExpression,
+    NOTExpression,
 
     // Composites
     Selector,

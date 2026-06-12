@@ -122,9 +122,9 @@ class Tick {
         return this.blackboard.getEvalContext();
     }
 
-    evalExpression(expression) {
+    evalExpression(expression, context) {
         if (IsExpressionLike(expression)) {
-            return expression._eval(this);;
+            return expression._eval(this, context);
         }
 
         return expression;

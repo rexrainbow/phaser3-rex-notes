@@ -7,6 +7,9 @@ import Expression from './Expression.js';
 import {
     NumberExpression,
     StringExpression,
+    ANDExpression,
+    ORExpression,
+    NOTExpression,
     CreateNumberExpression,
     CreateStringExpression,
 } from './expressions';
@@ -139,6 +142,23 @@ ObjectFactory.register('breakDecorator', function (config) {
     return new BreakDecorator(config);
 });
 
+// Expressions
+ObjectFactory.register('numberExpression', function (config) {
+    return new NumberExpression(config);
+});
+ObjectFactory.register('stringExpression', function (config) {
+    return new StringExpression(config);
+});
+ObjectFactory.register('andExpression', function (config) {
+    return new ANDExpression(config);
+});
+ObjectFactory.register('orExpression', function (config) {
+    return new ORExpression(config);
+});
+ObjectFactory.register('notExpression', function (config) {
+    return new NOTExpression(config);
+});
+
 
 SetValue(window, 'RexPlugins.BehaviorTree.Action', Action);
 SetValue(window, 'RexPlugins.BehaviorTree.Composite', Composite);
@@ -147,6 +167,9 @@ SetValue(window, 'RexPlugins.BehaviorTree.Service', Service);
 SetValue(window, 'RexPlugins.BehaviorTree.Expression', Expression);
 SetValue(window, 'RexPlugins.BehaviorTree.NumberExpression', NumberExpression);
 SetValue(window, 'RexPlugins.BehaviorTree.StringExpression', StringExpression);
+SetValue(window, 'RexPlugins.BehaviorTree.ANDExpression', ANDExpression);
+SetValue(window, 'RexPlugins.BehaviorTree.ORExpression', ORExpression);
+SetValue(window, 'RexPlugins.BehaviorTree.NOTExpression', NOTExpression);
 SetValue(window, 'RexPlugins.BehaviorTree.CreateNumberExpression', CreateNumberExpression);
 SetValue(window, 'RexPlugins.BehaviorTree.CreateStringExpression', CreateStringExpression);
 
@@ -191,6 +214,9 @@ export {
     Expression,
     NumberExpression,
     StringExpression,
+    ANDExpression,
+    ORExpression,
+    NOTExpression,
 
     Succeeder,
     Failer,

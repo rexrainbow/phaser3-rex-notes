@@ -24,8 +24,8 @@ class Expression extends BaseNode {
         });
     }
 
-    _eval(tick) {
-        var value = this.eval(tick);
+    _eval(tick, context) {
+        var value = this.eval(tick, context);
 
         var nodeMemory = this.getNodeMemory(tick);
         nodeMemory.$lastValue = value;  // For inspector
@@ -33,7 +33,7 @@ class Expression extends BaseNode {
         return value;
     }
 
-    eval(tick) {
+    eval(tick, context) {
         return 0;
     }
 

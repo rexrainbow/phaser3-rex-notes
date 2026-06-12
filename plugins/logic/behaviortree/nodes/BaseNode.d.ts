@@ -108,6 +108,10 @@ declare class BaseNode {
      * Custom properties.
      */
     properties: Record<string, unknown>;
+    /**
+     * Expression map or ordered expression list.
+     */
+    expressions?: Record<string, BaseNode.ExpressionValue> | BaseNode.ExpressionValue[];
 
     /**
      * Destroy the node.
@@ -158,6 +162,18 @@ declare class BaseNode {
 
     addExpression(
         name: string,
+        node: BaseNode.ExpressionValue,
+        nodePool?: BaseNode.NodePoolType
+    ): BaseNode.ExpressionValue | null;
+
+    /**
+     * Add an ordered expression item.
+     *
+     * @param node - Expression node or constant value.
+     * @param nodePool - Node pool for resolving ids.
+     * @returns The added expression value, or null when omitted.
+     */
+    addExpressionItem(
         node: BaseNode.ExpressionValue,
         nodePool?: BaseNode.NodePoolType
     ): BaseNode.ExpressionValue | null;

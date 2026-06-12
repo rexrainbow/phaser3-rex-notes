@@ -6,6 +6,7 @@ import Service from './Service';
 import Expression from './Expression';
 import {
     NumberExpression, StringExpression,
+    ANDExpression, ORExpression, NOTExpression,
     CreateNumberExpression, CreateStringExpression,
 } from './expressions/index';
 
@@ -50,6 +51,9 @@ export {
     Expression,
     NumberExpression,
     StringExpression,
+    ANDExpression,
+    ORExpression,
+    NOTExpression,
     CreateNumberExpression,
     CreateStringExpression,
 

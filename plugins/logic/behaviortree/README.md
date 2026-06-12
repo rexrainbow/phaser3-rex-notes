@@ -61,6 +61,32 @@ tree evaluates them each tick while using a blackboard to store state.
     - Abort : Always return `ABORT`.
     - BreakAction
         - Search for the nearest BreakDecorator ancestor, set its break flag, and return `ABORT`.
+- Expressions:
+    - NumberExpression : Evaluate a number/boolean expression string, callback,
+      constant, or expression node.
+    - StringExpression : Render a string template or callback.
+    - ANDExpression : Evaluate child expressions in order and return `true`
+      only when all are truthy. Stops at the first falsy expression.
+    - ORExpression : Evaluate child expressions in order and return `true`
+      when any expression is truthy. Stops at the first truthy expression.
+    - NOTExpression : Evaluate one expression and return the inverted boolean
+      result.
+
+Expression values can be constants, expression strings, callbacks, or other
+expression nodes. Logical expressions convert each child through
+`CreateNumberExpression`, so string conditions and custom expression nodes can
+be mixed:
+
+```javascript
+var condition = btAdd.andExpression([
+    'player.hp > 50',
+    btAdd.orExpression([
+        'player.mp > 10',
+        'player.coin > 100'
+    ]),
+    btAdd.notExpression('player.isBusy')
+]);
+```
 
 ## Custom Action, Service, and Expression
 

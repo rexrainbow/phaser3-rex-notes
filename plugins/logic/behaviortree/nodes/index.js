@@ -6,8 +6,9 @@ import Service from './Service.js';
 import Expression from './Expression.js';
 import {
     NumberExpression, StringExpression,
+    ANDExpression, ORExpression, NOTExpression,
     CreateNumberExpression, CreateStringExpression,
-} from './expressions/index';
+} from './expressions/index.js';
 
 import Succeeder from './actions/Succeeder.js';
 import Failer from './actions/Failer.js';
@@ -50,6 +51,9 @@ export {
     Expression,
     NumberExpression,
     StringExpression,
+    ANDExpression,
+    ORExpression,
+    NOTExpression,
     CreateNumberExpression,
     CreateStringExpression,
 
