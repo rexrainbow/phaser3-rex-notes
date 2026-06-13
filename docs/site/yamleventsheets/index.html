@@ -17459,14 +17459,40 @@ And game objects with <code>'autoClear'</code> will be destroyed.</p>
 <li>Boolean expression OR : <code>||</code>.</li>
 </ul>
 </li>
+<li>A logical expression object : Compose string expressions, parameter expression objects, or nested logical expression objects.<ul>
+<li><code>all</code>, or <code>and</code> : All child expressions must be truthy.</li>
+<li><code>any</code>, or <code>or</code> : At least one child expression must be truthy.</li>
+<li><code>not</code> : Invert one child expression.
+<div class="highlight"><pre><span></span><code><span class="nt">condition</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">all</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">notBusy</span>
+<span class="w">      </span><span class="nt">parameters</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">characterId</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">character_alice</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">any</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;coin</span><span class="nv"> </span><span class="s">&gt;</span><span class="nv"> </span><span class="s">10&quot;</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">characterStatus</span>
+<span class="w">          </span><span class="nt">parameters</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">characterId</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">character_alice</span>
+<span class="w">            </span><span class="nt">field</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">stamina</span>
+<span class="w">            </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&gt;=&quot;</span>
+<span class="w">            </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">not</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hasTag</span>
+<span class="w">        </span><span class="nt">parameters</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">characterId</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">character_alice</span>
+<span class="w">          </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sleeping</span>
+</code></pre></div></li>
+</ul>
+</li>
 <li>An array : Represents OR, elements can be<ul>
 <li>A string : Single expression</li>
 <li>An array : Represents AND, e.g., <code>["a", "b"]</code> -&gt; <code>(a) &amp;&amp; (b)</code></li>
-<li>Object <code>{and: [...]}</code>: Equivalent to AND
+<li>A logical expression object, e.g. <code>{and: [...]}</code>, <code>{or: [...]}</code>, <code>{not: ...}</code>
     <div class="highlight"><pre><span></span><code><span class="nt">condition</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;score</span><span class="nv"> </span><span class="s">&gt;</span><span class="nv"> </span><span class="s">0&quot;</span><span class="w">                    </span><span class="c1"># (score &gt; 0)</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;hp</span><span class="nv"> </span><span class="s">&gt;</span><span class="nv"> </span><span class="s">0&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;mp</span><span class="nv"> </span><span class="s">&gt;</span><span class="nv"> </span><span class="s">0&quot;</span><span class="p p-Indicator">]</span><span class="w">           </span><span class="c1"># OR ((hp &gt; 0) &amp;&amp; (mp &gt; 0))</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">and</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;stage</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">1&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;boss&quot;</span><span class="p p-Indicator">]</span><span class="w">    </span><span class="c1"># OR ((stage == 1) &amp;&amp; (boss))</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">not</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;isBusy&quot;</span>
 </code></pre></div></li>
 </ul>
 </li>
@@ -17478,7 +17504,8 @@ And game objects with <code>'autoClear'</code> will be destroyed.</p>
 <li>See <a href="./#parameter-expression">Parameter expression</a>.</li>
 </ul>
 </li>
-<li>When omitted or malformed, defaults to <code>"true"</code>.</li>
+<li>Priority order when parsing an object : <code>and/all</code>, <code>or/any</code>, <code>not</code>, then parameter expression object.</li>
+<li>When omitted, defaults to <code>true</code>.</li>
 </ul>
 <h4 id="flow-control-instructions">Flow control instructions<a class="headerlink" href="#flow-control-instructions" title="Permanent link">&para;</a></h4>
 <h5 id="if-else-if-else">If, Else if, Else<a class="headerlink" href="#if-else-if-else" title="Permanent link">&para;</a></h5>

@@ -306,7 +306,7 @@ nav:
         - Run commands: runcommands.md
         - Sequence: sequence.md
         - CSV scenario: csvscenario.md
-        - Event sheets:        
+        - Event sheets:
             - YAML event sheets: yamleventsheets.md
         - TCRP:
             - Recoder: tcrp-recoder.md

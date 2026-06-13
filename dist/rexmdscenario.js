@@ -362,7 +362,7 @@
 	    }
 	};
 
-	var IsPlainObject$B = function (obj)
+	var IsPlainObject$C = function (obj)
 	{
 	    // Not plain objects:
 	    // - Any object or value whose internal [[Class]] property is not "[object Object]"
@@ -515,6 +515,21 @@
 	        (typeof value.category === 'string');
 	};
 
+	var ForEachExpression = function (expressions, callback, scope) {
+	    if (Array.isArray(expressions)) {
+	        for (var i = 0, cnt = expressions.length; i < cnt; i++) {
+	            callback.call(scope, expressions[i], i);
+	        }
+
+	    } else {
+	        for (var name in expressions) {
+	            if (Object.prototype.hasOwnProperty.call(expressions, name)) {
+	                callback.call(scope, expressions[name], name);
+	            }
+	        }
+	    }
+	};
+
 	var BreadthFirstSearch$1 = function (root, callback, scope) {
 	    var queue = [root];
 	    while (queue.length > 0) {
@@ -527,13 +542,11 @@
 
 	        var expressions = current.expressions;
 	        if (expressions) {
-	            for (var name in expressions) {
-	                if (Object.prototype.hasOwnProperty.call(expressions, name)) {
-	                    if (IsNodeLike(expressions[name])) {
-	                        queue.push(expressions[name]);
-	                    }
+	            ForEachExpression(expressions, function (expression) {
+	                if (IsNodeLike(expression)) {
+	                    queue.push(expression);
 	                }
-	            }
+	            });
 	        }
 
 	        switch (current.category) {
@@ -667,10 +680,15 @@
 
 	        // Each node can have expressions
 	        if (node.expressions) {
-	            spec.expressions = {};
-	            for (var name in node.expressions) {
-	                if (Object.prototype.hasOwnProperty.call(node.expressions, name)) {
-	                    spec.expressions[name] = DumpExpression(node.expressions[name]);
+	            if (Array.isArray(node.expressions)) {
+	                spec.expressions = node.expressions.map(DumpExpression);
+
+	            } else {
+	                spec.expressions = {};
+	                for (var name in node.expressions) {
+	                    if (Object.prototype.hasOwnProperty.call(node.expressions, name)) {
+	                        spec.expressions[name] = DumpExpression(node.expressions[name]);
+	                    }
 	                }
 	            }
 	        }
@@ -834,7 +852,7 @@
 	    }
 
 	    addExpression(name, node, nodePool) {
-	        node = DecodeExpression(node, nodePool, name);
+	        node = CreateExpressionNode(node, nodePool, name);
 
 	        // Ignore null, undefined
 	        if (node == null) {
@@ -843,18 +861,34 @@
 
 	        if (this.expressions === undefined) {
 	            this.expressions = {};
-	        }
-
-	        // Get node from nodePool
-	        if (nodePool && (typeof (node) === 'string')) {
-	            node = ResolveNode(node, nodePool, name, 'expression node');
+	        } else if (Array.isArray(this.expressions)) {
+	            throw new Error(`${this.name}: expressions is an array.`);
 	        }
 
 	        this.expressions[name] = node;  // Expression node or constant number, boolean
 
-	        if (IsExpressionLike(node)) {
-	            node.setParent(this);
+	        SetExpressionParent(this, node);
+
+	        return node;
+	    }
+
+	    addExpressionItem(node, nodePool) {
+	        node = CreateExpressionNode(node, nodePool);
+
+	        // Ignore null, undefined
+	        if (node == null) {
+	            return null;
 	        }
+
+	        if (this.expressions === undefined) {
+	            this.expressions = [];
+	        } else if (!Array.isArray(this.expressions)) {
+	            throw new Error(`${this.name}: expressions is not an array.`);
+	        }
+
+	        this.expressions.push(node);  // Expression node or constant number, boolean
+
+	        SetExpressionParent(this, node);
 
 	        return node;
 	    }
@@ -978,6 +1012,27 @@
 	        return ERROR;
 	    }
 	}
+	var CreateExpressionNode = function (node, nodePool, owner) {
+	    node = DecodeExpression(node, nodePool, owner);
+
+	    // Ignore null, undefined
+	    if (node == null) {
+	        return null;
+	    }
+
+	    // Get node from nodePool
+	    if (nodePool && (typeof (node) === 'string')) {
+	        node = ResolveNode(node, nodePool, owner, 'expression node');
+	    }
+
+	    return node;
+	};
+
+	var SetExpressionParent = function (parent, node) {
+	    if (IsExpressionLike(node)) {
+	        node.setParent(parent);
+	    }
+	};
 
 	class Action extends BaseNode {
 
@@ -1277,8 +1332,8 @@
 	        });
 	    }
 
-	    _eval(tick) {
-	        var value = this.eval(tick);
+	    _eval(tick, context) {
+	        var value = this.eval(tick, context);
 
 	        var nodeMemory = this.getNodeMemory(tick);
 	        nodeMemory.$lastValue = value;  // For inspector
@@ -1286,7 +1341,7 @@
 	        return value;
 	    }
 
-	    eval(tick) {
+	    eval(tick, context) {
 	        return 0;
 	    }
 
@@ -1359,6 +1414,270 @@
 	    }
 	}
 
+	class StringExpression extends Expression {
+
+	    constructor(config = {}, nodePool) {
+	        var expression;
+
+	        if (nodePool) {  // Rebuild node, don't touch config
+	            super(config, nodePool);
+
+	            var properties = config.properties || {};
+	            expression = properties.expression;
+
+	        } else {
+	            var configType = typeof (config);
+	            if ((configType === 'string') || (configType === 'function')) {
+	                config = {
+	                    expression: config
+	                };
+	            }
+
+	            var {
+	                title,
+	                properties = {},
+	                name = 'StringExpression',
+	                expression: expressionValue = '',
+	            } = config;
+
+	            super({
+	                title,
+	                properties: {
+	                    ...properties,
+	                    expression: expressionValue,
+	                },
+	                name,
+	            });
+
+	            expression = expressionValue;
+	        }
+
+	        this.expression = expression;
+
+	        var expressionType = typeof (this.expression);
+	        this.canRender = (expressionType === 'string');
+	    }
+
+	    eval(tick, context) {
+	        // Assign context for testing purpose
+
+	        var value;
+	        if (!context) { // Normal case
+	            context = tick.getEvalContext();
+	        }
+
+	        if (this.canRender) {
+	            value = tick.stringTemplate.render(this.expression, context);
+	        } else if (typeof (this.expression) === 'function') {
+	            value = this.expression(context);
+	        } else {
+	            value = this.expression;
+	        }
+
+	        return value;
+	    }
+	}
+
+	class ANDExpression extends Expression {
+
+	    constructor(config = {}, nodePool) {
+	        var expressions;
+
+	        if (nodePool) {  // Rebuild node, don't touch config
+	            super(config, nodePool);
+
+	            expressions = config.expressions || [];
+
+	        } else {
+	            if (Array.isArray(config)) {
+	                config = {
+	                    expressions: config
+	                };
+	            }
+
+	            var {
+	                title,
+	                properties = {},
+	                name = 'ANDExpression',
+	                expressions: expressionValues = [],
+	            } = config;
+
+	            super({
+	                title,
+	                properties,
+	                name,
+	            });
+
+	            expressions = expressionValues;
+	        }
+
+	        for (var i = 0, cnt = expressions.length; i < cnt; i++) {
+	            this.addExpressionItem(expressions[i], nodePool);
+	        }
+	    }
+
+	    eval(tick, context) {
+	        var expressions = this.expressions || [];
+	        for (var i = 0, cnt = expressions.length; i < cnt; i++) {
+	            if (!tick.evalExpression(expressions[i], context)) {
+	                return false;
+	            }
+	        }
+
+	        return true;
+	    }
+	}
+
+	class ORExpression extends Expression {
+
+	    constructor(config = {}, nodePool) {
+	        var expressions;
+
+	        if (nodePool) {  // Rebuild node, don't touch config
+	            super(config, nodePool);
+
+	            expressions = config.expressions || [];
+
+	        } else {
+	            if (Array.isArray(config)) {
+	                config = {
+	                    expressions: config
+	                };
+	            }
+
+	            var {
+	                title,
+	                properties = {},
+	                name = 'ORExpression',
+	                expressions: expressionValues = [],
+	            } = config;
+
+	            super({
+	                title,
+	                properties,
+	                name,
+	            });
+
+	            expressions = expressionValues;
+	        }
+
+	        for (var i = 0, cnt = expressions.length; i < cnt; i++) {
+	            this.addExpressionItem(expressions[i], nodePool);
+	        }
+	    }
+
+	    eval(tick, context) {
+	        var expressions = this.expressions || [];
+	        for (var i = 0, cnt = expressions.length; i < cnt; i++) {
+	            if (tick.evalExpression(expressions[i], context)) {
+	                return true;
+	            }
+	        }
+
+	        return false;
+	    }
+	}
+
+	class NOTExpression extends Expression {
+
+	    constructor(config = {}, nodePool) {
+	        var expression;
+
+	        if (nodePool) {  // Rebuild node, don't touch config
+	            super(config, nodePool);
+
+	            var expressions = config.expressions || [];
+	            expression = expressions[0];
+
+	        } else {
+	            var configType = typeof (config);
+	            if ((configType !== 'object') || Array.isArray(config)) {
+	                config = {
+	                    expression: config
+	                };
+	            }
+
+	            var {
+	                title,
+	                properties = {},
+	                name = 'NOTExpression',
+	                expression: expressionValue = true,
+	            } = config;
+
+	            super({
+	                title,
+	                properties,
+	                name,
+	            });
+
+	            expression = expressionValue;
+	        }
+
+	        this.addExpressionItem(expression, nodePool);
+	    }
+
+	    eval(tick, context) {
+	        // Assign context for testing purpose
+
+	        var expressions = this.expressions || [];
+	        if (expressions.length === 0) {
+	            return false;
+	        }
+
+	        return !tick.evalExpression(expressions[0], context);
+	    }
+	}
+
+	var IsPlainObject$B = function (value) {
+	    return value &&
+	        (typeof (value) === 'object') &&
+	        !Array.isArray(value) &&
+	        !IsExpressionLike(value);
+	};
+
+	var HasOwnProperty$1 = function (obj, prop) {
+	    return Object.prototype.hasOwnProperty.call(obj, prop);
+	};
+
+	var IsLogicExpressionConfig = function (expression) {
+	    return IsPlainObject$B(expression) &&
+	        (HasOwnProperty$1(expression, 'and') ||
+	            HasOwnProperty$1(expression, 'all') ||
+	            HasOwnProperty$1(expression, 'or') ||
+	            HasOwnProperty$1(expression, 'any') ||
+	            HasOwnProperty$1(expression, 'not'));
+	};
+
+	var CreateLogicExpression = function (expression, nodePool) {
+	    expression = DecodeExpression(expression, nodePool);
+
+	    if (!IsLogicExpressionConfig(expression)) {
+	        return null;
+	    }
+
+	    if (HasOwnProperty$1(expression, 'and') || HasOwnProperty$1(expression, 'all')) {
+	        var andExpressions = expression.and || expression.all || [];
+	        return new ANDExpression({
+	            expressions: andExpressions.map(function (child) {
+	                return CreateNumberExpression(child, nodePool);
+	            })
+	        });
+	    }
+
+	    if (HasOwnProperty$1(expression, 'or') || HasOwnProperty$1(expression, 'any')) {
+	        var orExpressions = expression.or || expression.any || [];
+	        return new ORExpression({
+	            expressions: orExpressions.map(function (child) {
+	                return CreateNumberExpression(child, nodePool);
+	            })
+	        });
+	    }
+
+	    return new NOTExpression({
+	        expression: CreateNumberExpression(expression.not, nodePool)
+	    });
+	};
+
 	var CreateNumberExpression = function (expression, nodePool) {
 	    expression = DecodeExpression(expression, nodePool);
 
@@ -1366,10 +1685,14 @@
 	        return null;
 	    }
 
+	    if (IsLogicExpressionConfig(expression)) {
+	        return CreateLogicExpression(expression, nodePool);
+	    }
+
 	    // Convert number-string to number
 	    expression = StringToNumber(expression);
 
-	    // Constant number or boolean    
+	    // Constant number or boolean
 	    var expressionType = typeof (expression);
 	    if ((expressionType === 'number') || (expressionType === 'boolean')) {
 	        return expression;
@@ -1387,6 +1710,33 @@
 	    } else {
 	        // Create new number expression object
 	        node = new NumberExpression(expression);
+
+	    }
+
+	    return node;
+	};
+
+	var CreateStringExpression = function (expression, nodePool) {
+	    expression = DecodeExpression(expression, nodePool);
+
+	    if (expression == null) {
+	        return null;
+	    }
+
+	    var expressionType = typeof (expression);
+
+	    var node;
+	    if (nodePool && (expressionType === 'string')) {
+	        // Get node from nodePool
+	        node = ResolveNode(expression, nodePool, undefined, 'expression node');
+
+	    } else if (IsExpressionLike(expression)) {
+	        // Is Expression node already
+	        node = expression;
+
+	    } else {
+	        // Create new string expression object
+	        node = new StringExpression(expression);
 
 	    }
 
@@ -1481,97 +1831,6 @@
 	    }
 
 	}
-
-	class StringExpression extends Expression {
-
-	    constructor(config = {}, nodePool) {
-	        var expression;
-
-	        if (nodePool) {  // Rebuild node, don't touch config
-	            super(config, nodePool);
-
-	            var properties = config.properties || {};
-	            expression = properties.expression;
-
-	        } else {
-	            var configType = typeof (config);
-	            if ((configType === 'string') || (configType === 'function')) {
-	                config = {
-	                    expression: config
-	                };
-	            }
-
-	            var {
-	                title,
-	                properties = {},
-	                name = 'StringExpression',
-	                expression: expressionValue = '',
-	            } = config;
-
-	            super({
-	                title,
-	                properties: {
-	                    ...properties,
-	                    expression: expressionValue,
-	                },
-	                name,
-	            });
-
-	            expression = expressionValue;
-	        }
-
-	        this.expression = expression;
-
-	        var expressionType = typeof (this.expression);
-	        this.canRender = (expressionType === 'string');
-	    }
-
-	    eval(tick, context) {
-	        // Assign context for testing purpose
-
-	        var value;
-	        if (!context) { // Normal case
-	            context = tick.getEvalContext();
-	        }
-
-	        if (this.canRender) {
-	            value = tick.stringTemplate.render(this.expression, context);
-	        } else if (typeof (this.expression) === 'function') {
-	            value = this.expression(context);
-	        } else {
-	            value = this.expression;
-	        }
-
-	        return value;
-	    }
-	}
-
-	var CreateStringExpression = function (expression, nodePool) {
-	    expression = DecodeExpression(expression, nodePool);
-
-	    if (expression == null) {
-	        return null;
-	    }
-
-	    var expressionType = typeof (expression);
-
-	    var node;
-	    if (nodePool && (expressionType === 'string')) {
-	        // Get node from nodePool
-	        node = ResolveNode(expression, nodePool, undefined, 'expression node');
-
-	    } else if (IsExpressionLike(expression)) {
-	        // Is Expression node already
-	        node = expression;
-
-	    } else {
-	        // Create new string expression object
-	        node = new StringExpression(expression);
-
-	    }
-
-	    return node;
-	};
 
 	class Succeeder extends Action {
 
@@ -3625,6 +3884,7 @@
 
 	var Nodes = /*#__PURE__*/Object.freeze({
 		__proto__: null,
+		ANDExpression: ANDExpression,
 		Abort: Abort,
 		AbortIf: AbortIf,
 		Action: Action,
@@ -3635,6 +3895,7 @@
 		Composite: Composite,
 		ContinueIf: ContinueIf,
 		Cooldown: Cooldown$1,
+		CreateLogicExpression: CreateLogicExpression,
 		CreateNumberExpression: CreateNumberExpression,
 		CreateStringExpression: CreateStringExpression,
 		Decorator: Decorator,
@@ -3647,7 +3908,9 @@
 		IfSelector: IfSelector,
 		Invert: Invert,
 		Limiter: Limiter,
+		NOTExpression: NOTExpression,
 		NumberExpression: NumberExpression,
+		ORExpression: ORExpression,
 		Parallel: Parallel,
 		RandomSelector: RandomSelector,
 		Repeat: Repeat,
@@ -5769,9 +6032,10 @@
 	        return this.blackboard.getEvalContext();
 	    }
 
-	    evalExpression(expression) {
+	    evalExpression(expression, context) {
 	        if (IsExpressionLike(expression)) {
-	            return expression._eval(this);        }
+	            return expression._eval(this, context);
+	        }
 
 	        return expression;
 	    }
@@ -6315,7 +6579,7 @@
 
 	    setGlobalMemory(memory) {
 	        this._globalMemory = memory;
-	        this.isPlainGlobalMemory = IsPlainObject$B(memory);
+	        this.isPlainGlobalMemory = IsPlainObject$C(memory);
 	        return this;
 	    }
 
@@ -16301,7 +16565,7 @@
 
 	var BindEventMethods$1 = {
 	    startGroupByEvent(eventName, groupName, once) {
-	        if (IsPlainObject$B(eventName)) {
+	        if (IsPlainObject$C(eventName)) {
 	            var config = eventName;
 	            eventName = config.eventName;
 	            groupName = config.groupName;
@@ -16371,7 +16635,7 @@
 
 	class EventSheetManager extends EventEmitter$2 {
 	    constructor(owner, config) {
-	        if (IsPlainObject$B(owner) && (config === undefined)) {
+	        if (IsPlainObject$C(owner) && (config === undefined)) {
 	            config = owner;
 	            owner = undefined;
 	        }
@@ -16515,6 +16779,10 @@
 	var SerializeConditionExpression = function (expression) {
 	    if (expression == null) {
 	        return expression;
+	    }
+
+	    if (Array.isArray(expression)) {
+	        return expression.map(SerializeConditionExpression);
 	    }
 
 	    var expressionType = typeof (expression);
