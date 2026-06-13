@@ -1,4 +1,7 @@
-import { CreateNumberExpression, CreateStringExpression } from '../../../../behaviortree/index.js';
+import {
+    CreateNumberExpression,
+    CreateStringExpression,
+} from '../../../../behaviortree/nodes/expressions/index.js';
 
 var CreateExpressions = function (parentNode, nodePool, parameters) {
     var expression;

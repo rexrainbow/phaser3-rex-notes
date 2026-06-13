@@ -1,4 +1,4 @@
-import { Expression } from '../../../../behaviortree/index.js';
+import Expression from '../../../../behaviortree/nodes/Expression.js';
 import CreateExpressions from '../utils/CreateExpressions.js';
 import EvalParameters from '../utils/EvalParameters.js';
 

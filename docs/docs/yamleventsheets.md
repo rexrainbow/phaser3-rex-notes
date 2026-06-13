@@ -680,15 +680,40 @@ fallback:
     - Read data from [local memory](yamleventsheets.md#local-memory).
     - Boolean expression AND : `&&`.
     - Boolean expression OR : `||`.
+- A logical expression object : Compose string expressions, parameter expression objects, or nested logical expression objects.
+    - `all`, or `and` : All child expressions must be truthy.
+    - `any`, or `or` : At least one child expression must be truthy.
+    - `not` : Invert one child expression.
+    ```yaml
+    condition:
+      all:
+        - name: notBusy
+          parameters:
+            characterId: character_alice
+        - any:
+            - "coin > 10"
+            - name: characterStatus
+              parameters:
+                characterId: character_alice
+                field: stamina
+                operator: ">="
+                value: 30
+        - not:
+            name: hasTag
+            parameters:
+              characterId: character_alice
+              tag: sleeping
+    ```
 - An array : Represents OR, elements can be
     - A string : Single expression
     - An array : Represents AND, e.g., `["a", "b"]` -> `(a) && (b)`
-    - Object `{and: [...]}`: Equivalent to AND
+    - A logical expression object, e.g. `{and: [...]}`, `{or: [...]}`, `{not: ...}`
         ```yaml
         condition:
           - "score > 0"                    # (score > 0)
           - ["hp > 0", "mp > 0"]           # OR ((hp > 0) && (mp > 0))
           - and: ["stage == 1", "boss"]    # OR ((stage == 1) && (boss))
+          - not: "isBusy"
         ```
 - A parameter expression object : Invoke a method of `commandExecutor` and use its return value.
     ```yaml
@@ -697,7 +722,8 @@ fallback:
       parameters: { opA: "#(coin)", cmp: "<", opB: "#(5)" }
     ```
     - See [Parameter expression](yamleventsheets.md#parameter-expression).
-- When omitted or malformed, defaults to `"true"`.
+- Priority order when parsing an object : `and/all`, `or/any`, `not`, then parameter expression object.
+- When omitted, defaults to `true`.
 
 #### Flow control instructions
 
