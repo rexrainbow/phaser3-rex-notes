@@ -12,6 +12,9 @@ import {
     ANDExpression,
     ORExpression,
     NOTExpression,
+    CreateNumberExpression,
+    CreateStringExpression,
+    CreateLogicExpression,
 
     Succeeder,
     Failer,
@@ -67,6 +70,9 @@ export {
     ANDExpression,
     ORExpression,
     NOTExpression,
+    CreateNumberExpression,
+    CreateStringExpression,
+    CreateLogicExpression,
 
     // Composites
     Selector,

@@ -23,6 +23,7 @@ import {
     NOTExpression,
     CreateNumberExpression,
     CreateStringExpression,
+    CreateLogicExpression,
 
     Succeeder,
     Failer,
@@ -93,6 +94,7 @@ export {
     NOTExpression,
     CreateNumberExpression,
     CreateStringExpression,
+    CreateLogicExpression,
 
     Succeeder,
     Failer,

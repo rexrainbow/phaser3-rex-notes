@@ -1,5 +1,5 @@
 import Composite from '../Composite.js';
-import CreateNumberExpression from '../expressions/CreateNumberExpression.js';
+import { CreateNumberExpression } from '../expressions/CreateExpression.js';
 import { SUCCESS, FAILURE, RUNNING, ERROR } from '../../constants.js';
 
 class IfSelector extends Composite {

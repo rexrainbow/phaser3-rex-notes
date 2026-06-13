@@ -1,5 +1,5 @@
 import Action from '../Action.js';
-import CreateNumberExpression from '../expressions/CreateNumberExpression.js';
+import { CreateNumberExpression } from '../expressions/CreateExpression.js';
 import { SUCCESS, RUNNING } from '../../constants.js';
 
 class Wait extends Action {

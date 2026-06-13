@@ -1,5 +1,5 @@
 import Decorator from '../../../behaviortree/nodes/Decorator.js';
-import CreateNumberExpression from '../../../behaviortree/nodes/expressions/CreateNumberExpression.js';
+import { CreateNumberExpression } from '../../../behaviortree/index.js';
 import { SUCCESS, ERROR, FAILURE } from '../../../behaviortree/constants.js';
 import { EVT_REPEAT_ITERATION } from '../constants.js';
 

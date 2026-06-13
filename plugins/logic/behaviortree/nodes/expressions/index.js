@@ -3,8 +3,11 @@ import StringExpression from './StringExpression.js';
 import ANDExpression from './ANDExpression.js';
 import ORExpression from './ORExpression.js';
 import NOTExpression from './NOTExpression.js';
-import CreateNumberExpression from './CreateNumberExpression.js';
-import CreateStringExpression from './CreateStringExpression.js';
+import {
+    CreateNumberExpression,
+    CreateStringExpression,
+    CreateLogicExpression,
+} from './CreateExpression.js';
 
 
 export {
@@ -15,4 +18,5 @@ export {
     NOTExpression,
     CreateNumberExpression,
     CreateStringExpression,
+    CreateLogicExpression,
 }

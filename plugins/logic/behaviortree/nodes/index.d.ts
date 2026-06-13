@@ -7,7 +7,7 @@ import Expression from './Expression';
 import {
     NumberExpression, StringExpression,
     ANDExpression, ORExpression, NOTExpression,
-    CreateNumberExpression, CreateStringExpression,
+    CreateNumberExpression, CreateStringExpression, CreateLogicExpression,
 } from './expressions/index';
 
 import Succeeder from './actions/Succeeder';
@@ -56,6 +56,7 @@ export {
     NOTExpression,
     CreateNumberExpression,
     CreateStringExpression,
+    CreateLogicExpression,
 
     Succeeder,
     Failer,

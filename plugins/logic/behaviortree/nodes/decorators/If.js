@@ -1,5 +1,5 @@
 import Decorator from '../Decorator.js';
-import CreateNumberExpression from '../expressions/CreateNumberExpression.js';
+import { CreateNumberExpression } from '../expressions/CreateExpression.js';
 import { FAILURE, SUCCESS, RUNNING, ERROR } from '../../constants.js';
 
 

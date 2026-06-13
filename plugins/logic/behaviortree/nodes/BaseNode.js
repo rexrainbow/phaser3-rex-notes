@@ -4,29 +4,7 @@ import IsExpressionLike from '../utils/IsExpressionLike.js';
 import DecodeExpression from '../utils/DecodeExpression.js';
 import ResolveNode from '../behaviortree/dump/ResolveNode.js';
 
-var CreateExpressionNode = function (node, nodePool, owner) {
-    node = DecodeExpression(node, nodePool, owner);
-
-    // Ignore null, undefined
-    if (node == null) {
-        return null;
-    }
-
-    // Get node from nodePool
-    if (nodePool && (typeof (node) === 'string')) {
-        node = ResolveNode(node, nodePool, owner, 'expression node');
-    }
-
-    return node;
-}
-
-var SetExpressionParent = function (parent, node) {
-    if (IsExpressionLike(node)) {
-        node.setParent(parent);
-    }
-}
-
-export default class BaseNode {
+class BaseNode {
 
     constructor(
         {
@@ -263,3 +241,27 @@ export default class BaseNode {
         return ERROR;
     }
 };
+
+var CreateExpressionNode = function (node, nodePool, owner) {
+    node = DecodeExpression(node, nodePool, owner);
+
+    // Ignore null, undefined
+    if (node == null) {
+        return null;
+    }
+
+    // Get node from nodePool
+    if (nodePool && (typeof (node) === 'string')) {
+        node = ResolveNode(node, nodePool, owner, 'expression node');
+    }
+
+    return node;
+}
+
+var SetExpressionParent = function (parent, node) {
+    if (IsExpressionLike(node)) {
+        node.setParent(parent);
+    }
+}
+
+export default BaseNode;

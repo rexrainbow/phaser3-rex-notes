@@ -7,7 +7,7 @@ import Expression from './Expression.js';
 import {
     NumberExpression, StringExpression,
     ANDExpression, ORExpression, NOTExpression,
-    CreateNumberExpression, CreateStringExpression,
+    CreateNumberExpression, CreateStringExpression, CreateLogicExpression,
 } from './expressions/index.js';
 
 import Succeeder from './actions/Succeeder.js';
@@ -56,6 +56,7 @@ export {
     NOTExpression,
     CreateNumberExpression,
     CreateStringExpression,
+    CreateLogicExpression,
 
     Succeeder,
     Failer,

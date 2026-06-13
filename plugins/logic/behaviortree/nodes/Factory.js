@@ -12,6 +12,7 @@ import {
     NOTExpression,
     CreateNumberExpression,
     CreateStringExpression,
+    CreateLogicExpression,
 } from './expressions';
 
 import Succeeder from './actions/Succeeder.js';
@@ -172,6 +173,7 @@ SetValue(window, 'RexPlugins.BehaviorTree.ORExpression', ORExpression);
 SetValue(window, 'RexPlugins.BehaviorTree.NOTExpression', NOTExpression);
 SetValue(window, 'RexPlugins.BehaviorTree.CreateNumberExpression', CreateNumberExpression);
 SetValue(window, 'RexPlugins.BehaviorTree.CreateStringExpression', CreateStringExpression);
+SetValue(window, 'RexPlugins.BehaviorTree.CreateLogicExpression', CreateLogicExpression);
 
 SetValue(window, 'RexPlugins.BehaviorTree.Succeeder', Succeeder);
 SetValue(window, 'RexPlugins.BehaviorTree.Failer', Failer);
@@ -217,6 +219,9 @@ export {
     ANDExpression,
     ORExpression,
     NOTExpression,
+    CreateNumberExpression,
+    CreateStringExpression,
+    CreateLogicExpression,
 
     Succeeder,
     Failer,

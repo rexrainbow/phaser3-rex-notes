@@ -1,9 +1,5 @@
-import Expression from '../Expression';
-import BaseNode from '../BaseNode';
-
-declare function CreateStringExpression(
-    expression: BaseNode.ExpressionValue,
-    nodePool?: BaseNode.NodePoolType
-): Expression | string | null;
+import {
+    CreateStringExpression
+} from './CreateExpression';
 
 export default CreateStringExpression;

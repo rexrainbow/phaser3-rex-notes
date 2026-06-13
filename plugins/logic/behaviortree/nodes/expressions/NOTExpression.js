@@ -1,5 +1,4 @@
 import Expression from '../Expression.js';
-import CreateNumberExpression from './CreateNumberExpression.js';
 
 class NOTExpression extends Expression {
 
@@ -36,7 +35,7 @@ class NOTExpression extends Expression {
             expression = expressionValue;
         }
 
-        this.addExpressionItem(CreateNumberExpression(expression, nodePool));
+        this.addExpressionItem(expression, nodePool);
     }
 
     eval(tick, context) {

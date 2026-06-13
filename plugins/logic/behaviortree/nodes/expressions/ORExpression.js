@@ -1,5 +1,4 @@
 import Expression from '../Expression.js';
-import CreateNumberExpression from './CreateNumberExpression.js';
 
 class ORExpression extends Expression {
 
@@ -35,7 +34,7 @@ class ORExpression extends Expression {
         }
 
         for (var i = 0, cnt = expressions.length; i < cnt; i++) {
-            this.addExpressionItem(CreateNumberExpression(expressions[i], nodePool));
+            this.addExpressionItem(expressions[i], nodePool);
         }
     }
 

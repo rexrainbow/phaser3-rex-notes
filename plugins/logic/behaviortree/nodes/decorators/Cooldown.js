@@ -1,5 +1,5 @@
 import Decorator from '../Decorator.js';
-import CreateNumberExpression from '../expressions/CreateNumberExpression.js';
+import { CreateNumberExpression } from '../expressions/CreateExpression.js';
 import { SUCCESS, FAILURE, RUNNING, ABORT, ERROR } from '../../constants.js';
 
 class Cooldown extends Decorator {

@@ -153,13 +153,15 @@ class Demo extends Phaser.Scene {
         var tree = btAdd.behaviorTree()
             .setRoot(
                 btAdd.ifSelector({
-                    condition: btAdd.andExpression([
-                        'player.hp > 50',
-                        'player.mp > 10',
-                        new Comparator({
-                            opA: 'player.coin', cmp: '>', opB: 'time * 0.001'
-                        }),
-                    ]),
+                    condition: {
+                        and: [
+                            'player.hp > 50',
+                            'player.mp > 10',
+                            new Comparator({
+                                opA: 'player.coin', cmp: '>', opB: 'time * 0.001'
+                            }),
+                        ]
+                    },
                     children: [
                         CreateTask('TaskA', 500),
                         CreateTask('TaskB', 500)

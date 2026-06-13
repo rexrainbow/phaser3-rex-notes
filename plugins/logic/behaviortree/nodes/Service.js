@@ -1,5 +1,5 @@
 import BaseNode from './BaseNode.js';
-import CreateNumberExpression from './expressions/CreateNumberExpression.js';
+import { CreateNumberExpression } from './expressions/CreateExpression.js';
 import { SERVICE } from '../constants.js';
 
 class Service extends BaseNode {
