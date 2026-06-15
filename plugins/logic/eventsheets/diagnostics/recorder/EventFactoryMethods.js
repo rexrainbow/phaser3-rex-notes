@@ -1,5 +1,6 @@
 import GetManagerID from './GetManagerID.js';
 import SerializeValue from './SerializeValue.js';
+import SerializeConditionExpression from '../../eventsheetmanager/nodes/condition/SerializeConditionExpression.js';
 
 export default {
     createBaseEvent(type, manager, groupName) {
@@ -75,6 +76,20 @@ export default {
 
             event.nodeName = node.name;
             event.nodeTitle = node.title;
+
+            var conditionExpression = node.condition;
+            var returnInfo = GetExpressionReturnInfo(conditionExpression, manager, eventSheet);
+            if (returnInfo) {
+                event.returnIndex = returnInfo.index;
+
+                if (returnInfo.expression !== undefined) {
+                    event.returnExpression = SerializeConditionExpression(returnInfo.expression);
+                }
+
+                if (returnInfo.value !== undefined) {
+                    event.returnValue = returnInfo.value;
+                }
+            }
         }
 
         if (this.includeReferences) {
@@ -83,4 +98,40 @@ export default {
 
         return event;
     },
+}
+
+var GetExpressionReturnInfo = function (expression, manager, eventSheet) {
+    if (!expression || (expression.id === undefined) ||
+        !manager || !manager.blackboard ||
+        !eventSheet || (eventSheet.id === undefined)) {
+        return null;
+    }
+
+    var nodeMemory = manager.blackboard.getNodeMemory(eventSheet.id, expression.id);
+    var index = nodeMemory.$lastReturnIndex;
+    if (index === undefined) {
+        return null;
+    }
+
+    var info = {
+        index: index,
+    };
+
+    var expressions = expression.expressions;
+    if (Array.isArray(expressions) && (index >= 0) && (index < expressions.length)) {
+        var returnExpression = expressions[index];
+        info.expression = returnExpression;
+        info.value = GetExpressionLastValue(returnExpression, manager, eventSheet);
+    }
+
+    return info;
+}
+
+var GetExpressionLastValue = function (expression, manager, eventSheet) {
+    if (!expression || (expression.id === undefined)) {
+        return expression;
+    }
+
+    var nodeMemory = manager.blackboard.getNodeMemory(eventSheet.id, expression.id);
+    return nodeMemory.$lastValue;
 }

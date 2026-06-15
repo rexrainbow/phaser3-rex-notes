@@ -1,8 +1,6 @@
 import {
     Succeeder, Abort,
 } from '../../../behaviortree/index.js';
-import GetConditionExpression from './GetConditionExpression.js';
-import CreateIfDecorator from './CreateIfDecorator.js';
 import TaskAction from '../../eventsheetmanager/nodes/taskaction/TaskAction.js';
 import ActivateAction from '../../eventsheetmanager/nodes/ActivateAction.js';
 import DeactivateAction from '../../eventsheetmanager/nodes/DeactivateAction.js';
@@ -11,12 +9,7 @@ import ContinueAction from '../../eventsheetmanager/nodes/ContinueAction.js';
 import NextRoundAction from '../../eventsheetmanager/nodes/NextRoundAction.js';
 
 var CreateActionNode = function (nodeData) {
-    var node, ifDecorator;
-
-    var expression = GetConditionExpression(nodeData.condition);
-    if (expression !== 'true') {
-        ifDecorator = CreateIfDecorator(expression, true)
-    }
+    var node;
 
     switch (nodeData.type) {
         case 'command':
@@ -70,12 +63,6 @@ var CreateActionNode = function (nodeData) {
             console.warn(`Unsupported nodeData.type '${nodeData.type}' - treated as success.`);
             node = new Succeeder();
             break;
-    }
-
-    if (ifDecorator) {
-        // If <- Action
-        ifDecorator.addChild(node);
-        node = ifDecorator;
     }
 
     return node;

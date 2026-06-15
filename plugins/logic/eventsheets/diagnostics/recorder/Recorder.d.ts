@@ -195,6 +195,18 @@ declare namespace Recorder {
          */
         conditionType?: string;
         /**
+         * Child expression index that determined the condition result, or -1 when no child caused an early return.
+         */
+        returnIndex?: number;
+        /**
+         * Child expression that determined the condition result.
+         */
+        returnExpression?: ConditionExpression;
+        /**
+         * Child expression value that determined the condition result.
+         */
+        returnValue?: unknown;
+        /**
          * Completed repeat iteration index, 1-based.
          */
         iterationIndex?: number;

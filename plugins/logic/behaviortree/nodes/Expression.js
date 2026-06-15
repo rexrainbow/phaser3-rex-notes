@@ -42,6 +42,17 @@ class Expression extends BaseNode {
         return nodeMemory.$lastValue;
     }
 
+    setLastReturnIndex(tick, index) {
+        var nodeMemory = this.getNodeMemory(tick);
+        nodeMemory.$lastReturnIndex = index;  // For inspector
+        return this;
+    }
+
+    getLastReturnIndex(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        return nodeMemory.$lastReturnIndex;
+    }
+
 };
 
 export default Expression;

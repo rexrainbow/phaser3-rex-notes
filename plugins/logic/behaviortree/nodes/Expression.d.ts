@@ -39,4 +39,19 @@ declare class Expression extends BaseNode {
     );
 
     eval(tick: Tick): any;
+
+    /**
+     * Store the child expression index that determined the last evaluation result.
+     *
+     * @param tick - Current tick instance.
+     * @param index - Child expression index, or -1 when no child caused an early return.
+     */
+    setLastReturnIndex(tick: Tick, index: number): this;
+
+    /**
+     * Get the child expression index that determined the last evaluation result.
+     *
+     * @param tick - Current tick instance.
+     */
+    getLastReturnIndex(tick: Tick): number | undefined;
 }

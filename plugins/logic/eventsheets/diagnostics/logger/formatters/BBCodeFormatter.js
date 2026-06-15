@@ -83,6 +83,22 @@ var FormatExpression = function (expression) {
     return `"${expression}"`;
 }
 
+var FormatReturnExpression = function (record) {
+    if ((record.returnIndex === undefined) || (record.returnIndex < 0)) {
+        return '';
+    }
+
+    var text = ` ${Color(Colors.muted, `return[${record.returnIndex}]`)}`;
+    if (record.returnExpression !== undefined) {
+        text += ` ${FormatExpression(record.returnExpression)}`;
+    }
+    if (record.returnValue !== undefined) {
+        text += ` => ${record.returnValue}`;
+    }
+
+    return text;
+}
+
 var FormatStatus = function (statusName) {
     switch (statusName) {
         case 'FAILURE':
@@ -181,7 +197,7 @@ var BBCodeFormatter = function (record) {
             return `${prefix}${GetSheetLabel(record)}${GetCommandLabel(record)} ${Color(Colors.error, 'abort')}`;
 
         case EVT_CONDITION_EVAL:
-            return `${prefix}${GetSheetLabel(record)} ${Color(Colors.condition, `condition.${record.conditionType}`)} ${FormatExpression(record.expression)} => ${record.result}`;
+            return `${prefix}${GetSheetLabel(record)} ${Color(Colors.condition, `condition.${record.conditionType}`)} ${FormatExpression(record.expression)} => ${record.result}${FormatReturnExpression(record)}`;
 
         case EVT_REPEAT_ITERATION:
             return `${prefix}${GetSheetLabel(record)} ${Color(Colors.flow, 'repeat')} ${record.iterationIndex}/${record.maxLoop} status=${FormatStatus(record.statusName)} node="${record.nodeTitle || record.nodeName}"`;
