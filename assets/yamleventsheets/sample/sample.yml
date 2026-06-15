@@ -1,7 +1,7 @@
 title: Title
 condition:
   - coin > 5
-  - hp > 3
+  - player.hp > 3
 
 script:
   # single comment line
@@ -12,7 +12,7 @@ script:
   - name: print
     parameters:
       text: |-
-        Hello, {{name}}
+        Hello, {{player.name}}
         Line1
         Line2
         Line3
@@ -97,7 +97,7 @@ script:
     branches:
       - condition:
           all:
-            - hp > 1
+            - player.hp > 1
             - name: cmp
               parameters: { opA: "#(coin)", cmp: "<", opB: "#(5)" }
         actions:

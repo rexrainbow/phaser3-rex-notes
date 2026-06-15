@@ -3,6 +3,17 @@ import { Logger, BBCodeSink } from '../../plugins/yamleventsheets.js';
 import content from 'raw-loader!/assets/yamleventsheets/sample/sample.yml';
 
 class CommandExecutor {
+    constructor() {
+        this.state = {
+            player: {
+                name: 'rex',
+                hp: 4,
+            },
+
+            coin: 1
+        }
+    }
+
     print({ text = '' } = {}, eventSheetManager, eventSheet) {
         console.log(text);
         this.wait({ duration: 1000 }, eventSheetManager, eventSheet);
@@ -36,7 +47,8 @@ class CommandExecutor {
 var commandExecutor = new CommandExecutor();
 
 var eventSheetManager = new YAMLEventSheets({
-    commandExecutor: commandExecutor
+    commandExecutor: commandExecutor,
+    globalMemory: commandExecutor.state   // optional
 });
 eventSheetManager.addEventSheet(content);
 console.log(eventSheetManager.dumpEventSheetGroup())
@@ -49,9 +61,6 @@ var logger = new Logger({
 });
 
 eventSheetManager
-    .setData('name', 'rex')
-    .setData('coin', 1)
-    .setData('hp', 4)
     .setData('randomInt', function (a, b) {
         // console.log('-- run custom method randomInt--')
         return Math.floor(a + Math.random() * (b - a + 1));

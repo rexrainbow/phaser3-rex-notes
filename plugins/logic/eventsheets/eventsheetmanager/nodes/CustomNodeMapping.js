@@ -22,5 +22,6 @@ export default {
     DeactivateTree: DeactivateAction,
     LabelDecorator: LabelDecorator,
     Label: LabelDecorator,
+    NextRoundAction: NextRoundAction,
     NextRound: NextRoundAction,
 }
