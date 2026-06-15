@@ -1348,6 +1348,17 @@
 	        return nodeMemory.$lastValue;
 	    }
 
+	    setLastReturnIndex(tick, index) {
+	        var nodeMemory = this.getNodeMemory(tick);
+	        nodeMemory.$lastReturnIndex = index;  // For inspector
+	        return this;
+	    }
+
+	    getLastReturnIndex(tick) {
+	        var nodeMemory = this.getNodeMemory(tick);
+	        return nodeMemory.$lastReturnIndex;
+	    }
+
 	}
 
 	class NumberExpression extends Expression {
@@ -1518,10 +1529,12 @@
 	        var expressions = this.expressions || [];
 	        for (var i = 0, cnt = expressions.length; i < cnt; i++) {
 	            if (!tick.evalExpression(expressions[i], context)) {
+	                this.setLastReturnIndex(tick, i);
 	                return false;
 	            }
 	        }
 
+	        this.setLastReturnIndex(tick, -1);
 	        return true;
 	    }
 	}
@@ -1568,10 +1581,12 @@
 	        var expressions = this.expressions || [];
 	        for (var i = 0, cnt = expressions.length; i < cnt; i++) {
 	            if (tick.evalExpression(expressions[i], context)) {
+	                this.setLastReturnIndex(tick, i);
 	                return true;
 	            }
 	        }
 
+	        this.setLastReturnIndex(tick, -1);
 	        return false;
 	    }
 	}
@@ -7822,6 +7837,7 @@
 	    DeactivateTree: DeactivateAction,
 	    LabelDecorator: LabelDecorator,
 	    Label: LabelDecorator,
+	    NextRoundAction: NextRoundAction,
 	    NextRound: NextRoundAction,
 	};
 
@@ -17267,12 +17283,7 @@
 	};
 
 	var CreateActionNode = function (nodeData) {
-	    var node, ifDecorator;
-
-	    var expression = GetConditionExpression(nodeData.condition);
-	    if (expression !== 'true') {
-	        ifDecorator = CreateIfDecorator(expression, true);
-	    }
+	    var node;
 
 	    switch (nodeData.type) {
 	        case 'command':
@@ -17328,24 +17339,41 @@
 	            break;
 	    }
 
-	    if (ifDecorator) {
-	        // If <- Action
-	        ifDecorator.addChild(node);
-	        node = ifDecorator;
+	    return node;
+	};
+
+	var IsTrueExpression = function (expression) {
+	    return (expression === true) || (expression === 'true');
+	};
+
+	var WrapLabel = function (node, title) {
+	    var breakDecorator = new BreakDecorator({ title: title });
+	    var labelDecorator = new LabelDecorator({ title: title });
+
+	    breakDecorator.chainChild(labelDecorator);
+	    if (node) {
+	        labelDecorator.addChild(node);
 	    }
 
-	    return node;
+	    return breakDecorator;
+	};
+
+	var WrapCondition = function (node, condition, onConditionFailValue) {
+	    var expression = GetConditionExpression(condition);
+	    if (IsTrueExpression(expression)) {
+	        return node;
+	    }
+
+	    var ifDecorator = CreateIfDecorator(expression, onConditionFailValue);
+	    ifDecorator.addChild(node);
+
+	    return ifDecorator;
 	};
 
 	var CreateActionSequence = function (actions, title, hasLabel) {
 	    var parentNode, sequenceNode;
 	    if (hasLabel) {
-	        // break decorator
-	        var breakDecorator = new BreakDecorator({ title: title });
-	        // label decorator
-	        var labelDecorator = new LabelDecorator({ title: title });
-	        breakDecorator.chainChild(labelDecorator);
-	        parentNode = breakDecorator;
+	        parentNode = WrapLabel(undefined, title);
 	    }
 
 	    if (!actions || !actions.length) {
@@ -17361,35 +17389,45 @@
 	                nodeData.type = nodeData.type.toLowerCase();
 	            }
 
+	            var wrapTitle = false;
+	            var wrapActionCondition = false;
 	            switch (nodeData.type) {
 	                case undefined:
 	                    if (nodeData.branches) {  // type: if
 	                        node = CreateIFNode(nodeData);
+	                        wrapTitle = !!nodeData.title;
 	                    } else if (nodeData.times) {  // type: repeat
 	                        node = CreateRepeatNode(nodeData);
+	                        wrapTitle = !!nodeData.title;
 	                    } else if (nodeData.actions) {  // type: label
 	                        node = CreateSequenceNode(nodeData,
-	                            { hasLabel: true, nConditionFailValue: true }
+	                            { hasLabel: true, onConditionFailValue: true }
 	                        );
 	                    } else {  // type: command
 	                        node = CreateActionNode(nodeData);
+	                        wrapTitle = !!nodeData.title;
+	                        wrapActionCondition = true;
 	                    }
 	                    break;
 
 	                case 'if':
 	                    node = CreateIFNode(nodeData);
+	                    wrapTitle = !!nodeData.title;
 	                    break;
 
 	                case 'while':
 	                    node = CreateWhileNode(nodeData);
+	                    wrapTitle = !!nodeData.title;
 	                    break;
 
 	                case 'repeat':
 	                    node = CreateRepeatNode(nodeData);
+	                    wrapTitle = !!nodeData.title;
 	                    break;
 
 	                case 'for':
 	                    node = CreateForNode(nodeData);
+	                    wrapTitle = !!nodeData.title;
 	                    break;
 
 	                case 'label':
@@ -17400,13 +17438,23 @@
 
 	                case 'block':
 	                    node = CreateSequenceNode(nodeData,
-	                        { onConditionFailValue: true }
+	                        { hasLabel: !!nodeData.title, onConditionFailValue: true }
 	                    );
 	                    break;
 
 	                default:
 	                    node = CreateActionNode(nodeData);
+	                    wrapTitle = !!nodeData.title;
+	                    wrapActionCondition = true;
 	                    break;
+	            }
+
+	            if (wrapTitle) {
+	                node = WrapLabel(node, nodeData.title);
+	            }
+
+	            if (wrapActionCondition) {
+	                node = WrapCondition(node, nodeData.condition, true);
 	            }
 
 	            sequenceNode.addChild(node);
@@ -17598,7 +17646,7 @@
 
 	    if (!ignoreCondition) {
 	        var expression = GetConditionExpression(nodeData.condition);
-	        if (expression !== 'true') {
+	        if (!IsTrueExpression(expression)) {
 	            ifDecorator = CreateIfDecorator(expression, onConditionFailValue);
 	        }
 	    }

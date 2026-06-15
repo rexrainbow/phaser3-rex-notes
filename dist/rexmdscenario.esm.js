@@ -1346,6 +1346,17 @@ class Expression extends BaseNode {
         return nodeMemory.$lastValue;
     }
 
+    setLastReturnIndex(tick, index) {
+        var nodeMemory = this.getNodeMemory(tick);
+        nodeMemory.$lastReturnIndex = index;  // For inspector
+        return this;
+    }
+
+    getLastReturnIndex(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        return nodeMemory.$lastReturnIndex;
+    }
+
 }
 
 class NumberExpression extends Expression {
@@ -1516,10 +1527,12 @@ class ANDExpression extends Expression {
         var expressions = this.expressions || [];
         for (var i = 0, cnt = expressions.length; i < cnt; i++) {
             if (!tick.evalExpression(expressions[i], context)) {
+                this.setLastReturnIndex(tick, i);
                 return false;
             }
         }
 
+        this.setLastReturnIndex(tick, -1);
         return true;
     }
 }
@@ -1566,10 +1579,12 @@ class ORExpression extends Expression {
         var expressions = this.expressions || [];
         for (var i = 0, cnt = expressions.length; i < cnt; i++) {
             if (tick.evalExpression(expressions[i], context)) {
+                this.setLastReturnIndex(tick, i);
                 return true;
             }
         }
 
+        this.setLastReturnIndex(tick, -1);
         return false;
     }
 }
@@ -7813,6 +7828,7 @@ var CustomNodeMapping = {
     DeactivateTree: DeactivateAction,
     LabelDecorator: LabelDecorator,
     Label: LabelDecorator,
+    NextRoundAction: NextRoundAction,
     NextRound: NextRoundAction,
 };
 
