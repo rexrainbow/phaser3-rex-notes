@@ -1,12 +1,12 @@
-const Properties = ['groupName', 'parallel', 'active', 'once'];
+const ExcludeProperties = ['title', 'condition', 'script', 'fallback'];
 
 var GetTreeConfig = function (jsonData) {
     var config = {};
-    for (var i = 0, cnt = Properties.length; i < cnt; i++) {
-        var name = Properties[i];
-        if (jsonData.hasOwnProperty(name)) {
-            config[name] = jsonData[name];
+    for (var key in jsonData) {
+        if (ExcludeProperties.includes(key)) {
+            continue;
         }
+        config[key] = jsonData[key];
     }
 
     return config;

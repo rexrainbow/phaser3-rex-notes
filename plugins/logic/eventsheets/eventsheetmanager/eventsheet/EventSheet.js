@@ -28,7 +28,7 @@ class EventSheet extends BehaviorTree {
 
         super(config);
 
-        // Store default properties
+        // Store default properties, register properties to this instance
         for (var propertyKey in BuiltInProperties) {
             var { defaultValue, rewritable } = BuiltInProperties[propertyKey];
 
@@ -37,7 +37,6 @@ class EventSheet extends BehaviorTree {
             if (rewritable) {
                 if (propertyKey in properties) {
                     this[propertyKey] = properties[propertyKey];
-                    delete properties[propertyKey];
                 } else {
                     this[propertyKey] = defaultValue;
                 }
@@ -45,12 +44,12 @@ class EventSheet extends BehaviorTree {
                 this[propertyKey] = defaultValue;
             }
 
+            delete properties[propertyKey];
         }
 
-        // Store custom properties
+        // Store custom properties, inside this.properties
         for (var propertyKey in properties) {
-            this.wrapProperty(propertyKey);
-            this[propertyKey] = properties[propertyKey];
+            this.properties[propertyKey] = properties[propertyKey];
         }
 
         // Store references
