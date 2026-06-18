@@ -52,6 +52,38 @@ export var CloseEventSheet = function (eventSheetManager, eventsheet) {
     }
 }
 
+var InjectData = function (blackboard, data) {
+    var injectedEntries = [];
+    if (!data) {
+        return injectedEntries;
+    }
+
+    for (var key in data) {
+        if (!data.hasOwnProperty(key)) {
+            continue;
+        }
+        injectedEntries.push({
+            key,
+            hadValue: blackboard.hasData(key),
+            value: blackboard.getData(key)
+        });
+        blackboard.setData(key, data[key]);
+    }
+
+    return injectedEntries;
+}
+
+var RestoreData = function (blackboard, injectedEntries) {
+    for (var i = 0, cnt = injectedEntries.length; i < cnt; i++) {
+        var entry = injectedEntries[i];
+        if (entry.hadValue) {
+            blackboard.setData(entry.key, entry.value);
+        } else {
+            blackboard.removeData(entry.key);
+        }
+    }
+}
+
 export default {
 
     /*
@@ -208,5 +240,23 @@ export default {
         this.continue();
 
         return this;
+    },
+
+    evalCondition(title, data) {
+        var eventSheetManager = this.parent;
+        var blackboard = eventSheetManager.blackboard;
+        var commandExecutor = eventSheetManager.commandExecutor;
+        var eventsheet = this.getTree(title);
+        if (!eventsheet) {
+            return false;
+        }
+
+        var injectedEntries = InjectData(blackboard, data);
+
+        try {
+            return eventsheet.evalCondition(blackboard, commandExecutor);
+        } finally {
+            RestoreData(blackboard, injectedEntries);
+        }
     }
 }

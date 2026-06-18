@@ -165,6 +165,16 @@ class EventSheet extends BehaviorTree {
 
         super.abort(blackboard, target);
     }
+
+    evalCondition(blackboard, target) {
+        var ticker = this.ticker;
+        ticker
+            .setBlackBoard(blackboard)
+            .setTarget(target)
+            .reset();
+
+        return !!ticker.evalExpression(this.root.condition);
+    }
 }
 
 export default EventSheet;

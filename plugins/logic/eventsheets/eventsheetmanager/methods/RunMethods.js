@@ -63,4 +63,12 @@ export default {
         this.getTreeGroup(groupName).continue();
         return this;
     },
+
+    evalCondition(title, groupName, data) {
+        if (typeof (groupName) !== 'string') {
+            data = groupName;
+            groupName = this.defaultTreeGroupName;
+        }
+        return this.getTreeGroup(groupName).evalCondition(title, data)
+    }
 }

@@ -397,6 +397,16 @@ declare class EventSheetManager extends EventEmitter {
      * @returns The evaluation result.
      */
     evalExpression(expression: unknown): unknown;
+    /**
+     * Evaluate an event sheet condition without running its script.
+     *
+     * @param title - Event sheet title.
+     * @param groupName - Group name.
+     * @param data - Temporary data injected during condition evaluation.
+     * @returns True if the condition passes.
+     */
+    evalCondition(title: string, data?: Record<string, unknown>): boolean;
+    evalCondition(title: string, groupName: string, data?: Record<string, unknown>): boolean;
 
     /**
      * Render a string template.
