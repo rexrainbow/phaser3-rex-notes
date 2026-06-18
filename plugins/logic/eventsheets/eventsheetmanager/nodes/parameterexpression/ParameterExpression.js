@@ -39,6 +39,8 @@ class ParameterExpression extends Expression {
         }
 
         var expressionExecutor = tick.target;
+        var eventSheetManager = tick.blackboard.eventSheetManager;
+        var eventSheet = tick.tree;
 
         // Eval parameters
         var expressionParameters = this.expressions || {};
@@ -47,11 +49,11 @@ class ParameterExpression extends Expression {
         var value;
         var handler = expressionExecutor[expressionName];
         if (handler) {
-            value = handler.call(expressionExecutor, evaledParameters);
+            value = handler.call(expressionExecutor, evaledParameters, eventSheetManager, eventSheet);
         } else {
             handler = expressionExecutor.defaultHandler;
             if (handler) {
-                value = handler.call(expressionExecutor, expressionName, evaledParameters);
+                value = handler.call(expressionExecutor, expressionName, evaledParameters, eventSheetManager, eventSheet);
             }
         }
 
