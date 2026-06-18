@@ -12,6 +12,9 @@ class EventBehaviorTreeGroup {
         this.closedTrees = [];  // Temporary eventsheet array
 
         this.isRunning = false;
+        // One group owns one running context at a time. The context is shared by
+        // start(), startTree(), continue(), pause/resume, and scoped data injection.
+        this.runContext = null;
         this._threadKey = null;
     }
 

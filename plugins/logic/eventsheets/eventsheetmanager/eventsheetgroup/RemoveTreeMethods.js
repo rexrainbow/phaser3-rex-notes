@@ -42,6 +42,8 @@ export default {
         this.trees.length = 0;
         this.pendingTrees.length = 0;
         this.closedTrees.length = 0;
+        this.isRunning = false;
+        this.clearRunContext();
 
         if (sheetTitles.length > 0) {
             this.parent.emit(EVT_EVENTSHEET_REMOVE_ALL, this.name, sheetTitles, this.parent, this);

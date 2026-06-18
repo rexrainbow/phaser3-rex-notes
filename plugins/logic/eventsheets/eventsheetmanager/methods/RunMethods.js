@@ -1,4 +1,13 @@
 export default {
+
+    /*
+    A group owns exactly one running context at a time.
+    
+    Both start() and startTree() share the same pendingTrees/isRunning state.
+    When a group is running, another group run or single-tree run in the same group
+    must not start until the current run completes, pauses/resumes, or is stopped.
+    */
+
     startGroup(groupName) {
         if (groupName === undefined) {
             groupName = this.defaultTreeGroupName;
@@ -46,11 +55,13 @@ export default {
             default:
                 // Start an event sheet by name (arg[0]), 
                 // in a group by name (arg[1]), 
-                // can ignore condition checking (arg[2])
+                // can ignore condition checking (arg[2]),
+                // with scoped data injection (arg[3])
                 var title = arguments[0];
                 var groupName = arguments[1];
                 var ignoreCondition = arguments[2];
-                this.getTreeGroup(groupName).startTree(title, ignoreCondition);
+                var injectData = arguments[3];
+                this.getTreeGroup(groupName).startTree(title, ignoreCondition, injectData);
                 break;
         }
         return this;

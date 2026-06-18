@@ -293,8 +293,15 @@ class CommandExecutor {
         return this;
     }
 
-    print({ text = '' } = {}) {
+    print({ text = '' } = {}, eventSheetManager, eventSheet) {
         console.log(text);
+        this.wait({ duration: 1000 }, eventSheetManager, eventSheet);
+        // Task will be running until 'complete' event fired
+    }
+
+    wait({ duration = 1000 } = {}, eventSheetManager, eventSheet) {
+        var resumeCallback = eventSheetManager.pauseEventSheet();
+        setTimeout(resumeCallback, duration);
         return this;
     }
 
@@ -329,37 +336,8 @@ function createWorld() {
     return world;
 }
 
-function injectTaskProperties(eventSheetManager, task) {
-    var injectedEntries = [];
-    for (var key in task.properties) {
-        injectedEntries.push({
-            key,
-            hadValue: eventSheetManager.hasData(key),
-            value: eventSheetManager.getData(key)
-        });
-        eventSheetManager.setData(key, task.properties[key]);
-    }
-    return injectedEntries;
-}
-
-function restoreInjectedProperties(eventSheetManager, injectedEntries) {
-    for (var i = 0, cnt = injectedEntries.length; i < cnt; i++) {
-        var entry = injectedEntries[i];
-        if (entry.hadValue) {
-            eventSheetManager.setData(entry.key, entry.value);
-        } else {
-            eventSheetManager.removeData(entry.key);
-        }
-    }
-}
-
 function runTaskEventSheet(eventSheetManager, task) {
-    var injectedEntries = injectTaskProperties(eventSheetManager, task);
-    try {
-        eventSheetManager.start(task.taskTitle, 'tasks');
-    } finally {
-        restoreInjectedProperties(eventSheetManager, injectedEntries);
-    }
+    eventSheetManager.start(task.taskTitle, 'tasks', true, task.properties);
 }
 
 function logCharacterState(world, label) {
@@ -388,27 +366,84 @@ eventSheetManager
     .addEventSheet(WorkTaskEventSheet, 'tasks')
     .addEventSheet(SleepTaskEventSheet, 'tasks');
 
-function runRound() {
-    console.log(`---- Round ${world.tick} ----`);
-    eventSheetManager.setRoundCounter(world.tick);
-    eventSheetManager.startGroup('characters');
+var isRoundRunning = false;
+var roundPhase = 'idle';
+var roundCompleteCallbacks = [];
+
+function completeRound() {
+    logCharacterState(world, 'After run task, before remove ended tasks');
+
+    world.clearAllTaskPhaseFlags();
+    world.removeEndedTasks();
+    world.advanceTime();
+
+    isRoundRunning = false;
+    roundPhase = 'idle';
+
+    var callbacks = roundCompleteCallbacks;
+    roundCompleteCallbacks = [];
+    for (var i = 0, cnt = callbacks.length; i < cnt; i++) {
+        callbacks[i]();
+    }
+}
+
+function runTaskPhase() {
+    if ((!isRoundRunning) || (roundPhase !== 'characters')) {
+        return;
+    }
+
+    roundPhase = 'tasks';
 
     world.tickTasks();
     for (var i = 0, tasks = world.listActiveTasks(), cnt = tasks.length; i < cnt; i++) {
         runTaskEventSheet(eventSheetManager, tasks[i]);
     }
 
-    logCharacterState(world, 'After run task, before remove ended tasks');
+    if (!eventSheetManager.getTreeGroup('tasks').isRunning) {
+        completeRound();
+    }
+}
 
-    world.clearAllTaskPhaseFlags();
-    world.removeEndedTasks();
-    world.advanceTime();
+eventSheetManager.on('complete', function (groupName) {
+    if (groupName === 'characters' && isRoundRunning) {
+        runTaskPhase();
+    } else if (groupName === 'tasks' && isRoundRunning && roundPhase === 'tasks') {
+        completeRound();
+    }
+});
+
+function runRound(onComplete) {
+    if (onComplete) {
+        roundCompleteCallbacks.push(onComplete);
+    }
+
+    if (isRoundRunning) {
+        return;
+    }
+
+    isRoundRunning = true;
+    roundPhase = 'characters';
+
+    console.log(`---- Round ${world.tick} ----`);
+    eventSheetManager.setRoundCounter(world.tick);
+    eventSheetManager.startGroup('characters');
+
+    if (roundPhase === 'characters' && !eventSheetManager.getTreeGroup('characters').isRunning) {
+        runTaskPhase();
+    }
 }
 
 function runRounds(count = 8) {
-    for (var i = 0; i < count; i++) {
-        runRound();
+    var runNextRound = function () {
+        if (count <= 0) {
+            return;
+        }
+
+        count -= 1;
+        runRound(runNextRound);
     }
+
+    runNextRound();
 }
 
 Object.assign(window, {

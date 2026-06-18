@@ -470,6 +470,22 @@ declare class EventSheetManager extends EventEmitter {
         groupName: string,
         ignoreCondition: boolean
     ): this;
+    /**
+     * Start a tree by title in the given group with scoped injected data.
+     * Injected data is restored when this run completes or stops.
+     *
+     * @param title - Tree title.
+     * @param groupName - Group name.
+     * @param ignoreCondition - Whether to ignore start conditions.
+     * @param injectData - Temporary data available during this run.
+     * @returns This EventSheetManager instance.
+     */
+    start(
+        title: string,
+        groupName: string,
+        ignoreCondition: boolean,
+        injectData: Record<string, unknown>
+    ): this;
 
     /**
      * Continue running groups.

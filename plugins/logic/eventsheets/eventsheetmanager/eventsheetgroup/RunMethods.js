@@ -85,6 +85,34 @@ var RestoreData = function (blackboard, injectedEntries) {
 }
 
 export default {
+    setRunContext(context) {
+        this.clearRunContext();
+
+        if (context === undefined) {
+            context = {};
+        }
+
+        this.runContext = {
+            mode: context.mode,
+            title: context.title,
+            ignoreCondition: context.ignoreCondition,
+            injectData: context.injectData,
+            injectedEntries: InjectData(this.parent.blackboard, context.injectData)
+        };
+
+        return this;
+    },
+
+    clearRunContext() {
+        if (!this.runContext) {
+            return this;
+        }
+
+        RestoreData(this.parent.blackboard, this.runContext.injectedEntries);
+        this.runContext = null;
+
+        return this;
+    },
 
     /*
     A round : 
@@ -112,33 +140,42 @@ export default {
         }
 
         this.isRunning = true;
+        this.setRunContext({
+            mode: 'group'
+        });
 
         var eventSheetManager = this.parent;
         var trees = this.trees;
         var pendingTrees = this.pendingTrees;
 
-        eventSheetManager.emit(EVT_GROUP_START, this.name, eventSheetManager, this);
+        try {
+            eventSheetManager.emit(EVT_GROUP_START, this.name, eventSheetManager, this);
 
-        // pendingTrees.length = 0;
+            // pendingTrees.length = 0;
 
-        // Run parallel eventsheet, will return running, or failure
-        for (var i = 0, cnt = trees.length; i < cnt; i++) {
-            var eventsheet = trees[i];
+            // Run parallel eventsheet, will return running, or failure
+            for (var i = 0, cnt = trees.length; i < cnt; i++) {
+                var eventsheet = trees[i];
 
-            if (!eventsheet.active) {
-                eventSheetManager.emit(EVT_EVENTSHEET_SKIP, eventsheet.title, this.name, 'inactive', eventSheetManager, eventsheet, this);
-                continue;
+                if (!eventsheet.active) {
+                    eventSheetManager.emit(EVT_EVENTSHEET_SKIP, eventsheet.title, this.name, 'inactive', eventSheetManager, eventsheet, this);
+                    continue;
+                }
+
+                if (eventsheet.parallel) {
+                    // Open all event sheets
+                    OpenEventSheet.call(this, eventSheetManager, eventsheet);
+                }
+
+                pendingTrees.push(eventsheet);
             }
 
-            if (eventsheet.parallel) {
-                // Open all event sheets
-                OpenEventSheet.call(this, eventSheetManager, eventsheet);
-            }
-
-            pendingTrees.push(eventsheet);
+            this.continue();
+        } catch (error) {
+            this.isRunning = false;
+            this.clearRunContext();
+            throw error;
         }
-
-        this.continue();
 
         return this;
     },
@@ -166,51 +203,59 @@ export default {
 
         eventSheetManager.emit(EVT_GROUP_CONTINUE, this.name, eventSheetManager, this);
 
-        for (var i = 0, cnt = trees.length; i < cnt; i++) {
-            var eventsheet = trees[i];
+        try {
+            for (var i = 0, cnt = trees.length; i < cnt; i++) {
+                var eventsheet = trees[i];
 
-            // Do nothing if event sheet has been opened
-            OpenEventSheet.call(this, eventSheetManager, eventsheet);
+                // Do nothing if event sheet has been opened
+                OpenEventSheet.call(this, eventSheetManager, eventsheet);
 
-            if (!this.isRunning) {
-                // Can break here
-                break;
+                if (!this.isRunning) {
+                    // Can break here
+                    break;
+                }
+
+                // Will goto RUNNING, or SUCCESS/FAILURE/ERROR state
+                var status = TickEventSheet(eventSheetManager, eventsheet);
+
+                if (eventsheet.roundComplete) {
+                    closedTrees.push(eventsheet);
+                    CloseEventSheet.call(this, eventSheetManager, eventsheet);
+                } else if (status === RUNNING) {
+                    // Stall command execution here
+                    break;
+                }
+
+                if (!this.isRunning) {
+                    // Can break here
+                    break;
+                }
+
             }
 
-            // Will goto RUNNING, or SUCCESS/FAILURE/ERROR state
-            var status = TickEventSheet(eventSheetManager, eventsheet);
+            blackboard.eventSheetGroup = undefined;
 
-            if (eventsheet.roundComplete) {
-                closedTrees.push(eventsheet);
-                CloseEventSheet.call(this, eventSheetManager, eventsheet);
-            } else if (status === RUNNING) {
-                // Stall command execution here
-                break;
+            if (closedTrees.length > 0) {
+                RemoveItem(trees, closedTrees);
             }
 
-            if (!this.isRunning) {
-                // Can break here
-                break;
+            if (trees.length === 0) {
+                this.removePendingEventSheets();
+                this.isRunning = false;
+                this.clearRunContext();
+                eventSheetManager.emit(EVT_GROUP_COMPLETE, this.name, eventSheetManager, this);
             }
-
-        }
-
-        blackboard.eventSheetGroup = undefined;
-
-        if (closedTrees.length > 0) {
-            RemoveItem(trees, closedTrees);
-        }
-
-        if (trees.length === 0) {
-            this.removePendingEventSheets();
+        } catch (error) {
+            blackboard.eventSheetGroup = undefined;
             this.isRunning = false;
-            eventSheetManager.emit(EVT_GROUP_COMPLETE, this.name, eventSheetManager, this);
+            this.clearRunContext();
+            throw error;
         }
 
         return this;
     },
 
-    startTree(title, ignoreCondition = true) {
+    startTree(title, ignoreCondition = true, injectData) {
         // Run a single event sheet(eventsheet)
 
         if (this.isRunning) {
@@ -223,21 +268,34 @@ export default {
         }
 
         this.isRunning = true;
+        this.setRunContext({
+            mode: 'tree',
+            title,
+            ignoreCondition,
+            injectData
+        });
 
         var eventSheetManager = this.parent;
         var pendingTrees = this.pendingTrees;
 
         pendingTrees.length = 0;
 
-        eventsheet.setConditionEnable(!ignoreCondition);
+        try {
+            eventsheet.setConditionEnable(!ignoreCondition);
 
-        OpenEventSheet.call(this, eventSheetManager, eventsheet);
+            OpenEventSheet.call(this, eventSheetManager, eventsheet);
 
-        eventsheet.setConditionEnable(true);
+            eventsheet.setConditionEnable(true);
 
-        pendingTrees.push(eventsheet);
+            pendingTrees.push(eventsheet);
 
-        this.continue();
+            this.continue();
+        } catch (error) {
+            eventsheet.setConditionEnable(true);
+            this.isRunning = false;
+            this.clearRunContext();
+            throw error;
+        }
 
         return this;
     },

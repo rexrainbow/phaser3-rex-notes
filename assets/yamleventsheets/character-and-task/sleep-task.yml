@@ -18,6 +18,8 @@ script:
         phase: tick
     # energy += 20
     actions:
+      - name: print
+        parameters: { text: "{{$charId}} is sleeping" }
       - name: modifyCharacterStatus
         parameters:
           characterId: "{{$charId}}"

@@ -25,7 +25,8 @@ script:
         phase: tick
     # energy -= 10
     actions:
-
+      - name: print
+        parameters: { text: "{{$charId}} is working" }
       - name: modifyCharacterStatus
         parameters:
           characterId: "{{$charId}}"

@@ -22,6 +22,7 @@ export default {
         trees.length = 0;
 
         this.isRunning = false;
+        this.clearRunContext();
 
         return this;
     },

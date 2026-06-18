@@ -1,5 +1,7 @@
 title: Alice_behavior
 script:
+  - name: print
+    parameters: { text: "Alice want to ..." }
   - type: if
     branches:
       # Work
@@ -9,6 +11,8 @@ script:
             characterId: alice
             taskTitle: work_task
         actions:
+          - name: print
+            parameters: { text: "Working!" }
           - name: startTask
             parameters:
               taskTitle: work_task
@@ -21,6 +25,8 @@ script:
             characterId: alice
             taskTitle: sleep_task
         actions:
+          - name: print
+            parameters: { text: "Sleeping!" }
           - name: startTask
             parameters:
               taskTitle: sleep_task
