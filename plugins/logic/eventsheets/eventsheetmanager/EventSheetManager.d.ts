@@ -425,6 +425,15 @@ declare class EventSheetManager extends EventEmitter {
     startGroup(groupName?: string): this;
 
     /**
+     * Start a group and resolve when that group completes.
+     * Rejects if the target group is already running.
+     *
+     * @param groupName - Group name.
+     * @returns Promise resolved with this EventSheetManager instance.
+     */
+    startGroupPromise(groupName?: string): Promise<this>;
+
+    /**
      * Start the default group.
      *
      * @returns This EventSheetManager instance.
@@ -486,6 +495,75 @@ declare class EventSheetManager extends EventEmitter {
         ignoreCondition: boolean,
         injectData: Record<string, unknown>
     ): this;
+
+    /**
+     * Start the default group and resolve when it completes.
+     * Rejects if the target group is already running.
+     *
+     * @returns Promise resolved with this EventSheetManager instance.
+     */
+    startPromise(): Promise<this>;
+
+    /**
+     * Start a group or a tree by title in the default group and resolve when it completes.
+     * Rejects if the target group is already running.
+     *
+     * @param name - Group name or tree title.
+     * @returns Promise resolved with this EventSheetManager instance.
+     */
+    startPromise(name: string): Promise<this>;
+
+    /**
+     * Start a tree by title in the given group and resolve when that group completes.
+     * Rejects if the target group is already running.
+     *
+     * @param title - Tree title.
+     * @param groupName - Group name.
+     * @returns Promise resolved with this EventSheetManager instance.
+     */
+    startPromise(title: string, groupName: string): Promise<this>;
+
+    /**
+     * Start a tree by title in the default group and resolve when it completes.
+     * Rejects if the target group is already running.
+     *
+     * @param title - Tree title.
+     * @param ignoreCondition - Whether to ignore start conditions.
+     * @returns Promise resolved with this EventSheetManager instance.
+     */
+    startPromise(title: string, ignoreCondition: boolean): Promise<this>;
+
+    /**
+     * Start a tree by title in the given group and resolve when that group completes.
+     * Rejects if the target group is already running.
+     *
+     * @param title - Tree title.
+     * @param groupName - Group name.
+     * @param ignoreCondition - Whether to ignore start conditions.
+     * @returns Promise resolved with this EventSheetManager instance.
+     */
+    startPromise(
+        title: string,
+        groupName: string,
+        ignoreCondition: boolean
+    ): Promise<this>;
+
+    /**
+     * Start a tree by title in the given group with scoped injected data and resolve when that group completes.
+     * Rejects if the target group is already running.
+     *
+     * @param title - Tree title.
+     * @param groupName - Group name.
+     * @param ignoreCondition - Whether to ignore start conditions.
+     * @param injectData - Temporary data available during this run.
+     * @returns Promise resolved with this EventSheetManager instance.
+     */
+    startPromise(
+        title: string,
+        groupName: string,
+        ignoreCondition: boolean,
+        injectData: Record<string, unknown>
+    ): Promise<this>;
 
     /**
      * Continue running groups.

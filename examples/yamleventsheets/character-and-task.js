@@ -336,10 +336,6 @@ function createWorld() {
     return world;
 }
 
-function runTaskEventSheet(eventSheetManager, task) {
-    eventSheetManager.start(task.taskTitle, 'tasks', true, task.properties);
-}
-
 function logCharacterState(world, label) {
     var alice = world.getCharacter('alice');
     var task = world.listActiveTasks()[0];
@@ -366,84 +362,28 @@ eventSheetManager
     .addEventSheet(WorkTaskEventSheet, 'tasks')
     .addEventSheet(SleepTaskEventSheet, 'tasks');
 
-var isRoundRunning = false;
-var roundPhase = 'idle';
-var roundCompleteCallbacks = [];
+async function runRound() {
+    console.log(`---- Round ${world.tick} ----`);
+    eventSheetManager.setRoundCounter(world.tick);
+    await eventSheetManager.startGroupPromise('characters');
 
-function completeRound() {
+    world.tickTasks();
+    for (var i = 0, tasks = world.listActiveTasks(), cnt = tasks.length; i < cnt; i++) {
+        let task = tasks[i];
+        await eventSheetManager.startPromise(task.taskTitle, 'tasks', true, task.properties);
+    }
+
     logCharacterState(world, 'After run task, before remove ended tasks');
 
     world.clearAllTaskPhaseFlags();
     world.removeEndedTasks();
     world.advanceTime();
-
-    isRoundRunning = false;
-    roundPhase = 'idle';
-
-    var callbacks = roundCompleteCallbacks;
-    roundCompleteCallbacks = [];
-    for (var i = 0, cnt = callbacks.length; i < cnt; i++) {
-        callbacks[i]();
-    }
 }
 
-function runTaskPhase() {
-    if ((!isRoundRunning) || (roundPhase !== 'characters')) {
-        return;
+async function runRounds(count = 8) {
+    for (var i = 0; i < count; i++) {
+        await runRound();
     }
-
-    roundPhase = 'tasks';
-
-    world.tickTasks();
-    for (var i = 0, tasks = world.listActiveTasks(), cnt = tasks.length; i < cnt; i++) {
-        runTaskEventSheet(eventSheetManager, tasks[i]);
-    }
-
-    if (!eventSheetManager.getTreeGroup('tasks').isRunning) {
-        completeRound();
-    }
-}
-
-eventSheetManager.on('complete', function (groupName) {
-    if (groupName === 'characters' && isRoundRunning) {
-        runTaskPhase();
-    } else if (groupName === 'tasks' && isRoundRunning && roundPhase === 'tasks') {
-        completeRound();
-    }
-});
-
-function runRound(onComplete) {
-    if (onComplete) {
-        roundCompleteCallbacks.push(onComplete);
-    }
-
-    if (isRoundRunning) {
-        return;
-    }
-
-    isRoundRunning = true;
-    roundPhase = 'characters';
-
-    console.log(`---- Round ${world.tick} ----`);
-    eventSheetManager.setRoundCounter(world.tick);
-    eventSheetManager.startGroup('characters');
-
-    if (roundPhase === 'characters' && !eventSheetManager.getTreeGroup('characters').isRunning) {
-        runTaskPhase();
-    }
-}
-
-function runRounds(count = 8) {
-    var runNextRound = function () {
-        if (count <= 0) {
-            return;
-        }
-
-        count -= 1;
-        runRound(runNextRound);
-    }
-
-    runNextRound();
 }
 
 Object.assign(window, {
@@ -456,4 +396,6 @@ Object.assign(window, {
     }
 });
 
-runRounds();
+runRounds().catch(function (error) {
+    console.error(error);
+});

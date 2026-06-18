@@ -1,3 +1,52 @@
+var GetStartGroupName = function (eventSheetManager, args) {
+    switch (args.length) {
+        case 0:
+            return eventSheetManager.defaultTreeGroupName;
+
+        case 1:
+            return eventSheetManager.hasTreeGroup(args[0]) ? args[0] : eventSheetManager.defaultTreeGroupName;
+
+        case 2:
+            return (typeof (args[1]) === 'string') ? args[1] : eventSheetManager.defaultTreeGroupName;
+
+        default:
+            return args[1];
+    }
+}
+
+var StartPromise = function (eventSheetManager, groupName, startCallback) {
+    var eventSheetGroup = eventSheetManager.getTreeGroup(groupName);
+
+    if (eventSheetGroup.isRunning) {
+        return Promise.reject(new Error(`Event sheet group '${groupName}' is already running`));
+    }
+
+    return new Promise(function (resolve, reject) {
+        var completeCallback = function (completedGroupName) {
+            if (completedGroupName !== groupName) {
+                return;
+            }
+
+            eventSheetManager.off('complete', completeCallback);
+            resolve(eventSheetManager);
+        };
+
+        eventSheetManager.on('complete', completeCallback);
+
+        try {
+            startCallback();
+
+            if (!eventSheetGroup.isRunning) {
+                eventSheetManager.off('complete', completeCallback);
+                resolve(eventSheetManager);
+            }
+        } catch (error) {
+            eventSheetManager.off('complete', completeCallback);
+            reject(error);
+        }
+    });
+}
+
 export default {
 
     /*
@@ -14,6 +63,17 @@ export default {
         }
         this.getTreeGroup(groupName).start();
         return this;
+    },
+
+    startGroupPromise(groupName) {
+        if (groupName === undefined) {
+            groupName = this.defaultTreeGroupName;
+        }
+
+        var self = this;
+        return StartPromise(this, groupName, function () {
+            self.startGroup(groupName);
+        });
     },
 
     start() {
@@ -65,6 +125,16 @@ export default {
                 break;
         }
         return this;
+    },
+
+    startPromise() {
+        var args = arguments;
+        var groupName = GetStartGroupName(this, args);
+
+        var self = this;
+        return StartPromise(this, groupName, function () {
+            self.start.apply(self, args);
+        });
     },
 
     continue(groupName) {
