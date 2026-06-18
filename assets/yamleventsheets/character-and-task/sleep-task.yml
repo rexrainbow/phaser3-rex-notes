@@ -1,0 +1,25 @@
+title: sleep_task
+durationTicks: 1
+locationId: home
+tags:
+  - rest
+
+condition:
+  and:
+    - name: notBusy
+      parameters:
+        characterId: "{{$charId}}"
+
+script:
+  - condition:
+      name: taskPhase
+      parameters:
+        activeTaskId: "{{$taskId}}"
+        phase: tick
+    # energy += 20
+    actions:
+      - name: modifyCharacterStatus
+        parameters:
+          characterId: "{{$charId}}"
+          field: energy
+          value: 20

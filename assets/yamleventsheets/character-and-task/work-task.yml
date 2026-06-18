@@ -1,0 +1,46 @@
+title: work_task
+durationTicks: 2
+locationId: office
+tags:
+  - work
+
+condition:
+  and:
+    - name: notBusy
+      parameters:
+        characterId: "{{$charId}}"
+    # energy >= 20
+    - name: characterStatus
+      parameters:
+        characterId: "{{$charId}}"
+        field: energy
+        operator: ">="
+        value: 20
+
+script:
+  - condition:
+      name: taskPhase
+      parameters:
+        activeTaskId: "{{$taskId}}"
+        phase: tick
+    # energy -= 10
+    actions:
+
+      - name: modifyCharacterStatus
+        parameters:
+          characterId: "{{$charId}}"
+          field: energy
+          value: -10
+
+  - condition:
+      name: taskPhase
+      parameters:
+        activeTaskId: "{{$taskId}}"
+        phase: complete
+    # money += 100
+    actions:
+      - name: modifyCharacterStatus
+        parameters:
+          characterId: "{{$charId}}"
+          field: money
+          value: 100

@@ -1,0 +1,27 @@
+title: Alice_behavior
+script:
+  - type: if
+    branches:
+      # Work
+      - condition:
+          name: canRunTask
+          parameters:
+            characterId: alice
+            taskTitle: work_task
+        actions:
+          - name: startTask
+            parameters:
+              taskTitle: work_task
+              characterId: alice
+
+      # Or Sleep
+      - condition:
+          name: canRunTask
+          parameters:
+            characterId: alice
+            taskTitle: sleep_task
+        actions:
+          - name: startTask
+            parameters:
+              taskTitle: sleep_task
+              characterId: alice
