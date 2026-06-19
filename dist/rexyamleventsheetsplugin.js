@@ -7189,6 +7189,8 @@
 	        this.trees.length = 0;
 	        this.pendingTrees.length = 0;
 	        this.closedTrees.length = 0;
+	        this.isRunning = false;
+	        this.clearRunContext();
 
 	        if (sheetTitles.length > 0) {
 	            this.parent.emit(EVT_EVENTSHEET_REMOVE_ALL, this.name, sheetTitles, this.parent, this);
@@ -7607,6 +7609,8 @@
 	        }
 
 	        var expressionExecutor = tick.target;
+	        var eventSheetManager = tick.blackboard.eventSheetManager;
+	        var eventSheet = tick.tree;
 
 	        // Eval parameters
 	        var expressionParameters = this.expressions || {};
@@ -7615,11 +7619,11 @@
 	        var value;
 	        var handler = expressionExecutor[expressionName];
 	        if (handler) {
-	            value = handler.call(expressionExecutor, evaledParameters);
+	            value = handler.call(expressionExecutor, evaledParameters, eventSheetManager, eventSheet);
 	        } else {
 	            handler = expressionExecutor.defaultHandler;
 	            if (handler) {
-	                value = handler.call(expressionExecutor, expressionName, evaledParameters);
+	                value = handler.call(expressionExecutor, expressionName, evaledParameters, eventSheetManager, eventSheet);
 	            }
 	        }
 
@@ -7942,7 +7946,67 @@
 	    }
 	};
 
+	var InjectData = function (blackboard, data) {
+	    var injectedEntries = [];
+	    if (!data) {
+	        return injectedEntries;
+	    }
+
+	    for (var key in data) {
+	        if (!data.hasOwnProperty(key)) {
+	            continue;
+	        }
+	        injectedEntries.push({
+	            key,
+	            hadValue: blackboard.hasData(key),
+	            value: blackboard.getData(key)
+	        });
+	        blackboard.setData(key, data[key]);
+	    }
+
+	    return injectedEntries;
+	};
+
+	var RestoreData = function (blackboard, injectedEntries) {
+	    for (var i = 0, cnt = injectedEntries.length; i < cnt; i++) {
+	        var entry = injectedEntries[i];
+	        if (entry.hadValue) {
+	            blackboard.setData(entry.key, entry.value);
+	        } else {
+	            blackboard.removeData(entry.key);
+	        }
+	    }
+	};
+
 	var RunMethods$1 = {
+	    setRunContext(context) {
+	        this.clearRunContext();
+
+	        if (context === undefined) {
+	            context = {};
+	        }
+
+	        this.runContext = {
+	            mode: context.mode,
+	            title: context.title,
+	            ignoreCondition: context.ignoreCondition,
+	            injectData: context.injectData,
+	            injectedEntries: InjectData(this.parent.blackboard, context.injectData)
+	        };
+
+	        return this;
+	    },
+
+	    clearRunContext() {
+	        if (!this.runContext) {
+	            return this;
+	        }
+
+	        RestoreData(this.parent.blackboard, this.runContext.injectedEntries);
+	        this.runContext = null;
+
+	        return this;
+	    },
 
 	    /*
 	    A round : 
@@ -7970,33 +8034,42 @@
 	        }
 
 	        this.isRunning = true;
+	        this.setRunContext({
+	            mode: 'group'
+	        });
 
 	        var eventSheetManager = this.parent;
 	        var trees = this.trees;
 	        var pendingTrees = this.pendingTrees;
 
-	        eventSheetManager.emit(EVT_GROUP_START, this.name, eventSheetManager, this);
+	        try {
+	            eventSheetManager.emit(EVT_GROUP_START, this.name, eventSheetManager, this);
 
-	        // pendingTrees.length = 0;
+	            // pendingTrees.length = 0;
 
-	        // Run parallel eventsheet, will return running, or failure
-	        for (var i = 0, cnt = trees.length; i < cnt; i++) {
-	            var eventsheet = trees[i];
+	            // Run parallel eventsheet, will return running, or failure
+	            for (var i = 0, cnt = trees.length; i < cnt; i++) {
+	                var eventsheet = trees[i];
 
-	            if (!eventsheet.active) {
-	                eventSheetManager.emit(EVT_EVENTSHEET_SKIP, eventsheet.title, this.name, 'inactive', eventSheetManager, eventsheet, this);
-	                continue;
+	                if (!eventsheet.active) {
+	                    eventSheetManager.emit(EVT_EVENTSHEET_SKIP, eventsheet.title, this.name, 'inactive', eventSheetManager, eventsheet, this);
+	                    continue;
+	                }
+
+	                if (eventsheet.parallel) {
+	                    // Open all event sheets
+	                    OpenEventSheet.call(this, eventSheetManager, eventsheet);
+	                }
+
+	                pendingTrees.push(eventsheet);
 	            }
 
-	            if (eventsheet.parallel) {
-	                // Open all event sheets
-	                OpenEventSheet.call(this, eventSheetManager, eventsheet);
-	            }
-
-	            pendingTrees.push(eventsheet);
+	            this.continue();
+	        } catch (error) {
+	            this.isRunning = false;
+	            this.clearRunContext();
+	            throw error;
 	        }
-
-	        this.continue();
 
 	        return this;
 	    },
@@ -8024,51 +8097,59 @@
 
 	        eventSheetManager.emit(EVT_GROUP_CONTINUE, this.name, eventSheetManager, this);
 
-	        for (var i = 0, cnt = trees.length; i < cnt; i++) {
-	            var eventsheet = trees[i];
+	        try {
+	            for (var i = 0, cnt = trees.length; i < cnt; i++) {
+	                var eventsheet = trees[i];
 
-	            // Do nothing if event sheet has been opened
-	            OpenEventSheet.call(this, eventSheetManager, eventsheet);
+	                // Do nothing if event sheet has been opened
+	                OpenEventSheet.call(this, eventSheetManager, eventsheet);
 
-	            if (!this.isRunning) {
-	                // Can break here
-	                break;
+	                if (!this.isRunning) {
+	                    // Can break here
+	                    break;
+	                }
+
+	                // Will goto RUNNING, or SUCCESS/FAILURE/ERROR state
+	                var status = TickEventSheet(eventSheetManager, eventsheet);
+
+	                if (eventsheet.roundComplete) {
+	                    closedTrees.push(eventsheet);
+	                    CloseEventSheet.call(this, eventSheetManager, eventsheet);
+	                } else if (status === RUNNING) {
+	                    // Stall command execution here
+	                    break;
+	                }
+
+	                if (!this.isRunning) {
+	                    // Can break here
+	                    break;
+	                }
+
 	            }
 
-	            // Will goto RUNNING, or SUCCESS/FAILURE/ERROR state
-	            var status = TickEventSheet(eventSheetManager, eventsheet);
+	            blackboard.eventSheetGroup = undefined;
 
-	            if (eventsheet.roundComplete) {
-	                closedTrees.push(eventsheet);
-	                CloseEventSheet.call(this, eventSheetManager, eventsheet);
-	            } else if (status === RUNNING) {
-	                // Stall command execution here
-	                break;
+	            if (closedTrees.length > 0) {
+	                Remove(trees, closedTrees);
 	            }
 
-	            if (!this.isRunning) {
-	                // Can break here
-	                break;
+	            if (trees.length === 0) {
+	                this.removePendingEventSheets();
+	                this.isRunning = false;
+	                this.clearRunContext();
+	                eventSheetManager.emit(EVT_GROUP_COMPLETE, this.name, eventSheetManager, this);
 	            }
-
-	        }
-
-	        blackboard.eventSheetGroup = undefined;
-
-	        if (closedTrees.length > 0) {
-	            Remove(trees, closedTrees);
-	        }
-
-	        if (trees.length === 0) {
-	            this.removePendingEventSheets();
+	        } catch (error) {
+	            blackboard.eventSheetGroup = undefined;
 	            this.isRunning = false;
-	            eventSheetManager.emit(EVT_GROUP_COMPLETE, this.name, eventSheetManager, this);
+	            this.clearRunContext();
+	            throw error;
 	        }
 
 	        return this;
 	    },
 
-	    startTree(title, ignoreCondition = true) {
+	    startTree(title, ignoreCondition = true, injectData) {
 	        // Run a single event sheet(eventsheet)
 
 	        if (this.isRunning) {
@@ -8081,23 +8162,54 @@
 	        }
 
 	        this.isRunning = true;
+	        this.setRunContext({
+	            mode: 'tree',
+	            title,
+	            ignoreCondition,
+	            injectData
+	        });
 
 	        var eventSheetManager = this.parent;
 	        var pendingTrees = this.pendingTrees;
 
 	        pendingTrees.length = 0;
 
-	        eventsheet.setConditionEnable(!ignoreCondition);
+	        try {
+	            eventsheet.setConditionEnable(!ignoreCondition);
 
-	        OpenEventSheet.call(this, eventSheetManager, eventsheet);
+	            OpenEventSheet.call(this, eventSheetManager, eventsheet);
 
-	        eventsheet.setConditionEnable(true);
+	            eventsheet.setConditionEnable(true);
 
-	        pendingTrees.push(eventsheet);
+	            pendingTrees.push(eventsheet);
 
-	        this.continue();
+	            this.continue();
+	        } catch (error) {
+	            eventsheet.setConditionEnable(true);
+	            this.isRunning = false;
+	            this.clearRunContext();
+	            throw error;
+	        }
 
 	        return this;
+	    },
+
+	    evalCondition(title, data) {
+	        var eventSheetManager = this.parent;
+	        var blackboard = eventSheetManager.blackboard;
+	        var commandExecutor = eventSheetManager.commandExecutor;
+	        var eventsheet = this.getTree(title);
+	        if (!eventsheet) {
+	            return false;
+	        }
+
+	        var injectedEntries = InjectData(blackboard, data);
+
+	        try {
+	            return eventsheet.evalCondition(blackboard, commandExecutor);
+	        } finally {
+	            RestoreData(blackboard, injectedEntries);
+	        }
 	    }
 	};
 
@@ -8119,6 +8231,7 @@
 	        trees.length = 0;
 
 	        this.isRunning = false;
+	        this.clearRunContext();
 
 	        return this;
 	    },
@@ -8150,6 +8263,9 @@
 	        this.closedTrees = [];  // Temporary eventsheet array
 
 	        this.isRunning = false;
+	        // One group owns one running context at a time. The context is shared by
+	        // start(), startTree(), continue(), pause/resume, and scoped data injection.
+	        this.runContext = null;
 	        this._threadKey = null;
 	    }
 
@@ -16490,13 +16606,82 @@
 	    },
 	};
 
+	var GetStartGroupName = function (eventSheetManager, args) {
+	    switch (args.length) {
+	        case 0:
+	            return eventSheetManager.defaultTreeGroupName;
+
+	        case 1:
+	            return eventSheetManager.hasTreeGroup(args[0]) ? args[0] : eventSheetManager.defaultTreeGroupName;
+
+	        case 2:
+	            return (typeof (args[1]) === 'string') ? args[1] : eventSheetManager.defaultTreeGroupName;
+
+	        default:
+	            return args[1];
+	    }
+	};
+
+	var StartPromise = function (eventSheetManager, groupName, startCallback) {
+	    var eventSheetGroup = eventSheetManager.getTreeGroup(groupName);
+
+	    if (eventSheetGroup.isRunning) {
+	        return Promise.reject(new Error(`Event sheet group '${groupName}' is already running`));
+	    }
+
+	    return new Promise(function (resolve, reject) {
+	        var completeCallback = function (completedGroupName) {
+	            if (completedGroupName !== groupName) {
+	                return;
+	            }
+
+	            eventSheetManager.off(EVT_GROUP_COMPLETE, completeCallback);
+	            resolve(eventSheetManager);
+	        };
+
+	        eventSheetManager.on(EVT_GROUP_COMPLETE, completeCallback);
+
+	        try {
+	            startCallback();
+
+	            if (!eventSheetGroup.isRunning) {
+	                eventSheetManager.off(EVT_GROUP_COMPLETE, completeCallback);
+	                resolve(eventSheetManager);
+	            }
+	        } catch (error) {
+	            eventSheetManager.off(EVT_GROUP_COMPLETE, completeCallback);
+	            reject(error);
+	        }
+	    });
+	};
+
 	var RunMethods = {
+
+	    /*
+	    A group owns exactly one running context at a time.
+	    
+	    Both start() and startTree() share the same pendingTrees/isRunning state.
+	    When a group is running, another group run or single-tree run in the same group
+	    must not start until the current run completes, pauses/resumes, or is stopped.
+	    */
+
 	    startGroup(groupName) {
 	        if (groupName === undefined) {
 	            groupName = this.defaultTreeGroupName;
 	        }
 	        this.getTreeGroup(groupName).start();
 	        return this;
+	    },
+
+	    startGroupPromise(groupName) {
+	        if (groupName === undefined) {
+	            groupName = this.defaultTreeGroupName;
+	        }
+
+	        var self = this;
+	        return StartPromise(this, groupName, function () {
+	            self.startGroup(groupName);
+	        });
 	    },
 
 	    start() {
@@ -16538,14 +16723,26 @@
 	            default:
 	                // Start an event sheet by name (arg[0]), 
 	                // in a group by name (arg[1]), 
-	                // can ignore condition checking (arg[2])
+	                // can ignore condition checking (arg[2]),
+	                // with scoped data injection (arg[3])
 	                var title = arguments[0];
 	                var groupName = arguments[1];
 	                var ignoreCondition = arguments[2];
-	                this.getTreeGroup(groupName).startTree(title, ignoreCondition);
+	                var injectData = arguments[3];
+	                this.getTreeGroup(groupName).startTree(title, ignoreCondition, injectData);
 	                break;
 	        }
 	        return this;
+	    },
+
+	    startPromise() {
+	        var args = arguments;
+	        var groupName = GetStartGroupName(this, args);
+
+	        var self = this;
+	        return StartPromise(this, groupName, function () {
+	            self.start.apply(self, args);
+	        });
 	    },
 
 	    continue(groupName) {
@@ -16555,6 +16752,14 @@
 	        this.getTreeGroup(groupName).continue();
 	        return this;
 	    },
+
+	    evalCondition(title, groupName, data) {
+	        if (typeof (groupName) !== 'string') {
+	            data = groupName;
+	            groupName = this.defaultTreeGroupName;
+	        }
+	        return this.getTreeGroup(groupName).evalCondition(title, data)
+	    }
 	};
 
 	var StopMethods = {
@@ -16934,7 +17139,7 @@
 
 	        super(config);
 
-	        // Store default properties
+	        // Store default properties, register properties to this instance
 	        for (var propertyKey in BuiltInProperties) {
 	            var { defaultValue, rewritable } = BuiltInProperties[propertyKey];
 
@@ -16943,7 +17148,6 @@
 	            if (rewritable) {
 	                if (propertyKey in properties) {
 	                    this[propertyKey] = properties[propertyKey];
-	                    delete properties[propertyKey];
 	                } else {
 	                    this[propertyKey] = defaultValue;
 	                }
@@ -16951,12 +17155,12 @@
 	                this[propertyKey] = defaultValue;
 	            }
 
+	            delete properties[propertyKey];
 	        }
 
-	        // Store custom properties
+	        // Store custom properties, inside this.properties
 	        for (var propertyKey in properties) {
-	            this.wrapProperty(propertyKey);
-	            this[propertyKey] = properties[propertyKey];
+	            this.properties[propertyKey] = properties[propertyKey];
 	        }
 
 	        // Store references
@@ -17072,17 +17276,27 @@
 
 	        super.abort(blackboard, target);
 	    }
+
+	    evalCondition(blackboard, target) {
+	        var ticker = this.ticker;
+	        ticker
+	            .setBlackBoard(blackboard)
+	            .setTarget(target)
+	            .reset();
+
+	        return !!ticker.evalExpression(this.root.condition);
+	    }
 	}
 
-	const Properties = ['groupName', 'parallel', 'active', 'once'];
+	const ExcludeProperties = ['title', 'condition', 'script', 'fallback'];
 
 	var GetTreeConfig = function (jsonData) {
 	    var config = {};
-	    for (var i = 0, cnt = Properties.length; i < cnt; i++) {
-	        var name = Properties[i];
-	        if (jsonData.hasOwnProperty(name)) {
-	            config[name] = jsonData[name];
+	    for (var key in jsonData) {
+	        if (ExcludeProperties.includes(key)) {
+	            continue;
 	        }
+	        config[key] = jsonData[key];
 	    }
 
 	    return config;
@@ -24005,6 +24219,362 @@
 	        return [];
 	    },
 	};
+
+	class StateManagerBase {
+	    constructor(config) {
+	        this._states = {};
+	        this._stateLock = false;
+	        this.enable = true;
+	        this._start = undefined;
+	        this._state = undefined;
+	        this._prevState = undefined;
+
+	        // Event emitter
+	        var eventEmitter = GetValue$k(config, 'eventEmitter', undefined);
+	        var EventEmitterClass = GetValue$k(config, 'EventEmitterClass', undefined);
+	        this.setEventEmitter(eventEmitter, EventEmitterClass);
+
+	    }
+
+	    shutdown() {
+	        this.destroyEventEmitter();
+	    }
+
+	    destroy() {
+	        this.shutdown();
+	    }
+
+	    toJSON() {
+	        return {
+	            curState: this.state,
+	            prevState: this.prevState,
+
+	            enable: this.enable,
+	            start: this._start
+	        };
+	    }
+
+	    setEnable(e) {
+	        if (e === undefined) {
+	            e = true;
+	        }
+	        this.enable = e;
+	        return this;
+	    }
+
+	    toggleEnable() {
+	        this.setEnable(!this.enable);
+	        return this;
+	    }
+
+	    getState(name) {
+	        return this._states[name];
+	    }
+
+	    addState(name, state) {
+	        if (typeof (name) !== 'string') {
+	            state = name;
+	            name = state.name;
+	        }
+	        this._states[name] = state;
+	        return this;
+	    }
+
+	    addStates(states) {
+	        if (Array.isArray(states)) {
+	            for (var i = 0, cnt = states.length; i < cnt; i++) {
+	                this.addState(states[i]);
+	            }
+	        } else {
+	            for (var name in states) {
+	                this.addState(name, states[name]);
+	            }
+	        }
+	        return this;
+	    }
+
+	    removeState(name) {
+	        if (this._states.hasOwnProperty(name)) {
+	            delete this._states[name];
+	        }
+	        return this;
+	    }
+
+	    removeAllStates() {
+	        for (var name in this._states) {
+	            delete this._states[name];
+	        }
+	        return this;
+	    }
+
+	    set state(newState) {
+	        if (!this.enable || this._stateLock) {
+	            return;
+	        }
+	        if (this._state === newState) {
+	            return;
+	        }
+
+	        this._prevState = this._state;
+	        this._state = newState;
+
+	        this._stateLock = true; // Lock state
+
+	        this.emit('statechange', this);
+
+	        if (this._prevState != null) {
+	            var state = this.getState(this._prevState);
+	            if (state && state.exit) {
+	                state.exit(this);
+	            }
+	            this.emit(`exit_${this._prevState}`, this);
+	        }
+
+	        this._stateLock = false;
+
+	        if (this._state != null) {
+	            var state = this.getState(this._state);
+	            if (state && state.enter) {
+	                state.enter(this);
+	            }
+	            this.emit(`enter_${this._state}`, this);
+	        }
+	    }
+
+	    get state() {
+	        return this._state;
+	    }
+
+	    get prevState() {
+	        return this._prevState;
+	    }
+
+	    get stateList() {
+	        return Object.keys(this._states);
+	    }
+
+	    start(state) {
+	        this._start = state;
+	        this._prevState = undefined;
+	        this._state = state; // Won't fire statechange events
+	        return this;
+	    }
+
+	    goto(nextState) {
+	        if (nextState != null) {
+	            this.state = nextState;
+	        }
+	        return this;
+	    }
+
+	    next() {
+	        var state = this.getState(this.state);
+	        if (!state || !state.next) {
+	            return this;
+	        }
+
+	        var nextState;
+	        if (typeof (state.next) === 'string') {
+	            nextState = state.next;
+	        } else {
+	            nextState = state.next(this);
+	        }
+	        this.goto(nextState);
+	        return this;
+	    }
+
+	    runMethod(methodName, a1, a2, a3, a4, a5) {
+	        var state = this.getState(this.state);
+	        if (!state) {
+	            return undefined;
+	        }
+	        var fn = state[methodName];
+	        if (!fn) {
+	            return undefined;
+	        }
+
+	        // Copy from eventemitter3
+	        var len = arguments.length;
+	        switch (len) {
+	            case 1: return fn(this);
+	            case 2: return fn(this, a1);
+	            case 3: return fn(this, a1, a2);
+	            case 4: return fn(this, a1, a2, a3);
+	            case 5: return fn(this, a1, a2, a3, a4);
+	            case 6: return fn(this, a1, a2, a3, a4, a5);
+	        }
+
+	        var args = Array.prototype.slice.call(arguments);
+	        args[0] = this;
+	        return fn.apply(undefined, args);
+	    }
+	}
+
+	Object.assign(
+	    StateManagerBase.prototype,
+	    EventEmitterMethods
+	);
+
+	const IDLE_STATE = '$idle';
+
+	class PhaseRunner extends StateManagerBase {
+	    constructor(eventSheetManager, config) {
+	        var phases = config.phases;
+	        super({});
+
+	        this.eventSheetManager = eventSheetManager;
+
+	        var stateManager = this;
+	        var nextPhaseCallback = function () {
+	            if (!stateManager.isRunning) {
+	                return;
+	            }
+	            stateManager.next();
+	        };
+
+	        for (var i = 0, cnt = phases.length; i < cnt; i++) {
+	            let phase = phases[i];
+	            if (!phase.name) {
+	                phase.name = i.toString();
+	            }
+
+	            if (!phase.enter && phase.groupName) {
+	                // Run group until complete event firing of this group
+	                let groupName = phase.groupName;
+	                let groupcompleteHandler = function (completedGroupName) {
+	                    if (groupName !== completedGroupName) {
+	                        return;
+	                    }
+	                    nextPhaseCallback();
+	                };
+
+	                phase.enter = function () {
+	                    eventSheetManager.on('complete', groupcompleteHandler);
+	                    eventSheetManager.startGroup(groupName);
+	                };
+
+	                phase.exit = function () {
+	                    eventSheetManager.off('complete', groupcompleteHandler);
+	                };
+	            } else {
+	                // Custom phase lifecycle
+	                if (!phase.enter) {
+	                    throw new Error(`Phase '${phase.name}' requires an enter callback or groupName`);
+	                }
+
+	                let enterCallback = phase.enter;
+	                let exitCallback = phase.exit;
+
+	                phase.enter = function () {
+	                    enterCallback.call(phase, stateManager, eventSheetManager, nextPhaseCallback);
+	                };
+
+	                if (exitCallback) {
+	                    phase.exit = function () {
+	                        exitCallback.call(phase, stateManager, eventSheetManager);
+	                    };
+	                }
+	            }
+	        }
+
+	        for (var i = 0, cnt = phases.length; i < cnt; i++) {
+	            let phase = phases[i];
+
+	            var nextPhase;
+	            if (phase.next) {
+	                nextPhase = phase.next;
+	            } else if (i < cnt - 1) {
+	                nextPhase = phases[i + 1].name;
+	            } else {
+	                nextPhase = IDLE_STATE;
+	            }
+	            this.addState({
+	                name: phase.name,
+	                next: nextPhase,
+	                enter: phase.enter,
+	                exit: phase.exit
+	            });
+	        }
+
+	        this.addState({
+	            name: IDLE_STATE,
+	            enter: function () {
+	                if (stateManager._cancelRunning) {
+	                    stateManager.emit('cancel');
+	                } else {
+	                    stateManager.emit('complete');
+	                }
+	                stateManager._cancelRunning = false;
+	            }
+	        });
+
+	        this._cancelRunning = false;
+	        this._firstPhaseName = phases[0].name;
+	        super.start(IDLE_STATE);
+	    }
+
+	    get isRunning() {
+	        return this.state !== IDLE_STATE;
+	    }
+
+	    start() {
+	        if (this.isRunning) {
+	            return this;
+	        }
+
+	        super.goto(this._firstPhaseName);
+	        return this;
+	    }
+
+	    startPromise() {
+	        if (this.isRunning) {
+	            return Promise.reject(new Error('PhaseRunner is already running'));
+	        }
+
+	        var stateManager = this;
+	        return new Promise(function (resolve, reject) {
+	            var completeHandler;
+	            var cancelHandler;
+
+	            var cleanup = function () {
+	                stateManager.off('complete', completeHandler);
+	                stateManager.off('cancel', cancelHandler);
+	            };
+
+	            completeHandler = function () {
+	                cleanup();
+	                resolve(stateManager);
+	            };
+
+	            cancelHandler = function () {
+	                cleanup();
+	                reject(new Error('PhaseRunner was canceled'));
+	            };
+
+	            stateManager.once('complete', completeHandler);
+	            stateManager.once('cancel', cancelHandler);
+
+	            try {
+	                stateManager.start();
+	            } catch (error) {
+	                cleanup();
+	                reject(error);
+	            }
+	        });
+	    }
+
+	    stop() {
+	        if (!this.isRunning) {
+	            return this;
+	        }
+
+	        this._cancelRunning = true;
+	        this.goto(IDLE_STATE);
+
+	        return this;
+	    }
+
+	}
 
 	var PropertyMethods$1 = {
 	    hasProperty(property) {
@@ -33030,6 +33600,10 @@ void main (void) {
 
 	    addTracer(config) {
 	        return new Tracer(config);
+	    }
+
+	    addPhaseRunner(eventSheetManager, config) {
+	        return new PhaseRunner(eventSheetManager, config);
 	    }
 
 	}
