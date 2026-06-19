@@ -41,8 +41,27 @@ class EventSheetManager extends EventEmitter {
         this.blackboard.eventSheetManager = this; // For TaskAction
 
         // All event sheets (BT) use the same expressionParser and stringTemplate
+        var eventSheetManager = this;
         this.expressionParser = new ExpressionParser({
-            cache: true
+            cache: true,
+            defaultHandler(name, args, context) {
+                var commandExecutor = eventSheetManager.commandExecutor;
+                if (!commandExecutor) {
+                    return 0;
+                }
+
+                var handler = commandExecutor[name];
+                if (handler) {
+                    return handler.call(commandExecutor, args, eventSheetManager, context?.eventSheet);
+                }
+
+                var defaultHandler = commandExecutor.defaultExpressionHandler || commandExecutor.defaultHandler;
+                if (defaultHandler) {
+                    return defaultHandler.call(commandExecutor, name, args, eventSheetManager, context?.eventSheet);
+                }
+
+                return 0;
+            }
         });
         this.stringTemplate = new StringTemplate({
             expressionParser: this.expressionParser,

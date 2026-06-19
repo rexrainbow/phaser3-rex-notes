@@ -38,10 +38,17 @@ script:
       parameters:
         activeTaskId: "{{$taskId}}"
         phase: complete
-    # money += 100
+    # money += floor(skill) * 10
     actions:
       - name: modifyCharacterStatus
         parameters:
           characterId: "{{$charId}}"
           field: money
-          value: 100
+          value: "#(floor(characterStatus($charId, 'skill')) * 10)"
+      - name: modifyCharacterStatus
+        parameters:
+          characterId: "{{$charId}}"
+          field: skill
+          value: 0.8
+      - name: print
+        parameters: { text: "{{$charId}} has {{characterStatus($charId, 'money')}} money" }

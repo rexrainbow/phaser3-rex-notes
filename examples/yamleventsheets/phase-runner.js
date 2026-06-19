@@ -263,7 +263,15 @@ class CommandExecutor {
         return !this.world.isCharacterBusy(characterId);
     }
 
-    characterStatus({ characterId, field, operator = '>=', value } = {}) {
+    characterStatus(parameters = {}) {
+        // For expression-parser, return number value
+        if (Array.isArray(parameters)) {
+            var [characterId, field] = parameters;
+            return this.world.getCharacter(characterId).status[field] || 0;
+        }
+
+        // For parameter-expression, return boolean
+        var { characterId, field, operator = '>=', value } = parameters;
         return compareValues(
             this.world.getCharacter(characterId).status[field] || 0,
             operator,
@@ -331,7 +339,7 @@ function createWorld() {
             id: 'alice',
             name: 'Alice',
             locationId: 'office',
-            status: { money: 0, energy: 30, stress: 0 }
+            status: { money: 0, energy: 30, stress: 0, skill: 1 }
         });
 
     return world;
@@ -447,7 +455,7 @@ async function runRound() {
     await phaseRunner.startPromise();
 }
 
-async function runRounds(count = 8) {
+async function runRounds(count = 12) {
     if (count <= 0) {
         return;
     }
