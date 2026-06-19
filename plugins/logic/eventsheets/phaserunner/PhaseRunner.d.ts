@@ -9,17 +9,32 @@ declare namespace PhaseRunner {
      */
     type NextPhaseCallbackType = () => void;
 
+    type IPhaseConfig = IGroupPhaseConfig | ILifecyclePhaseConfig;
+
     /**
-     * Custom phase runner.
+     * Phase enter callback.
      *
      * @param runner - Current PhaseRunner instance.
      * @param eventSheetManager - EventSheetManager controlled by this runner.
      * @param nextPhaseCallback - Callback to continue to the next phase.
      */
-    type RunCallbackType = (
+    type EnterCallbackType = (
+        this: IPhaseConfig,
         runner: PhaseRunner,
         eventSheetManager: EventSheetManager,
         nextPhaseCallback: NextPhaseCallbackType
+    ) => void;
+
+    /**
+     * Phase exit callback.
+     *
+     * @param runner - Current PhaseRunner instance.
+     * @param eventSheetManager - EventSheetManager controlled by this runner.
+     */
+    type ExitCallbackType = (
+        this: IPhaseConfig,
+        runner: PhaseRunner,
+        eventSheetManager: EventSheetManager
     ) => void;
 
     /**
@@ -49,24 +64,23 @@ declare namespace PhaseRunner {
          * Event sheet group name to start.
          */
         groupName: string,
-        run?: never,
+        enter?: never,
     }
 
     /**
-     * Phase that runs custom logic.
+     * Phase that runs custom lifecycle logic.
      */
-    interface ICustomPhaseConfig extends IBasePhaseConfig {
+    interface ILifecyclePhaseConfig extends IBasePhaseConfig {
         /**
-         * Custom runner. Call nextPhaseCallback when this phase is complete.
+         * Phase runner. Call nextPhaseCallback when this phase is complete.
          */
-        run: RunCallbackType,
+        enter: EnterCallbackType,
+        /**
+         * Cleanup callback fired when leaving this phase.
+         */
+        exit?: ExitCallbackType,
         groupName?: string,
     }
-
-    /**
-     * Phase configuration.
-     */
-    type IPhaseConfig = IGroupPhaseConfig | ICustomPhaseConfig;
 
     /**
      * Configuration options for creating a PhaseRunner.
@@ -121,6 +135,14 @@ declare class PhaseRunner extends StateManagerBase {
      * @returns This PhaseRunner instance.
      */
     start(): this;
+
+    /**
+     * Start from the first phase and resolve when all phases complete.
+     * Rejects if this runner is already running or is stopped before completion.
+     *
+     * @returns Promise resolved with this PhaseRunner instance.
+     */
+    startPromise(): Promise<this>;
 
     /**
      * Stop the current run and return to idle state.

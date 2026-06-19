@@ -363,53 +363,53 @@ eventSheetManager
     .addEventSheet(WorkTaskEventSheet, 'tasks')
     .addEventSheet(SleepTaskEventSheet, 'tasks');
 
-function runTaskEventSheets(runner, eventSheetManager, nextPhaseCallback) {
-    var tasks = world.listActiveTasks();
-    var taskIndex = 0;
-    var completeHandler;
-    var cancelHandler;
+var taskPhase = {
+    name: 'tasks',
 
-    var cleanup = function () {
-        if (completeHandler) {
-            eventSheetManager.off('complete', completeHandler);
-            completeHandler = undefined;
-        }
-        if (cancelHandler) {
-            runner.off('cancel', cancelHandler);
-            cancelHandler = undefined;
-        }
-    }
+    enter: function (runner, eventSheetManager, nextPhaseCallback) {
+        this.tasks = world.listActiveTasks();
+        this.taskIndex = 0;
+        this.nextPhaseCallback = nextPhaseCallback;
+        this.runNextTask(runner, eventSheetManager);
+    },
 
-    var runNextTask = function () {
+    exit: function (runner, eventSheetManager) {
+        this.clearCompleteHandler(eventSheetManager);
+        this.tasks = undefined;
+        this.taskIndex = 0;
+        this.nextPhaseCallback = undefined;
+    },
+
+    clearCompleteHandler: function (eventSheetManager) {
+        if (this.completeHandler) {
+            eventSheetManager.off('complete', this.completeHandler);
+            this.completeHandler = undefined;
+        }
+    },
+
+    runNextTask: function (runner, eventSheetManager) {
         if (!runner.isRunning) {
-            cleanup();
             return;
         }
 
-        if (taskIndex >= tasks.length) {
-            cleanup();
-            nextPhaseCallback();
+        if (this.taskIndex >= this.tasks.length) {
+            this.nextPhaseCallback();
             return;
         }
 
-        var task = tasks[taskIndex++];
-        completeHandler = function (completedGroupName) {
+        var task = this.tasks[this.taskIndex++];
+        this.completeHandler = (completedGroupName) => {
             if (completedGroupName !== 'tasks') {
                 return;
             }
 
-            eventSheetManager.off('complete', completeHandler);
-            completeHandler = undefined;
-            runNextTask();
+            this.clearCompleteHandler(eventSheetManager);
+            this.runNextTask(runner, eventSheetManager);
         }
 
-        eventSheetManager.on('complete', completeHandler);
+        eventSheetManager.on('complete', this.completeHandler);
         eventSheetManager.start(task.taskTitle, 'tasks', true, task.properties);
     }
-
-    cancelHandler = cleanup;
-    runner.once('cancel', cancelHandler);
-    runNextTask();
 }
 
 var phaseRunner = new PhaseRunner(eventSheetManager, {
@@ -420,18 +420,15 @@ var phaseRunner = new PhaseRunner(eventSheetManager, {
         },
         {
             name: 'tickTasks',
-            run: function (runner, eventSheetManager, nextPhaseCallback) {
+            enter: function (runner, eventSheetManager, nextPhaseCallback) {
                 world.tickTasks();
                 nextPhaseCallback();
             }
         },
-        {
-            name: 'tasks',
-            run: runTaskEventSheets
-        },
+        taskPhase,
         {
             name: 'cleanup',
-            run: function (runner, eventSheetManager, nextPhaseCallback) {
+            enter: function (runner, eventSheetManager, nextPhaseCallback) {
                 logCharacterState(world, 'After run task, before remove ended tasks');
 
                 world.clearAllTaskPhaseFlags();
@@ -444,39 +441,20 @@ var phaseRunner = new PhaseRunner(eventSheetManager, {
     ]
 });
 
-function runRound() {
+async function runRound() {
     console.log(`---- Round ${world.tick} ----`);
     eventSheetManager.setRoundCounter(world.tick);
-    phaseRunner.start();
+    await phaseRunner.startPromise();
 }
 
-function runRounds(count = 8) {
+async function runRounds(count = 8) {
     if (count <= 0) {
         return;
     }
 
-    var remainingRounds = count;
-
-    var runNextRound = function () {
-        if (remainingRounds <= 0) {
-            return;
-        }
-
-        remainingRounds--;
-        runRound();
+    for (var i = 0; i < count; i++) {
+        await runRound();
     }
-
-    var completeHandler = function () {
-        if (remainingRounds <= 0) {
-            phaseRunner.off('complete', completeHandler);
-            return;
-        }
-
-        setTimeout(runNextRound, 0);
-    }
-
-    phaseRunner.on('complete', completeHandler);
-    runNextRound();
 }
 
 Object.assign(window, {
@@ -490,4 +468,6 @@ Object.assign(window, {
     }
 });
 
-runRounds();
+runRounds().catch(function (error) {
+    console.error(error);
+});

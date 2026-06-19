@@ -23,7 +23,7 @@ class PhaseRunner extends StateManager {
                 phase.name = i.toString();
             }
 
-            if (!phase.run && phase.groupName) {
+            if (!phase.enter && phase.groupName) {
                 // Run group until complete event firing of this group
                 let groupName = phase.groupName;
                 let groupcompleteHandler = function (completedGroupName) {
@@ -42,9 +42,22 @@ class PhaseRunner extends StateManager {
                     eventSheetManager.off('complete', groupcompleteHandler);
                 }
             } else {
-                // Custom runner
+                // Custom phase lifecycle
+                if (!phase.enter) {
+                    throw new Error(`Phase '${phase.name}' requires an enter callback or groupName`);
+                }
+
+                let enterCallback = phase.enter;
+                let exitCallback = phase.exit;
+
                 phase.enter = function () {
-                    phase.run(stateManager, eventSheetManager, nextPhaseCallback);
+                    enterCallback.call(phase, stateManager, eventSheetManager, nextPhaseCallback);
+                }
+
+                if (exitCallback) {
+                    phase.exit = function () {
+                        exitCallback.call(phase, stateManager, eventSheetManager);
+                    }
                 }
             }
         }
@@ -96,6 +109,43 @@ class PhaseRunner extends StateManager {
 
         super.goto(this._firstPhaseName);
         return this;
+    }
+
+    startPromise() {
+        if (this.isRunning) {
+            return Promise.reject(new Error('PhaseRunner is already running'));
+        }
+
+        var stateManager = this;
+        return new Promise(function (resolve, reject) {
+            var completeHandler;
+            var cancelHandler;
+
+            var cleanup = function () {
+                stateManager.off('complete', completeHandler);
+                stateManager.off('cancel', cancelHandler);
+            }
+
+            completeHandler = function () {
+                cleanup();
+                resolve(stateManager);
+            }
+
+            cancelHandler = function () {
+                cleanup();
+                reject(new Error('PhaseRunner was canceled'));
+            }
+
+            stateManager.once('complete', completeHandler);
+            stateManager.once('cancel', cancelHandler);
+
+            try {
+                stateManager.start();
+            } catch (error) {
+                cleanup();
+                reject(error);
+            }
+        });
     }
 
     stop() {
