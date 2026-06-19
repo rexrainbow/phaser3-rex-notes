@@ -1,6 +1,8 @@
 import parser from './parser/parser.js';
 import GetProperty from './GetProperty.js';
 import IsUnsafePropertyName from './IsUnsafePropertyName.js';
+import DefaultFunctions from './DefaultFunctions.js';
+
 
 const MISSING = {};
 
@@ -21,6 +23,8 @@ class FormulaParser extends parser.Parser {
         }
 
         this.setSafeMode(GetProperty(config, 'safeMode', false));
+
+        this.setFunctions(DefaultFunctions);
 
         var functions = GetProperty(config, 'functions', undefined);
         if (functions) {

@@ -169,6 +169,37 @@ or
 var value = parser.exec(f, context);
 ```
 
+### Default method
+
+These methods are registered into each parser instance by default.
+
+```javascript
+var value = parser.exec('round(a) * 10', { a: 2.6 });
+// value: 30
+```
+
+- `round(value)` : `Math.round(value)`.
+- `floor(value)` : `Math.floor(value)`.
+- `ceil(value)` : `Math.ceil(value)`.
+- `abs(value)` : `Math.abs(value)`.
+- `min(...values)` : `Math.min(...values)`.
+- `max(...values)` : `Math.max(...values)`.
+- `clamp(value, min, max)` : Clamp `value` into `[min, max]`.
+
+Default methods are registered before the `functions` config is applied, therefore they can be overridden.
+
+```javascript
+var parser = new ExpressionParser({
+    functions: {
+        round(value) {
+            return Math.floor(value);
+        }
+    }
+});
+```
+
+
+
 ### Custom method
 
 - Register method into parser instance
