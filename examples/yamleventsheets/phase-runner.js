@@ -1,7 +1,8 @@
 import YAMLEventSheets from '../../plugins/yamleventsheets.js';
-import AliceBehaviorEventSheet from 'raw-loader!/assets/yamleventsheets/character-and-task/alice-behavior.yml';
-import WorkTaskEventSheet from 'raw-loader!/assets/yamleventsheets/character-and-task/work-task.yml';
-import SleepTaskEventSheet from 'raw-loader!/assets/yamleventsheets/character-and-task/sleep-task.yml';
+import { PhaseRunner } from '../../plugins/yamleventsheets.js';
+import AliceBehaviorEventSheet from 'raw-loader!/assets/yamleventsheets/phase-runner/alice-behavior.yml';
+import WorkTaskEventSheet from 'raw-loader!/assets/yamleventsheets/phase-runner/work-task.yml';
+import SleepTaskEventSheet from 'raw-loader!/assets/yamleventsheets/phase-runner/sleep-task.yml';
 
 const TASK_PHASES = ['start', 'tick', 'complete', 'interrupt', 'cancel'];
 
@@ -362,42 +363,131 @@ eventSheetManager
     .addEventSheet(WorkTaskEventSheet, 'tasks')
     .addEventSheet(SleepTaskEventSheet, 'tasks');
 
-console.log(eventSheetManager.dumpEventSheetGroup('characters'))
+function runTaskEventSheets(runner, eventSheetManager, nextPhaseCallback) {
+    var tasks = world.listActiveTasks();
+    var taskIndex = 0;
+    var completeHandler;
+    var cancelHandler;
 
-async function runRound() {
-    console.log(`---- Round ${world.tick} ----`);
-    eventSheetManager.setRoundCounter(world.tick);
-    await eventSheetManager.startGroupPromise('characters');
-
-    world.tickTasks();
-    for (var i = 0, tasks = world.listActiveTasks(), cnt = tasks.length; i < cnt; i++) {
-        let task = tasks[i];
-        await eventSheetManager.startPromise(task.taskTitle, 'tasks', true, task.properties);
+    var cleanup = function () {
+        if (completeHandler) {
+            eventSheetManager.off('complete', completeHandler);
+            completeHandler = undefined;
+        }
+        if (cancelHandler) {
+            runner.off('cancel', cancelHandler);
+            cancelHandler = undefined;
+        }
     }
 
-    logCharacterState(world, 'After run task, before remove ended tasks');
+    var runNextTask = function () {
+        if (!runner.isRunning) {
+            cleanup();
+            return;
+        }
 
-    world.clearAllTaskPhaseFlags();
-    world.removeEndedTasks();
-    world.advanceTime();
+        if (taskIndex >= tasks.length) {
+            cleanup();
+            nextPhaseCallback();
+            return;
+        }
+
+        var task = tasks[taskIndex++];
+        completeHandler = function (completedGroupName) {
+            if (completedGroupName !== 'tasks') {
+                return;
+            }
+
+            eventSheetManager.off('complete', completeHandler);
+            completeHandler = undefined;
+            runNextTask();
+        }
+
+        eventSheetManager.on('complete', completeHandler);
+        eventSheetManager.start(task.taskTitle, 'tasks', true, task.properties);
+    }
+
+    cancelHandler = cleanup;
+    runner.once('cancel', cancelHandler);
+    runNextTask();
 }
 
-async function runRounds(count = 8) {
-    for (var i = 0; i < count; i++) {
-        await runRound();
+var phaseRunner = new PhaseRunner(eventSheetManager, {
+    phases: [
+        {
+            name: 'characters',
+            groupName: 'characters'
+        },
+        {
+            name: 'tickTasks',
+            run: function (runner, eventSheetManager, nextPhaseCallback) {
+                world.tickTasks();
+                nextPhaseCallback();
+            }
+        },
+        {
+            name: 'tasks',
+            run: runTaskEventSheets
+        },
+        {
+            name: 'cleanup',
+            run: function (runner, eventSheetManager, nextPhaseCallback) {
+                logCharacterState(world, 'After run task, before remove ended tasks');
+
+                world.clearAllTaskPhaseFlags();
+                world.removeEndedTasks();
+                world.advanceTime();
+
+                nextPhaseCallback();
+            }
+        }
+    ]
+});
+
+function runRound() {
+    console.log(`---- Round ${world.tick} ----`);
+    eventSheetManager.setRoundCounter(world.tick);
+    phaseRunner.start();
+}
+
+function runRounds(count = 8) {
+    if (count <= 0) {
+        return;
     }
+
+    var remainingRounds = count;
+
+    var runNextRound = function () {
+        if (remainingRounds <= 0) {
+            return;
+        }
+
+        remainingRounds--;
+        runRound();
+    }
+
+    var completeHandler = function () {
+        if (remainingRounds <= 0) {
+            phaseRunner.off('complete', completeHandler);
+            return;
+        }
+
+        setTimeout(runNextRound, 0);
+    }
+
+    phaseRunner.on('complete', completeHandler);
+    runNextRound();
 }
 
 Object.assign(window, {
     characterAndTaskDemo: {
         commandExecutor,
         eventSheetManager,
+        phaseRunner,
         runRound,
         runRounds,
         world
     }
 });
 
-runRounds().catch(function (error) {
-    console.error(error);
-});
+runRounds();

@@ -1,6 +1,9 @@
 import YAMLEventSheets from './yamleventsheets.js';
 import CommandExecutor from './commandexecutor.js';
-import { Logger, Tracer, BBCodeSink } from './yamleventsheets.js';
+import {
+    Logger, Tracer, BBCodeSink,
+    PhaseRunner,
+} from './yamleventsheets.js';
 
 import { Plugins as PhaserPlugins } from 'phaser';
 
@@ -34,6 +37,10 @@ class YAMLEventSheetsPlugin extends PhaserPlugins.BasePlugin {
 
     addTracer(config) {
         return new Tracer(config);
+    }
+
+    addPhaseRunner(eventSheetManager, config) {
+        return new PhaseRunner(eventSheetManager, config);
     }
 
 }

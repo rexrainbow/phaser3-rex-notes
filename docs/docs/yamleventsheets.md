@@ -240,15 +240,23 @@ graph TD
     ```javascript
     eventSheetManager.start(title, groupName, false);
     ```
+- Start running an event sheet (indexed by `title`) with scoped injected data, in a specific group.
+    ```javascript
+    eventSheetManager.start(title, groupName, ignoreCondition, injectData);
+    ```
+    Injected data is available during this run, including after `pauseEventSheet()` and resume. It is restored when this run completes or stops.
+- Start running and wait for completion by promise.
+    ```javascript
+    await eventSheetManager.startPromise();
+    await eventSheetManager.startPromise(title);
+    await eventSheetManager.startPromise(title, groupName);
+    await eventSheetManager.startPromise(title, ignoreCondition);
+    await eventSheetManager.startPromise(title, groupName, ignoreCondition);
+    await eventSheetManager.startPromise(title, groupName, ignoreCondition, injectData);
+    ```
+    Promise methods reject if the target group is already running.
 
 #### Start running a group by event
-
-```javascript
-eventSheetManager.startGroup(eventName, groupName);
-// eventSheetManager.startGroup(eventName, groupName, once);
-```
-
-or
 
 ```javascript
 eventSheetManager.startGroup({
@@ -257,6 +265,17 @@ eventSheetManager.startGroup({
     once: false
 });
 ```
+
+or
+
+Start running a group and wait for completion by promise.
+
+```javascript
+await eventSheetManager.startGroupPromise();
+await eventSheetManager.startGroupPromise(groupName);
+```
+
+Promise is resolved when this group completes, and rejects if this group is already running.
 
 ### Round counter
 

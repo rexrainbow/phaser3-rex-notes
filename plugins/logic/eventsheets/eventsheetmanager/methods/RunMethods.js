@@ -1,3 +1,5 @@
+import { EVT_GROUP_COMPLETE } from '../constants.js';
+
 var GetStartGroupName = function (eventSheetManager, args) {
     switch (args.length) {
         case 0:
@@ -27,21 +29,21 @@ var StartPromise = function (eventSheetManager, groupName, startCallback) {
                 return;
             }
 
-            eventSheetManager.off('complete', completeCallback);
+            eventSheetManager.off(EVT_GROUP_COMPLETE, completeCallback);
             resolve(eventSheetManager);
         };
 
-        eventSheetManager.on('complete', completeCallback);
+        eventSheetManager.on(EVT_GROUP_COMPLETE, completeCallback);
 
         try {
             startCallback();
 
             if (!eventSheetGroup.isRunning) {
-                eventSheetManager.off('complete', completeCallback);
+                eventSheetManager.off(EVT_GROUP_COMPLETE, completeCallback);
                 resolve(eventSheetManager);
             }
         } catch (error) {
-            eventSheetManager.off('complete', completeCallback);
+            eventSheetManager.off(EVT_GROUP_COMPLETE, completeCallback);
             reject(error);
         }
     });
