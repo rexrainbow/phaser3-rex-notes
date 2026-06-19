@@ -251,7 +251,7 @@ class CommandExecutor {
         return this.world.getEvalContext();
     }
 
-    canRunTask({ characterId, taskTitle } = {}, eventSheetManager) {
+    canStartTask({ characterId, taskTitle } = {}, eventSheetManager) {
         return eventSheetManager.evalCondition(taskTitle, 'tasks', {
             $charId: characterId,
             $taskTitle: taskTitle
@@ -361,6 +361,8 @@ eventSheetManager
     .addEventSheet(AliceBehaviorEventSheet, 'characters')
     .addEventSheet(WorkTaskEventSheet, 'tasks')
     .addEventSheet(SleepTaskEventSheet, 'tasks');
+
+console.log(eventSheetManager.dumpEventSheetGroup('characters'))
 
 async function runRound() {
     console.log(`---- Round ${world.tick} ----`);

@@ -6,7 +6,7 @@ script:
     branches:
       # Work
       - condition:
-          name: canRunTask
+          name: canStartTask
           parameters:
             characterId: alice
             taskTitle: work_task
@@ -20,7 +20,7 @@ script:
 
       # Or Sleep
       - condition:
-          name: canRunTask
+          name: canStartTask
           parameters:
             characterId: alice
             taskTitle: sleep_task
@@ -31,3 +31,7 @@ script:
             parameters:
               taskTitle: sleep_task
               characterId: alice
+
+      - actions:
+          - name: print
+            parameters: { text: "Continue previous task!" }
