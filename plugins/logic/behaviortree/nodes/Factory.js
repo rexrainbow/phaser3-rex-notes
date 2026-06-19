@@ -1,7 +1,7 @@
 import BaseNode from './BaseNode.js';
 import Action from './Action.js';
 import Composite from './Composite.js';
-import Decorator from './Decorator';
+import Decorator from './Decorator.js';
 import Service from './Service.js';
 import Expression from './Expression.js';
 import {
@@ -13,7 +13,7 @@ import {
     CreateNumberExpression,
     CreateStringExpression,
     CreateLogicExpression,
-} from './expressions';
+} from './expressions/index.js';
 
 import Succeeder from './actions/Succeeder.js';
 import Failer from './actions/Failer.js';

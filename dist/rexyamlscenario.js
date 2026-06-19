@@ -5098,6 +5098,18 @@
 	    }
 	};
 
+	var DefaultFunctions = {
+	    round: Math.round,
+	    floor: Math.floor,
+	    ceil: Math.ceil,
+	    abs: Math.abs,
+	    min: Math.min,
+	    max: Math.max,
+	    clamp(value, min, max) {
+	        return Math.min(Math.max(value, min), max);
+	    },
+	};
+
 	const MISSING = {};
 
 	class FormulaParser extends parser$2.Parser {
@@ -5117,6 +5129,8 @@
 	        }
 
 	        this.setSafeMode(GetProperty$1(config, 'safeMode', false));
+
+	        this.setFunctions(DefaultFunctions);
 
 	        var functions = GetProperty$1(config, 'functions', undefined);
 	        if (functions) {
@@ -16893,8 +16907,28 @@
 	        this.blackboard.eventSheetManager = this; // For TaskAction
 
 	        // All event sheets (BT) use the same expressionParser and stringTemplate
+	        var eventSheetManager = this;
 	        this.expressionParser = new FormulaParser({
-	            cache: true
+	            cache: true,
+	            defaultHandler(name, args, context) {
+	                var commandExecutor = eventSheetManager.commandExecutor;
+	                if (!commandExecutor) {
+	                    return 0;
+	                }
+
+	                var eventSheet = (context) ? context.eventSheet : undefined;
+	                var handler = commandExecutor[name];
+	                if (handler) {
+	                    return handler.call(commandExecutor, args, eventSheetManager, eventSheet);
+	                }
+
+	                var defaultHandler = commandExecutor.defaultExpressionHandler || commandExecutor.defaultHandler;
+	                if (defaultHandler) {
+	                    return defaultHandler.call(commandExecutor, name, args, eventSheetManager, eventSheet);
+	                }
+
+	                return 0;
+	            }
 	        });
 	        this.stringTemplate = new StringTemplate({
 	            expressionParser: this.expressionParser,

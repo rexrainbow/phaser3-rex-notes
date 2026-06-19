@@ -1013,6 +1013,18 @@ var GetProperty = function (context, key, defaultValue, dotMode, safeMode) {
     }
 };
 
+var DefaultFunctions = {
+    round: Math.round,
+    floor: Math.floor,
+    ceil: Math.ceil,
+    abs: Math.abs,
+    min: Math.min,
+    max: Math.max,
+    clamp(value, min, max) {
+        return Math.min(Math.max(value, min), max);
+    },
+};
+
 const MISSING = {};
 
 class FormulaParser extends parser$1.Parser {
@@ -1032,6 +1044,8 @@ class FormulaParser extends parser$1.Parser {
         }
 
         this.setSafeMode(GetProperty(config, 'safeMode', false));
+
+        this.setFunctions(DefaultFunctions);
 
         var functions = GetProperty(config, 'functions', undefined);
         if (functions) {

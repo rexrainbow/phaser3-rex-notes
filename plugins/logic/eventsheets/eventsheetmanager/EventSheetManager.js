@@ -50,14 +50,15 @@ class EventSheetManager extends EventEmitter {
                     return 0;
                 }
 
+                var eventSheet = (context) ? context.eventSheet : undefined;
                 var handler = commandExecutor[name];
                 if (handler) {
-                    return handler.call(commandExecutor, args, eventSheetManager, context?.eventSheet);
+                    return handler.call(commandExecutor, args, eventSheetManager, eventSheet);
                 }
 
                 var defaultHandler = commandExecutor.defaultExpressionHandler || commandExecutor.defaultHandler;
                 if (defaultHandler) {
-                    return defaultHandler.call(commandExecutor, name, args, eventSheetManager, context?.eventSheet);
+                    return defaultHandler.call(commandExecutor, name, args, eventSheetManager, eventSheet);
                 }
 
                 return 0;

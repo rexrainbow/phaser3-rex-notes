@@ -1,7 +1,7 @@
 import {
     IDLE, SUCCESS, FAILURE, RUNNING, ABORT, ERROR,
     COMPOSITE, DECORATOR, ACTION, EXPRESSION, SERVICE
-} from './constants';
+} from './constants.js';
 
 import { CreateID, SetSerialNumber, SetSerialNumberPrefix, GetSerialNumber } from './utils/CreateID.js'
 
@@ -56,7 +56,7 @@ import {
     ContinueIf,
     AbortIf,
     BreakDecorator,
-} from './nodes';
+} from './nodes/index.js';
 
 export {
     IDLE,
