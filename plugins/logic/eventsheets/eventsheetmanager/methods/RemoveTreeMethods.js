@@ -30,4 +30,15 @@ export default {
         this.getTreeGroup(groupName).removeEventSheetLater(title);
         return this;
     },
+
+    removeTreeGroup(name) {
+        if (!this.hasTreeGroup(name)) {
+            return this;
+        }
+
+        this.treeGroups[name].destroy();
+        delete this.treeGroups[name];
+
+        return this;
+    },
 }

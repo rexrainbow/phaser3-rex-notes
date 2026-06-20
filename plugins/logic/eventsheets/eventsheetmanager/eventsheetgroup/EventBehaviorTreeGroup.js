@@ -19,15 +19,25 @@ class EventBehaviorTreeGroup {
     }
 
     destroy() {
-        this.stop();
+        if (this.isRunning) {
+            this.stop();
+        } else {
+            this.clearRunContext();
+        }
 
+        var blackboard = this.parent.blackboard;
+
+        for (var i = 0, cnt = this.trees.length; i < cnt; i++) {
+            var tree = this.trees[i];
+
+            blackboard.removeTreeData(tree.id);
+            tree.destroy();
+        }
+
+        this.trees.length = 0;
         this.pendingTrees.length = 0;
         this.closedTrees.length = 0;
         this.isRunning = false;
-
-        for (var i = 0, cnt = this.trees.length; i < cnt; i++) {
-            this.trees[i].destroy();
-        }
     }
 }
 
