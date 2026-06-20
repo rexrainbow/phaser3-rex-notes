@@ -2,7 +2,7 @@ import EventSheets from '../eventsheets/EventSheets.js';
 import BuildTree from './buildtree/BuildTree.js';
 
 class JSONEventSheets extends EventSheets {
-    addEventSheet(jsonData, groupName, config) {
+    buildEventSheet(jsonData, groupName, config) {
         if (typeof (groupName) !== 'string') {
             config = groupName;
             groupName = undefined;
@@ -25,15 +25,15 @@ class JSONEventSheets extends EventSheets {
             this,
             jsonData,
             {
+                ...config,
                 groupName,
                 parallel
             }
         );
 
-        this.addTree(eventsheet, eventsheet.groupName);
-
-        return this;
+        return eventsheet;
     }
+
 }
 
 export default JSONEventSheets;

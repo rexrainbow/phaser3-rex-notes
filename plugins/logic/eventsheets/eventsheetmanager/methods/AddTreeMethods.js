@@ -1,7 +1,12 @@
 export default {
-    // Override it
     addEventSheet(data, groupName, config) {
+        var eventsheet = this.buildEventSheet(data, groupName, config);
+        this.addTree(eventsheet, eventsheet.groupName);
         return this;
+    },
+
+    // Override it
+    buildEventSheet(data, groupName, config) {
     },
 
     addTree(eventSheet, groupName) {

@@ -153,5 +153,6 @@ export default {
             groupName = this.defaultTreeGroupName;
         }
         return this.getTreeGroup(groupName).evalCondition(title, data)
-    }
+    },
+
 }

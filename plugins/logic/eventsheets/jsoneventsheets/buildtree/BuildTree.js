@@ -23,6 +23,7 @@ var BuildTree = function (
         parallel = false,
         active = true,
         once = false,
+        title: defaultTitle,
     } = config;
 
     var treeConfig = Object.assign(
@@ -33,7 +34,7 @@ var BuildTree = function (
     var eventsheet = new EventSheet(
         eventSheetManager,
         {
-            title: title,
+            title: title || defaultTitle,
             condition: GetConditionExpression(condition),
             properties: treeConfig
         }

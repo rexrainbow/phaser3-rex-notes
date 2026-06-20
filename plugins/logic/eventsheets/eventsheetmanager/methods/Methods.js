@@ -9,10 +9,12 @@ import StateMethods from './StateMethods.js';
 import ValueConvertMethods from './ValueConvertMethods.js';
 import RunMethods from './RunMethods.js';
 import StopMethods from './StopMethods.js';
+import RunEventSheetOnceMethods from './RunEventSheetOnceMethods.js';
 import BindEventMethods from './BindEventMethods.js';
 import RoundCounterMethods from './RoundCounterMethods.js';
 
-var Methods = {};
+var Methods = {
+};
 
 Object.assign(
     Methods,
@@ -26,6 +28,7 @@ Object.assign(
     StateMethods,
     ValueConvertMethods,
     RunMethods,
+    RunEventSheetOnceMethods,
     StopMethods,
     BindEventMethods,
     RoundCounterMethods,
