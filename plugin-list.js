@@ -165,7 +165,6 @@ module.exports = {
     'bracketparserplugin': './plugins/bracketparser-plugin.js',
     'bracketparser2plugin': './plugins/bracketparser2-plugin.js',
     'tagplayerplugin': './plugins/tagplayer-plugin.js',
-    'markedeventsheetsplugin': './plugins/markedeventsheets-plugin.js',
     'yamleventsheetsplugin': './plugins/yamleventsheets-plugin.js',
 
     // time
@@ -342,8 +341,6 @@ module.exports = {
     'spinner': './templates/spinner/spinner/Spinner.js',
 
     // scenario
-    'mdscenario': './templates/scenario/mdscenario/MDScenario.js',
-    'mdscenarioplugin': './templates/scenario/mdscenario/mdscenario-plugin.js',
     'jsonscenario': './templates/scenario/jsonscenario/JSONScenario.js',
     'jsonscenarioplugin': './templates/scenario/jsonscenario/jsonscenario-plugin.js',
     'yamlscenario': './templates/scenario/yamlscenario/YAMLScenario.js',
