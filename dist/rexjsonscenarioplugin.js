@@ -6032,7 +6032,27 @@
 
 	    get expressionParser() {
 	        if (!this._expressionParser) {
-	            this._expressionParser = new FormulaParser({ cache: true });
+	            var self = this;
+	            this._expressionParser = new FormulaParser({
+	                cache: true,
+	                defaultHandler(name, args, context) {
+	                    var target = self.target;
+	                    if (!target) {
+	                        return 0;
+	                    }
+	                    var handler = target[name];
+	                    if (handler) {
+	                        return handler.call(target, args, context);
+	                    }
+
+	                    var defaultHandler = target.defaultHandler;
+	                    if (defaultHandler) {
+	                        return defaultHandler.call(target, args, context);
+	                    }
+
+	                    return 0;
+	                }
+	            });
 	        }
 	        return this._expressionParser;
 	    }
@@ -16911,20 +16931,19 @@
 	        this.expressionParser = new FormulaParser({
 	            cache: true,
 	            defaultHandler(name, args, context) {
-	                var commandExecutor = eventSheetManager.commandExecutor;
-	                if (!commandExecutor) {
+	                var target = eventSheetManager.commandExecutor;
+	                if (!target) {
 	                    return 0;
 	                }
 
-	                var eventSheet = (context) ? context.eventSheet : undefined;
-	                var handler = commandExecutor[name];
+	                var handler = target[name];
 	                if (handler) {
-	                    return handler.call(commandExecutor, args, eventSheetManager, eventSheet);
+	                    return handler.call(target, args, context);
 	                }
 
-	                var defaultHandler = commandExecutor.defaultExpressionHandler || commandExecutor.defaultHandler;
+	                var defaultHandler = target.defaultExpressionHandler;
 	                if (defaultHandler) {
-	                    return defaultHandler.call(commandExecutor, name, args, eventSheetManager, eventSheet);
+	                    return defaultHandler.call(target, name, args, context);
 	                }
 
 	                return 0;
@@ -80168,6 +80187,7 @@ void main (void) {
 
 	var Methods$3 = {
 	    addCommand: AddCommand,
+	    addExpressionMethod: AddCommand,
 	    defaultHandler: DefaultHandler,
 	};
 
