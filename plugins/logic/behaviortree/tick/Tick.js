@@ -95,7 +95,27 @@ class Tick {
 
     get expressionParser() {
         if (!this._expressionParser) {
-            this._expressionParser = new ExpressionParser({ cache: true });
+            var self = this;
+            this._expressionParser = new ExpressionParser({
+                cache: true,
+                defaultHandler(name, args, context) {
+                    var target = self.target;
+                    if (!target) {
+                        return 0;
+                    }
+                    var handler = target[name];
+                    if (handler) {
+                        return handler.call(target, args, context);
+                    }
+
+                    var defaultHandler = target.defaultHandler;
+                    if (defaultHandler) {
+                        return defaultHandler.call(target, args, context);
+                    }
+
+                    return 0;
+                }
+            });
         }
         return this._expressionParser;
     }

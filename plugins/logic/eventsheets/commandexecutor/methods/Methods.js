@@ -13,6 +13,7 @@ import DefaultHandler from './DefaultHandler.js';
 
 var Methods = {
     addCommand: AddCommand,
+    addExpressionMethod: AddCommand,
     defaultHandler: DefaultHandler,
 }
 

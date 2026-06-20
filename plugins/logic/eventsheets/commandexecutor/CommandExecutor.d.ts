@@ -1,7 +1,7 @@
 import Managers from '../../runcommands/managers/Managers';
 import BBCodeLog from '../../../bbcodelog';
 import EventSheetManager from '../eventsheetmanager/EventSheetManager';
-import { BehaviorTree } from '../../behaviortree';
+import { BehaviorTree, Blackboard } from '../../behaviortree';
 
 export default CommandExecutor;
 
@@ -153,6 +153,20 @@ declare namespace CommandExecutor {
     ) => Phaser.Events.EventEmitter | CommandExecutor | void;
 
     /**
+     * Expression method callback signature.
+     *
+     * @param args - Evaluated expression arguments.
+     * @param context - Expression evaluation context.
+     * @param eventsheetManager - EventSheetManager instance.
+     * @param eventSheet - Behavior tree instance.
+     * @returns Expression result.
+     */
+    type ExpressionMethodCallbackType = (
+        args: any[],
+        context: Blackboard.MemoryType,
+    ) => any;
+
+    /**
      * Configuration options for creating a CommandExecutor.
      */
     interface IConfig extends Managers.IConfig {
@@ -233,6 +247,23 @@ declare class CommandExecutor {
         config: CommandExecutor.GeneralConfigType,
         eventSheetManager: EventSheetManager
     ): void | Phaser.Events.EventEmitter;
+
+    /**
+     * Add an expression method.
+     *
+     * This method shares the same runtime registration body as addCommand(),
+     * but its callback is invoked from expression evaluation.
+     *
+     * @param name - Expression method name.
+     * @param callback - Expression method callback.
+     * @param scope - Callback scope.
+     * @returns This CommandExecutor instance.
+     */
+    addExpressionMethod(
+        name: string,
+        callback: CommandExecutor.ExpressionMethodCallbackType,
+        scope?: object
+    ): this;
 
     /**
      * Set a game object property.

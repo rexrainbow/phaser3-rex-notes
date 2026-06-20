@@ -340,9 +340,9 @@ And game objects with `'autoClear'` will be destroyed.
     eventSheetManager.stop(groupName);
     ```
 
-### Local memory
+### Global memory
 
-Local memory is shared for all event sheets.
+Global memory is shared for all event sheets.
 
 - Set value
     ```javascript
@@ -368,12 +368,27 @@ Local memory is shared for all event sheets.
     ```javascript
     var hasData = eventSheetManager.hasData(key);
     ```
-- Local memory as a dictionary
+- Global memory as a dictionary
     ```javascript
     var data = eventSheetManager.memory;
     ```
 
 ### Custom expression
+
+Custom expression methods can be injected in 2 ways.
+
+1. Add a function to event sheet global memory/context by `eventSheetManager.addExpression()`.
+1. Add a method to `commandExecutor`  
+    - Using `commandExecutor.addExpressionMethod()` for built-in [command executor](#command-executor)
+
+They can be used in number expressions or string templates.
+
+```yaml
+- name: setData
+  parameters: { coin: "#(randomInt(1, 10))" }
+- name: print
+  parameters: { text: "coin = {{randomInt(1, 10)}}" }
+```
 
 #### Expression parser function
 
@@ -395,7 +410,48 @@ eventSheetManager.addExpression('randomInt', function (a, b) {
 });
 ```
 
-Expression parser functions are stored in [local memory](#local-memory).
+These functions are stored in [global memory](#global-memory).
+
+#### Command executor expression method
+
+```javascript
+commandExecutor.randomInt = function(args, context) {
+    var [param0, param1] = args;
+    return Math.floor(a + Math.random() * (b - a + 1));
+}
+```
+
+or
+
+```javascript
+commandExecutor.addExpressionMethod(name, callback, scope);
+```
+
+when using built-in [command executor](#command-executor)
+
+- `name` : A string value.
+- `callback` : A function object returns a value.
+    ```javascript
+    function(args, context) { 
+        var [param0, param1] = args;
+        return Math.floor(a + Math.random() * (b - a + 1));
+    }
+    ```
+    - `args` : Evaluated arguments passed from expression calls.
+    - `context` : Expression evaluation context.
+- `scope` : Callback scope.
+
+For example :
+
+```javascript
+commandExecutor.addExpressionMethod('randomInt', function (args) {
+    var [a, b] = args;
+    return Math.floor(a + Math.random() * (b - a + 1));
+});
+```
+
+When an expression method is not found in the expression parser context, 
+event sheet manager tries to invoke the method with the same name on `commandExecutor`.
 
 #### Parameter expression
 
@@ -696,7 +752,7 @@ fallback:
     ```yaml
     condition: "hp > 0 && mp > 0"
     ```
-    - Read data from [local memory](yamleventsheets.md#local-memory).
+    - Read data from [global memory](yamleventsheets.md#global-memory).
     - Boolean expression AND : `&&`.
     - Boolean expression OR : `||`.
 - A logical expression object : Compose string expressions, parameter expression objects, or nested logical expression objects.
@@ -1130,7 +1186,7 @@ var commandExecutor = new CommandExecutor(scene, config);
         - `true` : Can [print message on console](#bbcode-log). Default behavior.
         - `false` : Don't print any message on console.
 
-#### Local memory of event sheet manager
+#### Global memory of event sheet manager
 
 - Set value by key
     ```yaml
@@ -1153,8 +1209,7 @@ var commandExecutor = new CommandExecutor(scene, config);
       parameters: { key: true }
     ```
 
-
-See [Local memory](#local-memory)
+See [global memory](#global-memory)
 
 
 #### BBCode Log

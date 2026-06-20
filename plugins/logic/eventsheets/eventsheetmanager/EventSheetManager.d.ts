@@ -19,20 +19,22 @@ declare namespace EventSheetManager {
     ) => EventEmitter | void;
 
     /**
-     * Default handler for task execution.
+     * Default handler for expression execution.
      *
-     * @param taskName - Task name string.
-     * @param parameters - Task parameters.
+     * @param expressionName - Expression name string.
+     * @param args - Expression arguments.
+     * @param context - Expression evaluation context.
      * @param manager - EventSheetManager instance.
      * @param eventSheet - Behavior tree instance.
-     * @returns An EventEmitter or void.
+     * @returns Expression result.
      */
     type DefaultHandler = (
-        taskName: string,
-        parameters: { [key: string]: any },
+        expressionName: string,
+        args: any[],
+        context: Blackboard.MemoryType,
         manager: EventSheetManager,
         eventSheet?: BehaviorTree
-    ) => EventEmitter | void;
+    ) => any;
 
     /**
      * Configuration options for creating an EventSheetManager.
