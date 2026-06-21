@@ -9007,6 +9007,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#running-a-event-sheet-once" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running a event sheet once
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#round-counter" class="md-nav__link">
     <span class="md-ellipsis">
       Round counter
@@ -9034,9 +9043,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#local-memory" class="md-nav__link">
+  <a href="#global-memory" class="md-nav__link">
     <span class="md-ellipsis">
-      Local memory
+      Global memory
     </span>
   </a>
   
@@ -9056,6 +9065,15 @@
   <a href="#expression-parser-function" class="md-nav__link">
     <span class="md-ellipsis">
       Expression parser function
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command-executor-expression-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Command executor expression method
     </span>
   </a>
   
@@ -9338,9 +9356,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#local-memory-of-event-sheet-manager" class="md-nav__link">
+  <a href="#global-memory-of-event-sheet-manager" class="md-nav__link">
     <span class="md-ellipsis">
-      Local memory of event sheet manager
+      Global memory of event sheet manager
     </span>
   </a>
   
@@ -16124,6 +16142,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#running-a-event-sheet-once" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running a event sheet once
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#round-counter" class="md-nav__link">
     <span class="md-ellipsis">
       Round counter
@@ -16151,9 +16178,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#local-memory" class="md-nav__link">
+  <a href="#global-memory" class="md-nav__link">
     <span class="md-ellipsis">
-      Local memory
+      Global memory
     </span>
   </a>
   
@@ -16173,6 +16200,15 @@
   <a href="#expression-parser-function" class="md-nav__link">
     <span class="md-ellipsis">
       Expression parser function
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command-executor-expression-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Command executor expression method
     </span>
   </a>
   
@@ -16455,9 +16491,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#local-memory-of-event-sheet-manager" class="md-nav__link">
+  <a href="#global-memory-of-event-sheet-manager" class="md-nav__link">
     <span class="md-ellipsis">
-      Local memory of event sheet manager
+      Global memory of event sheet manager
     </span>
   </a>
   
@@ -17090,18 +17126,78 @@
 <li>Start running an event sheet (indexed by <code>title</code>) with condition testing, in a specific group.
     <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
 </code></pre></div></li>
+<li>Start running an event sheet (indexed by <code>title</code>) with scoped injected data, in a specific group.
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">ignoreCondition</span><span class="p">,</span><span class="w"> </span><span class="nx">injectData</span><span class="p">);</span>
+</code></pre></div>
+    Injected data is available during this run, including after <code>pauseEventSheet()</code> and resume. It is restored when this run completes or stops.</li>
+<li>Start running and wait for completion by promise.
+    <div class="highlight"><pre><span></span><code><span class="k">await</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">startPromise</span><span class="p">();</span>
+<span class="k">await</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">startPromise</span><span class="p">(</span><span class="nx">title</span><span class="p">);</span>
+<span class="k">await</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">startPromise</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">);</span>
+<span class="k">await</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">startPromise</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span><span class="w"> </span><span class="nx">ignoreCondition</span><span class="p">);</span>
+<span class="k">await</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">startPromise</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">ignoreCondition</span><span class="p">);</span>
+<span class="k">await</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">startPromise</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">ignoreCondition</span><span class="p">,</span><span class="w"> </span><span class="nx">injectData</span><span class="p">);</span>
+</code></pre></div>
+    Promise methods reject if the target group is already running.</li>
 </ul>
 <h4 id="start-running-a-group-by-event">Start running a group by event<a class="headerlink" href="#start-running-a-group-by-event" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">startGroup</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">);</span>
-<span class="c1">// eventSheetManager.startGroup(eventName, groupName, once);</span>
-</code></pre></div>
-<p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">startGroup</span><span class="p">({</span>
 <span class="w">    </span><span class="nx">eventName</span><span class="o">:</span>
 <span class="w">    </span><span class="nx">groupName</span><span class="o">:</span>
 <span class="w">    </span><span class="nx">once</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
 <span class="p">});</span>
 </code></pre></div>
+<p>or</p>
+<p>Start running a group and wait for completion by promise.</p>
+<div class="highlight"><pre><span></span><code><span class="k">await</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">startGroupPromise</span><span class="p">();</span>
+<span class="k">await</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">startGroupPromise</span><span class="p">(</span><span class="nx">groupName</span><span class="p">);</span>
+</code></pre></div>
+<p>Promise is resolved when this group completes, and rejects if this group is already running.</p>
+<h3 id="running-a-event-sheet-once">Running a event sheet once<a class="headerlink" href="#running-a-event-sheet-once" title="Permanent link">&para;</a></h3>
+<p>Run an event sheet content immediately, then remove it after completion.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">runEventSheetOnce</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">runEventSheetOnce</span><span class="p">(</span><span class="nx">content</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">ignoreCondition</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">injectData</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">runEventSheetOnce</span><span class="p">(</span><span class="nx">content</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">,</span><span class="w"> </span><span class="nx">injectData</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><code>content</code> : See <a href="./#structure-of-event-sheet">structure of event sheet</a></li>
+<li><code>title</code> : Title of this temporary event sheet.<ul>
+<li><code>undefined</code> : Generate an internal title.</li>
+</ul>
+</li>
+<li><code>ignoreCondition</code> :<ul>
+<li><code>true</code> : Run without condition testing. Default behavior.</li>
+<li><code>false</code> : Run with condition testing.</li>
+</ul>
+</li>
+<li><code>injectData</code> : Scoped data injected during this run. It is restored when this
+  run completes or stops.</li>
+</ul>
+<p>The event sheet is added to an internal temporary group. This group is removed
+after the event sheet completes, so this event sheet will not remain in the
+manager.</p>
+<p>Run once and wait for completion by promise.</p>
+<div class="highlight"><pre><span></span><code><span class="k">await</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">runEventSheetOncePromise</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="k">await</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">runEventSheetOncePromise</span><span class="p">(</span><span class="nx">content</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">ignoreCondition</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">injectData</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="k">await</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">runEventSheetOncePromise</span><span class="p">(</span><span class="nx">content</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">,</span><span class="w"> </span><span class="nx">injectData</span><span class="p">);</span>
+</code></pre></div>
+<p>Promise is resolved when this temporary event sheet completes.</p>
 <h3 id="round-counter">Round counter<a class="headerlink" href="#round-counter" title="Permanent link">&para;</a></h3>
 <p>Round counter is started from <code>0</code>.</p>
 <ul>
@@ -17153,8 +17249,8 @@ And game objects with <code>'autoClear'</code> will be destroyed.</p>
     <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">stop</span><span class="p">(</span><span class="nx">groupName</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="local-memory">Local memory<a class="headerlink" href="#local-memory" title="Permanent link">&para;</a></h3>
-<p>Local memory is shared for all event sheets.</p>
+<h3 id="global-memory">Global memory<a class="headerlink" href="#global-memory" title="Permanent link">&para;</a></h3>
+<p>Global memory is shared for all event sheets.</p>
 <ul>
 <li>Set value
     <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">);</span>
@@ -17174,11 +17270,25 @@ And game objects with <code>'autoClear'</code> will be destroyed.</p>
 <li>Has key
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">hasData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">hasData</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Local memory as a dictionary
+<li>Global memory as a dictionary
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">memory</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
 <h3 id="custom-expression">Custom expression<a class="headerlink" href="#custom-expression" title="Permanent link">&para;</a></h3>
+<p>Custom expression methods can be injected in 2 ways.</p>
+<ol>
+<li>Add a function to event sheet global memory/context by <code>eventSheetManager.addExpression()</code>.</li>
+<li>Add a method to <code>commandExecutor</code>  <ul>
+<li>Using <code>commandExecutor.addExpressionMethod()</code> for built-in <a href="#command-executor">command executor</a></li>
+</ul>
+</li>
+</ol>
+<p>They can be used in number expressions or string templates.</p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">setData</span>
+<span class="w">  </span><span class="nt">parameters</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> coin</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;#(randomInt(1,</span><span class="nv"> </span><span class="s">10))&quot;</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">print</span>
+<span class="w">  </span><span class="nt">parameters</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;coin</span><span class="nv"> </span><span class="s">=</span><span class="nv"> </span><span class="s">{{randomInt(1,</span><span class="nv"> </span><span class="s">10)}}&quot;</span><span class="w"> </span><span class="p p-Indicator">}</span>
+</code></pre></div>
 <h4 id="expression-parser-function">Expression parser function<a class="headerlink" href="#expression-parser-function" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">addExpression</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">callback</span><span class="p">);</span>
 </code></pre></div>
@@ -17193,7 +17303,39 @@ And game objects with <code>'autoClear'</code> will be destroyed.</p>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="nx">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">));</span>
 <span class="p">});</span>
 </code></pre></div>
-<p>Expression parser functions are stored in <a href="#local-memory">local memory</a>.</p>
+<p>These functions are stored in <a href="#global-memory">global memory</a>.</p>
+<h4 id="command-executor-expression-method">Command executor expression method<a class="headerlink" href="#command-executor-expression-method" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">commandExecutor</span><span class="p">.</span><span class="nx">randomInt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">args</span><span class="p">,</span><span class="w"> </span><span class="nx">context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="p">[</span><span class="nx">param0</span><span class="p">,</span><span class="w"> </span><span class="nx">param1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">args</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="nx">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">commandExecutor</span><span class="p">.</span><span class="nx">addExpressionMethod</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">callback</span><span class="p">,</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
+</code></pre></div>
+<p>when using built-in <a href="#command-executor">command executor</a></p>
+<ul>
+<li><code>name</code> : A string value.</li>
+<li><code>callback</code> : A function object returns a value.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">args</span><span class="p">,</span><span class="w"> </span><span class="nx">context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="p">[</span><span class="nx">param0</span><span class="p">,</span><span class="w"> </span><span class="nx">param1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">args</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="nx">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>args</code> : Evaluated arguments passed from expression calls.</li>
+<li><code>context</code> : Expression evaluation context.</li>
+</ul>
+</li>
+<li><code>scope</code> : Callback scope.</li>
+</ul>
+<p>For example :</p>
+<div class="highlight"><pre><span></span><code><span class="nx">commandExecutor</span><span class="p">.</span><span class="nx">addExpressionMethod</span><span class="p">(</span><span class="s1">&#39;randomInt&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="p">[</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">args</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="nx">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">));</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>When an expression method is not found in the expression parser context, 
+event sheet manager tries to invoke the method with the same name on <code>commandExecutor</code>.</p>
 <h4 id="parameter-expression">Parameter expression<a class="headerlink" href="#parameter-expression" title="Permanent link">&para;</a></h4>
 <p>A condition can also invoke a method of <code>commandExecutor</code> by using an object with <code>name</code> and <code>parameters</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">condition</span><span class="p">:</span>
@@ -17454,7 +17596,7 @@ And game objects with <code>'autoClear'</code> will be destroyed.</p>
 <li>A string : Single boolean expression.
     <div class="highlight"><pre><span></span><code><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;hp</span><span class="nv"> </span><span class="s">&gt;</span><span class="nv"> </span><span class="s">0</span><span class="nv"> </span><span class="s">&amp;&amp;</span><span class="nv"> </span><span class="s">mp</span><span class="nv"> </span><span class="s">&gt;</span><span class="nv"> </span><span class="s">0&quot;</span>
 </code></pre></div><ul>
-<li>Read data from <a href="./#local-memory">local memory</a>.</li>
+<li>Read data from <a href="./#global-memory">global memory</a>.</li>
 <li>Boolean expression AND : <code>&amp;&amp;</code>.</li>
 <li>Boolean expression OR : <code>||</code>.</li>
 </ul>
@@ -17834,7 +17976,7 @@ And game objects with <code>'autoClear'</code> will be destroyed.</p>
 </ul>
 </li>
 </ul>
-<h4 id="local-memory-of-event-sheet-manager">Local memory of event sheet manager<a class="headerlink" href="#local-memory-of-event-sheet-manager" title="Permanent link">&para;</a></h4>
+<h4 id="global-memory-of-event-sheet-manager">Global memory of event sheet manager<a class="headerlink" href="#global-memory-of-event-sheet-manager" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Set value by key
     <div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">setData</span>
@@ -17853,7 +17995,7 @@ And game objects with <code>'autoClear'</code> will be destroyed.</p>
 <span class="w">  </span><span class="nt">parameters</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> key</span><span class="p">:</span><span class="w"> </span><span class="nv">true</span><span class="w"> </span><span class="p p-Indicator">}</span>
 </code></pre></div></li>
 </ul>
-<p>See <a href="#local-memory">Local memory</a></p>
+<p>See <a href="#global-memory">global memory</a></p>
 <h4 id="bbcode-log">BBCode Log<a class="headerlink" href="#bbcode-log" title="Permanent link">&para;</a></h4>
 <h5 id="print-message-on-console">Print message on console<a class="headerlink" href="#print-message-on-console" title="Permanent link">&para;</a></h5>
 <div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">log</span>

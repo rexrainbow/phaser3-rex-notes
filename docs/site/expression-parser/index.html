@@ -11367,6 +11367,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#default-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Default method
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#custom-method" class="md-nav__link">
     <span class="md-ellipsis">
       Custom method
@@ -15373,6 +15382,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#default-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Default method
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#custom-method" class="md-nav__link">
     <span class="md-ellipsis">
       Custom method
@@ -15609,6 +15627,29 @@ Parser is generated from <a href="https://github.com/zaach/jison">jison</a></p>
 </code></pre></div>
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">parser</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="nx">f</span><span class="p">,</span><span class="w"> </span><span class="nx">context</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="default-method">Default method<a class="headerlink" href="#default-method" title="Permanent link">&para;</a></h3>
+<p>These methods are registered into each parser instance by default.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">parser</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="s1">&#39;round(a) * 10&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">a</span><span class="o">:</span><span class="w"> </span><span class="mf">2.6</span><span class="w"> </span><span class="p">});</span>
+<span class="c1">// value: 30</span>
+</code></pre></div>
+<ul>
+<li><code>round(value)</code> : <code>Math.round(value)</code>.</li>
+<li><code>floor(value)</code> : <code>Math.floor(value)</code>.</li>
+<li><code>ceil(value)</code> : <code>Math.ceil(value)</code>.</li>
+<li><code>abs(value)</code> : <code>Math.abs(value)</code>.</li>
+<li><code>min(...values)</code> : <code>Math.min(...values)</code>.</li>
+<li><code>max(...values)</code> : <code>Math.max(...values)</code>.</li>
+<li><code>clamp(value, min, max)</code> : Clamp <code>value</code> into <code>[min, max]</code>.</li>
+</ul>
+<p>Default methods are registered before the <code>functions</code> config is applied, therefore they can be overridden.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">parser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ExpressionParser</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">functions</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">round</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
 </code></pre></div>
 <h3 id="custom-method">Custom method<a class="headerlink" href="#custom-method" title="Permanent link">&para;</a></h3>
 <ul>
