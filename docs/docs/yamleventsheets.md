@@ -277,6 +277,67 @@ await eventSheetManager.startGroupPromise(groupName);
 
 Promise is resolved when this group completes, and rejects if this group is already running.
 
+### Running a event sheet once
+
+Run an event sheet content immediately, then remove it after completion.
+
+```javascript
+eventSheetManager.runEventSheetOnce(content);
+```
+
+or
+
+```javascript
+eventSheetManager.runEventSheetOnce(content, {
+    title: undefined,
+    ignoreCondition: true,
+    injectData: undefined
+});
+```
+
+or
+
+```javascript
+eventSheetManager.runEventSheetOnce(content, config, injectData);
+```
+
+- `content` : See [structure of event sheet](yamleventsheets.md#structure-of-event-sheet)
+- `title` : Title of this temporary event sheet.
+    - `undefined` : Generate an internal title.
+- `ignoreCondition` :
+    - `true` : Run without condition testing. Default behavior.
+    - `false` : Run with condition testing.
+- `injectData` : Scoped data injected during this run. It is restored when this
+  run completes or stops.
+
+The event sheet is added to an internal temporary group. This group is removed
+after the event sheet completes, so this event sheet will not remain in the
+manager.
+
+Run once and wait for completion by promise.
+
+```javascript
+await eventSheetManager.runEventSheetOncePromise(content);
+```
+
+or
+
+```javascript
+await eventSheetManager.runEventSheetOncePromise(content, {
+    title: undefined,
+    ignoreCondition: true,
+    injectData: undefined
+});
+```
+
+or
+
+```javascript
+await eventSheetManager.runEventSheetOncePromise(content, config, injectData);
+```
+
+Promise is resolved when this temporary event sheet completes.
+
 ### Round counter
 
 Round counter is started from `0`.
