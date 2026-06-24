@@ -15828,6 +15828,7 @@
 
 <span class="w">    </span><span class="nx">mask</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">padding</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="c1">// or {left, right, top, bottom}</span>
+<span class="w">        </span><span class="c1">// maskType: &#39;children&#39;,</span>
 <span class="w">        </span><span class="c1">// updateMode: 0,</span>
 <span class="w">        </span><span class="c1">// layer: undefined,</span>
 <span class="w">    </span><span class="p">},</span>
@@ -15886,6 +15887,12 @@
 <li><code>mask.padding</code> : <ul>
 <li>A number : Extra left/right/top/bottom padding spacing of this rectangle mask. Default value is <code>0</code>.</li>
 <li>A plain object <code>{left, right, top, bottom}</code>    </li>
+</ul>
+</li>
+<li><code>mask.maskType</code> :<ul>
+<li><code>children</code> or <code>undefined</code> : Applies the mask to each partially visible child.</li>
+<li><code>layer</code> : Applies one shared layer mask and only toggles child visibility.</li>
+<li><code>stencil</code> : Uses a stencil mask and only toggles child visibility.</li>
 </ul>
 </li>
 <li><code>mask.updateMode</code> : When to update cells mask<ul>

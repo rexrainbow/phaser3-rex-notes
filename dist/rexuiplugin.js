@@ -34287,12 +34287,17 @@ void main (void) {
         rendererLayer.depthSort();
 
         var layerHasBlendMode = (container.blendMode !== SKIP_CHECK_BLEND_MODE$1);
+        var useStencilChildrenMask = container.childrenMaskGameObject && container.useStencilChildrenMask;
 
         if (!layerHasBlendMode && currentContext.blendMode !== 0) {
             //  If Layer is SKIP_CHECK then set blend mode to Normal
             currentContext = currentContext.getClone();
             currentContext.setBlendMode(0);
             currentContext.use();
+        }
+
+        if (useStencilChildrenMask) {
+            RenderStencilMask(renderer, container.childrenMaskGameObject, currentContext, 'addLayer');
         }
 
         for (var i = 0; i < childCount; i++) {
@@ -34316,10 +34321,41 @@ void main (void) {
             child.renderWebGLStep(renderer, child, currentContext, undefined, undefined, children, i);
         }
 
+        if (useStencilChildrenMask) {
+            RenderStencilMask(renderer, container.childrenMaskGameObject, currentContext, 'subtractLayer');
+        }
+
         // Release any remaining context.
         if (currentContext !== drawingContext) {
             currentContext.release();
         }
+    };
+
+    var RenderStencilMask = function (renderer, maskGameObject, drawingContext, layerMode) {
+        var gl = renderer.gl;
+        var opIncr = gl.INCR_WRAP;
+        var opDecr = gl.DECR_WRAP;
+        var op = (layerMode === 'subtractLayer') ? opDecr : opIncr;
+
+        var currentContext = drawingContext.getClone();
+
+        currentContext.setAlphaStrategy(renderer.config.stencilAlphaStrategy);
+        currentContext.setColorWritemask(false, false, false, false);
+        currentContext.setStencil(true, gl.ALWAYS, 0, 0xFF, op, op, op, 0, 0xFF);
+        currentContext.use();
+
+        // Invert the stencil so the mask interior remains drawable under Phaser's zero-test rule.
+        renderer.renderNodes.getNode('FillCamera').run(currentContext, 0xff000000, drawingContext.useCanvas);
+
+        currentContext = currentContext.getClone();
+        currentContext.use();
+
+        op = (op === opIncr) ? opDecr : opIncr;
+        currentContext.setStencil(true, gl.ALWAYS, 0, 0xFF, op, op, op, 0, 0xFF);
+
+        maskGameObject.renderWebGLStep(renderer, maskGameObject, currentContext);
+
+        currentContext.release();
     };
 
     var CanvasRenderer$1 = function (renderer, container, camera) {
@@ -64055,6 +64091,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         parent,
         maskGameObject,
         children,
+        handlers,
 
         onVisible, onInvisible, scope,
     }) {
@@ -64065,6 +64102,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
         if (children === undefined) {
             children = parent.getAllChildren();
+        }
+        if (handlers === undefined) {
+            handlers = DefaultHandlers;
         }
 
         var hasAnyVisibleCallback = !!onVisible || !!onInvisible;
@@ -64089,22 +64129,22 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 visiblePointsNumber = ContainsPoints(parentBounds, childBounds);
                 switch (visiblePointsNumber) {
                     case 4: // 4 points are all inside visible window, set visible                     
-                        SetVisible(parent, child);
+                        handlers.visible(parent, child, maskGameObject);
                         break;
                     case 0: // No point is inside visible window
                         // Parent intersects with child, or parent is inside child, set visible, and apply mask
                         if (Intersects(parentBounds, childBounds) || Overlaps(parentBounds, childBounds)) {
-                            SetPartiallyVisible(parent, child, maskGameObject);
+                            handlers.partial(parent, child, maskGameObject);
                         } else { // Set invisible
-                            SetInvisible(parent, child);
+                            handlers.invisible(parent, child, maskGameObject);
                         }
                         break;
                     default: // Part of points are inside visible window, set visible, and apply mask
-                        SetPartiallyVisible(parent, child, maskGameObject);
+                        handlers.partial(parent, child, maskGameObject);
                         break;
                 }
             } else {
-                SetPartiallyVisible(parent, child, maskGameObject);
+                handlers.partial(parent, child, maskGameObject);
             }
 
             if (hasAnyVisibleCallback && (child.visible !== isChildVisible)) {
@@ -64199,6 +64239,18 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     };
 
+    var DefaultHandlers = {
+        visible: SetVisible,
+        partial: SetPartiallyVisible,
+        invisible: SetInvisible
+    };
+
+    var VisibilityOnlyHandlers = {
+        visible: SetVisible,
+        partial: SetVisible,
+        invisible: SetInvisible
+    };
+
     const GetValue$1D = phaser.Utils.Objects.GetValue;
 
     const MASKUPDATEMODE = {
@@ -64212,6 +64264,23 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 // No children mask
                 return this;
             }
+
+            var maskType = GetValue$1D(config, 'maskType');
+            if (!maskType) {
+                if (this.layerRendererEnable) {
+                    maskType = 'layer';
+                }
+            }
+            switch (maskType) {
+                case 'stencil':
+                    this.setStencilChildrenMaskEanble(true);
+                    break;
+                case 'layer':
+                    this.enableLayer();
+                    break;
+                // default = 'children' 
+            }
+            this.maskType = maskType;
 
             this.setMaskUpdateMode(GetValue$1D(config, 'updateMode', 0));
             this.enableChildrenMask(GetValue$1D(config, 'padding', 0));
@@ -64279,20 +64348,44 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 return this;
             }
 
-            if (this.layerRendererEnable) {
-                SetMask(this, this.childrenMaskGameObject);
+            switch (this.maskType) {
+                case 'stencil':
+                    MaskChildren({
+                        parent: this,
+                        maskGameObject: this.childrenMaskGameObject,
+                        handlers: VisibilityOnlyHandlers,
 
-            } else {
-                // Assume that all children are at scene's displayList
-                MaskChildren({
-                    parent: this,
-                    maskGameObject: this.childrenMaskGameObject,
+                        onVisible: this.onMaskGameObjectVisible,
+                        onInvisible: this.onMaskGameObjectInvisible,
+                        scope: this.maskGameObjectCallbackScope
+                    });
+                    break;
 
-                    onVisible: this.onMaskGameObjectVisible,
-                    onInvisible: this.onMaskGameObjectInvisible,
-                    scope: this.maskGameObjectCallbackScope
-                });
+                case 'layer':
+                    // Single mask target
+                    SetMask(this, this.childrenMaskGameObject);
+                    MaskChildren({
+                        parent: this,
+                        maskGameObject: this.childrenMaskGameObject,
+                        handlers: VisibilityOnlyHandlers,
 
+                        onVisible: this.onMaskGameObjectVisible,
+                        onInvisible: this.onMaskGameObjectInvisible,
+                        scope: this.maskGameObjectCallbackScope
+                    });
+                    break;
+
+                default:
+                    // Assume that all children are at scene's displayList
+                    MaskChildren({
+                        parent: this,
+                        maskGameObject: this.childrenMaskGameObject,
+
+                        onVisible: this.onMaskGameObjectVisible,
+                        onInvisible: this.onMaskGameObjectInvisible,
+                        scope: this.maskGameObjectCallbackScope
+                    });
+                    break;
             }
 
             if (this.maskUpdateMode === 0) {
@@ -64309,6 +64402,20 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             var maskGameObject = this.childrenMaskGameObject;
             maskGameObject.setPosition().resize();
             this.resetChildPositionState(maskGameObject);
+            return this;
+        },
+
+        setStencilChildrenMaskEanble(enable) {
+            if (enable === undefined) {
+                enable = true;
+            }
+
+            this.useStencilChildrenMask = enable;
+
+            if (enable) {
+                this.enableLayer();
+            }
+
             return this;
         }
     };

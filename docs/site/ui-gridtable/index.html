@@ -15746,6 +15746,7 @@
 
 <span class="w">        </span><span class="nx">mask</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nx">padding</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">            </span><span class="c1">// maskType: &#39;children&#39;,</span>
 <span class="w">            </span><span class="c1">// updateMode: 0,</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="c1">// enableLayer: false,</span>
@@ -15963,6 +15964,12 @@
 </li>
 <li><code>table.mask</code> : A rectangle mask of cells<ul>
 <li><code>table.mask.padding</code> : Extra left/right/top/bottom padding spacing of this rectangle mask. Default value is <code>0</code>.</li>
+<li><code>table.mask.maskType</code> :<ul>
+<li><code>children</code> or <code>undefined</code> : Applies the mask to each partially visible child.</li>
+<li><code>layer</code> : Applies one shared layer mask and only toggles child visibility.</li>
+<li><code>stencil</code> : Uses a stencil mask and only toggles child visibility.</li>
+</ul>
+</li>
 <li><code>table.mask.updateMode</code> : When to update cells mask<ul>
 <li><code>0</code>, or <code>update</code> : Apply mask to cell container only when <code>table.updateTable()</code> is invoked. Default behavior.</li>
 <li><code>1</code>, or <code>everyTick</code> : Apply mask to cell container every tick. Use this mode if game objects of cell are moved after <code>table.updateTable()</code> and still been masked.       </li>

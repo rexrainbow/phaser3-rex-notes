@@ -117,6 +117,7 @@ var panel = scene.rexUI.add.scrollablePanel({
         child: panelGameObject,
         mask: {
             padding: 0, // or {left, right, top, bottom}
+            // maskType: 'children',
             // updateMode: 0,
         },
         // enableLayer: false,
@@ -274,6 +275,10 @@ var panel = scene.rexUI.add.scrollablePanel({
         - `panel.mask.padding` : 
             - A number : Extra left/right/top/bottom padding spacing of this rectangle mask. Default value is `0`.
             - A plain object `{left, right, top, bottom}`
+        - `panel.mask.maskType` :
+            - `children` or `undefined` : Applies the mask to each partially visible child.
+            - `layer` : Applies one shared layer mask and only toggles child visibility.
+            - `stencil` : Uses a stencil mask and only toggles child visibility.
         - `panel.mask.updateMode` : When to update mask
             - `0`, or `'update'` : Apply mask only when scrolling. Default behavior.
             - `1`, or `'everyTick'` : Apply mask every tick. Use this mode if children game objects of panel are moved after scrolling and still been masked.

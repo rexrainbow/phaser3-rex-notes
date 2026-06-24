@@ -1,4 +1,5 @@
 import MaskChildren from './MaskChildren.js';
+import { VisibilityOnlyHandlers } from './MaskChildren.js';
 import AddChildMask from './AddChildMask.js';
 import { SetMask } from '../../../../utils/mask/MaskMethods.js';
 
@@ -17,9 +18,25 @@ export default {
             return this;
         }
 
+        var maskType = GetValue(config, 'maskType');
+        if (!maskType) {
+            if (this.layerRendererEnable) {
+                maskType = 'layer';
+            }
+        }
+        switch (maskType) {
+            case 'stencil':
+                this.setStencilChildrenMaskEanble(true);
+                break;
+            case 'layer':
+                this.enableLayer();
+                break;
+            // default = 'children' 
+        }
+        this.maskType = maskType;
+
         this.setMaskUpdateMode(GetValue(config, 'updateMode', 0));
         this.enableChildrenMask(GetValue(config, 'padding', 0));
-        this.setStencilChildrenMaskEanble(GetValue(config, 'stencilMask', false));
 
         this.onMaskGameObjectVisible = GetValue(config, 'onVisible');
         this.onMaskGameObjectInvisible = GetValue(config, 'onInvisible');
@@ -84,23 +101,44 @@ export default {
             return this;
         }
 
-        if (this.layerRendererEnable) {
-            if (!this.useStencilChildrenMask) {
+        switch (this.maskType) {
+            case 'stencil':
+                MaskChildren({
+                    parent: this,
+                    maskGameObject: this.childrenMaskGameObject,
+                    handlers: VisibilityOnlyHandlers,
+
+                    onVisible: this.onMaskGameObjectVisible,
+                    onInvisible: this.onMaskGameObjectInvisible,
+                    scope: this.maskGameObjectCallbackScope
+                });
+                break;
+
+            case 'layer':
                 // Single mask target
                 SetMask(this, this.childrenMaskGameObject);
-            }
+                MaskChildren({
+                    parent: this,
+                    maskGameObject: this.childrenMaskGameObject,
+                    handlers: VisibilityOnlyHandlers,
 
-        } else {
-            // Assume that all children are at scene's displayList
-            MaskChildren({
-                parent: this,
-                maskGameObject: this.childrenMaskGameObject,
+                    onVisible: this.onMaskGameObjectVisible,
+                    onInvisible: this.onMaskGameObjectInvisible,
+                    scope: this.maskGameObjectCallbackScope
+                });
+                break;
 
-                onVisible: this.onMaskGameObjectVisible,
-                onInvisible: this.onMaskGameObjectInvisible,
-                scope: this.maskGameObjectCallbackScope
-            });
+            default:
+                // Assume that all children are at scene's displayList
+                MaskChildren({
+                    parent: this,
+                    maskGameObject: this.childrenMaskGameObject,
 
+                    onVisible: this.onMaskGameObjectVisible,
+                    onInvisible: this.onMaskGameObjectInvisible,
+                    scope: this.maskGameObjectCallbackScope
+                });
+                break;
         }
 
         if (this.maskUpdateMode === 0) {

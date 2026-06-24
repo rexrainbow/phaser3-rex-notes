@@ -56,6 +56,7 @@ class Demo extends Phaser.Scene {
                 child: createPanel(this, data),
 
                 mask: {
+                    maskType: 'stencil',
                     padding: 1,
                 },
             },

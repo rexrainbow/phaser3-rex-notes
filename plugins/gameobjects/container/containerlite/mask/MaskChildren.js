@@ -8,6 +8,7 @@ var MaskChildren = function ({
     parent,
     maskGameObject,
     children,
+    handlers,
 
     onVisible, onInvisible, scope,
 }) {
@@ -18,6 +19,9 @@ var MaskChildren = function ({
 
     if (children === undefined) {
         children = parent.getAllChildren();
+    }
+    if (handlers === undefined) {
+        handlers = DefaultHandlers;
     }
 
     var hasAnyVisibleCallback = !!onVisible || !!onInvisible;
@@ -42,22 +46,22 @@ var MaskChildren = function ({
             visiblePointsNumber = ContainsPoints(parentBounds, childBounds);
             switch (visiblePointsNumber) {
                 case 4: // 4 points are all inside visible window, set visible                     
-                    SetVisible(parent, child, maskGameObject);
+                    handlers.visible(parent, child, maskGameObject);
                     break;
                 case 0: // No point is inside visible window
                     // Parent intersects with child, or parent is inside child, set visible, and apply mask
                     if (Intersects(parentBounds, childBounds) || Overlaps(parentBounds, childBounds)) {
-                        SetPartiallyVisible(parent, child, maskGameObject);
+                        handlers.partial(parent, child, maskGameObject);
                     } else { // Set invisible
-                        SetInvisible(parent, child, maskGameObject);
+                        handlers.invisible(parent, child, maskGameObject);
                     }
                     break;
                 default: // Part of points are inside visible window, set visible, and apply mask
-                    SetPartiallyVisible(parent, child, maskGameObject);
+                    handlers.partial(parent, child, maskGameObject);
                     break;
             }
         } else {
-            SetPartiallyVisible(parent, child, maskGameObject);
+            handlers.partial(parent, child, maskGameObject);
         }
 
         if (hasAnyVisibleCallback && (child.visible !== isChildVisible)) {
@@ -152,4 +156,20 @@ var SetInvisible = function (parent, child, maskGameObject) {
 
 }
 
+var DefaultHandlers = {
+    visible: SetVisible,
+    partial: SetPartiallyVisible,
+    invisible: SetInvisible
+};
+
+var VisibilityOnlyHandlers = {
+    visible: SetVisible,
+    partial: SetVisible,
+    invisible: SetInvisible
+};
+
 export default MaskChildren;
+
+export {
+    VisibilityOnlyHandlers
+}

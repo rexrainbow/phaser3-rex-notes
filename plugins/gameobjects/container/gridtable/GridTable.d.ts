@@ -139,6 +139,15 @@ declare namespace GridTable {
              */
             bottom?: number,
         },
+
+        /**
+         * Children mask implementation.
+         *
+         * - `children`: Applies the mask to each partially visible child.
+         * - `layer`: Applies one shared layer mask and only toggles child visibility.
+         * - `stencil`: Uses a stencil mask and only toggles child visibility.
+         */
+        maskType?: 'stencil' | 'layer' | 'children';
         /**
          * Mask update mode.
          */

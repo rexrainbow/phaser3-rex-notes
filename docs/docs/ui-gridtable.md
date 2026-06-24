@@ -121,6 +121,7 @@ var table = scene.rexUI.add.gridTable({
 
         mask: {
             padding: 0,
+            // maskType: 'children',
             // updateMode: 0,
         },
         // enableLayer: false,
@@ -314,6 +315,10 @@ var table = scene.rexUI.add.gridTable({
         - `true` : Set `columns` according to `cellWidth`/`cellHeight`.
     - `table.mask` : A rectangle mask of cells
         - `table.mask.padding` : Extra left/right/top/bottom padding spacing of this rectangle mask. Default value is `0`.
+        - `table.mask.maskType` :
+            - `children` or `undefined` : Applies the mask to each partially visible child.
+            - `layer` : Applies one shared layer mask and only toggles child visibility.
+            - `stencil` : Uses a stencil mask and only toggles child visibility.
         - `table.mask.updateMode` : When to update cells mask
             - `0`, or `update` : Apply mask to cell container only when `table.updateTable()` is invoked. Default behavior.
             - `1`, or `everyTick` : Apply mask to cell container every tick. Use this mode if game objects of cell are moved after `table.updateTable()` and still been masked.       
