@@ -19,6 +19,7 @@ export default {
 
         this.setMaskUpdateMode(GetValue(config, 'updateMode', 0));
         this.enableChildrenMask(GetValue(config, 'padding', 0));
+        this.setStencilChildrenMaskEanble(GetValue(config, 'stencilMask', false));
 
         this.onMaskGameObjectVisible = GetValue(config, 'onVisible');
         this.onMaskGameObjectInvisible = GetValue(config, 'onInvisible');
@@ -84,7 +85,10 @@ export default {
         }
 
         if (this.layerRendererEnable) {
-            SetMask(this, this.childrenMaskGameObject);
+            if (!this.useStencilChildrenMask) {
+                // Single mask target
+                SetMask(this, this.childrenMaskGameObject);
+            }
 
         } else {
             // Assume that all children are at scene's displayList
@@ -113,6 +117,20 @@ export default {
         var maskGameObject = this.childrenMaskGameObject;
         maskGameObject.setPosition().resize();
         this.resetChildPositionState(maskGameObject);
+        return this;
+    },
+
+    setStencilChildrenMaskEanble(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+
+        this.useStencilChildrenMask = enable;
+
+        if (enable) {
+            this.enableLayer();
+        }
+
         return this;
     }
 };
