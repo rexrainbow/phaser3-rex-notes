@@ -5,10 +5,10 @@ const Intersects = PhaserGeom.Intersects.RectangleToRectangle;
 const Overlaps = PhaserGeom.Rectangle.Overlaps;
 
 var MaskChildren = function ({
+    maskType,
     parent,
     maskGameObject,
     children,
-    handlers,
 
     onVisible, onInvisible, scope,
 }) {
@@ -17,11 +17,20 @@ var MaskChildren = function ({
         return;
     }
 
+    var handlers;
+    switch (maskType) {
+        case 'stencil':
+        case 'layer':
+            handlers = VisibilityOnlyHandlers;
+            break;
+
+        default:
+            handlers = DefaultHandlers;
+            break;
+    }
+
     if (children === undefined) {
         children = parent.getAllChildren();
-    }
-    if (handlers === undefined) {
-        handlers = DefaultHandlers;
     }
 
     var hasAnyVisibleCallback = !!onVisible || !!onInvisible;
@@ -169,7 +178,3 @@ var VisibilityOnlyHandlers = {
 };
 
 export default MaskChildren;
-
-export {
-    VisibilityOnlyHandlers
-}
