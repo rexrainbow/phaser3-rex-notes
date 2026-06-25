@@ -28337,7 +28337,7 @@ var WebGLRenderer$3 = function (renderer, container, drawingContext, parentMatri
     }
 
     if (useStencilChildrenMask) {
-        RenderStencilMask(renderer, container.childrenMaskGameObject, currentContext, 'addLayer');
+        PushStencilMask(renderer, container.childrenMaskGameObject, currentContext);
     }
 
     for (var i = 0; i < childCount; i++) {
@@ -28362,7 +28362,7 @@ var WebGLRenderer$3 = function (renderer, container, drawingContext, parentMatri
     }
 
     if (useStencilChildrenMask) {
-        RenderStencilMask(renderer, container.childrenMaskGameObject, currentContext, 'subtractLayer');
+        PopStencilMask(renderer, container.childrenMaskGameObject, currentContext);
     }
 
     // Release any remaining context.
@@ -28371,27 +28371,36 @@ var WebGLRenderer$3 = function (renderer, container, drawingContext, parentMatri
     }
 };
 
-var RenderStencilMask = function (renderer, maskGameObject, drawingContext, layerMode) {
+var PushStencilMask = function (renderer, maskGameObject, drawingContext) {
+    RenderStencilMask(renderer, maskGameObject, drawingContext, true);
+};
+
+var PopStencilMask = function (renderer, maskGameObject, drawingContext) {
+    RenderStencilMask(renderer, maskGameObject, drawingContext, false);
+};
+
+var RenderStencilMask = function (renderer, maskGameObject, drawingContext, push) {
     var gl = renderer.gl;
     var opIncr = gl.INCR_WRAP;
     var opDecr = gl.DECR_WRAP;
-    var op = (layerMode === 'subtractLayer') ? opDecr : opIncr;
+    var fillOp = (push) ? opIncr : opDecr;
+    var maskOp = (push) ? opDecr : opIncr;
 
     var currentContext = drawingContext.getClone();
 
     currentContext.setAlphaStrategy(renderer.config.stencilAlphaStrategy);
     currentContext.setColorWritemask(false, false, false, false);
-    currentContext.setStencil(true, gl.ALWAYS, 0, 0xFF, op, op, op, 0, 0xFF);
+    currentContext.setStencil(true, gl.ALWAYS, 0, 0xFF, fillOp, fillOp, fillOp, 0, 0xFF);
     currentContext.use();
 
-    // Invert the stencil so the mask interior remains drawable under Phaser's zero-test rule.
+    // Push adds a blocking layer everywhere, then removes it inside the mask.
+    // Pop applies the inverse operations to restore the previous stencil state.
     renderer.renderNodes.getNode('FillCamera').run(currentContext, 0xff000000, drawingContext.useCanvas);
 
     currentContext = currentContext.getClone();
     currentContext.use();
 
-    op = (op === opIncr) ? opDecr : opIncr;
-    currentContext.setStencil(true, gl.ALWAYS, 0, 0xFF, op, op, op, 0, 0xFF);
+    currentContext.setStencil(true, gl.ALWAYS, 0, 0xFF, maskOp, maskOp, maskOp, 0, 0xFF);
 
     maskGameObject.renderWebGLStep(renderer, maskGameObject, currentContext);
 

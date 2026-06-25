@@ -98,6 +98,36 @@ var GetMaskFilterViewTransformByScaleFactor = function (maskGameObject, scaleFac
 const ParentTransform = new TransformMatrix();
 ```
 
+### Stencil mask
+
+1. Create stencil
+   ```javascript
+   // var maskGameObject = this.add.rectangle(x, y, width, height, fillColor);
+   var stencil = this.add.stencil(0, 0, maskGameObject, { 
+       stencilInvert: true 
+   });
+   ```
+   or
+   ```javascript
+   // var maskGameObject0 = this.add.rectangle(x, y, width, height, fillColor);
+   // var maskGameObject1 = ...
+   var stencil = this.add.stencil(0, 0, [maskGameObject0, maskGameObject1, ...], { 
+       stencilInvert: true 
+   });
+   ```
+2. Add game object between stencil and stencilreference
+    ```javascript
+    var maskTarget = this.image(x, y, key, frame);
+    // More game objects ...
+    ```
+3. Create stencilreference, pair of stencil
+    ```javascript
+    var stencilreference = this.add.stencilreference(stencil, {
+        stencilInvert: true,
+        stencilLayerMode: 'subtractLayer'
+    }));
+    ```
+
 ### CANVAS render mode
 
 1. Create mask game object, from [Graphics](graphics.md) game object
