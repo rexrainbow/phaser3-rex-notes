@@ -45,6 +45,7 @@ module.exports = {
     'coverplugin': './plugins/cover-plugin.js',
     'live2dplugin': ['./plugins/live2d-plugin.js', true],
     'layermanagerplugin': './plugins/layermanager-plugin.js',
+    'stencillayerplugin': './plugins/stencillayer-plugin.js',
     // texture
     'framemanagerplugin': './plugins/framemanager-plugin.js',
     'canvasframemanagerplugin': './plugins/canvasframemanager-plugin.js',
@@ -54,7 +55,7 @@ module.exports = {
     // custom file loader
     'awaitloaderplugin': './plugins/awaitloader-plugin.js',
     'yamlloaderplugin': './plugins/yamlloader-plugin.js',
-    'webfontloaderplugin': './plugins/webfontloader-plugin.js',    
+    'webfontloaderplugin': './plugins/webfontloader-plugin.js',
     'scripttagloaderplugin': './plugins/scripttagloader-plugin.js',
     'imageuriloaderplugin': './plugins/imageuriloader-plugin.js',
     'loadinganimationsceneplugin': './plugins/loadinganimationscene-plugin.js',
