@@ -45669,10 +45669,10 @@ const Intersects = Geom.Intersects.RectangleToRectangle;
 const Overlaps = Geom.Rectangle.Overlaps;
 
 var MaskChildren = function ({
+    maskType,
     parent,
     maskGameObject,
     children,
-    handlers,
 
     onVisible, onInvisible, scope,
 }) {
@@ -45681,11 +45681,20 @@ var MaskChildren = function ({
         return;
     }
 
+    var handlers;
+    switch (maskType) {
+        case 'stencil':
+        case 'layer':
+            handlers = VisibilityOnlyHandlers;
+            break;
+
+        default:
+            handlers = DefaultHandlers;
+            break;
+    }
+
     if (children === undefined) {
         children = parent.getAllChildren();
-    }
-    if (handlers === undefined) {
-        handlers = DefaultHandlers;
     }
 
     var hasAnyVisibleCallback = !!onVisible || !!onInvisible;
@@ -45850,6 +45859,8 @@ var ChildrenMaskMethods = {
         if (!maskType) {
             if (this.layerRendererEnable) {
                 maskType = 'layer';
+            } else {
+                maskType = 'children';
             }
         }
         switch (maskType) {
@@ -45931,43 +45942,24 @@ var ChildrenMaskMethods = {
 
         switch (this.maskType) {
             case 'stencil':
-                MaskChildren({
-                    parent: this,
-                    maskGameObject: this.childrenMaskGameObject,
-                    handlers: VisibilityOnlyHandlers,
-
-                    onVisible: this.onMaskGameObjectVisible,
-                    onInvisible: this.onMaskGameObjectInvisible,
-                    scope: this.maskGameObjectCallbackScope
-                });
                 break;
 
             case 'layer':
                 // Single mask target
                 SetMask(this, this.childrenMaskGameObject);
-                MaskChildren({
-                    parent: this,
-                    maskGameObject: this.childrenMaskGameObject,
-                    handlers: VisibilityOnlyHandlers,
-
-                    onVisible: this.onMaskGameObjectVisible,
-                    onInvisible: this.onMaskGameObjectInvisible,
-                    scope: this.maskGameObjectCallbackScope
-                });
-                break;
-
-            default:
-                // Assume that all children are at scene's displayList
-                MaskChildren({
-                    parent: this,
-                    maskGameObject: this.childrenMaskGameObject,
-
-                    onVisible: this.onMaskGameObjectVisible,
-                    onInvisible: this.onMaskGameObjectInvisible,
-                    scope: this.maskGameObjectCallbackScope
-                });
                 break;
         }
+
+        // Assume that all children are at scene's displayList
+        MaskChildren({
+            maskType: this.maskType,
+            parent: this,
+            maskGameObject: this.childrenMaskGameObject,
+
+            onVisible: this.onMaskGameObjectVisible,
+            onInvisible: this.onMaskGameObjectInvisible,
+            scope: this.maskGameObjectCallbackScope
+        });
 
         if (this.maskUpdateMode === 0) {
             this.maskChildrenFlag = false;
