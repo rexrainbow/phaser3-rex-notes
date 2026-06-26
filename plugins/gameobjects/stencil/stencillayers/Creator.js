@@ -1,7 +1,6 @@
 import StencilLayers from './StencilLayers.js';
 
-import { GameObjects as PhaserGameObjects, Utils as PhaserUtils } from 'phaser';
-const GetAdvancedValue = PhaserUtils.Objects.GetAdvancedValue;
+import { GameObjects as PhaserGameObjects } from 'phaser';
 const BuildGameObject = PhaserGameObjects.BuildGameObject;
 
 export default function (config, addToScene) {

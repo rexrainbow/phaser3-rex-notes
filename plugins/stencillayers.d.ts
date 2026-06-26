@@ -1,2 +1,2 @@
-import StencilLayers from './gameobjects/layer/stencillayers/StencilLayers';
+import StencilLayers from './gameobjects/stencil/stencillayers/StencilLayers';
 export default StencilLayers;

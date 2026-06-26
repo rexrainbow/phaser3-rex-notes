@@ -16,10 +16,24 @@ class Demo extends Phaser.Scene {
         var image = this.add.image(400, 300, 'classroom');
 
         var mainLayer = this.add.rexStencilLayers()
-            .addStencil('stencilA', 'layer0', { stencilInvert: true })
-            .addStencil('stencilB', 'layer1', { stencilInvert: true })
-            .removeStencil('stencilA', 'layer2')
-            .removeStencil('stencilB', 'layer3')
+            .addStencil({
+                stencilName: 'stencilA',
+                layerName: 'layer0',
+                stencilInvert: true
+            })
+            .addStencil({
+                stencilName: 'stencilB',
+                layerName: 'layer1',
+                stencilInvert: true
+            })
+            .removeStencil({
+                stencilName: 'stencilA',
+                layerName: 'layer2'
+            })
+            .removeStencil({
+                stencilName: 'stencilB',
+                layerName: 'layer3'
+            })
             .end() // Check stencil pairs
 
         mainLayer.getStencil('stencilA').add(

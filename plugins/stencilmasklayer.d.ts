@@ -1,2 +1,2 @@
-import StencilMaskLayer from './gameobjects/layer/stencilmasklayer/StencilMaskLayer';
+import StencilMaskLayer from './gameobjects/stencil/stencilmasklayer/StencilMaskLayer';
 export default StencilMaskLayer;

@@ -1,5 +1,5 @@
-import Factory from './gameobjects/layer/stencilmasklayer/Factory';
-import Creator from './gameobjects/layer/stencilmasklayer/Creator';
+import Factory from './gameobjects/stencil/stencilmasklayer/Factory';
+import Creator from './gameobjects/stencil/stencilmasklayer/Creator';
 
 export default class extends Phaser.Plugins.BasePlugin { }
 

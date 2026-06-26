@@ -32,103 +32,180 @@
     };
 
     CheckP3Version();
-    const Layer = phaser.GameObjects.Layer;
+    const Layer$1 = phaser.GameObjects.Layer;
+    const Container$1 = phaser.GameObjects.Container;
     const Stencil = phaser.GameObjects.Stencil;
     const StencilReference = phaser.GameObjects.StencilReference;
+    const IsPlainObject = phaser.Utils.Objects.IsPlainObject;
 
-    class StencilLayers extends Layer {
-        constructor(scene) {
-            super(scene);
-            this.type = 'rexStencilLayers';
-
-            this.stencils = new Map();
-            this.layers = new Map();
+    var StencilLayersBase = function (GOClass, defaultUseContainer, canAddLayer) {
+        if (canAddLayer === undefined) {
+            canAddLayer = true;
         }
 
-        addStencil(stencilName, layerName, config) {
-            CheckName(stencilName, 'stencil');
-            CheckName(layerName, 'layer');
-            CheckUniqueName(this.stencils, stencilName, 'stencil');
-            CheckUniqueName(this.layers, layerName, 'layer');
+        return class Base extends GOClass {
+            constructor(scene, ...args) {
+                super(scene, ...args);
 
-            var stencilConfig = CreateStencilConfig(config, 'addLayer');
-            var stencil = new Stencil(this.scene, 0, 0, undefined, stencilConfig);
-            var layer = new Layer(this.scene);
+                this.defaultUseContainer = defaultUseContainer;
+                this.canAddLayer = canAddLayer;
 
-            stencil.name = stencilName;
-            layer.name = layerName;
-
-            this.stencils.set(stencilName, {
-                name: stencilName,
-                stencil: stencil,
-                reference: undefined,
-                stencilConfig: stencilConfig,
-                addLayerName: layerName,
-                removeLayerName: undefined,
-                open: true
-            });
-            this.layers.set(layerName, layer);
-
-            this.add([stencil, layer]);
-            return this;
-        }
-
-        removeStencil(stencilName, layerName, config) {
-            CheckName(stencilName, 'stencil');
-            CheckName(layerName, 'layer');
-            CheckUniqueName(this.layers, layerName, 'layer');
-
-            var record = this.stencils.get(stencilName);
-            if (!record) {
-                throw new Error(`StencilLayers: stencil '${stencilName}' does not exist.`);
-            }
-            if (!record.open) {
-                throw new Error(`StencilLayers: stencil '${stencilName}' has already been removed.`);
+                this.stencils = new Map();
+                this.layers = new Map();
             }
 
-            var referenceConfig = CreateStencilReferenceConfig(record.stencilConfig, config);
-            var stencilReference = new StencilReference(this.scene, record.stencil, referenceConfig);
-            var layer = new Layer(this.scene);
+            addStencil(stencilName, layerName, config) {
+                var args = GetStencilArgs(this.defaultUseContainer, stencilName, layerName, config);
+                stencilName = args.stencilName;
+                layerName = args.layerName;
+                config = args.config;
 
-            stencilReference.name = `${stencilName}.reference`;
-            stencilReference.setAlpha = NoopSetAlpha;  // monkey patch
-            layer.name = layerName;
+                CheckName(stencilName, 'stencil');
+                CheckName(layerName, 'layer');
+                CheckUniqueName(this.stencils, stencilName, 'stencil');
+                CheckUniqueName(this.layers, layerName, 'layer');
 
-            record.reference = stencilReference;
-            record.removeLayerName = layerName;
-            record.open = false;
-            this.layers.set(layerName, layer);
+                var useContainer = args.useContainer;
+                var stencilConfig = CreateStencilConfig(config, 'addLayer');
+                var stencil = new Stencil(this.scene, 0, 0, undefined, stencilConfig);
+                var layer = CreateLayerObject(this.scene, useContainer, this.canAddLayer);
 
-            this.add([stencilReference, layer]);
-            return this;
-        }
+                stencil.name = stencilName;
+                layer.name = layerName;
 
-        end() {
-            var openStencilNames = [];
+                this.stencils.set(stencilName, {
+                    name: stencilName,
+                    stencil: stencil,
+                    reference: undefined,
+                    stencilConfig: stencilConfig,
+                    addLayerName: layerName,
+                    removeLayerName: undefined,
+                    open: true
+                });
+                this.layers.set(layerName, layer);
 
-            this.stencils.forEach(function (record, name) {
-                if (record.open) {
-                    openStencilNames.push(name);
+                this.add([stencil, layer]);
+                return this;
+            }
+
+            removeStencil(stencilName, layerName, config) {
+                var args = GetStencilArgs(this.defaultUseContainer, stencilName, layerName, config);
+                stencilName = args.stencilName;
+                layerName = args.layerName;
+                config = args.config;
+
+                CheckName(stencilName, 'stencil');
+                CheckName(layerName, 'layer');
+                CheckUniqueName(this.layers, layerName, 'layer');
+
+                var record = this.stencils.get(stencilName);
+                if (!record) {
+                    throw new Error(`StencilLayers: stencil '${stencilName}' does not exist.`);
                 }
-            });
+                if (!record.open) {
+                    throw new Error(`StencilLayers: stencil '${stencilName}' has already been removed.`);
+                }
 
-            if (openStencilNames.length > 0) {
-                throw new Error(`StencilLayers: unremoved stencil(s): ${openStencilNames.join(', ')}.`);
+                var useContainer = args.useContainer;
+                var referenceConfig = CreateStencilReferenceConfig(record.stencilConfig, config);
+                var stencilReference = new StencilReference(this.scene, record.stencil, referenceConfig);
+                var layer = CreateLayerObject(this.scene, useContainer, this.canAddLayer);
+
+                stencilReference.name = `${stencilName}.reference`;
+                stencilReference.setAlpha = NoopSetAlpha;  // monkey patch
+                layer.name = layerName;
+
+                record.reference = stencilReference;
+                record.removeLayerName = layerName;
+                record.open = false;
+                this.layers.set(layerName, layer);
+
+                this.add([stencilReference, layer]);
+                return this;
             }
 
-            return this;
+            end() {
+                var openStencilNames = [];
+
+                this.stencils.forEach(function (record, name) {
+                    if (record.open) {
+                        openStencilNames.push(name);
+                    }
+                });
+
+                if (openStencilNames.length > 0) {
+                    throw new Error(`StencilLayers: unremoved stencil(s): ${openStencilNames.join(', ')}.`);
+                }
+
+                return this;
+            }
+
+            getStencil(name) {
+                var record = this.stencils.get(name);
+                return (record) ? record.stencil : undefined;
+            }
+
+            getLayer(name) {
+                return this.layers.get(name);
+            }
+
+            getContainer(name) {
+                return this.getLayer(name);
+            }
+        };
+    };
+
+    var GetStencilArgs = function (defaultUseContainer, stencilName, layerName, config) {
+        var useContainer;
+
+        if (
+            layerName === undefined &&
+            config === undefined &&
+            IsPlainObject(stencilName)
+        ) {
+            config = CloneConfig(stencilName);
+            stencilName = config.stencilName;
+            useContainer = GetUseContainer(config, defaultUseContainer);
+            layerName = config.layerName || config.containerName;
+
+            delete config.stencilName;
+            delete config.layerName;
+            delete config.containerName;
+            delete config.useContainer;
+
+        } else {
+            config = CloneConfig(config);
+            useContainer = GetUseContainer(config, defaultUseContainer);
+            layerName = layerName || config.layerName || config.containerName;
+
+            delete config.layerName;
+            delete config.containerName;
+            delete config.useContainer;
         }
 
-        getStencil(name) {
-            var record = this.stencils.get(name);
-            return (record) ? record.stencil : undefined;
+        return {
+            stencilName: stencilName,
+            layerName: layerName,
+            useContainer: useContainer,
+            config: config
+        };
+    };
+
+    var GetUseContainer = function (config, defaultUseContainer) {
+        if (config.useContainer !== undefined) {
+            return config.useContainer;
         }
 
-        getLayer(name) {
-            return this.layers.get(name);
+        return defaultUseContainer;
+    };
+
+    var CreateLayerObject = function (scene, useContainer, canAddLayer) {
+        if (!useContainer && !canAddLayer) {
+            throw new Error('StencilLayers: A Layer section cannot be added to a Container-based StencilLayers object.');
         }
 
-    }
+        return (useContainer) ? new Container$1(scene, 0, 0) : new Layer$1(scene);
+    };
 
     var CheckUniqueName = function (map, name, type) {
         if (map.has(name)) {
@@ -180,22 +257,63 @@
         return this;
     };
 
-    function Factory () {
+    const Layer = phaser.GameObjects.Layer;
+
+    class StencilLayers extends StencilLayersBase(Layer, false, true) {
+        constructor(scene) {
+            super(scene);
+            this.type = 'rexStencilLayers';
+        }
+    }
+
+    function StencilLayersFactory () {
         var gameObject = new StencilLayers(this.scene);
         this.scene.add.existing(gameObject);
         return gameObject;
     }
 
-    phaser.Utils.Objects.GetAdvancedValue;
-    const BuildGameObject = phaser.GameObjects.BuildGameObject;
+    const BuildGameObject$1 = phaser.GameObjects.BuildGameObject;
 
-    function Creator (config, addToScene) {
+    function StencilLayersCreator (config, addToScene) {
         if (config === undefined) { config = {}; }
         if (addToScene !== undefined) {
             config.add = addToScene;
         }
 
         var gameObject = new StencilLayers(this.scene);
+        BuildGameObject$1(this.scene, gameObject, config);
+        return gameObject;
+    }
+
+    const Container = phaser.GameObjects.Container;
+
+    class StencilContainers extends StencilLayersBase(Container, true, false) {
+        constructor(scene, x, y, children) {
+            super(scene, x, y, children);
+            this.type = 'rexStencilContainers';
+        }
+    }
+
+    function StencilContainersFactory (x, y, children) {
+        var gameObject = new StencilContainers(this.scene, x, y, children);
+        this.scene.add.existing(gameObject);
+        return gameObject;
+    }
+
+    const BuildGameObject = phaser.GameObjects.BuildGameObject;
+    const GetAdvancedValue = phaser.Utils.Objects.GetAdvancedValue;
+
+    function StencilContainersCreator (config, addToScene) {
+        if (config === undefined) { config = {}; }
+        if (addToScene !== undefined) {
+            config.add = addToScene;
+        }
+
+        var x = GetAdvancedValue(config, 'x', 0);
+        var y = GetAdvancedValue(config, 'y', 0);
+        var children = GetAdvancedValue(config, 'children');
+        var gameObject = new StencilContainers(this.scene, x, y, children);
+
         BuildGameObject(this.scene, gameObject, config);
         return gameObject;
     }
@@ -280,7 +398,8 @@
             super(pluginManager);
 
             //  Register our new Game Object type
-            pluginManager.registerGameObject('rexStencilLayers', Factory, Creator);
+            pluginManager.registerGameObject('rexStencilLayers', StencilLayersFactory, StencilLayersCreator);
+            pluginManager.registerGameObject('rexStencilContainers', StencilContainersFactory, StencilContainersCreator);
         }
 
         start() {
@@ -290,6 +409,7 @@
     }
 
     SetValue(window, 'RexPlugins.GameObjects.StencilLayers', StencilLayers);
+    SetValue(window, 'RexPlugins.GameObjects.StencilContainers', StencilContainers);
 
     return StencilLayersPlugin;
 

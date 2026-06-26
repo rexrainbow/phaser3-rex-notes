@@ -1,6 +1,6 @@
-import Factory from './gameobjects/layer/stencilmasklayer/Factory.js';
-import Creator from './gameobjects/layer/stencilmasklayer/Creator.js';
-import StencilMaskLayer from './gameobjects/layer/stencilmasklayer/StencilMaskLayer.js';
+import Factory from './gameobjects/stencil/stencilmasklayer/Factory.js';
+import Creator from './gameobjects/stencil/stencilmasklayer/Creator.js';
+import StencilMaskLayer from './gameobjects/stencil/stencilmasklayer/StencilMaskLayer.js';
 import SetValue from './utils/object/SetValue.js';
 
 import { Plugins as PhaserPlugins } from 'phaser';

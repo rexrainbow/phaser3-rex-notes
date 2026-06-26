@@ -1,38 +1,12 @@
-import { VERSION, GameObjects, Utils, Plugins } from 'phaser';
-
-const MainVersionNumber = 4;
-const SubVersionNumber = 0;
-
-var IsChecked = false;
-
-var CheckP3Version = function (minVersion) {
-    if (IsChecked) {
-        return;
-    }
-
-    if (minVersion === undefined) {
-        minVersion = SubVersionNumber;
-    }
-    var version = VERSION.split('.');
-    var mainVersion = parseInt(version[0]);
-    if (mainVersion === MainVersionNumber) {
-        var subVersion = parseInt(version[1]);
-        if (subVersion < minVersion) {
-            console.error(`Minimum supported version : ${mainVersion}.${subVersion}`);
-        }
-    } else {
-        console.error(`Can't supported version : ${mainVersion}`);
-    }
-
-    IsChecked = true;
-};
-
+import CheckP3Version from '../../../utils/system/CheckP3Version.js';
 CheckP3Version();
-const Layer$1 = GameObjects.Layer;
-const Container$1 = GameObjects.Container;
-const Stencil = GameObjects.Stencil;
-const StencilReference = GameObjects.StencilReference;
-const IsPlainObject = Utils.Objects.IsPlainObject;
+
+import { GameObjects as PhaserGameObjects, Utils as PhaserUtils } from 'phaser';
+const Layer = PhaserGameObjects.Layer;
+const Container = PhaserGameObjects.Container;
+const Stencil = PhaserGameObjects.Stencil;
+const StencilReference = PhaserGameObjects.StencilReference;
+const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
 
 var StencilLayersBase = function (GOClass, defaultUseContainer, canAddLayer) {
     if (canAddLayer === undefined) {
@@ -200,7 +174,7 @@ var CreateLayerObject = function (scene, useContainer, canAddLayer) {
         throw new Error('StencilLayers: A Layer section cannot be added to a Container-based StencilLayers object.');
     }
 
-    return (useContainer) ? new Container$1(scene, 0, 0) : new Layer$1(scene);
+    return (useContainer) ? new Container(scene, 0, 0) : new Layer(scene);
 };
 
 var CheckUniqueName = function (map, name, type) {
@@ -253,158 +227,4 @@ var NoopSetAlpha = function () {
     return this;
 };
 
-const Layer = GameObjects.Layer;
-
-class StencilLayers extends StencilLayersBase(Layer, false, true) {
-    constructor(scene) {
-        super(scene);
-        this.type = 'rexStencilLayers';
-    }
-}
-
-function StencilLayersFactory () {
-    var gameObject = new StencilLayers(this.scene);
-    this.scene.add.existing(gameObject);
-    return gameObject;
-}
-
-const BuildGameObject$1 = GameObjects.BuildGameObject;
-
-function StencilLayersCreator (config, addToScene) {
-    if (config === undefined) { config = {}; }
-    if (addToScene !== undefined) {
-        config.add = addToScene;
-    }
-
-    var gameObject = new StencilLayers(this.scene);
-    BuildGameObject$1(this.scene, gameObject, config);
-    return gameObject;
-}
-
-const Container = GameObjects.Container;
-
-class StencilContainers extends StencilLayersBase(Container, true, false) {
-    constructor(scene, x, y, children) {
-        super(scene, x, y, children);
-        this.type = 'rexStencilContainers';
-    }
-}
-
-function StencilContainersFactory (x, y, children) {
-    var gameObject = new StencilContainers(this.scene, x, y, children);
-    this.scene.add.existing(gameObject);
-    return gameObject;
-}
-
-const BuildGameObject = GameObjects.BuildGameObject;
-const GetAdvancedValue = Utils.Objects.GetAdvancedValue;
-
-function StencilContainersCreator (config, addToScene) {
-    if (config === undefined) { config = {}; }
-    if (addToScene !== undefined) {
-        config.add = addToScene;
-    }
-
-    var x = GetAdvancedValue(config, 'x', 0);
-    var y = GetAdvancedValue(config, 'y', 0);
-    var children = GetAdvancedValue(config, 'children');
-    var gameObject = new StencilContainers(this.scene, x, y, children);
-
-    BuildGameObject(this.scene, gameObject, config);
-    return gameObject;
-}
-
-var IsNil = function (value) {
-    return value === null || value === undefined;
-};
-
-var IsObjectLike = function (value) {
-    return value !== null && typeof value === 'object';
-};
-
-var NormalizePath = function (path, delimiter) {
-    if (Array.isArray(path)) ; else if (typeof path !== 'string') {
-        path = [];
-    } else if (path.trim() === '') {
-        path = [];
-    } else {
-        path = path.split(delimiter).filter(Boolean);
-    }
-    return path;
-};
-
-/**
- * Set a nested value into target by path (mutates target).
- *
- * - If keys is a string and does NOT contain delimiter, write directly.
- * - Intermediate non-plain-object values are always overwritten with {}.
- *
- * @param {object} target
- * @param {string|string[]} keys
- * @param {*} value
- * @param {string} [delimiter='.']
- * @returns {object} the same target reference
- */
-var SetValue = function (target, keys, value, delimiter = '.') {
-    if (!IsObjectLike(target)) {
-        return target;
-    }
-
-    // Invalid key: no-op; don't replace root
-    if (IsNil(keys) || keys === '' || (Array.isArray(keys) && keys.length === 0)) {
-        return target;
-    }
-
-    // Fast path: single key
-    if (
-        (typeof keys === 'string' && keys.indexOf(delimiter) === -1) ||
-        (typeof keys === 'number')
-    ) {
-        target[keys] = value;
-        return target;
-    }
-
-    var pathSegments = NormalizePath(keys, delimiter);
-    if (pathSegments.length === 0) {
-        return target;
-    }
-
-    var cursor = target;
-    var pathSegmentsCount = pathSegments.length;
-
-    for (var index = 0; index < pathSegmentsCount - 1; index++) {
-        var segment = pathSegments[index];
-        var next = cursor[segment];
-
-        if (!IsObjectLike(next)) {
-            // Force overwrite intermediates
-            cursor[segment] = {};
-        }
-
-        cursor = cursor[segment];
-    }
-
-    cursor[pathSegments[pathSegmentsCount - 1]] = value;
-    return target;
-};
-
-class StencilLayersPlugin extends Plugins.BasePlugin {
-
-    constructor(pluginManager) {
-        super(pluginManager);
-
-        //  Register our new Game Object type
-        pluginManager.registerGameObject('rexStencilLayers', StencilLayersFactory, StencilLayersCreator);
-        pluginManager.registerGameObject('rexStencilContainers', StencilContainersFactory, StencilContainersCreator);
-    }
-
-    start() {
-        var eventEmitter = this.game.events;
-        eventEmitter.on('destroy', this.destroy, this);
-    }
-}
-
-SetValue(window, 'RexPlugins.GameObjects.StencilLayers', StencilLayers);
-SetValue(window, 'RexPlugins.GameObjects.StencilContainers', StencilContainers);
-
-export { StencilLayersPlugin as default };
+export default StencilLayersBase;
