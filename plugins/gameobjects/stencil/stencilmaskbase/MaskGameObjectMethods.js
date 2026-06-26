@@ -24,4 +24,4 @@ export default {
         this.stencilInvert = enable;
         return this;
     },
-}
+};

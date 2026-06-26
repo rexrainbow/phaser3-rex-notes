@@ -31,9 +31,62 @@
         IsChecked = true;
     };
 
-    const SKIP_CHECK_BLEND_MODE = phaser.BlendModes.SKIP_CHECK;
+    var PushStencilMask = function (renderer, maskGameObjects, stencilInvert, drawingContext, parentMatrix) {
+        RenderStencilMask(renderer, maskGameObjects, stencilInvert, drawingContext, true, parentMatrix);
+    };
 
-    var WebGLRenderer = function (renderer, layer, drawingContext, parentMatrix, renderStep, displayList, displayListIndex) {
+    var PopStencilMask = function (renderer, maskGameObjects, stencilInvert, drawingContext, parentMatrix) {
+        RenderStencilMask(renderer, maskGameObjects, stencilInvert, drawingContext, false, parentMatrix);
+    };
+
+    var RenderStencilMask = function (renderer, maskGameObjects, stencilInvert, drawingContext, push, parentMatrix) {
+        var gl = renderer.gl;
+        var opIncr = gl.INCR_WRAP;
+        var opDecr = gl.DECR_WRAP;
+        var fillOp;
+        var maskOp;
+        var maskFunc;
+        var maskRef;
+
+        if (stencilInvert) {
+            fillOp = (push) ? opIncr : opDecr;
+            maskOp = (push) ? opDecr : opIncr;
+            maskFunc = gl.EQUAL;
+            maskRef = (push) ? 1 : 0xFF;
+
+        } else {
+            maskOp = (push) ? opIncr : opDecr;
+            maskFunc = gl.ALWAYS;
+            maskRef = 0;
+        }
+
+        var currentContext = drawingContext.getClone();
+
+        currentContext.setAlphaStrategy(renderer.config.stencilAlphaStrategy);
+        currentContext.setColorWritemask(false, false, false, false);
+
+        if (stencilInvert) {
+            currentContext.setStencil(true, gl.ALWAYS, 0, 0xFF, fillOp, fillOp, fillOp, 0, 0xFF);
+            currentContext.use();
+
+            renderer.renderNodes.getNode('FillCamera').run(currentContext, 0xff000000, drawingContext.useCanvas);
+
+            currentContext = currentContext.getClone();
+        }
+
+        currentContext.setStencil(true, maskFunc, maskRef, 0xFF, gl.KEEP, gl.KEEP, maskOp, 0, 0xFF);
+        currentContext.use();
+
+        for (var i = 0, cnt = maskGameObjects.length; i < cnt; i++) {
+            maskGameObjects[i].renderWebGLStep(renderer, maskGameObjects[i], currentContext, parentMatrix);
+        }
+
+        currentContext.release();
+    };
+
+    const SKIP_CHECK_BLEND_MODE$1 = phaser.BlendModes.SKIP_CHECK;
+
+    var WebGLRenderer$1 = function (renderer, layer, drawingContext, parentMatrix, renderStep, displayList, displayListIndex) {
         var children = layer.list;
         var childCount = children.length;
 
@@ -46,7 +99,7 @@
 
         layer.depthSort();
 
-        var layerHasBlendMode = (layer.blendMode !== SKIP_CHECK_BLEND_MODE);
+        var layerHasBlendMode = (layer.blendMode !== SKIP_CHECK_BLEND_MODE$1);
         var useStencilMask = (layer.maskGameObjects.length > 0);
 
         if (!layerHasBlendMode && currentContext.blendMode !== 0) {
@@ -92,7 +145,7 @@
             if (
                 !layerHasBlendMode &&
                 child.blendMode !== currentContext.blendMode &&
-                child.blendMode !== SKIP_CHECK_BLEND_MODE
+                child.blendMode !== SKIP_CHECK_BLEND_MODE$1
             ) {
                 //  If Layer doesn't have its own blend mode, then a child can have one
                 currentContext = currentContext.getClone();
@@ -117,60 +170,6 @@
         if (currentContext !== drawingContext) {
             currentContext.release();
         }
-    };
-
-
-    var PushStencilMask = function (renderer, maskGameObjects, stencilInvert, drawingContext) {
-        RenderStencilMask(renderer, maskGameObjects, stencilInvert, drawingContext, true);
-    };
-
-    var PopStencilMask = function (renderer, maskGameObjects, stencilInvert, drawingContext) {
-        RenderStencilMask(renderer, maskGameObjects, stencilInvert, drawingContext, false);
-    };
-
-    var RenderStencilMask = function (renderer, maskGameObjects, stencilInvert, drawingContext, push) {
-        var gl = renderer.gl;
-        var opIncr = gl.INCR_WRAP;
-        var opDecr = gl.DECR_WRAP;
-        var fillOp;
-        var maskOp;
-        var maskFunc;
-        var maskRef;
-
-        if (stencilInvert) {
-            fillOp = (push) ? opIncr : opDecr;
-            maskOp = (push) ? opDecr : opIncr;
-            maskFunc = gl.EQUAL;
-            maskRef = (push) ? 1 : 0xFF;
-
-        } else {
-            maskOp = (push) ? opIncr : opDecr;
-            maskFunc = gl.ALWAYS;
-            maskRef = 0;
-        }
-
-        var currentContext = drawingContext.getClone();
-
-        currentContext.setAlphaStrategy(renderer.config.stencilAlphaStrategy);
-        currentContext.setColorWritemask(false, false, false, false);
-
-        if (stencilInvert) {
-            currentContext.setStencil(true, gl.ALWAYS, 0, 0xFF, fillOp, fillOp, fillOp, 0, 0xFF);
-            currentContext.use();
-
-            renderer.renderNodes.getNode('FillCamera').run(currentContext, 0xff000000, drawingContext.useCanvas);
-
-            currentContext = currentContext.getClone();
-        }
-
-        currentContext.setStencil(true, maskFunc, maskRef, 0xFF, gl.KEEP, gl.KEEP, maskOp, 0, 0xFF);
-        currentContext.use();
-
-        for (var i = 0, cnt = maskGameObjects.length; i < cnt; i++) {
-            maskGameObjects[i].renderWebGLStep(renderer, maskGameObjects[i], currentContext);
-        }
-
-        currentContext.release();
     };
 
     function getDefaultExportFromCjs (x) {
@@ -453,33 +452,198 @@
 
     }
 
-    var Methods = {
-        renderWebGL: WebGLRenderer
+    var Methods$1 = {
+        renderWebGL: WebGLRenderer$1
     };
 
     Object.assign(
         StencilMaskLayer.prototype,
-        Methods,
+        Methods$1,
         MaskGameObjectMethods
     );
 
-    function Factory (children) {
+    function StencilMaskLayerFactory (children) {
         var gameObject = new StencilMaskLayer(this.scene, children);
         this.scene.add.existing(gameObject);
         return gameObject;
     }
 
-    const GetAdvancedValue = phaser.Utils.Objects.GetAdvancedValue;
-    const BuildGameObject = phaser.GameObjects.BuildGameObject;
+    const GetAdvancedValue$1 = phaser.Utils.Objects.GetAdvancedValue;
+    const BuildGameObject$1 = phaser.GameObjects.BuildGameObject;
 
-    function Creator (config, addToScene) {
+    function StencilMaskLayerCreator (config, addToScene) {
         if (config === undefined) { config = {}; }
         if (addToScene !== undefined) {
             config.add = addToScene;
         }
-        var children = GetAdvancedValue(config, 'children');
+        var children = GetAdvancedValue$1(config, 'children');
 
         var gameObject = new StencilMaskLayer(this.scene, children);
+        BuildGameObject$1(this.scene, gameObject, config);
+        return gameObject;
+    }
+
+    const SKIP_CHECK_BLEND_MODE = phaser.BlendModes.SKIP_CHECK;
+
+    var WebGLRenderer = function (renderer, container, drawingContext, parentMatrix, renderStep, displayList, displayListIndex) {
+        var camera = drawingContext.camera;
+        camera.addToRenderList(container);
+
+        var children = container.list;
+        var childCount = children.length;
+
+        if (childCount === 0) {
+            return;
+        }
+
+        var baseContext = drawingContext;
+        var transformMatrix = container.localTransform;
+
+        if (parentMatrix) {
+            transformMatrix.loadIdentity();
+            transformMatrix.multiply(parentMatrix);
+            transformMatrix.translate(container.x, container.y);
+            transformMatrix.rotate(container.rotation);
+            transformMatrix.scale(container.scaleX, container.scaleY);
+        } else {
+            transformMatrix.applyITRS(container.x, container.y, container.rotation, container.scaleX, container.scaleY);
+        }
+
+        var containerHasBlendMode = (container.blendMode !== SKIP_CHECK_BLEND_MODE);
+
+        if (!containerHasBlendMode && baseContext.blendMode !== 0) {
+            //  If Container is SKIP_TEST then set blend mode to be Normal
+            baseContext = baseContext.getClone();
+            baseContext.setBlendMode(0);
+            baseContext.use();
+        }
+
+        var currentContext = baseContext;
+        var alpha = container.alpha;
+        var scrollFactorX = container.scrollFactorX;
+        var scrollFactorY = container.scrollFactorY;
+        var useStencilMask = (container.maskGameObjects.length > 0);
+        var maskMatrix = (container.maskLocal) ? transformMatrix : undefined;
+
+        if (useStencilMask) {
+            PushStencilMask(renderer, container.maskGameObjects, container.stencilInvert, currentContext, maskMatrix);
+        }
+
+        for (var i = 0; i < childCount; i++) {
+            var child = children[i];
+
+            if (!child.willRender(camera)) {
+                continue;
+            }
+
+            var childAlphaTopLeft;
+            var childAlphaTopRight;
+            var childAlphaBottomLeft;
+            var childAlphaBottomRight;
+
+            if (child.alphaTopLeft !== undefined) {
+                childAlphaTopLeft = child.alphaTopLeft;
+                childAlphaTopRight = child.alphaTopRight;
+                childAlphaBottomLeft = child.alphaBottomLeft;
+                childAlphaBottomRight = child.alphaBottomRight;
+            }
+            else {
+                var childAlpha = child.alpha;
+
+                childAlphaTopLeft = childAlpha;
+                childAlphaTopRight = childAlpha;
+                childAlphaBottomLeft = childAlpha;
+                childAlphaBottomRight = childAlpha;
+            }
+
+            var childScrollFactorX = child.scrollFactorX;
+            var childScrollFactorY = child.scrollFactorY;
+
+            if (
+                !containerHasBlendMode &&
+                child.blendMode !== currentContext.blendMode &&
+                child.blendMode !== SKIP_CHECK_BLEND_MODE
+            ) {
+                //  If Container doesn't have its own blend mode, then a child can have one
+                currentContext = baseContext.getClone();
+                currentContext.setBlendMode(child.blendMode);
+                currentContext.use();
+            }
+
+            if (child.setScrollFactor) {
+                child.setScrollFactor(childScrollFactorX * scrollFactorX, childScrollFactorY * scrollFactorY);
+            }
+
+            if (child.setAlpha) {
+                child.setAlpha(childAlphaTopLeft * alpha, childAlphaTopRight * alpha, childAlphaBottomLeft * alpha, childAlphaBottomRight * alpha);
+            }
+
+            child.renderWebGLStep(renderer, child, currentContext, transformMatrix, undefined, children, i);
+
+            if (child.setAlpha) {
+                child.setAlpha(childAlphaTopLeft, childAlphaTopRight, childAlphaBottomLeft, childAlphaBottomRight);
+            }
+
+            if (child.setScrollFactor) {
+                child.setScrollFactor(childScrollFactorX, childScrollFactorY);
+            }
+        }
+
+        if (useStencilMask) {
+            PopStencilMask(renderer, container.maskGameObjects, container.stencilInvert, currentContext, maskMatrix);
+        }
+
+        // Release any remaining context.
+        if (currentContext !== drawingContext) {
+            currentContext.release();
+        }
+    };
+
+    CheckP3Version();
+    const Container = phaser.GameObjects.Container;
+    const GetValue = phaser.Utils.Objects.GetValue;
+
+    class StencilMaskContainer extends Container {
+        constructor(scene, x, y, children, config) {
+            super(scene, x, y, children);
+            this.type = 'rexStencilMaskContainer';
+
+            this.maskGameObjects = [];
+            this.maskLocal = GetValue(config, 'local', true);
+            this.setStencilInvert();
+        }
+    }
+
+    var Methods = {
+        renderWebGL: WebGLRenderer
+    };
+
+    Object.assign(
+        StencilMaskContainer.prototype,
+        Methods,
+        MaskGameObjectMethods
+    );
+
+    function StencilMaskContainerFactory (x, y, children, config) {
+        var gameObject = new StencilMaskContainer(this.scene, x, y, children, config);
+        this.scene.add.existing(gameObject);
+        return gameObject;
+    }
+
+    const BuildGameObject = phaser.GameObjects.BuildGameObject;
+    const GetAdvancedValue = phaser.Utils.Objects.GetAdvancedValue;
+
+    function StencilMaskContainerCreator (config, addToScene) {
+        if (config === undefined) { config = {}; }
+        if (addToScene !== undefined) {
+            config.add = addToScene;
+        }
+
+        var x = GetAdvancedValue(config, 'x', 0);
+        var y = GetAdvancedValue(config, 'y', 0);
+        var children = GetAdvancedValue(config, 'children');
+        var gameObject = new StencilMaskContainer(this.scene, x, y, children, config);
+
         BuildGameObject(this.scene, gameObject, config);
         return gameObject;
     }
@@ -564,7 +728,8 @@
             super(pluginManager);
 
             //  Register our new Game Object type
-            pluginManager.registerGameObject('rexStencilMaskLayer', Factory, Creator);
+            pluginManager.registerGameObject('rexStencilMaskLayer', StencilMaskLayerFactory, StencilMaskLayerCreator);
+            pluginManager.registerGameObject('rexStencilMaskContainer', StencilMaskContainerFactory, StencilMaskContainerCreator);
         }
 
         start() {
@@ -574,6 +739,7 @@
     }
 
     SetValue(window, 'RexPlugins.GameObjects.StencilMaskLayer', StencilMaskLayer);
+    SetValue(window, 'RexPlugins.GameObjects.StencilMaskContainer', StencilMaskContainer);
 
     return StencilMaskLayerPlugin;
 

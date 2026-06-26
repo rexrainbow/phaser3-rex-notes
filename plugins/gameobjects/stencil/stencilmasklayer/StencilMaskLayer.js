@@ -5,7 +5,7 @@ import { GameObjects as PhaserGameObjects } from 'phaser';
 const Layer = PhaserGameObjects.Layer;
 
 import WebGLRenderer from './renderer/WebGLRenderer.js';
-import MaskGameObjectMethods from './MaskGameObjectMethods.js';
+import MaskGameObjectMethods from '../stencilmaskbase/MaskGameObjectMethods.js';
 
 
 class StencilMaskLayer extends Layer {

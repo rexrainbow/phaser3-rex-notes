@@ -1,6 +1,9 @@
-import Factory from './gameobjects/stencil/stencilmasklayer/Factory.js';
-import Creator from './gameobjects/stencil/stencilmasklayer/Creator.js';
+import StencilMaskLayerFactory from './gameobjects/stencil/stencilmasklayer/Factory.js';
+import StencilMaskLayerCreator from './gameobjects/stencil/stencilmasklayer/Creator.js';
 import StencilMaskLayer from './gameobjects/stencil/stencilmasklayer/StencilMaskLayer.js';
+import StencilMaskContainerFactory from './gameobjects/stencil/stencilmaskcontainer/Factory.js';
+import StencilMaskContainerCreator from './gameobjects/stencil/stencilmaskcontainer/Creator.js';
+import StencilMaskContainer from './gameobjects/stencil/stencilmaskcontainer/StencilMaskContainer.js';
 import SetValue from './utils/object/SetValue.js';
 
 import { Plugins as PhaserPlugins } from 'phaser';
@@ -10,7 +13,8 @@ class StencilMaskLayerPlugin extends PhaserPlugins.BasePlugin {
         super(pluginManager);
 
         //  Register our new Game Object type
-        pluginManager.registerGameObject('rexStencilMaskLayer', Factory, Creator);
+        pluginManager.registerGameObject('rexStencilMaskLayer', StencilMaskLayerFactory, StencilMaskLayerCreator);
+        pluginManager.registerGameObject('rexStencilMaskContainer', StencilMaskContainerFactory, StencilMaskContainerCreator);
     }
 
     start() {
@@ -20,5 +24,6 @@ class StencilMaskLayerPlugin extends PhaserPlugins.BasePlugin {
 }
 
 SetValue(window, 'RexPlugins.GameObjects.StencilMaskLayer', StencilMaskLayer);
+SetValue(window, 'RexPlugins.GameObjects.StencilMaskContainer', StencilMaskContainer);
 
 export default StencilMaskLayerPlugin;
