@@ -46,6 +46,7 @@ module.exports = {
     'live2dplugin': ['./plugins/live2d-plugin.js', true],
     'layermanagerplugin': './plugins/layermanager-plugin.js',
     'stencilmasklayerplugin': './plugins/stencilmasklayer-plugin.js',
+    'stencillayersplugin': './plugins/stencillayers-plugin.js',
     // texture
     'framemanagerplugin': './plugins/framemanager-plugin.js',
     'canvasframemanagerplugin': './plugins/canvasframemanager-plugin.js',
