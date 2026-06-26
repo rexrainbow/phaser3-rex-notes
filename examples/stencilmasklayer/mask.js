@@ -1,5 +1,5 @@
 import Phaser from '../../../phaser/src/phaser.js';
-import StancilLayerPlugin from '../../plugins/stencillayer-plugin.js';
+import StancilMaskLayerPlugin from '../../plugins/stencilmasklayer-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -13,8 +13,8 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var layer = this.add.rexStencilLayer()
-            .addStencilGameObject(
+        var layer = this.add.rexStencilMaskLayer()
+            .addMaskGameObject(
                 this.add.container(400, 300)
                     .add(
                         [
@@ -53,8 +53,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'StancilLayerPlugin',
-            plugin: StancilLayerPlugin,
+            key: 'StancilMaskLayerPlugin',
+            plugin: StancilMaskLayerPlugin,
             start: true
         }]
     }

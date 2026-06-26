@@ -5,15 +5,15 @@ import { GameObjects as PhaserGameObjects } from 'phaser';
 const Layer = PhaserGameObjects.Layer;
 
 import WebGLRenderer from './renderer/WebGLRenderer.js';
-import StencilGameObjectMethods from './StencilGameObjectMethods.js';
+import MaskGameObjectMethods from './MaskGameObjectMethods.js';
 
 
-class StencilLayer extends Layer {
+class StencilMaskLayer extends Layer {
     constructor(scene, children) {
         super(scene, children);
-        this.type = 'rexStencilLayer';
+        this.type = 'rexStencilMaskLayer';
 
-        this.stencilGameObjects = [];
+        this.maskGameObjects = [];
         this.setStencilInvert();
     }
 
@@ -21,12 +21,12 @@ class StencilLayer extends Layer {
 
 var Methods = {
     renderWebGL: WebGLRenderer
-}
+};
 
 Object.assign(
-    StencilLayer.prototype,
+    StencilMaskLayer.prototype,
     Methods,
-    StencilGameObjectMethods
+    MaskGameObjectMethods
 );
 
-export default StencilLayer;
+export default StencilMaskLayer;

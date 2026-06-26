@@ -1,4 +1,4 @@
-import StencilLayer from './StencilLayer';
+import StencilMaskLayer from './StencilMaskLayer';
 
 export default Creator;
 
@@ -11,4 +11,4 @@ declare namespace Creator {
 declare function Creator(
     config?: Creator.IConfig,
     addToScene?: boolean,
-): StencilLayer;
+): StencilMaskLayer;

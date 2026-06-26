@@ -2,18 +2,18 @@ import AddItem from '../../../utils/array/Add.js';
 import RemoveItem from '../../../utils/array/Remove.js';
 
 export default {
-    addStencilGameObject(gameObject) {
-        AddItem(this.stencilGameObjects, gameObject);
+    addMaskGameObject(gameObject) {
+        AddItem(this.maskGameObjects, gameObject);
         return this;
     },
 
-    removeStencilGameObject(gameObject) {
-        RemoveItem(this.stencilGameObjects, gameObject);
+    removeMaskGameObject(gameObject) {
+        RemoveItem(this.maskGameObjects, gameObject);
         return this;
     },
 
-    clearStencilGameObjects() {
-        this.stencilGameObjects.length = 0;
+    clearMaskGameObjects() {
+        this.maskGameObjects.length = 0;
         return this;
     },
 

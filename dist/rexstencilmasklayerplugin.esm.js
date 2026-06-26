@@ -43,7 +43,7 @@ var WebGLRenderer = function (renderer, layer, drawingContext, parentMatrix, ren
     layer.depthSort();
 
     var layerHasBlendMode = (layer.blendMode !== SKIP_CHECK_BLEND_MODE);
-    var useStencilMask = (layer.stencilGameObjects.length > 0);
+    var useStencilMask = (layer.maskGameObjects.length > 0);
 
     if (!layerHasBlendMode && currentContext.blendMode !== 0) {
         //  If Layer is SKIP_TEST then set blend mode to be Normal
@@ -55,7 +55,7 @@ var WebGLRenderer = function (renderer, layer, drawingContext, parentMatrix, ren
     var alpha = layer.alpha;
 
     if (useStencilMask) {
-        PushStencilMask(renderer, layer.stencilGameObjects, layer.stencilInvert, currentContext);
+        PushStencilMask(renderer, layer.maskGameObjects, layer.stencilInvert, currentContext);
     }
 
     for (var i = 0; i < childCount; i++) {
@@ -106,7 +106,7 @@ var WebGLRenderer = function (renderer, layer, drawingContext, parentMatrix, ren
     }
 
     if (useStencilMask) {
-        PopStencilMask(renderer, layer.stencilGameObjects, layer.stencilInvert, currentContext);
+        PopStencilMask(renderer, layer.maskGameObjects, layer.stencilInvert, currentContext);
     }
 
     // Release any remaining context.
@@ -116,15 +116,15 @@ var WebGLRenderer = function (renderer, layer, drawingContext, parentMatrix, ren
 };
 
 
-var PushStencilMask = function (renderer, stencilGameObjects, stencilInvert, drawingContext) {
-    RenderStencilMask(renderer, stencilGameObjects, stencilInvert, drawingContext, true);
+var PushStencilMask = function (renderer, maskGameObjects, stencilInvert, drawingContext) {
+    RenderStencilMask(renderer, maskGameObjects, stencilInvert, drawingContext, true);
 };
 
-var PopStencilMask = function (renderer, stencilGameObjects, stencilInvert, drawingContext) {
-    RenderStencilMask(renderer, stencilGameObjects, stencilInvert, drawingContext, false);
+var PopStencilMask = function (renderer, maskGameObjects, stencilInvert, drawingContext) {
+    RenderStencilMask(renderer, maskGameObjects, stencilInvert, drawingContext, false);
 };
 
-var RenderStencilMask = function (renderer, stencilGameObjects, stencilInvert, drawingContext, push) {
+var RenderStencilMask = function (renderer, maskGameObjects, stencilInvert, drawingContext, push) {
     var gl = renderer.gl;
     var opIncr = gl.INCR_WRAP;
     var opDecr = gl.DECR_WRAP;
@@ -162,8 +162,8 @@ var RenderStencilMask = function (renderer, stencilGameObjects, stencilInvert, d
     currentContext.setStencil(true, maskFunc, maskRef, 0xFF, gl.KEEP, gl.KEEP, maskOp, 0, 0xFF);
     currentContext.use();
 
-    for (var i = 0, cnt = stencilGameObjects.length; i < cnt; i++) {
-        stencilGameObjects[i].renderWebGLStep(renderer, stencilGameObjects[i], currentContext);
+    for (var i = 0, cnt = maskGameObjects.length; i < cnt; i++) {
+        maskGameObjects[i].renderWebGLStep(renderer, maskGameObjects[i], currentContext);
     }
 
     currentContext.release();
@@ -409,19 +409,19 @@ var Remove = function (array, item, callback, context)
     return item;
 };
 
-var StencilGameObjectMethods = {
-    addStencilGameObject(gameObject) {
-        AddItem(this.stencilGameObjects, gameObject);
+var MaskGameObjectMethods = {
+    addMaskGameObject(gameObject) {
+        AddItem(this.maskGameObjects, gameObject);
         return this;
     },
 
-    removeStencilGameObject(gameObject) {
-        Remove(this.stencilGameObjects, gameObject);
+    removeMaskGameObject(gameObject) {
+        Remove(this.maskGameObjects, gameObject);
         return this;
     },
 
-    clearStencilGameObjects() {
-        this.stencilGameObjects.length = 0;
+    clearMaskGameObjects() {
+        this.maskGameObjects.length = 0;
         return this;
     },
 
@@ -438,12 +438,12 @@ CheckP3Version();
 const Layer = GameObjects.Layer;
 
 
-class StencilLayer extends Layer {
+class StencilMaskLayer extends Layer {
     constructor(scene, children) {
         super(scene, children);
-        this.type = 'rexStencilLayer';
+        this.type = 'rexStencilMaskLayer';
 
-        this.stencilGameObjects = [];
+        this.maskGameObjects = [];
         this.setStencilInvert();
     }
 
@@ -454,13 +454,13 @@ var Methods = {
 };
 
 Object.assign(
-    StencilLayer.prototype,
+    StencilMaskLayer.prototype,
     Methods,
-    StencilGameObjectMethods
+    MaskGameObjectMethods
 );
 
 function Factory (children) {
-    var gameObject = new StencilLayer(this.scene, children);
+    var gameObject = new StencilMaskLayer(this.scene, children);
     this.scene.add.existing(gameObject);
     return gameObject;
 }
@@ -475,7 +475,7 @@ function Creator (config, addToScene) {
     }
     var children = GetAdvancedValue(config, 'children');
 
-    var gameObject = new StencilLayer(this.scene, children);
+    var gameObject = new StencilMaskLayer(this.scene, children);
     BuildGameObject(this.scene, gameObject, config);
     return gameObject;
 }
@@ -554,13 +554,13 @@ var SetValue = function (target, keys, value, delimiter = '.') {
     return target;
 };
 
-class StencilLayerPlugin extends Plugins.BasePlugin {
+class StencilMaskLayerPlugin extends Plugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);
 
         //  Register our new Game Object type
-        pluginManager.registerGameObject('rexStencilLayer', Factory, Creator);
+        pluginManager.registerGameObject('rexStencilMaskLayer', Factory, Creator);
     }
 
     start() {
@@ -569,6 +569,6 @@ class StencilLayerPlugin extends Plugins.BasePlugin {
     }
 }
 
-SetValue(window, 'RexPlugins.GameObjects.StencilLayer', StencilLayer);
+SetValue(window, 'RexPlugins.GameObjects.StencilMaskLayer', StencilMaskLayer);
 
-export { StencilLayerPlugin as default };
+export { StencilMaskLayerPlugin as default };
