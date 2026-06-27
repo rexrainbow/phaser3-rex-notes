@@ -6,6 +6,63 @@ var PopStencilMask = function (renderer, maskGameObjects, stencilInvert, drawing
     RenderStencilMask(renderer, maskGameObjects, stencilInvert, drawingContext, false, parentMatrix);
 };
 
+var HasStencilModifier = function (gameObject, camera) {
+    if (gameObject.isStencilModifier) {
+        return true;
+    }
+
+    var children = gameObject.list;
+
+    if (!children) {
+        return false;
+    }
+
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+        var child = children[i];
+
+        if (
+            child &&
+            child.willRender(camera) &&
+            HasStencilModifier(child, camera)
+        ) {
+            return true;
+        }
+    }
+
+    return false;
+};
+
+var ShouldForceComposite = function (gameObject, camera) {
+    var stencilCompositeCheck = gameObject.stencilCompositeCheck;
+
+    if (stencilCompositeCheck === undefined) {
+        stencilCompositeCheck = 'auto';
+    }
+
+    return (
+        stencilCompositeCheck === true ||
+        (stencilCompositeCheck === 'auto' && HasStencilModifier(gameObject, camera))
+    );
+};
+
+var RenderMaskGameObject = function (renderer, maskGameObject, drawingContext, parentMatrix, camera) {
+    var filtersForceComposite = maskGameObject.filtersForceComposite;
+
+    if (
+        ShouldForceComposite(maskGameObject, camera) &&
+        maskGameObject.enableFilters &&
+        maskGameObject.setFiltersForceComposite
+    ) {
+        maskGameObject.enableFilters().setFiltersForceComposite(true);
+    }
+
+    maskGameObject.renderWebGLStep(renderer, maskGameObject, drawingContext, parentMatrix);
+
+    if (maskGameObject.setFiltersForceComposite) {
+        maskGameObject.setFiltersForceComposite(filtersForceComposite);
+    }
+};
+
 var RenderStencilMask = function (renderer, maskGameObjects, stencilInvert, drawingContext, push, parentMatrix) {
     var gl = renderer.gl;
     var opIncr = gl.INCR_WRAP;
@@ -53,7 +110,7 @@ var RenderStencilMask = function (renderer, maskGameObjects, stencilInvert, draw
             continue;
         }
 
-        maskGameObject.renderWebGLStep(renderer, maskGameObject, currentContext, parentMatrix);
+        RenderMaskGameObject(renderer, maskGameObject, currentContext, parentMatrix, camera);
     }
 
     currentContext.release();
