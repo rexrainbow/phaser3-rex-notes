@@ -44,8 +44,16 @@ var RenderStencilMask = function (renderer, maskGameObjects, stencilInvert, draw
     currentContext.setStencil(true, maskFunc, maskRef, 0xFF, gl.KEEP, gl.KEEP, maskOp, 0, 0xFF);
     currentContext.use();
 
+    var camera = drawingContext.camera;
+
     for (var i = 0, cnt = maskGameObjects.length; i < cnt; i++) {
-        maskGameObjects[i].renderWebGLStep(renderer, maskGameObjects[i], currentContext, parentMatrix);
+        var maskGameObject = maskGameObjects[i];
+
+        if (!maskGameObject.willRender(camera)) {
+            continue;
+        }
+
+        maskGameObject.renderWebGLStep(renderer, maskGameObject, currentContext, parentMatrix);
     }
 
     currentContext.release();

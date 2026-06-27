@@ -13,23 +13,22 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var layer = this.add.rexStencilMaskLayer()
+        var container = this.add.rexStencilMaskContainer(400, 300)
             .addMaskGameObject(
-                this.add.container(400, 300)
+                this.add.container(0, 0)
                     .add(
                         [
                             this.add.circle(-150, 0, 200, 0x330000),
                             this.add.circle(150, 0, 200, 0x330000)
                         ]
                     )
-                    .setVisible(false)
             )
         //.setStencilInvert(false)
 
-        layer.add(this.add.image(400, 300, 'classroom'));
+        container.add(this.add.image(0, 0, 'classroom'));
 
         /*
-        Stencil-Layer
+        Stencil-Container
           - stencilGameObjects: container <- [circle, circle]
           - children: [image]
         */
