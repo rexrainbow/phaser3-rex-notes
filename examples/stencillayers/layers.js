@@ -36,6 +36,18 @@ class Demo extends Phaser.Scene {
             })
             .end() // Check stencil pairs
 
+        /*
+        mainLayer
+          - stencilA           (Stencil)
+          - layer0             (Layer)
+          - stencilB           (Stencil)
+          - layer1             (Layer)
+          - stencilA reference (StencilReference)
+          - layer2             (Layer)
+          - stencilB reference (StencilReference)
+          - layer3             (Layer)
+        */
+
         mainLayer.getStencil('stencilA').add(
             this.add.circle(400 - 150, 300, 200, 0x330000)
         )

@@ -129,6 +129,12 @@ nav:
     - Copy frame buffer :
         - Render texture: rendertexture.md
         - Capture frame : captureframe.md
+    - Stencil:
+        - Stencil: stencil.md
+        - Stencil mask layer: stencilmasklayer.md
+        - Stencil mask container: stencilmaskcontainer.md
+        - Stencil layers: stencillayers.md
+        - Stencil containers: stencilcontainers.md
     - Canvas:
         - Canvas: canvas.md
         - Round rectangle: canvas-roundrectangle.md
