@@ -176,24 +176,24 @@ var quadimage = scene.make.rexQuadImage({
 
 - Get
     ```javascript
-    var worldXY = controlPoint.getWorldXY();
+    var worldXY = vertexObjects.getWorldXY();
     var x = worldXY.x;
     var y = worldXY.y;
     ```
     or
     ```javascript
-    var x = controlPoint.x;
-    var y = controlPoint.y;
+    var x = vertexObjects.x;
+    var y = vertexObjects.y;
     ```
 - Set
     ```javascript
-    controlPoint.setPosition(x, y);
-    // controlPoint.setWorldXY(x, y);
+    vertexObjects.setPosition(x, y);
+    // vertexObjects.setWorldXY(x, y);
     ```
     or
     ```javascript
-    controlPoint.x = x;
-    controlPoint.y = y;
+    vertexObjects.x = x;
+    vertexObjects.y = y;
     ```
 
 ### Tint color
