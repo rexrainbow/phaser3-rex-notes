@@ -25,13 +25,14 @@ class Demo extends Phaser.Scene {
             .fill(0x888888)
             .draw(numberText, 150, 200)
             .draw(mushroom, 75, 100)
+            .render()
 
         this.debug = this.add.graphics();
         image.setDebug(this.debug);
 
-        var controlPoints = image.controlPoints;
-        for (var i = 0, cnt = controlPoints.length; i < cnt; i++) {
-            CreateControlCircle(this, controlPoints[i]);
+        var vertexObjects = image.vertexObjects;
+        for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
+            CreateControlCircle(this, vertexObjects[i]);
         }
 
         this.add.image(600, 300, image.texture);
@@ -43,13 +44,13 @@ class Demo extends Phaser.Scene {
     }
 }
 
-var CreateControlCircle = function (scene, controlPoint) {
-    var circle = scene.add.circle(controlPoint.x, controlPoint.y, 10, 0xff0000)
+var CreateControlCircle = function (scene, vertexObject) {
+    var circle = scene.add.circle(vertexObject.x, vertexObject.y, 10, 0xff0000)
         .setInteractive({ draggable: true })
         .on('drag', function (pointer, dragX, dragY) {
             circle.x = dragX;
             circle.y = dragY;
-            controlPoint.setPosition(dragX, dragY);
+            vertexObject.setPosition(dragX, dragY);
         });
     return circle;
 }

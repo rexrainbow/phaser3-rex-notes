@@ -59,7 +59,7 @@ nav:
                 - Nine patch2: ninepatch2.md
             - Line: line.md       
     - Mesh:
-        - Mesh: mesh.md
+        - Mesh2D: mesh2d.md
         - Perspective:
             - Image: perspective-image.md
             - Render texture: perspective-rendertexture.md
@@ -70,6 +70,7 @@ nav:
         - Skew:
             - Image: skew-image.md
             - Render texture: skew-rendertexture.md
+        - Mesh: mesh.md
         - Shatter:
             - Image: shatter-image.md
             - Render texture: shatter-rendertexture.md

@@ -165,7 +165,7 @@ var quadimage = scene.make.rexSkewImage({
 
 ### Other properties
 
-See [Mesh game object](mesh.md), [game object](gameobject.md)
+See [Mesh2D game object](mesh2d.md), [game object](gameobject.md)
 
 ### Create mask
 

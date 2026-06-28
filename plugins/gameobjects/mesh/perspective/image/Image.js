@@ -1,7 +1,8 @@
-import Mesh from '../../mesh/sprite/Sprite.js';
+import Mesh2DSprite from '../../mesh2dwrapper/sprite/Sprite.js';
 import Methods from './methods/Methods.js';
-import RotateXYZ from '../../mesh/utils/RotateXYZ.js';
-import IsBackFace from '../../mesh/utils/IsBackFace.js';
+import RotateXYZ from '../../mesh2dwrapper/utils/RotateXYZ.js';
+import IsBackFace from '../../mesh2dwrapper/utils/IsBackFace.js';
+import GenerateGridVertices from '../../mesh2dwrapper/utils/GenerateGridVertices.js';
 
 import { Math as PhaserMath, Utils as PhaserUtils } from 'phaser';
 const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
@@ -9,7 +10,7 @@ const GetValue = PhaserUtils.Objects.GetValue;
 const RadToDeg = PhaserMath.RadToDeg;
 const DegToRad = PhaserMath.DegToRad;
 
-class Image extends Mesh {
+class Image extends Mesh2DSprite {
     constructor(scene, x, y, key, frame, config) {
         if (IsPlainObject(x)) {
             config = x;
@@ -19,7 +20,20 @@ class Image extends Mesh {
             frame = GetValue(config, 'frame', null);
         }
 
-        super(scene, x, y, key, frame);
+        if (config === undefined) {
+            config = {};
+        }
+        if (config.renderAsTriangles === undefined) {
+            config.renderAsTriangles = false;
+        }
+        if (config.useOrderedIndices === undefined) {
+            config.useOrderedIndices = true;
+        }
+        if (config.orderedIndicesStrategy === undefined) {
+            config.orderedIndicesStrategy = 1;
+        }
+
+        super(scene, x, y, key, frame, config);
         this.type = 'rexPerspectiveImage';
         this._rotationX = 0;
         this._rotationY = 0;
@@ -71,6 +85,12 @@ class Image extends Mesh {
             });
 
         this.syncRotation();
+
+        return this;
+    }
+
+    addGridFaces(columns, rows, sharedVertexMode) {
+        GenerateGridVertices(this, columns, rows, sharedVertexMode);
 
         return this;
     }
@@ -157,8 +177,8 @@ class Image extends Mesh {
 
 var Rotate = function (gameObject, rotationX, rotationY, rotationZ) {
     RotateXYZ(gameObject, rotationX, rotationY, rotationZ);
-    if (gameObject.faces.length > 0) {
-        gameObject.isBackFace = IsBackFace(gameObject.faces[0]);
+    if (gameObject.faceIndices.length > 0) {
+        gameObject.isBackFace = IsBackFace(gameObject.vertexObjects, gameObject.faceIndices, 0);
     } else {
         gameObject.isBackFace = false;
     }

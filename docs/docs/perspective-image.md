@@ -209,7 +209,7 @@ image.setTexture(key);
 
 ### Other properties
 
-See [Mesh game object](mesh.md), [game object](gameobject.md)
+See [Mesh2D game object](mesh2d.md), [game object](gameobject.md)
 
 ### Shader effects
 

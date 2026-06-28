@@ -1,6 +1,7 @@
 import Image from '../image/Image.js';
 import CreateDynamicTexture from '../../../../utils/rendertexture/CreateDynamicTexture.js';
 import Snapshot from '../../../../utils/rendertexture/Snapshot.js';
+import InstallRTSetSizeHook from '../../mesh2dwrapper/utils/InstallRTSetSizeHook.js';
 
 import { Utils as PhaserUtils } from 'phaser';
 const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
@@ -22,6 +23,11 @@ class RenderTexture extends Image {
         super(scene, x, y, texture, null, config);
         this.type = 'rexPerspectiveRenderTexture';
         this.rt = this.texture;
+
+        var self = this;
+        InstallRTSetSizeHook(this.rt, function () {
+            self.setSizeToFrame();
+        })
     }
 
     destroy(fromScene) {

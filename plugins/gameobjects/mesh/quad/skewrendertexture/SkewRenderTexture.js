@@ -1,6 +1,7 @@
 import SkewImage from '../skewimage/SkewImage.js';
 import CreateDynamicTexture from '../../../../utils/rendertexture/CreateDynamicTexture.js';
 import Snapshot from '../../../../utils/rendertexture/Snapshot.js';
+import InstallRTSetSizeHook from '../../mesh2dwrapper/utils/InstallRTSetSizeHook.js';
 
 import { Utils as PhaserUtils } from 'phaser';
 const IsPlainObject = PhaserUtils.Objects.IsPlainObject;
@@ -22,6 +23,11 @@ class SkewRenderTexture extends SkewImage {
         super(scene, x, y, texture, null);
         this.type = 'rexSkewRenderTexture';
         this.rt = this.texture;
+        
+        var self = this;
+        InstallRTSetSizeHook(this.rt, function(){
+            self.setSizeToFrame();
+        })
     }
 
     destroy(fromScene) {
@@ -41,7 +47,11 @@ class SkewRenderTexture extends SkewImage {
 
         this.updateDisplayOrigin();
 
-        this.resetFaceSize();
+        var vertexObjects = this.vertexObjects;
+
+        for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
+            this.updateVertexObjectFrame(vertexObjects[i]);
+        }
 
         return this;
     }

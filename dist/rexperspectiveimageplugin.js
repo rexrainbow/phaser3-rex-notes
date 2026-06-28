@@ -4,138 +4,6 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexperspectiveimageplugin = factory(global.Phaser));
 })(this, (function (phaser) { 'use strict';
 
-    const GameObject = phaser.GameObjects.GameObject;
-
-    let Image$2 = class Image extends GameObject {
-    };
-
-    const Components$1 = phaser.GameObjects.Components;
-    phaser.Class.mixin(Image$2,
-        [
-            Components$1.AlphaSingle,
-            Components$1.BlendMode,
-            Components$1.Depth,
-            Components$1.Flip,
-            Components$1.Lighting,
-            Components$1.Mask,
-            Components$1.Origin,
-            Components$1.RenderNodes,
-            Components$1.Size,
-            Components$1.Texture,
-            Components$1.Transform,
-            Components$1.Visible,
-            Components$1.ScrollFactor,
-        ]
-    );
-
-    const GetCalcMatrix = phaser.GameObjects.GetCalcMatrix;
-
-    var renderOptions = {
-        multiTexturing: true,
-        lighting: null,
-        smoothPixelArt: false
-    };
-
-    var lightingOptions = {
-        normalGLTexture: null,
-        normalMapRotation: 0,
-        selfShadow: {
-            enabled: false,
-            penumbra: 0,
-            diffuseFlatThreshold: 0
-        }
-    };
-
-    var SetRenderOptions = function (renderer, src) {
-        var srcTexture = src.texture;
-        var sourceIndex = src.frame.sourceIndex;
-
-        if (src.lighting) {
-            var normalMap = srcTexture.dataSource[sourceIndex];
-            if (!normalMap) {
-                normalMap = renderer.normalTexture;
-            } else {
-                normalMap = normalMap.glTexture;
-            }
-
-            var normalMapRotation = src.rotation;
-            if (src.parentContainer) {
-                normalMapRotation = src.getWorldTransformMatrix().rotationNormalized;
-            }
-
-            var selfShadow = src.selfShadow;
-            var selfShadowEnabled = selfShadow.enabled;
-            if (selfShadowEnabled === null) {
-                selfShadowEnabled = src.scene.sys.game.config.selfShadow;
-            }
-
-            lightingOptions.normalGLTexture = normalMap;
-            lightingOptions.normalMapRotation = normalMapRotation;
-            lightingOptions.selfShadow.enabled = selfShadowEnabled;
-            lightingOptions.selfShadow.penumbra = selfShadow.penumbra;
-            lightingOptions.selfShadow.diffuseFlatThreshold = selfShadow.diffuseFlatThreshold;
-
-            renderOptions.lighting = lightingOptions;
-        } else {
-            renderOptions.lighting = null;
-        }
-
-        // Get smooth pixel art option.
-        var smoothPixelArt;
-        if (srcTexture && srcTexture.smoothPixelArt !== null) {
-            smoothPixelArt = srcTexture.smoothPixelArt;
-        }
-        else {
-            smoothPixelArt = src.scene.sys.game.config.smoothPixelArt;
-        }
-        renderOptions.smoothPixelArt = smoothPixelArt;
-    };
-
-    var WebGLRenderer$1 = function (renderer, src, drawingContext, parentMatrix) {
-        var camera = drawingContext.camera;
-        camera.addToRenderList(src);
-
-        if (src.skipRender()) {
-            return;
-        }
-
-        var calcMatrix = GetCalcMatrix(src, camera, parentMatrix, !drawingContext.useCanvas).calc;
-
-        if (src.dirty) {
-            src.updateBuffers();
-        }
-
-        SetRenderOptions(renderer, src);
-
-        (src.customRenderNodes.BatchHandler || src.defaultRenderNodes.BatchHandler).batchTriangles(
-            drawingContext,
-            src,
-            calcMatrix,
-            src.frame.source.glTexture,
-            src.vertexBuffer,
-            src.uvBuffer,
-            src.colorBuffer,
-            src.alphaBuffer,
-            src.alpha,
-            src.tintMode,
-            renderOptions,
-            src.debugCallback
-        );
-    };
-
-    var CanvasRenderer$1 = function (renderer, src, camera, parentMatrix) {
-    };
-
-    var SkipRender = function () {
-        return this.faces.length === 0;
-    };
-
-    var Render = {
-        renderWebGL: WebGLRenderer$1,
-        renderCanvas: CanvasRenderer$1,
-        skipRender: SkipRender,
-    };
-
     const RotateAround$3 = phaser.Math.RotateAround;
 
     var LocalXYToWorldXY = function (gameObject, localX, localY, out) {
@@ -185,27 +53,41 @@
     const Linear$1 = phaser.Math.Linear;
     const RotateAround$2 = phaser.Math.RotateAround;
 
-    class Vertex {
-        constructor() {
-            this.parent = undefined;  // Mesh game object
+    class VertexObject {
+        constructor(parent, index, u, v) {
+            if (index === undefined) { index = -1; }
+            if (u === undefined) { u = 0; }
+            if (v === undefined) { v = 0; }
+
+            this.parent = undefined;
+            this.index = index;
             this.name = '';
 
-            this.u = 0;
-            this.v = 0;
-            this.frameU = 0;
-            this.frameV = 0;
-            this.frameX = 0;
-            this.frameY = 0;
+            this.u = u;
+            this.v = v;
+            this._frameU = 0;
+            this._frameV = 0;
+            this._frameX = 0;
+            this._frameY = 0;
             this._dx = 0;
             this._dy = 0;
-            this.localX = 0;
-            this.localY = 0;
-            this.alpha = 1;
-            this.color = 0xffffff;
+            this._localX = 0;
+            this._localY = 0;
+            this._alpha = 1;
+            this._color = 0xffffff;
+            this.xyz = [0, 0, 0];
+
+            if (parent) {
+                this.setParent(parent, index);
+            }
         }
 
-        setParent(parent) {
+        setParent(parent, index) {
             this.parent = parent;
+            if (index !== undefined) {
+                this.index = index;
+            }
+            this.writeToMesh();
             return this;
         }
 
@@ -223,10 +105,7 @@
                 return;
             }
             this._frameU = value;
-
-            if (this.parent) {
-                this.parent.setUVDirtyFlag();
-            }
+            this.writeUVToMesh();
         }
 
         get frameV() {
@@ -238,10 +117,7 @@
                 return;
             }
             this._frameV = value;
-
-            if (this.parent) {
-                this.parent.setUVDirtyFlag();
-            }
+            this.writeUVToMesh();
         }
 
         get frameX() {
@@ -254,10 +130,7 @@
             }
             this._frameX = value;
             this._localX = value + this._dx;
-
-            if (this.parent) {
-                this.parent.setVertexDirtyFlag();
-            }
+            this.writePositionToMesh();
         }
 
         get frameY() {
@@ -270,10 +143,7 @@
             }
             this._frameY = value;
             this._localY = value + this._dy;
-
-            if (this.parent) {
-                this.parent.setVertexDirtyFlag();
-            }
+            this.writePositionToMesh();
         }
 
         get localX() {
@@ -286,10 +156,7 @@
             }
             this._localX = value;
             this._dx = value - this._frameX;
-
-            if (this.parent) {
-                this.parent.setVertexDirtyFlag();
-            }
+            this.writePositionToMesh();
         }
 
         get localY() {
@@ -302,10 +169,7 @@
             }
             this._localY = value;
             this._dy = value - this._frameY;
-
-            if (this.parent) {
-                this.parent.setVertexDirtyFlag();
-            }
+            this.writePositionToMesh();
         }
 
         get alpha() {
@@ -313,14 +177,7 @@
         }
 
         set alpha(value) {
-            if (this._alpha === value) {
-                return;
-            }
             this._alpha = value;
-
-            if (this.parent) {
-                this.parent.setAlphaDirtyFlag();
-            }
         }
 
         get color() {
@@ -328,14 +185,7 @@
         }
 
         set color(value) {
-            if (this._color === value) {
-                return;
-            }
             this._color = value;
-
-            if (this.parent) {
-                this.parent.setColorDirtyFlag();
-            }
         }
 
         setUV(u, v) {
@@ -359,7 +209,6 @@
             return this;
         }
 
-        // Reset position to frame position
         resetPosition() {
             this.localX = this.frameX;
             this.localY = this.frameY;
@@ -433,661 +282,320 @@
         set y(value) {
             this.setWorldXY(this.x, value);
         }
+
+        writePositionToMesh() {
+            var parent = this.parent;
+            if (!parent || this.index < 0) {
+                return this;
+            }
+
+            var offset = this.index * 4;
+            parent.vertices[offset] = this._localX - parent.displayOriginX;
+            parent.vertices[offset + 1] = this._localY - parent.displayOriginY;
+
+            return this;
+        }
+
+        writeUVToMesh() {
+            var parent = this.parent;
+            if (!parent || this.index < 0) {
+                return this;
+            }
+
+            var offset = this.index * 4;
+            parent.vertices[offset + 2] = this._frameU;
+            parent.vertices[offset + 3] = this._frameV;
+
+            return this;
+        }
+
+        writeToMesh() {
+            this.writePositionToMesh();
+            this.writeUVToMesh();
+            return this;
+        }
     }
 
     var GlobalXY = {};
 
-    const InCenter = phaser.Geom.Triangle.InCenter;
+    const Mesh2D = phaser.GameObjects.Mesh2D;
+    const GetCalcMatrix = phaser.GameObjects.GetCalcMatrix;
+    const IsPlainObject$5 = phaser.Utils.Objects.IsPlainObject;
+    const GetValue$e = phaser.Utils.Objects.GetValue;
 
-    var GetInCenter = function (face, out) {
-        if (out === undefined) {
-            out = {};
-        } else if (out === true) {
-            out = GlobalOut;
-        }
-
-        GlobalTriangle.x1 = face.vertices[0].localX;
-        GlobalTriangle.y1 = face.vertices[0].localY;
-        GlobalTriangle.x2 = face.vertices[1].localX;
-        GlobalTriangle.y2 = face.vertices[1].localY;
-        GlobalTriangle.x3 = face.vertices[2].localX;
-        GlobalTriangle.y3 = face.vertices[2].localY;
-
-        return InCenter(GlobalTriangle, out);
-    };
-
-    var GlobalTriangle = {};
-    var GlobalOut = {};
-
-    var Contains$1 = function (face, x, y) {
-        var vertices = face.vertices;
-        var v0 = vertices[0];
-        var v1 = vertices[1];
-        var v2 = vertices[2];
-        GlobTriangle.setTo(
-            v0.localX, v0.localY,
-            v1.localX, v1.localY,
-            v2.localX, v2.localY,
-        );
-
-        return GlobTriangle.contains(x, y);
-    };
-
-    var GlobTriangle = new phaser.Geom.Triangle();
-
-    const RadToDeg$3 = phaser.Math.RadToDeg;
-    const DegToRad$4 = phaser.Math.DegToRad;
-
-    class Face {
-        constructor(vertex0, vertex1, vertex2) {
-            if (vertex0 === undefined) { vertex0 = new Vertex(); }
-            if (vertex1 === undefined) { vertex1 = new Vertex(); }
-            if (vertex2 === undefined) { vertex2 = new Vertex(); }
-
-            this.parent = undefined;  // Mesh game object
-            this.name = '';
-
-            this.vertices = [vertex0, vertex1, vertex2];
-
-            this._localOffsetX = 0;
-            this._localOffsetY = 0;
-            this._rotation = 0;
-            this._alpha = 1;
-            this._color = 0xffffff;
-        }
-
-        setParent(parent) {
-            this.parent = parent;
-            this.vertices[0].setParent(parent);
-            this.vertices[1].setParent(parent);
-            this.vertices[2].setParent(parent);
-
-            return this;
-        }
-
-        setName(name) {
-            this.name = name;
-            return this;
-        }
-
-        get vertex0() {
-            return this.vertices[0];
-        }
-
-        set vertex0(value) {
-            this.vertices[0] = value;
-        }
-
-        get vertex1() {
-            return this.vertices[1];
-        }
-
-        set vertex1(value) {
-            this.vertices[1] = value;
-        }
-
-        get vertex2() {
-            return this.vertices[2];
-        }
-
-        set vertex2(value) {
-            this.vertices[2] = value;
-        }
-
-        get localOffsetX() {
-            return this._localOffsetX;
-        }
-
-        set localOffsetX(value) {
-            if (value === this._localOffsetX) {
-                return;
-            }
-            this._localOffsetX = value;
-
-            this.updateVerticesPosition();
-        }
-
-        get localOffsetY() {
-            return this._localOffsetY;
-        }
-
-        set localOffsetY(value) {
-            if (value === this._localOffsetY) {
-                return;
-            }
-            this._localOffsetY = value;
-            this.updateVerticesPosition();
-        }
-
-        get rotation() {
-            return this._rotation;
-        }
-
-        set rotation(value) {
-            if (value === this._rotation) {
-                return;
+    let Image$1 = class Image extends Mesh2D {
+        constructor(scene, x, y, key, frame, config) {
+            if (IsPlainObject$5(x)) {
+                config = x;
+                x = GetValue$e(config, 'x', 0);
+                y = GetValue$e(config, 'y', 0);
+                key = GetValue$e(config, 'key', '__DEFAULT');
+                frame = GetValue$e(config, 'frame', null);
             }
 
-            this._rotation = value;
+            if (x === undefined) { x = 0; }
+            if (y === undefined) { y = 0; }
+            if (key === undefined || key === null) { key = '__DEFAULT'; }
 
-            var oxy = GetInCenter(this, true);
-            var ox = oxy.x;
-            var oy = oxy.y;
+            super(scene, x, y, key, [], [], GetValue$e(config, 'flipV', false));
 
-            this.vertices[0].rotateAround(ox, oy, value);
-            this.vertices[1].rotateAround(ox, oy, value);
-            this.vertices[2].rotateAround(ox, oy, value);
-        }
+            this.type = 'rexMeshImage';
 
-        get angle() {
-            return RadToDeg$3(this._rotation);
-        }
+            // Keep Mesh2D#vertices as the renderer-facing flat [x, y, u, v] array.
+            this.vertexObjects = [];
+            this.faceIndices = [];
+            this.texturePage = GetValue$e(config, 'texturePage', 0);
+            this.autoBuildOrderedIndices = GetValue$e(config, 'useOrderedIndices', false);
+            this.orderedIndicesStrategy = GetValue$e(config, 'orderedIndicesStrategy', 2);
+            this.debugCallback = null;
+            this.debugGraphic = null;
 
-        set angle(value) {
-            this.rotation = DegToRad$4(value);
-        }
+            this.setRenderAsTriangles(GetValue$e(config, 'renderAsTriangles', false));
+            this.setUseOrderedIndices(this.autoBuildOrderedIndices);
 
-        get alpha() {
-            return this._alpha;
-        }
-
-        set alpha(value) {
-            if (this._alpha === value) {
-                return;
-            }
-            this._alpha = value;
-
-            this.vertices[0].setAlpha(value);
-            this.vertices[1].setAlpha(value);
-            this.vertices[2].setAlpha(value);
-        }
-
-        get color() {
-            return this._color;
-        }
-
-        set color(value) {
-            if (this._color === value) {
-                return;
-            }
-            this._color = value;
-
-            this.vertices[0].setColor(value);
-            this.vertices[1].setColor(value);
-            this.vertices[2].setColor(value);
-        }
-
-        get isPositionModified() {
-            return (this._localOffsetX !== 0) || (this._localOffsetY !== 0) || (this._rotation !== 0);
-        }
-
-        setUV(u0, v0, u1, v1, u2, v2) {
-            this.vertices[0].setUV(u0, v0);
-            this.vertices[1].setUV(u1, v1);
-            this.vertices[2].setUV(u2, v2);
-
-            return this;
-        }
-
-        setFrameUV(frameU0, frameV0, frameU1, frameV1) {
-            this.vertices[0].setFrameUV(frameU0, frameV0, frameU1, frameV1);
-            this.vertices[1].setFrameUV(frameU0, frameV0, frameU1, frameV1);
-            this.vertices[2].setFrameUV(frameU0, frameV0, frameU1, frameV1);
-
-            return this;
-        }
-
-        setFrameSize(frameWidth, frameHeight, frameX, frameY) {
-            // Set local position of vertices by frameXY and dxy
-            for (var i = 0, cnt = this.vertices.length; i < cnt; i++) {
-                this.vertices[i].setFrameSize(frameWidth, frameHeight, frameX, frameY);
+            if (frame !== undefined && frame !== null) {
+                this.setFrame(frame);
             }
 
-            // Apply face offset, and rotation to vertices
-            if (this.isPositionModified) {
-                this.updateVerticesPosition();
-            }
-            return this;
+            this.setSizeToFrame();
+            this.setOriginFromFrame();
         }
 
-        setLocalOffset(x, y) {
-            this.localOffsetX = x;
-            this.localOffsetY = y;
-            return this;
-        }
-
-        resetVerticesPosition() {
-            for (var i = 0, cnt = this.vertices.length; i < cnt; i++) {
-                this.vertices[i].resetPosition();
-            }
-
-            if (this.isPositionModified) {
-                this.updateVerticesPosition();
-            }
-            return this;
-        }
-
-        updateVerticesPosition() {
-            // Extract the horizontal offset of the Face to calculate the new vertex positions
-            var offsetX = this._localOffsetX;
-            // Extract the vertical offset of the Face to calculate the new vertex positions
-            var offsetY = this._localOffsetY;
-
-            var vertices = this.vertices;
-            for (var i = 0, cnt = vertices.length; i < cnt; i++) {
-                var vertex = vertices[i];
-                // Update each vertex position based on frameX, frameY, and the Face's offsets
-                // This process overrides the original dx and dy values, ensuring the relative distance between the three vertices is maintained
-                vertex.setLocalPosition(vertex.frameX + offsetX, vertex.frameY + offsetY);
-            }
-
-            // Save the current rotation value to reapply after resetting rotation to 0
-            var rotationSave = this.rotation;
-            this._rotation = 0;
-            this.rotation = rotationSave;
-
-            return this;
-        }
-
-        setRotation(value) {
-            this.rotation = value;
-            return this;
-        }
-
-        setAngle(value) {
-            this.angle = value;
-            return this;
-        }
-
-        setAlpha(value) {
-            this.alpha = value;
-            return this;
-        }
-
-        setColor(value) {
-            this.color = value;
-            return this;
-        }
-
-        contains(localX, localY) {
-            return Contains$1(this, localX, localY);
-        }
-    }
-
-    var IsPlainObject$4 = function (obj)
-    {
-        // Not plain objects:
-        // - Any object or value whose internal [[Class]] property is not "[object Object]"
-        // - DOM nodes
-        // - window
-        if (typeof(obj) !== 'object' || obj.nodeType || obj === obj.window)
-        {
-            return false;
-        }
-
-        // Support: Firefox <20
-        // The try/catch suppresses exceptions thrown when attempting to access
-        // the "constructor" property of certain host objects, ie. |window.location|
-        // https://bugzilla.mozilla.org/show_bug.cgi?id=814622
-        try
-        {
-            if (obj.constructor && !({}).hasOwnProperty.call(obj.constructor.prototype, 'isPrototypeOf'))
-            {
-                return false;
-            }
-        }
-        catch (e)
-        {
-            return false;
-        }
-
-        // If the function hasn't returned already, we're confident that
-        // |obj| is a plain object, created by {} or constructed with new Object
-        return true;
-    };
-
-    var GenerateGridVertices = function (gameObject, columns, rows, sharedVertexMode) {
-        if (IsPlainObject$4(columns)) {
-            var config = columns;
-            columns = config.columns;
-            rows = config.rows;
-            sharedVertexMode = config.sharedVertexMode;
-        }
-
-        if (columns === undefined) {
-            columns = 1;
-        }
-        if (rows === undefined) {
-            rows = 1;
-        }
-        if (sharedVertexMode === undefined) {
-            sharedVertexMode = false;
-        }
-
-        var faces = [];
-        var vertices;
-
-        if (sharedVertexMode) {
-            vertices = [];
-            for (var r = 0; r <= rows; r++) {
-                for (var c = 0; c <= columns; c++) {
-                    var vertex = gameObject.createVertex(c / columns, r / rows);
-                    vertices.push(vertex);
-                }
-            }
-        }
-
-        var vertex0, vertex1, vertex2;
-        var face;
-        for (var r = 0; r < rows; r++) {
-            for (var c = 0; c < columns; c++) {
-                if (sharedVertexMode) {
-                    var indexTL = (r * (columns + 1)) + c,
-                        indexTR = indexTL + 1,
-                        indexBL = ((r + 1) * (columns + 1)) + c,
-                        indexBR = indexBL + 1;
-
-                    var vertexTL = vertices[indexTL];
-                    var vertexTR = vertices[indexTR];
-                    var vertexBL = vertices[indexBL];
-                    var vertexBR = vertices[indexBR];
-
-                    face = gameObject.createFace(vertexTL, vertexBR, vertexBL);
-                    gameObject.addFace(face);
-                    faces.push(face);
-
-                    face = gameObject.createFace(vertexTL, vertexTR, vertexBR);
-                    gameObject.addFace(face);
-                    faces.push(face);
-
-                } else {
-                    var lx = c / columns,
-                        rx = (c + 1) / columns,
-                        ty = r / rows,
-                        by = (r + 1) / rows;
-
-                    vertex0 = gameObject.createVertex(lx, ty); // top-left
-                    vertex1 = gameObject.createVertex(lx, by); // bottom-left
-                    vertex2 = gameObject.createVertex(rx, by); // bottom-right
-                    face = gameObject.createFace(vertex0, vertex1, vertex2);
-                    gameObject.addFace(face);
-                    faces.push(face);
-
-                    vertex0 = gameObject.createVertex(lx, ty); // top-left
-                    vertex1 = gameObject.createVertex(rx, by); // bottom-right
-                    vertex2 = gameObject.createVertex(rx, ty); // top-right
-                    face = gameObject.createFace(vertex0, vertex1, vertex2);
-                    gameObject.addFace(face);
-                    faces.push(face);
-                }
-            }
-        }
-
-        if (sharedVertexMode) {
-            gameObject.vertices.sort(function (vertexA, vertexB) {
-                if (vertexA.v === vertexB.v) {
-                    return vertexA.u - vertexB.u;
-                } else {
-                    return vertexA.v - vertexB.v;
-                }
-            });
-        }
-
-        return faces;
-    };
-
-    const GetFirst = phaser.Utils.Array.GetFirst;
-
-    var VertexMethods = {
         clear() {
-            this.faces.length = 0;
+            this.vertexObjects.length = 0;
+            this.faceIndices.length = 0;
             this.vertices.length = 0;
-            this.setFaceCountDirtyFlag();
+            this.indices.length = 0;
+            this.indicesOrdered = null;
+            this.setUseOrderedIndices(false);
             return this;
-        },
+        }
 
         createVertex(u, v) {
-            if (u === undefined) { u = 0; }
-            if (v === undefined) { v = 0; }
+            return this.createVertexObject(u, v);
+        }
 
-            var vertex = new Vertex();
-            vertex.setUV(u, v);
-            return vertex;
-        },
+        createVertexObject(u, v) {
+            var index = this.vertexObjects.length;
+            var vertexObject = new VertexObject(null, index, u, v);
 
-        createFace(vertex0, vertex1, vertex2) {
-            return new Face(vertex0, vertex1, vertex2);
-        },
+            this.vertexObjects.push(vertexObject);
+            this.vertices.push(0, 0, 0, 0);
 
-        addFace(face) {
-            if (this.faces.includes(face)) {
+            vertexObject.setParent(this, index);
+            this.updateVertexObjectFrame(vertexObject);
+
+            return vertexObject;
+        }
+
+        addVertexObject(vertexObject) {
+            if (this.vertexObjects.includes(vertexObject)) {
                 return this;
             }
 
-            face.setParent(this);
+            var index = this.vertexObjects.length;
+            this.vertexObjects.push(vertexObject);
+            this.vertices.push(0, 0, 0, 0);
 
-            this.faces.push(face);
-            this.setFaceCountDirtyFlag();
-
-            var frame = this.frame;
-            face
-                .setFrameSize(frame.cutWidth, frame.cutHeight, frame.x, frame.y)
-                .setFrameUV(frame.u0, frame.v0, frame.u1, frame.v1)
-                .resetVerticesPosition();
-
-            var vertices = this.vertices;
-            face.vertices.forEach(function (faceVertex) {
-                if (vertices.includes(faceVertex)) {
-                    return;
-                }
-                vertices.push(faceVertex);
-            });
+            vertexObject.setParent(this, index);
+            this.updateVertexObjectFrame(vertexObject);
 
             return this;
-        },
+        }
 
-        addFaces(faces) {
-            for (var i = 0, cnt = faces.length; i < cnt; i++) {
-                this.addFace(faces[i]);
+        setVertexObjects(vertexObjects) {
+            this.vertexObjects.length = 0;
+            this.vertices.length = 0;
+
+            for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
+                this.addVertexObject(vertexObjects[i]);
             }
+
             return this;
-        },
+        }
+
+        setFaceIndices(faceIndices, texturePage) {
+            if (texturePage === undefined) {
+                texturePage = this.texturePage;
+            } else {
+                this.texturePage = texturePage;
+            }
+
+            this.faceIndices.length = 0;
+            this.indices.length = 0;
+
+            for (var i = 0, cnt = faceIndices.length; i < cnt; i += 3) {
+                var a = faceIndices[i];
+                var b = faceIndices[i + 1];
+                var c = faceIndices[i + 2];
+
+                this.faceIndices.push(a, b, c);
+                this.indices.push(a, b, c, texturePage);
+            }
+
+            this.updateOrderedIndices();
+
+            return this;
+        }
+
+        setMeshIndices(indices) {
+            this.indices.length = 0;
+            this.faceIndices.length = 0;
+
+            for (var i = 0, cnt = indices.length; i < cnt; i += 4) {
+                this.indices.push(indices[i], indices[i + 1], indices[i + 2], indices[i + 3]);
+                this.faceIndices.push(indices[i], indices[i + 1], indices[i + 2]);
+            }
+
+            this.updateOrderedIndices();
+
+            return this;
+        }
+
+        setUseOrderedIndexOptimization(enabled, strategy) {
+            this.autoBuildOrderedIndices = !!enabled;
+
+            if (strategy !== undefined) {
+                this.orderedIndicesStrategy = strategy;
+            }
+
+            return this.updateOrderedIndices();
+        }
+
+        setUseOrderedIndicesOptimization(enabled, strategy) {
+            return this.setUseOrderedIndexOptimization(enabled, strategy);
+        }
+
+        updateOrderedIndices() {
+            if (this.autoBuildOrderedIndices && this.indices.length > 0) {
+                this.setRenderAsTriangles(false);
+                this.buildOrderedIndices(this.orderedIndicesStrategy, true);
+            } else {
+                this.setUseOrderedIndices(false);
+            }
+
+            return this;
+        }
+
+        setTexture(key, frame) {
+            super.setTexture(key, frame);
+
+            if (this.vertexObjects) {
+                this.syncVertexObjectsFrame();
+            }
+
+            return this;
+        }
+
+        get frame() {
+            return this._frame;
+        }
+
+        set frame(value) {
+            if (this._frame === value) {
+                return;
+            }
+
+            this._frame = value;
+
+            if (this.vertexObjects) {
+                this.syncVertexObjectsFrame();
+            }
+        }
+
+        setSizeToFrame(frame) {
+            if (!frame) { frame = this.frame; }
+            if (!frame) { return this; }
+
+            this.width = frame.realWidth;
+            this.height = frame.realHeight;
+
+            return this;
+        }
+
+        updateDisplayOrigin() {
+            super.updateDisplayOrigin();
+
+            if (this.vertexObjects) {
+                this.writeVertexObjectPositions();
+            }
+
+            return this;
+        }
+
+        setDisplayOrigin(x, y) {
+            super.setDisplayOrigin(x, y);
+
+            if (this.vertexObjects) {
+                this.writeVertexObjectPositions();
+            }
+
+            return this;
+        }
+
+        resetVertexObjects() {
+            var vertexObjects = this.vertexObjects;
+
+            for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
+                vertexObjects[i].resetPosition();
+            }
+
+            return this;
+        }
 
         resetFaceSize() {
-            var frame = this.frame;
-            var frameWidth = frame.realWidth;
-            var frameHeight = frame.realHeight;
+            return this.syncVertexObjectsFrame();
+        }
 
-            var faces = this.faces;
-            for (var i = 0, cnt = faces.length; i < cnt; i++) {
-                faces[i].setFrameSize(frameWidth, frameHeight);
+        syncVertexObjectsFrame() {
+            this.setSizeToFrame();
+            this.updateDisplayOrigin();
+
+            var vertexObjects = this.vertexObjects;
+
+            for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
+                this.updateVertexObjectFrame(vertexObjects[i]);
             }
 
-            return this;
-        },
-
-        addGridFaces(columns, rows, sharedVertexMode) {
-            GenerateGridVertices(this, columns, rows, sharedVertexMode);
-            return this;
-        },
-
-        getVertexByName(name) {
-            return GetFirst(this.vertices, 'name', name);
-        },
-
-        getFaceByName(name) {
-            return GetFirst(this.faces, 'name', name);
-        },
-
-        resetVerticesPosition() {
-            var vertices = this.vertices;
-            for (var i = 0, cnt = vertices.length; i < cnt; i++) {
-                vertices[i].resetPosition();
-            }
             return this;
         }
-    };
 
-    const UPDATE_ARRAYS = (1 << 0);
-    const UPDATE_UV = (1 << 1);
-    const UPDATE_VERTEX = (1 << 2);
-    const UPDATE_ALPHA = (1 << 3);
-    const UPDATE_COLOR = (1 << 4);
-    const UPDATE_ALL = UPDATE_ARRAYS | UPDATE_UV | UPDATE_VERTEX | UPDATE_ALPHA | UPDATE_COLOR;
+        writeVertexObjectPositions() {
+            var vertexObjects = this.vertexObjects;
 
-    var DirtyFlagsMethods = {
-        clearDirtyFlag() {
-            this.dirtyFlags = 0;
+            for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
+                vertexObjects[i].writePositionToMesh();
+            }
+
             return this;
-        },
+        }
 
-        setFaceCountDirtyFlag() {
-            this.dirtyFlags |= UPDATE_ALL;
-            return this;
-        },
+        updateVertexObjectFrame(vertexObject) {
+            var frame = this.frame;
 
-        setUVDirtyFlag() {
-            this.dirtyFlags |= UPDATE_UV;
-            return this;
-        },
-
-        setVertexDirtyFlag() {
-            this.dirtyFlags |= UPDATE_VERTEX;
-            return this;
-        },
-
-        setAlphaDirtyFlag() {
-            this.dirtyFlags |= UPDATE_ALPHA;
-            return this;
-        },
-
-        setColorDirtyFlag() {
-            this.dirtyFlags |= UPDATE_COLOR;
-            return this;
-        },
-    };
-
-    var UpdateMethods = {
-        updateBuffers() {
-            if (!this.dirty) {
+            if (!frame) {
+                vertexObject.writeToMesh();
                 return this;
             }
 
-            if (this.dirtyFlags & UPDATE_ARRAYS) { this.resizeBuffers(); }
-            if (this.dirtyFlags & UPDATE_UV) { this.updateUVBuffer(); }
-            if (this.dirtyFlags & UPDATE_VERTEX) { this.updateVertexBuffer(); }
-            if (this.dirtyFlags & UPDATE_ALPHA) { this.updateAlphaBuffer(); }
-            if (this.dirtyFlags & UPDATE_COLOR) { this.updateColorBuffer(); }
-
-            this.clearDirtyFlag();
+            vertexObject
+                .setFrameSize(frame.cutWidth, frame.cutHeight, frame.x, frame.y)
+                .setFrameUV(frame.u0, frame.v0, frame.u1, frame.v1);
 
             return this;
-        },
+        }
 
-        resizeBuffers() {
-            var size = this.faces.length;
-            this.vertexBuffer = new Float32Array(size * 6);
-            this.uvBuffer = new Float32Array(size * 6);
-            this.colorBuffer = new Uint32Array(size * 3);
-            this.alphaBuffer = new Float32Array(size * 3);
-            return this;
-        },
+        rebuildVerticesFromVertexObjects() {
+            var vertexObjects = this.vertexObjects;
+            this.vertices.length = vertexObjects.length * 4;
 
-        updateUVBuffer() {
-            var uvBuffer = this.uvBuffer,
-                index;
-            var faces = this.faces,
-                vertices;
-            for (var i = 0, cnt = faces.length; i < cnt; i++) {
-                vertices = faces[i].vertices;
-
-                index = i * 6;
-                uvBuffer[index] = vertices[0].frameU;
-                uvBuffer[index + 1] = vertices[0].frameV;
-                uvBuffer[index + 2] = vertices[1].frameU;
-                uvBuffer[index + 3] = vertices[1].frameV;
-                uvBuffer[index + 4] = vertices[2].frameU;
-                uvBuffer[index + 5] = vertices[2].frameV;
-            }
-
-            return this;
-        },
-
-        updateVertexBuffer() {
-            var vertexBuffer = this.vertexBuffer,
-                index;
-            var faces = this.faces,
-                vertices;
-            for (var i = 0, cnt = faces.length; i < cnt; i++) {
-                vertices = faces[i].vertices;
-
-                index = i * 6;
-                vertexBuffer[index] = vertices[0].localX;
-                vertexBuffer[index + 1] = vertices[0].localY;
-                vertexBuffer[index + 2] = vertices[1].localX;
-                vertexBuffer[index + 3] = vertices[1].localY;
-                vertexBuffer[index + 4] = vertices[2].localX;
-                vertexBuffer[index + 5] = vertices[2].localY;
-            }
-
-            return this;
-        },
-
-        updateAlphaBuffer() {
-            var alphaBuffer = this.alphaBuffer,
-                index;
-            var faces = this.faces,
-                vertices;
-            for (var i = 0, cnt = faces.length; i < cnt; i++) {
-                vertices = faces[i].vertices;
-
-                index = i * 3;
-                alphaBuffer[index] = vertices[0].alpha;
-                alphaBuffer[index + 1] = vertices[1].alpha;
-                alphaBuffer[index + 2] = vertices[2].alpha;
-            }
-
-            return this;
-        },
-
-        updateColorBuffer() {
-            var colorBuffer = this.colorBuffer,
-                index;
-            var faces = this.faces,
-                vertices;
-            for (var i = 0, cnt = faces.length; i < cnt; i++) {
-                vertices = faces[i].vertices;
-
-                index = i * 3;
-                colorBuffer[index] = vertices[0].color;
-                colorBuffer[index + 1] = vertices[1].color;
-                colorBuffer[index + 2] = vertices[2].color;
+            for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
+                vertexObjects[i].setParent(this, i);
             }
 
             return this;
         }
 
-    };
-
-    var TintMethods = {
-        setTintMode(mode) {
-            this.tintMode = mode;
-            return this;
-        },
-
-        setTint(color) {
-            this.tint = color;
-            return this;
-        },
-
-        clearTint() {
-            this.setTint(0xffffff);
-            this.setTintMode(phaser.TintModes.MULTIPLY);
-            return this;
-        }
-    };
-
-    var DebugMethods = {
         setDebug(graphic, callback) {
             this.debugGraphic = graphic;
 
@@ -1102,7 +610,7 @@
             }
 
             return this;
-        },
+        }
 
         renderDebugVerts(src, meshLength, verts) {
             var graphic = src.debugGraphic;
@@ -1119,504 +627,53 @@
                 graphic.lineBetween(x1, y1, x2, y2);
                 graphic.lineBetween(x2, y2, x0, y0);
             }
-        },
-    };
-
-    const TransformMatrix = phaser.GameObjects.Components.TransformMatrix;
-    const TransformXY = phaser.Math.TransformXY;
-
-    var WorldXYToGameObjectLocalXY = function (gameObject, worldX, worldY, camera, out) {
-        if (camera === undefined) {
-            camera = gameObject.scene.cameras.main;
         }
 
-        if (out === undefined) {
-            out = {};
-        } else if (out === true) {
-            out = globOut;
+        skipRender() {
+            return false;
         }
 
-        var csx = camera.scrollX;
-        var csy = camera.scrollY;
-        var px = worldX + (csx * gameObject.scrollFactorX) - csx;
-        var py = worldY + (csy * gameObject.scrollFactorY) - csy;
-        if (gameObject.parentContainer) {
-            if (tempMatrix === undefined) {
-                tempMatrix = new TransformMatrix();
-                parentMatrix = new TransformMatrix();
+        renderWebGL(renderer, src, drawingContext, parentMatrix) {
+            if (!src) {
+                src = this;
             }
 
-            gameObject.getWorldTransformMatrix(tempMatrix, parentMatrix);
-            tempMatrix.applyInverse(px, py, out);
-        }
-        else {
-            TransformXY(px, py, gameObject.x, gameObject.y, gameObject.rotation, gameObject.scaleX, gameObject.scaleY, out);
-        }
-
-        out.x += gameObject.displayOriginX;
-        out.y += gameObject.displayOriginY;
-
-        return out;
-    };
-
-    var tempMatrix, parentMatrix;
-    var globOut = {};
-
-    var PointMethods = {
-        getFaceAt(worldX, worldY, camera) {
-            var localXY = WorldXYToGameObjectLocalXY(this, worldX, worldY, camera, true);
-            var localX = localXY.x,
-                localY = localXY.y;
-            var faces = this.faces;
-            for (var i = 0, cnt = faces.length; i < cnt; i++) {
-                var face = faces[i];
-                if (face.contains(localX, localY)) {
-                    return face;
-                }
-            }
-
-            return null;
-        },
-
-        hasFaceAt(worldX, worldY, camera) {
-            return !!this.getFaceAt(worldX, worldY, camera);
-        },
-    };
-
-    var Contains = function (shape, x, y, gameObject) {
-        var faces = gameObject.faces;
-        for (var i = 0, cnt = faces.length; i < cnt; i++) {
-            var face = faces[i];
-            if (face.contains(x, y)) {
-                gameObject.input.hitFace = face;
-                return true;
-            }
-        }
-        gameObject.input.hitFace = null;
-        return false;
-    };
-
-    var OnPointerDown = function (pointer, localX, localY, event) {
-        var face = this.input.hitFace;
-        this.emit('face.pointerdown', face, pointer, localX, localY, event);
-    };
-
-    var OnPointerUp = function (pointer, localX, localY, event) {
-        var face = this.input.hitFace;
-        this.emit('face.pointerup', face, pointer, localX, localY, event);
-        this.input.hitFace = null;
-    };
-
-    var OnPointerMove = function (pointer, localX, localY, event) {
-        var face = this.input.hitFace;
-        var prevFace = this.input.prevHitFace;
-        if (face === prevFace) {
-            this.emit('face.pointermove', face, pointer, localX, localY, event);
-            return
-        }
-
-        if (prevFace) {
-            this.emit('face.pointerout', prevFace, pointer, event);
-        }
-
-        if (face) {
-            this.emit('face.pointerover', face, pointer, event);
-        }
-
-        this.input.prevHitFace = face;
-    };
-
-    var OnPointerOut = function (pointer, event) {
-        var face = this.input.prevHitFace;
-        if (face) {
-            this.emit('face.pointerout', face, pointer, event);
-        }
-
-        this.input.hitFace = null;
-        this.input.prevHitFace = null;
-    };
-
-    var SetFaceInteractive = function (config) {
-        if (this.input) {
-            return;
-        }
-
-        if (config === undefined) {
-            config = {};
-        }
-        config.hitArea = {};
-        config.hitAreaCallback = Contains;
-
-        this
-            .setInteractive(config)
-            .on('pointerdown', OnPointerDown, this)
-            .on('pointerup', OnPointerUp, this)
-            .on('pointermove', OnPointerMove, this)
-            .on('pointerover', OnPointerMove, this)
-            .on('pointerout', OnPointerOut, this);
-
-        return this;
-    };
-
-    var Methods$2 = {
-        setFaceInteractive: SetFaceInteractive
-    };
-
-    Object.assign(
-        Methods$2,
-        VertexMethods,
-        DirtyFlagsMethods,
-        UpdateMethods,
-        TintMethods,
-        DebugMethods,
-        PointMethods,
-    );
-
-    const ShaderSourceFS = phaser.Renderer.WebGL.Shaders.MultiFrag;
-    const ShaderSourceVS = phaser.Renderer.WebGL.Shaders.MultiVert;
-    const ShaderAdditionMakers = phaser.Renderer.WebGL.ShaderAdditionMakers;
-    const MakeApplyLighting = ShaderAdditionMakers.MakeApplyLighting;
-    const MakeApplyTint = ShaderAdditionMakers.MakeApplyTint;
-    const MakeDefineLights = ShaderAdditionMakers.MakeDefineLights;
-    const MakeDefineTexCount = ShaderAdditionMakers.MakeDefineTexCount;
-    const MakeGetNormalFromMap = ShaderAdditionMakers.MakeGetNormalFromMap;
-    const MakeGetTexCoordOut = ShaderAdditionMakers.MakeGetTexCoordOut;
-    const MakeGetTexRes = ShaderAdditionMakers.MakeGetTexRes;
-    const MakeOutInverseRotation = ShaderAdditionMakers.MakeOutInverseRotation;
-    const MakeRotationDatum = ShaderAdditionMakers.MakeRotationDatum;
-    const MakeSmoothPixelArt = ShaderAdditionMakers.MakeSmoothPixelArt;
-    const MakeGetTexture = ShaderAdditionMakers.MakeGetTexture;
-    const Utils = phaser.Renderer.WebGL.Utils;
-    const BatchHandlerQuad = phaser.Renderer.WebGL.RenderNodes.BatchHandlerQuad;
-    const getTint = Utils.getTintAppendFloatAlpha;
-
-    class BatchHandlerTriangles extends BatchHandlerQuad {
-        constructor(manager, config) {
-            super(manager, config);
-            // Match the default render option used by rex mesh images.
-            this.renderOptions.multiTexturing = true;
-        }
-
-        _generateElementIndices(instances) {
-            // Independent Triangles
-            var buffer = new ArrayBuffer(instances * 5 * 2);
-            var indices = new Uint16Array(buffer);
-
-            // 0,0,1,2,2,3,3,4,5,5,6,6,7,8,8,....
-            var offset = 0;
-            for (var i = 0; i < instances; i++) {
-                var index = i * 3;
-                indices[offset++] = index;      // Duplicate
-                indices[offset++] = index;
-                indices[offset++] = index + 1;
-                indices[offset++] = index + 2;
-                indices[offset++] = index + 2;  // Duplicate
-            }
-            return buffer;
-        }
-
-        batchTriangles(
-            drawingContext,
-            src,
-            calcMatrix,
-            glTexture,
-            vertices,
-            uv,
-            colors,
-            alphas,
-            alpha,
-            tintMode,
-            renderOptions,
-            debugCallback
-        ) {
-            if (this.instanceCount === 0) {
-                this.manager.setCurrentBatchNode(this, drawingContext);
-            }
-
-            var submittedInstanceCount = vertices.length / (2 * this.verticesPerInstance);
-            if (submittedInstanceCount > this.instancesPerBatch) {
-                throw new Error('rexBatchHandlerTriangle: Vertex count exceeds maximum per batch (' + this.maxVerticesPerBatch + ')');
-            }
-
-            // Check whether the batch should be rendered immediately.
-            // This guarantees that none of the arrays are full below.
-            if (this.instanceCount + submittedInstanceCount > this.instancesPerBatch) {
-                this.run(drawingContext);
-
-                // Now the batch is empty.
-            }
-
-            // Check render options and run the batch if they differ.
-            this.updateRenderOptions(renderOptions);
-            if (this._renderOptionsChanged) {
-                this.run(drawingContext);
-                this.updateShaderConfig();
-            }
-
-            // Process textures and get relevant data.
-            var textureDatum = this.batchTextures(glTexture, renderOptions);
-
-            // Update the vertex buffer.
-            var vertexOffset32 = this.instanceCount * this.floatsPerInstance;
-            var vertexBuffer = this.vertexBufferLayout.buffer;
-            var vertexViewF32 = vertexBuffer.viewF32;
-            var vertexViewU32 = vertexBuffer.viewU32;
-
-            var debugVertices;
-            if (debugCallback) {
-                debugVertices = [];
-            }
-
-            var a = calcMatrix.a;
-            var b = calcMatrix.b;
-            var c = calcMatrix.c;
-            var d = calcMatrix.d;
-            var e = calcMatrix.e;
-            var f = calcMatrix.f;
-
-            var displayOffsetX = -src.displayOriginX;
-            var displayOffsetY = -src.displayOriginY;
-
-            var meshVerticesLength = vertices.length;
-            for (var i = 0; i < meshVerticesLength; i += 6) {
-                for (var j = 0; j < 3; j++) {
-                    var vertexIndex = i + j * 2;
-                    var x = vertices[vertexIndex];
-                    var y = vertices[vertexIndex + 1];
-
-                    x += displayOffsetX;
-                    y += displayOffsetY;
-
-                    var tx = x * a + y * c + e;
-                    var ty = x * b + y * d + f;
-
-                    var tintIndex = (i / 2) + j;
-                    var tint = getTint(
-                        colors[tintIndex],
-                        alphas[tintIndex] * alpha
-                    );
-
-                    vertexViewF32[vertexOffset32++] = tx;
-                    vertexViewF32[vertexOffset32++] = ty;
-                    vertexViewF32[vertexOffset32++] = uv[vertexIndex];
-                    vertexViewF32[vertexOffset32++] = uv[vertexIndex + 1];
-                    vertexViewF32[vertexOffset32++] = textureDatum;
-                    vertexViewF32[vertexOffset32++] = tintMode;
-                    vertexViewU32[vertexOffset32++] = tint;
-
-                    if (debugVertices) {
-                        debugVertices.push(tx, ty);
-                    }
-                }
-
-                this.instanceCount++;
-                this.currentBatchEntry.count++;
-            }
-
-            if (debugCallback) {
-                debugCallback.call(src, src, meshVerticesLength, debugVertices);
-            }
-        }
-    }
-
-    BatchHandlerTriangles.prototype.defaultConfig = {
-        name: 'rexBatchHandlerTriangle',
-        verticesPerInstance: 3,
-        indicesPerInstance: 5,
-        shaderName: 'REXTRI',
-        vertexSource: ShaderSourceVS,
-        fragmentSource: ShaderSourceFS,
-        shaderAdditions: [
-            MakeGetTexCoordOut(),
-            MakeGetTexRes(true),
-            MakeSmoothPixelArt(true),
-            MakeDefineTexCount(1),
-            MakeGetTexture(),
-            MakeApplyTint(),
-            MakeDefineLights(true),
-            MakeRotationDatum(true),
-            MakeOutInverseRotation(true),
-            MakeGetNormalFromMap(true),
-            MakeApplyLighting(true)
-        ],
-        vertexBufferLayout: {
-            usage: 'DYNAMIC_DRAW',
-            layout: [
-                {
-                    name: 'inPosition',
-                    size: 2
-                },
-                {
-                    name: 'inTexCoord',
-                    size: 2
-                },
-                {
-                    name: 'inTexDatum'
-                },
-                {
-                    name: 'inTintEffect'
-                },
-                {
-                    name: 'inTint',
-                    size: 4,
-                    type: 'UNSIGNED_BYTE',
-                    normalized: true
-                }
-            ]
-        }
-    };
-
-    const GameClass = phaser.Game;
-    var IsGame = function (object) {
-        return (object instanceof GameClass);
-    };
-
-    const SceneClass = phaser.Scene;
-    var IsSceneObject = function (object) {
-        return (object instanceof SceneClass);
-    };
-
-    var GetGame = function (object) {
-        if ((object == null) || (typeof (object) !== 'object')) {
-            return null;
-        } else if (IsGame(object)) {
-            return object;
-        } else if (IsGame(object.game)) {
-            return object.game;
-        } else if (IsSceneObject(object)) { // object = scene object
-            return object.sys.game;
-        } else if (IsSceneObject(object.scene)) { // object = game object
-            return object.scene.sys.game;
-        }
-    };
-
-    var AddNodeConstructor = function (game, name, constructor) {
-        var renderNodes = GetGame(game).renderer.renderNodes;
-        if (!renderNodes.hasNode(name, true)) {
-            renderNodes.addNodeConstructor(name, constructor);
-        }
-    };
-
-    const DefaultMeshNodes = new phaser.Structs.Map([
-        ['BatchHandler', 'rexBatchHandlerTriangles']
-    ]);
-
-    let Image$1 = class Image extends Image$2 {
-        constructor(scene, x, y, texture, frame) {
-            if (x === undefined) {
-                x = 0;
-            }
-            if (y === undefined) {
-                y = 0;
-            }
-            if (texture === undefined) {
-                texture = '__DEFAULT';
-            }
-            super(scene, 'rexMeshImage');
-
-            this.dirtyFlags = 0;
-            // Each face has 3 vertics, each vertex has x,y, u,v, alpha, color members
-            this.vertices = [];
-            this.faces = [];
-
-            // Buffers
-            this.vertexBuffer = null;
-            this.uvBuffer = null;
-            this.alphaBuffer = null;
-            this.colorBuffer = null;
-
-            this.tintMode = phaser.TintModes.MULTIPLY;
-
-            this.debugCallback = null;
-            this.debugGraphic = null;
-
-            this.setTexture(texture, frame);
-            this.setPosition(x, y);
-            this.setSizeToFrame();
-            this.setOriginFromFrame();
-            AddNodeConstructor(scene, 'rexBatchHandlerTriangles', BatchHandlerTriangles);
-            this.initRenderNodes(this._defaultRenderNodesMap);
-        }
-
-        get _defaultRenderNodesMap() {
-            return DefaultMeshNodes;
-        }
-
-        get dirty() {
-            return this.dirtyFlags !== 0;
-        }
-
-        get frame() {
-            return this._frame;
-        }
-
-        set frame(value) {
-            if (this._frame === value) {
+            if (src.skipRender()) {
                 return;
             }
 
-            this._frame = value;
+            super.renderWebGL(renderer, src, drawingContext, parentMatrix);
 
-            var faces = this.faces;
-            if (!faces) {
-                return;
-            }
-
-            var frameU0 = (value) ? value.u0 : 0;
-            var frameV0 = (value) ? value.v0 : 0;
-            var frameU1 = (value) ? value.u1 : 0;
-            var frameV1 = (value) ? value.v1 : 0;
-            var frameWidth = (value) ? value.cutWidth : 0;
-            var frameHeight = (value) ? value.cutHeight : 0;
-            var frameX = (value) ? value.x : 0;
-            var frameY = (value) ? value.y : 0;
-
-            var isSizeChanged = (this._frameWidthSave !== frameWidth) || (this._frameHeightSave !== frameHeight) || (this._frameXSave !== frameX) || (this._frameYSave !== frameY);
-            this._frameWidthSave = frameWidth;
-            this._frameHeightSave = frameHeight;
-            this._frameXSave = frameX;
-            this._frameYSave = frameY;
-
-            for (var i = 0, cnt = faces.length; i < cnt; i++) {
-                var face = faces[i];
-                face.setFrameUV(frameU0, frameV0, frameU1, frameV1);
-                if (isSizeChanged) {
-                    face.setFrameSize(frameWidth, frameHeight, frameX, frameY);
-                }
+            if (src.debugCallback) {
+                src.runDebugCallback(drawingContext, parentMatrix);
             }
         }
 
-        get tint() {
-            if (this.faces.length > 0) {
-                return this.faces[0].color;
-            } else {
-                return 0xffffff;
+        runDebugCallback(drawingContext, parentMatrix) {
+            var camera = drawingContext.camera;
+            var calcMatrix = GetCalcMatrix(this, camera, parentMatrix, !drawingContext.useCanvas).calc;
+            var faceIndices = this.faceIndices;
+            var vertexObjects = this.vertexObjects;
+            var displayOriginX = this.displayOriginX;
+            var displayOriginY = this.displayOriginY;
+            var verts = [];
+
+            for (var i = 0, cnt = faceIndices.length; i < cnt; i++) {
+                var vertex = vertexObjects[faceIndices[i]];
+                var x = vertex.localX - displayOriginX;
+                var y = vertex.localY - displayOriginY;
+
+                verts.push(
+                    calcMatrix.getX(x, y),
+                    calcMatrix.getY(x, y)
+                );
             }
-        }
 
-        set tint(value) {
-            var faces = this.faces;
-            for (var i = 0, cnt = faces.length; i < cnt; i++) {
-                faces[i].setColor(value);
-            }
-        }
+            this.debugCallback.call(this, this, verts.length, verts);
 
-        //  Overrides Game Object method
-        addedToScene() {
-            this.scene.sys.updateList.add(this);
-        }
-
-        //  Overrides Game Object method
-        removedFromScene() {
-            this.scene.sys.updateList.remove(this);
+            return this;
         }
     };
-
-    Object.assign(
-        Image$1.prototype,
-        Render,
-        Methods$2
-    );
 
     var AnmiationMethods = {
         play(key, ignoreIfPlaying) {
@@ -1656,13 +713,6 @@
         },
     };
 
-    var Methods$1 = {};
-
-    Object.assign(
-        Methods$1,
-        AnmiationMethods,
-    );
-
     const AnimationState = phaser.Animations.AnimationState;
 
     class Sprite extends Image$1 {
@@ -1686,16 +736,12 @@
 
     Object.assign(
         Sprite.prototype,
-        Methods$1,
+        AnmiationMethods,
     );
 
     var RenderMethods = {
         skipRender() {
-            if (this.hideBackFace && this.isBackFace) {
-                return true;
-            }
-
-            return SkipRender.call(this);
+            return this.hideBackFace && this.isBackFace;
         }
     };
 
@@ -1770,7 +816,15 @@
     );
 
     var RotateXYZ = function (gameObject, rotationX, rotationY, rotationZ, centerX, centerY) {
-        var vertices = gameObject.vertices;
+        var vertexObjects = gameObject.vertexObjects;
+
+        if (!vertexObjects) {
+            return;
+        }
+
+        if (rotationX === undefined) { rotationX = 0; }
+        if (rotationY === undefined) { rotationY = 0; }
+        if (rotationZ === undefined) { rotationZ = 0; }
 
         if (centerX === undefined) {
             centerX = gameObject.width / 2;
@@ -1779,24 +833,25 @@
             centerY = gameObject.height / 2;
         }
 
-        if ((rotationX === 0) && (rotationY === 0) && (rotationZ === 0)) {
-            var vertex, xyz;
-            for (var i = 0, cnt = vertices.length; i < cnt; i++) {
-                vertex = vertices[i];
-                vertex.resetPosition();
+        var i, cnt, vertexObject, xyz;
 
-                if (!vertex.hasOwnProperty('xyz')) {
-                    vertex.xyz = [0, 0, 0];
+        if ((rotationX === 0) && (rotationY === 0) && (rotationZ === 0)) {
+            for (i = 0, cnt = vertexObjects.length; i < cnt; i++) {
+                vertexObject = vertexObjects[i];
+                vertexObject.resetPosition();
+
+                if (!vertexObject.hasOwnProperty('xyz')) {
+                    vertexObject.xyz = [0, 0, 0];
                 }
 
-                xyz = vertex.xyz;
-                xyz[0] = vertex.frameX - centerX;
-                xyz[1] = vertex.frameY - centerY;
+                xyz = vertexObject.xyz;
+                xyz[0] = vertexObject.frameX - centerX;
+                xyz[1] = vertexObject.frameY - centerY;
                 xyz[2] = 0;
             }
 
         } else {
-            var vertex, x, y, z, xTemp, yTemp, zTemp;
+            var x, y, z, xTemp, yTemp, zTemp;
             var cosX = Math.cos(rotationX),
                 sinX = Math.sin(rotationX);
             var cosY = Math.cos(rotationY),
@@ -1805,11 +860,11 @@
                 sinZ = Math.sin(rotationZ);
             var perspective = gameObject.scene.scale.gameSize.width,
                 scale;
-            var xyz;
-            for (var i = 0, cnt = vertices.length; i < cnt; i++) {
-                vertex = vertices[i];
-                x = vertex.frameX - centerX;
-                y = vertex.frameY - centerY;
+
+            for (i = 0, cnt = vertexObjects.length; i < cnt; i++) {
+                vertexObject = vertexObjects[i];
+                x = vertexObject.frameX - centerX;
+                y = vertexObject.frameY - centerY;
                 z = 0;
 
                 // Rotate around x-axis
@@ -1832,14 +887,14 @@
 
                 // Project from 3d to 2d
                 scale = perspective / (perspective - z);
-                vertex.localX = x * scale + centerX;
-                vertex.localY = y * scale + centerY;
+                vertexObject.localX = x * scale + centerX;
+                vertexObject.localY = y * scale + centerY;
 
                 // Store [x,y,z]
-                if (!vertex.hasOwnProperty('xyz')) {
-                    vertex.xyz = [0, 0, 0];
+                if (!vertexObject.hasOwnProperty('xyz')) {
+                    vertexObject.xyz = [0, 0, 0];
                 }
-                xyz = vertex.xyz;
+                xyz = vertexObject.xyz;
                 xyz[0] = x;
                 xyz[1] = y;
                 xyz[2] = z;
@@ -1848,21 +903,110 @@
 
     };
 
-    var IsBackFace = function (face) {
-        var v0 = face.vertices[0].xyz;  // [x,y,z]
-        var v1 = face.vertices[1].xyz;  // [x,y,z]
-        var v2 = face.vertices[2].xyz;  // [x,y,z]
+    var IsBackFace = function (vertexObjects, faceIndices, offset) {
+        if (offset === undefined) { offset = 0; }
+
+        if (!vertexObjects || !faceIndices || faceIndices.length < offset + 3) {
+            return false;
+        }
+
+        var vertex0 = vertexObjects[faceIndices[offset]];
+        var vertex1 = vertexObjects[faceIndices[offset + 1]];
+        var vertex2 = vertexObjects[faceIndices[offset + 2]];
+
+        if (!vertex0 || !vertex1 || !vertex2) {
+            return false;
+        }
+
+        var v0 = vertex0.xyz;  // [x,y,z]
+        var v1 = vertex1.xyz;  // [x,y,z]
+        var v2 = vertex2.xyz;  // [x,y,z]
+
+        if (!v0 || !v1 || !v2) {
+            return false;
+        }
 
         var edge1 = [v1[0] - v0[0], v1[1] - v0[1], v1[2] - v0[2]];
         var edge2 = [v2[0] - v0[0], v2[1] - v0[1], v2[2] - v0[2]];
 
-        var normal = [
-            edge1[1] * edge2[2] - edge1[2] * edge2[1],
-            edge1[2] * edge2[0] - edge1[0] * edge2[2],
-            edge1[0] * edge2[1] - edge1[1] * edge2[0]
-        ];
+        var normalZ = edge1[0] * edge2[1] - edge1[1] * edge2[0];
 
-        return normal[2] < 0;
+        return normalZ < 0;
+    };
+
+    var IsPlainObject$4 = function (obj)
+    {
+        // Not plain objects:
+        // - Any object or value whose internal [[Class]] property is not "[object Object]"
+        // - DOM nodes
+        // - window
+        if (typeof(obj) !== 'object' || obj.nodeType || obj === obj.window)
+        {
+            return false;
+        }
+
+        // Support: Firefox <20
+        // The try/catch suppresses exceptions thrown when attempting to access
+        // the "constructor" property of certain host objects, ie. |window.location|
+        // https://bugzilla.mozilla.org/show_bug.cgi?id=814622
+        try
+        {
+            if (obj.constructor && !({}).hasOwnProperty.call(obj.constructor.prototype, 'isPrototypeOf'))
+            {
+                return false;
+            }
+        }
+        catch (e)
+        {
+            return false;
+        }
+
+        // If the function hasn't returned already, we're confident that
+        // |obj| is a plain object, created by {} or constructed with new Object
+        return true;
+    };
+
+    var GenerateGridVertices = function (gameObject, columns, rows, sharedVertexMode) {
+        if (IsPlainObject$4(columns)) {
+            var config = columns;
+            columns = config.columns;
+            rows = config.rows;
+            config.sharedVertexMode;
+        }
+
+        if (columns === undefined) {
+            columns = 1;
+        }
+        if (rows === undefined) {
+            rows = 1;
+        }
+
+        var vertexObjects = [];
+        var faceIndices = [];
+
+        for (var r = 0; r <= rows; r++) {
+            for (var c = 0; c <= columns; c++) {
+                vertexObjects.push(gameObject.createVertex(c / columns, r / rows));
+            }
+        }
+
+        for (var r = 0; r < rows; r++) {
+            for (var c = 0; c < columns; c++) {
+                var indexTL = (r * (columns + 1)) + c;
+                var indexTR = indexTL + 1;
+                var indexBL = ((r + 1) * (columns + 1)) + c;
+                var indexBR = indexBL + 1;
+
+                faceIndices.push(
+                    indexTL, indexBR, indexBL,
+                    indexTL, indexTR, indexBR
+                );
+            }
+        }
+
+        gameObject.setFaceIndices(faceIndices);
+
+        return vertexObjects;
     };
 
     const IsPlainObject$3 = phaser.Utils.Objects.IsPlainObject;
@@ -1880,7 +1024,20 @@
                 frame = GetValue$d(config, 'frame', null);
             }
 
-            super(scene, x, y, key, frame);
+            if (config === undefined) {
+                config = {};
+            }
+            if (config.renderAsTriangles === undefined) {
+                config.renderAsTriangles = false;
+            }
+            if (config.useOrderedIndices === undefined) {
+                config.useOrderedIndices = true;
+            }
+            if (config.orderedIndicesStrategy === undefined) {
+                config.orderedIndicesStrategy = 1;
+            }
+
+            super(scene, x, y, key, frame, config);
             this.type = 'rexPerspectiveImage';
             this._rotationX = 0;
             this._rotationY = 0;
@@ -1932,6 +1089,12 @@
                 });
 
             this.syncRotation();
+
+            return this;
+        }
+
+        addGridFaces(columns, rows, sharedVertexMode) {
+            GenerateGridVertices(this, columns, rows);
 
             return this;
         }
@@ -2018,8 +1181,8 @@
 
     var Rotate = function (gameObject, rotationX, rotationY, rotationZ) {
         RotateXYZ(gameObject, rotationX, rotationY, rotationZ);
-        if (gameObject.faces.length > 0) {
-            gameObject.isBackFace = IsBackFace(gameObject.faces[0]);
+        if (gameObject.faceIndices.length > 0) {
+            gameObject.isBackFace = IsBackFace(gameObject.vertexObjects, gameObject.faceIndices, 0);
         } else {
             gameObject.isBackFace = false;
         }
@@ -2497,6 +1660,16 @@
         return renderTexture;
     };
 
+    var InstallRTSetSizeHook = function (rt, callback) {
+        var setSize = rt.setSize;
+
+        rt.setSize = function (width, height, forceEven) {
+            var result = setSize.call(this, width, height, forceEven);
+            callback();
+            return result;
+        };
+    };
+
     const IsPlainObject$2 = phaser.Utils.Objects.IsPlainObject;
     const GetValue$b = phaser.Utils.Objects.GetValue;
 
@@ -2516,6 +1689,11 @@
             super(scene, x, y, texture, null, config);
             this.type = 'rexPerspectiveRenderTexture';
             this.rt = this.texture;
+
+            var self = this;
+            InstallRTSetSizeHook(this.rt, function () {
+                self.setSizeToFrame();
+            });
         }
 
         destroy(fromScene) {
@@ -5618,6 +4796,11 @@
         },
     };
 
+    const SceneClass = phaser.Scene;
+    var IsSceneObject = function (object) {
+        return (object instanceof SceneClass);
+    };
+
     var GetSceneObject = function (object) {
         if ((object == null) || (typeof (object) !== 'object')) {
             return null;
@@ -5629,6 +4812,25 @@
             return object.parent.scene;
         } else {
             return null;
+        }
+    };
+
+    const GameClass = phaser.Game;
+    var IsGame = function (object) {
+        return (object instanceof GameClass);
+    };
+
+    var GetGame = function (object) {
+        if ((object == null) || (typeof (object) !== 'object')) {
+            return null;
+        } else if (IsGame(object)) {
+            return object;
+        } else if (IsGame(object.game)) {
+            return object.game;
+        } else if (IsSceneObject(object)) { // object = scene object
+            return object.sys.game;
+        } else if (IsSceneObject(object.scene)) { // object = game object
+            return object.scene.sys.game;
         }
     };
 

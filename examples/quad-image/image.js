@@ -33,9 +33,9 @@ var CreateCard = function (scene, x, y, rtl) {
         rtl: rtl
     }).setAlpha(0.8).setScale(0.5);
 
-    var vertices = image.vertices;
-    for (var i = 0, cnt = vertices.length; i < cnt; i++) {
-        CreateControlCircle(scene, vertices[i]);
+    var vertexObjects = image.vertexObjects;
+    for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
+        CreateControlCircle(scene, vertexObjects[i]);
     }
 
     return image;

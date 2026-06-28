@@ -145,31 +145,31 @@ var quadimage = scene.make.rexQuadImage({
     var image = new MyQuadImage(scene, x, y, texture, frame, config);
     ```
 
-### Vertex control points
+### Vertex objects
 
-- Array of vertex control points
+- Array of vertex objects
     ```javascript
-    var controlPoints = image.controlPoints;
+    var vertexObjects = image.vertexObjects;
     ```
-    - 4, or 9 vertex control points
+    - 4, or 9 vertex objects
 - 4 vertex control points
     ```javascript
-    var topLeftPoint = image.topLeft;         // image.controlPoints[0]
-    var topRightPoint = image.topRight;       // image.controlPoints[1]
-    var bottomLeftPoint = image.bottomLeft;   // image.controlPoints[2]
-    var bottomRightPoint = image.bottomRight; // image.controlPoints[3]
+    var topLeftPoint = image.topLeft;         // image.vertexObjects[0]
+    var topRightPoint = image.topRight;       // image.vertexObjects[1]
+    var bottomLeftPoint = image.bottomLeft;   // image.vertexObjects[2]
+    var bottomRightPoint = image.bottomRight; // image.vertexObjects[3]
     ```
-- 9 vertex control points
+- 9 vertex objects
     ```javascript
-    var topLeft = image.topLeft;               // image.controlPoints[0]
-    var topCenter = image.topCenter;           // image.controlPoints[1]
-    var topRight = image.topRight;             // image.controlPoints[2]
-    var centerLeft = image.centerLeft;         // image.controlPoints[3]
-    var center = image.center;                 // image.controlPoints[4]
-    var centerRight = image.centerRight;       // image.controlPoints[5]
-    var bottomLeft = image.bottomLeft;         // image.controlPoints[6]
-    var bottomCenter = image.bottomCenter;     // image.controlPoints[7]
-    var bottomRight = image.bottomRight;       // image.controlPoints[8]
+    var topLeft = image.topLeft;               // image.vertexObjects[0]
+    var topCenter = image.topCenter;           // image.vertexObjects[1]
+    var topRight = image.topRight;             // image.vertexObjects[2]
+    var centerLeft = image.centerLeft;         // image.vertexObjects[3]
+    var center = image.center;                 // image.vertexObjects[4]
+    var centerRight = image.centerRight;       // image.vertexObjects[5]
+    var bottomLeft = image.bottomLeft;         // image.vertexObjects[6]
+    var bottomCenter = image.bottomCenter;     // image.vertexObjects[7]
+    var bottomRight = image.bottomRight;       // image.vertexObjects[8]
     ```
 
 #### Position
@@ -213,7 +213,7 @@ var quadimage = scene.make.rexQuadImage({
 
 ### Other properties
 
-See [Mesh game object](mesh.md), [game object](gameobject.md)
+See [Mesh2D game object](mesh2d.md), [game object](gameobject.md)
 
 ### Create mask
 

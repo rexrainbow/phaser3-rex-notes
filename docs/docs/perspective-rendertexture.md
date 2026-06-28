@@ -206,7 +206,7 @@ image.rt.fill(rgb, alpha).render();
 
 ### Other properties
 
-See [Perspective image game object](perspective-image.md), [Mesh game object](mesh.md), [game object](gameobject.md)
+See [Perspective image game object](perspective-image.md), [Mesh2D game object](mesh2d.md), [game object](gameobject.md)
 
 ### Shader effects
 

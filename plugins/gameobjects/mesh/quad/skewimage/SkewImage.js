@@ -8,16 +8,29 @@ const DegToRad = PhaserMath.DegToRad;
 const RadToDeg = PhaserMath.RadToDeg;
 
 class SkewImage extends Image {
-    constructor(scene, x, y, key, frame) {
+    constructor(scene, x, y, key, frame, config) {
         if (IsPlainObject(x)) {
-            var config = x;
+            config = x;
             x = GetValue(config, 'x', 0);
             y = GetValue(config, 'y', 0);
             key = GetValue(config, 'key', null);
             frame = GetValue(config, 'frame', null);
         }
 
-        super(scene, x, y, key, frame);
+        if (config === undefined) {
+            config = {};
+        }
+        if (config.renderAsTriangles === undefined) {
+            config.renderAsTriangles = false;
+        }
+        if (config.useOrderedIndices === undefined) {
+            config.useOrderedIndices = true;
+        }
+        if (config.orderedIndicesStrategy === undefined) {
+            config.orderedIndicesStrategy = 2;
+        }
+
+        super(scene, x, y, key, frame, config);
         this.type = 'rexSkewmage';
 
         this._skewX = 0;

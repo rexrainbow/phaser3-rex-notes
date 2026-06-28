@@ -336,7 +336,7 @@ card.flip.setEase(ease);
 
 ### Other properties
 
-See [container](containerlite.md), [Mesh game object](mesh.md), [game object](gameobject.md)
+See [container](containerlite.md), [Mesh2D game object](mesh2d.md), [game object](gameobject.md)
 
 ### Shader effects
 

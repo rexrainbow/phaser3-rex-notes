@@ -10,7 +10,7 @@ var Skew = function (gameObject, skewX, skewY) {
     var oy = gameObject.displayOriginY;
     var xOffset = Math.tan(skewX) * oy;
     var yOffset = Math.tan(skewY) * ox;
-    var vertices = gameObject.vertices;
+    var vertices = gameObject.vertexObjects;
     for (var i = 0, cnt = vertices.length; i < cnt; i++) {
         var vertex = vertices[i];
         var frameX = vertex.frameX;

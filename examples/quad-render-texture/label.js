@@ -31,11 +31,10 @@ class Demo extends Phaser.Scene {
             originX: card.originX,
             originY: card.originY
         })
-        image.syncSize();
 
-        var controlPoints = image.controlPoints;
-        for (var i = 0, cnt = controlPoints.length; i < cnt; i++) {
-            CreateControlCircle(this, controlPoints[i]);
+        var vertexObjects = image.vertexObjects;
+        for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
+            CreateControlCircle(this, vertexObjects[i]);
         }
 
     }
@@ -44,13 +43,13 @@ class Demo extends Phaser.Scene {
     }
 }
 
-var CreateControlCircle = function (scene, controlPoint) {
-    var circle = scene.add.circle(controlPoint.x, controlPoint.y, 10, 0xff0000)
+var CreateControlCircle = function (scene, vertexObject) {
+    var circle = scene.add.circle(vertexObject.x, vertexObject.y, 10, 0xff0000)
         .setInteractive({ draggable: true })
         .on('drag', function (pointer, dragX, dragY) {
             circle.x = dragX;
             circle.y = dragY;
-            controlPoint.setPosition(dragX, dragY);
+            vertexObject.setPosition(dragX, dragY);
         });
     return circle;
 }

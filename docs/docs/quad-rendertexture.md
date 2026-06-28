@@ -78,7 +78,6 @@ Render texture with 4 or 9 vertex control points.
 
 ```javascript
 var image = scene.add.rexQuadRenderTexturege(x, y, width, height, {
-    // hideBackFace: true,
     // ninePointMode: false,
 });
 ```
@@ -91,7 +90,6 @@ var image = scene.add.rexQuadRenderTexturege({
     // y: 0,
     // width: 32,
     // height: 32,
-    // hideBackFace: true,
     // ninePointMode: false,
 });
 ```
@@ -109,7 +107,6 @@ var image = scene.make.rexQuadRenderTexturege({
     width: 32,
     height: 32,
 
-    // hideBackFace: false,
     // ninePointMode: false,
 
     add: true
@@ -153,29 +150,29 @@ var rt = image.rt;
 
 - Paste game object
     ```javascript
-    image.rt.draw(gameObject, x, y);
-    // image.rt.draw(gameObject, x, y, alpha, tint);
+    image.rt.draw(gameObject, x, y).render();
+    // image.rt.draw(gameObject, x, y, alpha, tint).render();
     ```
    - `gameObject` : a game object, or an array of game objects
 - Paste game objects in a [group](group.md)
     ```javascript
-    image.rt.draw(group, x, y);
+    image.rt.draw(group, x, y).render();
     // image.rt.draw(group, x, y, alpha, tint);
     ```
 - Paste game objects in a scene
     ```javascript
-    image.rt.draw(scene.children, x, y);
-    // image.rt.draw(scene.children, x, y, alpha, tint);
+    image.rt.draw(scene.children, x, y).render();
+    // image.rt.draw(scene.children, x, y, alpha, tint).render();
     ```
 - Paste texture
     ```javascript
-    image.rt.draw(key, x, y);
-    // image.rt.draw(key, x, y, alpha, tint);
+    image.rt.draw(key, x, y).render();
+    // image.rt.draw(key, x, y, alpha, tint).render();
     ```
     or
     ```javascript
-    image.rt.drawFrame(key, frame, x, y);
-    // image.rt.drawFrame(key, frame, x, y, alpha, tint);
+    image.rt.drawFrame(key, frame, x, y).render();
+    // image.rt.drawFrame(key, frame, x, y, alpha, tint).render();
     ```
     - `key` : The key of the texture to be used, as stored in the Texture Manager.
 - Snapshop game objects
@@ -187,7 +184,7 @@ var rt = image.rt;
 #### Erase
 
 ```javascript
-image.rt.erase(gameObject, x, y);
+image.rt.erase(gameObject, x, y).render();
 ```
 
 - `gameObject` : a game object, or an array of game objects
@@ -195,19 +192,19 @@ image.rt.erase(gameObject, x, y);
 #### Clear
 
 ```javascript
-image.rt.clear();
+image.rt.clear().render();
 ```
 
 #### Fill
 
 ```javascript
-image.rt.fill(rgb, alpha);
+image.rt.fill(rgb, alpha).render();
 // image.rt.fill(rgb, alpha, x, y, width, height);
 ```
 
 ### Other properties
 
-See [Quad image game object](quad-image.md), [Mesh game object](mesh.md), [game object](gameobject.md)
+See [Quad image game object](quad-image.md), [Mesh2D game object](mesh2d.md), [game object](gameobject.md)
 
 ### Create mask
 
