@@ -39,7 +39,7 @@ class Image extends Mesh2DSprite {
 
         for (var r = 0; r < pointsPerSide; r++) {
             for (var c = 0; c < pointsPerSide; c++) {
-                var vertex = this.createVertex(c / (pointsPerSide - 1), r / (pointsPerSide - 1));
+                var vertex = this.createVertexObject(c / (pointsPerSide - 1), r / (pointsPerSide - 1));
                 vertices.push(vertex);
             }
         }

@@ -20,7 +20,7 @@ var GenerateGridVertices = function (gameObject, columns, rows, sharedVertexMode
 
     for (var r = 0; r <= rows; r++) {
         for (var c = 0; c <= columns; c++) {
-            vertexObjects.push(gameObject.createVertex(c / columns, r / rows));
+            vertexObjects.push(gameObject.createVertexObject(c / columns, r / rows));
         }
     }
 
