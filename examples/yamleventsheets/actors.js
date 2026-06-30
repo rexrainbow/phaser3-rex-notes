@@ -12,7 +12,7 @@ graph TD
 
 YAMLEventSheets --> CommandExecutor
 CommandExecutor --> World
-CommandExecutor --> Actors
+World --> Actors
 Actors --> YAMLEventSheets
 ```
 */
@@ -33,12 +33,25 @@ function compareValues(a, operator, b) {
 
 class World {
     constructor() {
-        this.tick = 0;
+        this._tick = 0;
         this.characters = new Map();
+        this.actors = null;
+        this.eventSheetManager = null;
     }
 
     get currentTick() {
-        return this.tick;
+        return this._tick;
+    }
+
+    setEventSheetManager(eventSheetManager) {
+        this.eventSheetManager = eventSheetManager;
+        return this;
+    }
+
+    createActors(eventSheetManager, config) {
+        this.eventSheetManager = eventSheetManager;
+        this.actors = new Actors(eventSheetManager, config);
+        return this.actors;
     }
 
     addCharacter(config) {
@@ -50,12 +63,68 @@ class World {
         return this;
     }
 
+    addActor(config) {
+        if (!this.actors) {
+            throw new Error('World.addActor requires actors');
+        }
+
+        this.addCharacter(config);
+        this.actors.addActor({
+            id: config.id,
+            parentId: config.parentId,
+            priority: config.priority,
+            transitionTitle: config.transitionTitle,
+            properties: {
+                ...(config.properties || {})
+            }
+        });
+
+        return this;
+    }
+
     getCharacter(actorId) {
         var character = this.characters.get(actorId);
         if (!character) {
             throw new Error(`Character '${actorId}' not found`);
         }
         return character;
+    }
+
+    getActor(actorId) {
+        if (!this.actors) {
+            throw new Error('World.getActor requires actors');
+        }
+
+        return this.actors.getActor(actorId);
+    }
+
+    getStateAction(stateActionId) {
+        if (!this.actors) {
+            throw new Error('World.getStateAction requires actors');
+        }
+
+        var actors = this.actors.actors;
+        for (var i = 0, cnt = actors.length; i < cnt; i++) {
+            var actor = actors[i];
+            var previousStateAction = actor.previousStateAction;
+            if (previousStateAction && (previousStateAction.id === stateActionId)) {
+                return previousStateAction;
+            }
+
+            var currentStateAction = actor.currentStateAction;
+            if (currentStateAction && (currentStateAction.id === stateActionId)) {
+                return currentStateAction;
+            }
+        }
+        return null;
+    }
+
+    startStateAction(config) {
+        if (!this.actors) {
+            throw new Error('World.startStateAction requires actors');
+        }
+
+        return this.actors.startStateAction(config);
     }
 
     modifyCharacterStatus(actorId, field, delta) {
@@ -65,13 +134,26 @@ class World {
     }
 
     advanceTime(ticks = 1) {
-        this.tick += ticks;
+        this._tick += ticks;
+        return this;
+    }
+
+    async tick() {
+        if (!this.eventSheetManager) {
+            throw new Error('World.tick requires eventSheetManager');
+        }
+        if (!this.actors) {
+            throw new Error('World.tick requires actors');
+        }
+
+        this.eventSheetManager.setRoundCounter(this.currentTick);
+        await this.actors.startPromise();
         return this;
     }
 
     dump() {
         return {
-            tick: this.tick,
+            tick: this.currentTick,
             characters: Object.fromEntries(this.characters)
         };
     }
@@ -89,16 +171,10 @@ class World {
 class CommandExecutor {
     constructor(world) {
         this.world = world;
-        this.actors = null;
     }
 
     setWorld(world) {
         this.world = world;
-        return this;
-    }
-
-    setActors(actors) {
-        this.actors = actors;
         return this;
     }
 
@@ -107,24 +183,11 @@ class CommandExecutor {
     }
 
     getActor(actorId) {
-        return this.actors.getActor(actorId);
+        return this.world.getActor(actorId);
     }
 
     getStateAction(stateActionId) {
-        var actors = this.actors.actors;
-        for (var i = 0, cnt = actors.length; i < cnt; i++) {
-            var actor = actors[i];
-            var previousStateAction = actor.previousStateAction;
-            if (previousStateAction && (previousStateAction.id === stateActionId)) {
-                return previousStateAction;
-            }
-
-            var currentStateAction = actor.currentStateAction;
-            if (currentStateAction && (currentStateAction.id === stateActionId)) {
-                return currentStateAction;
-            }
-        }
-        return null;
+        return this.world.getStateAction(stateActionId);
     }
 
     canStartTask({ actorId, stateActionTitle } = {}, eventSheetManager) {
@@ -165,7 +228,7 @@ class CommandExecutor {
     }
 
     startTask({ actorId, stateActionTitle } = {}) {
-        this.actors.startStateAction({
+        this.world.startStateAction({
             actorId,
             stateActionTitle
         });
@@ -193,36 +256,26 @@ class CommandExecutor {
     }
 }
 
-function addActorsFromYaml(world, actors, yamlString) {
+function addActorsFromYaml(world, yamlString) {
     var data = ParseYaml(yamlString) || {};
     var actorConfigs = data.actors || [];
 
     for (var i = 0, cnt = actorConfigs.length; i < cnt; i++) {
-        var config = actorConfigs[i];
-        world.addCharacter(config);
-        actors.addActor({
-            id: config.id,
-            parentId: config.parentId,
-            priority: config.priority,
-            transitionTitle: config.transitionTitle,
-            properties: {
-                ...(config.properties || {})
-            }
-        });
+        world.addActor(actorConfigs[i]);
     }
 
-    return actors;
+    return world;
 }
 
 function dumpStateAction(stateAction) {
     return stateAction ? stateAction.dump() : undefined;
 }
 
-function logCharacterState(world, actors, label) {
+function logCharacterState(world, label) {
     var alice = world.getCharacter('alice');
-    var actor = actors.getActor('alice');
+    var actor = world.getActor('alice');
     console.log(label, {
-        tick: world.tick,
+        tick: world.currentTick,
         alice: {
             status: { ...alice.status }
         },
@@ -240,17 +293,16 @@ var eventSheetManager = new YAMLEventSheets({
     globalMemory: commandExecutor.getEvalContext()
 });
 
-var actors = new Actors(eventSheetManager, {
+world.createActors(eventSheetManager, {
     transitionGroupName: 'characters',
     stateActionGroupName: 'tasks',
     cleanup: function () {
-        logCharacterState(world, actors, 'After actors round cleanup');
+        logCharacterState(world, 'After actors round cleanup');
         world.advanceTime();
     }
 });
-commandExecutor.setActors(actors);
 
-addActorsFromYaml(world, actors, ActorsConfig);
+addActorsFromYaml(world, ActorsConfig);
 
 eventSheetManager
     .addEventSheet(AliceBehaviorEventSheet, 'characters')
@@ -258,9 +310,8 @@ eventSheetManager
     .addEventSheet(SleepTaskEventSheet, 'tasks');
 
 async function runRound() {
-    console.log(`---- Round ${world.tick} ----`);
-    eventSheetManager.setRoundCounter(world.tick);
-    await actors.startPromise();
+    console.log(`---- Round ${world.currentTick} ----`);
+    await world.tick();
 }
 
 async function runRounds(count = 12) {
@@ -275,7 +326,6 @@ async function runRounds(count = 12) {
 
 Object.assign(window, {
     characterAndTaskDemo: {
-        actors,
         commandExecutor,
         eventSheetManager,
         runRound,
