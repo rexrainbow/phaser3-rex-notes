@@ -91,6 +91,40 @@ declare namespace EventSheetManager {
     }
 
     /**
+     * Handle for one event-sheet run.
+     */
+    interface IRun {
+        /**
+         * Runtime run id.
+         */
+        id: string,
+        /**
+         * Group controlled by this run.
+         */
+        groupName: string,
+        /**
+         * Current run status.
+         */
+        status: 'pending' | 'running' | 'completed' | 'stopped' | 'failed',
+        /**
+         * Resolves when the run completes and rejects when it stops or fails.
+         */
+        promise: Promise<EventSheetManager>,
+        /**
+         * Stop this run.
+         *
+         * @returns This run handle.
+         */
+        stop(): this,
+        /**
+         * Cancel this run. Alias of stop().
+         *
+         * @returns This run handle.
+         */
+        cancel(): this,
+    }
+
+    /**
      * Dumped manager state.
      */
     interface IState {
@@ -566,6 +600,75 @@ declare class EventSheetManager extends EventEmitter {
         ignoreCondition: boolean,
         injectData: Record<string, unknown>
     ): Promise<this>;
+
+    /**
+     * Start the default group and return a run handle.
+     * The run promise resolves when it completes and rejects when it stops or fails.
+     *
+     * @returns Event sheet run handle.
+     */
+    startRun(): EventSheetManager.IRun;
+
+    /**
+     * Start a group or a tree by title in the default group and return a run handle.
+     * The run promise resolves when it completes and rejects when it stops or fails.
+     *
+     * @param name - Group name or tree title.
+     * @returns Event sheet run handle.
+     */
+    startRun(name: string): EventSheetManager.IRun;
+
+    /**
+     * Start a tree by title in the given group and return a run handle.
+     * The run promise resolves when it completes and rejects when it stops or fails.
+     *
+     * @param title - Tree title.
+     * @param groupName - Group name.
+     * @returns Event sheet run handle.
+     */
+    startRun(title: string, groupName: string): EventSheetManager.IRun;
+
+    /**
+     * Start a tree by title in the default group and return a run handle.
+     * The run promise resolves when it completes and rejects when it stops or fails.
+     *
+     * @param title - Tree title.
+     * @param ignoreCondition - Whether to ignore start conditions.
+     * @returns Event sheet run handle.
+     */
+    startRun(title: string, ignoreCondition: boolean): EventSheetManager.IRun;
+
+    /**
+     * Start a tree by title in the given group and return a run handle.
+     * The run promise resolves when it completes and rejects when it stops or fails.
+     *
+     * @param title - Tree title.
+     * @param groupName - Group name.
+     * @param ignoreCondition - Whether to ignore start conditions.
+     * @returns Event sheet run handle.
+     */
+    startRun(
+        title: string,
+        groupName: string,
+        ignoreCondition: boolean
+    ): EventSheetManager.IRun;
+
+    /**
+     * Start a tree by title in the given group with scoped injected data and return a run handle.
+     * The run promise resolves when it completes and rejects when it stops or fails.
+     *
+     * @param title - Tree title.
+     * @param groupName - Group name.
+     * @param ignoreCondition - Whether to ignore start conditions.
+     * @param injectData - Temporary data available during this run.
+     * @returns Event sheet run handle.
+     */
+    startRun(
+        title: string,
+        groupName: string,
+        ignoreCondition: boolean,
+        injectData: Record<string, unknown>
+    ): EventSheetManager.IRun;
 
     /**
      * Continue running groups.
