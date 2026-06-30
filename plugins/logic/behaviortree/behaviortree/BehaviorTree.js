@@ -211,7 +211,9 @@ class BehaviorTree extends EventEmitter {
         ticker.emitTickStart();
 
         /* ABORT NODE */
-        this.root.abortChildren(ticker);
+        if (this.root.getOpenState(ticker)) {
+            this.root._abort(ticker);
+        }
 
         /* POPULATE BLACKBOARD */
         blackboard.set(TREE_STATE, IDLE, this.id);
