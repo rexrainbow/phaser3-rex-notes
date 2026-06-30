@@ -40,6 +40,10 @@ class PhaseRunner extends StateManager {
 
                 phase.exit = function () {
                     eventSheetManager.off('complete', groupcompleteHandler);
+                    var eventSheetGroup = eventSheetManager.getTreeGroup(groupName);
+                    if (eventSheetGroup.isRunning) {
+                        eventSheetGroup.stop(groupName);
+                    }
                 }
             } else {
                 // Custom phase lifecycle
@@ -84,12 +88,14 @@ class PhaseRunner extends StateManager {
         this.addState({
             name: IDLE_STATE,
             enter: function () {
-                if (stateManager._cancelRunning) {
+                var isCanceled = stateManager._cancelRunning;
+                stateManager._cancelRunning = false;
+
+                if (isCanceled) {
                     stateManager.emit('cancel');
                 } else {
                     stateManager.emit('complete');
                 }
-                stateManager._cancelRunning = false;
             }
         })
 
@@ -154,7 +160,16 @@ class PhaseRunner extends StateManager {
         }
 
         this._cancelRunning = true;
-        this.goto(IDLE_STATE);
+        try {
+            this.goto(IDLE_STATE);
+        } catch (error) {
+            this._stateLock = false;
+            if (this._cancelRunning) {
+                this._cancelRunning = false;
+                this.emit('cancel');
+            }
+            throw error;
+        }
 
         return this;
     }
