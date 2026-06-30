@@ -26,24 +26,32 @@ class PhaseRunner extends StateManager {
             if (!phase.enter && phase.groupName) {
                 // Run group until complete event firing of this group
                 let groupName = phase.groupName;
-                let groupcompleteHandler = function (completedGroupName) {
-                    if (groupName !== completedGroupName) {
-                        return;
-                    }
-                    nextPhaseCallback();
-                }
+                let run;
 
                 phase.enter = function () {
-                    eventSheetManager.on('complete', groupcompleteHandler);
-                    eventSheetManager.startGroup(groupName);
+                    var currentRun = eventSheetManager.startRun(groupName);
+                    run = currentRun;
+                    currentRun.promise
+                        .then(function () {
+                            if (!stateManager.isRunning) {
+                                return;
+                            }
+                            nextPhaseCallback();
+                        })
+                        .catch(function (error) {
+                            if (currentRun.status === 'stopped') {
+                                return;
+                            }
+                            stateManager.emit('error', error, stateManager);
+                            stateManager.stop();
+                        });
                 }
 
                 phase.exit = function () {
-                    eventSheetManager.off('complete', groupcompleteHandler);
-                    var eventSheetGroup = eventSheetManager.getTreeGroup(groupName);
-                    if (eventSheetGroup.isRunning) {
-                        eventSheetGroup.stop(groupName);
+                    if (run && (run.status === 'running')) {
+                        run.stop();
                     }
+                    run = undefined;
                 }
             } else {
                 // Custom phase lifecycle
