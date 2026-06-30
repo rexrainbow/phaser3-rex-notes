@@ -1,0 +1,53 @@
+title: work_task
+durationTicks: 2
+tags:
+  - work
+
+condition:
+  and:
+    - name: notBusy
+      parameters:
+        actorId: "{{$actorId}}"
+    # energy >= 20
+    - name: characterStatus
+      parameters:
+        actorId: "{{$actorId}}"
+        field: energy
+        operator: ">="
+        value: 20
+
+script:
+  - condition:
+      name: taskPhase
+      parameters:
+        stateActionId: "{{$stateActionId}}"
+        phase: tick
+    # energy -= 10
+    actions:
+      - name: print
+        parameters: { text: "{{$actorId}} is working" }
+      - name: modifyCharacterStatus
+        parameters:
+          actorId: "{{$actorId}}"
+          field: energy
+          value: -10
+
+  - condition:
+      name: taskPhase
+      parameters:
+        stateActionId: "{{$stateActionId}}"
+        phase: complete
+    # money += floor(skill) * 10
+    actions:
+      - name: modifyCharacterStatus
+        parameters:
+          actorId: "{{$actorId}}"
+          field: money
+          value: "#(floor(characterStatus($actorId, 'skill')) * 10)"
+      - name: modifyCharacterStatus
+        parameters:
+          actorId: "{{$actorId}}"
+          field: skill
+          value: 0.8
+      - name: print
+        parameters: { text: "{{$actorId}} has {{characterStatus($actorId, 'money')}} money" }

@@ -1,0 +1,26 @@
+title: sleep_task
+durationTicks: 1
+tags:
+  - rest
+
+condition:
+  and:
+    - name: notBusy
+      parameters:
+        actorId: "{{$actorId}}"
+
+script:
+  - condition:
+      name: taskPhase
+      parameters:
+        stateActionId: "{{$stateActionId}}"
+        phase: tick
+    # energy += 20
+    actions:
+      - name: print
+        parameters: { text: "{{$actorId}} is sleeping" }
+      - name: modifyCharacterStatus
+        parameters:
+          actorId: "{{$actorId}}"
+          field: energy
+          value: 20

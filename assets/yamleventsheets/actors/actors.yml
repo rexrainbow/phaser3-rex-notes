@@ -1,0 +1,10 @@
+actors:
+  - id: alice
+    name: Alice
+    transitionTitle: Alice_behavior
+    priority: 0
+    status:
+      money: 0
+      energy: 30
+      stress: 0
+      skill: 1

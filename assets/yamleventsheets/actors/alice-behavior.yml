@@ -1,0 +1,37 @@
+title: Alice_behavior
+script:
+  - name: print
+    parameters: { text: "Alice want to ..." }
+  - type: if
+    branches:
+      # Work
+      - condition:
+          name: canStartTask
+          parameters:
+            actorId: alice
+            stateActionTitle: work_task
+        actions:
+          - name: print
+            parameters: { text: "Working!" }
+          - name: startTask
+            parameters:
+              stateActionTitle: work_task
+              actorId: alice
+
+      # Or Sleep
+      - condition:
+          name: canStartTask
+          parameters:
+            actorId: alice
+            stateActionTitle: sleep_task
+        actions:
+          - name: print
+            parameters: { text: "Sleeping!" }
+          - name: startTask
+            parameters:
+              stateActionTitle: sleep_task
+              actorId: alice
+
+      - actions:
+          - name: print
+            parameters: { text: "Continue previous task!" }
