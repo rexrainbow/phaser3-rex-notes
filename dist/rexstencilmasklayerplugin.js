@@ -5,11 +5,11 @@
 })(this, (function (phaser) { 'use strict';
 
     const MainVersionNumber = 4;
-    const SubVersionNumber = 0;
+    const SubVersionNumber = 2;
 
     var IsChecked = false;
 
-    var CheckP3Version = function (minVersion) {
+    var CheckPhaserVersion = function (minVersion) {
         if (IsChecked) {
             return;
         }
@@ -510,7 +510,7 @@
         },
     };
 
-    CheckP3Version();
+    CheckPhaserVersion();
     const Layer = phaser.GameObjects.Layer;
 
 
@@ -672,7 +672,7 @@
         }
     };
 
-    CheckP3Version();
+    CheckPhaserVersion();
     const Container = phaser.GameObjects.Container;
     const GetValue = phaser.Utils.Objects.GetValue;
 

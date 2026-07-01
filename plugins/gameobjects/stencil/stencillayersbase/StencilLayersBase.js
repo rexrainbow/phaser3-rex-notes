@@ -1,5 +1,5 @@
-import CheckP3Version from '../../../utils/system/CheckP3Version.js';
-CheckP3Version();
+import CheckPhaserVersion from '../../../utils/system/CheckPhaserVersion.js';
+CheckPhaserVersion();
 
 import { GameObjects as PhaserGameObjects, Utils as PhaserUtils } from 'phaser';
 const Layer = PhaserGameObjects.Layer;

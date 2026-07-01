@@ -1,11 +1,11 @@
 import { VERSION, BlendModes, Structs, Utils as Utils$3, GameObjects, Scenes, Math as Math$1, Class, Geom, Cameras, Display, Events, Scene, Game, Tweens, Renderer as Renderer$1, CANVAS, TintModes as TintModes$3, Filters, Actions, DOM } from 'phaser';
 
 const MainVersionNumber = 4;
-const SubVersionNumber = 0;
+const SubVersionNumber = 2;
 
 var IsChecked = false;
 
-var CheckP3Version = function (minVersion) {
+var CheckPhaserVersion = function (minVersion) {
     if (IsChecked) {
         return;
     }
@@ -442,7 +442,7 @@ var AddToContainer = function (p3Container, config) {
     return gameObjects;
 };
 
-CheckP3Version();
+CheckPhaserVersion();
 const Zone$2 = GameObjects.Zone;
 const AddItem = Utils$3.Array.Add;
 const RemoveItem$8 = Utils$3.Array.Remove;
@@ -15258,7 +15258,7 @@ var TextureMethods = {
 
 };
 
-CheckP3Version();
+CheckPhaserVersion();
 
 const CanvasPool$4 = Display.Canvas.CanvasPool;
 const GameObject$3 = GameObjects.GameObject;
@@ -31039,7 +31039,7 @@ var MeasureTextMargins = function (textStyle, testString, out) {
     return out;
 };
 
-CheckP3Version();
+CheckPhaserVersion();
 
 const GameObject$1 = GameObjects.GameObject;
 

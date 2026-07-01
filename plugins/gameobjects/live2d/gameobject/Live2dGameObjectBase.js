@@ -1,6 +1,6 @@
-import CheckP3Version from '../../../utils/system/CheckP3Version.js';
+import CheckPhaserVersion from '../../../utils/system/CheckPhaserVersion.js';
 import { Class as PhaserClass, GameObjects as PhaserGameObjects } from 'phaser';
-CheckP3Version();
+CheckPhaserVersion();
 
 const Extern = PhaserGameObjects.Extern;
 

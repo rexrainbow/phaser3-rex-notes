@@ -5,11 +5,11 @@
 })(this, (function (phaser) { 'use strict';
 
     const MainVersionNumber = 4;
-    const SubVersionNumber = 0;
+    const SubVersionNumber = 2;
 
     var IsChecked = false;
 
-    var CheckP3Version = function (minVersion) {
+    var CheckPhaserVersion = function (minVersion) {
         if (IsChecked) {
             return;
         }
@@ -33,7 +33,7 @@
 
     const SKIP_CHECK_BLEND_MODE$1 = phaser.BlendModes.SKIP_CHECK;
 
-    var WebGLRenderer = function (renderer, container, drawingContext, parentMatrix, renderStep, displayList, displayListIndex) {
+    var WebGLRenderer$1 = function (renderer, container, drawingContext, parentMatrix, renderStep, displayList, displayListIndex) {
         var camera = drawingContext.camera;
         camera.addToRenderList(container);
 
@@ -197,7 +197,7 @@
     };
 
     var Renderer = {
-        renderWebGL: WebGLRenderer,
+        renderWebGL: WebGLRenderer$1,
         renderCanvas: CanvasRenderer
 
     };
@@ -446,7 +446,7 @@
         return gameObjects;
     };
 
-    CheckP3Version();
+    CheckPhaserVersion();
     const Zone = phaser.GameObjects.Zone;
     const AddItem = phaser.Utils.Array.Add;
     const RemoveItem$3 = phaser.Utils.Array.Remove;
@@ -13110,6 +13110,33 @@
         methods
     );
 
+    const Mesh2D$2 = phaser.GameObjects.Mesh2D;
+
+    var WebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
+        if (!src) {
+            src = this;
+        }
+
+        if (src.skipRender()) {
+            return;
+        }
+
+        Mesh2D$2.prototype.renderWebGL.call(this, renderer, src, drawingContext, parentMatrix);
+
+        if (src.debugCallback) {
+            src.runDebugCallback(drawingContext, parentMatrix);
+        }
+    };
+
+    var SkipRender = function () {
+        return false;
+    };
+
+    var Render = {
+        renderWebGL: WebGLRenderer,
+        skipRender: SkipRender,
+    };
+
     const RotateAround$1 = phaser.Math.RotateAround;
 
     var LocalXYToWorldXY = function (gameObject, localX, localY, out) {
@@ -13424,8 +13451,302 @@
 
     var GlobalXY = {};
 
-    const Mesh2D = phaser.GameObjects.Mesh2D;
+    var VertexMethods = {
+        clear() {
+            this.vertexObjects.length = 0;
+            this.faceIndices.length = 0;
+            this.vertices.length = 0;
+            this.indices.length = 0;
+            this.indicesOrdered = null;
+            this.setUseOrderedIndices(false);
+            return this;
+        },
+
+        createVertexObject(u, v) {
+            var index = this.vertexObjects.length;
+            var vertexObject = new VertexObject(null, index, u, v);
+
+            this.vertexObjects.push(vertexObject);
+            this.vertices.push(0, 0, 0, 0);
+
+            vertexObject.setParent(this, index);
+            this.updateVertexObjectFrame(vertexObject);
+
+            return vertexObject;
+        },
+
+        addVertexObject(vertexObject) {
+            if (this.vertexObjects.includes(vertexObject)) {
+                return this;
+            }
+
+            var index = this.vertexObjects.length;
+            this.vertexObjects.push(vertexObject);
+            this.vertices.push(0, 0, 0, 0);
+
+            vertexObject.setParent(this, index);
+            this.updateVertexObjectFrame(vertexObject);
+
+            return this;
+        },
+
+        setVertexObjects(vertexObjects) {
+            this.vertexObjects.length = 0;
+            this.vertices.length = 0;
+
+            for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
+                this.addVertexObject(vertexObjects[i]);
+            }
+
+            return this;
+        },
+
+        resetVertexObjects() {
+            var vertexObjects = this.vertexObjects;
+
+            for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
+                vertexObjects[i].resetPosition();
+            }
+
+            return this;
+        },
+
+        writeVertexObjectPositions() {
+            var vertexObjects = this.vertexObjects;
+
+            for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
+                vertexObjects[i].writePositionToMesh();
+            }
+
+            return this;
+        },
+
+        rebuildVerticesFromVertexObjects() {
+            var vertexObjects = this.vertexObjects;
+            this.vertices.length = vertexObjects.length * 4;
+
+            for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
+                vertexObjects[i].setParent(this, i);
+            }
+
+            return this;
+        },
+    };
+
+    var IndexMethods = {
+        setFaceIndices(faceIndices, texturePage) {
+            if (texturePage === undefined) {
+                texturePage = this.texturePage;
+            } else {
+                this.texturePage = texturePage;
+            }
+
+            this.faceIndices.length = 0;
+            this.indices.length = 0;
+
+            for (var i = 0, cnt = faceIndices.length; i < cnt; i += 3) {
+                var a = faceIndices[i];
+                var b = faceIndices[i + 1];
+                var c = faceIndices[i + 2];
+
+                this.faceIndices.push(a, b, c);
+                this.indices.push(a, b, c, texturePage);
+            }
+
+            this.updateOrderedIndices();
+
+            return this;
+        },
+
+        setMeshIndices(indices) {
+            this.indices.length = 0;
+            this.faceIndices.length = 0;
+
+            for (var i = 0, cnt = indices.length; i < cnt; i += 4) {
+                this.indices.push(indices[i], indices[i + 1], indices[i + 2], indices[i + 3]);
+                this.faceIndices.push(indices[i], indices[i + 1], indices[i + 2]);
+            }
+
+            this.updateOrderedIndices();
+
+            return this;
+        },
+
+        setUseOrderedIndexOptimization(enabled, strategy) {
+            this.autoBuildOrderedIndices = !!enabled;
+
+            if (strategy !== undefined) {
+                this.orderedIndicesStrategy = strategy;
+            }
+
+            return this.updateOrderedIndices();
+        },
+
+        setUseOrderedIndicesOptimization(enabled, strategy) {
+            return this.setUseOrderedIndexOptimization(enabled, strategy);
+        },
+
+        updateOrderedIndices() {
+            if (this.autoBuildOrderedIndices && this.indices.length > 0) {
+                this.setRenderAsTriangles(false);
+                this.buildOrderedIndices(this.orderedIndicesStrategy, true);
+            } else {
+                this.setUseOrderedIndices(false);
+            }
+
+            return this;
+        },
+    };
+
+    const Mesh2D$1 = phaser.GameObjects.Mesh2D;
+
+    var FrameMethods = {
+        setTexture(key, frame) {
+            Mesh2D$1.prototype.setTexture.call(this, key, frame);
+
+            if (this.vertexObjects) {
+                this.syncVertexObjectsFrame();
+            }
+
+            return this;
+        },
+
+        setSizeToFrame(frame) {
+            if (!frame) { frame = this.frame; }
+            if (!frame) { return this; }
+
+            this.width = frame.realWidth;
+            this.height = frame.realHeight;
+
+            return this;
+        },
+
+        updateDisplayOrigin() {
+            Mesh2D$1.prototype.updateDisplayOrigin.call(this);
+
+            if (this.vertexObjects) {
+                this.writeVertexObjectPositions();
+            }
+
+            return this;
+        },
+
+        setDisplayOrigin(x, y) {
+            Mesh2D$1.prototype.setDisplayOrigin.call(this, x, y);
+
+            if (this.vertexObjects) {
+                this.writeVertexObjectPositions();
+            }
+
+            return this;
+        },
+
+        resetFaceSize() {
+            return this.syncVertexObjectsFrame();
+        },
+
+        syncVertexObjectsFrame() {
+            this.setSizeToFrame();
+            this.updateDisplayOrigin();
+
+            var vertexObjects = this.vertexObjects;
+
+            for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
+                this.updateVertexObjectFrame(vertexObjects[i]);
+            }
+
+            return this;
+        },
+
+        updateVertexObjectFrame(vertexObject) {
+            var frame = this.frame;
+
+            if (!frame) {
+                vertexObject.writeToMesh();
+                return this;
+            }
+
+            vertexObject
+                .setFrameSize(frame.cutWidth, frame.cutHeight, frame.x, frame.y)
+                .setFrameUV(frame.u0, frame.v0, frame.u1, frame.v1);
+
+            return this;
+        },
+    };
+
     const GetCalcMatrix = phaser.GameObjects.GetCalcMatrix;
+
+    var DebugMethods = {
+        setDebug(graphic, callback) {
+            this.debugGraphic = graphic;
+
+            if (!graphic && !callback) {
+                this.debugCallback = null;
+            }
+            else if (!callback) {
+                this.debugCallback = this.renderDebugVerts;
+            }
+            else {
+                this.debugCallback = callback;
+            }
+
+            return this;
+        },
+
+        renderDebugVerts(src, meshLength, verts) {
+            var graphic = src.debugGraphic;
+
+            for (var i = 0; i < meshLength; i += 6) {
+                var x0 = verts[i + 0];
+                var y0 = verts[i + 1];
+                var x1 = verts[i + 2];
+                var y1 = verts[i + 3];
+                var x2 = verts[i + 4];
+                var y2 = verts[i + 5];
+
+                graphic.lineBetween(x0, y0, x1, y1);
+                graphic.lineBetween(x1, y1, x2, y2);
+                graphic.lineBetween(x2, y2, x0, y0);
+            }
+        },
+
+        runDebugCallback(drawingContext, parentMatrix) {
+            var camera = drawingContext.camera;
+            var calcMatrix = GetCalcMatrix(this, camera, parentMatrix, !drawingContext.useCanvas).calc;
+            var faceIndices = this.faceIndices;
+            var vertexObjects = this.vertexObjects;
+            var displayOriginX = this.displayOriginX;
+            var displayOriginY = this.displayOriginY;
+            var verts = [];
+
+            for (var i = 0, cnt = faceIndices.length; i < cnt; i++) {
+                var vertex = vertexObjects[faceIndices[i]];
+                var x = vertex.localX - displayOriginX;
+                var y = vertex.localY - displayOriginY;
+
+                verts.push(
+                    calcMatrix.getX(x, y),
+                    calcMatrix.getY(x, y)
+                );
+            }
+
+            this.debugCallback.call(this, this, verts.length, verts);
+
+            return this;
+        },
+    };
+
+    var Methods$1 = {};
+
+    Object.assign(
+        Methods$1,
+        VertexMethods,
+        IndexMethods,
+        FrameMethods,
+        DebugMethods,
+    );
+
+    const Mesh2D = phaser.GameObjects.Mesh2D;
     const IsPlainObject$5 = phaser.Utils.Objects.IsPlainObject;
     const GetValue$6 = phaser.Utils.Objects.GetValue;
 
@@ -13467,132 +13788,6 @@
             this.setOriginFromFrame();
         }
 
-        clear() {
-            this.vertexObjects.length = 0;
-            this.faceIndices.length = 0;
-            this.vertices.length = 0;
-            this.indices.length = 0;
-            this.indicesOrdered = null;
-            this.setUseOrderedIndices(false);
-            return this;
-        }
-
-        createVertex(u, v) {
-            return this.createVertexObject(u, v);
-        }
-
-        createVertexObject(u, v) {
-            var index = this.vertexObjects.length;
-            var vertexObject = new VertexObject(null, index, u, v);
-
-            this.vertexObjects.push(vertexObject);
-            this.vertices.push(0, 0, 0, 0);
-
-            vertexObject.setParent(this, index);
-            this.updateVertexObjectFrame(vertexObject);
-
-            return vertexObject;
-        }
-
-        addVertexObject(vertexObject) {
-            if (this.vertexObjects.includes(vertexObject)) {
-                return this;
-            }
-
-            var index = this.vertexObjects.length;
-            this.vertexObjects.push(vertexObject);
-            this.vertices.push(0, 0, 0, 0);
-
-            vertexObject.setParent(this, index);
-            this.updateVertexObjectFrame(vertexObject);
-
-            return this;
-        }
-
-        setVertexObjects(vertexObjects) {
-            this.vertexObjects.length = 0;
-            this.vertices.length = 0;
-
-            for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
-                this.addVertexObject(vertexObjects[i]);
-            }
-
-            return this;
-        }
-
-        setFaceIndices(faceIndices, texturePage) {
-            if (texturePage === undefined) {
-                texturePage = this.texturePage;
-            } else {
-                this.texturePage = texturePage;
-            }
-
-            this.faceIndices.length = 0;
-            this.indices.length = 0;
-
-            for (var i = 0, cnt = faceIndices.length; i < cnt; i += 3) {
-                var a = faceIndices[i];
-                var b = faceIndices[i + 1];
-                var c = faceIndices[i + 2];
-
-                this.faceIndices.push(a, b, c);
-                this.indices.push(a, b, c, texturePage);
-            }
-
-            this.updateOrderedIndices();
-
-            return this;
-        }
-
-        setMeshIndices(indices) {
-            this.indices.length = 0;
-            this.faceIndices.length = 0;
-
-            for (var i = 0, cnt = indices.length; i < cnt; i += 4) {
-                this.indices.push(indices[i], indices[i + 1], indices[i + 2], indices[i + 3]);
-                this.faceIndices.push(indices[i], indices[i + 1], indices[i + 2]);
-            }
-
-            this.updateOrderedIndices();
-
-            return this;
-        }
-
-        setUseOrderedIndexOptimization(enabled, strategy) {
-            this.autoBuildOrderedIndices = !!enabled;
-
-            if (strategy !== undefined) {
-                this.orderedIndicesStrategy = strategy;
-            }
-
-            return this.updateOrderedIndices();
-        }
-
-        setUseOrderedIndicesOptimization(enabled, strategy) {
-            return this.setUseOrderedIndexOptimization(enabled, strategy);
-        }
-
-        updateOrderedIndices() {
-            if (this.autoBuildOrderedIndices && this.indices.length > 0) {
-                this.setRenderAsTriangles(false);
-                this.buildOrderedIndices(this.orderedIndicesStrategy, true);
-            } else {
-                this.setUseOrderedIndices(false);
-            }
-
-            return this;
-        }
-
-        setTexture(key, frame) {
-            super.setTexture(key, frame);
-
-            if (this.vertexObjects) {
-                this.syncVertexObjectsFrame();
-            }
-
-            return this;
-        }
-
         get frame() {
             return this._frame;
         }
@@ -13608,178 +13803,13 @@
                 this.syncVertexObjectsFrame();
             }
         }
-
-        setSizeToFrame(frame) {
-            if (!frame) { frame = this.frame; }
-            if (!frame) { return this; }
-
-            this.width = frame.realWidth;
-            this.height = frame.realHeight;
-
-            return this;
-        }
-
-        updateDisplayOrigin() {
-            super.updateDisplayOrigin();
-
-            if (this.vertexObjects) {
-                this.writeVertexObjectPositions();
-            }
-
-            return this;
-        }
-
-        setDisplayOrigin(x, y) {
-            super.setDisplayOrigin(x, y);
-
-            if (this.vertexObjects) {
-                this.writeVertexObjectPositions();
-            }
-
-            return this;
-        }
-
-        resetVertexObjects() {
-            var vertexObjects = this.vertexObjects;
-
-            for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
-                vertexObjects[i].resetPosition();
-            }
-
-            return this;
-        }
-
-        resetFaceSize() {
-            return this.syncVertexObjectsFrame();
-        }
-
-        syncVertexObjectsFrame() {
-            this.setSizeToFrame();
-            this.updateDisplayOrigin();
-
-            var vertexObjects = this.vertexObjects;
-
-            for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
-                this.updateVertexObjectFrame(vertexObjects[i]);
-            }
-
-            return this;
-        }
-
-        writeVertexObjectPositions() {
-            var vertexObjects = this.vertexObjects;
-
-            for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
-                vertexObjects[i].writePositionToMesh();
-            }
-
-            return this;
-        }
-
-        updateVertexObjectFrame(vertexObject) {
-            var frame = this.frame;
-
-            if (!frame) {
-                vertexObject.writeToMesh();
-                return this;
-            }
-
-            vertexObject
-                .setFrameSize(frame.cutWidth, frame.cutHeight, frame.x, frame.y)
-                .setFrameUV(frame.u0, frame.v0, frame.u1, frame.v1);
-
-            return this;
-        }
-
-        rebuildVerticesFromVertexObjects() {
-            var vertexObjects = this.vertexObjects;
-            this.vertices.length = vertexObjects.length * 4;
-
-            for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
-                vertexObjects[i].setParent(this, i);
-            }
-
-            return this;
-        }
-
-        setDebug(graphic, callback) {
-            this.debugGraphic = graphic;
-
-            if (!graphic && !callback) {
-                this.debugCallback = null;
-            }
-            else if (!callback) {
-                this.debugCallback = this.renderDebugVerts;
-            }
-            else {
-                this.debugCallback = callback;
-            }
-
-            return this;
-        }
-
-        renderDebugVerts(src, meshLength, verts) {
-            var graphic = src.debugGraphic;
-
-            for (var i = 0; i < meshLength; i += 6) {
-                var x0 = verts[i + 0];
-                var y0 = verts[i + 1];
-                var x1 = verts[i + 2];
-                var y1 = verts[i + 3];
-                var x2 = verts[i + 4];
-                var y2 = verts[i + 5];
-
-                graphic.lineBetween(x0, y0, x1, y1);
-                graphic.lineBetween(x1, y1, x2, y2);
-                graphic.lineBetween(x2, y2, x0, y0);
-            }
-        }
-
-        skipRender() {
-            return false;
-        }
-
-        renderWebGL(renderer, src, drawingContext, parentMatrix) {
-            if (!src) {
-                src = this;
-            }
-
-            if (src.skipRender()) {
-                return;
-            }
-
-            super.renderWebGL(renderer, src, drawingContext, parentMatrix);
-
-            if (src.debugCallback) {
-                src.runDebugCallback(drawingContext, parentMatrix);
-            }
-        }
-
-        runDebugCallback(drawingContext, parentMatrix) {
-            var camera = drawingContext.camera;
-            var calcMatrix = GetCalcMatrix(this, camera, parentMatrix, !drawingContext.useCanvas).calc;
-            var faceIndices = this.faceIndices;
-            var vertexObjects = this.vertexObjects;
-            var displayOriginX = this.displayOriginX;
-            var displayOriginY = this.displayOriginY;
-            var verts = [];
-
-            for (var i = 0, cnt = faceIndices.length; i < cnt; i++) {
-                var vertex = vertexObjects[faceIndices[i]];
-                var x = vertex.localX - displayOriginX;
-                var y = vertex.localY - displayOriginY;
-
-                verts.push(
-                    calcMatrix.getX(x, y),
-                    calcMatrix.getY(x, y)
-                );
-            }
-
-            this.debugCallback.call(this, this, verts.length, verts);
-
-            return this;
-        }
     };
+
+    Object.assign(
+        Image$1.prototype,
+        Render,
+        Methods$1
+    );
 
     var AnmiationMethods = {
         play(key, ignoreIfPlaying) {
@@ -14092,7 +14122,7 @@
 
         for (var r = 0; r <= rows; r++) {
             for (var c = 0; c <= columns; c++) {
-                vertexObjects.push(gameObject.createVertex(c / columns, r / rows));
+                vertexObjects.push(gameObject.createVertexObject(c / columns, r / rows));
             }
         }
 

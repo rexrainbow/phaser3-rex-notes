@@ -471,7 +471,7 @@
 	    return sn;
 	};
 
-	var CreateID = function () {
+	var CreateID$1 = function () {
 	    if (sn === null) {
 	        return UUID$4();
 	    }
@@ -787,7 +787,7 @@
 	    ) {
 
 	        if (id === undefined) {
-	            id = CreateID();
+	            id = CreateID$1();
 	        }
 
 	        this.parent = null;
@@ -1903,7 +1903,7 @@
 	    }
 	}
 
-	class Runner extends Action {
+	let Runner$1 = class Runner extends Action {
 
 	    constructor(config = {}, nodePool) {
 	        if (nodePool) {  // Rebuild node, don't touch config
@@ -1930,7 +1930,7 @@
 	    tick(tick) {
 	        return RUNNING;
 	    }
-	}
+	};
 
 	let Error$1 = class Error extends Action {
 
@@ -3929,7 +3929,7 @@
 		Repeat: Repeat$1,
 		RepeatUntilFailure: RepeatUntilFailure,
 		RepeatUntilSuccess: RepeatUntilSuccess,
-		Runner: Runner,
+		Runner: Runner$1,
 		Selector: Selector,
 		Sequence: Sequence,
 		Service: Service,
@@ -6135,7 +6135,7 @@
 	        super();
 
 	        if (id === undefined) {
-	            id = CreateID();
+	            id = CreateID$1();
 	        }
 
 	        this.id = id;
@@ -6324,7 +6324,9 @@
 	        ticker.emitTickStart();
 
 	        /* ABORT NODE */
-	        this.root.abortChildren(ticker);
+	        if (this.root.getOpenState(ticker)) {
+	            this.root._abort(ticker);
+	        }
 
 	        /* POPULATE BLACKBOARD */
 	        blackboard.set(TREE_STATE, IDLE$7, this.id);
@@ -6357,13 +6359,13 @@
 	        SetSerialNumberPrefix(prefix);
 	    }
 	}
-	var Methods$k = {
+	var Methods$l = {
 	    dump: Dump,
 	    load: Load,
 	};
 	Object.assign(
 	    BehaviorTree.prototype,
-	    Methods$k,
+	    Methods$l,
 	    DataMethods$5,
 	);
 
@@ -8012,7 +8014,7 @@
 	    }
 	};
 
-	var RunMethods$1 = {
+	var RunMethods$2 = {
 	    setRunContext(context) {
 	        this.clearRunContext();
 
@@ -8247,42 +8249,51 @@
 	    }
 	};
 
-	var StopMethods$1 = {
+	var StopMethods$2 = {
 	    stop() {
 	        var eventSheetManager = this.parent;
 	        var blackboard = eventSheetManager.blackboard;
 	        var commandExecutor = eventSheetManager.commandExecutor;
+	        var trees = this.pendingTrees.slice();
+
+	        this.pendingTrees.length = 0;
+	        this.closedTrees.length = 0;
+	        this.isRunning = false;
 
 	        eventSheetManager.emit(EVT_GROUP_STOP, this.name, eventSheetManager, this);
 
-	        var trees = this.pendingTrees;
-	        for (var i = 0, cnt = trees.length; i < cnt; i++) {
-	            var eventsheet = trees[i];
-	            eventSheetManager.emit(EVT_EVENTSHEET_ABORT, eventsheet.title, this.name, eventSheetManager, eventsheet, this);
-	            eventsheet.abort(blackboard, commandExecutor);
-	            CloseEventSheet.call(this, eventSheetManager, eventsheet);
-	        }
-	        trees.length = 0;
+	        try {
+	            for (var i = 0, cnt = trees.length; i < cnt; i++) {
+	                var eventsheet = trees[i];
+	                if (eventsheet.roundComplete) {
+	                    continue;
+	                }
 
-	        this.isRunning = false;
-	        this.clearRunContext();
+	                eventsheet.abort(blackboard, commandExecutor);
+	                eventSheetManager.emit(EVT_EVENTSHEET_ABORT, eventsheet.title, this.name, eventSheetManager, eventsheet, this);
+	                CloseEventSheet.call(this, eventSheetManager, eventsheet);
+	            }
+	        } finally {
+	            this.clearRunContext();
+	            this.removePendingEventSheets();
+	        }
 
 	        return this;
 	    },
 	};
 
-	var Methods$j = {};
+	var Methods$k = {};
 
 	Object.assign(
-	    Methods$j,
+	    Methods$k,
 	    TreeMethods$1,
 	    AddTreeMethods$1,
 	    RemoveTreeMethods$1,
 	    TreeActiveStateMethods$1,
 	    SaveLoadTreeMethods,
 	    StateMethods$1,
-	    RunMethods$1,
-	    StopMethods$1,
+	    RunMethods$2,
+	    StopMethods$2,
 	);
 
 	class EventBehaviorTreeGroup {
@@ -8328,7 +8339,7 @@
 
 	Object.assign(
 	    EventBehaviorTreeGroup.prototype,
-	    Methods$j,
+	    Methods$k,
 	);
 
 	var TreeMethods = {
@@ -16666,6 +16677,7 @@
 	    },
 	};
 
+	// Utils
 	var GetStartGroupName = function (eventSheetManager, args) {
 	    switch (args.length) {
 	        case 0:
@@ -16715,7 +16727,7 @@
 	    });
 	};
 
-	var RunMethods = {
+	var RunMethods$1 = {
 
 	    /*
 	    A group owns exactly one running context at a time.
@@ -16823,33 +16835,6 @@
 
 	};
 
-	var StopMethods = {
-	    stopGroup(groupName) {
-	        if (groupName === undefined) {
-	            groupName = this.defaultTreeGroupName;
-	        }
-	        this.getTreeGroup(groupName).stop();
-	        return this;
-	    },
-
-	    stop(groupName) {
-	        this.stopGroup(groupName);
-	        return this;
-	    },
-
-	    stopAllGroups() {
-	        for (var name in this.treeGroups) {
-	            this.treeGroups[name].stop();
-	        }
-	        return this;
-	    },
-
-	    stopAll() {
-	        this.stopAllGroups();
-	        return this;
-	    }
-	};
-
 	var RunEventSheetOnceMethods = {
 	    runEventSheetOnce(data, config, injectData) {
 	        if (config === undefined) {
@@ -16953,6 +16938,167 @@
 	    },
 	};
 
+	var StopMethods$1 = {
+	    stopGroup(groupName) {
+	        if (groupName === undefined) {
+	            groupName = this.defaultTreeGroupName;
+	        }
+	        this.getTreeGroup(groupName).stop();
+	        return this;
+	    },
+
+	    stop(groupName) {
+	        this.stopGroup(groupName);
+	        return this;
+	    },
+
+	    stopAllGroups() {
+	        for (var name in this.treeGroups) {
+	            this.treeGroups[name].stop();
+	        }
+	        return this;
+	    },
+
+	    stopAll() {
+	        this.stopAllGroups();
+	        return this;
+	    }
+	};
+
+	var CreateStopError$1 = function (groupName) {
+	    return new Error(`Event sheet group '${groupName}' was stopped`);
+	};
+
+	var SerialNumber = 0;
+	var CreateID = function () {
+	    SerialNumber += 1;
+	    return `run#${SerialNumber}`;
+	};
+
+	class Runner {
+	    constructor(eventSheetManager, config = {}) {
+	        this.manager = eventSheetManager;
+	        this.id = config.id || CreateID();
+	        this.groupName = config.groupName;
+	        this.args = config.args || [];
+	        this.status = 'pending';
+
+	        var self = this;
+	        this.completeCallback = function (completedGroupName) {
+	            if (completedGroupName !== self.groupName) {
+	                return;
+	            }
+
+	            self.complete(self.manager);
+	        };
+
+	        this.stopCallback = function (stoppedGroupName) {
+	            if (stoppedGroupName !== self.groupName) {
+	                return;
+	            }
+
+	            self.stopped(CreateStopError$1(self.groupName));
+	        };
+
+	        this.promise = new Promise(function (resolve, reject) {
+	            self._resolve = resolve;
+	            self._reject = reject;
+	        });
+	    }
+
+	    start() {
+	        if (this.status !== 'pending') {
+	            return this;
+	        }
+
+	        var eventSheetGroup = this.manager.getTreeGroup(this.groupName);
+	        if (eventSheetGroup.isRunning) {
+	            return this.fail(new Error(`Event sheet group '${this.groupName}' is already running`));
+	        }
+
+	        this.bindEvents();
+
+	        try {
+	            this.status = 'running';
+	            this.manager.start.apply(this.manager, this.args);
+
+	            if (!eventSheetGroup.isRunning) {
+	                this.complete(this.manager);
+	            }
+	        } catch (error) {
+	            this.fail(error);
+	        }
+
+	        return this;
+	    }
+
+	    stop() {
+	        if (this.status !== 'running') {
+	            return this;
+	        }
+
+	        this.manager.stop(this.groupName);
+	        return this;
+	    }
+
+	    cancel() {
+	        return this.stop();
+	    }
+
+	    complete(value) {
+	        return this.settle('completed', value);
+	    }
+
+	    stopped(error) {
+	        return this.settle('stopped', error);
+	    }
+
+	    fail(error) {
+	        return this.settle('failed', error);
+	    }
+
+	    bindEvents() {
+	        this.manager.on(EVT_GROUP_COMPLETE, this.completeCallback);
+	        this.manager.on(EVT_GROUP_STOP, this.stopCallback);
+	        return this;
+	    }
+
+	    cleanup() {
+	        this.manager.off(EVT_GROUP_COMPLETE, this.completeCallback);
+	        this.manager.off(EVT_GROUP_STOP, this.stopCallback);
+	        return this;
+	    }
+
+	    settle(status, value) {
+	        if ((this.status !== 'pending') && (this.status !== 'running')) {
+	            return this;
+	        }
+
+	        this.cleanup();
+	        this.status = status;
+
+	        if (status === 'completed') {
+	            this._resolve(value);
+	        } else {
+	            this._reject(value);
+	        }
+
+	        return this;
+	    }
+	}
+
+	var RunnerMethods = {
+	    startRun() {
+	        var args = Array.prototype.slice.call(arguments);
+	        var groupName = GetStartGroupName(this, args);
+
+	        return (new Runner(this, {
+	            groupName,
+	            args,
+	        })).start();
+	    },
+	};
+
 	var BindEventMethods$1 = {
 	    startGroupByEvent(eventName, groupName, once) {
 	        if (IsPlainObject$J(eventName)) {
@@ -17002,11 +17148,11 @@
 	    }
 	};
 
-	var Methods$i = {
+	var Methods$j = {
 	};
 
 	Object.assign(
-	    Methods$i,
+	    Methods$j,
 	    PauseEventSheetMethods$1,
 	    TreeMethods,
 	    AddTreeMethods,
@@ -17016,9 +17162,10 @@
 	    DataMethods$4,
 	    StateMethods,
 	    ValueConvertMethods,
-	    RunMethods,
+	    RunMethods$1,
 	    RunEventSheetOnceMethods,
-	    StopMethods,
+	    StopMethods$1,
+	    RunnerMethods,
 	    BindEventMethods$1,
 	    RoundCounterMethods,
 	);
@@ -17151,15 +17298,15 @@
 
 	Object.assign(
 	    EventSheetManager.prototype,
-	    Methods$i
+	    Methods$j
 	);
 
 	const MainVersionNumber = 4;
-	const SubVersionNumber = 0;
+	const SubVersionNumber = 2;
 
 	var IsChecked = false;
 
-	var CheckP3Version = function (minVersion) {
+	var CheckPhaserVersion = function (minVersion) {
 	    if (IsChecked) {
 	        return;
 	    }
@@ -17596,7 +17743,7 @@
 	    return gameObjects;
 	};
 
-	CheckP3Version();
+	CheckPhaserVersion();
 	const Zone$2 = phaser.GameObjects.Zone;
 	const AddItem = phaser.Utils.Array.Add;
 	const RemoveItem$d = phaser.Utils.Array.Remove;
@@ -31620,7 +31767,7 @@
 	    return this.geom.contains(localPoint.x, localPoint.y);
 	};
 
-	var Methods$h = {
+	var Methods$i = {
 	    setPosition: SetPosition$1,
 	    resize: Resize,
 	    setOrigin: SetOrigin,
@@ -31839,7 +31986,7 @@
 
 	Object.assign(
 	    RectangleMask$1.prototype,
-	    Methods$h
+	    Methods$i
 	);
 
 	const Base$4 = phaser.GameObjects.Arc;
@@ -31891,7 +32038,7 @@
 
 	Object.assign(
 	    CircleMask.prototype,
-	    Methods$h
+	    Methods$i
 	);
 
 	var CreateDefaultMaskGameObject = function (parent, shapeType, padding) {
@@ -32814,7 +32961,7 @@ void main (void) {
 
 	};
 
-	CheckP3Version();
+	CheckPhaserVersion();
 
 	const CanvasPool$4 = phaser.Display.Canvas.CanvasPool;
 	const GameObject$3 = phaser.GameObjects.GameObject;
@@ -33338,13 +33485,13 @@ void main (void) {
 	    return GetBobWorldPosition(this.parent, this, offsetX, offsetY, out);
 	};
 
-	var Methods$g = {
+	var Methods$h = {
 	    contains: Contains$1,
 	    getWorldPosition: GetWorldPosition,
 	};
 
 	Object.assign(
-	    Methods$g,
+	    Methods$h,
 	    RenderMethods
 	);
 
@@ -33701,7 +33848,7 @@ void main (void) {
 
 	Object.assign(
 	    RenderBase.prototype,
-	    Methods$g,
+	    Methods$h,
 	);
 
 	const Pad$1 = phaser.Utils.String.Pad;
@@ -37143,7 +37290,7 @@ void main (void) {
 	    },
 	};
 
-	var Methods$f = {
+	var Methods$g = {
 	    setFixedSize: SetFixedSize,
 	    setPadding: SetPadding,
 	    getPadding: GetPadding,
@@ -37201,7 +37348,7 @@ void main (void) {
 	};
 
 	Object.assign(
-	    Methods$f,
+	    Methods$g,
 
 	    MoveChildMethods,
 	    BackgroundMethods,
@@ -37377,7 +37524,7 @@ void main (void) {
 
 	Object.assign(
 	    DynamicText.prototype,
-	    Methods$f
+	    Methods$g
 	);
 
 	var TextRunWidthWrap = function (textObject) {
@@ -38444,11 +38591,11 @@ void main (void) {
 	    setDashed: SetDashed
 	};
 
-	var Methods$e = {
+	var Methods$f = {
 	    buildStrokePath: BuildStrokePath
 	};
 	Object.assign(
-	    Methods$e,
+	    Methods$f,
 	    StrokePathConfigMethods,
 	);
 
@@ -38571,7 +38718,7 @@ void main (void) {
 
 	Object.assign(
 	    PolygnBase.prototype,
-	    Methods$e,
+	    Methods$f,
 	    Render$2
 	);
 
@@ -39709,7 +39856,7 @@ void main (void) {
 
 	Object.assign(
 	    PathBase.prototype,
-	    Methods$e,
+	    Methods$f,
 	);
 
 	phaser.Math.DegToRad;
@@ -41012,7 +41159,7 @@ void main (void) {
 
 	Object.assign(
 	    Rectangle$1.prototype,
-	    Methods$e,
+	    Methods$f,
 	);
 
 	const GetValue$2z = phaser.Utils.Objects.GetValue;
@@ -41409,7 +41556,7 @@ void main (void) {
 
 	Object.assign(
 	    Triangle$1.prototype,
-	    Methods$e,
+	    Methods$f,
 	);
 
 	var UpdateShapes = function () {
@@ -41622,13 +41769,13 @@ void main (void) {
 
 	}
 
-	var Methods$d = {
+	var Methods$e = {
 	    updateShapes: UpdateShapes,
 	};
 
 	Object.assign(
 	    LineProgress.prototype,
-	    Methods$d,
+	    Methods$e,
 	);
 
 	class StatesBarRectangle extends LineProgress {
@@ -44737,7 +44884,7 @@ void main (void) {
 	    return this;
 	};
 
-	var Methods$c = {
+	var Methods$d = {
 	    _beginDraw: NOOP,
 	    _drawImage: NOOP,
 	    _drawTileSprite: NOOP,
@@ -44895,7 +45042,7 @@ void main (void) {
 
 	    Object.assign(
 	        NinePatch.prototype,
-	        Methods$c
+	        Methods$d
 	    );
 
 	    return NinePatch;
@@ -44929,14 +45076,14 @@ void main (void) {
 	class NinePatch extends NinePatchBase(RenderTexture, 'rexNinePatch') {
 	}
 
-	var Methods$b = {
+	var Methods$c = {
 	    _drawImage: DrawImage$1,
 	    _drawTileSprite: DrawTileSprite,
 	    _endDraw: EndDraw,
 	};
 	Object.assign(
 	    NinePatch.prototype,
-	    Methods$b
+	    Methods$c
 	);
 
 	let Style$1 = class Style extends ComponentBase {
@@ -45227,7 +45374,7 @@ void main (void) {
 	    return out;
 	};
 
-	CheckP3Version();
+	CheckPhaserVersion();
 
 	const GameObject$1 = phaser.GameObjects.GameObject;
 
@@ -50184,7 +50331,7 @@ void main (void) {
 
 	};
 
-	var Methods$a = {
+	var Methods$b = {
 	    addHeader: AddHeader,
 	    addFooter: AddFooter,
 	    resizeController: ResizeController,
@@ -50192,7 +50339,7 @@ void main (void) {
 	};
 
 	Object.assign(
-	    Methods$a,
+	    Methods$b,
 	    ChildPositionMethods
 	);
 
@@ -53802,7 +53949,7 @@ void main (void) {
 	// mixin
 	Object.assign(
 	    Scrollable$1.prototype,
-	    Methods$a
+	    Methods$b
 	);
 
 	var TextToLines = function (textObject, text, lines) {
@@ -63127,13 +63274,13 @@ void main (void) {
 
 	};
 
-	var Methods$9 = {
+	var Methods$a = {
 	    build: Build$1
 	};
 
 	Object.assign(
 	    CellContainer$1.prototype,
-	    Methods$9,
+	    Methods$a,
 	    OnClickButtonMethods$2,
 	    OnPointerOverOutMethods$1,
 	);
@@ -64864,13 +65011,13 @@ void main (void) {
 
 	}
 
-	var Methods$8 = {
+	var Methods$9 = {
 	    build: Build
 	};
 
 	Object.assign(
 	    CellContainer.prototype,
-	    Methods$8,
+	    Methods$9,
 	    OnClickButtonMethods,
 	    OnPointerOverOutMethods,
 	);
@@ -66842,7 +66989,7 @@ void main (void) {
 	    return this;
 	};
 
-	var Methods$7 = {
+	var Methods$8 = {
 	    open: Open,
 	    close: Close,
 	};
@@ -67197,7 +67344,7 @@ void main (void) {
 
 	Object.assign(
 	    HiddenTextEditBase.prototype,
-	    Methods$7,
+	    Methods$8,
 	);
 
 	var NumberInputUpdateCallback = function (text, textObject, hiddenInputText) {
@@ -72901,7 +73048,7 @@ void main (void) {
 	    }
 	};
 
-	var Methods$6 = {
+	var Methods$7 = {
 	    openListPanel: OpenListPanel,
 	    closeListPanel: CloseListPanel,
 	    toggleListPanel: ToggleListPanel,
@@ -72910,7 +73057,7 @@ void main (void) {
 	};
 
 	Object.assign(
-	    Methods$6,
+	    Methods$7,
 	    methods$5,
 	    FocusButtonMethods,
 	);
@@ -73028,7 +73175,7 @@ void main (void) {
 
 	Object.assign(
 	    DropDownList.prototype,
-	    Methods$6,
+	    Methods$7,
 	);
 
 	var CreateDropDownList = function (scene, config) {
@@ -79354,6 +79501,742 @@ void main (void) {
 	Object.assign(
 	    StateManagerBase.prototype,
 	    EventEmitterMethods$1
+	);
+
+	const MODE_PARALLEL = 'parallel';
+	const MODE_SEQUENCE = 'sequence';
+
+	class Actor {
+	    constructor(config = {}) {
+	        this.id = config.id;
+	        this.parentId = config.parentId;
+	        this.priority = config.priority || 0;
+	        this.transitionTitle = config.transitionTitle;  // Link to an event sheet
+	        this.previousStateAction = config.previousStateAction;
+	        this.currentStateAction = config.currentStateAction;
+	        this.properties = {
+	            ...(config.properties || {}),
+	            $actorId: this.id
+	        };
+	    }
+
+	    isBusy() {
+	        return this.currentStateAction && this.currentStateAction.isRunning();
+	    }
+
+	    setCurrentStateAction(stateAction) {
+	        this.currentStateAction = stateAction;
+	        return this;
+	    }
+
+	    setPreviousStateAction(stateAction) {
+	        this.previousStateAction = stateAction;
+	        return this;
+	    }
+
+	    clearPreviousStateAction(stateActionId) {
+	        if (!stateActionId || (this.previousStateAction && this.previousStateAction.id === stateActionId)) {
+	            this.previousStateAction = undefined;
+	        }
+	        return this;
+	    }
+
+	    replaceCurrentStateAction(stateAction) {
+	        if (this.previousStateAction) {
+	            throw new Error(`Actor '${this.id}' already has a previousStateAction`);
+	        }
+
+	        if (this.currentStateAction) {
+	            this.currentStateAction.clearPhaseFlags();
+	            this.currentStateAction.markCancelled();
+	            this.previousStateAction = this.currentStateAction;
+	        }
+
+	        this.currentStateAction = stateAction;
+	        return this;
+	    }
+
+	    clearCurrentStateAction(stateActionId) {
+	        if (!stateActionId || (this.currentStateAction && this.currentStateAction.id === stateActionId)) {
+	            this.currentStateAction = undefined;
+	        }
+	        return this;
+	    }
+
+	    dump() {
+	        var data = {
+	            id: this.id,
+	            priority: this.priority,
+	            properties: { ...this.properties }
+	        };
+
+	        if (this.parentId !== undefined) {
+	            data.parentId = this.parentId;
+	        }
+	        if (this.transitionTitle !== undefined) {
+	            data.transitionTitle = this.transitionTitle;
+	        }
+	        if (this.previousStateAction) {
+	            data.previousStateAction = this.previousStateAction.dump();
+	        }
+	        if (this.currentStateAction) {
+	            data.currentStateAction = this.currentStateAction.dump();
+	        }
+
+	        return data;
+	    }
+	}
+
+	var ActorMethods = {
+	    addActor(actor) {
+	        if (!actor) {
+	            return this;
+	        }
+
+	        if (!(actor instanceof Actor)) {
+	            actor = new Actor(actor);
+	        }
+
+	        if (this.actors.indexOf(actor) === -1) {
+	            this.actors.push(actor);
+	        }
+
+	        return this;
+	    },
+
+	    removeActor(actor) {
+	        var actorId = (typeof actor === 'string') ? actor : actor && actor.id;
+
+	        for (var i = this.actors.length - 1; i >= 0; i--) {
+	            if (this.actors[i] === actor || (actorId !== undefined && this.actors[i].id === actorId)) {
+	                this.actors.splice(i, 1);
+	                return this;
+	            }
+	        }
+
+	        return this;
+	    },
+
+	    getActor(actorId) {
+	        var actors = this.actors;
+
+	        for (var i = 0, cnt = actors.length; i < cnt; i++) {
+	            if (actors[i].id === actorId) {
+	                return actors[i];
+	            }
+	        }
+
+	        throw new Error(`Actor '${actorId}' not found`);
+	    },
+
+	    // Internal method
+	    getSortedActors() {
+	        var actors = this.actors;
+
+	        return actors.map(function (actor, index) {
+	            return { actor, index };
+	        }).sort(function (a, b) {
+	            var priorityA = a.actor.priority;
+	            var priorityB = b.actor.priority;
+
+	            if (priorityA !== priorityB) {
+	                return priorityA - priorityB;
+	            }
+
+	            return a.index - b.index;
+	        }).map(function (entry) {
+	            return entry.actor;
+	        });
+	    }
+	};
+
+	const IsPromiseLike = function (value) {
+	    return value && (typeof value.then === 'function');
+	};
+
+	const AwaitCallback = async function (callback, ...args) {
+	    var result = callback(...args);
+	    if (IsPromiseLike(result)) {
+	        await result;
+	    }
+	    return result;
+	};
+
+	const StartEventSheet = function (
+	    eventSheetManager,
+	    title,
+	    groupName,
+	    ignoreCondition,
+	    injectData
+	) {
+	    if (!title) {
+	        return null;
+	    }
+
+	    return eventSheetManager.startRun(title, groupName, ignoreCondition, injectData);
+	};
+
+	var RunMethods = {
+	    setMode(mode) {
+	        this.mode = mode;
+	        return this;
+	    },
+
+	    start() {
+	        if (this.isRunning) {
+	            return this;
+	        }
+
+	        this.startPromise().catch(function () {
+	        });
+	        return this;
+	    },
+
+	    async startPromise() {
+	        if (this.isRunning) {
+	            return Promise.reject(new Error('ActorStateMachineRunner is already running'));
+	        }
+
+	        this.isRunning = true;
+	        this.isStopping = false;
+	        this.emit('start', this);
+
+	        try {
+	            await this.runRound();
+
+	            this.throwIfStopping();
+
+	            this.emit('complete', this);
+	            return this;
+	        } catch (error) {
+	            if (this.isStopping) {
+	                this.emit('cancel', this);
+	            } else {
+	                this.emit('error', error, this);
+	            }
+	            throw error;
+	        } finally {
+	            this.currentRun = null;
+	            this.currentStateAction = null;
+	            this.isStopping = false;
+	            this.isRunning = false;
+	        }
+	    },
+
+	    async runRound() {
+	        switch (this.mode) {
+	            case MODE_PARALLEL:
+	                await this.runParallel();
+	                break;
+
+	            case MODE_SEQUENCE:
+	                await this.runSequence();
+	                break;
+
+	            default:
+	                throw new Error(`Unknown actor state machine run mode '${this.mode}'`);
+	        }
+
+	        this.throwIfStopping();
+
+	        this.emit('cleanup.start', this);
+	        this.cleanupStateActions();
+	        this.emit('cleanup', this);
+	        await AwaitCallback(this.cleanupCallback, this);
+	        this.emit('cleanup.complete', this);
+	    },
+
+	    async runActorStateTransition(actor) {
+	        this.throwIfStopping();
+
+	        this.emit('stateTransition.start', actor, this);
+	        this.throwIfStopping();
+
+	        var run = StartEventSheet(
+	            this.eventSheetManager,
+	            actor.transitionTitle,
+	            this.transitionGroupName,
+	            true, // ignoreCondition
+	            actor.properties
+	        );
+	        await this.waitEventSheetRun(run);
+	        this.throwIfStopping();
+
+	        this.emit('stateTransition.complete', actor, this);
+	    },
+
+	    async runActorStateAction(actor, stateAction, options = {}) {
+	        this.throwIfStopping();
+
+	        this.currentStateAction = stateAction;
+	        try {
+	            var tick = options.tick !== false;
+	            if (tick) {
+	                this.emit('stateTick.start', actor, stateAction, this);
+	                this.throwIfStopping();
+
+	                await AwaitCallback(function () {
+	                    return stateAction.markTick();
+	                });
+	                this.emit('stateTick.complete', actor, stateAction, this);
+	            }
+
+	            this.throwIfStopping();
+
+	            this.emit('stateAction.start', actor, stateAction, options, this);
+	            this.throwIfStopping();
+
+	            var run = StartEventSheet(
+	                this.eventSheetManager,
+	                stateAction.stateActionTitle,
+	                this.stateActionGroupName,
+	                true, // ignoreCondition
+	                stateAction.properties
+	            );
+	            await this.waitEventSheetRun(run);
+	            this.throwIfStopping();
+
+	            this.emit('stateAction.complete', actor, stateAction, options, this);
+	        } catch (error) {
+	            if (this.isStopping) {
+	                stateAction.markCancelled();
+	            }
+	            throw error;
+	        } finally {
+	            if (this.currentStateAction === stateAction) {
+	                this.currentStateAction = null;
+	            }
+	        }
+	    },
+
+	    async waitEventSheetRun(run) {
+	        if (!run) {
+	            return;
+	        }
+
+	        this.currentRun = run;
+	        try {
+	            await run.promise;
+	        } finally {
+	            if (this.currentRun === run) {
+	                this.currentRun = null;
+	            }
+	        }
+	    },
+	};
+
+	var RunParallelMethods = {
+	    async runParallel() {
+	        var actors = this.getSortedActors();
+	        this.emit('transitionPhase.start', actors, this);
+
+	        for (var i = 0, cnt = actors.length; i < cnt; i++) {
+	            await this.runActorStateTransition(actors[i]);
+	        }
+
+	        this.emit('transitionPhase.complete', actors, this);
+
+	        var actorStateActionPairs = this.getActorStateActionPairs(actors);
+	        this.emit('stateActionPhase.start', actorStateActionPairs, this);
+
+	        for (var i = 0, cnt = actorStateActionPairs.length; i < cnt; i++) {
+	            await this.runActorStateAction(
+	                actorStateActionPairs[i].actor,
+	                actorStateActionPairs[i].stateAction,
+	                actorStateActionPairs[i]
+	            );
+	        }
+
+	        this.emit('stateActionPhase.complete', actorStateActionPairs, this);
+	    },
+
+	    getActorStateActionPairs(actors) {
+	        var pairs = [];
+
+	        for (var i = 0, cnt = actors.length; i < cnt; i++) {
+	            var actor = actors[i];
+	            var previousStateAction = actor.previousStateAction;
+	            var stateAction = actor.currentStateAction;
+
+	            if (previousStateAction) {
+	                pairs.push({
+	                    actor,
+	                    stateAction: previousStateAction,
+	                    type: 'previous',
+	                    tick: false
+	                });
+	            }
+	            if (stateAction) {
+	                pairs.push({
+	                    actor,
+	                    stateAction,
+	                    type: 'current',
+	                    tick: true
+	                });
+	            }
+	        }
+
+	        return pairs;
+	    }
+	};
+
+	var RunSequenceMethods = {
+	    async runSequence() {
+	        var actors = this.getSortedActors();
+	        this.emit('sequence.start', actors, this);
+
+	        for (var i = 0, cnt = actors.length; i < cnt; i++) {
+	            var actor = actors[i];
+	            await this.runActorStateTransition(actor);
+
+	            var previousStateAction = actor.previousStateAction;
+	            if (previousStateAction) {
+	                await this.runActorStateAction(actor, previousStateAction, {
+	                    type: 'previous',
+	                    tick: false
+	                });
+	            }
+
+	            var stateAction = actor.currentStateAction;
+	            if (stateAction) {
+	                await this.runActorStateAction(actor, stateAction, {
+	                    type: 'current',
+	                    tick: true
+	                });
+	            }
+	        }
+
+	        this.emit('sequence.complete', actors, this);
+	    }
+	};
+
+	var StateActionMethods = {
+	    createStateActionId(actorId, stateActionTitle) {
+	        var id = `${actorId}:${stateActionTitle}:${this._nextStateActionId}`;
+	        this._nextStateActionId += 1;
+	        return id;
+	    },
+
+	    createStateAction(config = {}) {
+	        return new this.stateActionClass(config);
+	    },
+
+	    startStateAction(config = {}) {
+	        var actorId = config.actorId;
+	        var stateActionTitle = config.stateActionTitle;
+
+	        if (!actorId) {
+	            throw new Error('startStateAction requires actorId');
+	        }
+	        if (!stateActionTitle) {
+	            throw new Error('startStateAction requires stateActionTitle');
+	        }
+
+	        var actor = this.getActor(actorId);
+	        var isBusy = actor.isBusy();
+	        if (isBusy && actor.previousStateAction) {
+	            throw new Error(`Actor '${actorId}' already has a previousStateAction`);
+	        }
+
+	        var stateActionProperties = this.eventSheetManager.getTree(stateActionTitle, this.stateActionGroupName)?.properties || {};
+	        var stateAction = this.createStateAction({
+	            ...stateActionProperties,
+	            ...config,
+	            id: config.id || config.stateActionId || this.createStateActionId(actorId, stateActionTitle),
+	            actorId,
+	            stateActionTitle,
+	            durationTicks: config.durationTicks || stateActionProperties.durationTicks,
+	            properties: {
+	                ...(stateActionProperties.properties || {}),
+	                ...(config.properties || {})
+	            }
+	        });
+
+	        if (isBusy) {
+	            actor.replaceCurrentStateAction(stateAction);
+	        } else {
+	            actor.setCurrentStateAction(stateAction);
+	        }
+
+	        return stateAction;
+	    },
+
+	    canEnterState(config = {}) {
+	        var actorId = config.actorId;
+	        var stateActionTitle = config.stateActionTitle;
+
+	        if (!actorId) {
+	            throw new Error('canEnterState requires actorId');
+	        }
+	        if (!stateActionTitle) {
+	            throw new Error('canEnterState requires stateActionTitle');
+	        }
+	        if (!this.eventSheetManager) {
+	            throw new Error('canEnterState requires an EventSheetManager with evalCondition()');
+	        }
+
+	        return this.eventSheetManager.evalCondition(stateActionTitle, this.stateActionGroupName, {
+	            ...(config.properties || {}),
+	            $actorId: actorId,
+	            $stateActionTitle: stateActionTitle
+	        });
+	    },
+
+	    stateActionPhase(config = {}) {
+	        var stateAction = config.stateAction;
+
+	        if (!stateAction && config.actorId) {
+	            var actor = this.getActor(config.actorId);
+	            stateAction = actor.currentStateAction;
+	        }
+
+	        return stateAction ? stateAction.hasPhaseFlag(config.phase) : false;
+	    },
+
+	    clearEndedStateActions() {
+	        var actors = this.actors;
+
+	        for (var i = 0, cnt = actors.length; i < cnt; i++) {
+	            var actor = actors[i];
+	            var stateAction = actor.currentStateAction;
+
+	            if (stateAction && !stateAction.isRunning()) {
+	                actor.clearCurrentStateAction(stateAction.id);
+	            }
+	        }
+
+	        return this;
+	    },
+
+	    clearPreviousStateActions() {
+	        var actors = this.actors;
+
+	        for (var i = 0, cnt = actors.length; i < cnt; i++) {
+	            var actor = actors[i];
+
+	            actor.clearPreviousStateAction();
+	        }
+
+	        return this;
+	    },
+
+	    clearAllStateActionPhaseFlags() {
+	        var actors = this.actors;
+
+	        for (var i = 0, cnt = actors.length; i < cnt; i++) {
+	            var actor = actors[i];
+
+	            var previousStateAction = actor.previousStateAction;
+	            if (previousStateAction) {
+	                previousStateAction.clearPhaseFlags();
+	            }
+
+	            var stateAction = actor.currentStateAction;
+	            if (stateAction) {
+	                stateAction.clearPhaseFlags();
+	            }
+	        }
+
+	        return this;
+	    },
+
+	    cleanupStateActions() {
+	        this.clearAllStateActionPhaseFlags();
+	        this.clearPreviousStateActions();
+	        this.clearEndedStateActions();
+	        return this;
+	    }
+	};
+
+	var CreateStopError = function () {
+	    return new Error('ActorStateMachineRunner was stopped');
+	};
+
+	var StopMethods = {
+	    stop() {
+	        if (!this.isRunning) {
+	            return this;
+	        }
+
+	        this.isStopping = true;
+
+	        if (this.currentStateAction) {
+	            this.currentStateAction.markCancelled();
+	        }
+
+	        if (this.currentRun && (this.currentRun.status === 'running')) {
+	            this.currentRun.stop();
+	        }
+
+	        return this;
+	    },
+
+	    abort() {
+	        return this.stop();
+	    },
+
+	    throwIfStopping() {
+	        if (this.isStopping) {
+	            throw CreateStopError();
+	        }
+	    },
+
+	};
+
+	var Methods$6 = {
+	};
+
+	Object.assign(
+	    Methods$6,
+	    RunMethods,
+	    RunParallelMethods,
+	    RunSequenceMethods,
+	    ActorMethods,
+	    StateActionMethods,
+	    StopMethods,
+	);
+
+	const STATE_ACTION_PHASES = ['start', 'tick', 'complete', 'interrupt', 'cancel'];
+
+	const CreatePhaseFlags = function (phaseFlags = {}) {
+	    var flags = {};
+
+	    for (var i = 0, cnt = STATE_ACTION_PHASES.length; i < cnt; i++) {
+	        var phase = STATE_ACTION_PHASES[i];
+	        flags[phase] = phaseFlags[phase] || false;
+	    }
+
+	    return flags;
+	};
+
+	class StateAction {
+	    constructor(config = {}) {
+	        this.id = config.id;
+	        this.actorId = config.actorId;
+	        this.stateActionTitle = config.stateActionTitle;
+	        this.durationTicks = config.durationTicks || config.remainingTicks || 1;
+	        this.remainingTicks = config.remainingTicks || this.durationTicks;
+	        this.status = config.status || 'running';
+	        this.properties = {
+	            ...(config.properties || {}),
+	            $actorId: this.actorId,
+	            $stateActionId: this.id,
+	            $stateActionTitle: this.stateActionTitle
+	        };
+	        this.phaseFlags = CreatePhaseFlags(config.phaseFlags);
+	        this.markStarted();
+	    }
+
+	    isRunning() {
+	        return this.status === 'running';
+	    }
+
+	    setPhaseFlag(phase, value = true) {
+	        this.phaseFlags[phase] = value;
+	        return this;
+	    }
+
+	    clearPhaseFlag(phase) {
+	        this.phaseFlags[phase] = false;
+	        return this;
+	    }
+
+	    clearPhaseFlags() {
+	        this.phaseFlags = CreatePhaseFlags();
+	        return this;
+	    }
+
+	    hasPhaseFlag(phase) {
+	        return this.phaseFlags[phase] === true;
+	    }
+
+	    markStarted() {
+	        this.status = 'running';
+	        return this.setPhaseFlag('start');
+	    }
+
+	    markTick(ticks = 1) {
+	        if (!this.isRunning()) {
+	            return this.remainingTicks;
+	        }
+
+	        this.setPhaseFlag('tick');
+	        this.remainingTicks = Math.max(0, this.remainingTicks - ticks);
+
+	        if (this.remainingTicks === 0) {
+	            this.markCompleted();
+	        }
+
+	        return this.remainingTicks;
+	    }
+
+	    markCompleted() {
+	        this.remainingTicks = 0;
+	        this.status = 'completed';
+	        return this.setPhaseFlag('complete');
+	    }
+
+	    markInterrupted() {
+	        if (this.status === 'running') {
+	            this.status = 'interrupted';
+	        }
+	        return this.setPhaseFlag('interrupt');
+	    }
+
+	    markCancelled() {
+	        if (this.status === 'running') {
+	            this.status = 'cancelled';
+	        }
+	        return this.setPhaseFlag('cancel');
+	    }
+
+	    dump() {
+	        return {
+	            id: this.id,
+	            actorId: this.actorId,
+	            stateActionTitle: this.stateActionTitle,
+	            durationTicks: this.durationTicks,
+	            remainingTicks: this.remainingTicks,
+	            status: this.status,
+	            properties: { ...this.properties },
+	            phaseFlags: { ...this.phaseFlags }
+	        };
+	    }
+	}
+
+	class Actors extends EventEmitter$2 {
+	    constructor(eventSheetManager, config = {}) {
+	        super();
+
+	        var {
+	            mode = MODE_PARALLEL,
+	            defaultPriority = 0,
+	            stateActionClass = StateAction,
+	            transitionGroupName = '_',
+	            stateActionGroupName = transitionGroupName,
+	            cleanup = NOOP,
+	        } = config;
+
+	        this.eventSheetManager = eventSheetManager;
+	        this.actors = [];
+	        this.mode = mode;
+	        this.defaultPriority = defaultPriority;
+	        this.stateActionClass = stateActionClass;
+	        this.transitionGroupName = transitionGroupName;
+	        this.stateActionGroupName = stateActionGroupName;
+	        this.cleanupCallback = cleanup;
+
+	        this.isRunning = false;
+	        this.isStopping = false;
+	        this.currentRun = null;
+	        this.currentStateAction = null;
+	        this._nextStateActionId = 0;
+	    }
+	}
+
+	Object.assign(
+	    Actors.prototype,
+	    Methods$6
 	);
 
 	var PropertyMethods$1 = {

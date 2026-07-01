@@ -3,8 +3,8 @@ import CanvasMethods from './CanvasMethods.js';
 import TextureMethods from './TextureMethods.js';
 import { Class as PhaserClass, Display as PhaserDisplay, GameObjects as PhaserGameObjects, Renderer as PhaserRenderer, Utils as PhaserUtils } from 'phaser';
 
-import CheckP3Version from '../../../utils/system/CheckP3Version.js';
-CheckP3Version();
+import CheckPhaserVersion from '../../../utils/system/CheckPhaserVersion.js';
+CheckPhaserVersion();
 
 const CanvasPool = PhaserDisplay.Canvas.CanvasPool;
 const GameObject = PhaserGameObjects.GameObject;

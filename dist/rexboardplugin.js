@@ -12901,11 +12901,11 @@
     SetValue(window, 'RexPlugins.Board.Monopoly', Monopoly);
 
     const MainVersionNumber = 4;
-    const SubVersionNumber = 0;
+    const SubVersionNumber = 2;
 
     var IsChecked = false;
 
-    var CheckP3Version = function (minVersion) {
+    var CheckPhaserVersion = function (minVersion) {
         if (IsChecked) {
             return;
         }
@@ -13342,7 +13342,7 @@
         return gameObjects;
     };
 
-    CheckP3Version();
+    CheckPhaserVersion();
     const Zone = phaser.GameObjects.Zone;
     const AddItem = phaser.Utils.Array.Add;
     const RemoveItem = phaser.Utils.Array.Remove;

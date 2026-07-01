@@ -1,5 +1,5 @@
-import CheckP3Version from '../../../utils/system/CheckP3Version.js';
-CheckP3Version();
+import CheckPhaserVersion from '../../../utils/system/CheckPhaserVersion.js';
+CheckPhaserVersion();
 
 import Renderer from './renderer/Renderer.js';
 import ChildrenDisplayList from './renderer/ChildrenDisplayList.js';

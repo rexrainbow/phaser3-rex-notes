@@ -374,7 +374,7 @@ var NOOP = function () {
     //  NOOP
 };
 
-var Methods$q = {
+var Methods$r = {
     _beginDraw: NOOP,
     _drawImage: NOOP,
     _drawTileSprite: NOOP,
@@ -532,7 +532,7 @@ var NinePatchBase = function (GOClass, type) {
 
     Object.assign(
         NinePatch.prototype,
-        Methods$q
+        Methods$r
     );
 
     return NinePatch;
@@ -566,14 +566,14 @@ const RenderTexture$2 = GameObjects.RenderTexture;
 let NinePatch$1 = class NinePatch extends NinePatchBase(RenderTexture$2, 'rexNinePatch') {
 };
 
-var Methods$p = {
+var Methods$q = {
     _drawImage: DrawImage$2,
     _drawTileSprite: DrawTileSprite$1,
     _endDraw: EndDraw,
 };
 Object.assign(
     NinePatch$1.prototype,
-    Methods$p
+    Methods$q
 );
 
 var IsNil = function (value) {
@@ -662,7 +662,7 @@ const GetCalcMatrix$3 = GameObjects.GetCalcMatrix;
 const TransformMatrix$5 = GameObjects.Components.TransformMatrix;
 var tempMatrix$3 = new TransformMatrix$5();
 
-var WebGLRenderer$4 = function (renderer, src, drawingContext, parentMatrix) {
+var WebGLRenderer$5 = function (renderer, src, drawingContext, parentMatrix) {
     var bobs = src.getRenderList();
     var camera = drawingContext.camera;
 
@@ -714,8 +714,8 @@ var CanvasRenderer$4 = function (renderer, src, camera, parentMatrix) {
     ctx.restore();
 };
 
-var Render$4 = {
-    renderWebGL: WebGLRenderer$4,
+var Render$5 = {
+    renderWebGL: WebGLRenderer$5,
     renderCanvas: CanvasRenderer$4
 
 };
@@ -913,11 +913,11 @@ let PoolManager$1 = class PoolManager {
 };
 
 const MainVersionNumber = 4;
-const SubVersionNumber = 0;
+const SubVersionNumber = 2;
 
 var IsChecked = false;
 
-var CheckP3Version = function (minVersion) {
+var CheckPhaserVersion = function (minVersion) {
     if (IsChecked) {
         return;
     }
@@ -939,7 +939,7 @@ var CheckP3Version = function (minVersion) {
     IsChecked = true;
 };
 
-CheckP3Version();
+CheckPhaserVersion();
 
 const GameObject$4 = GameObjects.GameObject;
 const IsPlainObject$V = Utils$3.Objects.IsPlainObject;
@@ -1048,7 +1048,7 @@ Class.mixin(Blitter,
         Components$4.ScrollFactor,
         Components$4.Transform,
         Components$4.Visible,
-        Render$4,
+        Render$5,
 
         methods$I
     ]
@@ -2055,7 +2055,7 @@ var DrawTileSprite = function (key, frame, x, y, width, height) {
 
 };
 
-var Methods$o = {
+var Methods$p = {
     _drawImage: DrawImage$1,
     _drawTileSprite: DrawTileSprite,
 };
@@ -2070,7 +2070,7 @@ class NinePatch extends NinePatchBase(Blitter, 'rexNinePatch2') {
 
 Object.assign(
     NinePatch.prototype,
-    Methods$o
+    Methods$p
 );
 
 ObjectFactory.register('ninePatch2', function (x, y, width, height, key, columns, rows, config) {
@@ -2443,7 +2443,7 @@ var PolygonCanvasRenderer = function (renderer, src, camera, parentMatrix) {
     }
 };
 
-var Render$3 = {
+var Render$4 = {
     renderWebGL: PolygonWebGLRenderer,
     renderCanvas: PolygonCanvasRenderer
 
@@ -2734,11 +2734,11 @@ var StrokePathConfigMethods = {
     setDashed: SetDashed
 };
 
-var Methods$n = {
+var Methods$o = {
     buildStrokePath: BuildStrokePath
 };
 Object.assign(
-    Methods$n,
+    Methods$o,
     StrokePathConfigMethods,
 );
 
@@ -2861,8 +2861,8 @@ class PolygnBase extends Shape$1 {
 
 Object.assign(
     PolygnBase.prototype,
-    Methods$n,
-    Render$3
+    Methods$o,
+    Render$4
 );
 
 const GetValue$4k = Utils$3.Objects.GetValue;
@@ -3414,7 +3414,7 @@ ObjectFactory.register('roundRectangle', function (x, y, width, height, radiusCo
 SetValue(window, 'RexPlugins.UI.RoundRectangle', RoundRectangle$2);
 
 // copy from Phaser.GameObjects.Text
-var WebGLRenderer$3 = function (renderer, src, drawingContext, parentMatrix) {
+var WebGLRenderer$4 = function (renderer, src, drawingContext, parentMatrix) {
     if (src.dirty) {
         src.updateTexture();
         src.dirty = false;
@@ -3456,8 +3456,8 @@ var CanvasRenderer$3 = function (renderer, src, camera, parentMatrix) {
     renderer.batchSprite(src, src.frame, camera, parentMatrix);
 };
 
-var Render$2 = {
-    renderWebGL: WebGLRenderer$3,
+var Render$3 = {
+    renderWebGL: WebGLRenderer$4,
     renderCanvas: CanvasRenderer$3
 
 };
@@ -3672,7 +3672,7 @@ var TextureMethods = {
 
 };
 
-CheckP3Version();
+CheckPhaserVersion();
 
 const CanvasPool$4 = Display.Canvas.CanvasPool;
 const GameObject$3 = GameObjects.GameObject;
@@ -3884,7 +3884,7 @@ Class.mixin(Canvas$1,
         Components$3.Tint,
         Components$3.Transform,
         Components$3.Visible,
-        Render$2,
+        Render$3,
         CanvasMethods,
         TextureMethods,
     ]
@@ -4853,7 +4853,7 @@ ObjectFactory.register('quadShape', function (x, y, width, height, fillColor, fi
 
 SetValue(window, 'RexPlugins.UI.QuadShape', Quad);
 
-var WebGLRenderer$2 = function (renderer, src, drawingContext, parentMatrix) {
+var WebGLRenderer$3 = function (renderer, src, drawingContext, parentMatrix) {
     if ((src.width === 0) || (src.height === 0)) {
         return;
     }
@@ -4883,8 +4883,8 @@ var CanvasRenderer$2 = function (renderer, src, camera, parentMatrix) {
     renderer.batchSprite(src, src.frame, camera, parentMatrix);
 };
 
-var Render$1 = {
-    renderWebGL: WebGLRenderer$2,
+var Render$2 = {
+    renderWebGL: WebGLRenderer$3,
     renderCanvas: CanvasRenderer$2
 
 };
@@ -4948,7 +4948,7 @@ var MeasureTextMargins = function (textStyle, testString, out) {
     return out;
 };
 
-CheckP3Version();
+CheckPhaserVersion();
 
 const GameObject$2 = GameObjects.GameObject;
 
@@ -5157,7 +5157,7 @@ Class.mixin(TextBase,
         Components$2.Tint,
         Components$2.Transform,
         Components$2.Visible,
-        Render$1
+        Render$2
     ]
 );
 
@@ -10240,13 +10240,13 @@ var GetWorldPosition = function (offsetX, offsetY, out) {
     return GetBobWorldPosition(this.parent, this, offsetX, offsetY, out);
 };
 
-var Methods$m = {
+var Methods$n = {
     contains: Contains$2,
     getWorldPosition: GetWorldPosition,
 };
 
 Object.assign(
-    Methods$m,
+    Methods$n,
     RenderMethods$1
 );
 
@@ -10603,7 +10603,7 @@ class RenderBase extends Base$5 {
 
 Object.assign(
     RenderBase.prototype,
-    Methods$m,
+    Methods$n,
 );
 
 var GetProperty = function (name, config, defaultConfig) {
@@ -13515,7 +13515,7 @@ var InnerBoundsMethods = {
     },
 };
 
-var Methods$l = {
+var Methods$m = {
     setFixedSize: SetFixedSize,
     setPadding: SetPadding,
     getPadding: GetPadding,
@@ -13573,7 +13573,7 @@ var Methods$l = {
 };
 
 Object.assign(
-    Methods$l,
+    Methods$m,
 
     MoveChildMethods,
     BackgroundMethods,
@@ -13718,7 +13718,7 @@ class DynamicText extends Canvas$1 {
 
 Object.assign(
     DynamicText.prototype,
-    Methods$l
+    Methods$m
 );
 
 ObjectFactory.register('dynamicText', function (x, y, width, height, config) {
@@ -17931,12 +17931,12 @@ var CameraMethods$1 = {
     }
 };
 
-var Methods$k = {
+var Methods$l = {
     drawGameObjectsBounds: DrawGameObjectsBounds,
 };
 
 Object.assign(
-    Methods$k,
+    Methods$l,
     GetMethods,
     AddMethods$1,
     RemoveMethods$1,
@@ -18101,7 +18101,7 @@ class GOManager {
 Object.assign(
     GOManager.prototype,
     EventEmitterMethods$1,
-    Methods$k
+    Methods$l
 );
 
 const GameObjectClass = GameObjects.GameObject;
@@ -20084,12 +20084,12 @@ var SoundEffects2Methods = {
     },
 };
 
-var Methods$j = {
+var Methods$k = {
     hasAudio: HasaAudio
 };
 
 Object.assign(
-    Methods$j,
+    Methods$k,
     BackgroundMusicMethods,
     BackgroundMusic2Methods,
     SoundEffectsMethods,
@@ -20274,7 +20274,7 @@ class SoundManager {
 
 Object.assign(
     SoundManager.prototype,
-    Methods$j
+    Methods$k
 );
 
 const GetValue$3L = Utils$3.Objects.GetValue;
@@ -24118,7 +24118,7 @@ var SkipCurrentTypingDelay = function () {
     return this;
 };
 
-var Methods$i = {
+var Methods$j = {
     fadeOutPage: FadeOutPage,
     start: Start$1,
     typing: Typing,
@@ -24135,7 +24135,7 @@ var Methods$i = {
 };
 
 Object.assign(
-    Methods$i,
+    Methods$j,
     TypingSpeedMethods$1
 );
 
@@ -24252,7 +24252,7 @@ var SetChildrenInvisible = function (children) {
 Object.assign(
     TypeWriter.prototype,
     EventEmitterMethods$1,
-    Methods$i,
+    Methods$j,
 );
 
 class SpriteBob extends BobBase {
@@ -24326,9 +24326,9 @@ var AnimationMethods = {
     },
 };
 
-var Methods$h = {};
+var Methods$i = {};
 Object.assign(
-    Methods$h,
+    Methods$i,
     AnimationMethods
 );
 
@@ -24376,7 +24376,7 @@ class SpriteManager extends GOManager {
 
 Object.assign(
     SpriteManager.prototype,
-    Methods$h
+    Methods$i
 );
 
 var IsPlayAnimationTag = function (tags, goType) {
@@ -25132,7 +25132,7 @@ var ContentMethods = {
     },
 };
 
-var Methods$g = {
+var Methods$h = {
     setClickTarget: SetClickTarget,
     setCameraTarget: SetCameraTarget,
     setNextPageInput: SetNextPageInput,
@@ -25145,7 +25145,7 @@ var Methods$g = {
 };
 
 Object.assign(
-    Methods$g,
+    Methods$h,
     GameObjectManagerMethods,
     PlayMethods,
     PauseMethods,
@@ -25275,7 +25275,7 @@ class TextPlayer extends Extend(DynamicText) {
 
 Object.assign(
     TextPlayer.prototype,
-    Methods$g
+    Methods$h
 );
 
 ObjectFactory.register('textPlayer', function (x, y, width, height, config) {
@@ -25625,7 +25625,7 @@ var Close$1 = function () {
     return this;
 };
 
-var Methods$f = {
+var Methods$g = {
     open: Open$2,
     close: Close$1,
 };
@@ -25980,7 +25980,7 @@ class HiddenTextEditBase extends ComponentBase {
 
 Object.assign(
     HiddenTextEditBase.prototype,
-    Methods$f,
+    Methods$g,
 );
 
 var NumberInputUpdateCallback = function (text, textObject, hiddenInputText) {
@@ -27872,7 +27872,7 @@ SetValue(window, 'RexPlugins.UI.HiddenEdit', HiddenTextEdit);
 
 const GetCalcMatrix$1 = GameObjects.GetCalcMatrix;
 
-var WebGLRenderer$1 = function (renderer, src, drawingContext, parentMatrix) {
+var WebGLRenderer$2 = function (renderer, src, drawingContext, parentMatrix) {
     src.updateData();
 
     var camera = drawingContext.camera;
@@ -27923,8 +27923,8 @@ var CanvasRenderer$1 = function (renderer, src, camera, parentMatrix) {
     }
 };
 
-var Render = {
-    renderWebGL: WebGLRenderer$1,
+var Render$1 = {
+    renderWebGL: WebGLRenderer$2,
     renderCanvas: CanvasRenderer$1
 
 };
@@ -28137,7 +28137,7 @@ class BaseShapes extends Shape {
 
 Object.assign(
     BaseShapes.prototype,
-    Render
+    Render$1
 );
 
 var StyleMethods$2 = {
@@ -28385,7 +28385,7 @@ class PathBase extends BaseGeom {
 
 Object.assign(
     PathBase.prototype,
-    Methods$n,
+    Methods$o,
 );
 
 Math$1.DegToRad;
@@ -29688,7 +29688,7 @@ let Rectangle$2 = class Rectangle extends BaseGeom {
 
 Object.assign(
     Rectangle$2.prototype,
-    Methods$n,
+    Methods$o,
 );
 
 const GetValue$3z = Utils$3.Objects.GetValue;
@@ -30085,7 +30085,7 @@ let Triangle$1 = class Triangle extends BaseGeom {
 
 Object.assign(
     Triangle$1.prototype,
-    Methods$n,
+    Methods$o,
 );
 
 var ShapesUpdateMethods$4 = {
@@ -32730,13 +32730,13 @@ let LineProgress$1 = class LineProgress extends ProgressBase(BaseShapes) {
 
 };
 
-var Methods$e = {
+var Methods$f = {
     updateShapes: UpdateShapes$1,
 };
 
 Object.assign(
     LineProgress$1.prototype,
-    Methods$e,
+    Methods$f,
 );
 
 ObjectFactory.register('lineProgress', function (x, y, width, height, barColor, value, config) {
@@ -33447,13 +33447,13 @@ class RoundRectangleProgress extends ProgressBase(BaseShapes) {
     }
 }
 
-var Methods$d = {
+var Methods$e = {
     updateShapes: UpdateShapes,
 };
 
 Object.assign(
     RoundRectangleProgress.prototype,
-    Methods$d,
+    Methods$e,
 );
 
 ObjectFactory.register('roundRectangleProgress', function (x, y, width, height, radiusConfig, barColor, value, config) {
@@ -34255,7 +34255,7 @@ SetValue(window, 'RexPlugins.UI.Triangle', Triangle);
 
 const SKIP_CHECK_BLEND_MODE$1 = BlendModes.SKIP_CHECK;
 
-var WebGLRenderer = function (renderer, container, drawingContext, parentMatrix, renderStep, displayList, displayListIndex) {
+var WebGLRenderer$1 = function (renderer, container, drawingContext, parentMatrix, renderStep, displayList, displayListIndex) {
     var camera = drawingContext.camera;
     camera.addToRenderList(container);
 
@@ -34419,7 +34419,7 @@ var CanvasRenderer = function (renderer, container, camera) {
 };
 
 var Renderer = {
-    renderWebGL: WebGLRenderer,
+    renderWebGL: WebGLRenderer$1,
     renderCanvas: CanvasRenderer
 
 };
@@ -34615,7 +34615,7 @@ var AddToContainer = function (p3Container, config) {
     return gameObjects;
 };
 
-CheckP3Version();
+CheckPhaserVersion();
 const Zone$1 = GameObjects.Zone;
 const AddItem = Utils$3.Array.Add;
 const RemoveItem$6 = Utils$3.Array.Remove;
@@ -48213,13 +48213,13 @@ var FilterMethods = {
     },
 };
 
-var Methods$c = {
+var Methods$d = {
     resize: Resize$1,
     syncTo: SyncTo,
 };
 
 Object.assign(
-    Methods$c,
+    Methods$d,
     DropEnableMethods,
     FilterMethods,
     LoadFileMethods,
@@ -48306,7 +48306,7 @@ class FileDropZone extends DOMElement {
 
 Object.assign(
     FileDropZone.prototype,
-    Methods$c,
+    Methods$d,
 );
 
 ObjectFactory.register('fileDropZone', function (config) {
@@ -49700,7 +49700,7 @@ var Contains$1 = function (x, y) {
     return this.geom.contains(localPoint.x, localPoint.y);
 };
 
-var Methods$b = {
+var Methods$c = {
     setPosition: SetPosition$1,
     resize: Resize,
     setOrigin: SetOrigin,
@@ -49919,7 +49919,7 @@ class RectangleMask extends Base$1 {
 
 Object.assign(
     RectangleMask.prototype,
-    Methods$b
+    Methods$c
 );
 
 const Base = GameObjects.Arc;
@@ -49971,7 +49971,7 @@ class CircleMask extends Base {
 
 Object.assign(
     CircleMask.prototype,
-    Methods$b
+    Methods$c
 );
 
 var CreateDefaultMaskGameObject = function (parent, shapeType, padding) {
@@ -54242,7 +54242,7 @@ var ChildPositionMethods = {
 
 };
 
-var Methods$a = {
+var Methods$b = {
     addHeader: AddHeader,
     addFooter: AddFooter,
     resizeController: ResizeController,
@@ -54250,7 +54250,7 @@ var Methods$a = {
 };
 
 Object.assign(
-    Methods$a,
+    Methods$b,
     ChildPositionMethods
 );
 
@@ -56887,7 +56887,7 @@ let Scrollable$1 = class Scrollable extends Sizer {
 // mixin
 Object.assign(
     Scrollable$1.prototype,
-    Methods$a
+    Methods$b
 );
 
 var TextToLines = function (textObject, text, lines) {
@@ -61315,10 +61315,10 @@ var ModalMethods = {
     }
 };
 
-var Methods$9 = {};
+var Methods$a = {};
 
 Object.assign(
-    Methods$9,
+    Methods$a,
     ButtonMethods$1,
     ModalMethods,
 );
@@ -61626,7 +61626,7 @@ var EmitButtonEvent = function (dialog, postEventName) {
 
 Object.assign(
     Dialog.prototype,
-    Methods$9
+    Methods$a
 );
 
 ObjectFactory.register('dialog', function (config) {
@@ -61844,13 +61844,13 @@ var SetButtonIndexMethods = {
     },
 };
 
-var Methods$8 = {
+var Methods$9 = {
     resetDisplayContent: ResetDisplayContent$1,
     modal: Modal$1,
 };
 
 Object.assign(
-    Methods$8,
+    Methods$9,
     SetButtonIndexMethods,
 );
 
@@ -62012,7 +62012,7 @@ class ConfirmDialog extends Dialog {
 
 Object.assign(
     ConfirmDialog.prototype,
-    Methods$8
+    Methods$9
 );
 
 ObjectFactory.register('confirmDialog', function (config, creators) {
@@ -66014,14 +66014,14 @@ var CollapseSubMenu = function () {
     return this;
 };
 
-var Methods$7 = {
+var Methods$8 = {
     expandSubMenu: ExpandSubMenu,
     collapse: Collapse,
     collapseSubMenu: CollapseSubMenu,
 };
 
 Object.assign(
-    Methods$7,
+    Methods$8,
     SetTransitCallbackMethods,
     DelayCallMethods
 );
@@ -66330,7 +66330,7 @@ const SubMenuSideMode = {
 
 Object.assign(
     Menu.prototype,
-    Methods$7
+    Methods$8
 );
 
 ObjectFactory.register('menu', function (config) {
@@ -67769,7 +67769,7 @@ var FocusButtonMethods = {
     }
 };
 
-var Methods$6 = {
+var Methods$7 = {
     openListPanel: OpenListPanel,
     closeListPanel: CloseListPanel,
     toggleListPanel: ToggleListPanel,
@@ -67778,7 +67778,7 @@ var Methods$6 = {
 };
 
 Object.assign(
-    Methods$6,
+    Methods$7,
     methods$c,
     FocusButtonMethods,
 );
@@ -67896,7 +67896,7 @@ class DropDownList extends Label {
 
 Object.assign(
     DropDownList.prototype,
-    Methods$6,
+    Methods$7,
 );
 
 ObjectFactory.register('dropDownList', function (config) {
@@ -68356,12 +68356,12 @@ var ShowMethods = {
     }
 };
 
-var Methods$5 = {   
+var Methods$6 = {   
     getLines: GetLines,
 };
 
 Object.assign(
-    Methods$5,
+    Methods$6,
     SetContentMethods,
     GetPageMethods,
     ShowMethods
@@ -68640,7 +68640,7 @@ class TextPage extends ComponentBase {
 
 Object.assign(
     TextPage.prototype,
-    Methods$5,
+    Methods$6,
 );
 
 var SetTextMethods$1 = {
@@ -69847,6 +69847,33 @@ ObjectFactory.register('pages', function (config) {
 
 SetValue(window, 'RexPlugins.UI.Pages', Pages);
 
+const Mesh2D$2 = GameObjects.Mesh2D;
+
+var WebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
+    if (!src) {
+        src = this;
+    }
+
+    if (src.skipRender()) {
+        return;
+    }
+
+    Mesh2D$2.prototype.renderWebGL.call(this, renderer, src, drawingContext, parentMatrix);
+
+    if (src.debugCallback) {
+        src.runDebugCallback(drawingContext, parentMatrix);
+    }
+};
+
+var SkipRender = function () {
+    return false;
+};
+
+var Render = {
+    renderWebGL: WebGLRenderer,
+    skipRender: SkipRender,
+};
+
 const RotateAround$2 = Math$1.RotateAround;
 
 var LocalXYToWorldXY = function (gameObject, localX, localY, out) {
@@ -70161,8 +70188,302 @@ class VertexObject {
 
 var GlobalXY = {};
 
-const Mesh2D = GameObjects.Mesh2D;
+var VertexMethods = {
+    clear() {
+        this.vertexObjects.length = 0;
+        this.faceIndices.length = 0;
+        this.vertices.length = 0;
+        this.indices.length = 0;
+        this.indicesOrdered = null;
+        this.setUseOrderedIndices(false);
+        return this;
+    },
+
+    createVertexObject(u, v) {
+        var index = this.vertexObjects.length;
+        var vertexObject = new VertexObject(null, index, u, v);
+
+        this.vertexObjects.push(vertexObject);
+        this.vertices.push(0, 0, 0, 0);
+
+        vertexObject.setParent(this, index);
+        this.updateVertexObjectFrame(vertexObject);
+
+        return vertexObject;
+    },
+
+    addVertexObject(vertexObject) {
+        if (this.vertexObjects.includes(vertexObject)) {
+            return this;
+        }
+
+        var index = this.vertexObjects.length;
+        this.vertexObjects.push(vertexObject);
+        this.vertices.push(0, 0, 0, 0);
+
+        vertexObject.setParent(this, index);
+        this.updateVertexObjectFrame(vertexObject);
+
+        return this;
+    },
+
+    setVertexObjects(vertexObjects) {
+        this.vertexObjects.length = 0;
+        this.vertices.length = 0;
+
+        for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
+            this.addVertexObject(vertexObjects[i]);
+        }
+
+        return this;
+    },
+
+    resetVertexObjects() {
+        var vertexObjects = this.vertexObjects;
+
+        for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
+            vertexObjects[i].resetPosition();
+        }
+
+        return this;
+    },
+
+    writeVertexObjectPositions() {
+        var vertexObjects = this.vertexObjects;
+
+        for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
+            vertexObjects[i].writePositionToMesh();
+        }
+
+        return this;
+    },
+
+    rebuildVerticesFromVertexObjects() {
+        var vertexObjects = this.vertexObjects;
+        this.vertices.length = vertexObjects.length * 4;
+
+        for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
+            vertexObjects[i].setParent(this, i);
+        }
+
+        return this;
+    },
+};
+
+var IndexMethods = {
+    setFaceIndices(faceIndices, texturePage) {
+        if (texturePage === undefined) {
+            texturePage = this.texturePage;
+        } else {
+            this.texturePage = texturePage;
+        }
+
+        this.faceIndices.length = 0;
+        this.indices.length = 0;
+
+        for (var i = 0, cnt = faceIndices.length; i < cnt; i += 3) {
+            var a = faceIndices[i];
+            var b = faceIndices[i + 1];
+            var c = faceIndices[i + 2];
+
+            this.faceIndices.push(a, b, c);
+            this.indices.push(a, b, c, texturePage);
+        }
+
+        this.updateOrderedIndices();
+
+        return this;
+    },
+
+    setMeshIndices(indices) {
+        this.indices.length = 0;
+        this.faceIndices.length = 0;
+
+        for (var i = 0, cnt = indices.length; i < cnt; i += 4) {
+            this.indices.push(indices[i], indices[i + 1], indices[i + 2], indices[i + 3]);
+            this.faceIndices.push(indices[i], indices[i + 1], indices[i + 2]);
+        }
+
+        this.updateOrderedIndices();
+
+        return this;
+    },
+
+    setUseOrderedIndexOptimization(enabled, strategy) {
+        this.autoBuildOrderedIndices = !!enabled;
+
+        if (strategy !== undefined) {
+            this.orderedIndicesStrategy = strategy;
+        }
+
+        return this.updateOrderedIndices();
+    },
+
+    setUseOrderedIndicesOptimization(enabled, strategy) {
+        return this.setUseOrderedIndexOptimization(enabled, strategy);
+    },
+
+    updateOrderedIndices() {
+        if (this.autoBuildOrderedIndices && this.indices.length > 0) {
+            this.setRenderAsTriangles(false);
+            this.buildOrderedIndices(this.orderedIndicesStrategy, true);
+        } else {
+            this.setUseOrderedIndices(false);
+        }
+
+        return this;
+    },
+};
+
+const Mesh2D$1 = GameObjects.Mesh2D;
+
+var FrameMethods = {
+    setTexture(key, frame) {
+        Mesh2D$1.prototype.setTexture.call(this, key, frame);
+
+        if (this.vertexObjects) {
+            this.syncVertexObjectsFrame();
+        }
+
+        return this;
+    },
+
+    setSizeToFrame(frame) {
+        if (!frame) { frame = this.frame; }
+        if (!frame) { return this; }
+
+        this.width = frame.realWidth;
+        this.height = frame.realHeight;
+
+        return this;
+    },
+
+    updateDisplayOrigin() {
+        Mesh2D$1.prototype.updateDisplayOrigin.call(this);
+
+        if (this.vertexObjects) {
+            this.writeVertexObjectPositions();
+        }
+
+        return this;
+    },
+
+    setDisplayOrigin(x, y) {
+        Mesh2D$1.prototype.setDisplayOrigin.call(this, x, y);
+
+        if (this.vertexObjects) {
+            this.writeVertexObjectPositions();
+        }
+
+        return this;
+    },
+
+    resetFaceSize() {
+        return this.syncVertexObjectsFrame();
+    },
+
+    syncVertexObjectsFrame() {
+        this.setSizeToFrame();
+        this.updateDisplayOrigin();
+
+        var vertexObjects = this.vertexObjects;
+
+        for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
+            this.updateVertexObjectFrame(vertexObjects[i]);
+        }
+
+        return this;
+    },
+
+    updateVertexObjectFrame(vertexObject) {
+        var frame = this.frame;
+
+        if (!frame) {
+            vertexObject.writeToMesh();
+            return this;
+        }
+
+        vertexObject
+            .setFrameSize(frame.cutWidth, frame.cutHeight, frame.x, frame.y)
+            .setFrameUV(frame.u0, frame.v0, frame.u1, frame.v1);
+
+        return this;
+    },
+};
+
 const GetCalcMatrix = GameObjects.GetCalcMatrix;
+
+var DebugMethods = {
+    setDebug(graphic, callback) {
+        this.debugGraphic = graphic;
+
+        if (!graphic && !callback) {
+            this.debugCallback = null;
+        }
+        else if (!callback) {
+            this.debugCallback = this.renderDebugVerts;
+        }
+        else {
+            this.debugCallback = callback;
+        }
+
+        return this;
+    },
+
+    renderDebugVerts(src, meshLength, verts) {
+        var graphic = src.debugGraphic;
+
+        for (var i = 0; i < meshLength; i += 6) {
+            var x0 = verts[i + 0];
+            var y0 = verts[i + 1];
+            var x1 = verts[i + 2];
+            var y1 = verts[i + 3];
+            var x2 = verts[i + 4];
+            var y2 = verts[i + 5];
+
+            graphic.lineBetween(x0, y0, x1, y1);
+            graphic.lineBetween(x1, y1, x2, y2);
+            graphic.lineBetween(x2, y2, x0, y0);
+        }
+    },
+
+    runDebugCallback(drawingContext, parentMatrix) {
+        var camera = drawingContext.camera;
+        var calcMatrix = GetCalcMatrix(this, camera, parentMatrix, !drawingContext.useCanvas).calc;
+        var faceIndices = this.faceIndices;
+        var vertexObjects = this.vertexObjects;
+        var displayOriginX = this.displayOriginX;
+        var displayOriginY = this.displayOriginY;
+        var verts = [];
+
+        for (var i = 0, cnt = faceIndices.length; i < cnt; i++) {
+            var vertex = vertexObjects[faceIndices[i]];
+            var x = vertex.localX - displayOriginX;
+            var y = vertex.localY - displayOriginY;
+
+            verts.push(
+                calcMatrix.getX(x, y),
+                calcMatrix.getY(x, y)
+            );
+        }
+
+        this.debugCallback.call(this, this, verts.length, verts);
+
+        return this;
+    },
+};
+
+var Methods$5 = {};
+
+Object.assign(
+    Methods$5,
+    VertexMethods,
+    IndexMethods,
+    FrameMethods,
+    DebugMethods,
+);
+
+const Mesh2D = GameObjects.Mesh2D;
 const IsPlainObject$c = Utils$3.Objects.IsPlainObject;
 const GetValue$1j = Utils$3.Objects.GetValue;
 
@@ -70204,132 +70525,6 @@ let Image$3 = class Image extends Mesh2D {
         this.setOriginFromFrame();
     }
 
-    clear() {
-        this.vertexObjects.length = 0;
-        this.faceIndices.length = 0;
-        this.vertices.length = 0;
-        this.indices.length = 0;
-        this.indicesOrdered = null;
-        this.setUseOrderedIndices(false);
-        return this;
-    }
-
-    createVertex(u, v) {
-        return this.createVertexObject(u, v);
-    }
-
-    createVertexObject(u, v) {
-        var index = this.vertexObjects.length;
-        var vertexObject = new VertexObject(null, index, u, v);
-
-        this.vertexObjects.push(vertexObject);
-        this.vertices.push(0, 0, 0, 0);
-
-        vertexObject.setParent(this, index);
-        this.updateVertexObjectFrame(vertexObject);
-
-        return vertexObject;
-    }
-
-    addVertexObject(vertexObject) {
-        if (this.vertexObjects.includes(vertexObject)) {
-            return this;
-        }
-
-        var index = this.vertexObjects.length;
-        this.vertexObjects.push(vertexObject);
-        this.vertices.push(0, 0, 0, 0);
-
-        vertexObject.setParent(this, index);
-        this.updateVertexObjectFrame(vertexObject);
-
-        return this;
-    }
-
-    setVertexObjects(vertexObjects) {
-        this.vertexObjects.length = 0;
-        this.vertices.length = 0;
-
-        for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
-            this.addVertexObject(vertexObjects[i]);
-        }
-
-        return this;
-    }
-
-    setFaceIndices(faceIndices, texturePage) {
-        if (texturePage === undefined) {
-            texturePage = this.texturePage;
-        } else {
-            this.texturePage = texturePage;
-        }
-
-        this.faceIndices.length = 0;
-        this.indices.length = 0;
-
-        for (var i = 0, cnt = faceIndices.length; i < cnt; i += 3) {
-            var a = faceIndices[i];
-            var b = faceIndices[i + 1];
-            var c = faceIndices[i + 2];
-
-            this.faceIndices.push(a, b, c);
-            this.indices.push(a, b, c, texturePage);
-        }
-
-        this.updateOrderedIndices();
-
-        return this;
-    }
-
-    setMeshIndices(indices) {
-        this.indices.length = 0;
-        this.faceIndices.length = 0;
-
-        for (var i = 0, cnt = indices.length; i < cnt; i += 4) {
-            this.indices.push(indices[i], indices[i + 1], indices[i + 2], indices[i + 3]);
-            this.faceIndices.push(indices[i], indices[i + 1], indices[i + 2]);
-        }
-
-        this.updateOrderedIndices();
-
-        return this;
-    }
-
-    setUseOrderedIndexOptimization(enabled, strategy) {
-        this.autoBuildOrderedIndices = !!enabled;
-
-        if (strategy !== undefined) {
-            this.orderedIndicesStrategy = strategy;
-        }
-
-        return this.updateOrderedIndices();
-    }
-
-    setUseOrderedIndicesOptimization(enabled, strategy) {
-        return this.setUseOrderedIndexOptimization(enabled, strategy);
-    }
-
-    updateOrderedIndices() {
-        if (this.autoBuildOrderedIndices && this.indices.length > 0) {
-            this.setRenderAsTriangles(false);
-            this.buildOrderedIndices(this.orderedIndicesStrategy, true);
-        } else {
-            this.setUseOrderedIndices(false);
-        }
-
-        return this;
-    }
-
-    setTexture(key, frame) {
-        super.setTexture(key, frame);
-
-        if (this.vertexObjects) {
-            this.syncVertexObjectsFrame();
-        }
-
-        return this;
-    }
-
     get frame() {
         return this._frame;
     }
@@ -70345,178 +70540,13 @@ let Image$3 = class Image extends Mesh2D {
             this.syncVertexObjectsFrame();
         }
     }
-
-    setSizeToFrame(frame) {
-        if (!frame) { frame = this.frame; }
-        if (!frame) { return this; }
-
-        this.width = frame.realWidth;
-        this.height = frame.realHeight;
-
-        return this;
-    }
-
-    updateDisplayOrigin() {
-        super.updateDisplayOrigin();
-
-        if (this.vertexObjects) {
-            this.writeVertexObjectPositions();
-        }
-
-        return this;
-    }
-
-    setDisplayOrigin(x, y) {
-        super.setDisplayOrigin(x, y);
-
-        if (this.vertexObjects) {
-            this.writeVertexObjectPositions();
-        }
-
-        return this;
-    }
-
-    resetVertexObjects() {
-        var vertexObjects = this.vertexObjects;
-
-        for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
-            vertexObjects[i].resetPosition();
-        }
-
-        return this;
-    }
-
-    resetFaceSize() {
-        return this.syncVertexObjectsFrame();
-    }
-
-    syncVertexObjectsFrame() {
-        this.setSizeToFrame();
-        this.updateDisplayOrigin();
-
-        var vertexObjects = this.vertexObjects;
-
-        for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
-            this.updateVertexObjectFrame(vertexObjects[i]);
-        }
-
-        return this;
-    }
-
-    writeVertexObjectPositions() {
-        var vertexObjects = this.vertexObjects;
-
-        for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
-            vertexObjects[i].writePositionToMesh();
-        }
-
-        return this;
-    }
-
-    updateVertexObjectFrame(vertexObject) {
-        var frame = this.frame;
-
-        if (!frame) {
-            vertexObject.writeToMesh();
-            return this;
-        }
-
-        vertexObject
-            .setFrameSize(frame.cutWidth, frame.cutHeight, frame.x, frame.y)
-            .setFrameUV(frame.u0, frame.v0, frame.u1, frame.v1);
-
-        return this;
-    }
-
-    rebuildVerticesFromVertexObjects() {
-        var vertexObjects = this.vertexObjects;
-        this.vertices.length = vertexObjects.length * 4;
-
-        for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
-            vertexObjects[i].setParent(this, i);
-        }
-
-        return this;
-    }
-
-    setDebug(graphic, callback) {
-        this.debugGraphic = graphic;
-
-        if (!graphic && !callback) {
-            this.debugCallback = null;
-        }
-        else if (!callback) {
-            this.debugCallback = this.renderDebugVerts;
-        }
-        else {
-            this.debugCallback = callback;
-        }
-
-        return this;
-    }
-
-    renderDebugVerts(src, meshLength, verts) {
-        var graphic = src.debugGraphic;
-
-        for (var i = 0; i < meshLength; i += 6) {
-            var x0 = verts[i + 0];
-            var y0 = verts[i + 1];
-            var x1 = verts[i + 2];
-            var y1 = verts[i + 3];
-            var x2 = verts[i + 4];
-            var y2 = verts[i + 5];
-
-            graphic.lineBetween(x0, y0, x1, y1);
-            graphic.lineBetween(x1, y1, x2, y2);
-            graphic.lineBetween(x2, y2, x0, y0);
-        }
-    }
-
-    skipRender() {
-        return false;
-    }
-
-    renderWebGL(renderer, src, drawingContext, parentMatrix) {
-        if (!src) {
-            src = this;
-        }
-
-        if (src.skipRender()) {
-            return;
-        }
-
-        super.renderWebGL(renderer, src, drawingContext, parentMatrix);
-
-        if (src.debugCallback) {
-            src.runDebugCallback(drawingContext, parentMatrix);
-        }
-    }
-
-    runDebugCallback(drawingContext, parentMatrix) {
-        var camera = drawingContext.camera;
-        var calcMatrix = GetCalcMatrix(this, camera, parentMatrix, !drawingContext.useCanvas).calc;
-        var faceIndices = this.faceIndices;
-        var vertexObjects = this.vertexObjects;
-        var displayOriginX = this.displayOriginX;
-        var displayOriginY = this.displayOriginY;
-        var verts = [];
-
-        for (var i = 0, cnt = faceIndices.length; i < cnt; i++) {
-            var vertex = vertexObjects[faceIndices[i]];
-            var x = vertex.localX - displayOriginX;
-            var y = vertex.localY - displayOriginY;
-
-            verts.push(
-                calcMatrix.getX(x, y),
-                calcMatrix.getY(x, y)
-            );
-        }
-
-        this.debugCallback.call(this, this, verts.length, verts);
-
-        return this;
-    }
 };
+
+Object.assign(
+    Image$3.prototype,
+    Render,
+    Methods$5
+);
 
 var AnmiationMethods = {
     play(key, ignoreIfPlaying) {
@@ -70829,7 +70859,7 @@ var GenerateGridVertices = function (gameObject, columns, rows, sharedVertexMode
 
     for (var r = 0; r <= rows; r++) {
         for (var c = 0; c <= columns; c++) {
-            vertexObjects.push(gameObject.createVertex(c / columns, r / rows));
+            vertexObjects.push(gameObject.createVertexObject(c / columns, r / rows));
         }
     }
 
@@ -83577,7 +83607,7 @@ let Image$1 = class Image extends Sprite {
 
         for (var r = 0; r < pointsPerSide; r++) {
             for (var c = 0; c < pointsPerSide; c++) {
-                var vertex = this.createVertex(c / (pointsPerSide - 1), r / (pointsPerSide - 1));
+                var vertex = this.createVertexObject(c / (pointsPerSide - 1), r / (pointsPerSide - 1));
                 vertices.push(vertex);
             }
         }

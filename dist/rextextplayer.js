@@ -8007,11 +8007,11 @@ void main (void) {
     };
 
     const MainVersionNumber = 4;
-    const SubVersionNumber = 0;
+    const SubVersionNumber = 2;
 
     var IsChecked = false;
 
-    var CheckP3Version = function (minVersion) {
+    var CheckPhaserVersion = function (minVersion) {
         if (IsChecked) {
             return;
         }
@@ -8033,7 +8033,7 @@ void main (void) {
         IsChecked = true;
     };
 
-    CheckP3Version();
+    CheckPhaserVersion();
 
     const CanvasPool$1 = phaser.Display.Canvas.CanvasPool;
     const GameObject$1 = phaser.GameObjects.GameObject;

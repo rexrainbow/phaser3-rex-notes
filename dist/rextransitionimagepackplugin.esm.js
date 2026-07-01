@@ -1,11 +1,11 @@
 import { VERSION, BlendModes, Structs, Utils as Utils$3, GameObjects, Scenes, Math as Math$1, Class, Geom, Events, Scene, Game, Tweens, Filters, Renderer as Renderer$1, Plugins } from 'phaser';
 
 const MainVersionNumber = 4;
-const SubVersionNumber = 0;
+const SubVersionNumber = 2;
 
 var IsChecked = false;
 
-var CheckP3Version = function (minVersion) {
+var CheckPhaserVersion = function (minVersion) {
     if (IsChecked) {
         return;
     }
@@ -442,7 +442,7 @@ var AddToContainer = function (p3Container, config) {
     return gameObjects;
 };
 
-CheckP3Version();
+CheckPhaserVersion();
 const Zone = GameObjects.Zone;
 const AddItem = Utils$3.Array.Add;
 const RemoveItem$1 = Utils$3.Array.Remove;

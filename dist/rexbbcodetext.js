@@ -100,11 +100,11 @@
     };
 
     const MainVersionNumber = 4;
-    const SubVersionNumber = 0;
+    const SubVersionNumber = 2;
 
     var IsChecked = false;
 
-    var CheckP3Version = function (minVersion) {
+    var CheckPhaserVersion = function (minVersion) {
         if (IsChecked) {
             return;
         }
@@ -126,7 +126,7 @@
         IsChecked = true;
     };
 
-    CheckP3Version();
+    CheckPhaserVersion();
 
     const GameObject$1 = phaser.GameObjects.GameObject;
 

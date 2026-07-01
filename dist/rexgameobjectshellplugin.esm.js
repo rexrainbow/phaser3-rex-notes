@@ -4824,11 +4824,11 @@ ObjectFactory.register('cameraController', function (config) {
 SetValue(window, 'RexPlugins.GameObjectShell.CameraController', ControllerPack);
 
 const MainVersionNumber = 4;
-const SubVersionNumber = 0;
+const SubVersionNumber = 2;
 
 var IsChecked = false;
 
-var CheckP3Version = function (minVersion) {
+var CheckPhaserVersion = function (minVersion) {
     if (IsChecked) {
         return;
     }
@@ -5265,7 +5265,7 @@ var AddToContainer = function (p3Container, config) {
     return gameObjects;
 };
 
-CheckP3Version();
+CheckPhaserVersion();
 const Zone$2 = GameObjects.Zone;
 const AddItem = Utils$3.Array.Add;
 const RemoveItem$b = Utils$3.Array.Remove;
@@ -22125,7 +22125,7 @@ var TextureMethods = {
 
 };
 
-CheckP3Version();
+CheckPhaserVersion();
 
 const CanvasPool$4 = Display.Canvas.CanvasPool;
 const GameObject$3 = GameObjects.GameObject;
@@ -31700,7 +31700,7 @@ var MeasureTextMargins = function (textStyle, testString, out) {
     return out;
 };
 
-CheckP3Version();
+CheckPhaserVersion();
 
 const GameObject$1 = GameObjects.GameObject;
 

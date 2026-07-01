@@ -5,11 +5,11 @@
 })(this, (function (phaser) { 'use strict';
 
     const MainVersionNumber = 4;
-    const SubVersionNumber = 0;
+    const SubVersionNumber = 2;
 
     var IsChecked = false;
 
-    var CheckP3Version = function (minVersion) {
+    var CheckPhaserVersion = function (minVersion) {
         if (IsChecked) {
             return;
         }
@@ -446,7 +446,7 @@
         return gameObjects;
     };
 
-    CheckP3Version();
+    CheckPhaserVersion();
     const Zone$1 = phaser.GameObjects.Zone;
     const AddItem = phaser.Utils.Array.Add;
     const RemoveItem$7 = phaser.Utils.Array.Remove;
@@ -22853,7 +22853,7 @@ void main (void) {
 
     };
 
-    CheckP3Version();
+    CheckPhaserVersion();
 
     const CanvasPool$4 = phaser.Display.Canvas.CanvasPool;
     const GameObject$3 = phaser.GameObjects.GameObject;
@@ -27729,7 +27729,7 @@ void main (void) {
         return out;
     };
 
-    CheckP3Version();
+    CheckPhaserVersion();
 
     const GameObject$1 = phaser.GameObjects.GameObject;
 

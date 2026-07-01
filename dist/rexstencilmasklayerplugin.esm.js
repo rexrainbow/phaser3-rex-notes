@@ -1,11 +1,11 @@
 import { VERSION, BlendModes, GameObjects, Utils, Plugins } from 'phaser';
 
 const MainVersionNumber = 4;
-const SubVersionNumber = 0;
+const SubVersionNumber = 2;
 
 var IsChecked = false;
 
-var CheckP3Version = function (minVersion) {
+var CheckPhaserVersion = function (minVersion) {
     if (IsChecked) {
         return;
     }
@@ -506,7 +506,7 @@ var MaskGameObjectMethods = {
     },
 };
 
-CheckP3Version();
+CheckPhaserVersion();
 const Layer = GameObjects.Layer;
 
 
@@ -668,7 +668,7 @@ var WebGLRenderer = function (renderer, container, drawingContext, parentMatrix,
     }
 };
 
-CheckP3Version();
+CheckPhaserVersion();
 const Container = GameObjects.Container;
 const GetValue = Utils.Objects.GetValue;
 

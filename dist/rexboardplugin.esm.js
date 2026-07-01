@@ -12897,11 +12897,11 @@ ObjectFactory.register('monopoly', function (gameObject, config) {
 SetValue(window, 'RexPlugins.Board.Monopoly', Monopoly);
 
 const MainVersionNumber = 4;
-const SubVersionNumber = 0;
+const SubVersionNumber = 2;
 
 var IsChecked = false;
 
-var CheckP3Version = function (minVersion) {
+var CheckPhaserVersion = function (minVersion) {
     if (IsChecked) {
         return;
     }
@@ -13338,7 +13338,7 @@ var AddToContainer = function (p3Container, config) {
     return gameObjects;
 };
 
-CheckP3Version();
+CheckPhaserVersion();
 const Zone = GameObjects.Zone;
 const AddItem = Utils.Array.Add;
 const RemoveItem = Utils.Array.Remove;

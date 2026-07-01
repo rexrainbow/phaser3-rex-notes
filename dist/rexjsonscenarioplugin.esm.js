@@ -467,7 +467,7 @@ var GetSerialNumber = function () {
     return sn;
 };
 
-var CreateID = function () {
+var CreateID$1 = function () {
     if (sn === null) {
         return UUID$4();
     }
@@ -783,7 +783,7 @@ class BaseNode {
     ) {
 
         if (id === undefined) {
-            id = CreateID();
+            id = CreateID$1();
         }
 
         this.parent = null;
@@ -1899,7 +1899,7 @@ class Failer extends Action {
     }
 }
 
-class Runner extends Action {
+let Runner$1 = class Runner extends Action {
 
     constructor(config = {}, nodePool) {
         if (nodePool) {  // Rebuild node, don't touch config
@@ -1926,7 +1926,7 @@ class Runner extends Action {
     tick(tick) {
         return RUNNING;
     }
-}
+};
 
 let Error$1 = class Error extends Action {
 
@@ -3925,7 +3925,7 @@ var Nodes = /*#__PURE__*/Object.freeze({
 	Repeat: Repeat$1,
 	RepeatUntilFailure: RepeatUntilFailure,
 	RepeatUntilSuccess: RepeatUntilSuccess,
-	Runner: Runner,
+	Runner: Runner$1,
 	Selector: Selector,
 	Sequence: Sequence,
 	Service: Service,
@@ -6131,7 +6131,7 @@ class BehaviorTree extends EventEmitter$2 {
         super();
 
         if (id === undefined) {
-            id = CreateID();
+            id = CreateID$1();
         }
 
         this.id = id;
@@ -6320,7 +6320,9 @@ class BehaviorTree extends EventEmitter$2 {
         ticker.emitTickStart();
 
         /* ABORT NODE */
-        this.root.abortChildren(ticker);
+        if (this.root.getOpenState(ticker)) {
+            this.root._abort(ticker);
+        }
 
         /* POPULATE BLACKBOARD */
         blackboard.set(TREE_STATE, IDLE$7, this.id);
@@ -8248,20 +8250,29 @@ var StopMethods$1 = {
         var eventSheetManager = this.parent;
         var blackboard = eventSheetManager.blackboard;
         var commandExecutor = eventSheetManager.commandExecutor;
+        var trees = this.pendingTrees.slice();
+
+        this.pendingTrees.length = 0;
+        this.closedTrees.length = 0;
+        this.isRunning = false;
 
         eventSheetManager.emit(EVT_GROUP_STOP, this.name, eventSheetManager, this);
 
-        var trees = this.pendingTrees;
-        for (var i = 0, cnt = trees.length; i < cnt; i++) {
-            var eventsheet = trees[i];
-            eventSheetManager.emit(EVT_EVENTSHEET_ABORT, eventsheet.title, this.name, eventSheetManager, eventsheet, this);
-            eventsheet.abort(blackboard, commandExecutor);
-            CloseEventSheet.call(this, eventSheetManager, eventsheet);
-        }
-        trees.length = 0;
+        try {
+            for (var i = 0, cnt = trees.length; i < cnt; i++) {
+                var eventsheet = trees[i];
+                if (eventsheet.roundComplete) {
+                    continue;
+                }
 
-        this.isRunning = false;
-        this.clearRunContext();
+                eventsheet.abort(blackboard, commandExecutor);
+                eventSheetManager.emit(EVT_EVENTSHEET_ABORT, eventsheet.title, this.name, eventSheetManager, eventsheet, this);
+                CloseEventSheet.call(this, eventSheetManager, eventsheet);
+            }
+        } finally {
+            this.clearRunContext();
+            this.removePendingEventSheets();
+        }
 
         return this;
     },
@@ -16662,6 +16673,7 @@ var ValueConvertMethods = {
     },
 };
 
+// Utils
 var GetStartGroupName = function (eventSheetManager, args) {
     switch (args.length) {
         case 0:
@@ -16819,33 +16831,6 @@ var RunMethods = {
 
 };
 
-var StopMethods = {
-    stopGroup(groupName) {
-        if (groupName === undefined) {
-            groupName = this.defaultTreeGroupName;
-        }
-        this.getTreeGroup(groupName).stop();
-        return this;
-    },
-
-    stop(groupName) {
-        this.stopGroup(groupName);
-        return this;
-    },
-
-    stopAllGroups() {
-        for (var name in this.treeGroups) {
-            this.treeGroups[name].stop();
-        }
-        return this;
-    },
-
-    stopAll() {
-        this.stopAllGroups();
-        return this;
-    }
-};
-
 var RunEventSheetOnceMethods = {
     runEventSheetOnce(data, config, injectData) {
         if (config === undefined) {
@@ -16949,6 +16934,167 @@ var RunEventSheetOnceMethods = {
     },
 };
 
+var StopMethods = {
+    stopGroup(groupName) {
+        if (groupName === undefined) {
+            groupName = this.defaultTreeGroupName;
+        }
+        this.getTreeGroup(groupName).stop();
+        return this;
+    },
+
+    stop(groupName) {
+        this.stopGroup(groupName);
+        return this;
+    },
+
+    stopAllGroups() {
+        for (var name in this.treeGroups) {
+            this.treeGroups[name].stop();
+        }
+        return this;
+    },
+
+    stopAll() {
+        this.stopAllGroups();
+        return this;
+    }
+};
+
+var CreateStopError = function (groupName) {
+    return new Error(`Event sheet group '${groupName}' was stopped`);
+};
+
+var SerialNumber = 0;
+var CreateID = function () {
+    SerialNumber += 1;
+    return `run#${SerialNumber}`;
+};
+
+class Runner {
+    constructor(eventSheetManager, config = {}) {
+        this.manager = eventSheetManager;
+        this.id = config.id || CreateID();
+        this.groupName = config.groupName;
+        this.args = config.args || [];
+        this.status = 'pending';
+
+        var self = this;
+        this.completeCallback = function (completedGroupName) {
+            if (completedGroupName !== self.groupName) {
+                return;
+            }
+
+            self.complete(self.manager);
+        };
+
+        this.stopCallback = function (stoppedGroupName) {
+            if (stoppedGroupName !== self.groupName) {
+                return;
+            }
+
+            self.stopped(CreateStopError(self.groupName));
+        };
+
+        this.promise = new Promise(function (resolve, reject) {
+            self._resolve = resolve;
+            self._reject = reject;
+        });
+    }
+
+    start() {
+        if (this.status !== 'pending') {
+            return this;
+        }
+
+        var eventSheetGroup = this.manager.getTreeGroup(this.groupName);
+        if (eventSheetGroup.isRunning) {
+            return this.fail(new Error(`Event sheet group '${this.groupName}' is already running`));
+        }
+
+        this.bindEvents();
+
+        try {
+            this.status = 'running';
+            this.manager.start.apply(this.manager, this.args);
+
+            if (!eventSheetGroup.isRunning) {
+                this.complete(this.manager);
+            }
+        } catch (error) {
+            this.fail(error);
+        }
+
+        return this;
+    }
+
+    stop() {
+        if (this.status !== 'running') {
+            return this;
+        }
+
+        this.manager.stop(this.groupName);
+        return this;
+    }
+
+    cancel() {
+        return this.stop();
+    }
+
+    complete(value) {
+        return this.settle('completed', value);
+    }
+
+    stopped(error) {
+        return this.settle('stopped', error);
+    }
+
+    fail(error) {
+        return this.settle('failed', error);
+    }
+
+    bindEvents() {
+        this.manager.on(EVT_GROUP_COMPLETE, this.completeCallback);
+        this.manager.on(EVT_GROUP_STOP, this.stopCallback);
+        return this;
+    }
+
+    cleanup() {
+        this.manager.off(EVT_GROUP_COMPLETE, this.completeCallback);
+        this.manager.off(EVT_GROUP_STOP, this.stopCallback);
+        return this;
+    }
+
+    settle(status, value) {
+        if ((this.status !== 'pending') && (this.status !== 'running')) {
+            return this;
+        }
+
+        this.cleanup();
+        this.status = status;
+
+        if (status === 'completed') {
+            this._resolve(value);
+        } else {
+            this._reject(value);
+        }
+
+        return this;
+    }
+}
+
+var RunnerMethods = {
+    startRun() {
+        var args = Array.prototype.slice.call(arguments);
+        var groupName = GetStartGroupName(this, args);
+
+        return (new Runner(this, {
+            groupName,
+            args,
+        })).start();
+    },
+};
+
 var BindEventMethods$1 = {
     startGroupByEvent(eventName, groupName, once) {
         if (IsPlainObject$J(eventName)) {
@@ -17015,6 +17161,7 @@ Object.assign(
     RunMethods,
     RunEventSheetOnceMethods,
     StopMethods,
+    RunnerMethods,
     BindEventMethods$1,
     RoundCounterMethods,
 );
@@ -17151,11 +17298,11 @@ Object.assign(
 );
 
 const MainVersionNumber = 4;
-const SubVersionNumber = 0;
+const SubVersionNumber = 2;
 
 var IsChecked = false;
 
-var CheckP3Version = function (minVersion) {
+var CheckPhaserVersion = function (minVersion) {
     if (IsChecked) {
         return;
     }
@@ -17592,7 +17739,7 @@ var AddToContainer = function (p3Container, config) {
     return gameObjects;
 };
 
-CheckP3Version();
+CheckPhaserVersion();
 const Zone$2 = GameObjects.Zone;
 const AddItem = Utils$4.Array.Add;
 const RemoveItem$d = Utils$4.Array.Remove;
@@ -32810,7 +32957,7 @@ var TextureMethods = {
 
 };
 
-CheckP3Version();
+CheckPhaserVersion();
 
 const CanvasPool$4 = Display.Canvas.CanvasPool;
 const GameObject$3 = GameObjects.GameObject;
@@ -45223,7 +45370,7 @@ var MeasureTextMargins = function (textStyle, testString, out) {
     return out;
 };
 
-CheckP3Version();
+CheckPhaserVersion();
 
 const GameObject$1 = GameObjects.GameObject;
 

@@ -4828,11 +4828,11 @@
     SetValue(window, 'RexPlugins.GameObjectShell.CameraController', ControllerPack);
 
     const MainVersionNumber = 4;
-    const SubVersionNumber = 0;
+    const SubVersionNumber = 2;
 
     var IsChecked = false;
 
-    var CheckP3Version = function (minVersion) {
+    var CheckPhaserVersion = function (minVersion) {
         if (IsChecked) {
             return;
         }
@@ -5269,7 +5269,7 @@
         return gameObjects;
     };
 
-    CheckP3Version();
+    CheckPhaserVersion();
     const Zone$2 = phaser.GameObjects.Zone;
     const AddItem = phaser.Utils.Array.Add;
     const RemoveItem$b = phaser.Utils.Array.Remove;
@@ -22129,7 +22129,7 @@ void main (void) {
 
     };
 
-    CheckP3Version();
+    CheckPhaserVersion();
 
     const CanvasPool$4 = phaser.Display.Canvas.CanvasPool;
     const GameObject$3 = phaser.GameObjects.GameObject;
@@ -31704,7 +31704,7 @@ void main (void) {
         return out;
     };
 
-    CheckP3Version();
+    CheckPhaserVersion();
 
     const GameObject$1 = phaser.GameObjects.GameObject;
 

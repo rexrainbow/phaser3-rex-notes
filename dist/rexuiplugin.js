@@ -378,7 +378,7 @@
         //  NOOP
     };
 
-    var Methods$q = {
+    var Methods$r = {
         _beginDraw: NOOP,
         _drawImage: NOOP,
         _drawTileSprite: NOOP,
@@ -536,7 +536,7 @@
 
         Object.assign(
             NinePatch.prototype,
-            Methods$q
+            Methods$r
         );
 
         return NinePatch;
@@ -570,14 +570,14 @@
     let NinePatch$1 = class NinePatch extends NinePatchBase(RenderTexture$2, 'rexNinePatch') {
     };
 
-    var Methods$p = {
+    var Methods$q = {
         _drawImage: DrawImage$2,
         _drawTileSprite: DrawTileSprite$1,
         _endDraw: EndDraw,
     };
     Object.assign(
         NinePatch$1.prototype,
-        Methods$p
+        Methods$q
     );
 
     var IsNil = function (value) {
@@ -666,7 +666,7 @@
     const TransformMatrix$5 = phaser.GameObjects.Components.TransformMatrix;
     var tempMatrix$3 = new TransformMatrix$5();
 
-    var WebGLRenderer$4 = function (renderer, src, drawingContext, parentMatrix) {
+    var WebGLRenderer$5 = function (renderer, src, drawingContext, parentMatrix) {
         var bobs = src.getRenderList();
         var camera = drawingContext.camera;
 
@@ -718,8 +718,8 @@
         ctx.restore();
     };
 
-    var Render$4 = {
-        renderWebGL: WebGLRenderer$4,
+    var Render$5 = {
+        renderWebGL: WebGLRenderer$5,
         renderCanvas: CanvasRenderer$4
 
     };
@@ -917,11 +917,11 @@
     };
 
     const MainVersionNumber = 4;
-    const SubVersionNumber = 0;
+    const SubVersionNumber = 2;
 
     var IsChecked = false;
 
-    var CheckP3Version = function (minVersion) {
+    var CheckPhaserVersion = function (minVersion) {
         if (IsChecked) {
             return;
         }
@@ -943,7 +943,7 @@
         IsChecked = true;
     };
 
-    CheckP3Version();
+    CheckPhaserVersion();
 
     const GameObject$4 = phaser.GameObjects.GameObject;
     const IsPlainObject$V = phaser.Utils.Objects.IsPlainObject;
@@ -1052,7 +1052,7 @@
             Components$4.ScrollFactor,
             Components$4.Transform,
             Components$4.Visible,
-            Render$4,
+            Render$5,
 
             methods$I
         ]
@@ -2059,7 +2059,7 @@
 
     };
 
-    var Methods$o = {
+    var Methods$p = {
         _drawImage: DrawImage$1,
         _drawTileSprite: DrawTileSprite,
     };
@@ -2074,7 +2074,7 @@
 
     Object.assign(
         NinePatch.prototype,
-        Methods$o
+        Methods$p
     );
 
     ObjectFactory.register('ninePatch2', function (x, y, width, height, key, columns, rows, config) {
@@ -2447,7 +2447,7 @@
         }
     };
 
-    var Render$3 = {
+    var Render$4 = {
         renderWebGL: PolygonWebGLRenderer,
         renderCanvas: PolygonCanvasRenderer
 
@@ -2738,11 +2738,11 @@
         setDashed: SetDashed
     };
 
-    var Methods$n = {
+    var Methods$o = {
         buildStrokePath: BuildStrokePath
     };
     Object.assign(
-        Methods$n,
+        Methods$o,
         StrokePathConfigMethods,
     );
 
@@ -2865,8 +2865,8 @@
 
     Object.assign(
         PolygnBase.prototype,
-        Methods$n,
-        Render$3
+        Methods$o,
+        Render$4
     );
 
     const GetValue$4k = phaser.Utils.Objects.GetValue;
@@ -3418,7 +3418,7 @@
     SetValue(window, 'RexPlugins.UI.RoundRectangle', RoundRectangle$2);
 
     // copy from Phaser.GameObjects.Text
-    var WebGLRenderer$3 = function (renderer, src, drawingContext, parentMatrix) {
+    var WebGLRenderer$4 = function (renderer, src, drawingContext, parentMatrix) {
         if (src.dirty) {
             src.updateTexture();
             src.dirty = false;
@@ -3460,8 +3460,8 @@
         renderer.batchSprite(src, src.frame, camera, parentMatrix);
     };
 
-    var Render$2 = {
-        renderWebGL: WebGLRenderer$3,
+    var Render$3 = {
+        renderWebGL: WebGLRenderer$4,
         renderCanvas: CanvasRenderer$3
 
     };
@@ -3676,7 +3676,7 @@
 
     };
 
-    CheckP3Version();
+    CheckPhaserVersion();
 
     const CanvasPool$4 = phaser.Display.Canvas.CanvasPool;
     const GameObject$3 = phaser.GameObjects.GameObject;
@@ -3888,7 +3888,7 @@
             Components$3.Tint,
             Components$3.Transform,
             Components$3.Visible,
-            Render$2,
+            Render$3,
             CanvasMethods,
             TextureMethods,
         ]
@@ -4857,7 +4857,7 @@
 
     SetValue(window, 'RexPlugins.UI.QuadShape', Quad);
 
-    var WebGLRenderer$2 = function (renderer, src, drawingContext, parentMatrix) {
+    var WebGLRenderer$3 = function (renderer, src, drawingContext, parentMatrix) {
         if ((src.width === 0) || (src.height === 0)) {
             return;
         }
@@ -4887,8 +4887,8 @@
         renderer.batchSprite(src, src.frame, camera, parentMatrix);
     };
 
-    var Render$1 = {
-        renderWebGL: WebGLRenderer$2,
+    var Render$2 = {
+        renderWebGL: WebGLRenderer$3,
         renderCanvas: CanvasRenderer$2
 
     };
@@ -4952,7 +4952,7 @@
         return out;
     };
 
-    CheckP3Version();
+    CheckPhaserVersion();
 
     const GameObject$2 = phaser.GameObjects.GameObject;
 
@@ -5161,7 +5161,7 @@
             Components$2.Tint,
             Components$2.Transform,
             Components$2.Visible,
-            Render$1
+            Render$2
         ]
     );
 
@@ -10244,13 +10244,13 @@
         return GetBobWorldPosition(this.parent, this, offsetX, offsetY, out);
     };
 
-    var Methods$m = {
+    var Methods$n = {
         contains: Contains$2,
         getWorldPosition: GetWorldPosition,
     };
 
     Object.assign(
-        Methods$m,
+        Methods$n,
         RenderMethods$1
     );
 
@@ -10607,7 +10607,7 @@
 
     Object.assign(
         RenderBase.prototype,
-        Methods$m,
+        Methods$n,
     );
 
     var GetProperty = function (name, config, defaultConfig) {
@@ -13519,7 +13519,7 @@
         },
     };
 
-    var Methods$l = {
+    var Methods$m = {
         setFixedSize: SetFixedSize,
         setPadding: SetPadding,
         getPadding: GetPadding,
@@ -13577,7 +13577,7 @@
     };
 
     Object.assign(
-        Methods$l,
+        Methods$m,
 
         MoveChildMethods,
         BackgroundMethods,
@@ -13722,7 +13722,7 @@
 
     Object.assign(
         DynamicText.prototype,
-        Methods$l
+        Methods$m
     );
 
     ObjectFactory.register('dynamicText', function (x, y, width, height, config) {
@@ -17935,12 +17935,12 @@ void main (void) {
         }
     };
 
-    var Methods$k = {
+    var Methods$l = {
         drawGameObjectsBounds: DrawGameObjectsBounds,
     };
 
     Object.assign(
-        Methods$k,
+        Methods$l,
         GetMethods,
         AddMethods$1,
         RemoveMethods$1,
@@ -18105,7 +18105,7 @@ void main (void) {
     Object.assign(
         GOManager.prototype,
         EventEmitterMethods$1,
-        Methods$k
+        Methods$l
     );
 
     const GameObjectClass = phaser.GameObjects.GameObject;
@@ -20088,12 +20088,12 @@ void main (void) {
         },
     };
 
-    var Methods$j = {
+    var Methods$k = {
         hasAudio: HasaAudio
     };
 
     Object.assign(
-        Methods$j,
+        Methods$k,
         BackgroundMusicMethods,
         BackgroundMusic2Methods,
         SoundEffectsMethods,
@@ -20278,7 +20278,7 @@ void main (void) {
 
     Object.assign(
         SoundManager.prototype,
-        Methods$j
+        Methods$k
     );
 
     const GetValue$3L = phaser.Utils.Objects.GetValue;
@@ -24122,7 +24122,7 @@ void main (void) {
         return this;
     };
 
-    var Methods$i = {
+    var Methods$j = {
         fadeOutPage: FadeOutPage,
         start: Start$1,
         typing: Typing,
@@ -24139,7 +24139,7 @@ void main (void) {
     };
 
     Object.assign(
-        Methods$i,
+        Methods$j,
         TypingSpeedMethods$1
     );
 
@@ -24256,7 +24256,7 @@ void main (void) {
     Object.assign(
         TypeWriter.prototype,
         EventEmitterMethods$1,
-        Methods$i,
+        Methods$j,
     );
 
     class SpriteBob extends BobBase {
@@ -24330,9 +24330,9 @@ void main (void) {
         },
     };
 
-    var Methods$h = {};
+    var Methods$i = {};
     Object.assign(
-        Methods$h,
+        Methods$i,
         AnimationMethods
     );
 
@@ -24380,7 +24380,7 @@ void main (void) {
 
     Object.assign(
         SpriteManager.prototype,
-        Methods$h
+        Methods$i
     );
 
     var IsPlayAnimationTag = function (tags, goType) {
@@ -25136,7 +25136,7 @@ void main (void) {
         },
     };
 
-    var Methods$g = {
+    var Methods$h = {
         setClickTarget: SetClickTarget,
         setCameraTarget: SetCameraTarget,
         setNextPageInput: SetNextPageInput,
@@ -25149,7 +25149,7 @@ void main (void) {
     };
 
     Object.assign(
-        Methods$g,
+        Methods$h,
         GameObjectManagerMethods,
         PlayMethods,
         PauseMethods,
@@ -25279,7 +25279,7 @@ void main (void) {
 
     Object.assign(
         TextPlayer.prototype,
-        Methods$g
+        Methods$h
     );
 
     ObjectFactory.register('textPlayer', function (x, y, width, height, config) {
@@ -25629,7 +25629,7 @@ void main (void) {
         return this;
     };
 
-    var Methods$f = {
+    var Methods$g = {
         open: Open$2,
         close: Close$1,
     };
@@ -25984,7 +25984,7 @@ void main (void) {
 
     Object.assign(
         HiddenTextEditBase.prototype,
-        Methods$f,
+        Methods$g,
     );
 
     var NumberInputUpdateCallback = function (text, textObject, hiddenInputText) {
@@ -27876,7 +27876,7 @@ void main (void) {
 
     const GetCalcMatrix$1 = phaser.GameObjects.GetCalcMatrix;
 
-    var WebGLRenderer$1 = function (renderer, src, drawingContext, parentMatrix) {
+    var WebGLRenderer$2 = function (renderer, src, drawingContext, parentMatrix) {
         src.updateData();
 
         var camera = drawingContext.camera;
@@ -27927,8 +27927,8 @@ void main (void) {
         }
     };
 
-    var Render = {
-        renderWebGL: WebGLRenderer$1,
+    var Render$1 = {
+        renderWebGL: WebGLRenderer$2,
         renderCanvas: CanvasRenderer$1
 
     };
@@ -28141,7 +28141,7 @@ void main (void) {
 
     Object.assign(
         BaseShapes.prototype,
-        Render
+        Render$1
     );
 
     var StyleMethods$2 = {
@@ -28389,7 +28389,7 @@ void main (void) {
 
     Object.assign(
         PathBase.prototype,
-        Methods$n,
+        Methods$o,
     );
 
     phaser.Math.DegToRad;
@@ -29692,7 +29692,7 @@ void main (void) {
 
     Object.assign(
         Rectangle$2.prototype,
-        Methods$n,
+        Methods$o,
     );
 
     const GetValue$3z = phaser.Utils.Objects.GetValue;
@@ -30089,7 +30089,7 @@ void main (void) {
 
     Object.assign(
         Triangle$1.prototype,
-        Methods$n,
+        Methods$o,
     );
 
     var ShapesUpdateMethods$4 = {
@@ -32734,13 +32734,13 @@ void main (void) {
 
     };
 
-    var Methods$e = {
+    var Methods$f = {
         updateShapes: UpdateShapes$1,
     };
 
     Object.assign(
         LineProgress$1.prototype,
-        Methods$e,
+        Methods$f,
     );
 
     ObjectFactory.register('lineProgress', function (x, y, width, height, barColor, value, config) {
@@ -33451,13 +33451,13 @@ void main (void) {
         }
     }
 
-    var Methods$d = {
+    var Methods$e = {
         updateShapes: UpdateShapes,
     };
 
     Object.assign(
         RoundRectangleProgress.prototype,
-        Methods$d,
+        Methods$e,
     );
 
     ObjectFactory.register('roundRectangleProgress', function (x, y, width, height, radiusConfig, barColor, value, config) {
@@ -34259,7 +34259,7 @@ void main (void) {
 
     const SKIP_CHECK_BLEND_MODE$1 = phaser.BlendModes.SKIP_CHECK;
 
-    var WebGLRenderer = function (renderer, container, drawingContext, parentMatrix, renderStep, displayList, displayListIndex) {
+    var WebGLRenderer$1 = function (renderer, container, drawingContext, parentMatrix, renderStep, displayList, displayListIndex) {
         var camera = drawingContext.camera;
         camera.addToRenderList(container);
 
@@ -34423,7 +34423,7 @@ void main (void) {
     };
 
     var Renderer = {
-        renderWebGL: WebGLRenderer,
+        renderWebGL: WebGLRenderer$1,
         renderCanvas: CanvasRenderer
 
     };
@@ -34619,7 +34619,7 @@ void main (void) {
         return gameObjects;
     };
 
-    CheckP3Version();
+    CheckPhaserVersion();
     const Zone$1 = phaser.GameObjects.Zone;
     const AddItem = phaser.Utils.Array.Add;
     const RemoveItem$6 = phaser.Utils.Array.Remove;
@@ -48217,13 +48217,13 @@ void main (void) {
         },
     };
 
-    var Methods$c = {
+    var Methods$d = {
         resize: Resize$1,
         syncTo: SyncTo,
     };
 
     Object.assign(
-        Methods$c,
+        Methods$d,
         DropEnableMethods,
         FilterMethods,
         LoadFileMethods,
@@ -48310,7 +48310,7 @@ void main (void) {
 
     Object.assign(
         FileDropZone.prototype,
-        Methods$c,
+        Methods$d,
     );
 
     ObjectFactory.register('fileDropZone', function (config) {
@@ -49704,7 +49704,7 @@ void main (void) {
         return this.geom.contains(localPoint.x, localPoint.y);
     };
 
-    var Methods$b = {
+    var Methods$c = {
         setPosition: SetPosition$1,
         resize: Resize,
         setOrigin: SetOrigin,
@@ -49923,7 +49923,7 @@ void main (void) {
 
     Object.assign(
         RectangleMask.prototype,
-        Methods$b
+        Methods$c
     );
 
     const Base = phaser.GameObjects.Arc;
@@ -49975,7 +49975,7 @@ void main (void) {
 
     Object.assign(
         CircleMask.prototype,
-        Methods$b
+        Methods$c
     );
 
     var CreateDefaultMaskGameObject = function (parent, shapeType, padding) {
@@ -54246,7 +54246,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     };
 
-    var Methods$a = {
+    var Methods$b = {
         addHeader: AddHeader,
         addFooter: AddFooter,
         resizeController: ResizeController,
@@ -54254,7 +54254,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     };
 
     Object.assign(
-        Methods$a,
+        Methods$b,
         ChildPositionMethods
     );
 
@@ -56891,7 +56891,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     // mixin
     Object.assign(
         Scrollable$1.prototype,
-        Methods$a
+        Methods$b
     );
 
     var TextToLines = function (textObject, text, lines) {
@@ -61319,10 +61319,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    var Methods$9 = {};
+    var Methods$a = {};
 
     Object.assign(
-        Methods$9,
+        Methods$a,
         ButtonMethods$1,
         ModalMethods,
     );
@@ -61630,7 +61630,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     Object.assign(
         Dialog.prototype,
-        Methods$9
+        Methods$a
     );
 
     ObjectFactory.register('dialog', function (config) {
@@ -61848,13 +61848,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         },
     };
 
-    var Methods$8 = {
+    var Methods$9 = {
         resetDisplayContent: ResetDisplayContent$1,
         modal: Modal$1,
     };
 
     Object.assign(
-        Methods$8,
+        Methods$9,
         SetButtonIndexMethods,
     );
 
@@ -62016,7 +62016,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     Object.assign(
         ConfirmDialog.prototype,
-        Methods$8
+        Methods$9
     );
 
     ObjectFactory.register('confirmDialog', function (config, creators) {
@@ -66018,14 +66018,14 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return this;
     };
 
-    var Methods$7 = {
+    var Methods$8 = {
         expandSubMenu: ExpandSubMenu,
         collapse: Collapse,
         collapseSubMenu: CollapseSubMenu,
     };
 
     Object.assign(
-        Methods$7,
+        Methods$8,
         SetTransitCallbackMethods,
         DelayCallMethods
     );
@@ -66334,7 +66334,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     Object.assign(
         Menu.prototype,
-        Methods$7
+        Methods$8
     );
 
     ObjectFactory.register('menu', function (config) {
@@ -67773,7 +67773,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    var Methods$6 = {
+    var Methods$7 = {
         openListPanel: OpenListPanel,
         closeListPanel: CloseListPanel,
         toggleListPanel: ToggleListPanel,
@@ -67782,7 +67782,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     };
 
     Object.assign(
-        Methods$6,
+        Methods$7,
         methods$c,
         FocusButtonMethods,
     );
@@ -67900,7 +67900,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     Object.assign(
         DropDownList.prototype,
-        Methods$6,
+        Methods$7,
     );
 
     ObjectFactory.register('dropDownList', function (config) {
@@ -68360,12 +68360,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    var Methods$5 = {   
+    var Methods$6 = {   
         getLines: GetLines,
     };
 
     Object.assign(
-        Methods$5,
+        Methods$6,
         SetContentMethods,
         GetPageMethods,
         ShowMethods
@@ -68644,7 +68644,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     Object.assign(
         TextPage.prototype,
-        Methods$5,
+        Methods$6,
     );
 
     var SetTextMethods$1 = {
@@ -69851,6 +69851,33 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     SetValue(window, 'RexPlugins.UI.Pages', Pages);
 
+    const Mesh2D$2 = phaser.GameObjects.Mesh2D;
+
+    var WebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
+        if (!src) {
+            src = this;
+        }
+
+        if (src.skipRender()) {
+            return;
+        }
+
+        Mesh2D$2.prototype.renderWebGL.call(this, renderer, src, drawingContext, parentMatrix);
+
+        if (src.debugCallback) {
+            src.runDebugCallback(drawingContext, parentMatrix);
+        }
+    };
+
+    var SkipRender = function () {
+        return false;
+    };
+
+    var Render = {
+        renderWebGL: WebGLRenderer,
+        skipRender: SkipRender,
+    };
+
     const RotateAround$2 = phaser.Math.RotateAround;
 
     var LocalXYToWorldXY = function (gameObject, localX, localY, out) {
@@ -70165,8 +70192,302 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     var GlobalXY = {};
 
-    const Mesh2D = phaser.GameObjects.Mesh2D;
+    var VertexMethods = {
+        clear() {
+            this.vertexObjects.length = 0;
+            this.faceIndices.length = 0;
+            this.vertices.length = 0;
+            this.indices.length = 0;
+            this.indicesOrdered = null;
+            this.setUseOrderedIndices(false);
+            return this;
+        },
+
+        createVertexObject(u, v) {
+            var index = this.vertexObjects.length;
+            var vertexObject = new VertexObject(null, index, u, v);
+
+            this.vertexObjects.push(vertexObject);
+            this.vertices.push(0, 0, 0, 0);
+
+            vertexObject.setParent(this, index);
+            this.updateVertexObjectFrame(vertexObject);
+
+            return vertexObject;
+        },
+
+        addVertexObject(vertexObject) {
+            if (this.vertexObjects.includes(vertexObject)) {
+                return this;
+            }
+
+            var index = this.vertexObjects.length;
+            this.vertexObjects.push(vertexObject);
+            this.vertices.push(0, 0, 0, 0);
+
+            vertexObject.setParent(this, index);
+            this.updateVertexObjectFrame(vertexObject);
+
+            return this;
+        },
+
+        setVertexObjects(vertexObjects) {
+            this.vertexObjects.length = 0;
+            this.vertices.length = 0;
+
+            for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
+                this.addVertexObject(vertexObjects[i]);
+            }
+
+            return this;
+        },
+
+        resetVertexObjects() {
+            var vertexObjects = this.vertexObjects;
+
+            for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
+                vertexObjects[i].resetPosition();
+            }
+
+            return this;
+        },
+
+        writeVertexObjectPositions() {
+            var vertexObjects = this.vertexObjects;
+
+            for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
+                vertexObjects[i].writePositionToMesh();
+            }
+
+            return this;
+        },
+
+        rebuildVerticesFromVertexObjects() {
+            var vertexObjects = this.vertexObjects;
+            this.vertices.length = vertexObjects.length * 4;
+
+            for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
+                vertexObjects[i].setParent(this, i);
+            }
+
+            return this;
+        },
+    };
+
+    var IndexMethods = {
+        setFaceIndices(faceIndices, texturePage) {
+            if (texturePage === undefined) {
+                texturePage = this.texturePage;
+            } else {
+                this.texturePage = texturePage;
+            }
+
+            this.faceIndices.length = 0;
+            this.indices.length = 0;
+
+            for (var i = 0, cnt = faceIndices.length; i < cnt; i += 3) {
+                var a = faceIndices[i];
+                var b = faceIndices[i + 1];
+                var c = faceIndices[i + 2];
+
+                this.faceIndices.push(a, b, c);
+                this.indices.push(a, b, c, texturePage);
+            }
+
+            this.updateOrderedIndices();
+
+            return this;
+        },
+
+        setMeshIndices(indices) {
+            this.indices.length = 0;
+            this.faceIndices.length = 0;
+
+            for (var i = 0, cnt = indices.length; i < cnt; i += 4) {
+                this.indices.push(indices[i], indices[i + 1], indices[i + 2], indices[i + 3]);
+                this.faceIndices.push(indices[i], indices[i + 1], indices[i + 2]);
+            }
+
+            this.updateOrderedIndices();
+
+            return this;
+        },
+
+        setUseOrderedIndexOptimization(enabled, strategy) {
+            this.autoBuildOrderedIndices = !!enabled;
+
+            if (strategy !== undefined) {
+                this.orderedIndicesStrategy = strategy;
+            }
+
+            return this.updateOrderedIndices();
+        },
+
+        setUseOrderedIndicesOptimization(enabled, strategy) {
+            return this.setUseOrderedIndexOptimization(enabled, strategy);
+        },
+
+        updateOrderedIndices() {
+            if (this.autoBuildOrderedIndices && this.indices.length > 0) {
+                this.setRenderAsTriangles(false);
+                this.buildOrderedIndices(this.orderedIndicesStrategy, true);
+            } else {
+                this.setUseOrderedIndices(false);
+            }
+
+            return this;
+        },
+    };
+
+    const Mesh2D$1 = phaser.GameObjects.Mesh2D;
+
+    var FrameMethods = {
+        setTexture(key, frame) {
+            Mesh2D$1.prototype.setTexture.call(this, key, frame);
+
+            if (this.vertexObjects) {
+                this.syncVertexObjectsFrame();
+            }
+
+            return this;
+        },
+
+        setSizeToFrame(frame) {
+            if (!frame) { frame = this.frame; }
+            if (!frame) { return this; }
+
+            this.width = frame.realWidth;
+            this.height = frame.realHeight;
+
+            return this;
+        },
+
+        updateDisplayOrigin() {
+            Mesh2D$1.prototype.updateDisplayOrigin.call(this);
+
+            if (this.vertexObjects) {
+                this.writeVertexObjectPositions();
+            }
+
+            return this;
+        },
+
+        setDisplayOrigin(x, y) {
+            Mesh2D$1.prototype.setDisplayOrigin.call(this, x, y);
+
+            if (this.vertexObjects) {
+                this.writeVertexObjectPositions();
+            }
+
+            return this;
+        },
+
+        resetFaceSize() {
+            return this.syncVertexObjectsFrame();
+        },
+
+        syncVertexObjectsFrame() {
+            this.setSizeToFrame();
+            this.updateDisplayOrigin();
+
+            var vertexObjects = this.vertexObjects;
+
+            for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
+                this.updateVertexObjectFrame(vertexObjects[i]);
+            }
+
+            return this;
+        },
+
+        updateVertexObjectFrame(vertexObject) {
+            var frame = this.frame;
+
+            if (!frame) {
+                vertexObject.writeToMesh();
+                return this;
+            }
+
+            vertexObject
+                .setFrameSize(frame.cutWidth, frame.cutHeight, frame.x, frame.y)
+                .setFrameUV(frame.u0, frame.v0, frame.u1, frame.v1);
+
+            return this;
+        },
+    };
+
     const GetCalcMatrix = phaser.GameObjects.GetCalcMatrix;
+
+    var DebugMethods = {
+        setDebug(graphic, callback) {
+            this.debugGraphic = graphic;
+
+            if (!graphic && !callback) {
+                this.debugCallback = null;
+            }
+            else if (!callback) {
+                this.debugCallback = this.renderDebugVerts;
+            }
+            else {
+                this.debugCallback = callback;
+            }
+
+            return this;
+        },
+
+        renderDebugVerts(src, meshLength, verts) {
+            var graphic = src.debugGraphic;
+
+            for (var i = 0; i < meshLength; i += 6) {
+                var x0 = verts[i + 0];
+                var y0 = verts[i + 1];
+                var x1 = verts[i + 2];
+                var y1 = verts[i + 3];
+                var x2 = verts[i + 4];
+                var y2 = verts[i + 5];
+
+                graphic.lineBetween(x0, y0, x1, y1);
+                graphic.lineBetween(x1, y1, x2, y2);
+                graphic.lineBetween(x2, y2, x0, y0);
+            }
+        },
+
+        runDebugCallback(drawingContext, parentMatrix) {
+            var camera = drawingContext.camera;
+            var calcMatrix = GetCalcMatrix(this, camera, parentMatrix, !drawingContext.useCanvas).calc;
+            var faceIndices = this.faceIndices;
+            var vertexObjects = this.vertexObjects;
+            var displayOriginX = this.displayOriginX;
+            var displayOriginY = this.displayOriginY;
+            var verts = [];
+
+            for (var i = 0, cnt = faceIndices.length; i < cnt; i++) {
+                var vertex = vertexObjects[faceIndices[i]];
+                var x = vertex.localX - displayOriginX;
+                var y = vertex.localY - displayOriginY;
+
+                verts.push(
+                    calcMatrix.getX(x, y),
+                    calcMatrix.getY(x, y)
+                );
+            }
+
+            this.debugCallback.call(this, this, verts.length, verts);
+
+            return this;
+        },
+    };
+
+    var Methods$5 = {};
+
+    Object.assign(
+        Methods$5,
+        VertexMethods,
+        IndexMethods,
+        FrameMethods,
+        DebugMethods,
+    );
+
+    const Mesh2D = phaser.GameObjects.Mesh2D;
     const IsPlainObject$c = phaser.Utils.Objects.IsPlainObject;
     const GetValue$1j = phaser.Utils.Objects.GetValue;
 
@@ -70208,132 +70529,6 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.setOriginFromFrame();
         }
 
-        clear() {
-            this.vertexObjects.length = 0;
-            this.faceIndices.length = 0;
-            this.vertices.length = 0;
-            this.indices.length = 0;
-            this.indicesOrdered = null;
-            this.setUseOrderedIndices(false);
-            return this;
-        }
-
-        createVertex(u, v) {
-            return this.createVertexObject(u, v);
-        }
-
-        createVertexObject(u, v) {
-            var index = this.vertexObjects.length;
-            var vertexObject = new VertexObject(null, index, u, v);
-
-            this.vertexObjects.push(vertexObject);
-            this.vertices.push(0, 0, 0, 0);
-
-            vertexObject.setParent(this, index);
-            this.updateVertexObjectFrame(vertexObject);
-
-            return vertexObject;
-        }
-
-        addVertexObject(vertexObject) {
-            if (this.vertexObjects.includes(vertexObject)) {
-                return this;
-            }
-
-            var index = this.vertexObjects.length;
-            this.vertexObjects.push(vertexObject);
-            this.vertices.push(0, 0, 0, 0);
-
-            vertexObject.setParent(this, index);
-            this.updateVertexObjectFrame(vertexObject);
-
-            return this;
-        }
-
-        setVertexObjects(vertexObjects) {
-            this.vertexObjects.length = 0;
-            this.vertices.length = 0;
-
-            for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
-                this.addVertexObject(vertexObjects[i]);
-            }
-
-            return this;
-        }
-
-        setFaceIndices(faceIndices, texturePage) {
-            if (texturePage === undefined) {
-                texturePage = this.texturePage;
-            } else {
-                this.texturePage = texturePage;
-            }
-
-            this.faceIndices.length = 0;
-            this.indices.length = 0;
-
-            for (var i = 0, cnt = faceIndices.length; i < cnt; i += 3) {
-                var a = faceIndices[i];
-                var b = faceIndices[i + 1];
-                var c = faceIndices[i + 2];
-
-                this.faceIndices.push(a, b, c);
-                this.indices.push(a, b, c, texturePage);
-            }
-
-            this.updateOrderedIndices();
-
-            return this;
-        }
-
-        setMeshIndices(indices) {
-            this.indices.length = 0;
-            this.faceIndices.length = 0;
-
-            for (var i = 0, cnt = indices.length; i < cnt; i += 4) {
-                this.indices.push(indices[i], indices[i + 1], indices[i + 2], indices[i + 3]);
-                this.faceIndices.push(indices[i], indices[i + 1], indices[i + 2]);
-            }
-
-            this.updateOrderedIndices();
-
-            return this;
-        }
-
-        setUseOrderedIndexOptimization(enabled, strategy) {
-            this.autoBuildOrderedIndices = !!enabled;
-
-            if (strategy !== undefined) {
-                this.orderedIndicesStrategy = strategy;
-            }
-
-            return this.updateOrderedIndices();
-        }
-
-        setUseOrderedIndicesOptimization(enabled, strategy) {
-            return this.setUseOrderedIndexOptimization(enabled, strategy);
-        }
-
-        updateOrderedIndices() {
-            if (this.autoBuildOrderedIndices && this.indices.length > 0) {
-                this.setRenderAsTriangles(false);
-                this.buildOrderedIndices(this.orderedIndicesStrategy, true);
-            } else {
-                this.setUseOrderedIndices(false);
-            }
-
-            return this;
-        }
-
-        setTexture(key, frame) {
-            super.setTexture(key, frame);
-
-            if (this.vertexObjects) {
-                this.syncVertexObjectsFrame();
-            }
-
-            return this;
-        }
-
         get frame() {
             return this._frame;
         }
@@ -70349,178 +70544,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 this.syncVertexObjectsFrame();
             }
         }
-
-        setSizeToFrame(frame) {
-            if (!frame) { frame = this.frame; }
-            if (!frame) { return this; }
-
-            this.width = frame.realWidth;
-            this.height = frame.realHeight;
-
-            return this;
-        }
-
-        updateDisplayOrigin() {
-            super.updateDisplayOrigin();
-
-            if (this.vertexObjects) {
-                this.writeVertexObjectPositions();
-            }
-
-            return this;
-        }
-
-        setDisplayOrigin(x, y) {
-            super.setDisplayOrigin(x, y);
-
-            if (this.vertexObjects) {
-                this.writeVertexObjectPositions();
-            }
-
-            return this;
-        }
-
-        resetVertexObjects() {
-            var vertexObjects = this.vertexObjects;
-
-            for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
-                vertexObjects[i].resetPosition();
-            }
-
-            return this;
-        }
-
-        resetFaceSize() {
-            return this.syncVertexObjectsFrame();
-        }
-
-        syncVertexObjectsFrame() {
-            this.setSizeToFrame();
-            this.updateDisplayOrigin();
-
-            var vertexObjects = this.vertexObjects;
-
-            for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
-                this.updateVertexObjectFrame(vertexObjects[i]);
-            }
-
-            return this;
-        }
-
-        writeVertexObjectPositions() {
-            var vertexObjects = this.vertexObjects;
-
-            for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
-                vertexObjects[i].writePositionToMesh();
-            }
-
-            return this;
-        }
-
-        updateVertexObjectFrame(vertexObject) {
-            var frame = this.frame;
-
-            if (!frame) {
-                vertexObject.writeToMesh();
-                return this;
-            }
-
-            vertexObject
-                .setFrameSize(frame.cutWidth, frame.cutHeight, frame.x, frame.y)
-                .setFrameUV(frame.u0, frame.v0, frame.u1, frame.v1);
-
-            return this;
-        }
-
-        rebuildVerticesFromVertexObjects() {
-            var vertexObjects = this.vertexObjects;
-            this.vertices.length = vertexObjects.length * 4;
-
-            for (var i = 0, cnt = vertexObjects.length; i < cnt; i++) {
-                vertexObjects[i].setParent(this, i);
-            }
-
-            return this;
-        }
-
-        setDebug(graphic, callback) {
-            this.debugGraphic = graphic;
-
-            if (!graphic && !callback) {
-                this.debugCallback = null;
-            }
-            else if (!callback) {
-                this.debugCallback = this.renderDebugVerts;
-            }
-            else {
-                this.debugCallback = callback;
-            }
-
-            return this;
-        }
-
-        renderDebugVerts(src, meshLength, verts) {
-            var graphic = src.debugGraphic;
-
-            for (var i = 0; i < meshLength; i += 6) {
-                var x0 = verts[i + 0];
-                var y0 = verts[i + 1];
-                var x1 = verts[i + 2];
-                var y1 = verts[i + 3];
-                var x2 = verts[i + 4];
-                var y2 = verts[i + 5];
-
-                graphic.lineBetween(x0, y0, x1, y1);
-                graphic.lineBetween(x1, y1, x2, y2);
-                graphic.lineBetween(x2, y2, x0, y0);
-            }
-        }
-
-        skipRender() {
-            return false;
-        }
-
-        renderWebGL(renderer, src, drawingContext, parentMatrix) {
-            if (!src) {
-                src = this;
-            }
-
-            if (src.skipRender()) {
-                return;
-            }
-
-            super.renderWebGL(renderer, src, drawingContext, parentMatrix);
-
-            if (src.debugCallback) {
-                src.runDebugCallback(drawingContext, parentMatrix);
-            }
-        }
-
-        runDebugCallback(drawingContext, parentMatrix) {
-            var camera = drawingContext.camera;
-            var calcMatrix = GetCalcMatrix(this, camera, parentMatrix, !drawingContext.useCanvas).calc;
-            var faceIndices = this.faceIndices;
-            var vertexObjects = this.vertexObjects;
-            var displayOriginX = this.displayOriginX;
-            var displayOriginY = this.displayOriginY;
-            var verts = [];
-
-            for (var i = 0, cnt = faceIndices.length; i < cnt; i++) {
-                var vertex = vertexObjects[faceIndices[i]];
-                var x = vertex.localX - displayOriginX;
-                var y = vertex.localY - displayOriginY;
-
-                verts.push(
-                    calcMatrix.getX(x, y),
-                    calcMatrix.getY(x, y)
-                );
-            }
-
-            this.debugCallback.call(this, this, verts.length, verts);
-
-            return this;
-        }
     };
+
+    Object.assign(
+        Image$3.prototype,
+        Render,
+        Methods$5
+    );
 
     var AnmiationMethods = {
         play(key, ignoreIfPlaying) {
@@ -70833,7 +70863,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
         for (var r = 0; r <= rows; r++) {
             for (var c = 0; c <= columns; c++) {
-                vertexObjects.push(gameObject.createVertex(c / columns, r / rows));
+                vertexObjects.push(gameObject.createVertexObject(c / columns, r / rows));
             }
         }
 
@@ -83581,7 +83611,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             for (var r = 0; r < pointsPerSide; r++) {
                 for (var c = 0; c < pointsPerSide; c++) {
-                    var vertex = this.createVertex(c / (pointsPerSide - 1), r / (pointsPerSide - 1));
+                    var vertex = this.createVertexObject(c / (pointsPerSide - 1), r / (pointsPerSide - 1));
                     vertices.push(vertex);
                 }
             }

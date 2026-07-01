@@ -4,13 +4,13 @@
 
 ## Links
 
-### Phaser3
+### Phaser
 
 - [FAQ](https://github.com/phaser-discord/community/blob/master/FAQ.md)
 - [Official discord channel](https://discord.gg/phaser)
-- [API document](https://docs.phaser.io/api-documentation/api-documentation)
+- [API document](https://docs.phaser.io/)
 - [Examples](https://phaser.io/examples/)
-- [Bug report](https://github.com/photonstorm/phaser/issues)
+- [Bug report](https://github.com/phaserjs/phaser/issues)
 
 ### Rex plugins
 

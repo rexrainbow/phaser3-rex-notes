@@ -1,11 +1,11 @@
 import { VERSION, GameObjects, Class, Game, Scene, Utils, Geom, Math as Math$1, Loader, Plugins } from 'phaser';
 
 const MainVersionNumber = 4;
-const SubVersionNumber = 0;
+const SubVersionNumber = 2;
 
 var IsChecked = false;
 
-var CheckP3Version = function (minVersion) {
+var CheckPhaserVersion = function (minVersion) {
     if (IsChecked) {
         return;
     }
@@ -27,7 +27,7 @@ var CheckP3Version = function (minVersion) {
     IsChecked = true;
 };
 
-CheckP3Version();
+CheckPhaserVersion();
 
 const Extern = GameObjects.Extern;
 
