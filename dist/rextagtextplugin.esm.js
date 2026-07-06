@@ -2536,7 +2536,7 @@ class HitAreaManager {
     }
 }
 
-const HasOwn = Object.prototype.hasOwnProperty;
+const HasOwn$1 = Object.prototype.hasOwnProperty;
 
 class HitAreaCursorStyle {
     constructor() {
@@ -2571,7 +2571,7 @@ class HitAreaCursorStyle {
 
         return !!(
             (this.url && data.url) ||
-            HasOwn.call(this.tags, data.key) ||
+            HasOwn$1.call(this.tags, data.key) ||
             !!this.default
         );
     }
@@ -2583,7 +2583,7 @@ class HitAreaCursorStyle {
 
         if (this.url && data.url) {
             return this.url;
-        } else if (HasOwn.call(this.tags, data.key)) {
+        } else if (HasOwn$1.call(this.tags, data.key)) {
             return this.tags[data.key];
         } else if (this.default) {
             return this.default;
@@ -4929,6 +4929,21 @@ var IsObjectLike = function (value) {
     return value !== null && typeof value === 'object';
 };
 
+var HasOwn = Object.prototype.hasOwnProperty;
+
+var IsUnsafeKey = function (key) {
+    return key === '__proto__' || key === 'constructor' || key === 'prototype';
+};
+
+var HasUnsafeKey = function (keys) {
+    for (var i = 0, cnt = keys.length; i < cnt; i++) {
+        if (IsUnsafeKey(keys[i])) {
+            return true;
+        }
+    }
+    return false;
+};
+
 var NormalizePath = function (path, delimiter) {
     if (Array.isArray(path)) ; else if (typeof path !== 'string') {
         path = [];
@@ -4967,12 +4982,16 @@ var SetValue = function (target, keys, value, delimiter = '.') {
         (typeof keys === 'string' && keys.indexOf(delimiter) === -1) ||
         (typeof keys === 'number')
     ) {
+        if (IsUnsafeKey(keys)) {
+            return target;
+        }
+
         target[keys] = value;
         return target;
     }
 
     var pathSegments = NormalizePath(keys, delimiter);
-    if (pathSegments.length === 0) {
+    if (pathSegments.length === 0 || HasUnsafeKey(pathSegments)) {
         return target;
     }
 
@@ -4981,7 +5000,7 @@ var SetValue = function (target, keys, value, delimiter = '.') {
 
     for (var index = 0; index < pathSegmentsCount - 1; index++) {
         var segment = pathSegments[index];
-        var next = cursor[segment];
+        var next = HasOwn.call(cursor, segment) ? cursor[segment] : undefined;
 
         if (!IsObjectLike(next)) {
             // Force overwrite intermediates
