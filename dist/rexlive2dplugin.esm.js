@@ -1,7 +1,7 @@
 import { VERSION, GameObjects, Class, Game, Scene, Utils, Geom, Math as Math$1, Loader, Plugins } from 'phaser';
 
 const MainVersionNumber = 4;
-const SubVersionNumber = 2;
+const SubVersionNumber = 0;
 
 var IsChecked = false;
 

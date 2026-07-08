@@ -1,7 +1,7 @@
 import { VERSION, BlendModes, Structs, Utils, GameObjects, Scenes, Math as Math$1, Class, Geom, Cameras, Display, Events, Scene, Game, Tweens, Renderer as Renderer$1, Filters } from 'phaser';
 
 const MainVersionNumber = 4;
-const SubVersionNumber = 2;
+const SubVersionNumber = 0;
 
 var IsChecked = false;
 

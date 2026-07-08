@@ -12916,7 +12916,7 @@ ObjectFactory.register('monopoly', function (gameObject, config) {
 SetValue(window, 'RexPlugins.Board.Monopoly', Monopoly);
 
 const MainVersionNumber = 4;
-const SubVersionNumber = 2;
+const SubVersionNumber = 0;
 
 var IsChecked = false;
 

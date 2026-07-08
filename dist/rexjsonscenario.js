@@ -28441,7 +28441,7 @@ void main (void) {
 	  // layer: UILayer
 
 	const MainVersionNumber = 4;
-	const SubVersionNumber = 2;
+	const SubVersionNumber = 0;
 
 	var IsChecked = false;
 

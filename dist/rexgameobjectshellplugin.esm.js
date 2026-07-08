@@ -4843,7 +4843,7 @@ ObjectFactory.register('cameraController', function (config) {
 SetValue(window, 'RexPlugins.GameObjectShell.CameraController', ControllerPack);
 
 const MainVersionNumber = 4;
-const SubVersionNumber = 2;
+const SubVersionNumber = 0;
 
 var IsChecked = false;
 
