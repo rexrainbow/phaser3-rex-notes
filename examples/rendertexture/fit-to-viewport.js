@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import FitToViewport from '../../plugins/utils/rendertexture/FitToViewport';
+import FitToViewport from '../../plugins/utils/rendertexture/FitToViewport.js';
 
 
 class Demo extends Phaser.Scene {

@@ -1,5 +1,5 @@
-import BuildFuzzyRule from './BuildFuzzyRule';
-import IsInvalidLine from '../utils/IsInvalidLine';
+import BuildFuzzyRule from './BuildFuzzyRule.js';
+import IsInvalidLine from '../utils/IsInvalidLine.js';
 
 var BuildFuzzyRules = function (fuzzyModule, rules, fuzzySets) {
     if (typeof (rules) === 'string') {

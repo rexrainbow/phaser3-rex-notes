@@ -1,4 +1,4 @@
-import Clone from "../../utils/object/Clone";
+import Clone from "../../utils/object/Clone.js";
 
 export default {
     union(listB, out) {    

@@ -1,4 +1,4 @@
-import { SwitchSelector } from '../../../nodes';
+import { SwitchSelector } from '../../../nodes/index.js';
 
 /*
 ```yaml

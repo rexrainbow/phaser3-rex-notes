@@ -1,4 +1,4 @@
-import GetFrameNameCallback from "./GetFrameNameCallback";
+import GetFrameNameCallback from "./GetFrameNameCallback.js";
 
 var GenerateFrames = function (scene, key, frame, columns, rows, getFrameNameCallback) {
     if (frame == null) {

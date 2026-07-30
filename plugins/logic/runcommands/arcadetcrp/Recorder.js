@@ -1,5 +1,5 @@
 import BaseRecorder from '../tcrp/Recorder.js';
-import ArcadeStepClock from '../../../time/clock/ArcadeStepClock';
+import ArcadeStepClock from '../../../time/clock/ArcadeStepClock.js';
 
 class Recorder extends BaseRecorder {
     constructor(parent, config) {

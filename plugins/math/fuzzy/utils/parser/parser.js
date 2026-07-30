@@ -717,8 +717,7 @@ return new Parser;
 })();
 
 
-if (typeof require !== 'undefined' && typeof exports !== 'undefined') {
-exports.parser = parser;
-exports.Parser = parser.Parser;
-exports.parse = function () { return parser.parse.apply(parser, arguments); };
-}
+export { parser };
+export const Parser = parser.Parser;
+export const parse = function () { return parser.parse.apply(parser, arguments); };
+export default parser;

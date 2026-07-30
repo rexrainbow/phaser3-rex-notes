@@ -1,4 +1,4 @@
-import LZString from '../lzstring/lz-string.min.js';
+const LZString = require('../lzstring/lz-string.min.js');
 
 // Serialize then compress
 var Serialize = function (db, compress) {
@@ -24,4 +24,5 @@ var Deserialize = function (db, s, decompress) {
     return db;
 }
 
-export { Serialize, Deserialize };
+exports.Serialize = Serialize;
+exports.Deserialize = Deserialize;

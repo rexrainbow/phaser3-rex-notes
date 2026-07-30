@@ -1,4 +1,4 @@
-import GetScene from '../../system/GetSceneObject';
+import GetScene from '../../system/GetSceneObject.js';
 import LZString from '../../lzstring/lz-string.min.js';
 
 var FromJSON = function (container, dataList, callback, decompress) {

@@ -1,4 +1,4 @@
-import Query from './Query';
+import Query from './Query.js';
 
 var FindFirst = function (query, testCallback) {
     var out = {

@@ -1,4 +1,4 @@
-import { Cooldown } from '../../../nodes';
+import { Cooldown } from '../../../nodes/index.js';
 import IsPlainObject from '../../../../../utils/object/IsPlainObject.js';
 
 /*

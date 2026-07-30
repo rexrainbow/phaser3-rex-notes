@@ -5,7 +5,7 @@
  */
 
 import Perimeter from './Perimeter.js';
-import Point from '../point/Point';
+import Point from '../point/Point.js';
 
 /**
  * Position is a value between 0 and 1 where 0 = the top-left of the rectangle and 0.5 = the bottom right.

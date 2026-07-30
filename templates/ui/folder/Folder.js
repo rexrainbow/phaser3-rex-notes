@@ -1,4 +1,4 @@
-import Sizer from '../sizer/Sizer';
+import Sizer from '../sizer/Sizer.js';
 import ChildTransition from './methods/ChildTransition.js';
 import ExpandMethods from './methods/ExpandMethods.js';
 import { OnClick } from '../basesizer/ClickMethods.js';

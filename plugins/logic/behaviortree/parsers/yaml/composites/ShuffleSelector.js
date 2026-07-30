@@ -1,4 +1,4 @@
-import { ShuffleSelector } from '../../../nodes';
+import { ShuffleSelector } from '../../../nodes/index.js';
 
 /*
 ```yaml

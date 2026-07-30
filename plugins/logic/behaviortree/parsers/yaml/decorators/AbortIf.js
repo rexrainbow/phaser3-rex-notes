@@ -1,4 +1,4 @@
-import { AbortIf } from '../../../nodes';
+import { AbortIf } from '../../../nodes/index.js';
 import IsPlainObject from '../../../../../utils/object/IsPlainObject.js';
 
 /*

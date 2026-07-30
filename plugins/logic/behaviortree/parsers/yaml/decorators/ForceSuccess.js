@@ -1,4 +1,4 @@
-import { ForceSuccess } from '../../../nodes';
+import { ForceSuccess } from '../../../nodes/index.js';
 
 /*
 ```yaml

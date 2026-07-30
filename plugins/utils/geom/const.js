@@ -71,4 +71,4 @@ var GEOM_CONST = {
 
 };
 
-module.exports = GEOM_CONST;
+export default GEOM_CONST;

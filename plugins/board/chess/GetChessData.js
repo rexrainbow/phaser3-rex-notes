@@ -1,6 +1,6 @@
 import ChessBank from './ChessBank.js';
 import ChessData from './ChessData.js';
-import IsUID from './IsUID';
+import IsUID from './IsUID.js';
 
 var GetChessData = function (gameObject) {
     // game object or uid

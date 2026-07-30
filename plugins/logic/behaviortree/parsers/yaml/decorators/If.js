@@ -1,4 +1,4 @@
-import { If } from '../../../nodes';
+import { If } from '../../../nodes/index.js';
 import IsPlainObject from '../../../../../utils/object/IsPlainObject.js';
 
 /*

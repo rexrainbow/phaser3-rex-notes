@@ -1,4 +1,4 @@
-import { Parallel } from '../../../nodes';
+import { Parallel } from '../../../nodes/index.js';
 
 /*
 ```yaml

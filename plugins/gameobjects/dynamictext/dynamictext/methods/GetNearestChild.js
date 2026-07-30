@@ -1,4 +1,4 @@
-import GetBobCenterPosition from './utils/transform/GetBobCenterPosition';
+import GetBobCenterPosition from './utils/transform/GetBobCenterPosition.js';
 
 import { Math as PhaserMath } from 'phaser';
 const GetDistance = PhaserMath.Distance.BetweenPointsSquared;

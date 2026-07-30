@@ -1,7 +1,7 @@
-import {structuredPatch} from './create';
-import {parsePatch} from './parse';
+import {structuredPatch} from './create.js';
+import {parsePatch} from './parse.js';
 
-import {arrayEqual, arrayStartsWith} from '../util/array';
+import {arrayEqual, arrayStartsWith} from '../util/array.js';
 
 export function calcLineCount(hunk) {
   const {oldLines, newLines} = calcOldNewLineCount(hunk.lines);

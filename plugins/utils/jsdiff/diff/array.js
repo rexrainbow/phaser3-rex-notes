@@ -1,4 +1,4 @@
-import Diff from './base';
+import Diff from './base.js';
 
 export const arrayDiff = new Diff();
 arrayDiff.tokenize = function(value) {

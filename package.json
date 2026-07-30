@@ -1,6 +1,7 @@
 {
     "name": "phaser4-rex-plugins",
     "version": "4.2.0",
+    "type": "module",
     "description": "Plugins of phaser4",
     "author": "Rex",
     "files": [
@@ -11,9 +12,9 @@
         "docs\\docs"
     ],
     "scripts": {
-        "dev": "webpack serve --config webpack.config.js",
+        "dev": "webpack serve --config webpack.config.cjs",
         "build": "rollup -c rollup.config.mjs",
-        "build-app": "webpack --config webpack.production.config.js"
+        "build-app": "webpack --config webpack.production.config.cjs"
     },
     "repository": {
         "type": "git",

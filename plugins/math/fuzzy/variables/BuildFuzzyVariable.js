@@ -1,5 +1,5 @@
 import FuzzyVariable from './FuzzyVariable.js';
-import BuildFuzzySet from './BuildFuzzySet';
+import BuildFuzzySet from './BuildFuzzySet.js';
 
 var BuildFuzzyVariable = function (setsConfig) {
     var flv = new FuzzyVariable();

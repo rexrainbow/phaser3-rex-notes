@@ -1,5 +1,5 @@
 import EventEmitter from 'eventemitter3';
-import AddDataMonitor from '../../plugins/utils/proxy/datamonitor/AddDataMonitor';
+import AddDataMonitor from '../../plugins/utils/proxy/datamonitor/AddDataMonitor.js';
 
 var eventEmitter = new EventEmitter();
 eventEmitter

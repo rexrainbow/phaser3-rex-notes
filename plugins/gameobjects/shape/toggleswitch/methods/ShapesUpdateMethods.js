@@ -1,5 +1,5 @@
-import { RoundRectangle } from '../../shapes/geoms';
-import MixColor from '../../../../utils/color/MixColor';
+import { RoundRectangle } from '../../shapes/geoms/index.js';
+import MixColor from '../../../../utils/color/MixColor.js';
 
 import { Math as PhaserMath } from 'phaser';
 const Linear = PhaserMath.Linear;

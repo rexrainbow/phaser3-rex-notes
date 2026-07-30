@@ -1,4 +1,4 @@
-import { Wait } from '../../../nodes';
+import { Wait } from '../../../nodes/index.js';
 import IsPlainObject from '../../../../../utils/object/IsPlainObject.js';
 
 /*

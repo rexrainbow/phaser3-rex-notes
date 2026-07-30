@@ -1,4 +1,4 @@
-import GridCutImage from './gridcutimage';
+import GridCutImage from './gridcutimage.js';
 
 import { Plugins as PhaserPlugins } from 'phaser';
 class GridCutImagePlugin extends PhaserPlugins.BasePlugin {

@@ -1,4 +1,4 @@
-import { Intersection } from '../../../plugins/utils/struct/SetMethods';
+import { Intersection } from '../../../plugins/utils/struct/SetMethods.js';
 
 export default {
     intersection: Intersection

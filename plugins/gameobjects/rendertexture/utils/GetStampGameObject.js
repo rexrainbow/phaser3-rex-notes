@@ -1,4 +1,4 @@
-import GetGame from '../../../utils/system/GetGame';
+import GetGame from '../../../utils/system/GetGame.js';
 
 import { GameObjects as PhaserGameObjects } from 'phaser';
 const GameObjectClasses = PhaserGameObjects;

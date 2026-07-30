@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import ClickOutsidePlugin from '../../plugins/clickoutside-plugin';
+import ClickOutsidePlugin from '../../plugins/clickoutside-plugin.js';
 
 const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;

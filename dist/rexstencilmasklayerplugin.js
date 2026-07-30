@@ -237,10 +237,6 @@
         }
     };
 
-    function getDefaultExportFromCjs (x) {
-    	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
-    }
-
     /**
      * @author       Richard Davey <rich@photonstorm.com>
      * @copyright    2020 Photon Storm Ltd.
@@ -350,10 +346,6 @@
 
         return item;
     };
-
-    var Add_1 = Add;
-
-    var AddItem = /*@__PURE__*/getDefaultExportFromCjs(Add_1);
 
     /**
      * @author       Richard Davey <rich@photonstorm.com>
@@ -487,7 +479,7 @@
 
     var MaskGameObjectMethods = {
         addMaskGameObject(gameObject) {
-            AddItem(this.maskGameObjects, gameObject, 0, OnAddMaskGameObject);
+            Add(this.maskGameObjects, gameObject, 0, OnAddMaskGameObject);
             return this;
         },
 

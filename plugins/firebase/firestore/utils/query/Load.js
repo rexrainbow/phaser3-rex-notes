@@ -1,4 +1,4 @@
-import Query from './Query';
+import Query from './Query.js';
 
 var Load = function (query, count, skip, startDocRef, startMode) {
     if (count === undefined) {

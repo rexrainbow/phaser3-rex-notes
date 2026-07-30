@@ -1,5 +1,5 @@
-var fs = require('fs');
-var jison = require("jison");
+import fs from 'node:fs';
+import jison from 'jison';
 
 console.log("In progress...");
 
@@ -9,11 +9,18 @@ var parser = new jison.Parser(fs.readFileSync("grammar.jison", "utf8"));
 var parserSource = parser.generate();
 // console.log('Source: ', parserSource)
 
-var index = parserSource.indexOf('exports.main = function commonjsMain (args) {');
-parserSource = parserSource.substring(0, index) + '}';
-
-// End with line: 
-// exports.parse = function () { return parser.parse.apply(parser, arguments); };
+var index = parserSource.indexOf("if (typeof require !== 'undefined' && typeof exports !== 'undefined') {");
+if (index === -1) {
+	throw new Error('CommonJS export footer was not found in the generated parser.');
+}
+parserSource = parserSource.substring(0, index);
+parserSource += [
+	'export { parser };',
+	'export const Parser = parser.Parser;',
+	'export const parse = function () { return parser.parse.apply(parser, arguments); };',
+	'export default parser;',
+	''
+].join('\n');
 
 try {
 	fs.writeFileSync("./parser.js", parserSource)

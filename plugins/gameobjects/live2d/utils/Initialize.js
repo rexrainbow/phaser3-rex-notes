@@ -1,4 +1,4 @@
-import { CubismFramework, Option } from '../framework/src/live2dcubismframework';
+import { CubismFramework, Option } from '../framework/src/live2dcubismframework.ts';
 
 // Invoke this method after loading live2dcubismcore.js, and before loading any model asset.
 var Initialize = function (config) {

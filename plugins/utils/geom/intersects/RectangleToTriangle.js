@@ -5,7 +5,7 @@
  */
 
 import LineToLine from './LineToLine.js';
-import Contains from '../rectangle/Contains';
+import Contains from '../rectangle/Contains.js';
 import ContainsArray from '../triangle/ContainsArray.js';
 import Decompose from '../rectangle/Decompose.js';
 

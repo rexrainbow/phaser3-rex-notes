@@ -1,4 +1,4 @@
-import { Selector } from '../../../nodes';
+import { Selector } from '../../../nodes/index.js';
 
 /*
 ```yaml

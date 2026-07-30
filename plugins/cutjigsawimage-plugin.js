@@ -1,4 +1,4 @@
-import CutJigsawImage from './cutjigsawimage';
+import CutJigsawImage from './cutjigsawimage.js';
 
 import { Plugins as PhaserPlugins } from 'phaser';
 class CutJigsawImagePlugin extends PhaserPlugins.BasePlugin {

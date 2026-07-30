@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import ExpressionParserPlugin from '../../plugins/expressionparser-plugin';
+import ExpressionParserPlugin from '../../plugins/expressionparser-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

@@ -1,9 +1,9 @@
 import Canvas from '../../canvas/canvasbase/Canvas.js';
-import { SetPadding } from '../../../utils/padding/PaddingMethods';
+import { SetPadding } from '../../../utils/padding/PaddingMethods.js';
 import Background from './bob/background/Background.js';
 import InnerBounds from './bob/innerbounds/InnerBounds.js';
 import TextStyle from './bob/char/TextStyle.js';
-import Methods from './methods/Methods';
+import Methods from './methods/Methods.js';
 import PoolManager from './poolmanager/PoolManager.js';
 
 import { Utils as PhaserUtils } from 'phaser';

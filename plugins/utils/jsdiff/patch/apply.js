@@ -1,5 +1,5 @@
-import {parsePatch} from './parse';
-import distanceIterator from '../util/distance-iterator';
+import {parsePatch} from './parse.js';
+import distanceIterator from '../util/distance-iterator.js';
 
 export function applyPatch(source, uniDiff, options = {}) {
   if (typeof uniDiff === 'string') {

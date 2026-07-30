@@ -4,7 +4,7 @@ import {
     PinchZoom,
     BoundsScroll,
     MouseWheelZoom
-} from './cameracontroller';
+} from './cameracontroller.js';
 
 import { Plugins as PhaserPlugins } from 'phaser';
 class CameraControllerPlugin extends PhaserPlugins.BasePlugin {

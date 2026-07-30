@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import PolarCoordinatePlugin from '../../plugins/polarcoordinate-plugin';
+import PolarCoordinatePlugin from '../../plugins/polarcoordinate-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

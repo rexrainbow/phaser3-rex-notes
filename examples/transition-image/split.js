@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import TransitionImagePlugin from '../../plugins/transitionimage-plugin';
+import TransitionImagePlugin from '../../plugins/transitionimage-plugin.js';
 import SplitFilterPlugin from '../../plugins/splitfilter-plugin.js';
 
 class Demo extends Phaser.Scene {

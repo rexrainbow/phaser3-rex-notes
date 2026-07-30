@@ -231,6 +231,6 @@ var Delaunay;
         }
     };
 
-    if(typeof module !== "undefined")
-        module.exports = Delaunay;
 })();
+
+export default Delaunay;

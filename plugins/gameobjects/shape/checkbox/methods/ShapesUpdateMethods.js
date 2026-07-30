@@ -1,4 +1,4 @@
-import { Lines, RoundRectangle } from '../../shapes/geoms';
+import { Lines, RoundRectangle } from '../../shapes/geoms/index.js';
 
 export default {
     buildShapes() {

@@ -19,7 +19,7 @@ import InsertNewCells from './InsertNewCells.js';
 import RemoveCells from './RemoveCells.js';
 import SetColumnCount from './SetColumnCount.js';
 import SetGridSize from './SetGridSize.js';
-import UpdateVisibleCell from './UpdateVisibleCell';
+import UpdateVisibleCell from './UpdateVisibleCell.js';
 import ResetCellSizeFromCell from './ResetCellSizeFromCell.js';
 
 var methods = {

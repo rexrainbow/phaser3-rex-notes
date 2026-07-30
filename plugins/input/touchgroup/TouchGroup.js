@@ -1,4 +1,4 @@
-import IsSceneObject from '../../utils/system/IsSceneObject';
+import IsSceneObject from '../../utils/system/IsSceneObject.js';
 import Clear from '../../utils/object/Clear.js';
 
 class TouchGroup {

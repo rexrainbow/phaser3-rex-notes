@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
-import TransitionImagePlugin from '../../plugins/transitionimage-plugin';
-import GridCutImagePlugin from '../../plugins/gridcutimage-plugin';
+import TransitionImagePlugin from '../../plugins/transitionimage-plugin.js';
+import GridCutImagePlugin from '../../plugins/gridcutimage-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

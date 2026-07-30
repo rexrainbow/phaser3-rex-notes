@@ -108,4 +108,4 @@ var Add = function (array, item, limit, callback, context)
     return item;
 };
 
-module.exports = Add;
+export default Add;

@@ -1,2 +1,2 @@
-import { Pan } from '../../../plugins/gestures';
+import { Pan } from '../../../plugins/gestures.js';
 export default Pan;

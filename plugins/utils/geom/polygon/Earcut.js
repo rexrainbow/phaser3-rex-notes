@@ -756,4 +756,4 @@ earcut.flatten = function (data) {
     return result;
 };
 
-module.exports = earcut;
+export default earcut;

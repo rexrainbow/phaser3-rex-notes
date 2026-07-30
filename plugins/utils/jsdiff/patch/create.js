@@ -1,4 +1,4 @@
-import {diffLines} from '../diff/line';
+import {diffLines} from '../diff/line.js';
 
 export function structuredPatch(oldFileName, newFileName, oldStr, newStr, oldHeader, newHeader, options) {
   if (!options) {

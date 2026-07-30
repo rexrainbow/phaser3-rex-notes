@@ -1,4 +1,4 @@
-import { ForceFailure } from '../../../nodes';
+import { ForceFailure } from '../../../nodes/index.js';
 
 /*
 ```yaml

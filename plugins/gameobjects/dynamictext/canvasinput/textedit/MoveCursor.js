@@ -1,4 +1,4 @@
-import ScrollToBob from '../../dynamictext/bob/utils/ScrollToBob';
+import ScrollToBob from '../../dynamictext/bob/utils/ScrollToBob.js';
 
 var MoveCursor = function (hiddenTextEdit) {
     var textObject = hiddenTextEdit.parent;

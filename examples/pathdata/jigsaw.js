@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import PathData from '../../plugins/geom/pathdata/PathData';
+import PathDataBuilder from '../../plugins/geom/pathdata/PathDataBuilder/PathDataBuilder.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -44,7 +44,7 @@ var CreateJigsawShape = function (width, height, convexEdges) {
     var radiusX = width / 6,
         radiusY = height / 6;
 
-    var polygon = new PathData();
+    var polygon = new PathDataBuilder();
     polygon
         .setIterations(8)
         .startAt(0, 0)

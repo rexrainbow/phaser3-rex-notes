@@ -1,4 +1,4 @@
-module.exports = {
+const pluginList = {
     // game objects
     'bbcodetextplugin': './plugins/bbcodetext-plugin.js',
     'tagtextplugin': './plugins/tagtext-plugin.js',
@@ -355,3 +355,5 @@ module.exports = {
     // other
     'bbcodelog': './plugins/bbcodelog.js',
 }
+
+export default pluginList;

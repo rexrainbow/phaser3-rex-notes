@@ -1,5 +1,5 @@
-import Diff from './base';
-import {generateOptions} from '../util/params';
+import Diff from './base.js';
+import {generateOptions} from '../util/params.js';
 
 export const lineDiff = new Diff();
 lineDiff.tokenize = function(value) {

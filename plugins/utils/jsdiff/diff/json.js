@@ -1,5 +1,5 @@
-import Diff from './base';
-import {lineDiff} from './line';
+import Diff from './base.js';
+import {lineDiff} from './line.js';
 
 const objectPrototypeToString = Object.prototype.toString;
 

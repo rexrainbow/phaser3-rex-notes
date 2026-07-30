@@ -1,4 +1,4 @@
-import { ContinueIf } from '../../../nodes';
+import { ContinueIf } from '../../../nodes/index.js';
 import IsPlainObject from '../../../../../utils/object/IsPlainObject.js';
 
 /*

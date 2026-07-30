@@ -3,7 +3,7 @@ import CameraController from './cameracontroller/CameraController.js';
 import FullWindowRectangle from './fullwindowrectangle/FullWindowRectangle.js';
 import GameObjectPanel from './gameobjectpanel/GameObjectPanel.js';
 import LayerManager from './layermanager/LayerManager.js';
-import Shell from './shell/Shell';
+import Shell from './shell/Shell.js';
 
 export {
     ControlPoints,

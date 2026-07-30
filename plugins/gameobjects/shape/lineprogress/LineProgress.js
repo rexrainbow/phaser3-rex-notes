@@ -1,6 +1,6 @@
 import BaseShapes from '../shapes/BaseShapes.js';
 import ProgressBase from '../../../utils/progressbase/ProgressBase.js';
-import { Lines } from '../shapes/geoms';
+import { Lines } from '../shapes/geoms/index.js';
 import UpdateShapes from './UpdateShapes.js';
 
 import { Utils as PhaserUtils } from 'phaser';

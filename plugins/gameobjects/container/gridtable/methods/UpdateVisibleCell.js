@@ -1,4 +1,4 @@
-import ShowCell from './updatetable/ShowCell';
+import ShowCell from './updatetable/ShowCell.js';
 
 var UpdateVisibleCell = function (cellIdx) {
     var cell = this.table.getCell(cellIdx, false);

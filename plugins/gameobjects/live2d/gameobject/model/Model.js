@@ -1,6 +1,6 @@
-import { csmMap } from '../../framework/src/type/csmmap';
-import { csmVector } from '../../framework/src/type/csmvector';
-import { CubismUserModel } from '../../framework/src/model/cubismusermodel';
+import { csmMap } from '../../framework/src/type/csmmap.ts';
+import { csmVector } from '../../framework/src/type/csmvector.ts';
+import { CubismUserModel } from '../../framework/src/model/cubismusermodel.ts';
 import ViewMatrix from './ViewMatrix.js';
 import GlobalData from '../globaldata/GlobalData.js';
 import Methods from './Methods.js';

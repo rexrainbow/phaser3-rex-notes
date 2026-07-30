@@ -1,4 +1,4 @@
-import FileObjectToCache from '../../../utils/loader/FileObjectToCache';
+import FileObjectToCache from '../../../utils/loader/FileObjectToCache.js';
 
 var LoadFile = function (file, loaderType, key, cacheType, onComplete) {
     var scene = this.scene;

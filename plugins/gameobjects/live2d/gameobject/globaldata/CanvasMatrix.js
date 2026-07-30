@@ -1,4 +1,4 @@
-import { CubismMatrix44 } from '../../framework/src/math/cubismmatrix44';
+import { CubismMatrix44 } from '../../framework/src/math/cubismmatrix44.ts';
 
 class CanvasMatrix extends CubismMatrix44 {
     constructor() {

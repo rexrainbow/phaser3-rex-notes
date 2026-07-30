@@ -1,4 +1,4 @@
-import { WeightSelector } from '../../../nodes';
+import { WeightSelector } from '../../../nodes/index.js';
 
 /*
 ```yaml

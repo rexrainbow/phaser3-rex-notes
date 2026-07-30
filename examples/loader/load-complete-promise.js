@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import LoadCompletePromise from '../../plugins/utils/loader/LoadCompletePromise';
+import LoadCompletePromise from '../../plugins/utils/loader/LoadCompletePromise.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

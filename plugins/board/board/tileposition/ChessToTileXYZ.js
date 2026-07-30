@@ -1,5 +1,5 @@
 import IsUID from '../../chess/IsUID.js';
-import IsChess from '../../chess/IsChess';
+import IsChess from '../../chess/IsChess.js';
 import GetChessUID from '../../chess/GetChessUID.js';
 import IsTileXYZ from '../../utils/IsTileXYZ.js';
 

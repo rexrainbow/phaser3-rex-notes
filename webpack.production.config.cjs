@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path');
 const webpack = require('webpack');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require("terser-webpack-plugin");
@@ -29,7 +29,7 @@ plugins.push(
 )
 
 plugins.push(
-    new CleanWebpackPlugin([distFolder])
+    new CleanWebpackPlugin()
 )
 
 plugins.push(

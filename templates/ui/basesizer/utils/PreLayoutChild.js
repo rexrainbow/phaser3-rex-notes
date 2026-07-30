@@ -1,4 +1,4 @@
-import CopyState from '../../utils/CopyState';
+import CopyState from '../../utils/CopyState.js';
 
 var PreLayoutChild = function (child) {
     if (this.sizerEventsEnable) {

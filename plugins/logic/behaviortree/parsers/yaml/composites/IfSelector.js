@@ -1,4 +1,4 @@
-import { IfSelector } from '../../../nodes';
+import { IfSelector } from '../../../nodes/index.js';
 
 /*
 ```yaml

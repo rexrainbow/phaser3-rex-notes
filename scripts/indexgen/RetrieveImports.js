@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'node:fs';
+import path from 'node:path';
 
 const RetrieveImports = function (folderPath) {
     // console.log(folderPath)
@@ -96,4 +96,4 @@ const GetImportNames = function (importStatement) {
     return importNames;
 }
 
-module.exports = RetrieveImports;
+export default RetrieveImports;

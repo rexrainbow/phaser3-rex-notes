@@ -5,7 +5,7 @@ import SetStretchMode from './texture/SetStretchMode.js';
 import GetStretchMode from './texture/GetStretchMode.js';
 import SetPreserveRatio from './texture/SetPreserveRatio.js';
 import SetMaxFixedPartScale from './texture/SetMaxFixedPartScale.js';
-import NOOP from '../object/NOOP';
+import NOOP from '../object/NOOP.js';
 
 export default {
     _beginDraw: NOOP,

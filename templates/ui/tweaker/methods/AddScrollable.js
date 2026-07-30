@@ -1,4 +1,4 @@
-import CreateScrollable from '../builders/CreateScrollable';
+import CreateScrollable from '../builders/CreateScrollable.js';
 
 import { Utils as PhaserUtils } from 'phaser';
 const GetValue = PhaserUtils.Objects.GetValue;

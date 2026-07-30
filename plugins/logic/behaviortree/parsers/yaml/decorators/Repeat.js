@@ -1,4 +1,4 @@
-import { Repeat } from '../../../nodes';
+import { Repeat } from '../../../nodes/index.js';
 import IsPlainObject from '../../../../../utils/object/IsPlainObject.js';
 
 /*

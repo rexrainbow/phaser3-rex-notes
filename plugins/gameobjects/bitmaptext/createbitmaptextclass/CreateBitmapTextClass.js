@@ -1,5 +1,5 @@
 import CharacterCache from '../../../charactercache.js';
-import GetCharacterCache from '../../../texture/charactercache/methods/GetCharacterCache';
+import GetCharacterCache from '../../../texture/charactercache/methods/GetCharacterCache.js';
 
 var CreateBitmapTextClass = function (BaseClass) {
     class BitmapTextClass extends BaseClass {

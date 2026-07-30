@@ -1,4 +1,4 @@
-import Tree from '../../plugins/utils/struct/Tree';
+import Tree from '../../plugins/utils/struct/Tree.js';
 
 var tree = new Tree({
     a: {

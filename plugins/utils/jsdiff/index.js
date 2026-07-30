@@ -14,24 +14,24 @@
  * "An O(ND) Difference Algorithm and its Variations" (Myers, 1986).
  * http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.4.6927
  */
-import Diff from './diff/base';
-import {diffChars} from './diff/character';
-import {diffWords, diffWordsWithSpace} from './diff/word';
-import {diffLines, diffTrimmedLines} from './diff/line';
-import {diffSentences} from './diff/sentence';
+import Diff from './diff/base.js';
+import {diffChars} from './diff/character.js';
+import {diffWords, diffWordsWithSpace} from './diff/word.js';
+import {diffLines, diffTrimmedLines} from './diff/line.js';
+import {diffSentences} from './diff/sentence.js';
 
-import {diffCss} from './diff/css';
-import {diffJson, canonicalize} from './diff/json';
+import {diffCss} from './diff/css.js';
+import {diffJson, canonicalize} from './diff/json.js';
 
-import {diffArrays} from './diff/array';
+import {diffArrays} from './diff/array.js';
 
-import {applyPatch, applyPatches} from './patch/apply';
-import {parsePatch} from './patch/parse';
-import {merge} from './patch/merge';
-import {structuredPatch, createTwoFilesPatch, createPatch} from './patch/create';
+import {applyPatch, applyPatches} from './patch/apply.js';
+import {parsePatch} from './patch/parse.js';
+import {merge} from './patch/merge.js';
+import {structuredPatch, createTwoFilesPatch, createPatch} from './patch/create.js';
 
-import {convertChangesToDMP} from './convert/dmp';
-import {convertChangesToXML} from './convert/xml';
+import {convertChangesToDMP} from './convert/dmp.js';
+import {convertChangesToXML} from './convert/xml.js';
 
 export {
   Diff,

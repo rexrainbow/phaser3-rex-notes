@@ -3,7 +3,7 @@ import  FuzzyAND  from './operators/FuzzyAND.js';
 import  FuzzyOR  from './operators/FuzzyOR.js';
 import  FuzzyFAIRLY  from './operators/FuzzyFAIRLY.js'
 import  FuzzyVERY  from './operators/FuzzyVERY.js'
-import Parse from '../utils/parser/Parse';
+import Parse from '../utils/parser/Parse.js';
 
 var BuildFuzzyRule = function (ruleInput, fuzzySets) {
     var ruleJson = Parse(ruleInput);

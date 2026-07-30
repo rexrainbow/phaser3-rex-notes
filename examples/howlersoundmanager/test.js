@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import HowlerSoundManager from '../../plugins/utils/audio/howlersoundmanager/HowlerSoundManager';
+import HowlerSoundManager from '../../plugins/utils/audio/howlersoundmanager/HowlerSoundManager.js';
 import Awaitloader from '../../plugins/awaitloader.js';
 
 var howlSoundManager = new HowlerSoundManager();

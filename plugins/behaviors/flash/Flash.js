@@ -1,5 +1,5 @@
 import { Utils as PhaserUtils } from 'phaser';
-import TickTask from '../../utils/componentbase/timerticktask/TimerTask';
+import TickTask from '../../utils/componentbase/timerticktask/TimerTask.js';
 
 const GetValue = PhaserUtils.Objects.GetValue;
 

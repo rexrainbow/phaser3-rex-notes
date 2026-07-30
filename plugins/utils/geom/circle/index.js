@@ -4,8 +4,8 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-import Circle from './Circle';
-import Area from './Area';
+import Circle from './Circle.js';
+import Area from './Area.js';
 import Circumference from './Circumference.js';
 import CircumferencePoint from './CircumferencePoint.js';
 import Clone from './Clone.js';

@@ -1,4 +1,4 @@
-import Extend from './Extend';
+import Extend from './Extend.js';
 
 import { Events as PhaserEvents } from 'phaser';
 const EventEmitter = PhaserEvents.EventEmitter;

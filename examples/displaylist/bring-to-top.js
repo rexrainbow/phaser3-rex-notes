@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import DisplayListMethods from '../../plugins/utils/gameobject/displaylist/DisplayListMethods';
+import DisplayListMethods from '../../plugins/utils/gameobject/displaylist/DisplayListMethods.js';
 
 Object.assign(
     Phaser.GameObjects.GameObject.prototype,

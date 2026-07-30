@@ -1,4 +1,4 @@
-import { Invert } from '../../../nodes';
+import { Invert } from '../../../nodes/index.js';
 
 /*
 ```yaml

@@ -1,4 +1,4 @@
-import { RandomSelector } from '../../../nodes';
+import { RandomSelector } from '../../../nodes/index.js';
 
 /*
 ```yaml

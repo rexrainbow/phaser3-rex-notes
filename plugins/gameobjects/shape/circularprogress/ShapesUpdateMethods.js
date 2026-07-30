@@ -1,4 +1,4 @@
-import { Lines, Circle } from '../shapes/geoms';
+import { Lines, Circle } from '../shapes/geoms/index.js';
 
 import { Math as PhaserMath } from 'phaser';
 const RadToDeg = PhaserMath.RadToDeg;

@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import TouchHelperPlugin from '../../plugins/touchhelper-plugin';
+import TouchHelperPlugin from '../../plugins/touchhelper-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

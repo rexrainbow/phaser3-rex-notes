@@ -1,4 +1,4 @@
-import { TimeLimit } from '../../../nodes';
+import { TimeLimit } from '../../../nodes/index.js';
 import IsPlainObject from '../../../../../utils/object/IsPlainObject.js';
 
 /*

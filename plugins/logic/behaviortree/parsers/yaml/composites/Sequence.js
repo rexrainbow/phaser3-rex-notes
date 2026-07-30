@@ -1,4 +1,4 @@
-import { Sequence } from '../../../nodes';
+import { Sequence } from '../../../nodes/index.js';
 
 /*
 ```yaml

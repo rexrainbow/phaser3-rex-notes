@@ -8,7 +8,7 @@ import {
     Rectangle,
     RoundRectangle,
     Triangle
-} from '../shapes/geoms';
+} from '../shapes/geoms/index.js';
 
 import { Utils as PhaserUtils } from 'phaser';
 const ShapeClasses = {

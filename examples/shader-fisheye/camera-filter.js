@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import FishEyeFilterPlugin from '../../plugins/fisheyefilter-plugin'
+import FishEyeFilterPlugin from '../../plugins/fisheyefilter-plugin.js'
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {

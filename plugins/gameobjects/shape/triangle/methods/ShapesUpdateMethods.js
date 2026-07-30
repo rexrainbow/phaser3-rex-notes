@@ -1,6 +1,6 @@
-import { Lines } from '../../shapes/geoms';
+import { Lines } from '../../shapes/geoms/index.js';
 import DrawFitTriangle from './DrawFitTriangle.js';
-import DrawCircleVerticesTriangle from './DrawCircleVerticesTriangle';
+import DrawCircleVerticesTriangle from './DrawCircleVerticesTriangle.js';
 
 export default {
     buildShapes() {

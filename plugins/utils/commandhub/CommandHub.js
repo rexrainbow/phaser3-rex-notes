@@ -1,4 +1,4 @@
-import ComponentBase from '../componentbase/ComponentBase';
+import ComponentBase from '../componentbase/ComponentBase.js';
 
 class CommandHub extends ComponentBase {
     addCommand(name, callback, scope) {

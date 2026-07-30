@@ -22,4 +22,4 @@ const RenderIndexFile = function (result) {
     return lines.join('\n');
 }
 
-module.exports = RenderIndexFile;
+export default RenderIndexFile;

@@ -1,4 +1,4 @@
-import { RepeatUntilSuccess } from '../../../nodes';
+import { RepeatUntilSuccess } from '../../../nodes/index.js';
 import IsPlainObject from '../../../../../utils/object/IsPlainObject.js';
 
 /*

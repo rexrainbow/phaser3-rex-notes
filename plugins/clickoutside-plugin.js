@@ -1,4 +1,4 @@
-import ClickOutside from './clickoutside';
+import ClickOutside from './clickoutside.js';
 
 import { Plugins as PhaserPlugins } from 'phaser';
 class ClickOutsidePlugin extends PhaserPlugins.BasePlugin {

@@ -33,7 +33,7 @@ import LazyLoadImageBoxFactory from '../lazyloadimagebox/Factory.js';
 import FullWindowRectangleFactory from './fullwindowrectangle/Factory.js';
 import FullWindowZoneFactory from './fullwindowzone/Factory.js';
 import CoverFactory from './cover/Factory.js';
-import InputTextFactory from './inputtext/Factory';
+import InputTextFactory from './inputtext/Factory.js';
 import FileChooserFactory from './filechooser/Factory.js';
 import FileDropZoneFactory from './filedropzone/Factory.js';
 import ImageInputLabelFactory from './imageinputlabel/Factory.js';

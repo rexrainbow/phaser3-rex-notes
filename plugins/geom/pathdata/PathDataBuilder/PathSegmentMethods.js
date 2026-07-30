@@ -1,4 +1,4 @@
-import DuplicateLast from '../DuplicateLast';
+import DuplicateLast from '../DuplicateLast.js';
 
 import { Math as PhaserMath } from 'phaser';
 const DistanceBetween = PhaserMath.Distance.Between;

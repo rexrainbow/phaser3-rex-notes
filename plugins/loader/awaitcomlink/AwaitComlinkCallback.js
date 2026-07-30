@@ -5,7 +5,7 @@ import {
     IsLoaded as IsComlinkLoaded,
     SetState as SetComlinkScriptState,
     LOADED
-} from './AwaitComlinkScriptState';
+} from './AwaitComlinkScriptState.js';
 import DefaultWorkerCode from './DefaultWorker.js';
 
 

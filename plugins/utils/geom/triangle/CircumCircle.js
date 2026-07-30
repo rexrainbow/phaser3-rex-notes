@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-import Circle from '../circle/Circle';
+import Circle from '../circle/Circle.js';
 
 //  Adapted from https://gist.github.com/mutoo/5617691
 

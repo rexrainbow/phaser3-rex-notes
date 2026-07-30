@@ -1,7 +1,7 @@
 import {
     ShockwaveFilter,
     ShockwaveController
-} from './shockwavefilter';
+} from './shockwavefilter.js';
 
 import FilterPluginBase from './utils/renderer/filterpluginbase/FilterPluginBase.js';
 import SetValue from './utils/object/SetValue.js';

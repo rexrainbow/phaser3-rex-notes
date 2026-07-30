@@ -1,5 +1,5 @@
 import BasePlayer from '../tcrp/Player.js';
-import ArcadeStepClock from '../../../time/clock/ArcadeStepClock';
+import ArcadeStepClock from '../../../time/clock/ArcadeStepClock.js';
 
 class Player extends BasePlayer {
     constructor(parent, config) {
