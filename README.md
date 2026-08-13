@@ -45,4 +45,4 @@
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=rexrainbow/phaser3-rex-notes&type=date&legend=top-left)](https://www.star-history.com/#rexrainbow/phaser3-rex-notes&type=date&legend=top-left)
+[![Star History Chart](https://star-history.dera.page/svg?repos=rexrainbow/phaser3-rex-notes&type=date&legend=top-left)](https://star-history.dera.page/#rexrainbow/phaser3-rex-notes&type=date&legend=top-left)
