@@ -81,7 +81,7 @@
         "graphology": "^0.25.4",
         "dagre": "^0.8.5",
         "i18next": "^22.5.1",
-        "i18next-http-backend": "^3.0.5",
+        "i18next-http-backend": "^4.0.2",
         "js-yaml": "^5.2.1",
         "mustache": "^4.2.0",
         "papaparse": "^5.4.1",
