@@ -80,7 +80,7 @@
         "eventemitter3": "^3.1.2",
         "graphology": "^0.25.4",
         "dagre": "^0.8.5",
-        "i18next": "^22.5.1",
+        "i18next": "^26.3.4",
         "i18next-http-backend": "^3.0.5",
         "js-yaml": "^5.2.1",
         "mustache": "^4.2.0",
