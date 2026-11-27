@@ -6,7 +6,7 @@
 
 ### Free texture packer
 
-[Free texture packer](http://free-tex-packer.com/), [Web app](http://free-tex-packer.com/app/)
+[Free texture packer](https://odrick.github.io/free-tex-packer/)
 
 ### Leshy SpriteSheet Tool
 
@@ -42,6 +42,12 @@ Tested with Aseprite 1.2.25
 ### Atlas-packer
 
 - [gammafp/Atlas-packer](https://gammafp.com/tool/atlas-packer/)
+
+### SpriteSheet.dev
+
+[SpriteSheet.dev](https://spritesheet.dev/) (free, runs in the browser)
+
+Export to JSON (Hash or Array), Aseprite JSON or Sparrow XML
 
 ## Animation
 
