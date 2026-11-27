@@ -6338,13 +6338,13 @@ class BehaviorTree extends EventEmitter$2 {
         SetSerialNumberPrefix(prefix);
     }
 }
-var Methods$i = {
+var Methods$h = {
     dump: Dump,
     load: Load,
 };
 Object.assign(
     BehaviorTree.prototype,
-    Methods$i,
+    Methods$h,
     DataMethods$5,
 );
 
@@ -8012,7 +8012,7 @@ var RestoreData = function (blackboard, injectedEntries) {
     }
 };
 
-var RunMethods$2 = {
+var RunMethods$1 = {
     setRunContext(context) {
         this.clearRunContext();
 
@@ -8247,7 +8247,7 @@ var RunMethods$2 = {
     }
 };
 
-var StopMethods$2 = {
+var StopMethods$1 = {
     stop() {
         var eventSheetManager = this.parent;
         var blackboard = eventSheetManager.blackboard;
@@ -8280,18 +8280,18 @@ var StopMethods$2 = {
     },
 };
 
-var Methods$h = {};
+var Methods$g = {};
 
 Object.assign(
-    Methods$h,
+    Methods$g,
     TreeMethods$1,
     AddTreeMethods$1,
     RemoveTreeMethods$1,
     TreeActiveStateMethods$1,
     SaveLoadTreeMethods,
     StateMethods$1,
-    RunMethods$2,
-    StopMethods$2,
+    RunMethods$1,
+    StopMethods$1,
 );
 
 class EventBehaviorTreeGroup {
@@ -8337,7 +8337,7 @@ class EventBehaviorTreeGroup {
 
 Object.assign(
     EventBehaviorTreeGroup.prototype,
-    Methods$h,
+    Methods$g,
 );
 
 var TreeMethods = {
@@ -16725,7 +16725,7 @@ var StartPromise = function (eventSheetManager, groupName, startCallback) {
     });
 };
 
-var RunMethods$1 = {
+var RunMethods = {
 
     /*
     A group owns exactly one running context at a time.
@@ -16936,7 +16936,7 @@ var RunEventSheetOnceMethods = {
     },
 };
 
-var StopMethods$1 = {
+var StopMethods = {
     stopGroup(groupName) {
         if (groupName === undefined) {
             groupName = this.defaultTreeGroupName;
@@ -16963,7 +16963,7 @@ var StopMethods$1 = {
     }
 };
 
-var CreateStopError$1 = function (groupName) {
+var CreateStopError = function (groupName) {
     return new Error(`Event sheet group '${groupName}' was stopped`);
 };
 
@@ -16995,7 +16995,7 @@ class Runner {
                 return;
             }
 
-            self.stopped(CreateStopError$1(self.groupName));
+            self.stopped(CreateStopError(self.groupName));
         };
 
         this.promise = new Promise(function (resolve, reject) {
@@ -17146,11 +17146,11 @@ var RoundCounterMethods = {
     }
 };
 
-var Methods$g = {
+var Methods$f = {
 };
 
 Object.assign(
-    Methods$g,
+    Methods$f,
     PauseEventSheetMethods$1,
     TreeMethods,
     AddTreeMethods,
@@ -17160,9 +17160,9 @@ Object.assign(
     DataMethods$4,
     StateMethods,
     ValueConvertMethods,
-    RunMethods$1,
+    RunMethods,
     RunEventSheetOnceMethods,
-    StopMethods$1,
+    StopMethods,
     RunnerMethods,
     BindEventMethods$1,
     RoundCounterMethods,
@@ -17296,7 +17296,7 @@ class EventSheetManager extends EventEmitter$2 {
 
 Object.assign(
     EventSheetManager.prototype,
-    Methods$g
+    Methods$f
 );
 
 class EventSheets extends EventSheetManager {
@@ -23055,941 +23055,6 @@ var EventEmitterMethods = {
         return [];
     },
 };
-
-class StateManagerBase {
-    constructor(config) {
-        this._states = {};
-        this._stateLock = false;
-        this.enable = true;
-        this._start = undefined;
-        this._state = undefined;
-        this._prevState = undefined;
-
-        // Event emitter
-        var eventEmitter = GetValue$2f(config, 'eventEmitter', undefined);
-        var EventEmitterClass = GetValue$2f(config, 'EventEmitterClass', undefined);
-        this.setEventEmitter(eventEmitter, EventEmitterClass);
-
-    }
-
-    shutdown() {
-        this.destroyEventEmitter();
-    }
-
-    destroy() {
-        this.shutdown();
-    }
-
-    toJSON() {
-        return {
-            curState: this.state,
-            prevState: this.prevState,
-
-            enable: this.enable,
-            start: this._start
-        };
-    }
-
-    setEnable(e) {
-        if (e === undefined) {
-            e = true;
-        }
-        this.enable = e;
-        return this;
-    }
-
-    toggleEnable() {
-        this.setEnable(!this.enable);
-        return this;
-    }
-
-    getState(name) {
-        return this._states[name];
-    }
-
-    addState(name, state) {
-        if (typeof (name) !== 'string') {
-            state = name;
-            name = state.name;
-        }
-        this._states[name] = state;
-        return this;
-    }
-
-    addStates(states) {
-        if (Array.isArray(states)) {
-            for (var i = 0, cnt = states.length; i < cnt; i++) {
-                this.addState(states[i]);
-            }
-        } else {
-            for (var name in states) {
-                this.addState(name, states[name]);
-            }
-        }
-        return this;
-    }
-
-    removeState(name) {
-        if (this._states.hasOwnProperty(name)) {
-            delete this._states[name];
-        }
-        return this;
-    }
-
-    removeAllStates() {
-        for (var name in this._states) {
-            delete this._states[name];
-        }
-        return this;
-    }
-
-    set state(newState) {
-        if (!this.enable || this._stateLock) {
-            return;
-        }
-        if (this._state === newState) {
-            return;
-        }
-
-        this._prevState = this._state;
-        this._state = newState;
-
-        this._stateLock = true; // Lock state
-
-        this.emit('statechange', this);
-
-        if (this._prevState != null) {
-            var state = this.getState(this._prevState);
-            if (state && state.exit) {
-                state.exit(this);
-            }
-            this.emit(`exit_${this._prevState}`, this);
-        }
-
-        this._stateLock = false;
-
-        if (this._state != null) {
-            var state = this.getState(this._state);
-            if (state && state.enter) {
-                state.enter(this);
-            }
-            this.emit(`enter_${this._state}`, this);
-        }
-    }
-
-    get state() {
-        return this._state;
-    }
-
-    get prevState() {
-        return this._prevState;
-    }
-
-    get stateList() {
-        return Object.keys(this._states);
-    }
-
-    start(state) {
-        this._start = state;
-        this._prevState = undefined;
-        this._state = state; // Won't fire statechange events
-        return this;
-    }
-
-    goto(nextState) {
-        if (nextState != null) {
-            this.state = nextState;
-        }
-        return this;
-    }
-
-    next() {
-        var state = this.getState(this.state);
-        if (!state || !state.next) {
-            return this;
-        }
-
-        var nextState;
-        if (typeof (state.next) === 'string') {
-            nextState = state.next;
-        } else {
-            nextState = state.next(this);
-        }
-        this.goto(nextState);
-        return this;
-    }
-
-    runMethod(methodName, a1, a2, a3, a4, a5) {
-        var state = this.getState(this.state);
-        if (!state) {
-            return undefined;
-        }
-        var fn = state[methodName];
-        if (!fn) {
-            return undefined;
-        }
-
-        // Copy from eventemitter3
-        var len = arguments.length;
-        switch (len) {
-            case 1: return fn(this);
-            case 2: return fn(this, a1);
-            case 3: return fn(this, a1, a2);
-            case 4: return fn(this, a1, a2, a3);
-            case 5: return fn(this, a1, a2, a3, a4);
-            case 6: return fn(this, a1, a2, a3, a4, a5);
-        }
-
-        var args = Array.prototype.slice.call(arguments);
-        args[0] = this;
-        return fn.apply(undefined, args);
-    }
-}
-
-Object.assign(
-    StateManagerBase.prototype,
-    EventEmitterMethods
-);
-
-const MODE_PARALLEL = 'parallel';
-const MODE_SEQUENCE = 'sequence';
-
-class Actor {
-    constructor(config = {}) {
-        this.id = config.id;
-        this.parentId = config.parentId;
-        this.priority = config.priority || 0;
-        this.transitionTitle = config.transitionTitle;  // Link to an event sheet
-        this.previousStateAction = config.previousStateAction;
-        this.currentStateAction = config.currentStateAction;
-        this.properties = {
-            ...(config.properties || {}),
-            $actorId: this.id
-        };
-    }
-
-    isBusy() {
-        return this.currentStateAction && this.currentStateAction.isRunning();
-    }
-
-    setCurrentStateAction(stateAction) {
-        this.currentStateAction = stateAction;
-        return this;
-    }
-
-    setPreviousStateAction(stateAction) {
-        this.previousStateAction = stateAction;
-        return this;
-    }
-
-    clearPreviousStateAction(stateActionId) {
-        if (!stateActionId || (this.previousStateAction && this.previousStateAction.id === stateActionId)) {
-            this.previousStateAction = undefined;
-        }
-        return this;
-    }
-
-    replaceCurrentStateAction(stateAction) {
-        if (this.previousStateAction) {
-            throw new Error(`Actor '${this.id}' already has a previousStateAction`);
-        }
-
-        if (this.currentStateAction) {
-            this.currentStateAction.clearPhaseFlags();
-            this.currentStateAction.markCancelled();
-            this.previousStateAction = this.currentStateAction;
-        }
-
-        this.currentStateAction = stateAction;
-        return this;
-    }
-
-    clearCurrentStateAction(stateActionId) {
-        if (!stateActionId || (this.currentStateAction && this.currentStateAction.id === stateActionId)) {
-            this.currentStateAction = undefined;
-        }
-        return this;
-    }
-
-    dump() {
-        var data = {
-            id: this.id,
-            priority: this.priority,
-            properties: { ...this.properties }
-        };
-
-        if (this.parentId !== undefined) {
-            data.parentId = this.parentId;
-        }
-        if (this.transitionTitle !== undefined) {
-            data.transitionTitle = this.transitionTitle;
-        }
-        if (this.previousStateAction) {
-            data.previousStateAction = this.previousStateAction.dump();
-        }
-        if (this.currentStateAction) {
-            data.currentStateAction = this.currentStateAction.dump();
-        }
-
-        return data;
-    }
-}
-
-var ActorMethods = {
-    addActor(actor) {
-        if (!actor) {
-            return this;
-        }
-
-        if (!(actor instanceof Actor)) {
-            actor = new Actor(actor);
-        }
-
-        if (this.actors.indexOf(actor) === -1) {
-            this.actors.push(actor);
-        }
-
-        return this;
-    },
-
-    removeActor(actor) {
-        var actorId = (typeof actor === 'string') ? actor : actor && actor.id;
-
-        for (var i = this.actors.length - 1; i >= 0; i--) {
-            if (this.actors[i] === actor || (actorId !== undefined && this.actors[i].id === actorId)) {
-                this.actors.splice(i, 1);
-                return this;
-            }
-        }
-
-        return this;
-    },
-
-    getActor(actorId) {
-        var actors = this.actors;
-
-        for (var i = 0, cnt = actors.length; i < cnt; i++) {
-            if (actors[i].id === actorId) {
-                return actors[i];
-            }
-        }
-
-        throw new Error(`Actor '${actorId}' not found`);
-    },
-
-    // Internal method
-    getSortedActors() {
-        var actors = this.actors;
-
-        return actors.map(function (actor, index) {
-            return { actor, index };
-        }).sort(function (a, b) {
-            var priorityA = a.actor.priority;
-            var priorityB = b.actor.priority;
-
-            if (priorityA !== priorityB) {
-                return priorityA - priorityB;
-            }
-
-            return a.index - b.index;
-        }).map(function (entry) {
-            return entry.actor;
-        });
-    }
-};
-
-const IsPromiseLike = function (value) {
-    return value && (typeof value.then === 'function');
-};
-
-const AwaitCallback = async function (callback, ...args) {
-    var result = callback(...args);
-    if (IsPromiseLike(result)) {
-        await result;
-    }
-    return result;
-};
-
-const StartEventSheet = function (
-    eventSheetManager,
-    title,
-    groupName,
-    ignoreCondition,
-    injectData
-) {
-    if (!title) {
-        return null;
-    }
-
-    return eventSheetManager.startRun(title, groupName, ignoreCondition, injectData);
-};
-
-var RunMethods = {
-    setMode(mode) {
-        this.mode = mode;
-        return this;
-    },
-
-    start() {
-        if (this.isRunning) {
-            return this;
-        }
-
-        this.startPromise().catch(function () {
-        });
-        return this;
-    },
-
-    async startPromise() {
-        if (this.isRunning) {
-            return Promise.reject(new Error('ActorStateMachineRunner is already running'));
-        }
-
-        this.isRunning = true;
-        this.isStopping = false;
-        this.emit('start', this);
-
-        try {
-            await this.runRound();
-
-            this.throwIfStopping();
-
-            this.emit('complete', this);
-            return this;
-        } catch (error) {
-            if (this.isStopping) {
-                this.emit('cancel', this);
-            } else {
-                this.emit('error', error, this);
-            }
-            throw error;
-        } finally {
-            this.currentRun = null;
-            this.currentStateAction = null;
-            this.isStopping = false;
-            this.isRunning = false;
-        }
-    },
-
-    async runRound() {
-        switch (this.mode) {
-            case MODE_PARALLEL:
-                await this.runParallel();
-                break;
-
-            case MODE_SEQUENCE:
-                await this.runSequence();
-                break;
-
-            default:
-                throw new Error(`Unknown actor state machine run mode '${this.mode}'`);
-        }
-
-        this.throwIfStopping();
-
-        this.emit('cleanup.start', this);
-        this.cleanupStateActions();
-        this.emit('cleanup', this);
-        await AwaitCallback(this.cleanupCallback, this);
-        this.emit('cleanup.complete', this);
-    },
-
-    async runActorStateTransition(actor) {
-        this.throwIfStopping();
-
-        this.emit('stateTransition.start', actor, this);
-        this.throwIfStopping();
-
-        var run = StartEventSheet(
-            this.eventSheetManager,
-            actor.transitionTitle,
-            this.transitionGroupName,
-            true, // ignoreCondition
-            actor.properties
-        );
-        await this.waitEventSheetRun(run);
-        this.throwIfStopping();
-
-        this.emit('stateTransition.complete', actor, this);
-    },
-
-    async runActorStateAction(actor, stateAction, options = {}) {
-        this.throwIfStopping();
-
-        this.currentStateAction = stateAction;
-        try {
-            var tick = options.tick !== false;
-            if (tick) {
-                this.emit('stateTick.start', actor, stateAction, this);
-                this.throwIfStopping();
-
-                await AwaitCallback(function () {
-                    return stateAction.markTick();
-                });
-                this.emit('stateTick.complete', actor, stateAction, this);
-            }
-
-            this.throwIfStopping();
-
-            this.emit('stateAction.start', actor, stateAction, options, this);
-            this.throwIfStopping();
-
-            var run = StartEventSheet(
-                this.eventSheetManager,
-                stateAction.stateActionTitle,
-                this.stateActionGroupName,
-                true, // ignoreCondition
-                stateAction.properties
-            );
-            await this.waitEventSheetRun(run);
-            this.throwIfStopping();
-
-            this.emit('stateAction.complete', actor, stateAction, options, this);
-        } catch (error) {
-            if (this.isStopping) {
-                stateAction.markCancelled();
-            }
-            throw error;
-        } finally {
-            if (this.currentStateAction === stateAction) {
-                this.currentStateAction = null;
-            }
-        }
-    },
-
-    async waitEventSheetRun(run) {
-        if (!run) {
-            return;
-        }
-
-        this.currentRun = run;
-        try {
-            await run.promise;
-        } finally {
-            if (this.currentRun === run) {
-                this.currentRun = null;
-            }
-        }
-    },
-};
-
-var RunParallelMethods = {
-    async runParallel() {
-        var actors = this.getSortedActors();
-        this.emit('transitionPhase.start', actors, this);
-
-        for (var i = 0, cnt = actors.length; i < cnt; i++) {
-            await this.runActorStateTransition(actors[i]);
-        }
-
-        this.emit('transitionPhase.complete', actors, this);
-
-        var actorStateActionPairs = this.getActorStateActionPairs(actors);
-        this.emit('stateActionPhase.start', actorStateActionPairs, this);
-
-        for (var i = 0, cnt = actorStateActionPairs.length; i < cnt; i++) {
-            await this.runActorStateAction(
-                actorStateActionPairs[i].actor,
-                actorStateActionPairs[i].stateAction,
-                actorStateActionPairs[i]
-            );
-        }
-
-        this.emit('stateActionPhase.complete', actorStateActionPairs, this);
-    },
-
-    getActorStateActionPairs(actors) {
-        var pairs = [];
-
-        for (var i = 0, cnt = actors.length; i < cnt; i++) {
-            var actor = actors[i];
-            var previousStateAction = actor.previousStateAction;
-            var stateAction = actor.currentStateAction;
-
-            if (previousStateAction) {
-                pairs.push({
-                    actor,
-                    stateAction: previousStateAction,
-                    type: 'previous',
-                    tick: false
-                });
-            }
-            if (stateAction) {
-                pairs.push({
-                    actor,
-                    stateAction,
-                    type: 'current',
-                    tick: true
-                });
-            }
-        }
-
-        return pairs;
-    }
-};
-
-var RunSequenceMethods = {
-    async runSequence() {
-        var actors = this.getSortedActors();
-        this.emit('sequence.start', actors, this);
-
-        for (var i = 0, cnt = actors.length; i < cnt; i++) {
-            var actor = actors[i];
-            await this.runActorStateTransition(actor);
-
-            var previousStateAction = actor.previousStateAction;
-            if (previousStateAction) {
-                await this.runActorStateAction(actor, previousStateAction, {
-                    type: 'previous',
-                    tick: false
-                });
-            }
-
-            var stateAction = actor.currentStateAction;
-            if (stateAction) {
-                await this.runActorStateAction(actor, stateAction, {
-                    type: 'current',
-                    tick: true
-                });
-            }
-        }
-
-        this.emit('sequence.complete', actors, this);
-    }
-};
-
-var StateActionMethods = {
-    createStateActionId(actorId, stateActionTitle) {
-        var id = `${actorId}:${stateActionTitle}:${this._nextStateActionId}`;
-        this._nextStateActionId += 1;
-        return id;
-    },
-
-    createStateAction(config = {}) {
-        return new this.stateActionClass(config);
-    },
-
-    startStateAction(config = {}) {
-        var actorId = config.actorId;
-        var stateActionTitle = config.stateActionTitle;
-
-        if (!actorId) {
-            throw new Error('startStateAction requires actorId');
-        }
-        if (!stateActionTitle) {
-            throw new Error('startStateAction requires stateActionTitle');
-        }
-
-        var actor = this.getActor(actorId);
-        var isBusy = actor.isBusy();
-        if (isBusy && actor.previousStateAction) {
-            throw new Error(`Actor '${actorId}' already has a previousStateAction`);
-        }
-
-        var stateActionProperties = this.eventSheetManager.getTree(stateActionTitle, this.stateActionGroupName)?.properties || {};
-        var stateAction = this.createStateAction({
-            ...stateActionProperties,
-            ...config,
-            id: config.id || config.stateActionId || this.createStateActionId(actorId, stateActionTitle),
-            actorId,
-            stateActionTitle,
-            durationTicks: config.durationTicks || stateActionProperties.durationTicks,
-            properties: {
-                ...(stateActionProperties.properties || {}),
-                ...(config.properties || {})
-            }
-        });
-
-        if (isBusy) {
-            actor.replaceCurrentStateAction(stateAction);
-        } else {
-            actor.setCurrentStateAction(stateAction);
-        }
-
-        return stateAction;
-    },
-
-    canEnterState(config = {}) {
-        var actorId = config.actorId;
-        var stateActionTitle = config.stateActionTitle;
-
-        if (!actorId) {
-            throw new Error('canEnterState requires actorId');
-        }
-        if (!stateActionTitle) {
-            throw new Error('canEnterState requires stateActionTitle');
-        }
-        if (!this.eventSheetManager) {
-            throw new Error('canEnterState requires an EventSheetManager with evalCondition()');
-        }
-
-        return this.eventSheetManager.evalCondition(stateActionTitle, this.stateActionGroupName, {
-            ...(config.properties || {}),
-            $actorId: actorId,
-            $stateActionTitle: stateActionTitle
-        });
-    },
-
-    stateActionPhase(config = {}) {
-        var stateAction = config.stateAction;
-
-        if (!stateAction && config.actorId) {
-            var actor = this.getActor(config.actorId);
-            stateAction = actor.currentStateAction;
-        }
-
-        return stateAction ? stateAction.hasPhaseFlag(config.phase) : false;
-    },
-
-    clearEndedStateActions() {
-        var actors = this.actors;
-
-        for (var i = 0, cnt = actors.length; i < cnt; i++) {
-            var actor = actors[i];
-            var stateAction = actor.currentStateAction;
-
-            if (stateAction && !stateAction.isRunning()) {
-                actor.clearCurrentStateAction(stateAction.id);
-            }
-        }
-
-        return this;
-    },
-
-    clearPreviousStateActions() {
-        var actors = this.actors;
-
-        for (var i = 0, cnt = actors.length; i < cnt; i++) {
-            var actor = actors[i];
-
-            actor.clearPreviousStateAction();
-        }
-
-        return this;
-    },
-
-    clearAllStateActionPhaseFlags() {
-        var actors = this.actors;
-
-        for (var i = 0, cnt = actors.length; i < cnt; i++) {
-            var actor = actors[i];
-
-            var previousStateAction = actor.previousStateAction;
-            if (previousStateAction) {
-                previousStateAction.clearPhaseFlags();
-            }
-
-            var stateAction = actor.currentStateAction;
-            if (stateAction) {
-                stateAction.clearPhaseFlags();
-            }
-        }
-
-        return this;
-    },
-
-    cleanupStateActions() {
-        this.clearAllStateActionPhaseFlags();
-        this.clearPreviousStateActions();
-        this.clearEndedStateActions();
-        return this;
-    }
-};
-
-var CreateStopError = function () {
-    return new Error('ActorStateMachineRunner was stopped');
-};
-
-var StopMethods = {
-    stop() {
-        if (!this.isRunning) {
-            return this;
-        }
-
-        this.isStopping = true;
-
-        if (this.currentStateAction) {
-            this.currentStateAction.markCancelled();
-        }
-
-        if (this.currentRun && (this.currentRun.status === 'running')) {
-            this.currentRun.stop();
-        }
-
-        return this;
-    },
-
-    abort() {
-        return this.stop();
-    },
-
-    throwIfStopping() {
-        if (this.isStopping) {
-            throw CreateStopError();
-        }
-    },
-
-};
-
-var Methods$f = {
-};
-
-Object.assign(
-    Methods$f,
-    RunMethods,
-    RunParallelMethods,
-    RunSequenceMethods,
-    ActorMethods,
-    StateActionMethods,
-    StopMethods,
-);
-
-const STATE_ACTION_PHASES = ['start', 'tick', 'complete', 'interrupt', 'cancel'];
-
-const CreatePhaseFlags = function (phaseFlags = {}) {
-    var flags = {};
-
-    for (var i = 0, cnt = STATE_ACTION_PHASES.length; i < cnt; i++) {
-        var phase = STATE_ACTION_PHASES[i];
-        flags[phase] = phaseFlags[phase] || false;
-    }
-
-    return flags;
-};
-
-class StateAction {
-    constructor(config = {}) {
-        this.id = config.id;
-        this.actorId = config.actorId;
-        this.stateActionTitle = config.stateActionTitle;
-        this.durationTicks = config.durationTicks || config.remainingTicks || 1;
-        this.remainingTicks = config.remainingTicks || this.durationTicks;
-        this.status = config.status || 'running';
-        this.properties = {
-            ...(config.properties || {}),
-            $actorId: this.actorId,
-            $stateActionId: this.id,
-            $stateActionTitle: this.stateActionTitle
-        };
-        this.phaseFlags = CreatePhaseFlags(config.phaseFlags);
-        this.markStarted();
-    }
-
-    isRunning() {
-        return this.status === 'running';
-    }
-
-    setPhaseFlag(phase, value = true) {
-        this.phaseFlags[phase] = value;
-        return this;
-    }
-
-    clearPhaseFlag(phase) {
-        this.phaseFlags[phase] = false;
-        return this;
-    }
-
-    clearPhaseFlags() {
-        this.phaseFlags = CreatePhaseFlags();
-        return this;
-    }
-
-    hasPhaseFlag(phase) {
-        return this.phaseFlags[phase] === true;
-    }
-
-    markStarted() {
-        this.status = 'running';
-        return this.setPhaseFlag('start');
-    }
-
-    markTick(ticks = 1) {
-        if (!this.isRunning()) {
-            return this.remainingTicks;
-        }
-
-        this.setPhaseFlag('tick');
-        this.remainingTicks = Math.max(0, this.remainingTicks - ticks);
-
-        if (this.remainingTicks === 0) {
-            this.markCompleted();
-        }
-
-        return this.remainingTicks;
-    }
-
-    markCompleted() {
-        this.remainingTicks = 0;
-        this.status = 'completed';
-        return this.setPhaseFlag('complete');
-    }
-
-    markInterrupted() {
-        if (this.status === 'running') {
-            this.status = 'interrupted';
-        }
-        return this.setPhaseFlag('interrupt');
-    }
-
-    markCancelled() {
-        if (this.status === 'running') {
-            this.status = 'cancelled';
-        }
-        return this.setPhaseFlag('cancel');
-    }
-
-    dump() {
-        return {
-            id: this.id,
-            actorId: this.actorId,
-            stateActionTitle: this.stateActionTitle,
-            durationTicks: this.durationTicks,
-            remainingTicks: this.remainingTicks,
-            status: this.status,
-            properties: { ...this.properties },
-            phaseFlags: { ...this.phaseFlags }
-        };
-    }
-}
-
-var NOOP = function () {
-    //  NOOP
-};
-
-class Actors extends EventEmitter$2 {
-    constructor(eventSheetManager, config = {}) {
-        super();
-
-        var {
-            mode = MODE_PARALLEL,
-            defaultPriority = 0,
-            stateActionClass = StateAction,
-            transitionGroupName = '_',
-            stateActionGroupName = transitionGroupName,
-            cleanup = NOOP,
-        } = config;
-
-        this.eventSheetManager = eventSheetManager;
-        this.actors = [];
-        this.mode = mode;
-        this.defaultPriority = defaultPriority;
-        this.stateActionClass = stateActionClass;
-        this.transitionGroupName = transitionGroupName;
-        this.stateActionGroupName = stateActionGroupName;
-        this.cleanupCallback = cleanup;
-
-        this.isRunning = false;
-        this.isStopping = false;
-        this.currentRun = null;
-        this.currentStateAction = null;
-        this._nextStateActionId = 0;
-    }
-}
-
-Object.assign(
-    Actors.prototype,
-    Methods$f
-);
 
 var PropertyMethods$1 = {
     hasProperty(property) {
@@ -44590,6 +43655,10 @@ var AlignConst = {
 
     'right-bottom': ALIGN$1.BOTTOM_RIGHT,
     'bottom-right': ALIGN$1.BOTTOM_RIGHT,
+};
+
+var NOOP = function () {
+    //  NOOP
 };
 
 var globZone = new GameObjects.Zone({

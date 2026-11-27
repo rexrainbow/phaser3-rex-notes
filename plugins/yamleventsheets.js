@@ -4,17 +4,11 @@ export default YAMLEventSheets;
 import Logger from './logic/eventsheets/diagnostics/logger/Logger.js';
 import Tracer from './logic/eventsheets/diagnostics/tracer/Tracer.js';
 import BBCodeSink from './logic/eventsheets/diagnostics/logger/sinks/BBCodeSink.js';
-import PhaseRunner from './logic/eventsheets/phaserunner/PhaseRunner.js';
-import Actors from './logic/eventsheets/actors/Actors.js';
-// import ActorsRuntime from './logic/eventsheets/actors/ActorsRuntime.js';
 
 export {
     Logger,
     Tracer,
     BBCodeSink,
-    PhaseRunner,
-    Actors,
-    // ActorsRuntime
 }
 
 export * from './logic/eventsheets/eventsheetmanager/constants.js';
